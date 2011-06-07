@@ -1,3 +1,0 @@
-#!/bin/sh
-I2P="%INSTALL_PATH"
-java -cp "$I2P/lib/i2p.jar" net.i2p.util.EepGet "$@"

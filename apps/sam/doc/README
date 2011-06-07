@@ -1,8 +1,0 @@
-The Simple Anonymous Messaging protocol provides a way for
-client applications to communicate anonymously over I2P without 
-having to deal with the complexities of I2CP.  More information can
-be found at http://www.i2p.net/sam and a comparison of the various
-client access techniques is up at http://www.i2p.net/applications
-
-There are a few SAM libraries available in this package, as well as
-a Java implementation of the SAM bridge.  

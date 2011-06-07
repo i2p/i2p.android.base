@@ -1,2 +1,0 @@
-core/c/jbigi/*.so usr/lib/jni
-core/c/jcpuid/lib/freenet/support/CPUInformation/*.so usr/lib/jni
