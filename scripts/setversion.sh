@@ -6,15 +6,16 @@ THISDIR=$(realpath $(dirname $(which $0)))
 cd $THISDIR
 MANIFEST=../AndroidManifest.xml
 TMP=AndroidManifest.xml.tmp
+I2PBASE=../../i2p.i2p
 
-CORE=`grep 'public final static String VERSION' ../../core/java/src/net/i2p/CoreVersion.java | \
+CORE=`grep 'public final static String VERSION' $I2PBASE/core/java/src/net/i2p/CoreVersion.java | \
          cut -d '"' -f 2`
 
 MAJOR=`echo $CORE | cut -d '.' -f 1`
 MINOR=`echo $CORE | cut -d '.' -f 2`
 RELEASE=`echo $CORE | cut -d '.' -f 3`
 
-ROUTERBUILD=$((`grep 'public final static long BUILD' ../../router/java/src/net/i2p/router/RouterVersion.java | \
+ROUTERBUILD=$((`grep 'public final static long BUILD' $I2PBASE/router/java/src/net/i2p/router/RouterVersion.java | \
          cut -d '=' -f 2 | \
          cut -d ';' -f 1`))
 

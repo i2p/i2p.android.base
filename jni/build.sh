@@ -7,7 +7,8 @@
 
 THISDIR=$(realpath $(dirname $(which $0)))
 cd $THISDIR
-export NDK=$(realpath ../../../android-ndk-r5b/)
+I2PBASE=../../i2p.i2p
+export NDK=$(realpath ../../android-ndk-r5b/)
 
 #
 # API level, must match that in ../AndroidManifest.xml
@@ -22,7 +23,7 @@ export CC="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}gcc --sysroot=
 
 #echo "CC is $CC"
 
-JBIGI=$(realpath ../../core/c/jbigi)
+JBIGI=$(realpath $I2PBASE/core/c/jbigi)
 GMPVER=4.3.2
 GMP=$JBIGI/gmp-$GMPVER
 
