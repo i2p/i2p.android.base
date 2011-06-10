@@ -6,6 +6,7 @@
       android:installLocation="preferExternal"
       >
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- 3 = 1.5, 2 = 1.1, 1 = 1.0; would probably work with 1 but don't have a 1.0 SDK to test against -->
     <!-- 3 required for NDK -->

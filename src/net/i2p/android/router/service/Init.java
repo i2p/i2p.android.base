@@ -43,6 +43,7 @@ class Init {
         System.err.println("user.home" + ": " + System.getProperty("user.home"));
         System.err.println("user.name" + ": " + System.getProperty("user.name"));
         System.err.println("getFilesDir()" + ": " + myDir);
+        System.err.println("max mem" + ": " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()));
         System.err.println("Package" + ": " + ctx.getPackageName());
         System.err.println("Version" + ": " + getOurVersion());
         System.err.println("MODEL" + ": " + Build.MODEL);

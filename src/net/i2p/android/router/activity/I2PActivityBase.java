@@ -50,6 +50,13 @@ public abstract class I2PActivityBase extends Activity {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState)
+    {
+        System.err.println(this + " onSaveInstanceState called");
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onStop()
     {
         System.err.println(this + " onStop called");

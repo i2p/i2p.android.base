@@ -20,11 +20,23 @@ export AABI=arm-linux-androideabi-4.4.3
 export SYSTEM=linux-x86
 export BINPREFIX=arm-linux-androideabi-
 export CC="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}gcc --sysroot=$SYSROOT"
+# worked without this on 4.3.2, but 5.0.2 couldn't find it
+export NM="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}nm"
 
 #echo "CC is $CC"
 
 JBIGI=$(realpath $I2PBASE/core/c/jbigi)
-GMPVER=4.3.2
+#
+# GMP Version
+#
+# prelim stats on a droid
+# java (libcrypto) 29 ms
+# 4.3.2 (jbigi) 34 ms
+# 5.0.2 (jbigi) 32 ms
+# libcrypto crashes on emulator, don't trust it
+# jbigi about 20-25% slower than java on emulator
+#
+GMPVER=5.0.2
 GMP=$JBIGI/gmp-$GMPVER
 
 if [ ! -d $GMP ]

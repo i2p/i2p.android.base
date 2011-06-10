@@ -165,6 +165,66 @@
         <delete file="scripts/version.properties" verbose="${verbose}" />
     </target>
 
+    <!-- just to make it easier -->
+    <target name="create-signing-keys" >
+        <echo message="key store is ${key.store}" />
+        <echo message="key store password is android" />
+        <echo message="key alias is ${key.alias}" />
+        <input message="Enter common name for new key (your name): " addproperty="release.cn" />
+        <fail message="You must enter a name" >
+            <condition>
+                <equals arg1="${release.cn}" arg2="" />
+            </condition>
+        </fail>
+        <input message="Enter password for new key (6 characters minimum): " addproperty="release.password" />
+        <fail message="You must enter a password" >
+            <condition>
+                <equals arg1="${release.password}" arg2="" />
+            </condition>
+        </fail>
+        <echo message="Generating keys..." />
+        <exec executable="keytool" inputstring="${release.password}${line.separator}${release.password}${line.separator}" osfamily="unix" failonerror="true">
+            <arg value="-genkey" />
+            <arg value="-v" />
+            <arg value="-alias" />
+            <arg value="${key.alias}" />
+            <arg value="-keystore" />
+            <arg value="${key.store}" />
+            <arg value="-validity" />
+            <arg value="10000" />
+            <arg value="-keyalg" />
+            <arg value="RSA" />
+            <arg value="-keysize" />
+            <arg value="4096" />
+            <arg value="-storepass" />
+            <arg value="android" />
+            <arg value="-dname" />
+            <arg value="cn=${release.cn}, ou=Apps, o=I2P, c=DE" />
+        </exec>
+        <echo message="Created keys:" />
+        <exec executable="keytool" inputstring="android${line.separator}" osfamily="unix" failonerror="true">
+            <arg value="-list" />
+            <arg value="-v" />
+            <arg value="-alias" />
+            <arg value="${key.alias}" />
+            <arg value="-keystore" />
+            <arg value="${key.store}" />
+        </exec>
+    </target>
+
+    <target name="hint" >
+        <echo message="key store password is android" />
+    </target>
+
+    <target name="verify" depends="hint, release" >
+        <exec executable="jarsigner" osfamily="unix" failonerror="true">
+            <arg value="-verify" />
+            <arg value="-verbose" />
+            <arg value="-certs" />
+            <arg value="${out.release.file}" />
+        </exec>
+    </target>
+
     <!--
          ================================================================================
          From here down copied from SDK tools/ant/main_rules.xml from Tools version 11
