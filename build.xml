@@ -129,7 +129,11 @@
         <!-- i2ptunnel -->
         <copy file="${i2pbase}/apps/ministreaming/java/build/mstreaming.jar" todir="${jar.libs.dir}" />
         <copy file="${i2pbase}/apps/streaming/java/build/streaming.jar" todir="${jar.libs.dir}" />
-        <copy file="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" todir="${jar.libs.dir}" />
+        <jar destfile="${jar.libs.dir}/i2ptunnel.jar" >
+            <zipfileset src="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" >
+                <exclude name="net/i2p/i2ptunnel/I2PTunnelGUI.class" />
+            </zipfileset >
+        </jar>
 
     </target>
 

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import dalvik.system.PathClassLoader;
+
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class RouterService extends Service {
 
     private RouterContext _context;
     private String _myDir;
+    private String _apkPath;
     private State _state = State.INIT;
     private Thread _starterThread;
     private Thread _statusThread;
@@ -41,6 +44,7 @@ public class RouterService extends Service {
         Init init = new Init(this);
         init.debugStuff();
         init.initialize();
+        _apkPath = init.getAPKPath();
         _statusBar = new StatusBar(this);
     }
 
@@ -53,7 +57,12 @@ public class RouterService extends Service {
                 return START_STICKY;
             _statusBar.update("I2P is starting up");
             _state = State.STARTING;
+
             _starterThread = new Thread(new Starter());
+            // this is required for Class.forName() to work in LoadClientAppsJob
+            // http://doandroids.com/blogs/2010/6/10/android-classloader-dynamic-loading-of/
+            ClassLoader cl = new PathClassLoader(_apkPath, ClassLoader.getSystemClassLoader());
+            _starterThread.setContextClassLoader(cl);
             _starterThread.start();
         }
         return START_STICKY;

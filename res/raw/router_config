@@ -1,7 +1,7 @@
 # initial router.config
 # temp directory
-i2p.dir.temp=/data/data/net.i2p.router/files/tmp
-i2p.dir.pid=/data/data/net.i2p.router/files/tmp
+i2p.dir.temp=/data/data/net.i2p.android.router/files/tmp
+i2p.dir.pid=/data/data/net.i2p.android.router/files/tmp
 # save memory
 prng.buffers=2
 prng.bufferSize=32768

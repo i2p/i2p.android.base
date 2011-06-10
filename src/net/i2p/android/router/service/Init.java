@@ -26,6 +26,7 @@ class Init {
 
     private final Context ctx;
     private final String myDir;
+    private String _apkPath;
 
     public Init(Context c) {
         ctx = c;
@@ -58,10 +59,17 @@ class Init {
         try {
             PackageInfo pi = pm.getPackageInfo(us, 0);
             System.err.println("VersionCode" + ": " + pi.versionCode);
+            // http://doandroids.com/blogs/2010/6/10/android-classloader-dynamic-loading-of/
+            _apkPath = pm.getApplicationInfo(us, 0).sourceDir;
+            System.err.println("APK Path" + ": " + _apkPath);
             if (pi.versionName != null)
                 return pi.versionName;
         } catch (Exception e) {}
         return "??";
+    }
+
+    String getAPKPath() {
+        return _apkPath;
     }
 
     void initialize() {
