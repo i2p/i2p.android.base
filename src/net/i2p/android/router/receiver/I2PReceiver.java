@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import net.i2p.android.router.R;
 
@@ -24,8 +25,18 @@ public class I2PReceiver extends BroadcastReceiver {
     }
 
     public void onReceive(Context context, Intent intent) {
-        System.out.println("Got broadcast: " + intent);
+        String action = intent.getAction();
+        System.out.println("Got broadcast: " + action);
 
-        ConnectivityManager cm = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+            boolean failover = intent.getBooleanExtra(ConnectivityManager.EXTRA_IS_FAILOVER, false);
+            boolean noConn = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
+            NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
+            NetworkInfo other = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_OTHER_NETWORK_INFO);
+
+            System.out.println("No conn? " + noConn + " failover? " + failover + 
+                               " info: " + info + " other: " + other);
+            //ConnectivityManager cm = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
     }
 }

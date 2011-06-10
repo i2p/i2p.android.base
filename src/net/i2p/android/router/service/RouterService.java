@@ -20,19 +20,15 @@ import net.i2p.util.NativeBigInteger;
  *  Runs the router
  */
 public class RouterService extends Service {
+    private enum State {INIT, STARTING, RUNNING, STOPPING, STOPPED}
+
     private RouterContext _context;
     private String _myDir;
-    private int _state;
+    private State _state = State.INIT;
     private Thread _starterThread;
     private Thread _statusThread;
     private StatusBar _statusBar;
     private final Object _stateLock = new Object();
-
-    private static final int STATE_INIT = 0;
-    private static final int STATE_STARTING  = 1;
-    private static final int STATE_RUNNING = 2;
-    private static final int STATE_STOPPING = 3;
-    private static final int STATE_STOPPED = 4;
 
     private static final String MARKER = "**************************************  ";
 
@@ -53,10 +49,10 @@ public class RouterService extends Service {
         System.err.println(this + " onStart called" +
                            "Current state is: " + _state);
         synchronized (_stateLock) {
-            if (_state != STATE_INIT)
+            if (_state != State.INIT)
                 return START_STICKY;
             _statusBar.update("I2P is starting up");
-            _state = STATE_STARTING;
+            _state = State.STARTING;
             _starterThread = new Thread(new Starter());
             _starterThread.start();
         }
@@ -67,14 +63,14 @@ public class RouterService extends Service {
         public void run() {
             System.err.println(MARKER + this + " starter thread" +
                            "Current state is: " + _state);
-            System.err.println(MARKER + this + " JBigI speed test started");
-            NativeBigInteger.main(null);
-            System.err.println(MARKER + this + " JBigI speed test finished, launching router");
+            //System.err.println(MARKER + this + " JBigI speed test started");
+            //NativeBigInteger.main(null);
+            //System.err.println(MARKER + this + " JBigI speed test finished, launching router");
             RouterLaunch.main(null);
             synchronized (_stateLock) {
-                if (_state != STATE_STARTING)
+                if (_state != State.STARTING)
                     return;
-                _state = STATE_RUNNING;
+                _state = State.RUNNING;
                 List contexts = RouterContext.listContexts();
                 if ( (contexts == null) || (contexts.isEmpty()) ) 
                       throw new IllegalStateException("No contexts. This is usually because the router is either starting up or shutting down.");
@@ -95,7 +91,7 @@ public class RouterService extends Service {
             System.err.println(MARKER + this + " status thread started" +
                                "Current state is: " + _state);
             Router router = _context.router();
-            while (_state == STATE_RUNNING && router.isAlive()) {
+            while (_state == State.RUNNING && router.isAlive()) {
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException ie) {
@@ -156,15 +152,15 @@ public class RouterService extends Service {
         System.err.println("onDestroy called" +
                            "Current state is: " + _state);
         synchronized (_stateLock) {
-            if (_state == STATE_STARTING)
+            if (_state == State.STARTING)
                 _starterThread.interrupt();
-            if (_state == STATE_STARTING || _state == STATE_RUNNING) {
-                _state = STATE_STOPPING;
+            if (_state == State.STARTING || _state == State.RUNNING) {
+                _state = State.STOPPING;
               // should this be in a thread?
                 _statusBar.update("I2P is stopping");
                 Thread stopperThread = new Thread(new Stopper());
                 stopperThread.start();
-            } else if (_state != STATE_STOPPING) {
+            } else if (_state != State.STOPPING) {
                 _statusBar.off(this);
             }
         }
@@ -178,7 +174,7 @@ public class RouterService extends Service {
             _statusBar.off(RouterService.this);
             System.err.println("shutdown complete");
             synchronized (_stateLock) {
-                _state = STATE_STOPPED;
+                _state = State.STOPPED;
             }
         }
     }
@@ -188,8 +184,8 @@ public class RouterService extends Service {
             System.err.println(this + " shutdown hook" +
                                "Current state is: " + _state);
             synchronized (_stateLock) {
-                if (_state == STATE_STARTING || _state == STATE_RUNNING) {
-                    _state = STATE_STOPPED;
+                if (_state == State.STARTING || _state == State.RUNNING) {
+                    _state = State.STOPPED;
                     if (_statusThread != null)
                         _statusThread.interrupt();
                     _statusBar.off(RouterService.this);

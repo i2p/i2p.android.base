@@ -4,6 +4,7 @@ i2p.dir.temp=/data/data/net.i2p.router/files/tmp
 i2p.dir.pid=/data/data/net.i2p.router/files/tmp
 # save memory
 prng.buffers=2
+prng.bufferSize=32768
 router.decayingBloomFilterM=20
 stat.full=false
 #
@@ -11,9 +12,8 @@ stat.full=false
 #
 time.disabled=true
 #
-# no I2CP
+# no external I2CP (7654)
 #
-i2p.dummyClientFacade=true
 i2cp.disableInterface=true
 #
 ##### Tunnels

@@ -90,7 +90,10 @@
 
     <target name="buildrouter" depends="-dirs" >
         <!-- build router and core -->
-        <ant dir="${i2pbase}" target="buildrouter" />
+        <ant dir="${i2pbase}" >
+            <target name="buildRouter" />
+            <target name="buildI2PTunnel" />
+        </ant>
 
         <!-- router -->
         <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
@@ -122,12 +125,19 @@
                 <exclude name="org/bouncycastle/crypto/digests/MD5Digest.class" />
             </zipfileset >
         </jar>
+
+        <!-- i2ptunnel -->
+        <copy file="${i2pbase}/apps/ministreaming/java/build/mstreaming.jar" todir="${jar.libs.dir}" />
+        <copy file="${i2pbase}/apps/streaming/java/build/streaming.jar" todir="${jar.libs.dir}" />
+        <copy file="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" todir="${jar.libs.dir}" />
+
     </target>
 
     <!-- some resources -->
     <target name="copy-i2p-resources" depends="-dirs" >
         <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="res/drawable/" />
         <copy file="${i2pbase}/installer/resources/blocklist.txt" tofile="res/raw/blocklist_txt" />
+        <copy file="${i2pbase}/installer/resources/hosts.txt" tofile="res/raw/hosts_txt" />
     </target>
 
     <target name="hackcleanup">
@@ -159,6 +169,7 @@
         <delete dir="${jar.libs.dir}" verbose="${verbose}" />
         <delete file="res/drawable/i2plogo.png" verbose="${verbose}"/>
         <delete file="res/raw/blocklist_txt" verbose="${verbose}" />
+        <delete file="res/raw/hosts_txt" verbose="${verbose}" />
         <delete dir="jni/build/" verbose="${verbose}" />
         <delete file="jni/libjbigi.so" verbose="${verbose}" />
         <delete file="scripts/build.number" verbose="${verbose}" />

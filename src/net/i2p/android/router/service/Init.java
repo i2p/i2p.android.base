@@ -67,6 +67,10 @@ class Init {
     void initialize() {
         mergeResourceToFile(R.raw.router_config, "router.config");
         mergeResourceToFile(R.raw.logger_config, "logger.config");
+        mergeResourceToFile(R.raw.clients_config, "clients.config");
+        mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config");
+        // FIXME this is a memory hog to merge this way
+        mergeResourceToFile(R.raw.hosts_txt, "hosts.txt");
         copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
 
         // Set up the locations so Router and WorkingDir can find them

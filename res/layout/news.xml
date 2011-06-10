@@ -7,18 +7,17 @@
 <TextView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
-    android:text="I2P News Page"
+    android:text="Hello World, I2PAndroid"
     />
 <ImageView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:src="@drawable/i2plogo"
     />
-<Button 
-    android:id="@+id/news_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Go to news"
+<WebView  
+    android:id="@+id/news_webview"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
     />
 </LinearLayout>
 
