@@ -24,7 +24,7 @@ import net.i2p.util.NativeBigInteger;
  *  Runs the router
  */
 public class RouterService extends Service {
-    private enum State {INIT, STARTING, RUNNING, STOPPING, STOPPED}
+    private enum State {INIT, WAITING, STARTING, RUNNING, STOPPING, STOPPED}
 
     private RouterContext _context;
     private String _myDir;
@@ -33,7 +33,7 @@ public class RouterService extends Service {
     private Thread _starterThread;
     private Thread _statusThread;
     private StatusBar _statusBar;
-    private BroadcastReceiver _receiver;
+    private I2PReceiver _receiver;
     private final Object _stateLock = new Object();
 
     private static final String MARKER = "**************************************  ";
@@ -58,14 +58,48 @@ public class RouterService extends Service {
         synchronized (_stateLock) {
             if (_state != State.INIT)
                 return START_STICKY;
-            _statusBar.update("I2P is starting up");
-            _state = State.STARTING;
-
-            _starterThread = new Thread(new Starter());
-            _starterThread.start();
             _receiver = new I2PReceiver(this);
+            if (_receiver.isConnected()) {
+                _statusBar.update("I2P is starting up");
+                _state = State.STARTING;
+                _starterThread = new Thread(new Starter());
+                _starterThread.start();
+            } else {
+                _statusBar.update("I2P is waiting for a network connection");
+                _state = State.WAITING;
+                _starterThread = new Thread(new Waiter());
+                _starterThread.start();
+            }
         }
         return START_STICKY;
+    }
+
+    /** maybe this goes away when the receiver can bind to us */
+    private class Waiter implements Runnable {
+        public void run() {
+            System.err.println(MARKER + this + " waiter thread" +
+                           "Current state is: " + _state);
+            while (_state == State.WAITING) {
+                try {
+                    Thread.sleep(30*1000);
+                } catch (InterruptedException ie) {
+                    break;
+                }
+
+                if (_receiver.isConnected()) {
+                    synchronized (_stateLock) {
+                        if (_state != State.WAITING)
+                            break;
+                        _statusBar.update("Network connected, I2P is starting up");
+                        _state = State.STARTING;
+                        _starterThread = new Thread(new Starter());
+                        _starterThread.start();
+                    }
+                    break;
+                }
+            }
+            System.err.println("waiter finished");
+        }
     }
 
     private class Starter implements Runnable {
@@ -104,7 +138,7 @@ public class RouterService extends Service {
             Router router = _context.router();
             while (_state == State.RUNNING && router.isAlive()) {
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(15*1000);
                 } catch (InterruptedException ie) {
                     break;
                 }

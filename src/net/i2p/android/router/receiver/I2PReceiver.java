@@ -46,6 +46,11 @@ public class I2PReceiver extends BroadcastReceiver {
         }
     }
 
+    public boolean isConnected() {
+        NetworkInfo current = getInfo();
+        return current != null && current.isConnected();
+    }
+
     private NetworkInfo getInfo() {
         ConnectivityManager cm = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo current = cm.getActiveNetworkInfo();
