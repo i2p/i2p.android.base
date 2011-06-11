@@ -75,7 +75,6 @@ class Init {
     void initialize() {
         mergeResourceToFile(R.raw.router_config, "router.config");
         mergeResourceToFile(R.raw.logger_config, "logger.config");
-        mergeResourceToFile(R.raw.clients_config, "clients.config");
         mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config");
         // FIXME this is a memory hog to merge this way
         mergeResourceToFile(R.raw.hosts_txt, "hosts.txt");
@@ -114,6 +113,8 @@ class Init {
      *  Load defaults from resource,
      *  then add props from file,
      *  and write back
+     *  For now, do it backwards so we can override with new apks.
+     *  When we have user configurable stuff, switch it back.
      */
     private void mergeResourceToFile(int resID, String f) {
         InputStream in = null;
@@ -121,9 +122,10 @@ class Init {
 
         byte buf[] = new byte[4096];
         try {
-            Properties props = new OrderedProperties();
             in = ctx.getResources().openRawResource(resID);
-            DataHelper.loadProps(props,  in);
+            Properties props = new OrderedProperties();
+            // keep user settings
+            //DataHelper.loadProps(props,  in);
             
             try {
                 fin = ctx.openFileInput(f);
@@ -131,9 +133,10 @@ class Init {
                 System.err.println("Merging resource into file " + f);
             } catch (IOException ioe) {
                 System.err.println("Creating file " + f + " from resource");
-            } finally {
-                if (fin != null) try { fin.close(); } catch (IOException ioe) {}
             }
+
+            // override user settings
+            DataHelper.loadProps(props,  in);
 
             DataHelper.storeProps(props, ctx.getFileStreamPath(f));
         } catch (IOException ioe) {

@@ -34,6 +34,10 @@ public class StatusBar {
 
     public void update(String details) {
         String title = "I2P Status";
+        update(title, details);
+    }
+
+    public void update(String title, String details) {
         PendingIntent pi = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notif.setLatestEventInfo(ctx, title, details, pi);
         mgr.notify(ID, notif);

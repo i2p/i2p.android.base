@@ -1,5 +1,0 @@
-# poke the i2ptunnels defined in i2ptunnel.config
-clientApp.0.main=net.i2p.i2ptunnel.TunnelControllerGroup
-clientApp.0.name=Application tunnels
-clientApp.0.args=i2ptunnel.config
-clientApp.0.startOnLoad=true

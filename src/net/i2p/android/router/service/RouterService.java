@@ -1,18 +1,20 @@
 package net.i2p.android.router.service;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 
-import dalvik.system.PathClassLoader;
-
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.List;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.receiver.I2PReceiver;
 import net.i2p.data.DataHelper;
+import net.i2p.router.Job;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.RouterLaunch;
@@ -26,11 +28,12 @@ public class RouterService extends Service {
 
     private RouterContext _context;
     private String _myDir;
-    private String _apkPath;
+    //private String _apkPath;
     private State _state = State.INIT;
     private Thread _starterThread;
     private Thread _statusThread;
     private StatusBar _statusBar;
+    private BroadcastReceiver _receiver;
     private final Object _stateLock = new Object();
 
     private static final String MARKER = "**************************************  ";
@@ -44,7 +47,7 @@ public class RouterService extends Service {
         Init init = new Init(this);
         init.debugStuff();
         init.initialize();
-        _apkPath = init.getAPKPath();
+        //_apkPath = init.getAPKPath();
         _statusBar = new StatusBar(this);
     }
 
@@ -59,11 +62,8 @@ public class RouterService extends Service {
             _state = State.STARTING;
 
             _starterThread = new Thread(new Starter());
-            // this is required for Class.forName() to work in LoadClientAppsJob
-            // http://doandroids.com/blogs/2010/6/10/android-classloader-dynamic-loading-of/
-            ClassLoader cl = new PathClassLoader(_apkPath, ClassLoader.getSystemClassLoader());
-            _starterThread.setContextClassLoader(cl);
             _starterThread.start();
+            _receiver = new I2PReceiver(this);
         }
         return START_STICKY;
     }
@@ -86,6 +86,8 @@ public class RouterService extends Service {
                 _statusBar.update("I2P is running");
                 _context = (RouterContext)contexts.get(0);
                 _context.router().setKillVMOnEnd(false);
+                Job loadJob = new LoadClientsJob(_context);
+                _context.jobQueue().addJob(loadJob);
                 _statusThread = new Thread(new StatusThread());
                 _statusThread.start();
                 _context.addShutdownTask(new ShutdownHook());
@@ -130,17 +132,19 @@ public class RouterService extends Service {
                     fmt = new DecimalFormat("#0.00");
 
                 String status =
+                       "I2P " +
                        " Pr " + active + '/' + known +
                        " Ex " + inEx + '/' + outEx +
-                       " Cl " + inCl + '/' + outCl +
+                       " Cl " + inCl + '/' + outCl;
                        //" Pt " + part +
-                       " BW " + fmt.format(inBW) + '/' + fmt.format(outBW) + "K" +
+
+                String details =
+                       "BW " + fmt.format(inBW) + '/' + fmt.format(outBW) + "K" +
                        " Lg " + jobLag +
                        " Dy " + msgDelay +
                        " Up " + uptime;
 
-                System.out.println(status);
-                _statusBar.update(status);
+                _statusBar.update(status, details);
             }
             _statusBar.update("Status thread died");
             System.err.println(MARKER + this + " status thread finished" +
@@ -160,6 +164,14 @@ public class RouterService extends Service {
     public void onDestroy() {
         System.err.println("onDestroy called" +
                            "Current state is: " + _state);
+
+        BroadcastReceiver rcvr = _receiver;
+        if (rcvr != null) {
+            synchronized(rcvr) {
+                unregisterReceiver(rcvr);
+                _receiver = null;
+            }
+        }
         synchronized (_stateLock) {
             if (_state == State.STARTING)
                 _starterThread.interrupt();
@@ -179,7 +191,8 @@ public class RouterService extends Service {
         public void run() {
             System.err.println(MARKER + this + " stopper thread" +
                                "Current state is: " + _state);
-            _context.router().shutdown(Router.EXIT_HARD);
+            if (_context != null)
+                _context.router().shutdown(Router.EXIT_HARD);
             _statusBar.off(RouterService.this);
             System.err.println("shutdown complete");
             synchronized (_stateLock) {
@@ -192,12 +205,19 @@ public class RouterService extends Service {
         public void run() {
             System.err.println(this + " shutdown hook" +
                                "Current state is: " + _state);
+            _statusBar.off(RouterService.this);
+            BroadcastReceiver rcvr = _receiver;
+            if (rcvr != null) {
+                synchronized(rcvr) {
+                    unregisterReceiver(rcvr);
+                    _receiver = null;
+                }
+            }
             synchronized (_stateLock) {
                 if (_state == State.STARTING || _state == State.RUNNING) {
                     _state = State.STOPPED;
                     if (_statusThread != null)
                         _statusThread.interrupt();
-                    _statusBar.off(RouterService.this);
                     stopSelf();
                 }
             }
