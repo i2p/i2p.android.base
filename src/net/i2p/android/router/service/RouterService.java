@@ -12,6 +12,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.receiver.I2PReceiver;
 import net.i2p.data.DataHelper;
 import net.i2p.router.Job;
@@ -24,7 +25,9 @@ import net.i2p.util.NativeBigInteger;
  *  Runs the router
  */
 public class RouterService extends Service {
-    private enum State {INIT, WAITING, STARTING, RUNNING, STOPPING, STOPPED}
+    private enum State {INIT, WAITING, STARTING, RUNNING, STOPPING, STOPPED,
+                        MANUAL_STOPPING, MANUAL_STOPPED,
+                        NETWORK_STOPPING, NETWORK_STOPPED, RESTARTING}
 
     private RouterContext _context;
     private String _myDir;
@@ -34,6 +37,7 @@ public class RouterService extends Service {
     private Thread _statusThread;
     private StatusBar _statusBar;
     private I2PReceiver _receiver;
+    private IBinder _binder;
     private final Object _stateLock = new Object();
 
     private static final String MARKER = "**************************************  ";
@@ -49,6 +53,7 @@ public class RouterService extends Service {
         init.initialize();
         //_apkPath = init.getAPKPath();
         _statusBar = new StatusBar(this);
+        _binder = new RouterBinder(this);
     }
 
     @Override
@@ -191,8 +196,35 @@ public class RouterService extends Service {
     {
         System.err.println("onBind called" +
                            "Current state is: " + _state);
-        return null;
+        return _binder;
     }
+
+    // ******** following methods may be accessed from Activities and Receivers ************
+
+    public RouterContext getRouterContext() {
+        RouterContext rv = _context;
+        if (rv == null)
+            return null;
+        if (!rv.router().isAlive())
+            return null;
+        if (_state != State.RUNNING &&
+            _state != State.STOPPING &&
+            _state != State.MANUAL_STOPPING &&
+            _state != State.NETWORK_STOPPING)
+            return null;
+        return rv;
+    }
+
+    public void manualStop() {
+    }
+
+    public void networkStop() {
+    }
+
+    public void restart() {
+    }
+
+    // ******** end methods accessed from Activities and Receivers ************
 
     @Override
     public void onDestroy() {

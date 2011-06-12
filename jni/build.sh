@@ -13,7 +13,7 @@ export NDK=$(realpath ../../android-ndk-r5b/)
 #
 # API level, must match that in ../AndroidManifest.xml
 #
-LEVEL=3
+LEVEL=7
 ARCH=arm
 export SYSROOT=$NDK/platforms/android-$LEVEL/arch-$ARCH/
 export AABI=arm-linux-androideabi-4.4.3
