@@ -57,14 +57,21 @@ public class I2PReceiver extends BroadcastReceiver {
 
         if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION) ||
             action.equals(Intent.ACTION_TIME_TICK)) {
-            if (_wasConnected && !isConnected()) {
+            boolean connected = isConnected();
+            if (_wasConnected && !connected) {
                 // notify + 2 timer ticks
                 if (++_unconnectedCount >= 3) {
-                    // connection will call networkStop()
-                    System.err.println("********* Network down, binding to router");
-                    bindRouter();
+                    if (_isBound) {
+                        System.err.println("********* Network down, already bound");
+                        _routerService.networkStop();
+                    } else {
+                        System.err.println("********* Network down, binding to router");
+                        // connection will call networkStop()
+                        bindRouter();
+                    }
                 }
             } else {
+                _wasConnected = connected;
                 _unconnectedCount = 0;
             }
         }
