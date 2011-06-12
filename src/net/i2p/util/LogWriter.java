@@ -47,7 +47,6 @@ class LogWriter implements Runnable {
                 flushRecords();
                 rereadConfig();
             }
-            System.err.println("Done writing");
         } catch (Exception e) {
             System.err.println("Error writing the logs: " + e.getMessage());
             e.printStackTrace();

@@ -28,6 +28,7 @@ public abstract class I2PActivityBase extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        System.err.println(this + " onCreate called");
         super.onCreate(savedInstanceState);
         _myDir = getFilesDir().getAbsolutePath();
     }

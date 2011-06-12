@@ -59,10 +59,11 @@ public class RouterService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         System.err.println(this + " onStart called" +
-                           "Current state is: " + _state);
+                           " Current state is: " + _state);
         synchronized (_stateLock) {
             if (_state != State.INIT)
-                return START_STICKY;
+                //return START_STICKY;
+                return START_NOT_STICKY;
             _receiver = new I2PReceiver(this);
             if (_receiver.isConnected()) {
                 _statusBar.update("I2P is starting up");
@@ -76,14 +77,15 @@ public class RouterService extends Service {
                 _starterThread.start();
             }
         }
-        return START_STICKY;
+        //return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     /** maybe this goes away when the receiver can bind to us */
     private class Waiter implements Runnable {
         public void run() {
             System.err.println(MARKER + this + " waiter thread" +
-                           "Current state is: " + _state);
+                           " Current state is: " + _state);
             while (_state == State.WAITING) {
                 try {
                     Thread.sleep(30*1000);
@@ -110,7 +112,7 @@ public class RouterService extends Service {
     private class Starter implements Runnable {
         public void run() {
             System.err.println(MARKER + this + " starter thread" +
-                           "Current state is: " + _state);
+                           " Current state is: " + _state);
             //System.err.println(MARKER + this + " JBigI speed test started");
             //NativeBigInteger.main(null);
             //System.err.println(MARKER + this + " JBigI speed test finished, launching router");
@@ -139,7 +141,7 @@ public class RouterService extends Service {
     private class StatusThread implements Runnable {
         public void run() {
             System.err.println(MARKER + this + " status thread started" +
-                               "Current state is: " + _state);
+                               " Current state is: " + _state);
             Router router = _context.router();
             while (_state == State.RUNNING && router.isAlive()) {
                 try {
@@ -187,7 +189,7 @@ public class RouterService extends Service {
             }
             _statusBar.update("Status thread died");
             System.err.println(MARKER + this + " status thread finished" +
-                               "Current state is: " + _state);
+                               " Current state is: " + _state);
         }
     }
 
@@ -195,7 +197,7 @@ public class RouterService extends Service {
     public IBinder onBind(Intent intent)
     {
         System.err.println("onBind called" +
-                           "Current state is: " + _state);
+                           " Current state is: " + _state);
         return _binder;
     }
 
@@ -218,13 +220,19 @@ public class RouterService extends Service {
         return rv;
     }
 
+    public boolean canManualStop() {
+        return _state == State.WAITING || _state == State.STARTING || _state == State.RUNNING;
+    }
+
     /**
      *  Stop and don't restart
      */
     public void manualStop() {
         System.err.println("manualStop called" +
-                           "Current state is: " + _state);
+                           " Current state is: " + _state);
         synchronized (_stateLock) {
+            if (!canManualStop())
+                return;
             if (_state == State.WAITING || _state == State.STARTING)
                 _starterThread.interrupt();
             if (_state == State.STARTING || _state == State.RUNNING) {
@@ -240,7 +248,7 @@ public class RouterService extends Service {
      */
     public void networkStop() {
         System.err.println("networkStop called" +
-                           "Current state is: " + _state);
+                           " Current state is: " + _state);
         synchronized (_stateLock) {
             if (_state == State.WAITING || _state == State.STARTING)
                 _starterThread.interrupt();
@@ -253,7 +261,21 @@ public class RouterService extends Service {
         }
     }
 
-    public void restart() {
+    public boolean canManualStart() {
+        return _state == State.MANUAL_STOPPED;
+    }
+
+    public void manualStart() {
+        System.err.println("restart called" +
+                           " Current state is: " + _state);
+        synchronized (_stateLock) {
+            if (!canManualStart())
+                return;
+            _statusBar.update("I2P is starting up");
+            _state = State.STARTING;
+            _starterThread = new Thread(new Starter());
+            _starterThread.start();
+        }
     }
 
     // ******** end methods accessed from Activities and Receivers ************
@@ -261,14 +283,17 @@ public class RouterService extends Service {
     @Override
     public void onDestroy() {
         System.err.println("onDestroy called" +
-                           "Current state is: " + _state);
+                           " Current state is: " + _state);
 
         _statusBar.off(this);
 
         I2PReceiver rcvr = _receiver;
         if (rcvr != null) {
             synchronized(rcvr) {
-                unregisterReceiver(rcvr);
+                try {
+                    // throws if not registered
+                    unregisterReceiver(rcvr);
+                } catch (IllegalArgumentException iae) {}
                 //rcvr.unbindRouter();
                 //_receiver = null;
             }
@@ -298,11 +323,11 @@ public class RouterService extends Service {
 
         public void run() {
             System.err.println(MARKER + this + " stopper thread" +
-                               "Current state is: " + _state);
+                               " Current state is: " + _state);
             if (_context != null)
                 _context.router().shutdown(Router.EXIT_HARD);
             _statusBar.off(RouterService.this);
-            System.err.println("shutdown complete");
+            System.err.println("********** Router shutdown complete");
             synchronized (_stateLock) {
                 if (_state == nextState)
                     _state = stopState;
@@ -313,12 +338,15 @@ public class RouterService extends Service {
     private class ShutdownHook implements Runnable {
         public void run() {
             System.err.println(this + " shutdown hook" +
-                               "Current state is: " + _state);
+                               " Current state is: " + _state);
             _statusBar.off(RouterService.this);
             I2PReceiver rcvr = _receiver;
             if (rcvr != null) {
                 synchronized(rcvr) {
-                    unregisterReceiver(rcvr);
+                    try {
+                        // throws if not registered
+                        unregisterReceiver(rcvr);
+                    } catch (IllegalArgumentException iae) {}
                     //rcvr.unbindRouter();
                     //_receiver = null;
                 }
