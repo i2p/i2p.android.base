@@ -1,10 +1,11 @@
 package net.i2p.android.router.service;
 
+import net.i2p.android.apps.NewsFetcher;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.router.Job;
 import net.i2p.router.JobImpl;
 import net.i2p.router.RouterContext;
-import net.i2p.util.I2PThread;
+import net.i2p.util.I2PAppThread;
 
 /**
  * Load the clients we want.
@@ -27,6 +28,8 @@ import net.i2p.util.I2PThread;
  */
 class LoadClientsJob extends JobImpl {
     
+    private Thread _fetcherThread;
+
     /** this is the delay to load the clients. There are additional delays e.g. in i2ptunnel.config */
     private static final long LOAD_DELAY = 10*1000;
 
@@ -41,10 +44,15 @@ class LoadClientsJob extends JobImpl {
     public void runJob() {
         Job j = new RunI2PTunnel(getContext());
         getContext().jobQueue().addJob(j);
+
+        NewsFetcher fetcher = NewsFetcher.getInstance(getContext());
+        _fetcherThread = new I2PAppThread(fetcher, "NewsFetcher", true);
+        _fetcherThread.start();
+
         // add other clients here
     }
 
-    private static class RunI2PTunnel extends JobImpl {
+    private class RunI2PTunnel extends JobImpl {
 
         public RunI2PTunnel(RouterContext ctx) {
             super(ctx);
@@ -61,9 +69,11 @@ class LoadClientsJob extends JobImpl {
         }
     }
 
-    private static class I2PTunnelShutdownHook implements Runnable {
+    private class I2PTunnelShutdownHook implements Runnable {
         public void run() {
             System.err.println("i2ptunnel shutdown hook");
+            if (_fetcherThread != null)
+                _fetcherThread.interrupt();
             TunnelControllerGroup.getInstance().unloadControllers();
         }
     }

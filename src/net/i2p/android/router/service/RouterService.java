@@ -201,6 +201,9 @@ public class RouterService extends Service {
 
     // ******** following methods may be accessed from Activities and Receivers ************
 
+    /**
+     *  @returns null if router is not running
+     */
     public RouterContext getRouterContext() {
         RouterContext rv = _context;
         if (rv == null)
@@ -215,10 +218,35 @@ public class RouterService extends Service {
         return rv;
     }
 
+    /**
+     *  Stop and don't restart
+     */
     public void manualStop() {
+        synchronized (_stateLock) {
+            if (_state == State.WAITING || _state == State.STARTING)
+                _starterThread.interrupt();
+            if (_state == State.STARTING || _state == State.RUNNING) {
+                _statusBar.update("I2P is stopping");
+                Thread stopperThread = new Thread(new Stopper(State.MANUAL_STOPPING, State.MANUAL_STOPPED));
+                stopperThread.start();
+            }
+        }
     }
 
+    /**
+     *  Stop and then spin waiting for a network connection, then restart
+     */
     public void networkStop() {
+        synchronized (_stateLock) {
+            if (_state == State.WAITING || _state == State.STARTING)
+                _starterThread.interrupt();
+            if (_state == State.STARTING || _state == State.RUNNING) {
+                _statusBar.update("I2P is stopping");
+                // don't change state, let the shutdown hook do it
+                Thread stopperThread = new Thread(new Stopper(State.NETWORK_STOPPING, State.NETWORK_STOPPING));
+                stopperThread.start();
+            }
+        }
     }
 
     public void restart() {
@@ -231,29 +259,39 @@ public class RouterService extends Service {
         System.err.println("onDestroy called" +
                            "Current state is: " + _state);
 
-        BroadcastReceiver rcvr = _receiver;
+        _statusBar.off(this);
+
+        I2PReceiver rcvr = _receiver;
         if (rcvr != null) {
             synchronized(rcvr) {
                 unregisterReceiver(rcvr);
+                rcvr.unbindRouter();
                 _receiver = null;
             }
         }
         synchronized (_stateLock) {
-            if (_state == State.STARTING)
+            if (_state == State.WAITING || _state == State.STARTING)
                 _starterThread.interrupt();
             if (_state == State.STARTING || _state == State.RUNNING) {
-                _state = State.STOPPING;
               // should this be in a thread?
                 _statusBar.update("I2P is stopping");
-                Thread stopperThread = new Thread(new Stopper());
+                Thread stopperThread = new Thread(new Stopper(State.STOPPING, State.STOPPED));
                 stopperThread.start();
-            } else if (_state != State.STOPPING) {
-                _statusBar.off(this);
             }
         }
     }
 
     private class Stopper implements Runnable {
+        private final State nextState;
+        private final State stopState;
+
+        /** call holding statelock */
+        public Stopper(State next, State stop) {
+            nextState = next;
+            stopState = stop;
+            _state = next;
+        }
+
         public void run() {
             System.err.println(MARKER + this + " stopper thread" +
                                "Current state is: " + _state);
@@ -262,7 +300,8 @@ public class RouterService extends Service {
             _statusBar.off(RouterService.this);
             System.err.println("shutdown complete");
             synchronized (_stateLock) {
-                _state = State.STOPPED;
+                if (_state == nextState)
+                    _state = stopState;
             }
         }
     }
@@ -272,15 +311,26 @@ public class RouterService extends Service {
             System.err.println(this + " shutdown hook" +
                                "Current state is: " + _state);
             _statusBar.off(RouterService.this);
-            BroadcastReceiver rcvr = _receiver;
+            I2PReceiver rcvr = _receiver;
             if (rcvr != null) {
                 synchronized(rcvr) {
                     unregisterReceiver(rcvr);
+                    rcvr.unbindRouter();
                     _receiver = null;
                 }
             }
             synchronized (_stateLock) {
-                if (_state == State.STARTING || _state == State.RUNNING) {
+                if (_state == State.WAITING || _state == State.STARTING)
+                    _starterThread.interrupt();
+                if (_state == State.MANUAL_STOPPING) {
+                    _state = State.MANUAL_STOPPED;
+                } else if (_state == State.NETWORK_STOPPING) {
+                    // start waiter thread
+                    _state = State.WAITING;
+                    _starterThread = new Thread(new Waiter());
+                    _starterThread.start();
+                } else if (_state == State.STARTING || _state == State.RUNNING ||
+                           _state == State.STOPPING) {
                     _state = State.STOPPED;
                     if (_statusThread != null)
                         _statusThread.interrupt();

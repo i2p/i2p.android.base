@@ -78,7 +78,10 @@
 
     <!-- overrides of those in main_rules.xml -->
 
-    <target name="-pre-build" depends="copy-i2p-resources, incrementBuild" />
+    <target name="-pre-build" depends="copy-i2p-resources, incrementBuild" >
+        <!-- aapt messes up when resources are added or deleted, just build every time -->
+        <delete dir="${gen.absolute.dir}/net" verbose="${verbose}" />
+    </target>
 
     <target name="-pre-compile" depends="buildrouter" />
 

@@ -17,6 +17,7 @@ public class I2PReceiver extends BroadcastReceiver {
     private final Context _context;
     private boolean _isBound;
     private RouterService _routerService;
+    private ServiceConnection _connection;
 
     /**
      *  Registers itself
@@ -28,8 +29,6 @@ public class I2PReceiver extends BroadcastReceiver {
         IntentFilter intents = new IntentFilter();
         intents.addAction(Intent.ACTION_TIME_CHANGED);
         intents.addAction(Intent.ACTION_TIME_TICK);  // once per minute, for testing
-        intents.addAction(Intent.ACTION_SCREEN_OFF);
-        intents.addAction(Intent.ACTION_SCREEN_ON);
         intents.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         context.registerReceiver(this, intents);
         boolean success = bindRouter();
@@ -90,9 +89,15 @@ public class I2PReceiver extends BroadcastReceiver {
         Intent intent = new Intent();
         intent.setClassName(_context, "net.i2p.android.router.service.RouterService");
         System.err.println(this + " calling bindService");
-        boolean success = _context.bindService(intent, new RouterConnection(), Context.BIND_AUTO_CREATE);
+        _connection = new RouterConnection();
+        boolean success = _context.bindService(intent, _connection, Context.BIND_AUTO_CREATE);
         System.err.println(this + " got from bindService: " + success);
         return success;
+    }
+
+    public void unbindRouter() {
+        if (_connection != null)
+            _context.unbindService(_connection);
     }
 
     private class RouterConnection implements ServiceConnection {

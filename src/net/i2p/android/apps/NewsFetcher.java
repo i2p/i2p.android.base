@@ -29,8 +29,21 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private boolean _invalidated;
     private File _newsFile;
     private File _tempFile;
+    private static NewsFetcher _instance;
 
-    private static final String NEWS_FILE = "docs/news.xml";
+    public static final NewsFetcher getInstance() { 
+        return _instance;
+    }
+
+    public static final synchronized NewsFetcher getInstance(RouterContext ctx) { 
+        if (_instance != null)
+            return _instance;
+        _instance = new NewsFetcher(ctx);
+        return _instance;
+    }
+
+    private static final String NEWS_DIR = "docs";
+    private static final String NEWS_FILE = "news.xml";
     private static final String TEMP_NEWS_FILE = "news.xml.temp";
     /** @since 0.7.14 not configurable */
     private static final String BACKUP_NEWS_URL = "http://www.i2p2.i2p/_static/news/news.xml";
@@ -48,7 +61,10 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             if (last != null)
                 _lastFetch = Long.parseLong(last);
         } catch (NumberFormatException nfe) {}
-        _newsFile = new File(_context.getRouterDir(), NEWS_FILE);
+        File newsDir = new File(_context.getRouterDir(), NEWS_DIR);
+        // isn't already there on android
+        newsDir.mkdir();
+        _newsFile = new File(newsDir, NEWS_FILE);
         _tempFile = new File(_context.getTempDir(), TEMP_NEWS_FILE);
         updateLastFetched();
     }
@@ -86,15 +102,23 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     }
     
     private static final long INITIAL_DELAY = 5*60*1000;
-    private static final long RUN_DELAY = 10*60*1000;
+    private static final long RUN_DELAY = 30*60*1000;
 
     public void run() {
-        try { Thread.sleep(INITIAL_DELAY + _context.random().nextLong(INITIAL_DELAY)); } catch (InterruptedException ie) {}
+        try {
+            Thread.sleep(INITIAL_DELAY);
+        } catch (InterruptedException ie) {
+            return;
+        }
         while (true) {
             if (shouldFetchNews()) {
                 fetchNews();
             }
-            try { Thread.sleep(RUN_DELAY); } catch (InterruptedException ie) {}
+            try {
+                Thread.sleep(RUN_DELAY);
+            } catch (InterruptedException ie) {
+                break;
+            }
         }
     }
     

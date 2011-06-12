@@ -73,11 +73,14 @@ class Init {
     }
 
     void initialize() {
-        mergeResourceToFile(R.raw.router_config, "router.config");
-        mergeResourceToFile(R.raw.logger_config, "logger.config");
-        mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config");
+        Properties props = new Properties();
+        props.setProperty("i2p.dir.temp", myDir + "/tmp");
+        props.setProperty("i2p.dir.pid", myDir + "/tmp");
+        mergeResourceToFile(R.raw.router_config, "router.config", props);
+        mergeResourceToFile(R.raw.logger_config, "logger.config", null);
+        mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config", null);
         // FIXME this is a memory hog to merge this way
-        mergeResourceToFile(R.raw.hosts_txt, "hosts.txt");
+        mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
         copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
 
         // Set up the locations so Router and WorkingDir can find them
@@ -115,8 +118,9 @@ class Init {
      *  and write back
      *  For now, do it backwards so we can override with new apks.
      *  When we have user configurable stuff, switch it back.
+     *  @param props local overrides or null
      */
-    private void mergeResourceToFile(int resID, String f) {
+    private void mergeResourceToFile(int resID, String f, Properties overrides) {
         InputStream in = null;
         InputStream fin = null;
 
@@ -138,6 +142,8 @@ class Init {
             // override user settings
             DataHelper.loadProps(props,  in);
 
+            if (overrides != null)
+                props.putAll(overrides);
             DataHelper.storeProps(props, ctx.getFileStreamPath(f));
         } catch (IOException ioe) {
         } catch (Resources.NotFoundException nfe) {
