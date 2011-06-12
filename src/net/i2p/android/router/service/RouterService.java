@@ -222,6 +222,8 @@ public class RouterService extends Service {
      *  Stop and don't restart
      */
     public void manualStop() {
+        System.err.println("manualStop called" +
+                           "Current state is: " + _state);
         synchronized (_stateLock) {
             if (_state == State.WAITING || _state == State.STARTING)
                 _starterThread.interrupt();
@@ -237,6 +239,8 @@ public class RouterService extends Service {
      *  Stop and then spin waiting for a network connection, then restart
      */
     public void networkStop() {
+        System.err.println("networkStop called" +
+                           "Current state is: " + _state);
         synchronized (_stateLock) {
             if (_state == State.WAITING || _state == State.STARTING)
                 _starterThread.interrupt();
@@ -265,8 +269,8 @@ public class RouterService extends Service {
         if (rcvr != null) {
             synchronized(rcvr) {
                 unregisterReceiver(rcvr);
-                rcvr.unbindRouter();
-                _receiver = null;
+                //rcvr.unbindRouter();
+                //_receiver = null;
             }
         }
         synchronized (_stateLock) {
@@ -315,8 +319,8 @@ public class RouterService extends Service {
             if (rcvr != null) {
                 synchronized(rcvr) {
                     unregisterReceiver(rcvr);
-                    rcvr.unbindRouter();
-                    _receiver = null;
+                    //rcvr.unbindRouter();
+                    //_receiver = null;
                 }
             }
             synchronized (_stateLock) {

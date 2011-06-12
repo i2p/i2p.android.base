@@ -16,6 +16,8 @@ import net.i2p.android.router.service.RouterService;
 public class I2PReceiver extends BroadcastReceiver {
     private final Context _context;
     private boolean _isBound;
+    private boolean _wasConnected;
+    private int _unconnectedCount;
     private RouterService _routerService;
     private ServiceConnection _connection;
 
@@ -31,9 +33,7 @@ public class I2PReceiver extends BroadcastReceiver {
         intents.addAction(Intent.ACTION_TIME_TICK);  // once per minute, for testing
         intents.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         context.registerReceiver(this, intents);
-        boolean success = bindRouter();
-        if (!success)
-            System.err.println(this + " Bind router failed");
+        _wasConnected = isConnected();
     }
 
     public void onReceive(Context context, Intent intent) {
@@ -46,11 +46,27 @@ public class I2PReceiver extends BroadcastReceiver {
             NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
             NetworkInfo other = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_OTHER_NETWORK_INFO);
 
+         /*****
             System.err.println("No conn? " + noConn + " failover? " + failover + 
                                " info: " + info + " other: " + other);
             printInfo(info);
             printInfo(other);
             getInfo();
+          *****/
+        }
+
+        if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION) ||
+            action.equals(Intent.ACTION_TIME_TICK)) {
+            if (_wasConnected && !isConnected()) {
+                // notify + 2 timer ticks
+                if (++_unconnectedCount >= 3) {
+                    // connection will call networkStop()
+                    System.err.println("********* Network down, binding to router");
+                    bindRouter();
+                }
+            } else {
+                _unconnectedCount = 0;
+            }
         }
     }
 
@@ -90,11 +106,12 @@ public class I2PReceiver extends BroadcastReceiver {
         intent.setClassName(_context, "net.i2p.android.router.service.RouterService");
         System.err.println(this + " calling bindService");
         _connection = new RouterConnection();
-        boolean success = _context.bindService(intent, _connection, Context.BIND_AUTO_CREATE);
+        boolean success = _context.bindService(intent, _connection, 0);
         System.err.println(this + " got from bindService: " + success);
         return success;
     }
 
+    /** unused */
     public void unbindRouter() {
         if (_connection != null)
             _context.unbindService(_connection);
@@ -106,10 +123,17 @@ public class I2PReceiver extends BroadcastReceiver {
             RouterBinder binder = (RouterBinder) service;
             _routerService = binder.getService();
             _isBound = true;
+            _unconnectedCount = 0;
+            _wasConnected = false;
+            System.err.println("********* Network down, stopping router");
+            _routerService.networkStop();
+            // this doesn't work here... TODO where to unbind
+            //_context.unbindService(this);
         }
 
         public void onServiceDisconnected(ComponentName name) {
             _isBound = false;
+            System.err.println("********* Receiver unbinding from router");
         }
     }
 }
