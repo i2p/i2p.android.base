@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 
 import java.io.File;
@@ -34,11 +35,12 @@ public class RouterService extends Service {
     //private String _apkPath;
     private State _state = State.INIT;
     private Thread _starterThread;
-    private Thread _statusThread;
     private StatusBar _statusBar;
     private I2PReceiver _receiver;
     private IBinder _binder;
     private final Object _stateLock = new Object();
+    private Handler _handler;
+    private Runnable _updater;
 
     private static final String MARKER = "**************************************  ";
 
@@ -55,6 +57,8 @@ public class RouterService extends Service {
         //_apkPath = init.getAPKPath();
         _statusBar = new StatusBar(this);
         _binder = new RouterBinder(this);
+        _handler = new Handler();
+        _updater = new Updater();
     }
 
     @Override
@@ -78,6 +82,9 @@ public class RouterService extends Service {
                 _starterThread.start();
             }
         }
+        _handler.removeCallbacks(_updater);
+        _handler.postDelayed(_updater, 50);
+
         //return START_STICKY;
         return START_NOT_STICKY;
     }
@@ -130,8 +137,6 @@ public class RouterService extends Service {
                 _context.router().setKillVMOnEnd(false);
                 Job loadJob = new LoadClientsJob(_context);
                 _context.jobQueue().addJob(loadJob);
-                _statusThread = new Thread(new StatusThread());
-                _statusThread.start();
                 _context.addShutdownTask(new ShutdownHook());
                 _starterThread = null;
             }
@@ -139,62 +144,47 @@ public class RouterService extends Service {
         }
     }
 
-    /** TODO change to a handler */
-    private class StatusThread implements Runnable {
+    private class Updater implements Runnable {
         public void run() {
-            System.err.println(MARKER + this + " status thread started" +
-                               " Current state is: " + _state);
-            try {
-                Thread.sleep(5*1000);
-            } catch (InterruptedException ie) {}
-            Router router = _context.router();
-            while (_state == State.RUNNING && router.isAlive()) {
-                int active = _context.commSystem().countActivePeers();
-                int known = Math.max(_context.netDb().getKnownRouters() - 1, 0);
-                int inEx = _context.tunnelManager().getFreeTunnelCount();
-                int outEx = _context.tunnelManager().getOutboundTunnelCount();
-                int inCl = _context.tunnelManager().getInboundClientTunnelCount();
-                int outCl = _context.tunnelManager().getOutboundClientTunnelCount();
-                //int part = _context.tunnelManager().getParticipatingCount();
-                double dLag = _context.statManager().getRate("jobQueue.jobLag").getRate(60000).getAverageValue();
-                String jobLag = DataHelper.formatDuration((long) dLag);
-                String msgDelay = DataHelper.formatDuration(_context.throttle().getMessageDelay());
-                String uptime = DataHelper.formatDuration(router.getUptime());
-                //String tunnelStatus = _context.throttle().getTunnelStatus();
-                double inBW = _context.bandwidthLimiter().getReceiveBps() / 1024;
-                double outBW = _context.bandwidthLimiter().getSendBps() / 1024;
-                // control total width
-                DecimalFormat fmt;
-                if (inBW >= 1000 || outBW >= 1000)
-                    fmt = new DecimalFormat("#0");
-                else if (inBW >= 100 || outBW >= 100)
-                    fmt = new DecimalFormat("#0.0");
-                else
-                    fmt = new DecimalFormat("#0.00");
-
-                String status =
-                       "I2P " +
-                       " Pr " + active + '/' + known +
-                       " Ex " + inEx + '/' + outEx +
-                       " Cl " + inCl + '/' + outCl;
-                       //" Pt " + part +
-
-                String details =
-                       "BW " + fmt.format(inBW) + '/' + fmt.format(outBW) + "K" +
-                       " Lg " + jobLag +
-                       " Dy " + msgDelay +
-                       " Up " + uptime;
-
-                _statusBar.update(status, details);
-                try {
-                    Thread.sleep(15*1000);
-                } catch (InterruptedException ie) {
-                    break;
-                }
+            RouterContext ctx = _context;
+            if (ctx != null && _state == State.RUNNING) {
+                Router router = ctx.router();
+                if (router.isAlive())
+                    updateStatus(ctx);
             }
-            System.err.println(MARKER + this + " status thread finished" +
-                               " Current state is: " + _state);
+            _handler.postDelayed(this, 15*1000);
         }
+    }
+
+    private void updateStatus(RouterContext ctx) {
+        int active = ctx.commSystem().countActivePeers();
+        int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
+        int inEx = ctx.tunnelManager().getFreeTunnelCount();
+        int outEx = ctx.tunnelManager().getOutboundTunnelCount();
+        int inCl = ctx.tunnelManager().getInboundClientTunnelCount();
+        int outCl = ctx.tunnelManager().getOutboundClientTunnelCount();
+        String uptime = DataHelper.formatDuration(ctx.router().getUptime());
+        double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
+        double outBW = ctx.bandwidthLimiter().getSendBps() / 1024;
+        // control total width
+        DecimalFormat fmt;
+        if (inBW >= 1000 || outBW >= 1000)
+            fmt = new DecimalFormat("#0");
+        else if (inBW >= 100 || outBW >= 100)
+            fmt = new DecimalFormat("#0.0");
+        else
+            fmt = new DecimalFormat("#0.00");
+
+        String status =
+               "I2P " +
+               active + '/' + known + " peers connected";
+
+        String details =
+               fmt.format(inBW) + '/' + fmt.format(outBW) + " KBps" +
+               "; Expl " + inEx + '/' + outEx +
+               "; Client " + inCl + '/' + outCl;
+
+        _statusBar.update(status, details);
     }
 
     @Override
@@ -289,6 +279,7 @@ public class RouterService extends Service {
         System.err.println("onDestroy called" +
                            " Current state is: " + _state);
 
+        _handler.removeCallbacks(_updater);
         _statusBar.off(this);
 
         I2PReceiver rcvr = _receiver;
@@ -328,8 +319,9 @@ public class RouterService extends Service {
         public void run() {
             System.err.println(MARKER + this + " stopper thread" +
                                " Current state is: " + _state);
-            if (_context != null)
-                _context.router().shutdown(Router.EXIT_HARD);
+            RouterContext ctx = _context;
+            if (ctx != null)
+                ctx.router().shutdown(Router.EXIT_HARD);
             _statusBar.off(RouterService.this);
             System.err.println("********** Router shutdown complete");
             synchronized (_stateLock) {
@@ -356,6 +348,8 @@ public class RouterService extends Service {
                 }
             }
             synchronized (_stateLock) {
+                // null out to release the memory
+                _context = null;
                 if (_state == State.WAITING || _state == State.STARTING)
                     _starterThread.interrupt();
                 if (_state == State.MANUAL_STOPPING) {
@@ -368,8 +362,6 @@ public class RouterService extends Service {
                 } else if (_state == State.STARTING || _state == State.RUNNING ||
                            _state == State.STOPPING) {
                     _state = State.STOPPED;
-                    if (_statusThread != null)
-                        _statusThread.interrupt();
                     stopSelf();
                 }
             }
