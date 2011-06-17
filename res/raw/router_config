@@ -37,7 +37,7 @@ i2np.bandwidth.outboundKBytesPerSecond=30
 # NTCP
 #
 #i2np.ntcp.enable=false
-i2np.ntcp.maxConnections=12
+i2np.ntcp.maxConnections=24
 #
 # UDP disabled for now
 #
@@ -48,5 +48,5 @@ i2np.udp.maxConnections=12
 #i2p.vmCommSystem=true
 #
 # not on android
-i2np.upnp.enable=false
+i2np.upnp.enable=true
 routerconsole.geoip.enable=false

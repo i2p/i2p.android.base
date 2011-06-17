@@ -45,7 +45,8 @@ class LogWriter implements Runnable {
         try {
             while (_write) {
                 flushRecords();
-                rereadConfig();
+                if (_write)
+                    rereadConfig();
             }
         } catch (Exception e) {
             System.err.println("Error writing the logs: " + e.getMessage());
@@ -103,6 +104,14 @@ class LogWriter implements Runnable {
             log(rec.getPriority(), rec.getSource(), rec.getSourceName(), rec.getThreadName(), rec.getMessage());
         else
             log(rec.getPriority(), rec.getSource(), rec.getSourceName(), rec.getThreadName(), rec.getMessage(), rec.getThrowable());
+
+        // we always add to the console buffer, but only sometimes write to stdout
+        if (_manager.getDisplayOnScreenLevel() <= rec.getPriority()) {
+            if (_manager.displayOnScreen()) {
+                // android log already does time stamps, so reformat without the date
+                System.out.print(LogRecordFormatter.formatRecord(_manager, rec, false));
+            }
+        }
     }
 
     public void log(int priority, Class src, String name, String threadName, String msg) {

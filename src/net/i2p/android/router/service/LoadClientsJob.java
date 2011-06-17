@@ -30,8 +30,8 @@ class LoadClientsJob extends JobImpl {
     
     private Thread _fetcherThread;
 
-    /** this is the delay to load the clients. There are additional delays e.g. in i2ptunnel.config */
-    private static final long LOAD_DELAY = 10*1000;
+    /** this is the delay to load (and start) the clients. */
+    private static final long LOAD_DELAY = 2*60*1000;
 
 
     public LoadClientsJob(RouterContext ctx) {
@@ -62,8 +62,9 @@ class LoadClientsJob extends JobImpl {
 
         public void runJob() {
             System.err.println("Starting i2ptunnel");
-            TunnelControllerGroup.main(null);
-            System.err.println("i2ptunnel started");
+            TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
+            int sz = tcg.getControllers().size();
+            System.err.println("i2ptunnel started " + sz + " clients");
             getContext().addShutdownTask(new I2PTunnelShutdownHook());
 
         }
@@ -74,7 +75,6 @@ class LoadClientsJob extends JobImpl {
             System.err.println("i2ptunnel shutdown hook");
             if (_fetcherThread != null)
                 _fetcherThread.interrupt();
-            TunnelControllerGroup.getInstance().unloadControllers();
         }
     }
 }

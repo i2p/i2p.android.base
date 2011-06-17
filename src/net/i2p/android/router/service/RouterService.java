@@ -47,6 +47,7 @@ public class RouterService extends Service {
         System.err.println(this + " onCreate called" +
                            " Current state is: " + _state);
 
+        (new File(getFilesDir(), "wrapper.log")).delete();
         _myDir = getFilesDir().getAbsolutePath();
         Init init = new Init(this);
         init.debugStuff();
@@ -138,17 +139,16 @@ public class RouterService extends Service {
         }
     }
 
+    /** TODO change to a handler */
     private class StatusThread implements Runnable {
         public void run() {
             System.err.println(MARKER + this + " status thread started" +
                                " Current state is: " + _state);
+            try {
+                Thread.sleep(5*1000);
+            } catch (InterruptedException ie) {}
             Router router = _context.router();
             while (_state == State.RUNNING && router.isAlive()) {
-                try {
-                    Thread.sleep(15*1000);
-                } catch (InterruptedException ie) {
-                    break;
-                }
                 int active = _context.commSystem().countActivePeers();
                 int known = Math.max(_context.netDb().getKnownRouters() - 1, 0);
                 int inEx = _context.tunnelManager().getFreeTunnelCount();
@@ -186,8 +186,12 @@ public class RouterService extends Service {
                        " Up " + uptime;
 
                 _statusBar.update(status, details);
+                try {
+                    Thread.sleep(15*1000);
+                } catch (InterruptedException ie) {
+                    break;
+                }
             }
-            _statusBar.update("Status thread died");
             System.err.println(MARKER + this + " status thread finished" +
                                " Current state is: " + _state);
         }

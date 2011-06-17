@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.IBinder;
 
 import net.i2p.android.router.binder.RouterBinder;
@@ -20,6 +21,7 @@ public class I2PReceiver extends BroadcastReceiver {
     private int _unconnectedCount;
     private RouterService _routerService;
     private ServiceConnection _connection;
+    private static final boolean _isEmulator = Build.MODEL.equals("sdk");
 
     /**
      *  Registers itself
@@ -78,6 +80,9 @@ public class I2PReceiver extends BroadcastReceiver {
     }
 
     public boolean isConnected() {
+        // emulator always returns null NetworkInfo
+        if (_isEmulator)
+            return true;
         NetworkInfo current = getInfo();
         return current != null && current.isConnected();
     }

@@ -83,6 +83,8 @@ class Init {
         mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
         copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
 
+        (new File(myDir, "wrapper.log")).delete();
+
         // Set up the locations so Router and WorkingDir can find them
         System.setProperty("i2p.dir.base", myDir);
         System.setProperty("i2p.dir.config", myDir);

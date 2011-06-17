@@ -39,6 +39,9 @@ The i2p source must be installed in ../i2p.i2p
 ../android-sdk-linux_86/tools/emulator -avd i2p &
 
 # or to talk to a real phone in debug mode:
+# You have to do this if you get a permission error -
+# Stop ddms, unplug the phone, do the following,
+# then plug in the phone, then start ddms
 adb kill-server
 sudo adb start-server
 adb devices
