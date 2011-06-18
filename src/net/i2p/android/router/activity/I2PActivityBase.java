@@ -45,6 +45,10 @@ public abstract class I2PActivityBase extends Activity {
     {
         System.err.println(this + " onStart called");
         super.onStart();
+        startRouter();
+    }
+
+    protected boolean startRouter() {
         Intent intent = new Intent();
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
         System.err.println(this + " calling startService");
@@ -55,6 +59,7 @@ public abstract class I2PActivityBase extends Activity {
         boolean success = bindRouter();
         if (!success)
             System.err.println(this + " Bind router failed");
+        return success;
     }
 
     @Override
@@ -89,7 +94,7 @@ public abstract class I2PActivityBase extends Activity {
     @Override
     public void onDestroy()
     {
-        System.err.println(this + "onDestroy called");
+        System.err.println(this + " onDestroy called");
         super.onDestroy();
     }
 
@@ -113,12 +118,14 @@ public abstract class I2PActivityBase extends Activity {
     protected class RouterConnection implements ServiceConnection {
 
         public void onServiceConnected(ComponentName name, IBinder service) {
+            System.err.println(this + " connected to router service");
             RouterBinder binder = (RouterBinder) service;
             _routerService = binder.getService();
             _isBound = true;
         }
 
         public void onServiceDisconnected(ComponentName name) {
+            System.err.println(this + " disconnected from router service!!!!!!!");
             _isBound = false;
         }
     }

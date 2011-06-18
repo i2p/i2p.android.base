@@ -136,7 +136,7 @@ public class MainActivity extends I2PActivityBase {
                    //" Pt " + part +
 
             String details =
-                   "; BW " + fmt.format(inBW) + '/' + fmt.format(outBW) + "K" +
+                   "; Bandwidth " + fmt.format(inBW) + '/' + fmt.format(outBW) + " KBps" +
                    "; Job Lag " + jobLag +
                    "; Msg Delay " + msgDelay +
                    "; Up " + uptime;

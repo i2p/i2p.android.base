@@ -7,7 +7,16 @@
 
 THISDIR=$(realpath $(dirname $(which $0)))
 cd $THISDIR
-I2PBASE=../../i2p.i2p
+
+LIBFILE=$PWD/libjbigi.so
+if [ -f $LIBFILE ]
+then
+	echo "$LIBFILE exists, nothing to do here"
+	echo "If you wish to force a recompile, delete it"
+	exit 0
+fi
+
+I2PBASE=${1:-../../i2p.i2p}
 export NDK=$(realpath ../../android-ndk-r5b/)
 
 #
@@ -36,7 +45,7 @@ JBIGI=$(realpath $I2PBASE/core/c/jbigi)
 # libcrypto crashes on emulator, don't trust it
 # jbigi about 20-25% slower than java on emulator
 #
-GMPVER=5.0.2
+GMPVER=4.3.2
 GMP=$JBIGI/gmp-$GMPVER
 
 if [ ! -d $GMP ]
@@ -44,14 +53,6 @@ then
 	echo "Source dir for GMP version $GMPVER not found in $GMP"
 	echo "Install it there or change GMPVER and/or GMP in this script"
 	exit 1
-fi
-
-LIBFILE=$PWD/libjbigi.so
-if [ -f $LIBFILE ]
-then
-	echo "$LIBFILE exists, nothing to do here"
-	echo "If you wish to force a recompile, delete it"
-	exit 0
 fi
 
 mkdir -p build

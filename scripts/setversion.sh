@@ -6,7 +6,7 @@ THISDIR=$(realpath $(dirname $(which $0)))
 cd $THISDIR
 MANIFEST=../AndroidManifest.xml
 TMP=AndroidManifest.xml.tmp
-I2PBASE=../../i2p.i2p
+I2PBASE=${1:-../../i2p.i2p}
 
 CORE=`grep 'public final static String VERSION' $I2PBASE/core/java/src/net/i2p/CoreVersion.java | \
          cut -d '"' -f 2`

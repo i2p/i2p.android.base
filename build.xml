@@ -78,7 +78,7 @@
 
     <!-- overrides of those in main_rules.xml -->
 
-    <target name="-pre-build" depends="copy-i2p-resources, incrementBuild" >
+    <target name="-pre-build" depends="findI2PSource, copy-i2p-resources, incrementBuild" >
         <!-- aapt messes up when resources are added or deleted, just build every time -->
         <delete dir="${gen.absolute.dir}/net" verbose="${verbose}" />
     </target>
@@ -89,9 +89,14 @@
 
     <!-- new rules -->
 
-    <property name="i2pbase" value="../i2p.i2p"/>
+    <target name="findI2PSource" >
+        <!-- override with i2psrc=path/to/source in local.properties -->
+        <property name="i2psrc" value="../i2p.i2p" />
+        <property name="i2pbase" location="${i2psrc}" />
+        <echo message="Using I2P source at ${i2pbase}" />
+    </target>
 
-    <target name="buildrouter" depends="-dirs" >
+    <target name="buildrouter" depends="findI2PSource, -dirs" >
         <!-- build router and core -->
         <ant dir="${i2pbase}" >
             <target name="buildRouter" />
@@ -141,7 +146,7 @@
     </target>
 
     <!-- some resources -->
-    <target name="copy-i2p-resources" depends="-dirs" >
+    <target name="copy-i2p-resources" depends="findI2PSource, -dirs" >
         <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="res/drawable/" />
         <copy file="${i2pbase}/installer/resources/blocklist.txt" tofile="res/raw/blocklist_txt" />
         <copy file="${i2pbase}/installer/resources/hosts.txt" tofile="res/raw/hosts_txt" />
@@ -151,19 +156,19 @@
         <delete file="${jar.libs.dir}/crypto.jar" />
     </target>
 
-    <target name="jbigi">
+    <target name="jbigi" depends="findI2PSource" >
         <exec executable="sh" osfamily="unix" failonerror="true">
             <arg value="-c" />
-            <arg value="jni/build.sh" />
+            <arg value="jni/build.sh ${i2pbase}" />
         </exec>
         <copy file="jni/libjbigi.so" todir="${native.libs.dir}/armeabi" />
     </target>
 
-    <target name="incrementBuild">
+    <target name="incrementBuild" depends="findI2PSource" >
         <buildnumber file="scripts/build.number" />
         <exec executable="sh" osfamily="unix" failonerror="true">
             <arg value="-c" />
-            <arg value="scripts/setversion.sh" />
+            <arg value="scripts/setversion.sh ${i2pbase}" />
         </exec>
         <!-- this loads my.version.code and my.version.name -->
         <property file="scripts/version.properties" />

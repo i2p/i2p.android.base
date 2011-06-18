@@ -138,6 +138,7 @@ public class RouterService extends Service {
                 Job loadJob = new LoadClientsJob(_context);
                 _context.jobQueue().addJob(loadJob);
                 _context.addShutdownTask(new ShutdownHook());
+                _context.addFinalShutdownTask(new FinalShutdownHook());
                 _starterThread = null;
             }
             System.err.println("Router.main finished");
@@ -230,7 +231,7 @@ public class RouterService extends Service {
             if (_state == State.WAITING || _state == State.STARTING)
                 _starterThread.interrupt();
             if (_state == State.STARTING || _state == State.RUNNING) {
-                _statusBar.update("I2P is stopping");
+                _statusBar.update("Stopping I2P");
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_STOPPING, State.MANUAL_STOPPED));
                 stopperThread.start();
             }
@@ -247,7 +248,7 @@ public class RouterService extends Service {
             if (_state == State.WAITING || _state == State.STARTING)
                 _starterThread.interrupt();
             if (_state == State.STARTING || _state == State.RUNNING) {
-                _statusBar.update("I2P is stopping");
+                _statusBar.update("Network disconnected, stopping I2P");
                 // don't change state, let the shutdown hook do it
                 Thread stopperThread = new Thread(new Stopper(State.NETWORK_STOPPING, State.NETWORK_STOPPING));
                 stopperThread.start();
@@ -256,7 +257,7 @@ public class RouterService extends Service {
     }
 
     public boolean canManualStart() {
-        return _state == State.MANUAL_STOPPED;
+        return _state == State.MANUAL_STOPPED || _state == State.STOPPED;
     }
 
     public void manualStart() {
@@ -335,7 +336,7 @@ public class RouterService extends Service {
         public void run() {
             System.err.println(this + " shutdown hook" +
                                " Current state is: " + _state);
-            _statusBar.off(RouterService.this);
+            _statusBar.update("I2P is shutting down");
             I2PReceiver rcvr = _receiver;
             if (rcvr != null) {
                 synchronized(rcvr) {
@@ -347,6 +348,25 @@ public class RouterService extends Service {
                     //_receiver = null;
                 }
             }
+            synchronized (_stateLock) {
+                // null out to release the memory
+                _context = null;
+                if (_state == State.WAITING || _state == State.STARTING)
+                    _starterThread.interrupt();
+                if (_state == State.WAITING || _state == State.STARTING ||
+                    _state == State.RUNNING)
+                    _state = State.STOPPING;
+            }
+        }
+    }
+
+    private class FinalShutdownHook implements Runnable {
+        public void run() {
+            System.err.println(this + " final shutdown hook" +
+                               " Current state is: " + _state);
+            _statusBar.off(RouterService.this);
+            I2PReceiver rcvr = _receiver;
+
             synchronized (_stateLock) {
                 // null out to release the memory
                 _context = null;

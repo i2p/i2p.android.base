@@ -61,3 +61,10 @@ ant reinstall
 #other helpful commands
 ../android-sdk-linux_86/platform-tools/adb shell
 ../android-sdk-linux_86/platform-tools/adb pull /some/file/on/emulator some-local-dir/
+
+# copy the Dev Tools app from the emulator to your phone
+adb -e pull /system/app/Development.apk ./Development.apk
+adb -d install Development.apk
+
+# reinstall an existing apk onto the emulator
+adb -e install -r bin/I2PAndroid-debug.apk
