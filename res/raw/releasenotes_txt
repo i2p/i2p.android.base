@@ -1,0 +1,15 @@
+This is ALPHA SOFTWARE. It may crash your phone. Do not rely upon it for strong anonymity. Tunnels may be as short as one hop.
+
+This is only tested on the Droid. You need at least 256 MB of RAM. 512 should be much better.
+
+The app may be moved to the SD card if you have Froyo (2.2) or higher.
+
+The app will work best when you are not changing IPs. If you are moving around, changing WIFI nodes, or switching from cellular to WIFI networks, it won't work well.
+
+There is an HTTP proxy at localhost port 4444 and a transparent IRC proxy at localhost port 6668.
+
+The HTTP proxy is untested (other than with the news fetcher). It should work with Firefox 4 Mobile and the ProxyMob Firefox plugin, if you have at least 512 MB of RAM.
+
+The IRC proxy is tested with the "Android IRC Free" app.
+
+Report results and bugs on the zzz.i2p Android forum.

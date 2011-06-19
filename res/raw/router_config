@@ -19,12 +19,12 @@ i2cp.disableInterface=true
 ##### Tunnels
 #
 router.inboundPool.backupQuantity=0
-router.inboundPool.length=2
-router.inboundPool.lengthVariance=0
+router.inboundPool.length=1
+router.inboundPool.lengthVariance=1
 router.inboundPool.quantity=2
 router.outboundPool.backupQuantity=0
-router.outboundPool.length=2
-router.outboundPool.lengthVariance=0
+router.outboundPool.length=1
+router.outboundPool.lengthVariance=1
 router.outboundPool.quantity=2
 router.maxParticipatingTunnels=0
 router.sharePercentage=10

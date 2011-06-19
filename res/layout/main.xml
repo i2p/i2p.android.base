@@ -15,24 +15,48 @@
     android:layout_height="wrap_content" 
     android:src="@drawable/i2plogo"
     />
-<Button 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    >
+ <Button 
     android:id="@+id/news_button"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
-    android:text="Go to news"
+    android:text="News"
     />
-<Button 
+ <Button 
+    android:id="@+id/releasenotes_button"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="Release Notes"
+    />
+ <Button 
+    android:id="@+id/licenses_button"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="Licenses"
+    />
+</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    >
+ <Button 
     android:id="@+id/router_start_button"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
     android:text="Start router"
     />
-<Button 
+ <Button 
     android:id="@+id/router_stop_button"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
     android:text="Stop router"
     />
+</LinearLayout>
 <TextView  
     android:id="@+id/main_status_text"
     android:layout_width="fill_parent" 

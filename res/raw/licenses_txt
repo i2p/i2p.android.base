@@ -1,0 +1,121 @@
+This product includes both public domain code and licensed code as described below.
+For all code, unless otherwise stated in the appropriate license, the following applies:
+
+
+			    NO WARRANTY
+
+  BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
+OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
+PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED
+OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS
+TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE
+PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,
+REPAIR OR CORRECTION.
+
+  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,
+INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING
+OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED
+TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY
+YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
+PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES.
+
+
+
+LICENSES
+--------
+
+Core (i2p.jar):
+Public domain except as listed below:
+
+   ElGamal and DSA code:
+   Copyright (c) 2003, TheCrypto
+   See LICENSE-ElGamalDSA.txt
+
+   SHA256 and HMAC-SHA256:
+   Copyright (c) 2000 - 2004 The Legion Of The Bouncy Castle
+   See LICENSE-SHA256.txt
+
+   AES code:
+   Under the Cryptix (MIT) license, written by the Cryptix team
+   (That's what our website says but all our AES code looks like it is public domain)
+
+   Crypto filters:
+   From the xlattice app - http://xlattice.sourceforge.net/
+   See LICENSE-BSD.txt
+
+   SNTP code:
+   Copyright (c) 2004, Adam Buckley
+   See LICENSE-SNTP.txt
+
+   PRNG:
+   Copyright (C) 2001, 2002, Free Software Foundation, Inc.
+   See LICENSE-LGPLv2.1.txt
+
+   HashCash code:
+   Copyright 2006 Gregory Rubin grrubin@gmail.com
+   See LICENSE-HashCash.txt
+
+   GettextResource from gettext v0.18:
+   Copyright (C) 2001, 2007 Free Software Foundation, Inc.
+   See LICENSE-LGPLv2.1.txt
+
+   SSLEepGet:
+   Contains some code Copyright 2006 Sun Microsystems, Inc.
+   See LICENSE-InstallCert.txt
+
+   BlockFile:
+   Copyright (c) 2006, Matthew Estes
+   See LICENSE-BlockFile.txt
+
+
+Router (router.jar):
+Public domain except as listed below:
+   UPnP.java:
+   From freenet
+   See LICENSE-GPLv2.txt
+
+   UPnP subsystem 1.7:
+   Copyright (C) 2003-2006 Satoshi Konno
+   See LICENSE-UPnP.txt
+
+Jbigi Libraries (jbigi.jar):
+   JNI code public domain.
+
+   GMP 4.3.2 / 5.0.2:
+   Copyright 1991, 1996, 1999, 2000, 2007 Free Software Foundation, Inc.
+   See LICENSE-LGPLv3.txt
+
+
+Applications:
+
+   Addressbook:
+   Copyright (c) 2004 Ragnarok
+   See LICENSE-Addressbook.txt
+
+   I2PTunnel:
+   (c) 2003 - 2004 mihi
+   GPLv2 with exception.
+   See LICENSE-I2PTunnel.txt
+   See LICENSE-GPLv2.txt
+
+   I2PTunnel SOCKS Proxy:
+   Copyright (c) 2004 by human
+   GPLv2 with exception.
+   See LICENSE-I2PTunnel.txt
+   See LICENSE-GPLv2.txt
+
+   I2PTunnel UDP and Streamr:
+   By welterde.
+   See LICENSE-GPLv2.txt
+
+   Ministreaming Lib:
+   By mihi.
+   See LICENSE-BSD.txt
+
+   Streaming Lib:
+   Public domain.

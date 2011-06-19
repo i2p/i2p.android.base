@@ -150,6 +150,16 @@
         <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="res/drawable/" />
         <copy file="${i2pbase}/installer/resources/blocklist.txt" tofile="res/raw/blocklist_txt" />
         <copy file="${i2pbase}/installer/resources/hosts.txt" tofile="res/raw/hosts_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-ElGamalDSA.txt" tofile="res/raw/license_elgamaldsa_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-SHA256.txt" tofile="res/raw/license_sha256_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-BSD.txt" tofile="res/raw/license_bsd_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-SNTP.txt" tofile="res/raw/license_sntp_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-LGPLv2.1.txt" tofile="res/raw/license_lgplv2_1_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-InstallCert.txt" tofile="res/raw/license_installcert_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-BlockFile.txt" tofile="res/raw/license_blockfile_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-GPLv2.txt" tofile="res/raw/license_gplv2_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-GPLv3.txt" tofile="res/raw/license_gplv3_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-LGPLv3.txt" tofile="res/raw/license_lgplv3_txt" />
     </target>
 
     <target name="hackcleanup">
@@ -182,8 +192,21 @@
         <delete file="res/drawable/i2plogo.png" verbose="${verbose}"/>
         <delete file="res/raw/blocklist_txt" verbose="${verbose}" />
         <delete file="res/raw/hosts_txt" verbose="${verbose}" />
+        <delete file="res/raw/license_elgamaldsa_txt" />
+        <delete file="res/raw/license_sha256_txt" />
+        <delete file="res/raw/license_bsd_txt" />
+        <delete file="res/raw/license_sntp_txt" />
+        <delete file="res/raw/license_lgplv2_1_txt" />
+        <delete file="res/raw/license_installcert_txt" />
+        <delete file="res/raw/license_blockfile_txt" />
+        <delete file="res/raw/license_gplv2_txt" />
+        <delete file="res/raw/license_gplv3_txt" />
+        <delete file="res/raw/license_lgplv3_txt" />
         <delete dir="jni/build/" verbose="${verbose}" />
+        <echo message="Not deleting jni/libjbigi.so" />
+<!--
         <delete file="jni/libjbigi.so" verbose="${verbose}" />
+-->
         <delete file="scripts/build.number" verbose="${verbose}" />
         <delete file="scripts/version.properties" verbose="${verbose}" />
     </target>

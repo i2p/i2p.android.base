@@ -26,11 +26,19 @@ class Init {
 
     private final Context ctx;
     private final String myDir;
+    private final String _ourVersion;
     private String _apkPath;
+
+    private static final String CONFIG_FILE = "android.config";
+    private static final String PROP_NEW_INSTALL = "i2p.newInstall";
+    private static final String PROP_NEW_VERSION = "i2p.newVersion";
+    private static final String PROP_INSTALLED_VERSION = "i2p.version";
 
     public Init(Context c) {
         ctx = c;
         myDir = c.getFilesDir().getAbsolutePath();
+        _ourVersion = getOurVersion();
+        System.setProperty(PROP_INSTALLED_VERSION, _ourVersion);
     }
 
     void debugStuff() {
@@ -46,7 +54,7 @@ class Init {
         System.err.println("getFilesDir()" + ": " + myDir);
         System.err.println("max mem" + ": " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()));
         System.err.println("Package" + ": " + ctx.getPackageName());
-        System.err.println("Version" + ": " + getOurVersion());
+        System.err.println("Version" + ": " + _ourVersion);
         System.err.println("MODEL" + ": " + Build.MODEL);
         System.err.println("DISPLAY" + ": " + Build.DISPLAY);
         System.err.println("VERSION" + ": " + Build.VERSION.RELEASE);
@@ -73,15 +81,17 @@ class Init {
     }
 
     void initialize() {
-        Properties props = new Properties();
-        props.setProperty("i2p.dir.temp", myDir + "/tmp");
-        props.setProperty("i2p.dir.pid", myDir + "/tmp");
-        mergeResourceToFile(R.raw.router_config, "router.config", props);
-        mergeResourceToFile(R.raw.logger_config, "logger.config", null);
-        mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config", null);
-        // FIXME this is a memory hog to merge this way
-        mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
-        copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
+        if (checkNewVersion()) {
+            Properties props = new Properties();
+            props.setProperty("i2p.dir.temp", myDir + "/tmp");
+            props.setProperty("i2p.dir.pid", myDir + "/tmp");
+            mergeResourceToFile(R.raw.router_config, "router.config", props);
+            mergeResourceToFile(R.raw.logger_config, "logger.config", null);
+            mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config", null);
+            // FIXME this is a memory hog to merge this way
+            mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
+            copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
+        }
 
         (new File(myDir, "wrapper.log")).delete();
 
@@ -155,4 +165,39 @@ class Init {
         }
     }
     
+    /**
+     *  Check for new version.
+     *  Sets system properties i2p.newVersion and i2p.newInstall
+     *  @return true if new version
+     */
+    private boolean checkNewVersion() {
+        Properties props = new Properties();
+        
+        InputStream fin = null;
+        try {
+            fin = ctx.openFileInput(CONFIG_FILE);
+            DataHelper.loadProps(props,  fin);
+        } catch (IOException ioe) {
+            System.err.println("Looks like a new install");
+        } finally {
+            if (fin != null) try { fin.close(); } catch (IOException ioe) {}
+        }
+
+        String oldVersion = props.getProperty(PROP_INSTALLED_VERSION);
+        boolean newInstall = oldVersion == null;
+        boolean newVersion = !_ourVersion.equals(oldVersion);
+        System.setProperty(PROP_NEW_INSTALL, Boolean.toString(newInstall));
+        System.setProperty(PROP_NEW_VERSION, Boolean.toString(newVersion));
+
+        if (newVersion) {
+            System.err.println("New version " + _ourVersion);
+            props.setProperty(PROP_INSTALLED_VERSION, _ourVersion);
+            try {
+                DataHelper.storeProps(props, ctx.getFileStreamPath(CONFIG_FILE));
+            } catch (IOException ioe) {
+                System.err.println("Failed to write " + CONFIG_FILE);
+            }
+        }
+        return newVersion;
+    }
 }

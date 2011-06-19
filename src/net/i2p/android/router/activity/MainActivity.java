@@ -1,5 +1,8 @@
 package net.i2p.android.router.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +20,12 @@ public class MainActivity extends I2PActivityBase {
 
     private Handler _handler;
     private Runnable _updater;
-    private int _counter;
+    private String _savedStatus;
+
+    protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
+    protected static final String PROP_NEW_VERSION = "i2p.newVersion";
+    protected static final int DIALOG_NEW_INSTALL = 0;
+    protected static final int DIALOG_NEW_VERSION = 1;
 
     /** Called when the activity is first created. */
     @Override
@@ -30,6 +38,24 @@ public class MainActivity extends I2PActivityBase {
         news.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), NewsActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        Button notes = (Button) findViewById(R.id.releasenotes_button);
+        notes.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
+                intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        Button licenses = (Button) findViewById(R.id.licenses_button);
+        licenses.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
+                intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.licenses_txt);
                 startActivityForResult(intent, 0);
             }
         });
@@ -54,6 +80,13 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
+        if (savedInstanceState != null) {
+            String saved = savedInstanceState.getString("status");
+            if (saved != null) {
+                _savedStatus = saved;
+            }
+        }
+
         _handler = new Handler();
         _updater = new Updater();
     }
@@ -64,7 +97,11 @@ public class MainActivity extends I2PActivityBase {
     {
         super.onStart();
         _handler.removeCallbacks(_updater);
-        _handler.postDelayed(_updater, 50);
+        if (_savedStatus != null) {
+            TextView tv = (TextView) findViewById(R.id.main_status_text);
+            tv.setText(_savedStatus);
+        }
+        _handler.postDelayed(_updater, 100);
     }
 
     @Override
@@ -78,14 +115,30 @@ public class MainActivity extends I2PActivityBase {
     public void onResume()
     {
         super.onResume();
+        checkDialog();
         updateVisibility();
         updateStatus();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState)
+    {
+        if (_savedStatus != null)
+            outState.putString("status", _savedStatus);
+        super.onSaveInstanceState(outState);
+    }
+
     private class Updater implements Runnable {
+        private boolean needsCheck = true;
+        private int counter;
+
         public void run() {
+            if (getRouterContext() != null && needsCheck) {
+                checkDialog();
+                needsCheck = false;
+            }
             updateVisibility();
-            if (++_counter % 3 == 0)
+            if (counter++ % 3 == 0)
                 updateStatus();
             _handler.postDelayed(this, 2500);
         }
@@ -129,22 +182,99 @@ public class MainActivity extends I2PActivityBase {
                 fmt = new DecimalFormat("#0.00");
 
             String status =
-                   "Router status: " +
-                   " Peers " + active + '/' + known +
-                   "; Expl. Tunnels " + inEx + '/' + outEx +
-                   "; Client Tunnels " + inCl + '/' + outCl;
+                   "ROUTER STATUS" +
+                   "\nPeers active/known: " + active + " / " + known +
+                   "\nExploratory Tunnels in/out: " + inEx + " / " + outEx +
+                   "\nClient Tunnels in/out: " + inCl + " / " + outCl;
                    //" Pt " + part +
 
             String details =
-                   "; Bandwidth " + fmt.format(inBW) + '/' + fmt.format(outBW) + " KBps" +
-                   "; Job Lag " + jobLag +
-                   "; Msg Delay " + msgDelay +
-                   "; Up " + uptime;
+                   "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps" +
+                   "\nJob Lag: " + jobLag +
+                   "\nMsg Delay: " + msgDelay +
+                   "\nUptime: " + uptime;
 
-            tv.setText(status + details);
+            _savedStatus = status + details;
+            tv.setText(_savedStatus);
             tv.setVisibility(View.VISIBLE);
         } else {
             tv.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void checkDialog() {
+        if (Boolean.valueOf(System.getProperty(PROP_NEW_INSTALL)).booleanValue()) {
+            showDialog(DIALOG_NEW_INSTALL);
+        } else if (Boolean.valueOf(System.getProperty(PROP_NEW_VERSION)).booleanValue()) {
+            showDialog(DIALOG_NEW_VERSION);
+        }
+    }
+
+    protected Dialog onCreateDialog(int id) {
+        Dialog rv = null;
+        AlertDialog.Builder b = new AlertDialog.Builder(this);
+        switch (id) {
+          case DIALOG_NEW_INSTALL:
+            b.setMessage(getResources().getText(R.string.welcome_new_install))
+              .setCancelable(false)
+              .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int id) {
+                           System.setProperty(PROP_NEW_INSTALL, "false");
+                           System.setProperty(PROP_NEW_VERSION, "false");
+                           dialog.cancel();
+                           MainActivity.this.removeDialog(id);
+                       }
+               })
+              .setNeutralButton("Release Notes", new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int id) {
+                           System.setProperty(PROP_NEW_INSTALL, "false");
+                           System.setProperty(PROP_NEW_VERSION, "false");
+                           dialog.cancel();
+                           MainActivity.this.removeDialog(id);
+                           Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
+                           intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+                           startActivityForResult(intent, 0);
+                       }
+               })
+              .setNegativeButton("Licenses", new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int id) {
+                           System.setProperty(PROP_NEW_INSTALL, "false");
+                           System.setProperty(PROP_NEW_VERSION, "false");
+                           dialog.cancel();
+                           MainActivity.this.removeDialog(id);
+                           Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
+                           intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.licenses_txt);
+                           startActivityForResult(intent, 0);
+                       }
+               });
+            rv = b.create();
+            break;
+
+          case DIALOG_NEW_VERSION:
+            b.setMessage(getResources().getText(R.string.welcome_new_version) + " " + System.getProperty("i2p.version"))
+              .setCancelable(true)
+              .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int id) {
+                           System.setProperty(PROP_NEW_VERSION, "false");
+                           dialog.cancel();
+                           MainActivity.this.removeDialog(id);
+                       }
+               })
+              .setNegativeButton("Release Notes", new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int id) {
+                           System.setProperty(PROP_NEW_VERSION, "false");
+                           dialog.cancel();
+                           MainActivity.this.removeDialog(id);
+                           Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
+                           intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+                           startActivityForResult(intent, 0);
+                       }
+               });
+
+
+            rv = b.create();
+            break;
+        }
+        return rv;
     }
 }

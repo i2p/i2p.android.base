@@ -15,10 +15,10 @@ tunnel.0.option.i2cp.reduceIdleTime=600000
 tunnel.0.option.i2cp.reduceOnIdle=true
 tunnel.0.option.i2cp.reduceQuantity=1
 tunnel.0.option.i2p.streaming.connectDelay=1000
-tunnel.0.option.inbound.length=2
-tunnel.0.option.inbound.lengthVariance=0
-tunnel.0.option.outbound.length=2
-tunnel.0.option.outbound.lengthVariance=0
+tunnel.0.option.inbound.length=1
+tunnel.0.option.inbound.lengthVariance=1
+tunnel.0.option.outbound.length=1
+tunnel.0.option.outbound.lengthVariance=1
 tunnel.0.startOnLoad=true
 
 # irc
@@ -38,8 +38,8 @@ tunnel.1.option.i2cp.reduceIdleTime=600000
 tunnel.1.option.i2cp.reduceOnIdle=true
 tunnel.1.option.i2cp.reduceQuantity=1
 tunnel.1.option.i2p.streaming.connectDelay=1000
-tunnel.1.option.inbound.length=2
-tunnel.1.option.inbound.lengthVariance=0
-tunnel.1.option.outbound.length=2
-tunnel.1.option.outbound.lengthVariance=0
+tunnel.1.option.inbound.length=1
+tunnel.1.option.inbound.lengthVariance=1
+tunnel.1.option.outbound.length=1
+tunnel.1.option.outbound.lengthVariance=1
 tunnel.1.startOnLoad=true
