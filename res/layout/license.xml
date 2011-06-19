@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    >
+ <Button 
+    android:id="@+id/license_main"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="License Overview"
+    />
+</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    >
+ <Button 
+    android:id="@+id/license_bf"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="Blockfile"
+    />
+ <Button 
+    android:id="@+id/license_bsd"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="BSD"
+    />
+ <Button 
+    android:id="@+id/license_elg"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="ElGamal/DSA"
+    />
+</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    >
+ <Button 
+    android:id="@+id/license_gplv2"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="GPLv2"
+    />
+ <Button 
+    android:id="@+id/license_lgplv21"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="LGPLv2.1"
+    />
+ <Button 
+    android:id="@+id/license_gplv3"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="GPLv3"
+    />
+</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    >
+ <Button 
+    android:id="@+id/license_lgplv3"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="LGPLv3"
+    />
+ <Button 
+    android:id="@+id/license_cert"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="InstallCert"
+    />
+ <Button 
+    android:id="@+id/license_sha256"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="SHA-256"
+    />
+</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    >
+ <Button 
+    android:id="@+id/license_sntp"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="SNTP"
+    />
+</LinearLayout>
+</LinearLayout>
+

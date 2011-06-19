@@ -54,8 +54,9 @@ public class MainActivity extends I2PActivityBase {
         Button licenses = (Button) findViewById(R.id.licenses_button);
         licenses.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
-                intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.licenses_txt);
+                Intent intent = new Intent(view.getContext(), LicenseActivity.class);
+                //Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
+                //intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.licenses_txt);
                 startActivityForResult(intent, 0);
             }
         });
@@ -242,8 +243,7 @@ public class MainActivity extends I2PActivityBase {
                            System.setProperty(PROP_NEW_VERSION, "false");
                            dialog.cancel();
                            MainActivity.this.removeDialog(id);
-                           Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
-                           intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.licenses_txt);
+                           Intent intent = new Intent(MainActivity.this, LicenseActivity.class);
                            startActivityForResult(intent, 0);
                        }
                });

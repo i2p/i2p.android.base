@@ -1,15 +1,44 @@
-This is ALPHA SOFTWARE. It may crash your phone. Do not rely upon it for strong anonymity. Tunnels may be as short as one hop.
+WARNING - This is ALPHA SOFTWARE. It may crash your phone. Do not rely upon it for strong anonymity. Tunnels may be as short as one hop.
 
-This is only tested on the Droid. You need at least 256 MB of RAM. 512 should be much better.
+Minimum Android OS is 2.1 (SDK 7). The app is only tested on the Motorola Droid. It uses a lot of RAM. You need at least 256 MB of RAM. 512 should be much better.
 
-The app may be moved to the SD card if you have Froyo (2.2) or higher.
+The app may use a lot of RAM even after the router has stopped and there is no icon in the notification bar. Go to Settings -> Applications -> Running Services and stop the I2P service if necessary. Or Settings -> Applications -> Manage Applications -> Running -> I2P and force stop.
 
-The app will work best when you are not changing IPs. If you are moving around, changing WIFI nodes, or switching from cellular to WIFI networks, it won't work well.
+The app may be moved to the SD card if you have Froyo (2.2) or higher. The app does not store any files on the SD card.
 
-There is an HTTP proxy at localhost port 4444 and a transparent IRC proxy at localhost port 6668.
+The app runs on either WIFI or mobile networks. For now, the app is very low bandwidth, as it does not allow participating tunnels. It does not route traffic for other routers.
+
+The app uses TCP only for router-router connections, with a maximum of 24 simultaneous. UDP is disabled.
+
+UPnP is enabled but it it doesn't appear to be working.
+
+NTP is disabled. If you have cell service, your phone or tablet should have the correct time. If you do not have cell service, ensure your device has accurate time.
+
+The app will work best when you are not changing IPs. If you are moving around, changing WIFI nodes, or switching between mobile and WIFI networks, it won't work well.
+
+There is no method to configure anything in the app.
+
+
+Using clients with the router
+-----------------------------
+
+The app stats an HTTP proxy at localhost port 4444 and a transparent IRC proxy at localhost port 6668. These are "shared clients" on the same tunnels. Once you see in and out client tunnels listed on the router status (several minutes after startup), you should be able to connect.
 
 The HTTP proxy is untested (other than with the news fetcher). It should work with Firefox 4 Mobile and the ProxyMob Firefox plugin, if you have at least 512 MB of RAM.
 
-The IRC proxy is tested with the "Android IRC Free" app.
+The IRC proxy destinations are irc.postman.i2p and irc.freshcoffee.i2p. It is tested with the "Android IRC Free" app.
 
-Report results and bugs on the zzz.i2p Android forum.
+Report results and bugs on the zzz.i2p Android forum. New versions will be announced there.
+
+
+Further anonymity warnings
+--------------------------
+
+* Reseeding is via http
+* Exploratory and Client Tunnels are 1 hop + 0-1 hops
+* Sharing IRC and HTTP proxies on same tunnels allows for linking
+* Not well-tested
+* There may be DNS leaks
+* Cell phones aren't exactly secure environments
+* This app does not attempt to "sanitize" your phone, make you safe from Google, or capture and route traffic from any other apps over I2P
+* The app does not require root or do anything with iptables, for example, to route or block traffic.
