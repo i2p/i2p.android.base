@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -57,6 +58,35 @@ public class MainActivity extends I2PActivityBase {
                 Intent intent = new Intent(view.getContext(), LicenseActivity.class);
                 //Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
                 //intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.licenses_txt);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        Button website = (Button) findViewById(R.id.website_button);
+        website.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), WebActivity.class);
+                //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/").build());
+                intent.setData(Uri.parse("http://www.i2p2.de/"));
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        Button faq = (Button) findViewById(R.id.faq_button);
+        faq.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), WebActivity.class);
+                //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/faq").build());
+                intent.setData(Uri.parse("http://www.i2p2.de/faq"));
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        Button welcome = (Button) findViewById(R.id.welcome_button);
+        welcome.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), WebActivity.class);
+                // default is to display the welcome_html resource
                 startActivityForResult(intent, 0);
             }
         });

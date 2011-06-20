@@ -6,6 +6,8 @@ import android.webkit.WebViewClient;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import net.i2p.android.apps.EepGetFetcher;
+
 class I2PWebViewClient extends WebViewClient {
 
     // TODO add some inline style
@@ -27,12 +29,21 @@ class I2PWebViewClient extends WebViewClient {
             String h = uri.getHost();
             if (h == null)
                 return false;
+            view.getSettings().setBuiltInZoomControls(true);
             h = h.toLowerCase();
             if (h.endsWith(".i2p")) {
                 // if (s.equals("https")
                 //    return false;
-                view.loadData(ERROR_EEPSITE, "text/html", "UTF-8");
+                view.getSettings().setLoadsImagesAutomatically(false);
+                //view.loadData(ERROR_EEPSITE, "text/html", "UTF-8");
+                EepGetFetcher fetcher = new EepGetFetcher(url);
+                // todo spinner
+                boolean success = fetcher.fetch();
+                if (!success)
+                    System.err.println("Fetch failed for " + url);
+                view.loadData(fetcher.getData(), fetcher.getContentType(), fetcher.getEncoding());
             } else {
+                view.getSettings().setLoadsImagesAutomatically(true);
                 view.loadUrl(url);
             }
             return true;

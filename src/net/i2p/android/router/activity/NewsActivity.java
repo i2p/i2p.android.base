@@ -13,13 +13,15 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import net.i2p.android.router.R;
 import net.i2p.android.apps.NewsFetcher;
 
 public class NewsActivity extends I2PActivityBase {
+
+    private static final String WARNING = "Warning - while the news is fetched over I2P, " +
+               "any links visited in this window are fetched over the regular internet and are " +
+               "not anonymous.\n";
 
     private long _lastChanged;
 
@@ -33,6 +35,7 @@ public class NewsActivity extends I2PActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news);
         WebView wv = (WebView) findViewById(R.id.news_webview);
+        wv.getSettings().setLoadsImagesAutomatically(false);
         wv.setWebViewClient(new I2PWebViewClient());
     }
 
@@ -44,7 +47,7 @@ public class NewsActivity extends I2PActivityBase {
         if (nf != null) {
             // always update the text
             TextView tv = (TextView) findViewById(R.id.news_status);
-            tv.setText(nf.status().replace("&nbsp;", " "));
+            tv.setText(WARNING + nf.status().replace("&nbsp;", " "));
         }
 
         // only update the webview if we need to

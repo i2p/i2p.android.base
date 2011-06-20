@@ -21,6 +21,30 @@
     android:layout_height="wrap_content" 
     >
  <Button 
+    android:id="@+id/website_button"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="Web Site"
+    />
+ <Button 
+    android:id="@+id/faq_button"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="FAQ"
+    />
+ <Button 
+    android:id="@+id/welcome_button"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="Welcome"
+    />
+</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    >
+ <Button 
     android:id="@+id/news_button"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
