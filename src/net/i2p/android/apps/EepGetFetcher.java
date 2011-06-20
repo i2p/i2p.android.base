@@ -33,9 +33,13 @@ public class EepGetFetcher implements EepGet.StatusListener {
         _eepget = new EepGet(_context, true, "localhost", 4444, 0, -1, MAX_LEN,
                              _file.getAbsolutePath(), null, url,
                              true, null, null, null);
-        _eepget.addStatusListener(this);
+        //_eepget.addStatusListener(this);
     }
     
+    public void addStatusListener(EepGet.StatusListener l) {
+        _eepget.addStatusListener(l);
+    }
+
     public boolean fetch() {
         _success = _eepget.fetch();
         return _success;
@@ -48,8 +52,8 @@ public class EepGetFetcher implements EepGet.StatusListener {
         if (!_success)
             return "text/plain";
         String rv = _eepget.getContentType();
-        if (rv == null)
-            return "text/html";
+        if (rv == null || rv.equals("text/html"))
+            return "text/html; charset=utf-8";
         return rv;
     }
 

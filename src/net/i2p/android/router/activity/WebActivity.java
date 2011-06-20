@@ -73,9 +73,12 @@ public class WebActivity extends I2PActivityBase {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         WebView wv = (WebView) findViewById(R.id.browser_webview);
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && wv.canGoBack()) {
-            wv.goBack();
-            return true;
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            wv.stopLoading();
+            if (wv.canGoBack()) {
+                wv.goBack();
+                return true;
+            }
         }
         return super.onKeyDown(keyCode, event);
     }
