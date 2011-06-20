@@ -52,9 +52,12 @@ public class EepGetFetcher implements EepGet.StatusListener {
         if (!_success)
             return "text/plain";
         String rv = _eepget.getContentType();
-        if (rv == null || rv.equals("text/html"))
-            return "text/html; charset=utf-8";
-        return rv;
+        if (rv == null)
+            return "text/html";
+        int semi = rv.indexOf(";");
+        if (semi > 0)
+            rv = rv.substring(0, semi);
+        return rv.toLowerCase();
     }
 
     /**
@@ -71,14 +74,15 @@ public class EepGetFetcher implements EepGet.StatusListener {
     }
 
     /**
+     *  Only call ONCE!
      *  FIXME we don't get the proxy error pages this way
      */
     public String getData() {
         String rv;
         if (!_file.exists()) {
-            rv = "Fetch failed";
+            rv = "Fetch failed for url \"" + _url + '"';
         } else if (_file.length() <= 0) {
-            rv = "Fetch failed";
+            rv = "Fetch failed for url \"" + _url + '"';
             _file.delete();
         } else {
             InputStream fis = null;

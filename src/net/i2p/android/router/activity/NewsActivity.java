@@ -37,6 +37,7 @@ public class NewsActivity extends I2PActivityBase {
         WebView wv = (WebView) findViewById(R.id.news_webview);
         wv.getSettings().setLoadsImagesAutomatically(false);
         wv.setWebViewClient(new I2PWebViewClient());
+        wv.getSettings().setBuiltInZoomControls(true);
     }
 
     @Override

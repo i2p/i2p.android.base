@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -22,29 +23,37 @@ class I2PWebViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         System.err.println("Should override? " + url);
+        view.stopLoading();
         try {
             URI uri = new URI(url);
             String s = uri.getScheme();
-            if (s == null)
-                return false;
+            if (s == null) {
+                Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_SHORT);
+                return true;
+            }
             s = s.toLowerCase();
             if (!(s.equals("http") || s.equals("https")))
                 return false;
             String h = uri.getHost();
-            if (h == null)
-                return false;
+            if (h == null) {
+                Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_SHORT);
+                return true;
+            }
 
-            view.stopLoading();
-            view.getSettings().setBuiltInZoomControls(true);
             h = h.toLowerCase();
             if (h.endsWith(".i2p")) {
                 // if (s.equals("https")
                 //    return false;
                 view.getSettings().setLoadsImagesAutomatically(false);
+                ///////// API 8
+                // Otherwise hangs waiting for CSS
+                view.getSettings().setBlockNetworkLoads(true);
                 //view.loadData(ERROR_EEPSITE, "text/html", "UTF-8");
                 (new BackgroundEepLoad(view, h)).execute(url);
             } else {
                 view.getSettings().setLoadsImagesAutomatically(true);
+                ///////// API 8
+                view.getSettings().setBlockNetworkLoads(false);
                 //view.loadUrl(url);
                 (new BackgroundLoad(view)).execute(url);
             }
@@ -81,6 +90,9 @@ class I2PWebViewClient extends WebViewClient {
         }
     }
 
+    // http://stackoverflow.com/questions/3961589/android-webview-and-loaddata
+    private static final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
+
     private static class BackgroundEepLoad extends AsyncTask<String, Integer, Integer> implements EepGet.StatusListener {
         private final WebView _view;
         private final String _host;
@@ -101,11 +113,15 @@ class I2PWebViewClient extends WebViewClient {
             boolean success = fetcher.fetch();
             if (!success)
                 System.err.println("Fetch failed for " + url);
-            String d = fetcher.getData();
             String t = fetcher.getContentType();
+            String d = fetcher.getData();
+            int len = d.length();
+            // http://stackoverflow.com/questions/3961589/android-webview-and-loaddata
+            if (success && t.startsWith("text/html") && !d.startsWith("<?xml"))
+                d = XML_HEADER + d;
             String e = fetcher.getEncoding();
-            System.err.println("Len: " + d.length() + " type: \"" + t + "\" encoding: \"" + e + '"');
-            _view.loadData(d, t, e);
+            System.err.println("Len: " + len + " type: \"" + t + "\" encoding: \"" + e + '"');
+            _view.loadDataWithBaseURL(url, d, t, e, url);
             return Integer.valueOf(0);
         }
 
@@ -117,7 +133,7 @@ class I2PWebViewClient extends WebViewClient {
                 ProgressDialog d = new ProgressDialog(_view.getContext());
                 d.setCancelable(true);
                 d.setTitle("Fetching...");
-                d.setMessage("from " + _host);
+                d.setMessage("...from " + _host);
                 d.setIndeterminate(true);
                 d.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 d.show();

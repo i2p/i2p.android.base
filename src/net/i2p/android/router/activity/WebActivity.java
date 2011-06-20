@@ -32,15 +32,14 @@ public class WebActivity extends I2PActivityBase {
         tv.setText(WARNING);
         WebView wv = (WebView) findViewById(R.id.browser_webview);
         wv.setWebViewClient(new I2PWebViewClient());
+        wv.getSettings().setBuiltInZoomControls(true);
         Intent intent = getIntent();
         Uri uri = intent.getData();
         if (uri != null) {
             wv.getSettings().setLoadsImagesAutomatically(true);
-            wv.getSettings().setBuiltInZoomControls(true);
             wv.loadUrl(uri.toString());
         } else {
             wv.getSettings().setLoadsImagesAutomatically(false);
-            wv.getSettings().setBuiltInZoomControls(false);
             int id = intent.getIntExtra(HTML_RESOURCE_ID, R.raw.welcome_html);
             loadResource(wv, id);
         }
