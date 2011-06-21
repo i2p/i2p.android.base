@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.i2p.android.router"
-      android.versionCode="4206788"
-      android.versionName="0.8.6-24_b132-SDK3"
+      android.versionCode="4206808"
+      android.versionName="0.8.6-27_b56-SDK8"
       android:installLocation="preferExternal"
       >
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!-- 3 = 1.5, 2 = 1.1, 1 = 1.0; would probably work with 1 but don't have a 1.0 SDK to test against -->
-    <!-- 3 required for NDK -->
-    <uses-sdk android:minSdkVersion="7" />
+    <uses-sdk android:minSdkVersion="8" />
 
     <application android:label="@string/app_name"
                android:icon="@drawable/ic_launcher_itoopie" >

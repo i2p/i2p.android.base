@@ -69,7 +69,6 @@
     -->
     <setup import="true" />
 
-    <echo>Ignore warning about SDK version</echo>
     <!--
          ================================================================================
          New I2P rules

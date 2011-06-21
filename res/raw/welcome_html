@@ -54,22 +54,6 @@ client</a>
 target="_blank">hq.postman.i2p</a>.
 </li>
 
-<li class="tidylist"><b>Anonymous File Transfer</b><br><a href="/i2psnark/" 
-target="_blank">I2PSnark</a> is integrated into I2P, providing anonymous, 
-encrypted <a 
-href="https://secure.wikimedia.org/wikipedia/en/wiki/BitTorrent_%28protocol%29" 
-target="_blank">BitTorrent</a> transfers.
-  In addition, Sponge develops a bittorrent client called <a 
-href="http://bob.i2p/Robert.html">Robert</a> written in Python.
-  There is also a port of <a href="http://www.emule-project.net/" 
-target="_blank">eMule</a> to I2P called <a 
-href="http://echelon.i2p/imule/">iMule</a> [Needs developers!], an anonymous, 
-secure implementation of a <a 
-href="https://secure.wikimedia.org/wikipedia/en/wiki/Gnutella" 
-target="_blank">Gnutella network</a>, accessible using <a 
-href="http://echelon.i2p/i2phex/" target="_blank">I2Phex</a> [maintained by 
-Complication, seeking new developers!], and additional facilities including 
-browser-based file hosting.</li>
 <li class="tidylist"><b>Anonymous Chat</b><br>Start your IRC client (e.g. 
 Chatzilla, Pidgin, XChat)
   and connect to the <a href="irc://127.0.0.1:6668/i2p-help">server</a> at 
@@ -199,18 +183,6 @@ or perhaps <a href="http://paste.i2p2.i2p/" target="_blank">paste</a> it
 instead and reference the link on IRC for help.
   </li> 
 
-<li class="tidylist"><b>Verify Java is Up to Date</b><br>Ensure your Java is up 
-to date [version 1.6 recommended and required for some features]. Check the 
-version of your JRE (<a 
-href="https://secure.wikimedia.org/wikipedia/en/wiki/JRE" target="_blank">Java 
-Runtime Environment</a>)
-  at the top of <a href="/logs">the logs page</a>.
-  If you're a developer, a <a 
-href="https://secure.wikimedia.org/wikipedia/en/wiki/Java_SDK" 
-target="_blank">Java SDK</a> and <a href="http://ant.apache.org/" 
-target="_blank">Apache Ant</a> are required to build from source.
-  </li>
- 
 <li class="tidylist"><b>Getting Support Online</b><br>You may also want 
   to review the information on the <a href="http://www.i2p2.i2p/" 
 target="_blank">I2P website</a>, 

@@ -30,10 +30,9 @@ The i2p source must be installed in ../i2p.i2p
 
 # DO NOT create a new project or anything. It's all set up right here for you.
 
-# Create the android 1.5 (API 3) virtual device
+# Create the android 2.2 (API 8) virtual device
 # (don't make a custom hardware profile)
-# A AVD created with the 1.5 SDK will not work with the newer tools
-../android-sdk-linux_86/tools/android create avd --name i2p --target 3
+../android-sdk-linux_86/tools/android create avd --name i2p --target 8
 
 #then run the emulator:
 ../android-sdk-linux_86/tools/emulator -avd i2p &
