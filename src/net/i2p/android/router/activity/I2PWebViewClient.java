@@ -2,6 +2,7 @@ package net.i2p.android.router.activity;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,6 +15,8 @@ import net.i2p.android.apps.EepGetFetcher;
 import net.i2p.util.EepGet;
 
 class I2PWebViewClient extends WebViewClient {
+
+    private BGLoad _lastTask;
 
     // TODO add some inline style
     private static final String HEADER = "<html><head></head><body>";
@@ -42,20 +45,30 @@ class I2PWebViewClient extends WebViewClient {
 
             h = h.toLowerCase();
             if (h.endsWith(".i2p")) {
-                // if (s.equals("https")
-                //    return false;
+                if (!s.equals("http")) {
+                    Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_SHORT);
+                    return true;
+                }
+                // strip trailing junk
+                int hash = url.indexOf("#");
+                if (hash > 0)
+                    url = url.substring(0, hash);
                 view.getSettings().setLoadsImagesAutomatically(false);
                 ///////// API 8
                 // Otherwise hangs waiting for CSS
                 view.getSettings().setBlockNetworkLoads(true);
                 //view.loadData(ERROR_EEPSITE, "text/html", "UTF-8");
-                (new BackgroundEepLoad(view, h)).execute(url);
+                BGLoad task = new BackgroundEepLoad(view, h);
+                _lastTask = task;
+                task.execute(url);
             } else {
                 view.getSettings().setLoadsImagesAutomatically(true);
                 ///////// API 8
                 view.getSettings().setBlockNetworkLoads(false);
                 //view.loadUrl(url);
-                (new BackgroundLoad(view)).execute(url);
+                BGLoad task = new BackgroundLoad(view);
+                _lastTask = task;
+                task.execute(url);
             }
             return true;
         } catch (URISyntaxException use) {
@@ -63,12 +76,53 @@ class I2PWebViewClient extends WebViewClient {
         }
     }
 
-    private static class BackgroundLoad extends AsyncTask<String, Integer, Integer> {
-        private final WebView _view;
-        private ProgressDialog _dialog;
+    void cancelAll() {
+        BGLoad task = _lastTask;
+        if (task != null) {
+            System.err.println("Cancelling fetches");
+            task.cancel(true);
+        }
+    }
+
+    private abstract static class BGLoad extends AsyncTask<String, Integer, Integer> implements DialogInterface.OnCancelListener {
+        protected final WebView _view;
+        protected ProgressDialog _dialog;
+
+        public BGLoad(WebView view) {
+            _view = view;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            dismiss();
+        }
+
+        @Override
+        protected void onCancelled() {
+            dismiss();
+        }
+
+        private void dismiss() {
+            if (_dialog != null && _dialog.isShowing()) {
+                try {
+                    // throws IAE - not attached to window manager - on screen rotation
+                    // isShowing() may cover it though.
+                    _dialog.dismiss();
+                } catch (Exception e) {}
+            }
+        }
+
+        /** cancel listener */
+        public void onCancel(DialogInterface dialog) {
+            cancel(true);
+        }
+    }
+
+
+    private static class BackgroundLoad extends BGLoad {
 
         public BackgroundLoad(WebView view) {
-            _view = view;
+            super(view);
         }
 
         protected Integer doInBackground(String... urls) {
@@ -78,30 +132,28 @@ class I2PWebViewClient extends WebViewClient {
         }
 
         protected void onProgressUpdate(Integer... progress) {
+            if (isCancelled())
+                return;
             if (progress[0].intValue() < 0) {
                 _dialog = ProgressDialog.show(_view.getContext(), "Loading", "some url");
+                _dialog.setOnCancelListener(this);
                 _dialog.setCancelable(true);
             }
         }
 
-        protected void onPostExecute(Integer result) {
-            if (_dialog != null)
-                _dialog.dismiss();
-        }
+
     }
 
     // http://stackoverflow.com/questions/3961589/android-webview-and-loaddata
     private static final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
 
-    private static class BackgroundEepLoad extends AsyncTask<String, Integer, Integer> implements EepGet.StatusListener {
-        private final WebView _view;
+    private static class BackgroundEepLoad extends BGLoad implements EepGet.StatusListener {
         private final String _host;
-        private ProgressDialog _dialog;
         private int _total;
         private String _data;
 
         public BackgroundEepLoad(WebView view, String host) {
-            _view = view;
+            super(view);
             _host = host;
         }
 
@@ -111,6 +163,10 @@ class I2PWebViewClient extends WebViewClient {
             EepGetFetcher fetcher = new EepGetFetcher(url);
             fetcher.addStatusListener(this);
             boolean success = fetcher.fetch();
+            if (isCancelled()) {
+                System.err.println("Fetch cancelled for " + url);
+                return Integer.valueOf(0);
+            }
             if (!success)
                 System.err.println("Fetch failed for " + url);
             String t = fetcher.getContentType();
@@ -121,11 +177,17 @@ class I2PWebViewClient extends WebViewClient {
                 d = XML_HEADER + d;
             String e = fetcher.getEncoding();
             System.err.println("Len: " + len + " type: \"" + t + "\" encoding: \"" + e + '"');
+            if (isCancelled()) {
+                System.err.println("Fetch cancelled for " + url);
+                return Integer.valueOf(0);
+            }
             _view.loadDataWithBaseURL(url, d, t, e, url);
             return Integer.valueOf(0);
         }
 
         protected void onProgressUpdate(Integer... progress) {
+            if (isCancelled())
+                return;
             int prog = progress[0].intValue();
             if (prog < 0) {
                 // Can't change style on the fly later, results in an NPE in setMax()
@@ -137,6 +199,7 @@ class I2PWebViewClient extends WebViewClient {
                 d.setIndeterminate(true);
                 d.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 d.show();
+                d.setOnCancelListener(this);
                 _dialog = d;
             } else if (prog == 0 && _total > 0) {
                 _dialog.setTitle("Downloading");
@@ -148,11 +211,6 @@ class I2PWebViewClient extends WebViewClient {
             } else {
                 // nothing
             }
-        }
-
-        protected void onPostExecute(Integer result) {
-            if (_dialog != null)
-                _dialog.dismiss();
         }
 
         // EepGet callbacks

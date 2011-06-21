@@ -18,10 +18,12 @@ import net.i2p.android.router.R;
 
 public class WebActivity extends I2PActivityBase {
 
+    private I2PWebViewClient _wvClient;
+
     final static String HTML_RESOURCE_ID = "html_resource_id";
-    private static final String WARNING = "Warning - while the welcome screen is local, web pages and " +
-               "any links visited in this window are fetched over the regular internet and are " +
-               "not anonymous. I2P fetches leak .i2p DNS requests and do not load images or CSS.\n";
+    private static final String WARNING = "Warning - " +
+               "any non-I2P links visited in this window are fetched over the regular internet and are " +
+               "not anonymous. I2P pages do not load images or CSS.\n";
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -31,7 +33,8 @@ public class WebActivity extends I2PActivityBase {
         TextView tv = (TextView) findViewById(R.id.browser_status);
         tv.setText(WARNING);
         WebView wv = (WebView) findViewById(R.id.browser_webview);
-        wv.setWebViewClient(new I2PWebViewClient());
+        _wvClient = new I2PWebViewClient();
+        wv.setWebViewClient(_wvClient);
         wv.getSettings().setBuiltInZoomControls(true);
         Intent intent = getIntent();
         Uri uri = intent.getData();
@@ -73,6 +76,7 @@ public class WebActivity extends I2PActivityBase {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         WebView wv = (WebView) findViewById(R.id.browser_webview);
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            _wvClient.cancelAll();
             wv.stopLoading();
             if (wv.canGoBack()) {
                 wv.goBack();

@@ -286,14 +286,18 @@ public class MainActivity extends I2PActivityBase {
               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
                            System.setProperty(PROP_NEW_VERSION, "false");
-                           dialog.cancel();
+                           try {
+                               dialog.dismiss();
+                           } catch (Exception e) {}
                            MainActivity.this.removeDialog(id);
                        }
                })
               .setNegativeButton("Release Notes", new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
                            System.setProperty(PROP_NEW_VERSION, "false");
-                           dialog.cancel();
+                           try {
+                               dialog.dismiss();
+                           } catch (Exception e) {}
                            MainActivity.this.removeDialog(id);
                            Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
                            intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);

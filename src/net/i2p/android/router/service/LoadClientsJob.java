@@ -31,7 +31,7 @@ class LoadClientsJob extends JobImpl {
     private Thread _fetcherThread;
 
     /** this is the delay to load (and start) the clients. */
-    private static final long LOAD_DELAY = 2*60*1000;
+    private static final long LOAD_DELAY = 90*1000;
 
 
     public LoadClientsJob(RouterContext ctx) {

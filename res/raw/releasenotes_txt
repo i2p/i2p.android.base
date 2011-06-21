@@ -1,3 +1,5 @@
+******* Please read all of the following *******
+
 WARNING - This is ALPHA SOFTWARE. It may crash your phone. Do not rely upon it for strong anonymity. Tunnels may be as short as one hop.
 
 Minimum Android OS is 2.1 (SDK 7). The app is only tested on the Motorola Droid. It uses a lot of RAM. You need at least 256 MB of RAM. 512 should be much better.
@@ -17,6 +19,22 @@ NTP is disabled. If you have cell service, your phone or tablet should have the 
 The app will work best when you are not changing IPs. If you are moving around, changing WIFI nodes, or switching between mobile and WIFI networks, it won't work well.
 
 There is no method to configure anything in the app.
+
+
+Embedded web browser
+--------------------
+
+The browser does not use the outproxy for regular web sites. Javascript is disabled.
+
+The following problems with eepsites are probably not fixable except on Android 3.0 (Honeycomb - i.e. tablets) due to API limitations. I don't have a tablet to test on, so I haven't made any effort to work on it. The workaround is to use Firefox Mobile 4 and the ProxMob plugin (see below).
+  - No images
+  - No CSS
+
+For eepsites, there are several other things to note:
+  - No cookies
+  - No way to type in addresses
+  - No addressbook app yet, so you only have what is in the standard hosts.txt
+  - Eepsites are not found in the cache when hitting the back button
 
 
 Using clients with the router

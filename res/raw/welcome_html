@@ -51,11 +51,8 @@ client</a>
   (susimail) or using any mail client that supports smtp and pop3.
   Accounts can send and receive mail from the normal internet. For an
   account, visit <a href="http://hq.postman.i2p/" 
-target="_blank">hq.postman.i2p</a>. Additionally, <a href="http://i2pbote.i2p/" 
-target="_blank">I2P-Bote</a> is a new I2P-internal serverless, secure 
-(end-to-end encrypted) e-mail system with an integrated anonymous/pseudonymous 
-remailer, providing a web interface and a built-in addressbook. It is developed 
-by HungryHobo, and can be installed as a <a href="#plugins">plugin</a>.</li>
+target="_blank">hq.postman.i2p</a>.
+</li>
 
 <li class="tidylist"><b>Anonymous File Transfer</b><br><a href="/i2psnark/" 
 target="_blank">I2PSnark</a> is integrated into I2P, providing anonymous, 
@@ -109,27 +106,12 @@ target="_blank">Java API</a>.</li>
 your own blog or forum, you might be interested in <a 
 href="http://syndie.i2p2.de/" target="_blank">Syndie</a>, a distributed forum 
 and blogging platform for I2P [Needs developers!].
-  There's also an I2P plugin port of the Java-based <a 
-href="http://pebble.sourceforge.net/" target="_blank">pebble</a> blogging 
-platform ported to I2P by zzz, available on <a href="http://i2plugins.i2p/" 
-target="_blank">i2plugins.i2p</a>.
   And, of course, all normal blogging, forum and cms software will run over 
 I2P, though you're advised to take extra precautions with security when setting 
 up and to keep all associated software (e.g. Php, MySql, Python, Apache) up to 
 date and locked-down!
   Also, there are quite a few community run forums on I2P in various languages; 
 see <a href="#eepsites">below</a> for some suggestions.</li>
-  <li class="tidylist"><a name="plugins"></a><b>Plugins for I2P</b><br>Extend 
-the usefulness of I2P by installing plugins&hellip; blogging, chatting, file 
-sharing and other plugins have already been written or ported and await your <a 
-href="http://i2plugins.i2p/plugins/" target="_blank">installation</a>!
-  Browse the plugins and related info at <a href="http://i2plugins.i2p/" 
-target="_blank">i2plugins.i2p</a>.
-  If you're a <a href="http://i2plugins.i2p/developers/" 
-target="_blank">developer</a>, a complete language-agnostic framework for 
-writing your own plugins is provided with <a 
-href="http://www.i2p2.i2p/plugins.html" target="_blank">documentation</a>; I2P 
-plugins can be coded in any language.</li>
 </ul>
 
 <a name="eepsites"></a>    

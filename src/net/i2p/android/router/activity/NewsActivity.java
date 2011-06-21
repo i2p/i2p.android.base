@@ -19,11 +19,13 @@ import net.i2p.android.apps.NewsFetcher;
 
 public class NewsActivity extends I2PActivityBase {
 
+    private I2PWebViewClient _wvClient;
+    private long _lastChanged;
+
     private static final String WARNING = "Warning - while the news is fetched over I2P, " +
-               "any links visited in this window are fetched over the regular internet and are " +
+               "any non-I2P links visited in this window are fetched over the regular internet and are " +
                "not anonymous.\n";
 
-    private long _lastChanged;
 
     // TODO add some inline style
     private static final String HEADER = "<html><head></head><body>";
@@ -36,7 +38,8 @@ public class NewsActivity extends I2PActivityBase {
         setContentView(R.layout.news);
         WebView wv = (WebView) findViewById(R.id.news_webview);
         wv.getSettings().setLoadsImagesAutomatically(false);
-        wv.setWebViewClient(new I2PWebViewClient());
+        _wvClient = new I2PWebViewClient();
+        wv.setWebViewClient(_wvClient);
         wv.getSettings().setBuiltInZoomControls(true);
     }
 
@@ -95,6 +98,7 @@ public class NewsActivity extends I2PActivityBase {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         WebView wv = (WebView) findViewById(R.id.news_webview);
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            _wvClient.cancelAll();
             wv.stopLoading();
             if (wv.canGoBack()) {
                 wv.goBack();
