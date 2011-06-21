@@ -16,7 +16,7 @@
                   android:label="@string/app_name"
                   android:icon="@drawable/ic_launcher_itoopie" />
         <activity android:name=".activity.MainActivity"
-                  android:label="@string/app_name"
+                  android:label="I2P Main Page"
                   android:icon="@drawable/ic_launcher_itoopie"
                   android.theme="@android:style/Theme.NoTitleBar"
                   android:launchMode="singleTask" >
@@ -26,19 +26,23 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.NewsActivity"
-                  android:label="@string/app_name"
+                  android:label="I2P News"
                   android.theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity android:name=".activity.TextResourceActivity"
-                  android:label="@string/app_name"
+                  android:label="I2P Information"
                   android.theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity android:name=".activity.LicenseActivity"
-                  android:label="@string/app_name"
+                  android:label="Licenses"
                   android.theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity android:name=".activity.WebActivity"
-                  android:label="@string/app_name"
+                  android:label="Web Browser"
+                  android.theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity android:name=".activity.SettingsActivity"
+                  android:label="Settings"
                   android.theme="@android:style/Theme.NoTitleBar" >
         </activity>
     </application>

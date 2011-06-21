@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import net.i2p.android.router.R;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.router.CommSystemFacade;
@@ -98,6 +102,35 @@ public abstract class I2PActivityBase extends Activity {
         super.onDestroy();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu1, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // add/hide items here
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_settings:
+            Intent intent = new Intent(I2PActivityBase.this, SettingsActivity.class);
+            startActivityForResult(intent, 0);
+            return true;
+        case R.id.menu_start:
+        case R.id.menu_stop:
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    ////// Service stuff
+
     protected boolean bindRouter() {
         Intent intent = new Intent();
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
@@ -129,6 +162,8 @@ public abstract class I2PActivityBase extends Activity {
             _isBound = false;
         }
     }
+
+    ////// Router stuff
 
     protected RouterContext getRouterContext() {
         if (_routerService == null || !_isBound)

@@ -19,8 +19,9 @@ import net.i2p.data.DataHelper;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.RouterLaunch;
-import net.i2p.util.OrderedProperties;
+import net.i2p.util.FileUtil;
 import net.i2p.util.NativeBigInteger;
+import net.i2p.util.OrderedProperties;
 
 class Init {
 
@@ -93,7 +94,7 @@ class Init {
             copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
         }
 
-        (new File(myDir, "wrapper.log")).delete();
+        deleteOldFiles();
 
         // Set up the locations so Router and WorkingDir can find them
         System.setProperty("i2p.dir.base", myDir);
@@ -199,5 +200,18 @@ class Init {
             }
         }
         return newVersion;
+    }
+
+    private void deleteOldFiles() {
+        (new File(myDir, "wrapper.log")).delete();
+        File tmp = new File(myDir, "tmp");
+        File[] files = tmp.listFiles();
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                File f = files[i];
+                System.err.println("Deleting old file/dir " + f);
+                FileUtil.rmdir(f, false);
+            }
+        }
     }
 }

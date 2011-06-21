@@ -36,6 +36,8 @@ public class WebActivity extends I2PActivityBase {
         _wvClient = new I2PWebViewClient();
         wv.setWebViewClient(_wvClient);
         wv.getSettings().setBuiltInZoomControls(true);
+        // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855
+        wv.getSettings().setUseWideViewPort(true);
         Intent intent = getIntent();
         Uri uri = intent.getData();
         if (uri != null) {

@@ -26,7 +26,7 @@ SDK=`grep 'android:minSdkVersion' $MANIFEST | \
          cut -d '"' -f 2`
 
 # don't let build number get too long
-VERSIONSTRING="${CORE}-${ROUTERBUILD}_b$(($ANDROIDBUILD % 256))-SDK$SDK"
+VERSIONSTRING="${CORE}-${ROUTERBUILD}_b$(($ANDROIDBUILD % 512))-API$SDK"
 
 #
 # Android version code is an integer.

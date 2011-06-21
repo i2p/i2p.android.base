@@ -24,19 +24,19 @@
     android:id="@+id/website_button"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
-    android:text="Web Site"
+    android:text="Web Site\n(non-anon)"
     />
  <Button 
     android:id="@+id/faq_button"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
-    android:text="FAQ"
+    android:text="FAQ\n(non-anon)"
     />
  <Button 
     android:id="@+id/welcome_button"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
-    android:text="Welcome"
+    android:text="Welcome\nPage"
     />
 </LinearLayout>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

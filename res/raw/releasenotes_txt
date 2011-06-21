@@ -2,7 +2,7 @@
 
 WARNING - This is ALPHA SOFTWARE. It may crash your phone. Do not rely upon it for strong anonymity. Tunnels may be as short as one hop.
 
-Minimum Android OS is 2.1 (SDK 7). The app is only tested on the Motorola Droid. It uses a lot of RAM. You need at least 256 MB of RAM. 512 should be much better.
+Minimum Android OS is 2.2 (API 8). The app is only tested on the Motorola Droid. It uses a lot of RAM. You need at least 256 MB of RAM. 512 should be much better.
 
 The app may use a lot of RAM even after the router has stopped and there is no icon in the notification bar. Go to Settings -> Applications -> Running Services and stop the I2P service if necessary. Or Settings -> Applications -> Manage Applications -> Running -> I2P and force stop.
 
@@ -35,6 +35,7 @@ For eepsites, there are several other things to note:
   - No way to type in addresses
   - No addressbook app yet, so you only have what is in the standard hosts.txt
   - Eepsites are not found in the cache when hitting the back button
+  - Fetches are aborted when you rotate the screen
 
 
 Using clients with the router

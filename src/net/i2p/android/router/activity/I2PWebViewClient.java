@@ -127,7 +127,12 @@ class I2PWebViewClient extends WebViewClient {
 
         protected Integer doInBackground(String... urls) {
             publishProgress(Integer.valueOf(-1));
-            _view.loadUrl(urls[0]);
+            try {
+                _view.loadUrl(urls[0]);
+            } catch (Exception e) {
+                // CalledFromWrongThreadException
+                cancel(false);
+            }
             return Integer.valueOf(0);
         }
 
@@ -181,7 +186,12 @@ class I2PWebViewClient extends WebViewClient {
                 System.err.println("Fetch cancelled for " + url);
                 return Integer.valueOf(0);
             }
-            _view.loadDataWithBaseURL(url, d, t, e, url);
+            try {
+                _view.loadDataWithBaseURL(url, d, t, e, url);
+            } catch (Exception exc) {
+                // CalledFromWrongThreadException
+                cancel(false);
+            }
             return Integer.valueOf(0);
         }
 
