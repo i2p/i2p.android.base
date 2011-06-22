@@ -57,6 +57,8 @@ public abstract class I2PActivityBase extends Activity {
         _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
         if (_sharedPrefs.getBoolean(PREF_AUTO_START, true))
             startRouter();
+        else
+            bindRouter(false);
     }
 
     protected void setAutoStart(boolean yes) {
@@ -65,6 +67,9 @@ public abstract class I2PActivityBase extends Activity {
         edit.commit();
     }
 
+    /**
+     *  Start the service and bind to it
+     */
     protected boolean startRouter() {
         Intent intent = new Intent();
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
@@ -73,7 +78,7 @@ public abstract class I2PActivityBase extends Activity {
         if (name == null)
             System.err.println(this + " XXXXXXXXXXXXXXXXXXXX got from startService: " + name);
         System.err.println(this + " got from startService: " + name);
-        boolean success = bindRouter();
+        boolean success = bindRouter(true);
         if (!success)
             System.err.println(this + " Bind router failed");
         return success;
@@ -126,7 +131,7 @@ public abstract class I2PActivityBase extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // add/hide items here
         RouterService svc = _routerService;
-        boolean showStart = (svc == null) || (svc != null && _isBound && svc.canManualStart());
+        boolean showStart = (svc == null) || (!_isBound) || svc.canManualStart();
         MenuItem start = menu.findItem(R.id.menu_start);
         start.setVisible(showStart);
         start.setEnabled(showStart);
@@ -166,12 +171,12 @@ public abstract class I2PActivityBase extends Activity {
 
     ////// Service stuff
 
-    protected boolean bindRouter() {
+    protected boolean bindRouter(boolean autoCreate) {
         Intent intent = new Intent();
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
         System.err.println(this + " calling bindService");
         _connection = new RouterConnection();
-        boolean success = bindService(intent, _connection, BIND_AUTO_CREATE);
+        boolean success = bindService(intent, _connection, autoCreate ? BIND_AUTO_CREATE : 0);
         System.err.println(this + " got from bindService: " + success);
         return success;
     }
@@ -179,6 +184,7 @@ public abstract class I2PActivityBase extends Activity {
     protected void unbindRouter() {
         if (_isBound) {
             unbindService(_connection);
+            _routerService = null;
             _isBound = false;
         }
     }

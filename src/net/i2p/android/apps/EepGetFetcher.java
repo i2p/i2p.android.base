@@ -80,9 +80,9 @@ public class EepGetFetcher implements EepGet.StatusListener {
     public String getData() {
         String rv;
         if (!_file.exists()) {
-            rv = "Fetch failed for url \"" + _url + '"';
+            rv = "Fetch failed for URL:\n" + _url + "\n\nMaybe the eepsite is not up?\nMaybe your router is not up?\nMaybe your router does not have client tunnels yet?";
         } else if (_file.length() <= 0) {
-            rv = "Fetch failed for url \"" + _url + '"';
+            rv = "Fetch failed for URL:\n" + _url + "\n\nMaybe the eepsite is not up?\nMaybe your router is not up?\nMaybe your router does not have client tunnels yet?";
             _file.delete();
         } else {
             InputStream fis = null;

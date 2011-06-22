@@ -52,6 +52,8 @@ class LoadClientsJob extends JobImpl {
         _fetcherThread.start();
 
         _addressbook = new DaemonThread(new String[] {"addressbook"});
+        _addressbook.setName("Addressbook");
+        _addressbook.setDaemon(true);
         _addressbook.start();
 
         // add other clients here

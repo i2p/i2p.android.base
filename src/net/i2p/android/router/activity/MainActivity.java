@@ -195,7 +195,7 @@ public class MainActivity extends I2PActivityBase {
 
     private void updateVisibility() {
         RouterService svc = _routerService;
-        boolean showStart = (svc == null) || (svc != null && _isBound && svc.canManualStart());
+        boolean showStart = (svc == null) || (!_isBound) || svc.canManualStart();
         Button start = (Button) findViewById(R.id.router_start_button);
         start.setVisibility(showStart ? View.VISIBLE : View.INVISIBLE);
 

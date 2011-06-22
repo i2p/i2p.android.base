@@ -40,6 +40,9 @@ use it instead!
 #then run the emulator:
 #  This may take a LONG time the first time (half an hour or more)...
 #  Run the debugger to ensure it is making progress
+# -no-boot-anim for faster boot
+# -dns-server 8.8.8.8 if the router can't reseed
+#../android-sdk-linux_86/tools/emulator -avd i2p -no-boot-anim -dns-server 8.8.8.8 &
 ../android-sdk-linux_86/tools/emulator -avd i2p &
 
 # or to talk to a real phone in debug mode:

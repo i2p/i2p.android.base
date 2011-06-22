@@ -169,6 +169,7 @@ class Init {
                 props.putAll(overrides);
             File path = new File(myDir, f);
             DataHelper.storeProps(props, path);
+            System.err.println("Saved " + props.size() +" properties in " + f);
         } catch (IOException ioe) {
         } catch (Resources.NotFoundException nfe) {
         } finally {
