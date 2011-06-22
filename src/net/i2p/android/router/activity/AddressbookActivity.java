@@ -35,9 +35,9 @@ public class AddressbookActivity extends ListActivity {
 
         // set the header
         TextView tv = (TextView) getLayoutInflater().inflate(R.layout.addressbook_header, null);
-        tv.setText(names.size() + " hosts in address book. Start typing to filter");
+        tv.setText(names.size() + " hosts in address book. Start typing to filter.");
         ListView lv = getListView();
-        lv.addHeaderView(tv);
+        lv.addHeaderView(tv, "", false);
         lv.setTextFilterEnabled(true);
 
         // set the list

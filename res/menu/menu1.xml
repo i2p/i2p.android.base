@@ -7,6 +7,10 @@
           android:id="@+id/menu_stop"
           android:icon="@android:drawable/ic_menu_close_clear_cancel" >
     </item>
+    <item android:title="Address Book"
+          android:id="@+id/menu_addressbook"
+          android:icon="@drawable/ic_menu_friendslist" >
+    </item>
     <item android:title="I2P Home"
           android:id="@+id/menu_home"
           android:icon="@drawable/ic_menu_home" >

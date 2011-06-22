@@ -146,6 +146,11 @@ public abstract class I2PActivityBase extends Activity {
         home.setVisible(showHome);
         home.setEnabled(showHome);
 
+        boolean showAddressbook = (this instanceof WebActivity);
+        MenuItem addressbook = menu.findItem(R.id.menu_addressbook);
+        addressbook.setVisible(showAddressbook);
+        addressbook.setEnabled(showAddressbook);
+
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -160,6 +165,11 @@ public abstract class I2PActivityBase extends Activity {
         case R.id.menu_home:
             Intent i2 = new Intent(I2PActivityBase.this, MainActivity.class);
             startActivity(i2);
+            return true;
+
+        case R.id.menu_addressbook:
+            Intent i3 = new Intent(I2PActivityBase.this, AddressbookActivity.class);
+            startActivity(i3);
             return true;
 
         case R.id.menu_start:
