@@ -2,7 +2,10 @@ These instructions are for a recent Android SDK (1.6 or later).
 These instructions were last updated for SDK Tools Version 11 with
 SDK Platform-tools Version 5, June 2011.
 
-The i2p source must be installed in ../i2p.i2p
+The i2p source must be installed in ../i2p.i2p,
+or else add i2psrc=/path/to/source in the local.properties file.
+Temporary - requires changes in the i2p.i2p.zzz.android branch,
+use it instead!
 
 =====================
 
@@ -35,6 +38,8 @@ The i2p source must be installed in ../i2p.i2p
 ../android-sdk-linux_86/tools/android create avd --name i2p --target 8
 
 #then run the emulator:
+#  This may take a LONG time the first time (half an hour or more)...
+#  Run the debugger to ensure it is making progress
 ../android-sdk-linux_86/tools/emulator -avd i2p &
 
 # or to talk to a real phone in debug mode:

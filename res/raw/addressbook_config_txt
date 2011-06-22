@@ -1,0 +1,11 @@
+etags=etags
+last_modified=last_modified
+log=../tmp/addressbook-log.txt
+proxy_host=127.0.0.1
+proxy_port=4444
+master_addressbook=../userhosts.txt
+published_addressbook=../tmp/published.txt
+router_addressbook=../hosts.txt
+should_publish=false
+subscriptions=subscriptions.txt
+update_delay=23

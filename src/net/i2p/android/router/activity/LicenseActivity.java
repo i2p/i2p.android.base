@@ -12,12 +12,12 @@ public class LicenseActivity extends I2PActivityBase {
     private static final int[] buttons = {
         R.id.license_main, R.id.license_bf, R.id.license_bsd, R.id.license_elg,
         R.id.license_gplv2, R.id.license_lgplv21, R.id.license_gplv3, R.id.license_lgplv3,
-        R.id.license_cert, R.id.license_sha256, R.id.license_sntp};
+        R.id.license_cert, R.id.license_sha256, R.id.license_sntp, R.id.license_addressbook};
 
     private static final int[] files = {
         R.raw.licenses_txt, R.raw.license_blockfile_txt, R.raw.license_bsd_txt, R.raw.license_elgamaldsa_txt,
         R.raw.license_gplv2_txt, R.raw.license_lgplv2_1_txt, R.raw.license_gplv3_txt, R.raw.license_lgplv3_txt,
-        R.raw.license_installcert_txt, R.raw.license_sha256_txt, R.raw.license_sntp_txt};
+        R.raw.license_installcert_txt, R.raw.license_sha256_txt, R.raw.license_sntp_txt, R.raw.license_addressbook_txt};
 
     /** Called when the activity is first created. */
     @Override

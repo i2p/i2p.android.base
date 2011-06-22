@@ -102,6 +102,7 @@
         <ant dir="${i2pbase}" >
             <target name="buildRouter" />
             <target name="buildI2PTunnel" />
+            <target name="buildAddressbook" />
         </ant>
 
         <!-- router -->
@@ -144,6 +145,11 @@
             </zipfileset >
         </jar>
 
+        <!-- addressbook - make a jar, it's a war in the i2p distro -->
+        <jar destfile="${jar.libs.dir}/addressbook.jar"
+             basedir="${i2pbase}/apps/addressbook/build"
+             excludes="net/i2p/addressbook/Servlet.class" />
+
     </target>
 
     <!-- some resources -->
@@ -161,6 +167,7 @@
         <copy file="${i2pbase}/licenses/LICENSE-GPLv2.txt" tofile="res/raw/license_gplv2_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-GPLv3.txt" tofile="res/raw/license_gplv3_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-LGPLv3.txt" tofile="res/raw/license_lgplv3_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-Addressbook.txt" tofile="res/raw/license_addressbook_txt" />
     </target>
 
     <target name="hackcleanup">

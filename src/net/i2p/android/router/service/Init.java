@@ -8,6 +8,7 @@ import android.content.res.Resources.NotFoundException;
 import android.os.Build;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.IOException;
@@ -92,6 +93,10 @@ class Init {
             // FIXME this is a memory hog to merge this way
             mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
             copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
+            File abDir = new File(myDir, "addressbook");
+            abDir.mkdir();
+            copyResourceToFile(R.raw.subscriptions_txt, "addressbook/subscriptions.txt");
+            mergeResourceToFile(R.raw.addressbook_config_txt, "addressbook/config.txt", null);
         }
 
         deleteOldFiles();
@@ -102,6 +107,9 @@ class Init {
         System.setProperty("wrapper.logfile", myDir + "/wrapper.log");
     }
 
+    /**
+     *  @param f relative to base dir
+     */
     private void copyResourceToFile(int resID, String f) {
         InputStream in = null;
         FileOutputStream out = null;
@@ -111,7 +119,7 @@ class Init {
         try {
             // Context methods
             in = ctx.getResources().openRawResource(resID);
-            out = ctx.openFileOutput(f, 0);
+            out = new FileOutputStream(new File(myDir, f));
             
             int read = 0;
             while ( (read = in.read(buf)) != -1)
@@ -131,6 +139,8 @@ class Init {
      *  and write back
      *  For now, do it backwards so we can override with new apks.
      *  When we have user configurable stuff, switch it back.
+     *
+     *  @param f relative to base dir
      *  @param props local overrides or null
      */
     private void mergeResourceToFile(int resID, String f, Properties overrides) {
@@ -145,7 +155,7 @@ class Init {
             //DataHelper.loadProps(props,  in);
             
             try {
-                fin = ctx.openFileInput(f);
+                fin = new FileInputStream(new File(myDir, f));
                 DataHelper.loadProps(props,  fin);
                 System.err.println("Merging resource into file " + f);
             } catch (IOException ioe) {
@@ -157,7 +167,8 @@ class Init {
 
             if (overrides != null)
                 props.putAll(overrides);
-            DataHelper.storeProps(props, ctx.getFileStreamPath(f));
+            File path = new File(myDir, f);
+            DataHelper.storeProps(props, path);
         } catch (IOException ioe) {
         } catch (Resources.NotFoundException nfe) {
         } finally {
