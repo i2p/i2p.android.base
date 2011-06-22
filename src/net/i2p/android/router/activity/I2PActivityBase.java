@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.Menu;
@@ -27,6 +28,10 @@ public abstract class I2PActivityBase extends Activity {
     protected boolean _isBound;
     protected ServiceConnection _connection;
     protected RouterService _routerService;
+    private SharedPreferences _sharedPrefs;
+
+    private static final String SHARED_PREFS = "net.i2p.android.router";
+    protected static final String PREF_AUTO_START = "autoStart";
 
     /** Called when the activity is first created. */
     @Override
@@ -49,7 +54,15 @@ public abstract class I2PActivityBase extends Activity {
     {
         System.err.println(this + " onStart called");
         super.onStart();
-        startRouter();
+        _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
+        if (_sharedPrefs.getBoolean(PREF_AUTO_START, true))
+            startRouter();
+    }
+
+    protected void setAutoStart(boolean yes) {
+        SharedPreferences.Editor edit = _sharedPrefs.edit();
+        edit.putBoolean(PREF_AUTO_START, yes);
+        edit.commit();
     }
 
     protected boolean startRouter() {
@@ -112,6 +125,22 @@ public abstract class I2PActivityBase extends Activity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // add/hide items here
+        RouterService svc = _routerService;
+        boolean showStart = (svc == null) || (svc != null && _isBound && svc.canManualStart());
+        MenuItem start = menu.findItem(R.id.menu_start);
+        start.setVisible(showStart);
+        start.setEnabled(showStart);
+
+        boolean showStop = svc != null && _isBound && svc.canManualStop();
+        MenuItem stop = menu.findItem(R.id.menu_stop);
+        stop.setVisible(showStop);
+        stop.setEnabled(showStop);
+
+        boolean showHome = ! (this instanceof MainActivity);
+        MenuItem home = menu.findItem(R.id.menu_home);
+        home.setVisible(showHome);
+        home.setEnabled(showHome);
+
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -120,8 +149,14 @@ public abstract class I2PActivityBase extends Activity {
         switch (item.getItemId()) {
         case R.id.menu_settings:
             Intent intent = new Intent(I2PActivityBase.this, SettingsActivity.class);
-            startActivityForResult(intent, 0);
+            startActivity(intent);
             return true;
+
+        case R.id.menu_home:
+            Intent i2 = new Intent(I2PActivityBase.this, MainActivity.class);
+            startActivity(i2);
+            return true;
+
         case R.id.menu_start:
         case R.id.menu_stop:
         default:
@@ -159,6 +194,8 @@ public abstract class I2PActivityBase extends Activity {
 
         public void onServiceDisconnected(ComponentName name) {
             System.err.println(this + " disconnected from router service!!!!!!!");
+            // save memory
+            _routerService = null;
             _isBound = false;
         }
     }
@@ -166,9 +203,10 @@ public abstract class I2PActivityBase extends Activity {
     ////// Router stuff
 
     protected RouterContext getRouterContext() {
-        if (_routerService == null || !_isBound)
+        RouterService svc = _routerService;
+        if (svc == null || !_isBound)
             return null;
-        return _routerService.getRouterContext();
+        return svc.getRouterContext();
     }
 
     protected Router getRouter() {

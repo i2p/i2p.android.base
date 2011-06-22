@@ -63,9 +63,10 @@ public class I2PReceiver extends BroadcastReceiver {
             if (_wasConnected && !connected) {
                 // notify + 2 timer ticks
                 if (++_unconnectedCount >= 3) {
-                    if (_isBound) {
+                    RouterService svc = _routerService;
+                    if (_isBound && svc != null) {
                         System.err.println("********* Network down, already bound");
-                        _routerService.networkStop();
+                        svc.networkStop();
                     } else {
                         System.err.println("********* Network down, binding to router");
                         // connection will call networkStop()
@@ -131,6 +132,7 @@ public class I2PReceiver extends BroadcastReceiver {
 
     private class RouterConnection implements ServiceConnection {
 
+        /** Stops the router when connected */
         public void onServiceConnected(ComponentName name, IBinder service) {
             RouterBinder binder = (RouterBinder) service;
             _routerService = binder.getService();
@@ -145,6 +147,7 @@ public class I2PReceiver extends BroadcastReceiver {
 
         public void onServiceDisconnected(ComponentName name) {
             _isBound = false;
+            _routerService = null;
             System.err.println("********* Receiver unbinding from router");
         }
     }

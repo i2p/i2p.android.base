@@ -80,6 +80,12 @@
     android:layout_height="wrap_content" 
     android:text="Stop router"
     />
+ <Button 
+    android:id="@+id/router_quit_button"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="QUIT router"
+    />
 </LinearLayout>
 <TextView  
     android:id="@+id/main_status_text"

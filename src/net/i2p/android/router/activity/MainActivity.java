@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.service.RouterService;
 import net.i2p.data.DataHelper;
 import net.i2p.router.RouterContext;
 
@@ -39,7 +40,7 @@ public class MainActivity extends I2PActivityBase {
         news.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), NewsActivity.class);
-                startActivityForResult(intent, 0);
+                startActivity(intent);
             }
         });
 
@@ -48,7 +49,7 @@ public class MainActivity extends I2PActivityBase {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
                 intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-                startActivityForResult(intent, 0);
+                startActivity(intent);
             }
         });
 
@@ -58,7 +59,7 @@ public class MainActivity extends I2PActivityBase {
                 Intent intent = new Intent(view.getContext(), LicenseActivity.class);
                 //Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
                 //intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.licenses_txt);
-                startActivityForResult(intent, 0);
+                startActivity(intent);
             }
         });
 
@@ -68,7 +69,7 @@ public class MainActivity extends I2PActivityBase {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/").build());
                 intent.setData(Uri.parse("http://www.i2p2.de/"));
-                startActivityForResult(intent, 0);
+                startActivity(intent);
             }
         });
 
@@ -78,7 +79,7 @@ public class MainActivity extends I2PActivityBase {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/faq").build());
                 intent.setData(Uri.parse("http://www.i2p2.de/faq"));
-                startActivityForResult(intent, 0);
+                startActivity(intent);
             }
         });
 
@@ -87,26 +88,44 @@ public class MainActivity extends I2PActivityBase {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 // default is to display the welcome_html resource
-                startActivityForResult(intent, 0);
+                startActivity(intent);
             }
         });
 
         Button start = (Button) findViewById(R.id.router_start_button);
         start.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if (_routerService != null && _isBound) {
-                    _routerService.manualStart();
-                     updateVisibility();
+                RouterService svc = _routerService;
+                if (svc != null && _isBound) {
+                    setAutoStart(true);
+                    svc.manualStart();
+                } else {
+                    startRouter();
                 }
+                updateVisibility();
             }
         });
 
         Button stop = (Button) findViewById(R.id.router_stop_button);
         stop.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if (_routerService != null && _isBound) {
-                    _routerService.manualStop();
-                     updateVisibility();
+                RouterService svc = _routerService;
+                if (svc != null && _isBound) {
+                    setAutoStart(false);
+                    svc.manualStop();
+                    updateVisibility();
+                }
+            }
+        });
+
+        Button quit = (Button) findViewById(R.id.router_quit_button);
+        quit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                RouterService svc = _routerService;
+                if (svc != null && _isBound) {
+                    setAutoStart(false);
+                    svc.manualQuit();
+                    updateVisibility();
                 }
             }
         });
@@ -121,7 +140,6 @@ public class MainActivity extends I2PActivityBase {
         _handler = new Handler();
         _updater = new Updater();
     }
-
 
     @Override
     public void onStart()
@@ -176,13 +194,17 @@ public class MainActivity extends I2PActivityBase {
     }
 
     private void updateVisibility() {
-        boolean showStart = _routerService != null && _isBound && _routerService.canManualStart();
+        RouterService svc = _routerService;
+        boolean showStart = (svc == null) || (svc != null && _isBound && svc.canManualStart());
         Button start = (Button) findViewById(R.id.router_start_button);
         start.setVisibility(showStart ? View.VISIBLE : View.INVISIBLE);
 
-        boolean showStop = _routerService != null && _isBound && _routerService.canManualStop();
+        boolean showStop = svc != null && _isBound && svc.canManualStop();
         Button stop = (Button) findViewById(R.id.router_stop_button);
         stop.setVisibility(showStop ? View.VISIBLE : View.INVISIBLE);
+
+        Button quit = (Button) findViewById(R.id.router_quit_button);
+        quit.setVisibility(showStop ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void updateStatus() {
@@ -264,7 +286,7 @@ public class MainActivity extends I2PActivityBase {
                            MainActivity.this.removeDialog(id);
                            Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
                            intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-                           startActivityForResult(intent, 0);
+                           startActivity(intent);
                        }
                })
               .setNegativeButton("Licenses", new DialogInterface.OnClickListener() {
@@ -274,7 +296,7 @@ public class MainActivity extends I2PActivityBase {
                            dialog.cancel();
                            MainActivity.this.removeDialog(id);
                            Intent intent = new Intent(MainActivity.this, LicenseActivity.class);
-                           startActivityForResult(intent, 0);
+                           startActivity(intent);
                        }
                });
             rv = b.create();
@@ -301,7 +323,7 @@ public class MainActivity extends I2PActivityBase {
                            MainActivity.this.removeDialog(id);
                            Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
                            intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-                           startActivityForResult(intent, 0);
+                           startActivity(intent);
                        }
                });
 

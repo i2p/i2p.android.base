@@ -26,9 +26,16 @@ import net.i2p.util.NativeBigInteger;
  *  Runs the router
  */
 public class RouterService extends Service {
-    private enum State {INIT, WAITING, STARTING, RUNNING, STOPPING, STOPPED,
+    private enum State {INIT, WAITING, STARTING, RUNNING,
+                        // unplanned (router stopped itself), next: killSelf()
+                        STOPPING, STOPPED,
+                        // button, don't kill service when stopped, stay in MANUAL_STOPPED
                         MANUAL_STOPPING, MANUAL_STOPPED,
-                        NETWORK_STOPPING, NETWORK_STOPPED, RESTARTING}
+                        // button, DO kill service when stopped, next: killSelf()
+                        MANUAL_QUITTING, MANUAL_QUITTED,
+                        // Stopped by listener (no network), next: WAITING (spin waiting for network)
+                        NETWORK_STOPPING, NETWORK_STOPPED
+                       }
 
     private RouterContext _context;
     private String _myDir;
@@ -210,6 +217,7 @@ public class RouterService extends Service {
         if (_state != State.RUNNING &&
             _state != State.STOPPING &&
             _state != State.MANUAL_STOPPING &&
+            _state != State.MANUAL_QUITTING &&
             _state != State.NETWORK_STOPPING)
             return null;
         return rv;
@@ -220,7 +228,7 @@ public class RouterService extends Service {
     }
 
     /**
-     *  Stop and don't restart
+     *  Stop and don't restart the router, but keep the service
      */
     public void manualStop() {
         System.err.println("manualStop called" +
@@ -233,6 +241,25 @@ public class RouterService extends Service {
             if (_state == State.STARTING || _state == State.RUNNING) {
                 _statusBar.update("Stopping I2P");
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_STOPPING, State.MANUAL_STOPPED));
+                stopperThread.start();
+            }
+        }
+    }
+
+    /**
+     *  Stop the router and kill the service
+     */
+    public void manualQuit() {
+        System.err.println("manualQuit called" +
+                           " Current state is: " + _state);
+        synchronized (_stateLock) {
+            if (!canManualStop())
+                return;
+            if (_state == State.WAITING || _state == State.STARTING)
+                _starterThread.interrupt();
+            if (_state == State.STARTING || _state == State.RUNNING) {
+                _statusBar.update("Quitting I2P");
+                Thread stopperThread = new Thread(new Stopper(State.MANUAL_QUITTING, State.MANUAL_QUITTED));
                 stopperThread.start();
             }
         }
@@ -275,6 +302,11 @@ public class RouterService extends Service {
 
     // ******** end methods accessed from Activities and Receivers ************
 
+    /**
+     *  Turn off the status bar.
+     *  Unregister the receiver.
+     *  If we were running, fire up the Stopper thread.
+     */
     @Override
     public void onDestroy() {
         System.err.println("onDestroy called" +
@@ -306,6 +338,12 @@ public class RouterService extends Service {
         }
     }
 
+    /**
+     *  Transition to the next state.
+     *  If we still have a context, shut down the router.
+     *  Turn off the status bar.
+     *  Then transition to the stop state.
+     */
     private class Stopper implements Runnable {
         private final State nextState;
         private final State stopState;
@@ -332,6 +370,11 @@ public class RouterService extends Service {
         }
     }
 
+    /**
+     *  First (early) hook.
+     *  Update the status bar.
+     *  Unregister the receiver.
+     */
     private class ShutdownHook implements Runnable {
         public void run() {
             System.err.println(this + " shutdown hook" +
@@ -360,12 +403,20 @@ public class RouterService extends Service {
         }
     }
 
+    /**
+     *  Second (late) hook.
+     *  Turn off the status bar.
+     *  Null out the context.
+     *  If we were stopped manually, do nothing.
+     *  If we were stopped because of no network, start the waiter thread.
+     *  If it stopped of unknown causes or from manualQuit(), kill the Service.
+     */
     private class FinalShutdownHook implements Runnable {
         public void run() {
             System.err.println(this + " final shutdown hook" +
                                " Current state is: " + _state);
             _statusBar.off(RouterService.this);
-            I2PReceiver rcvr = _receiver;
+            //I2PReceiver rcvr = _receiver;
 
             synchronized (_stateLock) {
                 // null out to release the memory
@@ -381,7 +432,11 @@ public class RouterService extends Service {
                     _starterThread.start();
                 } else if (_state == State.STARTING || _state == State.RUNNING ||
                            _state == State.STOPPING) {
+                    System.err.println(this + " died of unknown causes");
                     _state = State.STOPPED;
+                    stopSelf();
+                } else if (_state == State.MANUAL_QUITTING) {
+                    _state = State.MANUAL_QUITTED;
                     stopSelf();
                 }
             }

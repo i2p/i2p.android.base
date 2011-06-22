@@ -19,7 +19,7 @@
                   android:label="I2P Main Page"
                   android:icon="@drawable/ic_launcher_itoopie"
                   android.theme="@android:style/Theme.NoTitleBar"
-                  android:launchMode="singleTask" >
+                  android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -43,7 +43,8 @@
         </activity>
         <activity android:name=".activity.SettingsActivity"
                   android:label="Settings"
-                  android.theme="@android:style/Theme.NoTitleBar" >
+                  android.theme="@android:style/Theme.NoTitleBar"
+                  android:launchMode="singleTop" >
         </activity>
     </application>
 </manifest> 

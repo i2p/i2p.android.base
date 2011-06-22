@@ -1,17 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Preferences"
-          android:titleCondensed="Settings"
-          android:id="@+id/menu_settings"
-          android:icon="@android:drawable/ic_menu_preferences" >
-    </item>
     <item android:title="Start Router"
           android:id="@+id/menu_start"
-          android:titleCondensed="Start"
           android:icon="@drawable/ic_menu_play_clip" >
     </item>
     <item android:title="Stop Router"
           android:id="@+id/menu_stop"
-          android:titleCondensed="Stop"
           android:icon="@android:drawable/ic_menu_close_clear_cancel" >
+    </item>
+    <item android:title="I2P Home"
+          android:id="@+id/menu_home"
+          android:icon="@drawable/ic_menu_home" >
+    </item>
+    <item android:title="Settings"
+          android:id="@+id/menu_settings"
+          android:icon="@android:drawable/ic_menu_preferences" >
     </item>
 </menu>

@@ -76,6 +76,16 @@ class I2PWebViewClient extends WebViewClient {
         }
     }
 
+/******
+  API 11 :(
+
+    @Override
+    public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+
+    }
+
+******/
+
     void cancelAll() {
         BGLoad task = _lastTask;
         if (task != null) {

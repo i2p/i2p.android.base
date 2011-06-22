@@ -42,7 +42,7 @@ public class LicenseActivity extends I2PActivityBase {
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
             intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, resource);
-            startActivityForResult(intent, 0);
+            startActivity(intent);
         }
     }
 }
