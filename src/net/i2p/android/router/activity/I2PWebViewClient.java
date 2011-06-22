@@ -32,6 +32,7 @@ class I2PWebViewClient extends WebViewClient {
             String s = uri.getScheme();
             if (s == null) {
                 Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_SHORT);
+                toast.show();
                 return true;
             }
             s = s.toLowerCase();
@@ -40,6 +41,7 @@ class I2PWebViewClient extends WebViewClient {
             String h = uri.getHost();
             if (h == null) {
                 Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_SHORT);
+                toast.show();
                 return true;
             }
 
@@ -47,6 +49,7 @@ class I2PWebViewClient extends WebViewClient {
             if (h.endsWith(".i2p")) {
                 if (!s.equals("http")) {
                     Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_SHORT);
+                    toast.show();
                     return true;
                 }
                 // strip trailing junk

@@ -92,6 +92,14 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
+        Button addressbook = (Button) findViewById(R.id.addressbook_button);
+        addressbook.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), AddressbookActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Button start = (Button) findViewById(R.id.router_start_button);
         start.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

@@ -46,5 +46,9 @@
                   android.theme="@android:style/Theme.NoTitleBar"
                   android:launchMode="singleTop" >
         </activity>
+        <activity android:name=".activity.AddressbookActivity"
+                  android:label="Address Book"
+                  android.theme="@android:style/Theme.NoTitleBar" >
+        </activity>
     </application>
 </manifest> 

@@ -41,8 +41,10 @@ public class WebActivity extends I2PActivityBase {
         Intent intent = getIntent();
         Uri uri = intent.getData();
         if (uri != null) {
-            wv.getSettings().setLoadsImagesAutomatically(true);
-            wv.loadUrl(uri.toString());
+            //wv.getSettings().setLoadsImagesAutomatically(true);
+            //wv.loadUrl(uri.toString());
+            // go thru the client so .i2p will work too
+            _wvClient.shouldOverrideUrlLoading(wv, uri.toString());
         } else {
             wv.getSettings().setLoadsImagesAutomatically(false);
             int id = intent.getIntExtra(HTML_RESOURCE_ID, R.raw.welcome_html);
