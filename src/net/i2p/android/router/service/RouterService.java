@@ -15,6 +15,7 @@ import java.util.List;
 import net.i2p.android.router.R;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.receiver.I2PReceiver;
+import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.router.Job;
 import net.i2p.router.Router;
@@ -77,7 +78,7 @@ public class RouterService extends Service {
                 //return START_STICKY;
                 return START_NOT_STICKY;
             _receiver = new I2PReceiver(this);
-            if (_receiver.isConnected()) {
+            if (Util.isConnected(this)) {
                 _statusBar.update("I2P is starting up");
                 _state = State.STARTING;
                 _starterThread = new Thread(new Starter());
@@ -99,28 +100,22 @@ public class RouterService extends Service {
     /** maybe this goes away when the receiver can bind to us */
     private class Waiter implements Runnable {
         public void run() {
-            System.err.println(MARKER + this + " waiter thread" +
+            System.err.println(MARKER + this + " waiter handler" +
                            " Current state is: " + _state);
-            while (_state == State.WAITING) {
-                try {
-                    Thread.sleep(30*1000);
-                } catch (InterruptedException ie) {
-                    break;
-                }
-
-                if (_receiver.isConnected()) {
+            if (_state == State.WAITING) {
+                if (Util.isConnected(RouterService.this)) {
                     synchronized (_stateLock) {
                         if (_state != State.WAITING)
-                            break;
+                            return;
                         _statusBar.update("Network connected, I2P is starting up");
                         _state = State.STARTING;
                         _starterThread = new Thread(new Starter());
                         _starterThread.start();
                     }
-                    break;
+                    return;
                 }
+                _handler.postDelayed(this, 15*1000);
             }
-            System.err.println("waiter finished");
         }
     }
 
@@ -236,7 +231,7 @@ public class RouterService extends Service {
         synchronized (_stateLock) {
             if (!canManualStop())
                 return;
-            if (_state == State.WAITING || _state == State.STARTING)
+            if (_state == State.STARTING)
                 _starterThread.interrupt();
             if (_state == State.STARTING || _state == State.RUNNING) {
                 _statusBar.update("Stopping I2P");
@@ -255,12 +250,15 @@ public class RouterService extends Service {
         synchronized (_stateLock) {
             if (!canManualStop())
                 return;
-            if (_state == State.WAITING || _state == State.STARTING)
+            if (_state == State.STARTING)
                 _starterThread.interrupt();
             if (_state == State.STARTING || _state == State.RUNNING) {
                 _statusBar.update("Quitting I2P");
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_QUITTING, State.MANUAL_QUITTED));
                 stopperThread.start();
+            } else if (_state == State.WAITING) {
+                _state = State.MANUAL_QUITTING;
+                (new FinalShutdownHook()).run();
             }
         }
     }
@@ -272,7 +270,7 @@ public class RouterService extends Service {
         System.err.println("networkStop called" +
                            " Current state is: " + _state);
         synchronized (_stateLock) {
-            if (_state == State.WAITING || _state == State.STARTING)
+            if (_state == State.STARTING)
                 _starterThread.interrupt();
             if (_state == State.STARTING || _state == State.RUNNING) {
                 _statusBar.update("Network disconnected, stopping I2P");
@@ -327,7 +325,7 @@ public class RouterService extends Service {
             }
         }
         synchronized (_stateLock) {
-            if (_state == State.WAITING || _state == State.STARTING)
+            if (_state == State.STARTING)
                 _starterThread.interrupt();
             if (_state == State.STARTING || _state == State.RUNNING) {
               // should this be in a thread?
@@ -394,7 +392,7 @@ public class RouterService extends Service {
             synchronized (_stateLock) {
                 // null out to release the memory
                 _context = null;
-                if (_state == State.WAITING || _state == State.STARTING)
+                if (_state == State.STARTING)
                     _starterThread.interrupt();
                 if (_state == State.WAITING || _state == State.STARTING ||
                     _state == State.RUNNING)
@@ -421,15 +419,14 @@ public class RouterService extends Service {
             synchronized (_stateLock) {
                 // null out to release the memory
                 _context = null;
-                if (_state == State.WAITING || _state == State.STARTING)
+                if (_state == State.STARTING)
                     _starterThread.interrupt();
                 if (_state == State.MANUAL_STOPPING) {
                     _state = State.MANUAL_STOPPED;
                 } else if (_state == State.NETWORK_STOPPING) {
-                    // start waiter thread
+                    // start waiter handler
                     _state = State.WAITING;
-                    _starterThread = new Thread(new Waiter());
-                    _starterThread.start();
+                    _handler.postDelayed(new Waiter(), 10*1000);
                 } else if (_state == State.STARTING || _state == State.RUNNING ||
                            _state == State.STOPPING) {
                     System.err.println(this + " died of unknown causes");

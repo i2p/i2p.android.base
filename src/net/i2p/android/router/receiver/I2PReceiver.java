@@ -8,11 +8,11 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.IBinder;
 
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.service.RouterService;
+import net.i2p.android.router.util.Util;
 
 public class I2PReceiver extends BroadcastReceiver {
     private final Context _context;
@@ -21,7 +21,6 @@ public class I2PReceiver extends BroadcastReceiver {
     private int _unconnectedCount;
     private RouterService _routerService;
     private ServiceConnection _connection;
-    private static final boolean _isEmulator = Build.MODEL.equals("sdk");
 
     /**
      *  Registers itself
@@ -29,13 +28,12 @@ public class I2PReceiver extends BroadcastReceiver {
     public I2PReceiver(Context context) {
         super();
         _context = context;
-        getInfo();
         IntentFilter intents = new IntentFilter();
         intents.addAction(Intent.ACTION_TIME_CHANGED);
         intents.addAction(Intent.ACTION_TIME_TICK);  // once per minute, for testing
         intents.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         context.registerReceiver(this, intents);
-        _wasConnected = isConnected();
+        _wasConnected = Util.isConnected(context);
     }
 
     public void onReceive(Context context, Intent intent) {
@@ -59,7 +57,7 @@ public class I2PReceiver extends BroadcastReceiver {
 
         if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION) ||
             action.equals(Intent.ACTION_TIME_TICK)) {
-            boolean connected = isConnected();
+            boolean connected = Util.isConnected(context);
             if (_wasConnected && !connected) {
                 // notify + 2 timer ticks
                 if (++_unconnectedCount >= 3) {
@@ -80,22 +78,7 @@ public class I2PReceiver extends BroadcastReceiver {
         }
     }
 
-    public boolean isConnected() {
-        // emulator always returns null NetworkInfo
-        if (_isEmulator)
-            return true;
-        NetworkInfo current = getInfo();
-        return current != null && current.isConnected();
-    }
-
-    private NetworkInfo getInfo() {
-        ConnectivityManager cm = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo current = cm.getActiveNetworkInfo();
-        System.err.println("Current network info:");
-        printInfo(current);
-        return current;
-    }
-
+/****
     private static void printInfo(NetworkInfo ni) {
         if (ni == null) {
             System.err.println("Network info is null");
@@ -113,6 +96,7 @@ public class I2PReceiver extends BroadcastReceiver {
              " failover: " + ni.isFailover());
 
     }
+****/
 
     private boolean bindRouter() {
         Intent intent = new Intent();

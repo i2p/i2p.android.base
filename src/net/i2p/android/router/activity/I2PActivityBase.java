@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import net.i2p.android.router.R;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.service.RouterService;
+import net.i2p.android.router.util.Util;
 import net.i2p.router.CommSystemFacade;
 import net.i2p.router.NetworkDatabaseFacade;
 import net.i2p.router.Router;
@@ -145,7 +146,8 @@ public abstract class I2PActivityBase extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // add/hide items here
         RouterService svc = _routerService;
-        boolean showStart = (svc == null) || (!_isBound) || svc.canManualStart();
+        boolean showStart = ((svc == null) || (!_isBound) || svc.canManualStart()) &&
+                            Util.isConnected(this);
         MenuItem start = menu.findItem(R.id.menu_start);
         start.setVisible(showStart);
         start.setEnabled(showStart);

@@ -199,7 +199,8 @@ public class MainActivity extends I2PActivityBase {
 
     private void updateVisibility() {
         RouterService svc = _routerService;
-        boolean showStart = (svc == null) || (!_isBound) || svc.canManualStart();
+        boolean showStart = ((svc == null) || (!_isBound) || svc.canManualStart()) &&
+                            Util.isConnected(this);
         Button start = (Button) findViewById(R.id.router_start_button);
         start.setVisibility(showStart ? View.VISIBLE : View.INVISIBLE);
 
@@ -214,7 +215,10 @@ public class MainActivity extends I2PActivityBase {
     private void updateStatus() {
         RouterContext ctx = getRouterContext();
         TextView tv = (TextView) findViewById(R.id.main_status_text);
-        if (ctx != null) {
+        if (!Util.isConnected(this)) {
+            tv.setText("No Internet connection is available");
+            tv.setVisibility(View.VISIBLE);
+        } else if (ctx != null) {
             int active = ctx.commSystem().countActivePeers();
             int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
             int inEx = ctx.tunnelManager().getFreeTunnelCount();
