@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
 
 /**
  *  Display a raw text resource.
@@ -31,7 +32,7 @@ public class TextResourceActivity extends I2PActivityBase {
         Intent intent = getIntent();
         int id = intent.getIntExtra(TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
         if (id == R.raw.releasenotes_txt)
-            tv.setText("Release Notes for Release " + System.getProperty("i2p.version") + "\n\n" +
+            tv.setText("Release Notes for Release " + Util.getOurVersion(this) + "\n\n" +
                        getResourceAsString(id));
         else
             tv.setText(getResourceAsString(id));
