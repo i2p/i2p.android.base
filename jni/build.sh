@@ -31,6 +31,7 @@ export BINPREFIX=arm-linux-androideabi-
 export CC="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}gcc --sysroot=$SYSROOT"
 # worked without this on 4.3.2, but 5.0.2 couldn't find it
 export NM="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}nm"
+STRIP="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}strip"
 
 #echo "CC is $CC"
 
@@ -90,6 +91,8 @@ echo "$CC -c $COMPILEFLAGS $INCLUDES $JBIGI/jbigi/src/jbigi.c"
 $CC -c $COMPILEFLAGS $INCLUDES $JBIGI/jbigi/src/jbigi.c || exit 1
 echo "$CC $LINKFLAGS $INCLUDES $INCLUDELIBS -o $LIBFILE jbigi.o $STATICLIBS"
 $CC $LINKFLAGS $INCLUDES $INCLUDELIBS -o $LIBFILE jbigi.o $STATICLIBS || exit 1
+echo "$STRIP $LIBFILE"
+$STRIP $LIBFILE || exit 1
 
 ls -l $LIBFILE || exit 1
 

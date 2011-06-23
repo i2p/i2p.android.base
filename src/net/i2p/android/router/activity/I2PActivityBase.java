@@ -32,6 +32,7 @@ public abstract class I2PActivityBase extends Activity {
 
     private static final String SHARED_PREFS = "net.i2p.android.router";
     protected static final String PREF_AUTO_START = "autoStart";
+    protected static final String PREF_INSTALLED_VERSION = "app.version";
 
     /** Called when the activity is first created. */
     @Override
@@ -61,10 +62,23 @@ public abstract class I2PActivityBase extends Activity {
             bindRouter(false);
     }
 
-    protected void setAutoStart(boolean yes) {
+    /** @param def default */
+    protected String getPref(String pref, String def) {
+        return _sharedPrefs.getString(pref, def);
+    }
+
+    /** @return success */
+    protected boolean setPref(String pref, boolean val) {
         SharedPreferences.Editor edit = _sharedPrefs.edit();
-        edit.putBoolean(PREF_AUTO_START, yes);
-        edit.commit();
+        edit.putBoolean(pref, val);
+        return edit.commit();
+    }
+
+    /** @return success */
+    protected boolean setPref(String pref, String val) {
+        SharedPreferences.Editor edit = _sharedPrefs.edit();
+        edit.putString(pref, val);
+        return edit.commit();
     }
 
     /**

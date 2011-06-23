@@ -1,8 +1,6 @@
 package net.i2p.android.router.service;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.os.Build;
@@ -16,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
@@ -29,7 +28,6 @@ class Init {
     private final Context ctx;
     private final String myDir;
     private final String _ourVersion;
-    private String _apkPath;
 
     private static final String CONFIG_FILE = "android.config";
     private static final String PROP_NEW_INSTALL = "i2p.newInstall";
@@ -39,7 +37,7 @@ class Init {
     public Init(Context c) {
         ctx = c;
         myDir = c.getFilesDir().getAbsolutePath();
-        _ourVersion = getOurVersion();
+        _ourVersion = Util.getOurVersion(c);
         System.setProperty(PROP_INSTALLED_VERSION, _ourVersion);
     }
 
@@ -61,25 +59,6 @@ class Init {
         System.err.println("DISPLAY" + ": " + Build.DISPLAY);
         System.err.println("VERSION" + ": " + Build.VERSION.RELEASE);
         System.err.println("SDK" + ": " + Build.VERSION.SDK);
-    }
-
-    private String getOurVersion() {
-        PackageManager pm = ctx.getPackageManager();
-        String us = ctx.getPackageName();
-        try {
-            PackageInfo pi = pm.getPackageInfo(us, 0);
-            System.err.println("VersionCode" + ": " + pi.versionCode);
-            // http://doandroids.com/blogs/2010/6/10/android-classloader-dynamic-loading-of/
-            _apkPath = pm.getApplicationInfo(us, 0).sourceDir;
-            System.err.println("APK Path" + ": " + _apkPath);
-            if (pi.versionName != null)
-                return pi.versionName;
-        } catch (Exception e) {}
-        return "??";
-    }
-
-    String getAPKPath() {
-        return _apkPath;
     }
 
     void initialize() {
@@ -180,7 +159,7 @@ class Init {
     
     /**
      *  Check for new version.
-     *  Sets system properties i2p.newVersion and i2p.newInstall
+     *  FIXME we could just use shared prefs for this instead of storing in a file
      *  @return true if new version
      */
     private boolean checkNewVersion() {
@@ -199,8 +178,6 @@ class Init {
         String oldVersion = props.getProperty(PROP_INSTALLED_VERSION);
         boolean newInstall = oldVersion == null;
         boolean newVersion = !_ourVersion.equals(oldVersion);
-        System.setProperty(PROP_NEW_INSTALL, Boolean.toString(newInstall));
-        System.setProperty(PROP_NEW_VERSION, Boolean.toString(newVersion));
 
         if (newVersion) {
             System.err.println("New version " + _ourVersion);

@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
+import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.router.RouterContext;
 
@@ -105,7 +106,7 @@ public class MainActivity extends I2PActivityBase {
             public void onClick(View view) {
                 RouterService svc = _routerService;
                 if (svc != null && _isBound) {
-                    setAutoStart(true);
+                    setPref(PREF_AUTO_START, true);
                     svc.manualStart();
                 } else {
                     startRouter();
@@ -119,7 +120,7 @@ public class MainActivity extends I2PActivityBase {
             public void onClick(View view) {
                 RouterService svc = _routerService;
                 if (svc != null && _isBound) {
-                    setAutoStart(false);
+                    setPref(PREF_AUTO_START, false);
                     svc.manualStop();
                     updateVisibility();
                 }
@@ -131,7 +132,7 @@ public class MainActivity extends I2PActivityBase {
             public void onClick(View view) {
                 RouterService svc = _routerService;
                 if (svc != null && _isBound) {
-                    setAutoStart(false);
+                    setPref(PREF_AUTO_START, false);
                     svc.manualQuit();
                     updateVisibility();
                 }
@@ -158,6 +159,7 @@ public class MainActivity extends I2PActivityBase {
             TextView tv = (TextView) findViewById(R.id.main_status_text);
             tv.setText(_savedStatus);
         }
+        checkDialog();
         _handler.postDelayed(_updater, 100);
     }
 
@@ -172,7 +174,6 @@ public class MainActivity extends I2PActivityBase {
     public void onResume()
     {
         super.onResume();
-        checkDialog();
         updateVisibility();
         updateStatus();
     }
@@ -186,14 +187,9 @@ public class MainActivity extends I2PActivityBase {
     }
 
     private class Updater implements Runnable {
-        private boolean needsCheck = true;
         private int counter;
 
         public void run() {
-            if (getRouterContext() != null && needsCheck) {
-                checkDialog();
-                needsCheck = false;
-            }
             updateVisibility();
             if (counter++ % 3 == 0)
                 updateStatus();
@@ -264,14 +260,18 @@ public class MainActivity extends I2PActivityBase {
     }
 
     private void checkDialog() {
-        if (Boolean.valueOf(System.getProperty(PROP_NEW_INSTALL)).booleanValue()) {
+        String oldVersion = getPref(PREF_INSTALLED_VERSION, "??");
+        if (oldVersion.equals("??")) {
             showDialog(DIALOG_NEW_INSTALL);
-        } else if (Boolean.valueOf(System.getProperty(PROP_NEW_VERSION)).booleanValue()) {
-            showDialog(DIALOG_NEW_VERSION);
+        } else {
+            String currentVersion = Util.getOurVersion(this);
+            if (!oldVersion.equals(currentVersion))
+                showDialog(DIALOG_NEW_VERSION);
         }
     }
 
     protected Dialog onCreateDialog(int id) {
+        final String currentVersion = Util.getOurVersion(this);
         Dialog rv = null;
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         switch (id) {
@@ -280,16 +280,14 @@ public class MainActivity extends I2PActivityBase {
               .setCancelable(false)
               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
-                           System.setProperty(PROP_NEW_INSTALL, "false");
-                           System.setProperty(PROP_NEW_VERSION, "false");
+                           setPref(PREF_INSTALLED_VERSION, currentVersion);
                            dialog.cancel();
                            MainActivity.this.removeDialog(id);
                        }
                })
               .setNeutralButton("Release Notes", new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
-                           System.setProperty(PROP_NEW_INSTALL, "false");
-                           System.setProperty(PROP_NEW_VERSION, "false");
+                           setPref(PREF_INSTALLED_VERSION, currentVersion);
                            dialog.cancel();
                            MainActivity.this.removeDialog(id);
                            Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
@@ -299,8 +297,7 @@ public class MainActivity extends I2PActivityBase {
                })
               .setNegativeButton("Licenses", new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
-                           System.setProperty(PROP_NEW_INSTALL, "false");
-                           System.setProperty(PROP_NEW_VERSION, "false");
+                           setPref(PREF_INSTALLED_VERSION, currentVersion);
                            dialog.cancel();
                            MainActivity.this.removeDialog(id);
                            Intent intent = new Intent(MainActivity.this, LicenseActivity.class);
@@ -311,11 +308,11 @@ public class MainActivity extends I2PActivityBase {
             break;
 
           case DIALOG_NEW_VERSION:
-            b.setMessage(getResources().getText(R.string.welcome_new_version) + " " + System.getProperty("i2p.version"))
+            b.setMessage(getResources().getText(R.string.welcome_new_version) + " " + currentVersion)
               .setCancelable(true)
               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
-                           System.setProperty(PROP_NEW_VERSION, "false");
+                           setPref(PREF_INSTALLED_VERSION, currentVersion);
                            try {
                                dialog.dismiss();
                            } catch (Exception e) {}
@@ -324,7 +321,7 @@ public class MainActivity extends I2PActivityBase {
                })
               .setNegativeButton("Release Notes", new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
-                           System.setProperty(PROP_NEW_VERSION, "false");
+                           setPref(PREF_INSTALLED_VERSION, currentVersion);
                            try {
                                dialog.dismiss();
                            } catch (Exception e) {}
