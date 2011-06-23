@@ -23,6 +23,7 @@ public class MainActivity extends I2PActivityBase {
 
     private Handler _handler;
     private Runnable _updater;
+    private Runnable _oneShotUpdate;
     private String _savedStatus;
 
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
@@ -111,7 +112,7 @@ public class MainActivity extends I2PActivityBase {
                 } else {
                     startRouter();
                 }
-                updateVisibility();
+                updateOneShot();
             }
         });
 
@@ -122,7 +123,7 @@ public class MainActivity extends I2PActivityBase {
                 if (svc != null && _isBound) {
                     setPref(PREF_AUTO_START, false);
                     svc.manualStop();
-                    updateVisibility();
+                    updateOneShot();
                 }
             }
         });
@@ -134,7 +135,7 @@ public class MainActivity extends I2PActivityBase {
                 if (svc != null && _isBound) {
                     setPref(PREF_AUTO_START, false);
                     svc.manualQuit();
-                    updateVisibility();
+                    updateOneShot();
                 }
             }
         });
@@ -148,6 +149,7 @@ public class MainActivity extends I2PActivityBase {
 
         _handler = new Handler();
         _updater = new Updater();
+        _oneShotUpdate = new OneShotUpdate();
     }
 
     @Override
@@ -174,8 +176,7 @@ public class MainActivity extends I2PActivityBase {
     public void onResume()
     {
         super.onResume();
-        updateVisibility();
-        updateStatus();
+        updateOneShot();
     }
 
     @Override
@@ -184,6 +185,17 @@ public class MainActivity extends I2PActivityBase {
         if (_savedStatus != null)
             outState.putString("status", _savedStatus);
         super.onSaveInstanceState(outState);
+    }
+
+    private void updateOneShot() {
+        _handler.postDelayed(_oneShotUpdate, 100);
+    }
+
+    private class OneShotUpdate implements Runnable {
+        public void run() {
+            updateVisibility();
+            updateStatus();
+        }
     }
 
     private class Updater implements Runnable {

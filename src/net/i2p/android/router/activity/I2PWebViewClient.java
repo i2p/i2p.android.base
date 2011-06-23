@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.view.Gravity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import net.i2p.android.apps.EepGetFetcher;
+import net.i2p.android.router.util.Util;
 import net.i2p.util.EepGet;
 
 class I2PWebViewClient extends WebViewClient {
@@ -31,7 +33,8 @@ class I2PWebViewClient extends WebViewClient {
             URI uri = new URI(url);
             String s = uri.getScheme();
             if (s == null) {
-                Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
                 return true;
             }
@@ -40,7 +43,15 @@ class I2PWebViewClient extends WebViewClient {
                 return false;
             String h = uri.getHost();
             if (h == null) {
-                Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return true;
+            }
+
+            if (!Util.isConnected(view.getContext())) {
+                Toast toast = Toast.makeText(view.getContext(), "No Internet connection is available", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
                 return true;
             }
@@ -48,10 +59,14 @@ class I2PWebViewClient extends WebViewClient {
             h = h.toLowerCase();
             if (h.endsWith(".i2p")) {
                 if (!s.equals("http")) {
-                    Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                     return true;
                 }
+
+                // TODO check that the router is up and we have client tunnels both ways
+
                 // strip trailing junk
                 int hash = url.indexOf("#");
                 if (hash > 0)
