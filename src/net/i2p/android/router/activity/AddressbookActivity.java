@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import net.i2p.android.router.R;
@@ -25,9 +26,16 @@ public class AddressbookActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Fixme problems if started before router -
-        // wrong dir, dup contexts, locking, ...
-        I2PAppContext ctx = I2PAppContext.getGlobalContext();
+        // Grab context if router has started, otherwise create new
+        // FIXME dup contexts, locking, ...
+        I2PAppContext ctx = I2PAppContext.getCurrentContext();
+        if (ctx == null) {
+            Properties props = new Properties();
+            String myDir = getFilesDir().getAbsolutePath();
+            props.setProperty("i2p.dir.base", myDir);
+            props.setProperty("i2p.dir.config", myDir);
+            ctx = new I2PAppContext(props);
+        }
 
         // get the names
         NamingService ns = ctx.namingService();
