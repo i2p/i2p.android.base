@@ -263,6 +263,8 @@ public class MainActivity extends I2PActivityBase {
 
             String details =
                    "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps" +
+                   "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) +
+                                  "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B' +
                    "\nJob Lag: " + jobLag +
                    "\nMsg Delay: " + msgDelay +
                    "\nUptime: " + uptime;
