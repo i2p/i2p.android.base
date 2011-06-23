@@ -38,7 +38,6 @@ class Init {
         ctx = c;
         myDir = c.getFilesDir().getAbsolutePath();
         _ourVersion = Util.getOurVersion(c);
-        System.setProperty(PROP_INSTALLED_VERSION, _ourVersion);
     }
 
     void debugStuff() {
