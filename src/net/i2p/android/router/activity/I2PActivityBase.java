@@ -82,23 +82,6 @@ public abstract class I2PActivityBase extends Activity {
         return edit.commit();
     }
 
-    /**
-     *  Start the service and bind to it
-     */
-    protected boolean startRouter() {
-        Intent intent = new Intent();
-        intent.setClassName(this, "net.i2p.android.router.service.RouterService");
-        System.err.println(this + " calling startService");
-        ComponentName name = startService(intent);
-        if (name == null)
-            System.err.println(this + " XXXXXXXXXXXXXXXXXXXX got from startService: " + name);
-        System.err.println(this + " got from startService: " + name);
-        boolean success = bindRouter(true);
-        if (!success)
-            System.err.println(this + " Bind router failed");
-        return success;
-    }
-
     @Override
     public void onResume()
     {
@@ -197,18 +180,38 @@ public abstract class I2PActivityBase extends Activity {
 
     ////// Service stuff
 
+    /**
+     *  Start the service and bind to it
+     */
+    protected boolean startRouter() {
+        Intent intent = new Intent();
+        intent.setClassName(this, "net.i2p.android.router.service.RouterService");
+        System.err.println(this + " calling startService");
+        ComponentName name = startService(intent);
+        if (name == null)
+            System.err.println(this + " XXXXXXXXXXXXXXXXXXXX got from startService: " + name);
+        System.err.println(this + " got from startService: " + name);
+        boolean success = bindRouter(true);
+        if (!success)
+            System.err.println(this + " Bind router failed");
+        return success;
+    }
+
+    /**
+     *  Bind only
+     */
     protected boolean bindRouter(boolean autoCreate) {
         Intent intent = new Intent();
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
         System.err.println(this + " calling bindService");
         _connection = new RouterConnection();
         boolean success = bindService(intent, _connection, autoCreate ? BIND_AUTO_CREATE : 0);
-        System.err.println(this + " got from bindService: " + success);
+        System.err.println(this + " bindService: auto create? " + autoCreate + " success? " + success);
         return success;
     }
 
     protected void unbindRouter() {
-        if (_isBound) {
+        if (_isBound && _connection != null) {
             unbindService(_connection);
             _routerService = null;
             _isBound = false;
@@ -220,8 +223,10 @@ public abstract class I2PActivityBase extends Activity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             System.err.println(this + " connected to router service");
             RouterBinder binder = (RouterBinder) service;
-            _routerService = binder.getService();
+            RouterService svc = binder.getService();
+            _routerService = svc;
             _isBound = true;
+            onRouterBind(svc);
         }
 
         public void onServiceDisconnected(ComponentName name) {
@@ -229,8 +234,15 @@ public abstract class I2PActivityBase extends Activity {
             // save memory
             _routerService = null;
             _isBound = false;
+            onRouterUnbind();
         }
     }
+
+    /** callback from ServiceConnection, override as necessary */
+    protected void onRouterBind(RouterService svc) {}
+
+    /** callback from ServiceConnection, override as necessary */
+    protected void onRouterUnbind() {}
 
     ////// Router stuff
 

@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -50,14 +51,20 @@ public class RouterService extends Service {
     private Handler _handler;
     private Runnable _updater;
 
+    private static final String SHARED_PREFS = "net.i2p.android.router";
+    private static final String LAST_STATE = "service.lastState";
+    private static final String EXTRA_RESTART = "restart";
     private static final String MARKER = "**************************************  ";
 
     @Override
     public void onCreate() {
+        State lastState = getSavedState();
+        setState(State.INIT);
         System.err.println(this + " onCreate called" +
+                           " Saved state is: " + lastState +
                            " Current state is: " + _state);
 
-        (new File(getFilesDir(), "wrapper.log")).delete();
+        //(new File(getFilesDir(), "wrapper.log")).delete();
         _myDir = getFilesDir().getAbsolutePath();
         Init init = new Init(this);
         init.debugStuff();
@@ -67,27 +74,41 @@ public class RouterService extends Service {
         _binder = new RouterBinder(this);
         _handler = new Handler();
         _updater = new Updater();
+        if (lastState == State.RUNNING) {
+            Intent intent = new Intent(this, RouterService.class);
+            intent.putExtra(EXTRA_RESTART, true);
+            onStartCommand(intent, 12345, 67890);
+        }
     }
 
+    /** NOT called by system if it restarts us after a crash */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         System.err.println(this + " onStart called" +
+                           " Intent is: " + intent +
+                           " Flags is: " + flags +
+                           " ID is: " + startId +
                            " Current state is: " + _state);
+        boolean restart = intent != null && intent.getBooleanExtra(EXTRA_RESTART, false);
+        if (restart)
+            System.err.println(this + " RESTARTING");
         synchronized (_stateLock) {
             if (_state != State.INIT)
                 //return START_STICKY;
                 return START_NOT_STICKY;
             _receiver = new I2PReceiver(this);
             if (Util.isConnected(this)) {
-                _statusBar.update("I2P is starting up");
-                _state = State.STARTING;
+                if (restart)
+                    _statusBar.update("I2P is restarting");
+                else
+                    _statusBar.update("I2P is starting up");
+                setState(State.STARTING);
                 _starterThread = new Thread(new Starter());
                 _starterThread.start();
             } else {
                 _statusBar.update("I2P is waiting for a network connection");
-                _state = State.WAITING;
-                _starterThread = new Thread(new Waiter());
-                _starterThread.start();
+                setState(State.WAITING);
+                _handler.postDelayed(new Waiter(), 10*1000);
             }
         }
         _handler.removeCallbacks(_updater);
@@ -108,7 +129,7 @@ public class RouterService extends Service {
                         if (_state != State.WAITING)
                             return;
                         _statusBar.update("Network connected, I2P is starting up");
-                        _state = State.STARTING;
+                        setState(State.STARTING);
                         _starterThread = new Thread(new Starter());
                         _starterThread.start();
                     }
@@ -130,7 +151,7 @@ public class RouterService extends Service {
             synchronized (_stateLock) {
                 if (_state != State.STARTING)
                     return;
-                _state = State.RUNNING;
+                setState(State.RUNNING);
                 List contexts = RouterContext.listContexts();
                 if ( (contexts == null) || (contexts.isEmpty()) ) 
                       throw new IllegalStateException("No contexts. This is usually because the router is either starting up or shutting down.");
@@ -193,7 +214,7 @@ public class RouterService extends Service {
     @Override
     public IBinder onBind(Intent intent)
     {
-        System.err.println("onBind called" +
+        System.err.println(this + "onBind called" +
                            " Current state is: " + _state);
         return _binder;
     }
@@ -262,7 +283,7 @@ public class RouterService extends Service {
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_QUITTING, State.MANUAL_QUITTED));
                 stopperThread.start();
             } else if (_state == State.WAITING) {
-                _state = State.MANUAL_QUITTING;
+                setState(State.MANUAL_QUITTING);
                 (new FinalShutdownHook()).run();
             }
         }
@@ -287,7 +308,8 @@ public class RouterService extends Service {
     }
 
     public boolean canManualStart() {
-        return _state == State.MANUAL_STOPPED || _state == State.STOPPED;
+        // We can be in INIT if we restarted after crash but previous state was not RUNNING.
+        return _state == State.INIT || _state == State.MANUAL_STOPPED || _state == State.STOPPED;
     }
 
     public void manualStart() {
@@ -297,7 +319,7 @@ public class RouterService extends Service {
             if (!canManualStart())
                 return;
             _statusBar.update("I2P is starting up");
-            _state = State.STARTING;
+            setState(State.STARTING);
             _starterThread = new Thread(new Starter());
             _starterThread.start();
         }
@@ -355,7 +377,7 @@ public class RouterService extends Service {
         public Stopper(State next, State stop) {
             nextState = next;
             stopState = stop;
-            _state = next;
+            setState(next);
         }
 
         public void run() {
@@ -368,7 +390,7 @@ public class RouterService extends Service {
             System.err.println("********** Router shutdown complete");
             synchronized (_stateLock) {
                 if (_state == nextState)
-                    _state = stopState;
+                    setState(stopState);
             }
         }
     }
@@ -401,7 +423,7 @@ public class RouterService extends Service {
                     _starterThread.interrupt();
                 if (_state == State.WAITING || _state == State.STARTING ||
                     _state == State.RUNNING)
-                    _state = State.STOPPING;
+                    setState(State.STOPPING);
             }
         }
     }
@@ -427,21 +449,44 @@ public class RouterService extends Service {
                 if (_state == State.STARTING)
                     _starterThread.interrupt();
                 if (_state == State.MANUAL_STOPPING) {
-                    _state = State.MANUAL_STOPPED;
+                    setState(State.MANUAL_STOPPED);
                 } else if (_state == State.NETWORK_STOPPING) {
                     // start waiter handler
-                    _state = State.WAITING;
+                    setState(State.WAITING);
                     _handler.postDelayed(new Waiter(), 10*1000);
                 } else if (_state == State.STARTING || _state == State.RUNNING ||
                            _state == State.STOPPING) {
                     System.err.println(this + " died of unknown causes");
-                    _state = State.STOPPED;
+                    setState(State.STOPPED);
                     stopSelf();
                 } else if (_state == State.MANUAL_QUITTING) {
-                    _state = State.MANUAL_QUITTED;
+                    setState(State.MANUAL_QUITTED);
                     stopSelf();
                 }
             }
         }
+    }
+
+    private State getSavedState() {
+        SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, 0);
+        String stateString = prefs.getString(LAST_STATE, State.INIT.toString());
+        for (State s : State.values()) {
+            if (s.toString().equals(stateString))
+                return s;
+        }
+        return State.INIT;
+    }
+
+    private void setState(State s) {
+        _state = s;
+        saveState();
+    }
+
+    /** @return success */
+    private boolean saveState() {
+        SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, 0);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString(LAST_STATE, _state.toString());
+        return edit.commit();
     }
 }

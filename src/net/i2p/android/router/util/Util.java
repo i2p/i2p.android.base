@@ -18,7 +18,7 @@ public abstract class Util {
         String us = ctx.getPackageName();
         try {
             PackageInfo pi = pm.getPackageInfo(us, 0);
-            System.err.println("VersionCode" + ": " + pi.versionCode);
+            //System.err.println("VersionCode" + ": " + pi.versionCode);
             // http://doandroids.com/blogs/2010/6/10/android-classloader-dynamic-loading-of/
             //_apkPath = pm.getApplicationInfo(us, 0).sourceDir;
             //System.err.println("APK Path" + ": " + _apkPath);

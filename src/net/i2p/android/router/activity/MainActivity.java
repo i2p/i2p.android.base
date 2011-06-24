@@ -119,6 +119,14 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
+        b = (Button) findViewById(R.id.peers_button);
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), PeersActivity.class);
+                startActivity(intent);
+            }
+        });
+
         b = (Button) findViewById(R.id.router_start_button);
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -297,6 +305,8 @@ public class MainActivity extends I2PActivityBase {
             RouterService svc = _routerService;
             String status =
                             "connected? " + Util.isConnected(this) +
+                            "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) +
+                                       "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B' +
                             "\nhave ctx? " + (ctx != null) +
                             "\nhave svc? " + (svc != null) +
                             "\nis bound? " + _isBound +
