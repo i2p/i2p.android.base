@@ -18,7 +18,7 @@ import net.i2p.android.router.R;
 
 public class LogActivity extends ListActivity {
 
-    boolean errorsOnly;
+    boolean _errorsOnly;
     private Handler _handler;
     private Runnable _updater;
     private ArrayAdapter<String> _adap;
@@ -39,24 +39,20 @@ public class LogActivity extends ListActivity {
         I2PAppContext ctx = I2PAppContext.getCurrentContext();
         if (ctx != null) {
             Intent intent = getIntent();
-            errorsOnly = intent.getBooleanExtra(ERRORS_ONLY, false);
-            if (errorsOnly) {
+            _errorsOnly = intent.getBooleanExtra(ERRORS_ONLY, false);
+            if (_errorsOnly) {
                 msgs = ctx.logManager().getBuffer().getMostRecentCriticalMessages();
             } else {
                 msgs = ctx.logManager().getBuffer().getMostRecentMessages();
             }
             int sz = msgs.size();
-            if (sz == 0) {
-                header = "No messages";
-            } else if (sz == 1) {
-                header = "1 message";
-            } else {
-                header = sz + " messages, newest first";
+            header = getHeader(sz, _errorsOnly);
+            if (sz > 1) {
                 Collections.reverse(msgs);
             }
         } else {
             msgs = Collections.EMPTY_LIST;
-            header = "No messages";
+            header = "No messages, router has not started yet.";
         }
 
         // set the header
@@ -84,7 +80,7 @@ public class LogActivity extends ListActivity {
     public void onStart() {
         super.onStart();
         _handler.removeCallbacks(_updater);
-        _handler.postDelayed(_updater, 2500);
+        _handler.postDelayed(_updater, 10*1000);
     }
 
     @Override
@@ -100,7 +96,7 @@ public class LogActivity extends ListActivity {
             I2PAppContext ctx = I2PAppContext.getCurrentContext();
             if (ctx != null) {
                 List<String> msgs;
-                if (errorsOnly) {
+                if (_errorsOnly) {
                     msgs = ctx.logManager().getBuffer().getMostRecentCriticalMessages();
                 } else {
                     msgs = ctx.logManager().getBuffer().getMostRecentMessages();
@@ -124,21 +120,30 @@ public class LogActivity extends ListActivity {
                     if (changed) {
                         // fixme update header
                         newSz = _adap.getCount();
-                        String header;
-                        if (newSz == 0) {
-                            header = "No messages";
-                        } else if (newSz == 1) {
-                            header = "1 message";
-                        } else {
-                            header = sz + " messages, newest first";
-                        }
+                        String header = getHeader(newSz, _errorsOnly);
                         _headerView.setText(header);
                         _adap.notifyDataSetChanged();
                     }
                 }
             }
-            _handler.postDelayed(this, 1500);
+            // LogWriter only processes queue every 10 seconds
+            _handler.postDelayed(this, 10*1000);
         }
     }
 
+    /** fixme plurals */
+    private static String getHeader(int sz, boolean errorsOnly) {
+        if (errorsOnly) {
+            if (sz == 0)
+                return "No error messages";
+            if (sz == 1)
+                return "1 error message";
+            return sz + " error messages, newest first";
+        }
+        if (sz == 0)
+            return "No messages";
+        if (sz == 1)
+            return "1 message";
+        return sz + " messages, newest first";
+    }
 }

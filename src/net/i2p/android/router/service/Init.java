@@ -70,6 +70,7 @@ class Init {
             mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config", null);
             // FIXME this is a memory hog to merge this way
             mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
+            mergeResourceToFile(R.raw.more_hosts_txt, "hosts.txt", null);
             copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
             File abDir = new File(myDir, "addressbook");
             abDir.mkdir();

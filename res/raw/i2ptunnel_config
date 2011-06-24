@@ -22,7 +22,7 @@ tunnel.0.option.outbound.lengthVariance=1
 tunnel.0.startOnLoad=true
 
 # irc
-tunnel.1.name=IRC Proxy
+tunnel.1.name=IRC Proxy postman/freshcoffee
 tunnel.1.description=IRC proxy to access anonymous IRC servers
 tunnel.1.type=ircclient
 tunnel.1.sharedClient=true
@@ -43,3 +43,49 @@ tunnel.1.option.inbound.lengthVariance=1
 tunnel.1.option.outbound.length=1
 tunnel.1.option.outbound.lengthVariance=1
 tunnel.1.startOnLoad=true
+
+# irc
+tunnel.2.name=IRC Proxy welterde
+tunnel.2.description=IRC proxy to access anonymous IRC servers
+tunnel.2.type=ircclient
+tunnel.2.sharedClient=true
+tunnel.2.interface=127.0.0.1
+tunnel.2.listenPort=6669
+tunnel.2.targetDestination=irc.welterde.i2p
+tunnel.2.i2cpHost=127.0.0.1
+tunnel.2.i2cpPort=7654
+tunnel.2.option.inbound.nickname=shared clients
+tunnel.2.option.outbound.nickname=shared clients
+#tunnel.2.option.i2cp.delayOpen=true
+tunnel.2.option.i2cp.reduceIdleTime=600000
+tunnel.2.option.i2cp.reduceOnIdle=true
+tunnel.2.option.i2cp.reduceQuantity=1
+tunnel.2.option.i2p.streaming.connectDelay=1000
+tunnel.2.option.inbound.length=1
+tunnel.2.option.inbound.lengthVariance=1
+tunnel.2.option.outbound.length=1
+tunnel.2.option.outbound.lengthVariance=1
+tunnel.2.startOnLoad=true
+
+# irc
+tunnel.3.name=IRC Proxy telecomix
+tunnel.3.description=IRC proxy to access anonymous IRC servers
+tunnel.3.type=ircclient
+tunnel.3.sharedClient=true
+tunnel.3.interface=127.0.0.1
+tunnel.3.listenPort=6670
+tunnel.3.targetDestination=irc.telecomix.i2p
+tunnel.3.i2cpHost=127.0.0.1
+tunnel.3.i2cpPort=7654
+tunnel.3.option.inbound.nickname=shared clients
+tunnel.3.option.outbound.nickname=shared clients
+#tunnel.3.option.i2cp.delayOpen=true
+tunnel.3.option.i2cp.reduceIdleTime=600000
+tunnel.3.option.i2cp.reduceOnIdle=true
+tunnel.3.option.i2cp.reduceQuantity=1
+tunnel.3.option.i2p.streaming.connectDelay=1000
+tunnel.3.option.inbound.length=1
+tunnel.3.option.inbound.lengthVariance=1
+tunnel.3.option.outbound.length=1
+tunnel.3.option.outbound.lengthVariance=1
+tunnel.3.startOnLoad=true

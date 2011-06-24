@@ -34,7 +34,6 @@ The following problems with eepsites are probably not fixable except on Android 
 For eepsites, there are several other things to note:
   - No cookies
   - No way to type in addresses
-  - No addressbook app yet, so you only have what is in the standard hosts.txt
   - Eepsites are not found in the cache when hitting the back button
   - Fetches are aborted when you rotate the screen
 
@@ -42,11 +41,14 @@ For eepsites, there are several other things to note:
 Using clients with the router
 -----------------------------
 
-The app starts an HTTP proxy at localhost port 4444 and a transparent IRC proxy at localhost port 6668. These are "shared clients" on the same tunnels. Once you see in and out client tunnels listed on the router status (several minutes after startup), you should be able to connect.
+The app starts an HTTP proxy at localhost port 4444 and transparent IRC proxies at localhost ports 6668, 6669, and 6670. These are "shared clients" on the same tunnels. Once you see in and out client tunnels listed on the router status (several minutes after startup), you should be able to connect.
 
 The HTTP proxy should work with Firefox 4 Mobile and the ProxyMob Firefox plugin, if you have at least 512 MB of RAM. If it works it should avoid all the problems with the embedded web browser listed above. I can't test it as I have a 256 MB Droid.
 
-The IRC proxy destinations are irc.postman.i2p and irc.freshcoffee.i2p. It is tested with the "Android IRC Free" app.
+The IRC proxy is tested with the "Android IRC Free" app. The IRC proxy destinations are:
+  * Port 6668: irc.postman.i2p and irc.freshcoffee.i2p
+  * Port 6669: irc.welterde.i2p
+  * Port 6670: irc.telecomix.i2p
 
 Report results and bugs on the zzz.i2p Android forum. New versions will be announced there.
 
