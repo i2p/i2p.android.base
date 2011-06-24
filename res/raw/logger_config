@@ -1,3 +1,4 @@
+logger.consoleBufferSize=250
 logger.dateFormat=MM/dd HH:mm:ss.SSS
 logger.defaultLevel=INFO
 logger.displayOnScreen=true

@@ -69,6 +69,18 @@
     android:layout_height="wrap_content" 
     android:text="Address Book"
     />
+ <Button 
+    android:id="@+id/logs_button"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="Logs"
+    />
+ <Button 
+    android:id="@+id/error_button"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="Error Logs"
+    />
 </LinearLayout>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"

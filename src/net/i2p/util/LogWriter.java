@@ -105,6 +105,12 @@ class LogWriter implements Runnable {
         else
             log(rec.getPriority(), rec.getSource(), rec.getSourceName(), rec.getThreadName(), rec.getMessage(), rec.getThrowable());
 
+        // to be viewed on android screen
+        String val = LogRecordFormatter.formatRecord(_manager, rec, true);
+        _manager.getBuffer().add(val);
+        if (rec.getPriority() >= Log.ERROR)
+            _manager.getBuffer().addCritical(val);
+
         // we always add to the console buffer, but only sometimes write to stdout
         if (_manager.getDisplayOnScreenLevel() <= rec.getPriority()) {
             if (_manager.displayOnScreen()) {
@@ -114,6 +120,8 @@ class LogWriter implements Runnable {
         }
     }
 
+    private static final String ANDROID_LOG_TAG = "I2P";
+
     public void log(int priority, Class src, String name, String threadName, String msg) {
             if (src != null) {
                 String tag = src.getName();
@@ -121,15 +129,18 @@ class LogWriter implements Runnable {
                 if (dot >= 0)
                     tag = tag.substring(dot + 1);
                 android.util.Log.println(toAndroidLevel(priority),
-                                         tag,
-                                         '[' + threadName + "] " + msg);
+                                         ANDROID_LOG_TAG,
+                                         tag +
+                                         " [" + threadName + "] " + msg);
             } else if (name != null)
                 android.util.Log.println(toAndroidLevel(priority),
-                                         name,
-                                         '[' + threadName + "] " + msg);
+                                         ANDROID_LOG_TAG,
+                                         name +
+                                         " ["  + threadName + "] " + msg);
             else
                 android.util.Log.println(toAndroidLevel(priority),
-                                         threadName, msg);
+                                         ANDROID_LOG_TAG,
+                                         '[' + threadName + "] " + msg);
     }
 
     public void log(int priority, Class src, String name, String threadName, String msg, Throwable t) {
@@ -139,17 +150,20 @@ class LogWriter implements Runnable {
                 if (dot >= 0)
                     tag = tag.substring(dot + 1);
                 android.util.Log.println(toAndroidLevel(priority),
-                                         tag,
-                                         '[' + threadName + "] " + msg +
+                                         ANDROID_LOG_TAG,
+                                         tag +
+                                         " [" + threadName + "] " + msg +
                                          ' ' + t.toString() + ' ' + android.util.Log.getStackTraceString(t));
             } else if (name != null)
                 android.util.Log.println(toAndroidLevel(priority),
-                                         name,
-                                         '[' + threadName + "] " + msg +
+                                         ANDROID_LOG_TAG,
+                                         name +
+                                         " [" + threadName + "] " + msg +
                                          ' ' + t.toString() + ' ' + android.util.Log.getStackTraceString(t));
             else
                 android.util.Log.println(toAndroidLevel(priority),
-                                         threadName,
+                                         ANDROID_LOG_TAG,
+                                         '[' + threadName + "] " +
                                          msg + ' ' + t.toString() + ' ' + android.util.Log.getStackTraceString(t));
     }
 

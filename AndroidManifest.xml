@@ -50,5 +50,9 @@
                   android:label="Address Book"
                   android.theme="@android:style/Theme.NoTitleBar" >
         </activity>
+        <activity android:name=".activity.LogActivity"
+                  android:label="Logs"
+                  android.theme="@android:style/Theme.NoTitleBar" >
+        </activity>
     </application>
 </manifest> 

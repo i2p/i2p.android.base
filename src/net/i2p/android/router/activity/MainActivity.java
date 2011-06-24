@@ -38,16 +38,16 @@ public class MainActivity extends I2PActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        Button news = (Button) findViewById(R.id.news_button);
-        news.setOnClickListener(new View.OnClickListener() {
+        Button b = (Button) findViewById(R.id.news_button);
+        b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), NewsActivity.class);
                 startActivity(intent);
             }
         });
 
-        Button notes = (Button) findViewById(R.id.releasenotes_button);
-        notes.setOnClickListener(new View.OnClickListener() {
+        b = (Button) findViewById(R.id.releasenotes_button);
+        b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
                 intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
@@ -55,8 +55,8 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
-        Button licenses = (Button) findViewById(R.id.licenses_button);
-        licenses.setOnClickListener(new View.OnClickListener() {
+        b = (Button) findViewById(R.id.licenses_button);
+        b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), LicenseActivity.class);
                 //Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
@@ -65,8 +65,8 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
-        Button website = (Button) findViewById(R.id.website_button);
-        website.setOnClickListener(new View.OnClickListener() {
+        b = (Button) findViewById(R.id.website_button);
+        b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/").build());
@@ -75,8 +75,8 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
-        Button faq = (Button) findViewById(R.id.faq_button);
-        faq.setOnClickListener(new View.OnClickListener() {
+        b = (Button) findViewById(R.id.faq_button);
+        b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/faq").build());
@@ -85,8 +85,8 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
-        Button welcome = (Button) findViewById(R.id.welcome_button);
-        welcome.setOnClickListener(new View.OnClickListener() {
+        b = (Button) findViewById(R.id.welcome_button);
+        b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 // default is to display the welcome_html resource
@@ -94,16 +94,33 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
-        Button addressbook = (Button) findViewById(R.id.addressbook_button);
-        addressbook.setOnClickListener(new View.OnClickListener() {
+        b = (Button) findViewById(R.id.addressbook_button);
+        b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AddressbookActivity.class);
                 startActivity(intent);
             }
         });
 
-        Button start = (Button) findViewById(R.id.router_start_button);
-        start.setOnClickListener(new View.OnClickListener() {
+        b = (Button) findViewById(R.id.logs_button);
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), LogActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        b = (Button) findViewById(R.id.error_button);
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), LogActivity.class);
+                intent.putExtra(LogActivity.ERRORS_ONLY, true);
+                startActivity(intent);
+            }
+        });
+
+        b = (Button) findViewById(R.id.router_start_button);
+        b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 RouterService svc = _routerService;
                 if (svc != null && _isBound) {
@@ -116,8 +133,8 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
-        Button stop = (Button) findViewById(R.id.router_stop_button);
-        stop.setOnClickListener(new View.OnClickListener() {
+        b = (Button) findViewById(R.id.router_stop_button);
+        b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 RouterService svc = _routerService;
                 if (svc != null && _isBound) {
@@ -128,8 +145,8 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
-        Button quit = (Button) findViewById(R.id.router_quit_button);
-        quit.setOnClickListener(new View.OnClickListener() {
+        b = (Button) findViewById(R.id.router_quit_button);
+        b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 RouterService svc = _routerService;
                 if (svc != null && _isBound) {
@@ -157,6 +174,7 @@ public class MainActivity extends I2PActivityBase {
     {
         super.onStart();
         _handler.removeCallbacks(_updater);
+        _handler.removeCallbacks(_oneShotUpdate);
         if (_savedStatus != null) {
             TextView tv = (TextView) findViewById(R.id.main_status_text);
             tv.setText(_savedStatus);
@@ -170,6 +188,7 @@ public class MainActivity extends I2PActivityBase {
     {
         super.onStop();
         _handler.removeCallbacks(_updater);
+        _handler.removeCallbacks(_oneShotUpdate);
     }
 
     @Override
@@ -227,10 +246,11 @@ public class MainActivity extends I2PActivityBase {
     private void updateStatus() {
         RouterContext ctx = getRouterContext();
         TextView tv = (TextView) findViewById(R.id.main_status_text);
+/***
         if (!Util.isConnected(this)) {
             tv.setText("No Internet connection is available");
             tv.setVisibility(View.VISIBLE);
-        } else if (ctx != null) {
+        } else ****/ if (ctx != null) {
             int active = ctx.commSystem().countActivePeers();
             int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
             int inEx = ctx.tunnelManager().getFreeTunnelCount();
@@ -273,7 +293,18 @@ public class MainActivity extends I2PActivityBase {
             tv.setText(_savedStatus);
             tv.setVisibility(View.VISIBLE);
         } else {
-            tv.setVisibility(View.INVISIBLE);
+            //tv.setVisibility(View.INVISIBLE);
+            RouterService svc = _routerService;
+            String status =
+                            "connected? " + Util.isConnected(this) +
+                            "\nhave ctx? " + (ctx != null) +
+                            "\nhave svc? " + (svc != null) +
+                            "\nis bound? " + _isBound +
+                            "\nsvc state: " + (svc == null ? "null" : svc.getState()) +
+                            "\ncan start? " + (svc == null ? "null" : svc.canManualStart()) +
+                            "\ncan stop? " + (svc == null ? "null" : svc.canManualStop());
+            tv.setText(status);
+            tv.setVisibility(View.VISIBLE);
         }
     }
 

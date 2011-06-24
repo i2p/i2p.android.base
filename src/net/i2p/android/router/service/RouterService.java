@@ -27,7 +27,7 @@ import net.i2p.util.NativeBigInteger;
  *  Runs the router
  */
 public class RouterService extends Service {
-    private enum State {INIT, WAITING, STARTING, RUNNING,
+    public enum State {INIT, WAITING, STARTING, RUNNING,
                         // unplanned (router stopped itself), next: killSelf()
                         STOPPING, STOPPED,
                         // button, don't kill service when stopped, stay in MANUAL_STOPPED
@@ -216,6 +216,11 @@ public class RouterService extends Service {
             _state != State.NETWORK_STOPPING)
             return null;
         return rv;
+    }
+
+    /** debug */
+    public String getState() {
+        return _state.toString();
     }
 
     public boolean canManualStop() {
