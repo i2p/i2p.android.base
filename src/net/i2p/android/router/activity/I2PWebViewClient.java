@@ -2,6 +2,7 @@ package net.i2p.android.router.activity;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.view.Gravity;
@@ -9,10 +10,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import net.i2p.android.apps.EepGetFetcher;
+import net.i2p.android.router.util.AppCache;
 import net.i2p.android.router.util.Util;
 import net.i2p.util.EepGet;
 
@@ -24,6 +28,10 @@ class I2PWebViewClient extends WebViewClient {
     private static final String HEADER = "<html><head></head><body>";
     private static final String FOOTER = "</body></html>";
     private static final String ERROR_EEPSITE = HEADER + "Sorry, eepsites not yet supported" + FOOTER;
+
+    public I2PWebViewClient(Context ctx) {
+        super();
+    }
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -92,6 +100,18 @@ class I2PWebViewClient extends WebViewClient {
         } catch (URISyntaxException use) {
             return false;
         }
+    }
+
+    @Override
+    public void onLoadResource(WebView view, String url) {
+        Util.e("OLR URL: " + url);
+        super.onLoadResource(view, url);
+    }
+
+    @Override
+    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+        Util.e("ORE " + errorCode + " Desc: " + description + " URL: " + failingUrl);
+        super.onReceivedError(view, errorCode, description, failingUrl);
     }
 
 /******
@@ -183,7 +203,6 @@ class I2PWebViewClient extends WebViewClient {
     private static class BackgroundEepLoad extends BGLoad implements EepGet.StatusListener {
         private final String _host;
         private int _total;
-        private String _data;
 
         public BackgroundEepLoad(WebView view, String host) {
             super(view);
@@ -214,8 +233,25 @@ class I2PWebViewClient extends WebViewClient {
                 System.err.println("Fetch cancelled for " + url);
                 return Integer.valueOf(0);
             }
+            String history = url;
+            if (success) {
+                OutputStream out = null;
+                try {
+                    out = AppCache.getInstance(_view.getContext()).createCacheFile(url);
+                    out.write(d.getBytes(e));
+                    history = AppCache.getInstance(_view.getContext()).addCacheFile(url);
+                    Util.e("Stored cache in " + history);
+                } catch (Exception ex) {
+                    AppCache.getInstance(_view.getContext()).removeCacheFile(url);
+                    Util.e("cache create error", ex);
+                } finally {
+                    if (out != null) try { out.close(); } catch (IOException ioe) {}
+                }
+            } else {
+                history = url;
+            }
             try {
-                _view.loadDataWithBaseURL(url, d, t, e, url);
+                _view.loadDataWithBaseURL(url, d, t, e, history);
             } catch (Exception exc) {
                 // CalledFromWrongThreadException
                 cancel(false);

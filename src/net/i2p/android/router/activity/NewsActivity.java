@@ -40,7 +40,7 @@ public class NewsActivity extends I2PActivityBase {
         wv.getSettings().setLoadsImagesAutomatically(false);
         // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855
         wv.getSettings().setUseWideViewPort(true);
-        _wvClient = new I2PWebViewClient();
+        _wvClient = new I2PWebViewClient(this);
         wv.setWebViewClient(_wvClient);
         wv.getSettings().setBuiltInZoomControls(true);
     }

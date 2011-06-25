@@ -33,7 +33,7 @@ public class WebActivity extends I2PActivityBase {
         TextView tv = (TextView) findViewById(R.id.browser_status);
         tv.setText(WARNING);
         WebView wv = (WebView) findViewById(R.id.browser_webview);
-        _wvClient = new I2PWebViewClient();
+        _wvClient = new I2PWebViewClient(this);
         wv.setWebViewClient(_wvClient);
         wv.getSettings().setBuiltInZoomControls(true);
         // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855
