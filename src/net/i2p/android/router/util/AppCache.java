@@ -1,5 +1,7 @@
 package net.i2p.android.router.util;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 
@@ -14,9 +16,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.i2p.android.router.provider.CacheProvider;
+
 /**
  *  A least recently used cache with a max number of entries
  *  and a max total disk space.
+ *  Inserts and deletes entries in the local ContentProvider.
  *
  *  Like Android's CacheManager but usable.
  */
@@ -25,6 +30,7 @@ public class AppCache {
     private static AppCache _instance;
     private static File _cacheDir;
     private static long _totalSize;
+    private static ContentResolver _resolver;
     /** the LRU cache */
     private final Map<Integer, Object> _cache;
 
@@ -35,7 +41,7 @@ public class AppCache {
     private static final int MAX_FILES = 1024;
     /** total used space */
     private static final long MAX_SPACE = 1024 * 1024;
-
+    private static final long MAX_AGE = 12 * 60 * 60 * 1000l;
 
     public static AppCache getInstance(Context ctx) {
         synchronized (AppCache.class) {
@@ -49,6 +55,7 @@ public class AppCache {
         _cacheDir = new File(ctx.getCacheDir(), DIR_NAME);
         _cacheDir.mkdir();
         Util.e("AppCache cache dir " + _cacheDir);
+        _resolver = ctx.getContentResolver();
         _cache = new LHM(MAX_FILES);
         initialize();
     }
@@ -56,8 +63,9 @@ public class AppCache {
     /**
      *  Caller MUST close stream AND call either
      *  addCacheFile() or removeCacheFile() after the data is written.
+     *  @param key no fragment allowed
      */
-    public OutputStream createCacheFile(String key) throws IOException {
+    public OutputStream createCacheFile(Uri key) throws IOException {
         // remove any old file so the total stays correct
         removeCacheFile(key);
         File f = toFile(key);
@@ -66,38 +74,46 @@ public class AppCache {
     }
 
     /**
-     *  Add a previously written file to the cache.
-     *  Return a file:/// uri for the cached content in question.
+     *  Add a previously written file to the cache index.
+     *  Return a content:// uri for the cached content in question,
+     *  or null on error
+     *  @param key no fragment allowed
      */
-    public String addCacheFile(String key) {
+    public Uri addCacheFile(Uri key) {
         int hash = toHash(key);
         synchronized(_cache) {
             _cache.put(Integer.valueOf(hash), DUMMY);
         }
-        return Uri.fromFile(toFile(hash)).toString();
+        // file:/// uri
+        //return Uri.fromFile(toFile(hash)).toString();
+        // content:// uri
+        return insertContent(key);
     }
 
     /**
-     *  Remove a previously written file from the cache.
+     *  Remove a previously written file from the cache index and disk.
+     *  @param key no fragment allowed
      */
-    public void removeCacheFile(String key) {
+    public void removeCacheFile(Uri key) {
         int hash = toHash(key);
         synchronized(_cache) {
             _cache.remove(Integer.valueOf(hash));
         }
+        deleteContent(key);
     }
 
     /**
-     *  Return a file:/// uri for any cached content in question.
+     *  Return a content:// uri for any cached content in question.
      *  The file may or may not exist, and it may be deleted at any time.
+     *  @param key no fragment allowed
      */
-    public String getCacheFile(String key) {
+    public Uri getCacheUri(Uri key) {
         int hash = toHash(key);
         // poke the LRU
         synchronized(_cache) {
             _cache.get(Integer.valueOf(hash));
         }
-        return Uri.fromFile(toFile(hash)).toString();
+        return CacheProvider.getContentUri(key);
     }
 
     ////// private below here
@@ -108,13 +124,15 @@ public class AppCache {
         long total = enumerate(_cacheDir, fileList);
         Util.e("AppCache found " + fileList.size() + " files totalling " + total + " bytes");
         Collections.sort(fileList, new FileComparator());
-        // oldest first, delete if too big else add to LHM
+        // oldest first, delete if too big or too old, else add to LHM
+        long now = System.currentTimeMillis();
         for (File f : fileList) {
-            if (total > MAX_SPACE) {
+            if (total > MAX_SPACE || f.lastModified() < now - MAX_AGE) {
                 total -= f.length();
                 f.delete();
             } else {
                 addToCache(f);
+                // TODO insertContent
             }
         }
         Util.e("after init " + _cache.size() + " files totalling " + total + " bytes");
@@ -158,6 +176,7 @@ public class AppCache {
                 _cache.put(Integer.valueOf(hash), DUMMY);
             }
         } catch (IllegalArgumentException iae) {
+            Util.e("Huh bad file?" + iae);
             f.delete();
         }
     }
@@ -166,30 +185,57 @@ public class AppCache {
     private static int toHash(File f) throws IllegalArgumentException {
         String path = f.getAbsolutePath();
         int slash = path.lastIndexOf("/");
-        String basename = path.substring(slash);
+        String basename = path.substring(slash + 1);
         try {
             return Integer.parseInt(basename);
         } catch (NumberFormatException nfe) {
-             throw new IllegalArgumentException("bad file name");
+             throw new IllegalArgumentException("bad file name " + f);
         }
     }
 
-    /** just use the hashcode for the hash */
-    private static int toHash(String key) {
-        return key.hashCode();
+    /**
+     *  Just use the hashcode for the hash for now
+     *  TODO switch to something secure like SHA-1
+     */
+    private static int toHash(Uri key) {
+        return key.toString().hashCode();
     }
 
     /**
      *  /path/to/cache/dir/(hashCode(key) % 32)/hashCode(key)
      */
-    private static File toFile(String key) {
+    private static File toFile(Uri key) {
         int hash = toHash(key);
         return toFile(hash);
     }
 
     private static File toFile(int hash) {
         int dir = hash % NUM_DIRS;
+        if (dir < 0)
+            dir = 0 - dir;
         return new File(_cacheDir, dir + "/" + hash);
+    }
+
+    /**
+     *  @return the uri inserted or null on failure
+     */
+    private static Uri insertContent(Uri key) {
+        String path = toFile(key).getAbsolutePath();
+        ContentValues cv = new ContentValues();
+        cv.put(CacheProvider.DATA, path);
+        Uri uri = CacheProvider.getContentUri(key);
+        if (uri != null) {
+           _resolver.insert(uri, cv);
+           return uri;
+        }
+        return null;
+    }
+
+    /** ok for now but we will need to store key in the map and delete by integer */
+    private static void deleteContent(Uri key) {
+        Uri uri = CacheProvider.getContentUri(key);
+        if (uri != null)
+            _resolver.delete(uri, null, null);
     }
 
     /**
@@ -238,6 +284,7 @@ public class AppCache {
             if (size() > _max || _totalSize > MAX_SPACE) {
                 Integer key = eldest.getKey();
                 remove(key);
+                // TODO deleteContent()
             }
             // we modified the map, we must return false
             return false;

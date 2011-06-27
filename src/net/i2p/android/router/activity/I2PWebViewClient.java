@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.Gravity;
 import android.webkit.WebView;
@@ -35,7 +36,7 @@ class I2PWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        System.err.println("Should override? " + url);
+        Util.e("Should override? " + url);
         view.stopLoading();
         try {
             URI uri = new URI(url);
@@ -127,7 +128,7 @@ class I2PWebViewClient extends WebViewClient {
     void cancelAll() {
         BGLoad task = _lastTask;
         if (task != null) {
-            System.err.println("Cancelling fetches");
+            Util.e("Cancelling fetches");
             task.cancel(true);
         }
     }
@@ -216,11 +217,11 @@ class I2PWebViewClient extends WebViewClient {
             fetcher.addStatusListener(this);
             boolean success = fetcher.fetch();
             if (isCancelled()) {
-                System.err.println("Fetch cancelled for " + url);
+                Util.e("Fetch cancelled for " + url);
                 return Integer.valueOf(0);
             }
             if (!success)
-                System.err.println("Fetch failed for " + url);
+                Util.e("Fetch failed for " + url);
             String t = fetcher.getContentType();
             String d = fetcher.getData();
             int len = d.length();
@@ -228,21 +229,25 @@ class I2PWebViewClient extends WebViewClient {
             if (success && t.startsWith("text/html") && !d.startsWith("<?xml"))
                 d = XML_HEADER + d;
             String e = fetcher.getEncoding();
-            System.err.println("Len: " + len + " type: \"" + t + "\" encoding: \"" + e + '"');
+            Util.e("Len: " + len + " type: \"" + t + "\" encoding: \"" + e + '"');
             if (isCancelled()) {
-                System.err.println("Fetch cancelled for " + url);
+                Util.e("Fetch cancelled for " + url);
                 return Integer.valueOf(0);
             }
             String history = url;
             if (success) {
+                // TODO switch back to Uri
+                Uri uri = Uri.parse(url);
                 OutputStream out = null;
                 try {
-                    out = AppCache.getInstance(_view.getContext()).createCacheFile(url);
+                    out = AppCache.getInstance(_view.getContext()).createCacheFile(uri);
                     out.write(d.getBytes(e));
-                    history = AppCache.getInstance(_view.getContext()).addCacheFile(url);
+                    Uri content = AppCache.getInstance(_view.getContext()).addCacheFile(uri);
+                    if (content != null)
+                        history = content.toString();
                     Util.e("Stored cache in " + history);
                 } catch (Exception ex) {
-                    AppCache.getInstance(_view.getContext()).removeCacheFile(url);
+                    AppCache.getInstance(_view.getContext()).removeCacheFile(uri);
                     Util.e("cache create error", ex);
                 } finally {
                     if (out != null) try { out.close(); } catch (IOException ioe) {}
@@ -251,6 +256,7 @@ class I2PWebViewClient extends WebViewClient {
                 history = url;
             }
             try {
+                Util.e("loading data, base URL: " + url + " history URL: " + history);
                 _view.loadDataWithBaseURL(url, d, t, e, history);
             } catch (Exception exc) {
                 // CalledFromWrongThreadException
