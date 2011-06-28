@@ -8,9 +8,13 @@ import android.os.ParcelFileDescriptor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import net.i2p.android.apps.EepGetFetcher;
+import net.i2p.android.router.util.AppCache;
 import net.i2p.android.router.util.Util;
 
 /**
@@ -43,6 +47,11 @@ public class CacheProvider extends ContentProvider {
     /** the database key */
     public static final String DATA = "_data";
     private static final String QUERY_MARKER = "!!QUERY!!";
+
+    private static final String ERROR_HEADER = "<html><head><title>Not Found</title></head><body>";
+    private static final String ERROR_URL = "<p>Unable to load URL: ";
+    private static final String ERROR_ROUTER = "<p>Your router does not appear to be up.</p>";
+    private static final String ERROR_FOOTER = "</body></html>";
 
     /**
      *  Generate a cache content URI for a given URI key
@@ -90,30 +99,64 @@ public class CacheProvider extends ContentProvider {
             throw new FileNotFoundException("Bad uri no path? " + uri);
         String[] segs = resPath.split("/", 5);
         // first seg is empty since string starts with /
-        String nonce = segs.length > 1 ? segs[1] : "unset";
-        String scheme = segs.length > 2 ? segs[2] : "unset";
-        String host = segs.length > 3 ? segs[3] : "unset";
-        String realPath = segs.length > 4 ? segs[4] : "unset";
+        String nonce = segs.length > 1 ? segs[1] : null;
+        String scheme = segs.length > 2 ? segs[2] : null;
+        String host = segs.length > 3 ? segs[3].toLowerCase() : null;
+        String realPath = segs.length > 4 ? segs[4] : "";
         String query = uri.getEncodedQuery();
         if (query == null) {
             int marker = realPath.indexOf(QUERY_MARKER);
             if (marker >= 0) {
                 realPath = realPath.substring(0, marker);
                 query = realPath.substring(marker + QUERY_MARKER.length());
-            } else {
-                query = "unset";
             }
         }
-        String debug = "Here is where we fetch: nonce: " + nonce + "scheme: " + scheme + " host: " + host + " realPath: " + realPath + " query: " + query;
+        String debug = "CacheProvider nonce: " + nonce + " scheme: " + scheme + " host: " + host + " realPath: " + realPath + " query: " + query;
         Util.e(debug);
-        // convert the encoded path to the new uri
-        //load the URL with eepget
-      /**
-        File file = new File(path);
-        ParcelFileDescriptor parcel = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
-        return parcel;
-       **/
-        throw new FileNotFoundException(debug);
+        if ((!NONCE.equals(nonce)) ||
+            (!"http".equals(scheme)) ||
+            (host == null) ||
+            (!host.endsWith(".i2p")))
+            throw new FileNotFoundException(debug);
+        String newUri = scheme + "://" + host + '/' + realPath;
+        if (query != null)
+            newUri += '?' + query;
+
+        Util.e("CacheProvider fetching: " + newUri);
+        return eepFetch(newUri);
+    }
+
+    private ParcelFileDescriptor eepFetch(String url) throws FileNotFoundException {
+        AppCache cache = AppCache.getInstance();
+        if (cache == null) {
+            Util.e("app cache uninitialized " + url);
+            throw new FileNotFoundException("uninitialized");
+        }
+        Uri uri = Uri.parse(url);
+        OutputStream out;
+        try {
+            out = cache.createCacheFile(uri);
+        } catch (IOException ioe) {
+            throw new FileNotFoundException(ioe.toString());
+        }
+        // in this constructor we don't use the error output, for now
+        EepGetFetcher fetcher = new EepGetFetcher(url, out);
+        boolean success = fetcher.fetch();
+        if (success) {
+            File file = cache.getCacheFile(uri);
+            if (file.length() > 0) {
+                // this call will insert it back to us
+                Uri content = cache.addCacheFile(uri);
+                ParcelFileDescriptor parcel = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
+                return parcel;
+            } else {
+                 Util.e("CacheProvider Sucess but no data " + uri);
+            }
+        } else {
+            Util.e("CacheProvider Eepget fail " + uri);
+        }
+        AppCache.getInstance().removeCacheFile(uri);
+        throw new FileNotFoundException("eepget fail");
     }
 
     public int delete(Uri uri, String selection, String[] selectionArgs) {
@@ -123,6 +166,7 @@ public class CacheProvider extends ContentProvider {
     }
 
     public String getType(Uri uri) {
+        Util.e("CacheProvider getType " + uri);
         return "text/html";
     }
 

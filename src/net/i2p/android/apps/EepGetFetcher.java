@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import net.i2p.I2PAppContext;
 import net.i2p.data.DataHelper;
@@ -29,7 +30,10 @@ public class EepGetFetcher implements EepGet.StatusListener {
     private static final String ERROR_ROUTER = "<p>Your router does not appear to be up.</p>";
     private static final String ERROR_FOOTER = "</body></html>";
 
-
+    /**
+     *  Writes to temp file, call getData()
+     *  to get the data as a String
+     */
     public EepGetFetcher(String url) {
         _context = I2PAppContext.getGlobalContext();
         _log = _context.logManager().getLog(EepGetFetcher.class);
@@ -41,6 +45,20 @@ public class EepGetFetcher implements EepGet.StatusListener {
         // use new 0.8.8 feature
         _eepget.setWriteErrorToOutput();
         //_eepget.addStatusListener(this);
+    }
+    
+    /**
+     *  Writes to output stream
+     */
+    public EepGetFetcher(String url, OutputStream out) {
+        _context = I2PAppContext.getGlobalContext();
+        _log = _context.logManager().getLog(EepGetFetcher.class);
+        _url = url;
+        _file = null;
+        _eepget = new EepGet(_context, true, "localhost", 4444, 0, -1, MAX_LEN,
+                             null, out, url,
+                             true, null, null, null);
+        //_eepget.setWriteErrorToOutput();
     }
     
     public void addStatusListener(EepGet.StatusListener l) {
@@ -83,6 +101,7 @@ public class EepGetFetcher implements EepGet.StatusListener {
     }
 
     /**
+     *  Only for the constructor without the output stream
      *  Only call ONCE!
      *  FIXME we don't get the proxy error pages this way
      */

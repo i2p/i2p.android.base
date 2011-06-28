@@ -51,6 +51,10 @@ public class AppCache {
         return _instance;
     }
 
+    public static AppCache getInstance() {
+        return _instance;
+    }
+
     private AppCache(Context ctx) {
         _cacheDir = new File(ctx.getCacheDir(), DIR_NAME);
         _cacheDir.mkdir();
@@ -114,6 +118,16 @@ public class AppCache {
             _cache.get(Integer.valueOf(hash));
         }
         return CacheProvider.getContentUri(key);
+    }
+
+    /**
+     *  Return an abolute file path for any cached content in question.
+     *  The file may or may not exist, and it may be deleted at any time.
+     *  @param key no fragment allowed
+     */
+    public File getCacheFile(Uri key) {
+        int hash = toHash(key);
+        return toFile(hash);
     }
 
     ////// private below here
