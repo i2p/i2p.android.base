@@ -24,6 +24,11 @@ public class EepGetFetcher implements EepGet.StatusListener {
 
     private static final long MAX_LEN = 256*1024;
 
+    private static final String ERROR_HEADER = "<html><head><title>Not Found</title></head><body>";
+    private static final String ERROR_URL = "<p>Unable to load URL: ";
+    private static final String ERROR_ROUTER = "<p>Your router does not appear to be up.</p>";
+    private static final String ERROR_FOOTER = "</body></html>";
+
 
     public EepGetFetcher(String url) {
         _context = I2PAppContext.getGlobalContext();
@@ -33,6 +38,8 @@ public class EepGetFetcher implements EepGet.StatusListener {
         _eepget = new EepGet(_context, true, "localhost", 4444, 0, -1, MAX_LEN,
                              _file.getAbsolutePath(), null, url,
                              true, null, null, null);
+        // use new 0.8.8 feature
+        _eepget.setWriteErrorToOutput();
         //_eepget.addStatusListener(this);
     }
     
@@ -49,8 +56,8 @@ public class EepGetFetcher implements EepGet.StatusListener {
      *  @return non-null
      */
     public String getContentType() {
-        if (!_success)
-            return "text/plain";
+        if (_eepget.getStatusCode() < 0)
+            return "text/html";
         String rv = _eepget.getContentType();
         if (rv == null)
             return "text/html";
@@ -64,6 +71,8 @@ public class EepGetFetcher implements EepGet.StatusListener {
      *  @return non-null
      */
     public String getEncoding() {
+        if (_eepget.getStatusCode() < 0)
+            return "UTF-8";
         String type = _eepget.getContentType();
         String rv;
         if (type == null || !type.startsWith("text"))
@@ -79,10 +88,15 @@ public class EepGetFetcher implements EepGet.StatusListener {
      */
     public String getData() {
         String rv;
-        if (!_file.exists()) {
-            rv = "Fetch failed for URL:\n" + _url + "\n\nMaybe the eepsite is not up?\nMaybe your router is not up?\nMaybe your router does not have client tunnels yet?";
+        int statusCode = _eepget.getStatusCode();
+        if (statusCode < 0) {
+            rv = ERROR_HEADER + ERROR_URL + "<a href=\"" + _url + "\">" + _url +
+                 "</a></p>" + ERROR_ROUTER + ERROR_FOOTER;
+            _file.delete();
         } else if (_file.length() <= 0) {
-            rv = "Fetch failed for URL:\n" + _url + "\n\nMaybe the eepsite is not up?\nMaybe your router is not up?\nMaybe your router does not have client tunnels yet?";
+            rv = ERROR_HEADER + ERROR_URL + "<a href=\"" + _url + "\">" + _url +
+                 "</a> No data returned, error code: " + statusCode +
+                 "</p>" + ERROR_FOOTER;
             _file.delete();
         } else {
             InputStream fis = null;
