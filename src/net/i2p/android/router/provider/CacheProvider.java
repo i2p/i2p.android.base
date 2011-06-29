@@ -47,7 +47,7 @@ public class CacheProvider extends ContentProvider {
     //private static final String NONCE = Integer.toString(Math.abs((new java.util.Random()).nextInt()));
     private static final String NONCE = "0";
     private static final String SCHEME = "content";
-    private static final String AUTHORITY = "net.i2p.android.router";
+    public static final String AUTHORITY = "net.i2p.android.router";
     /** includes the nonce */
     public static final Uri CONTENT_URI = Uri.parse(SCHEME + "://" + AUTHORITY + '/' + NONCE);
     /** the database key */
@@ -177,7 +177,7 @@ public class CacheProvider extends ContentProvider {
             throw new FileNotFoundException(ioe.toString());
         }
         // in this constructor we don't use the error output, for now
-        EepGetFetcher fetcher = new EepGetFetcher(uri.toString(), out);
+        EepGetFetcher fetcher = new EepGetFetcher(uri.toString(), out, false);
         boolean success = fetcher.fetch();
         if (success) {
             File file = cache.getCacheFile(uri);

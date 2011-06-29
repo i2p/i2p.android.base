@@ -102,19 +102,19 @@
     android:id="@+id/router_start_button"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
-    android:text="Start router"
+    android:text="Start Router"
     />
  <Button 
     android:id="@+id/router_stop_button"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
-    android:text="Stop router"
+    android:text="OLD STOP"
     />
  <Button 
     android:id="@+id/router_quit_button"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content" 
-    android:text="QUIT router"
+    android:text="Stop Router"
     />
 </LinearLayout>
 <TextView  

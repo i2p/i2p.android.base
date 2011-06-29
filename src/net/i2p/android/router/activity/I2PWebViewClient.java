@@ -12,13 +12,17 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import net.i2p.android.apps.EepGetFetcher;
 import net.i2p.android.router.provider.CacheProvider;
 import net.i2p.android.router.util.AppCache;
 import net.i2p.android.router.util.Util;
+import net.i2p.data.DataHelper;
 import net.i2p.util.EepGet;
 
 class I2PWebViewClient extends WebViewClient {
@@ -26,9 +30,11 @@ class I2PWebViewClient extends WebViewClient {
     private BGLoad _lastTask;
 
     // TODO add some inline style
+    private static final String CONTENT = "content";
     private static final String HEADER = "<html><head></head><body>";
     private static final String FOOTER = "</body></html>";
-    private static final String ERROR_EEPSITE = HEADER + "Sorry, eepsites not yet supported" + FOOTER;
+    private static final String ERROR_URL = "<p>Unable to load URL: ";
+    private static final String ERROR_ROUTER = "<p>Your router does not appear to be up.</p>";
 
     public I2PWebViewClient(Context ctx) {
         super();
@@ -47,7 +53,7 @@ class I2PWebViewClient extends WebViewClient {
             }
             s = s.toLowerCase();
             if (!(s.equals("http") || s.equals("https") ||
-                  s.equals("content"))) {
+                  s.equals(CONTENT))) {
                 Util.e("Not loading URL " + url);
                 return false;
             }
@@ -75,16 +81,22 @@ class I2PWebViewClient extends WebViewClient {
                 int hash = url.indexOf("#");
                 if (hash > 0)
                     url = url.substring(0, hash);
-                view.getSettings().setLoadsImagesAutomatically(false);
+                view.getSettings().setLoadsImagesAutomatically(true);
                 ///////// API 8
                 // Otherwise hangs waiting for CSS
-                view.getSettings().setBlockNetworkLoads(true);
-                //view.loadData(ERROR_EEPSITE, "text/html", "UTF-8");
+                view.getSettings().setBlockNetworkLoads(false);
                 BGLoad task = new BackgroundEepLoad(view, h);
                 _lastTask = task;
                 task.execute(url);
             } else {
-                if (s.equals("content")) {
+                if (s.equals(CONTENT)) {
+                    if (h.equals(CacheProvider.AUTHORITY)) {
+                        if (!url.startsWith(CacheProvider.CONTENT_URI.toString()))
+                            Util.e("Content URI bad nonce, FIXME: " + url);
+                    } else {
+                        Util.e("Content URI but not for us?? " + url);
+                    }
+
                     // canonicalize to append query to path
                     // because the resolver doesn't send a query to the provider
                     Uri canon = CacheProvider.getContentUri(uri);
@@ -140,6 +152,20 @@ class I2PWebViewClient extends WebViewClient {
         if (task != null) {
             Util.e("Cancelling fetches");
             task.cancel(true);
+        }
+    }
+
+    /**
+     *  This should always be a content url
+     */
+    void deleteCurrentPageCache(WebView view) {
+        String url = view.getUrl();
+        Uri uri = Uri.parse(url);
+        if (CONTENT.equals(uri.getScheme())) {
+            // this actually only deletes the row in the provider,
+            // not the actual file, but it will be overwritten in the reload.
+            Util.e("clearing provider entry for current page " + url);
+            view.getContext().getContentResolver().delete(uri, null, null);
         }
     }
 
@@ -223,7 +249,8 @@ class I2PWebViewClient extends WebViewClient {
         protected Integer doInBackground(String... urls) {
             String url = urls[0];
             Uri uri = Uri.parse(url);
-            if (AppCache.getInstance(_view.getContext()).getCacheFile(uri).exists()) {
+            File cacheFile = AppCache.getInstance(_view.getContext()).getCacheFile(uri);
+            if (cacheFile.exists()) {
                 Uri resUri = AppCache.getInstance(_view.getContext()).getCacheUri(uri);
                 Util.e("Loading " + url + " from resource cache " + resUri);
                 _view.getSettings().setLoadsImagesAutomatically(true);
@@ -234,56 +261,82 @@ class I2PWebViewClient extends WebViewClient {
                     // CalledFromWrongThreadException
                     cancel(false);
                 }
-                return Integer.valueOf(0);
+                // 1 means show the cache toast message
+                return Integer.valueOf(1);
             }
 
             publishProgress(Integer.valueOf(-1));
-            EepGetFetcher fetcher = new EepGetFetcher(url);
-            fetcher.addStatusListener(this);
-            boolean success = fetcher.fetch();
-            if (isCancelled()) {
-                Util.e("Fetch cancelled for " + url);
-                return Integer.valueOf(0);
-            }
-            if (!success)
-                Util.e("Fetch failed for " + url);
-            String t = fetcher.getContentType();
-            String d = fetcher.getData();
-            int len = d.length();
-            // http://stackoverflow.com/questions/3961589/android-webview-and-loaddata
-            if (success && t.startsWith("text/html") && !d.startsWith("<?xml"))
-                d = XML_HEADER + d;
-            String e = fetcher.getEncoding();
-            Util.e("Len: " + len + " type: \"" + t + "\" encoding: \"" + e + '"');
-            if (isCancelled()) {
-                Util.e("Fetch cancelled for " + url);
-                return Integer.valueOf(0);
-            }
-            String history = url;
-            if (success) {
-                OutputStream out = null;
-                try {
-                    out = AppCache.getInstance(_view.getContext()).createCacheFile(uri);
-                    out.write(d.getBytes(e));
-                    Uri content = AppCache.getInstance(_view.getContext()).addCacheFile(uri);
-                    if (content != null)
-                        history = content.toString();
-                    Util.e("Stored cache in " + history);
-                } catch (Exception ex) {
-                    AppCache.getInstance(_view.getContext()).removeCacheFile(uri);
-                    Util.e("cache create error", ex);
-                } finally {
-                    if (out != null) try { out.close(); } catch (IOException ioe) {}
-                }
-            } else {
-                history = url;
-            }
+            //EepGetFetcher fetcher = new EepGetFetcher(url);
+            OutputStream out = null;
             try {
-                Util.e("loading data, base URL: " + url + " history URL: " + history);
-                _view.loadDataWithBaseURL(url, d, t, e, history);
-            } catch (Exception exc) {
-                // CalledFromWrongThreadException
-                cancel(false);
+                out = AppCache.getInstance(_view.getContext()).createCacheFile(uri);
+                // write error to stream
+                EepGetFetcher fetcher = new EepGetFetcher(url, out, true);
+                fetcher.addStatusListener(this);
+                boolean success = fetcher.fetch();
+                if (isCancelled()) {
+                    Util.e("Fetch cancelled for " + url);
+                    return Integer.valueOf(0);
+                }
+                try { out.close(); } catch (IOException ioe) {}
+                if (success) {
+                    // store in cache, get content URL, and load that way
+                    Uri content = AppCache.getInstance(_view.getContext()).addCacheFile(uri);
+                    if (content != null) {
+                        Util.e("Stored cache in " + content);
+                    } else {
+                        AppCache.getInstance(_view.getContext()).removeCacheFile(uri);
+                        Util.e("cache create error");
+                        return Integer.valueOf(0);
+                    }
+                    Util.e("loading data, base URL: " + uri + " content URL: " + content);
+                    try {
+                        _view.loadUrl(content.toString());
+                    } catch (Exception exc) {
+                        // CalledFromWrongThreadException
+                        cancel(false);
+                    }
+                    Util.e("Fetch failed for " + url);
+                } else {
+                    // Load the error message in as a string, delete the file
+                    String t = fetcher.getContentType();
+                    String e = fetcher.getEncoding();
+                    String msg;
+                    int statusCode = fetcher.getStatusCode();
+                    if (statusCode < 0) {
+                        msg = HEADER + ERROR_URL + "<a href=\"" + url + "\">" + url +
+                              "</a></p>" + ERROR_ROUTER + FOOTER;
+                    } else if (cacheFile.length() <= 0) {
+                        msg = HEADER + ERROR_URL + "<a href=\"" + url + "\">" + url +
+                              "</a> No data returned, error code: " + statusCode +
+                              "</p>" + FOOTER;
+                    } else {
+                        InputStream fis = null;
+                        try {
+                            fis = new FileInputStream(cacheFile);
+                            byte[] data = new byte[(int) cacheFile.length()];
+                            DataHelper.read(fis, data);
+                            msg = new String(data, e);
+                        } catch (IOException ioe) {
+                            Util.e("WVC", ioe);
+                            msg = HEADER + "I/O error" + FOOTER;
+                        } finally {
+                              if (fis != null) try { fis.close(); } catch (IOException ioe) {}
+                        }
+                    }
+                    AppCache.getInstance(_view.getContext()).removeCacheFile(uri);
+                    try {
+                         Util.e("loading error data URL: " + url);
+                        _view.loadDataWithBaseURL(url, msg, t, e, url);
+                    } catch (Exception exc) {
+                        // CalledFromWrongThreadException
+                        cancel(false);
+                    }
+                }
+            } catch (IOException ioe) {
+                    Util.e("IOE for " + url, ioe);
+            } finally {
+                if (out != null) try { out.close(); } catch (IOException ioe) {}
             }
             return Integer.valueOf(0);
         }
@@ -314,6 +367,16 @@ class I2PWebViewClient extends WebViewClient {
             } else {
                 // nothing
             }
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            if (result.equals(Integer.valueOf(1))) {
+                Toast toast = Toast.makeText(_view.getContext(), "Loading from cache, click settings to reload", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+            super.onPostExecute(result);
         }
 
         // EepGet callbacks

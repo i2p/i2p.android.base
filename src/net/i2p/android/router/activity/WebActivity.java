@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -91,4 +92,22 @@ public class WebActivity extends I2PActivityBase {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        WebView wv = (WebView) findViewById(R.id.browser_webview);
+        switch (item.getItemId()) {
+        case R.id.menu_reload:
+            _wvClient.cancelAll();
+            wv.stopLoading();
+            _wvClient.deleteCurrentPageCache(wv);
+            // should go through the WVC instead??
+            wv.reload();
+            return true;
+
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

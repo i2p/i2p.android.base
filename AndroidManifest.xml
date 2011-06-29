@@ -29,6 +29,7 @@
         </activity>
         <activity android:name=".activity.NewsActivity"
                   android:label="I2P News"
+                  android:configChanges="orientation|keyboardHidden"
                   android.theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity android:name=".activity.TextResourceActivity"
@@ -41,6 +42,7 @@
         </activity>
         <activity android:name=".activity.WebActivity"
                   android:label="I2P Web Browser"
+                  android:configChanges="orientation|keyboardHidden"
                   android.theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

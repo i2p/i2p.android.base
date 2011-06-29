@@ -32,7 +32,8 @@ public class EepGetFetcher implements EepGet.StatusListener {
 
     /**
      *  Writes to temp file, call getData()
-     *  to get the data as a String
+     *  to get the data as a String.
+     *  Temp file sticks around forever.
      */
     public EepGetFetcher(String url) {
         _context = I2PAppContext.getGlobalContext();
@@ -50,7 +51,7 @@ public class EepGetFetcher implements EepGet.StatusListener {
     /**
      *  Writes to output stream
      */
-    public EepGetFetcher(String url, OutputStream out) {
+    public EepGetFetcher(String url, OutputStream out, boolean writeErrorToStream) {
         _context = I2PAppContext.getGlobalContext();
         _log = _context.logManager().getLog(EepGetFetcher.class);
         _url = url;
@@ -58,7 +59,8 @@ public class EepGetFetcher implements EepGet.StatusListener {
         _eepget = new EepGet(_context, true, "localhost", 4444, 0, -1, MAX_LEN,
                              null, out, url,
                              true, null, null, null);
-        //_eepget.setWriteErrorToOutput();
+        if (writeErrorToStream)
+            _eepget.setWriteErrorToOutput();
     }
     
     public void addStatusListener(EepGet.StatusListener l) {
@@ -98,6 +100,13 @@ public class EepGetFetcher implements EepGet.StatusListener {
         else
             rv = "UTF-8";
         return rv;
+    }
+
+    /**
+     *  @return -1 if nothing back from server
+     */
+    public int getStatusCode() {
+        return _eepget.getStatusCode();
     }
 
     /**

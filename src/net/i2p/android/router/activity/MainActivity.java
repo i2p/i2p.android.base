@@ -244,8 +244,9 @@ public class MainActivity extends I2PActivityBase {
         start.setVisibility(showStart ? View.VISIBLE : View.INVISIBLE);
 
         boolean showStop = svc != null && _isBound && svc.canManualStop();
+        // Old stop but leave in memory. Always hide for now.
         Button stop = (Button) findViewById(R.id.router_stop_button);
-        stop.setVisibility(showStop ? View.VISIBLE : View.INVISIBLE);
+        stop.setVisibility( /* showStop ? View.VISIBLE : */ View.INVISIBLE);
 
         Button quit = (Button) findViewById(R.id.router_quit_button);
         quit.setVisibility(showStop ? View.VISIBLE : View.INVISIBLE);
