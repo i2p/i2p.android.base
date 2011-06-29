@@ -51,6 +51,9 @@ public class AppCache {
         return _instance;
     }
 
+    /**
+     *  If you don't have a context. Could return null.
+     */
     public static AppCache getInstance() {
         return _instance;
     }
@@ -121,7 +124,7 @@ public class AppCache {
     }
 
     /**
-     *  Return an abolute file path for any cached content in question.
+     *  Return an absolute file path for any cached content in question.
      *  The file may or may not exist, and it may be deleted at any time.
      *  @param key no fragment allowed
      */

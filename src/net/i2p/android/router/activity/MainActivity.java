@@ -89,7 +89,7 @@ public class MainActivity extends I2PActivityBase {
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
-                // default is to display the welcome_html resource
+                intent.putExtra(WebActivity.HTML_RESOURCE_ID, R.raw.welcome_html);
                 startActivity(intent);
             }
         });

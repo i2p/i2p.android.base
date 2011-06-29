@@ -182,6 +182,8 @@ public class RouterService extends Service {
         }
     }
 
+    private boolean _hadTunnels;
+
     private void updateStatus(RouterContext ctx) {
         int active = ctx.commSystem().countActivePeers();
         int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
@@ -210,6 +212,14 @@ public class RouterService extends Service {
                "; Expl " + inEx + '/' + outEx +
                "; Client " + inCl + '/' + outCl;
 
+        boolean haveTunnels = inCl > 0 && outCl > 0;
+        if (haveTunnels != _hadTunnels) {
+            if (haveTunnels)
+                _statusBar.replace("Client tunnels are ready");
+            else
+                _statusBar.replace("Client tunnels are down");
+            _hadTunnels = haveTunnels;
+        }
         _statusBar.update(status, details);
     }
 
@@ -448,6 +458,7 @@ public class RouterService extends Service {
             synchronized (_stateLock) {
                 // null out to release the memory
                 _context = null;
+                Runtime.getRuntime().gc();
                 if (_state == State.STARTING)
                     _starterThread.interrupt();
                 if (_state == State.MANUAL_STOPPING) {

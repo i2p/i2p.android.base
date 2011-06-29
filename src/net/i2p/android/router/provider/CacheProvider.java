@@ -2,6 +2,7 @@ package net.i2p.android.router.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
@@ -10,8 +11,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import net.i2p.android.apps.EepGetFetcher;
 import net.i2p.android.router.util.AppCache;
@@ -39,11 +41,15 @@ public class CacheProvider extends ContentProvider {
 
     // FIXME not persistent, use SharedPrefs
     /** content:// Uri to absolute path of the file */
-    private Map<Uri, String> _uriMap;
+    private SharedPreferences _sharedPrefs;
 
-    private static final String NONCE = Integer.toString(Math.abs((new java.util.Random()).nextInt()));
+    private static final String SHARED_PREFS = "net.i2p.android.router.provider.CacheProvider";
+    //private static final String NONCE = Integer.toString(Math.abs((new java.util.Random()).nextInt()));
+    private static final String NONCE = "0";
+    private static final String SCHEME = "content";
+    private static final String AUTHORITY = "net.i2p.android.router";
     /** includes the nonce */
-    public static final Uri CONTENT_URI = Uri.parse("content://net.i2p.android.router/" + NONCE);
+    public static final Uri CONTENT_URI = Uri.parse(SCHEME + "://" + AUTHORITY + '/' + NONCE);
     /** the database key */
     public static final String DATA = "_data";
     private static final String QUERY_MARKER = "!!QUERY!!";
@@ -54,7 +60,10 @@ public class CacheProvider extends ContentProvider {
     private static final String ERROR_FOOTER = "</body></html>";
 
     /**
-     *  Generate a cache content URI for a given URI key
+     *  Generate a cache content (resource) URI for a given URI key
+     *  If the key is already a resource URI, canonicalize it
+     *  by twizzling the query if necessary
+     *
      *  @param key must contain a scheme, authority and path
      *  @return null on error
      */
@@ -65,6 +74,27 @@ public class CacheProvider extends ContentProvider {
         if (s == null || a == null || p == null)
             return null;
         String q = key.getEncodedQuery();
+
+        // canonicalize resource URI
+        if (s.equals(SCHEME)) {
+            if (q == null || !a.equals(AUTHORITY))
+                return key;
+            if (p.contains(QUERY_MARKER)) {
+                Util.e("Key contains both queries ?!? " + key);
+                return null;
+            }
+            // twizzle query
+            StringBuilder buf = new StringBuilder(128);
+            buf.append(s).append("://")
+               .append(a);
+            if (!p.startsWith("/"))
+                buf.append('/');
+            buf.append(p);
+            buf.append(QUERY_MARKER).append(q);
+            return Uri.parse(buf.toString());
+        }
+
+        // convert http URI to resource
         StringBuilder buf = new StringBuilder(128);
         buf.append(CONTENT_URI).append('/')
            .append(s).append('/')
@@ -81,7 +111,7 @@ public class CacheProvider extends ContentProvider {
     public ParcelFileDescriptor openFile(Uri uri, String mode) throws FileNotFoundException {
         Util.e("CacheProvider open " + uri);
         // map the resource URI to a local file URI and return it if it exists
-        String filePath = _uriMap.get(uri);
+        String filePath = get(uri);
         if (filePath != null) {
             try {
                 File file = new File(filePath);
@@ -90,10 +120,24 @@ public class CacheProvider extends ContentProvider {
                 return ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
             } catch (FileNotFoundException fnfe) {
                 Util.e("CacheProvider not found", fnfe);
-                _uriMap.remove(uri);
+                remove(uri);
             }
         }
         Util.e("CacheProvider not in cache " + uri);
+
+        Uri newUri = getI2PUri(uri);
+        Util.e("CacheProvider fetching: " + newUri);
+        return eepFetch(newUri);
+    }
+
+    /**
+     *  Generate an i2p URI for a resource URI
+     *
+     *  @param uri must contain a scheme, authority and path with nonce etc. as defined above
+     *  @return non-null
+     *  @throws FNFE on error
+     */
+    private static Uri getI2PUri(Uri uri) throws FileNotFoundException {
         String resPath = uri.getEncodedPath();
         if (resPath == null)
             throw new FileNotFoundException("Bad uri no path? " + uri);
@@ -107,8 +151,8 @@ public class CacheProvider extends ContentProvider {
         if (query == null) {
             int marker = realPath.indexOf(QUERY_MARKER);
             if (marker >= 0) {
-                realPath = realPath.substring(0, marker);
                 query = realPath.substring(marker + QUERY_MARKER.length());
+                realPath = realPath.substring(0, marker);
             }
         }
         String debug = "CacheProvider nonce: " + nonce + " scheme: " + scheme + " host: " + host + " realPath: " + realPath + " query: " + query;
@@ -118,21 +162,14 @@ public class CacheProvider extends ContentProvider {
             (host == null) ||
             (!host.endsWith(".i2p")))
             throw new FileNotFoundException(debug);
-        String newUri = scheme + "://" + host + '/' + realPath;
+        String i2pUri = scheme + "://" + host + '/' + realPath;
         if (query != null)
-            newUri += '?' + query;
-
-        Util.e("CacheProvider fetching: " + newUri);
-        return eepFetch(newUri);
+            i2pUri += '?' + query;
+        return Uri.parse(i2pUri);
     }
 
-    private ParcelFileDescriptor eepFetch(String url) throws FileNotFoundException {
-        AppCache cache = AppCache.getInstance();
-        if (cache == null) {
-            Util.e("app cache uninitialized " + url);
-            throw new FileNotFoundException("uninitialized");
-        }
-        Uri uri = Uri.parse(url);
+    private ParcelFileDescriptor eepFetch(Uri uri) throws FileNotFoundException {
+        AppCache cache = AppCache.getInstance(getContext());
         OutputStream out;
         try {
             out = cache.createCacheFile(uri);
@@ -140,7 +177,7 @@ public class CacheProvider extends ContentProvider {
             throw new FileNotFoundException(ioe.toString());
         }
         // in this constructor we don't use the error output, for now
-        EepGetFetcher fetcher = new EepGetFetcher(url, out);
+        EepGetFetcher fetcher = new EepGetFetcher(uri.toString(), out);
         boolean success = fetcher.fetch();
         if (success) {
             File file = cache.getCacheFile(uri);
@@ -161,8 +198,8 @@ public class CacheProvider extends ContentProvider {
 
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         Util.e("CacheProvider delete " + uri);
-        String deleted = _uriMap.remove(uri);
-        return deleted != null ? 1 : 0;
+        boolean deleted = remove(uri);
+        return deleted ? 1 : 0;
     }
 
     public String getType(Uri uri) {
@@ -177,12 +214,13 @@ public class CacheProvider extends ContentProvider {
         Util.e("CacheProvider insert " + uri);
         String fileURI = values.getAsString(DATA);
         if (fileURI != null)
-            _uriMap.put(uri, fileURI);
+            put(uri, fileURI);
         return uri;
     }
 
     public boolean onCreate() {
-        _uriMap = new ConcurrentHashMap();
+        _sharedPrefs = getContext().getSharedPreferences(SHARED_PREFS, 0);
+        cleanup();
         return true;
     }
 
@@ -195,4 +233,59 @@ public class CacheProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         return 0;
     }
+
+    ///// Map stuff
+
+    private void cleanup() {
+        List<String> toDelete = new ArrayList();
+        Map<String, ?> map = _sharedPrefs.getAll();
+        for (Map.Entry<String, ?> e : map.entrySet()) {
+            String path = (String) e.getValue();
+            File f = new File(path);
+            if (!f.exists())
+                toDelete.add(e.getKey());
+        }
+        if (!toDelete.isEmpty()) {
+            SharedPreferences.Editor edit = _sharedPrefs.edit();
+            for (String key : toDelete) {
+                edit.remove(key);
+            }
+            edit.commit();
+        }
+    }
+
+    private String get(Uri uri) {
+        return getPref(uri.toString());
+    }
+
+    private void put(Uri uri, String fileURI) {
+        setPref(uri.toString(), fileURI);
+    }
+
+    /** @return true if it was removed */
+    private boolean remove(Uri uri) {
+        String old = getPref(uri.toString());
+        boolean success = deletePref(uri.toString());
+        return success && old != null;
+    }
+
+    /** @return null if not found */
+    private String getPref(String pref) {
+        return _sharedPrefs.getString(pref, null);
+    }
+
+    /** @return success */
+    private boolean setPref(String pref, String val) {
+        SharedPreferences.Editor edit = _sharedPrefs.edit();
+        edit.putString(pref, val);
+        return edit.commit();
+    }
+
+    /** @return success */
+    private boolean deletePref(String pref) {
+        SharedPreferences.Editor edit = _sharedPrefs.edit();
+        edit.remove(pref);
+        return edit.commit();
+    }
+
 }

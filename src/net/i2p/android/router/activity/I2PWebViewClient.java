@@ -7,16 +7,16 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.Gravity;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import net.i2p.android.apps.EepGetFetcher;
+import net.i2p.android.router.provider.CacheProvider;
 import net.i2p.android.router.util.AppCache;
 import net.i2p.android.router.util.Util;
 import net.i2p.util.EepGet;
@@ -38,39 +38,34 @@ class I2PWebViewClient extends WebViewClient {
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         Util.e("Should override? " + url);
         view.stopLoading();
-        try {
-            URI uri = new URI(url);
+
+            Uri uri = Uri.parse(url);
             String s = uri.getScheme();
             if (s == null) {
-                Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                fail(view, "Bad URL " + url);
                 return true;
             }
             s = s.toLowerCase();
-            if (!(s.equals("http") || s.equals("https")))
+            if (!(s.equals("http") || s.equals("https") ||
+                  s.equals("content"))) {
+                Util.e("Not loading URL " + url);
                 return false;
+            }
             String h = uri.getHost();
             if (h == null) {
-                Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                fail(view, "Bad URL " + url);
                 return true;
             }
 
             if (!Util.isConnected(view.getContext())) {
-                Toast toast = Toast.makeText(view.getContext(), "No Internet connection is available", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                fail(view, "No Internet connection is available");
                 return true;
             }
 
             h = h.toLowerCase();
             if (h.endsWith(".i2p")) {
                 if (!s.equals("http")) {
-                    Toast toast = Toast.makeText(view.getContext(), "Bad URL " + url, Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    fail(view, "Bad URL " + url);
                     return true;
                 }
 
@@ -89,18 +84,33 @@ class I2PWebViewClient extends WebViewClient {
                 _lastTask = task;
                 task.execute(url);
             } else {
+                if (s.equals("content")) {
+                    // canonicalize to append query to path
+                    // because the resolver doesn't send a query to the provider
+                    Uri canon = CacheProvider.getContentUri(uri);
+                    if (canon == null) {
+                        fail(view, "Bad URL " + url);
+                        return true;
+                    }
+                    url = canon.toString();
+                }
                 view.getSettings().setLoadsImagesAutomatically(true);
                 ///////// API 8
                 view.getSettings().setBlockNetworkLoads(false);
                 //view.loadUrl(url);
                 BGLoad task = new BackgroundLoad(view);
                 _lastTask = task;
+                Util.e("Fetching via web or resource: " + url);
                 task.execute(url);
             }
             return true;
-        } catch (URISyntaxException use) {
-            return false;
-        }
+    }
+
+    private static void fail(View v, String s) {
+        Util.e("Fail toast: " + s);
+        Toast toast = Toast.makeText(v.getContext(), s, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     @Override
@@ -212,6 +222,21 @@ class I2PWebViewClient extends WebViewClient {
 
         protected Integer doInBackground(String... urls) {
             String url = urls[0];
+            Uri uri = Uri.parse(url);
+            if (AppCache.getInstance(_view.getContext()).getCacheFile(uri).exists()) {
+                Uri resUri = AppCache.getInstance(_view.getContext()).getCacheUri(uri);
+                Util.e("Loading " + url + " from resource cache " + resUri);
+                _view.getSettings().setLoadsImagesAutomatically(true);
+                _view.getSettings().setBlockNetworkLoads(false);
+                try {
+                    _view.loadUrl(resUri.toString());
+                } catch (Exception e) {
+                    // CalledFromWrongThreadException
+                    cancel(false);
+                }
+                return Integer.valueOf(0);
+            }
+
             publishProgress(Integer.valueOf(-1));
             EepGetFetcher fetcher = new EepGetFetcher(url);
             fetcher.addStatusListener(this);
@@ -236,8 +261,6 @@ class I2PWebViewClient extends WebViewClient {
             }
             String history = url;
             if (success) {
-                // TODO switch back to Uri
-                Uri uri = Uri.parse(url);
                 OutputStream out = null;
                 try {
                     out = AppCache.getInstance(_view.getContext()).createCacheFile(uri);

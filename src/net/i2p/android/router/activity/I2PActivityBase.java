@@ -149,6 +149,9 @@ public abstract class I2PActivityBase extends Activity {
         MenuItem addressbook = menu.findItem(R.id.menu_addressbook);
         addressbook.setVisible(showAddressbook);
         addressbook.setEnabled(showAddressbook);
+        MenuItem reload = menu.findItem(R.id.menu_reload);
+        reload.setVisible(showAddressbook);
+        reload.setEnabled(showAddressbook);
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -171,6 +174,7 @@ public abstract class I2PActivityBase extends Activity {
             startActivity(i3);
             return true;
 
+        case R.id.menu_reload:
         case R.id.menu_start:
         case R.id.menu_stop:
         default:

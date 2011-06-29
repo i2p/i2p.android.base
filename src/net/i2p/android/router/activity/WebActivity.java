@@ -23,7 +23,7 @@ public class WebActivity extends I2PActivityBase {
     final static String HTML_RESOURCE_ID = "html_resource_id";
     private static final String WARNING = "Warning - " +
                "any non-I2P links visited in this window are fetched over the regular internet and are " +
-               "not anonymous. I2P pages do not load images or CSS.\n";
+               "not anonymous. I2P pages may not load images or CSS.";
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -47,8 +47,10 @@ public class WebActivity extends I2PActivityBase {
             _wvClient.shouldOverrideUrlLoading(wv, uri.toString());
         } else {
             wv.getSettings().setLoadsImagesAutomatically(false);
-            int id = intent.getIntExtra(HTML_RESOURCE_ID, R.raw.welcome_html);
-            loadResource(wv, id);
+            int id = intent.getIntExtra(HTML_RESOURCE_ID, 0);
+            // no default, so restart should keep previous view
+            if (id != 0)
+                loadResource(wv, id);
         }
     }
 

@@ -11,6 +11,10 @@
           android:id="@+id/menu_addressbook"
           android:icon="@drawable/ic_menu_friendslist" >
     </item>
+    <item android:title="Reload"
+          android:id="@+id/menu_reload"
+          android:icon="@drawable/ic_menu_refresh" >
+    </item>
     <item android:title="I2P Home"
           android:id="@+id/menu_home"
           android:icon="@drawable/ic_menu_home" >
