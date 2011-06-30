@@ -100,9 +100,16 @@ public class WebActivity extends I2PActivityBase {
         case R.id.menu_reload:
             _wvClient.cancelAll();
             wv.stopLoading();
-            _wvClient.deleteCurrentPageCache(wv);
-            // should go through the WVC instead??
-            wv.reload();
+            String url = wv.getUrl();
+            Uri uri = Uri.parse(url);
+            if ("data".equals(uri.getScheme())) {
+                // welcome page... or just do nothing ?
+                wv.reload();
+            } else {
+                // wv.reload() doesn't call shouldOverrideUrlLoading(), so do it this way
+                _wvClient.deleteCurrentPageCache(wv);
+                _wvClient.shouldOverrideUrlLoading(wv, url);
+            }
             return true;
 
         default:

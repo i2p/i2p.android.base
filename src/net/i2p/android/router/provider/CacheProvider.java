@@ -137,7 +137,7 @@ public class CacheProvider extends ContentProvider {
      *  @return non-null
      *  @throws FNFE on error
      */
-    private static Uri getI2PUri(Uri uri) throws FileNotFoundException {
+    public static Uri getI2PUri(Uri uri) throws FileNotFoundException {
         String resPath = uri.getEncodedPath();
         if (resPath == null)
             throw new FileNotFoundException("Bad uri no path? " + uri);

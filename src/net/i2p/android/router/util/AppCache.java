@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.i2p.android.router.provider.CacheProvider;
+import net.i2p.android.router.util.Util;
 
 /**
  *  A least recently used cache with a max number of entries
@@ -286,11 +287,12 @@ public class AppCache {
         @Override
         public Object remove(Object key) {
             Object rv = super.remove(key);
-            if (rv != null && key instanceof Integer) {
+            if ( /* rv != null && */ key instanceof Integer) {
                 File f = toFile(((Integer)key).intValue());
                 if (f.exists()) {
                     _totalSize -= f.length();
                     f.delete();
+                    Util.e("AppCache deleted file " + f);
                 }
             }
             return rv;

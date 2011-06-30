@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -46,6 +47,15 @@ class I2PWebViewClient extends WebViewClient {
         view.stopLoading();
 
             Uri uri = Uri.parse(url);
+            if (CONTENT.equals(uri.getScheme())) {
+                try {
+                    //reverse back to a i2p URI so we can load it here and not in ContentProvider
+                    uri = CacheProvider.getI2PUri(uri);
+                    url = uri.toString();
+                    Util.e("Reversed content uri back to " + url);
+                    AppCache.getInstance(view.getContext()).removeCacheFile(uri);
+                } catch (FileNotFoundException fnfe) {}
+            }
             String s = uri.getScheme();
             if (s == null) {
                 fail(view, "Bad URL " + url);
@@ -162,10 +172,17 @@ class I2PWebViewClient extends WebViewClient {
         String url = view.getUrl();
         Uri uri = Uri.parse(url);
         if (CONTENT.equals(uri.getScheme())) {
-            // this actually only deletes the row in the provider,
-            // not the actual file, but it will be overwritten in the reload.
-            Util.e("clearing provider entry for current page " + url);
-            view.getContext().getContentResolver().delete(uri, null, null);
+            try {
+                //reverse back to a i2p URI so we can delete it from the AppCache
+                uri = CacheProvider.getI2PUri(uri);
+                Util.e("clearing AppCache entry for current page " + uri);
+                AppCache.getInstance(view.getContext()).removeCacheFile(uri);
+            } catch (FileNotFoundException fnfe) {
+                // this actually only deletes the row in the provider,
+                // not the actual file, but it will be overwritten in the reload.
+                Util.e("clearing provider entry for current page " + url);
+                view.getContext().getContentResolver().delete(uri, null, null);
+            }
         }
     }
 
