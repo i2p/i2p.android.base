@@ -383,20 +383,26 @@ class I2PWebViewClient extends WebViewClient {
                 //_dialog = ProgressDialog.show(_view.getContext(), "Fetching...", "from " + _host);
                 ProgressDialog d = new ProgressDialog(_view.getContext());
                 d.setCancelable(true);
-                d.setTitle("Fetching...");
-                d.setMessage("...from " + _host);
+                d.setTitle("Contacting...");
+                d.setMessage(_host);
                 d.setIndeterminate(true);
                 d.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 d.show();
                 d.setOnCancelListener(this);
                 _dialog = d;
             } else if (prog == 0 && _total > 0) {
-                _dialog.setTitle("Downloading");
+                _dialog.setTitle("Downloading...");
+                _dialog.setMessage("...from " + _host);
                 _dialog.setIndeterminate(false);
                 _dialog.setMax(_total);
                 _dialog.setProgress(0);
             } else if (_total > 0) {
                 _dialog.setProgress(prog);
+            } else if (prog > 0) {
+                // ugly, need custom
+                _dialog.setTitle("Downloading...");
+                _dialog.setMessage("...from " + _host + ": " + DataHelper.formatSize(prog) + 'B');
+                //_dialog.setProgress(prog);
             } else {
                 // nothing
             }
