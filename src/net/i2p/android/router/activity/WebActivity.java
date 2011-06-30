@@ -86,6 +86,8 @@ public class WebActivity extends I2PActivityBase {
             _wvClient.cancelAll();
             wv.stopLoading();
             if (wv.canGoBack()) {
+                // TODO go into history, get url and call shouldOverrideUrlLoading()
+                // so we have control ??? But then back won't work right
                 wv.goBack();
                 return true;
             }

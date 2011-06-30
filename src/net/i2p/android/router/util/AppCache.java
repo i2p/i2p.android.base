@@ -85,9 +85,11 @@ public class AppCache {
      *  Add a previously written file to the cache index.
      *  Return a content:// uri for the cached content in question,
      *  or null on error
+     *
      *  @param key no fragment allowed
+     *  @param setAsCurrentBase tell CacheProvider
      */
-    public Uri addCacheFile(Uri key) {
+    public Uri addCacheFile(Uri key, boolean setAsCurrentBase) {
         int hash = toHash(key);
         synchronized(_cache) {
             _cache.put(Integer.valueOf(hash), DUMMY);
@@ -95,7 +97,7 @@ public class AppCache {
         // file:/// uri
         //return Uri.fromFile(toFile(hash)).toString();
         // content:// uri
-        return insertContent(key);
+        return insertContent(key, setAsCurrentBase);
     }
 
     /**
@@ -237,10 +239,12 @@ public class AppCache {
     /**
      *  @return the uri inserted or null on failure
      */
-    private static Uri insertContent(Uri key) {
+    private static Uri insertContent(Uri key, boolean setAsCurrentBase) {
         String path = toFile(key).getAbsolutePath();
         ContentValues cv = new ContentValues();
         cv.put(CacheProvider.DATA, path);
+        if (setAsCurrentBase)
+            cv.put(CacheProvider.CURRENT_BASE, Boolean.TRUE);
         Uri uri = CacheProvider.getContentUri(key);
         if (uri != null) {
            _resolver.insert(uri, cv);

@@ -50,8 +50,11 @@ public class CacheProvider extends ContentProvider {
     public static final String AUTHORITY = "net.i2p.android.router";
     /** includes the nonce */
     public static final Uri CONTENT_URI = Uri.parse(SCHEME + "://" + AUTHORITY + '/' + NONCE);
-    /** the database key */
+
+    /** the database keys */
     public static final String DATA = "_data";
+    public static final String CURRENT_BASE = "currentBase";
+
     private static final String QUERY_MARKER = "!!QUERY!!";
 
     private static final String ERROR_HEADER = "<html><head><title>Not Found</title></head><body>";
@@ -61,7 +64,7 @@ public class CacheProvider extends ContentProvider {
 
     /**
      *  Generate a cache content (resource) URI for a given URI key
-     *  If the key is already a resource URI, canonicalize it
+     *  If the key is already a content URI, canonicalize it
      *  by twizzling the query if necessary
      *
      *  @param key must contain a scheme, authority and path
@@ -110,6 +113,10 @@ public class CacheProvider extends ContentProvider {
     @Override
     public ParcelFileDescriptor openFile(Uri uri, String mode) throws FileNotFoundException {
         Util.e("CacheProvider open " + uri);
+
+        // if uri is malformed and we have a current base, rectify it
+        uri = rectifyContentUri(getCurrentBase(), uri);
+
         // map the resource URI to a local file URI and return it if it exists
         String filePath = get(uri);
         if (filePath != null) {
@@ -131,7 +138,7 @@ public class CacheProvider extends ContentProvider {
     }
 
     /**
-     *  Generate an i2p URI for a resource URI
+     *  Generate an i2p URI for a content URI
      *
      *  @param uri must contain a scheme, authority and path with nonce etc. as defined above
      *  @return non-null
@@ -168,6 +175,59 @@ public class CacheProvider extends ContentProvider {
         return Uri.parse(i2pUri);
     }
 
+    /**
+     *  Rectify a malformed content uri using the current base content uri.
+     *  Any query in uri is also canonicalized.
+     *
+     *  @param base a valid content base uri e.g. content://net.i2p.android.router/0/http/bar.i2p/baz/baf.html
+     *             if null, uri is returned.
+     *  @param uri a malformed content uri e.g. content://net.i2p.android.router/foo.html
+     *  @return a valid content uri e.g. content://net.i2p.android.router/0/http/bar.i2p/foo.html,
+     *          or the original uri on error, or if no rectification needed
+     */
+    public static Uri rectifyContentUri(Uri base, Uri uri) {
+        Util.e("rectifyContentUri  base: " + base + " and uri: " + uri);
+        if (base == null)
+            return uri;
+        if (!SCHEME.equals(base.getScheme()))
+            return uri;
+        if (!AUTHORITY.equals(base.getEncodedAuthority()))
+            return uri;
+        String basePath = base.getEncodedPath();
+        if (basePath == null)
+            return uri;
+        String[] segs = basePath.split("/", 5);
+        if (segs.length < 3)
+            return uri;
+        // first seg is empty since string starts with /
+        if (!segs[1].equals(NONCE))
+            return uri;
+        if (!segs[2].equals("http"))
+            return uri;
+        String host = segs[3];
+        if (!SCHEME.equals(uri.getScheme()))
+            return uri;
+        if (!AUTHORITY.equals(uri.getEncodedAuthority()))
+            return uri;
+        String path = uri.getEncodedPath();
+        if (path != null && (path.startsWith(NONCE + '/') || path.startsWith('/' + NONCE + '/')))
+            return uri;
+        String query = uri.getEncodedQuery();
+        StringBuilder buf = new StringBuilder(128);
+        buf.append(SCHEME).append("://")
+           .append(AUTHORITY).append('/')
+           .append(NONCE).append("/http/")
+           .append(host);
+        if (path == null || !path.startsWith("/"))
+            buf.append('/');
+        if (path != null)
+            buf.append(path);
+        if (query != null)
+            buf.append(QUERY_MARKER).append(query);
+        Util.e("rectified from base: " + base + " and uri: " + uri + " to: " + buf);
+        return Uri.parse(buf.toString());
+    }
+
     private ParcelFileDescriptor eepFetch(Uri uri) throws FileNotFoundException {
         AppCache cache = AppCache.getInstance(getContext());
         OutputStream out;
@@ -182,8 +242,8 @@ public class CacheProvider extends ContentProvider {
         if (success) {
             File file = cache.getCacheFile(uri);
             if (file.length() > 0) {
-                // this call will insert it back to us
-                Uri content = cache.addCacheFile(uri);
+                // this call will insert it back to us (don't set as current base)
+                Uri content = cache.addCacheFile(uri, false);
                 ParcelFileDescriptor parcel = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
                 return parcel;
             } else {
@@ -211,10 +271,16 @@ public class CacheProvider extends ContentProvider {
      *  _data -> String absolute path of the file (NOT a file:// URI)
      */
     public Uri insert(Uri uri, ContentValues values) {
-        Util.e("CacheProvider insert " + uri);
         String fileURI = values.getAsString(DATA);
-        if (fileURI != null)
+        if (fileURI != null) {
+            Util.e("CacheProvider insert " + uri);
             put(uri, fileURI);
+        }
+        Boolean setAsCurrentBase = values.getAsBoolean(CURRENT_BASE);
+        if (setAsCurrentBase != null && setAsCurrentBase.booleanValue()) {
+            Util.e("CacheProvider set current base " + uri);
+            setCurrentBase(uri);
+        }
         return uri;
     }
 
@@ -237,10 +303,13 @@ public class CacheProvider extends ContentProvider {
     ///// Map stuff
 
     private void cleanup() {
+        String pfx = CONTENT_URI.toString();
         List<String> toDelete = new ArrayList();
         Map<String, ?> map = _sharedPrefs.getAll();
         for (Map.Entry<String, ?> e : map.entrySet()) {
             String path = (String) e.getValue();
+            if (!path.startsWith(pfx))
+                continue;
             File f = new File(path);
             if (!f.exists())
                 toDelete.add(e.getKey());
@@ -260,6 +329,18 @@ public class CacheProvider extends ContentProvider {
 
     private void put(Uri uri, String fileURI) {
         setPref(uri.toString(), fileURI);
+    }
+
+    /** @return may be null */
+    private Uri getCurrentBase() {
+        String url = getPref(CURRENT_BASE);
+        if (url != null)
+           return Uri.parse(url);
+        return null;
+    }
+
+    private void setCurrentBase(Uri contentURI) {
+        setPref(CURRENT_BASE, contentURI.toString());
     }
 
     /** @return true if it was removed */

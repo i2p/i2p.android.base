@@ -46,37 +46,23 @@ class I2PWebViewClient extends WebViewClient {
         Util.e("Should override? " + url);
         view.stopLoading();
 
-            Uri uri = Uri.parse(url);
+        Uri uri = Uri.parse(url);
 
-            if (CONTENT.equals(uri.getScheme())) {
-                if (CacheProvider.AUTHORITY.equals(uri.getAuthority())) {
-                    if (!url.startsWith(CacheProvider.CONTENT_URI.toString())) {
-                        // Fix up top-level links like <a href="/foo">
-                        // take the host from the current uri and the path from the new uri
-                        Util.e("Content URI bad nonce, FIXME: " + url);
-                        String currentUrl = view.getUrl();
-                        Uri currentUri = Uri.parse(currentUrl);
-                        try {
-                            //reverse back to a i2p URI
-                            Uri iUri = CacheProvider.getI2PUri(currentUri);
-                            String q = uri.getQuery();
-                            url = iUri.getScheme() + "://" + iUri.getHost() + '/' + uri.getPath() +
-                                  (q != null ? ('?' + q) : "");
-                            uri = Uri.parse(url);
-                            Util.e("Fixed up top-level url back to " + url);
-                        } catch (FileNotFoundException fnfe) {}
-                    } else {
-                        try {
-                            //reverse back to a i2p URI so we can load it here and not in ContentProvider
-                            uri = CacheProvider.getI2PUri(uri);
-                            url = uri.toString();
-                            Util.e("Reversed content uri back to " + url);
-                        } catch (FileNotFoundException fnfe) {}
-                    }
-                } else {
-                    Util.e("Content URI but not for us?? " + url);
-                }
-            }
+        if (CONTENT.equals(uri.getScheme())) {
+            // Fix up top-level links like <a href="/foo">
+            // take the host from the current uri and the path from the new uri
+            String currentUrl = view.getUrl();
+            Uri currentUri = Uri.parse(currentUrl);
+            uri = CacheProvider.rectifyContentUri(currentUri, uri);
+
+            //reverse back to a i2p URI so we can load it here and not in ContentProvider
+            try {
+                uri = CacheProvider.getI2PUri(uri);
+                Util.e("Reversed content uri back to " + uri);
+            } catch (FileNotFoundException fnfe) {}
+            url = uri.toString();
+        }
+
 
             String s = uri.getScheme();
             if (s == null) {
@@ -314,7 +300,8 @@ class I2PWebViewClient extends WebViewClient {
                 try { out.close(); } catch (IOException ioe) {}
                 if (success) {
                     // store in cache, get content URL, and load that way
-                    Uri content = AppCache.getInstance(_view.getContext()).addCacheFile(uri);
+                    // Set as current base
+                    Uri content = AppCache.getInstance(_view.getContext()).addCacheFile(uri, true);
                     if (content != null) {
                         Util.e("Stored cache in " + content);
                     } else {
