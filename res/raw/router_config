@@ -16,6 +16,11 @@ time.disabled=true
 #
 i2cp.disableInterface=true
 #
+# hosts.txt should be more crash-proof than blockfile
+# Todo: implement a NamingService using the android native SQLite
+#
+i2p.naming.impl=net.i2p.client.naming.HostsTxtNamingService
+#
 ##### Tunnels
 #
 router.inboundPool.backupQuantity=0

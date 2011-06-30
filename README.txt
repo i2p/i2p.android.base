@@ -4,8 +4,6 @@ SDK Platform-tools Version 5, June 2011.
 
 The i2p source must be installed in ../i2p.i2p,
 or else add i2psrc=/path/to/source in the local.properties file.
-Temporary - requires changes in the i2p.i2p.zzz.android branch,
-use it instead!
 
 =====================
 

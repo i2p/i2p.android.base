@@ -27,15 +27,13 @@ Embedded web browser
 The browser does not use the outproxy for regular web sites. Javascript is disabled.
 
 The following problems with eepsites are probably not fixable except on Android 3.0 (Honeycomb - i.e. tablets) due to API limitations. I don't have a tablet to test on, so I haven't made any effort to work on it. The workaround is to use Firefox Mobile 4 and the ProxMob plugin (see below).
-  - No images
-  - No CSS
   - No POSTs to forms
 
 For eepsites, there are several other things to note:
   - No cookies
   - No way to type in addresses
-  - Eepsites are not found in the cache when hitting the back button
-  - Fetches are aborted when you rotate the screen
+  - Several issues with images and CSS fetches
+  - Non-HTML links (pdf, text, images, torrent, etc.) probably don't work
 
 
 Using clients with the router
