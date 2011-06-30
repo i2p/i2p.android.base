@@ -47,15 +47,37 @@ class I2PWebViewClient extends WebViewClient {
         view.stopLoading();
 
             Uri uri = Uri.parse(url);
+
             if (CONTENT.equals(uri.getScheme())) {
-                try {
-                    //reverse back to a i2p URI so we can load it here and not in ContentProvider
-                    uri = CacheProvider.getI2PUri(uri);
-                    url = uri.toString();
-                    Util.e("Reversed content uri back to " + url);
-                    AppCache.getInstance(view.getContext()).removeCacheFile(uri);
-                } catch (FileNotFoundException fnfe) {}
+                if (CacheProvider.AUTHORITY.equals(uri.getAuthority())) {
+                    if (!url.startsWith(CacheProvider.CONTENT_URI.toString())) {
+                        // Fix up top-level links like <a href="/foo">
+                        // take the host from the current uri and the path from the new uri
+                        Util.e("Content URI bad nonce, FIXME: " + url);
+                        String currentUrl = view.getUrl();
+                        Uri currentUri = Uri.parse(currentUrl);
+                        try {
+                            //reverse back to a i2p URI
+                            Uri iUri = CacheProvider.getI2PUri(currentUri);
+                            String q = uri.getQuery();
+                            url = iUri.getScheme() + "://" + iUri.getHost() + '/' + uri.getPath() +
+                                  (q != null ? ('?' + q) : "");
+                            uri = Uri.parse(url);
+                            Util.e("Fixed up top-level url back to " + url);
+                        } catch (FileNotFoundException fnfe) {}
+                    } else {
+                        try {
+                            //reverse back to a i2p URI so we can load it here and not in ContentProvider
+                            uri = CacheProvider.getI2PUri(uri);
+                            url = uri.toString();
+                            Util.e("Reversed content uri back to " + url);
+                        } catch (FileNotFoundException fnfe) {}
+                    }
+                } else {
+                    Util.e("Content URI but not for us?? " + url);
+                }
             }
+
             String s = uri.getScheme();
             if (s == null) {
                 fail(view, "Bad URL " + url);
@@ -100,12 +122,6 @@ class I2PWebViewClient extends WebViewClient {
                 task.execute(url);
             } else {
                 if (s.equals(CONTENT)) {
-                    if (h.equals(CacheProvider.AUTHORITY)) {
-                        if (!url.startsWith(CacheProvider.CONTENT_URI.toString()))
-                            Util.e("Content URI bad nonce, FIXME: " + url);
-                    } else {
-                        Util.e("Content URI but not for us?? " + url);
-                    }
 
                     // canonicalize to append query to path
                     // because the resolver doesn't send a query to the provider
