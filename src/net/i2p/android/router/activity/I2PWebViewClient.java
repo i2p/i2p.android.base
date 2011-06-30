@@ -218,7 +218,8 @@ class I2PWebViewClient extends WebViewClient {
 
         public BGLoad(WebView view, ProgressDialog dialog) {
             _view = view;
-            dialog.setCancelable(true);
+            if (dialog != null)
+                dialog.setCancelable(true);
             _dialog = dialog;
         }
 
