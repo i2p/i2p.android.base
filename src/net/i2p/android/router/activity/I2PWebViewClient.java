@@ -30,6 +30,8 @@ import net.i2p.util.EepGet;
 class I2PWebViewClient extends WebViewClient {
 
     private BGLoad _lastTask;
+    /** save it here so we can dismiss it in onPageFinished() */
+    private ProgressDialog _lastDialog;
 
     // TODO add some inline style
     private static final String CONTENT = "content";
@@ -104,7 +106,8 @@ class I2PWebViewClient extends WebViewClient {
                 ///////// API 8
                 // Otherwise hangs waiting for CSS
                 view.getSettings().setBlockNetworkLoads(false);
-                BGLoad task = new BackgroundEepLoad(view, h);
+                _lastDialog = new ProgressDialog(view.getContext());
+                BGLoad task = new BackgroundEepLoad(view, h, _lastDialog);
                 _lastTask = task;
                 task.execute(url);
             } else {
@@ -159,6 +162,14 @@ class I2PWebViewClient extends WebViewClient {
     @Override
     public void onPageFinished(WebView view, String url) {
         Util.e("OPF URL: " + url);
+        ProgressDialog d = _lastDialog;
+        if (d != null && d.isShowing()) {
+            try {
+                // throws IAE - not attached to window manager - on screen rotation
+                // isShowing() may cover it though.
+                d.dismiss();
+            } catch (Exception e) {}
+        }
         super.onPageFinished(view, url);
     }
 
@@ -203,15 +214,23 @@ class I2PWebViewClient extends WebViewClient {
 
     private abstract static class BGLoad extends AsyncTask<String, Integer, Integer> implements DialogInterface.OnCancelListener {
         protected final WebView _view;
-        protected ProgressDialog _dialog;
+        protected final ProgressDialog _dialog;
 
-        public BGLoad(WebView view) {
+        public BGLoad(WebView view, ProgressDialog dialog) {
             _view = view;
+            dialog.setCancelable(true);
+            _dialog = dialog;
         }
 
         @Override
         protected void onPostExecute(Integer result) {
-            dismiss();
+            if (_dialog != null && _dialog.isShowing()) {
+                // since webkit is just going to sit there...
+                try {
+                    _dialog.setTitle("Downloading...");
+                    _dialog.setMessage("...CSS and images...");
+                } catch (Exception e) {}
+            }
         }
 
         @Override
@@ -239,7 +258,7 @@ class I2PWebViewClient extends WebViewClient {
     private static class BackgroundLoad extends BGLoad {
 
         public BackgroundLoad(WebView view) {
-            super(view);
+            super(view, null);
         }
 
         protected Integer doInBackground(String... urls) {
@@ -256,11 +275,11 @@ class I2PWebViewClient extends WebViewClient {
         protected void onProgressUpdate(Integer... progress) {
             if (isCancelled())
                 return;
-            if (progress[0].intValue() < 0) {
-                _dialog = ProgressDialog.show(_view.getContext(), "Loading", "some url");
-                _dialog.setOnCancelListener(this);
-                _dialog.setCancelable(true);
-            }
+            //if (progress[0].intValue() < 0) {
+            //    _dialog = ProgressDialog.show(_view.getContext(), "Loading", "some url");
+            //    _dialog.setOnCancelListener(this);
+            //    _dialog.setCancelable(true);
+            //}
         }
 
 
@@ -273,8 +292,8 @@ class I2PWebViewClient extends WebViewClient {
         private final String _host;
         private int _total;
 
-        public BackgroundEepLoad(WebView view, String host) {
-            super(view);
+        public BackgroundEepLoad(WebView view, String host, ProgressDialog dialog) {
+            super(view, dialog);
             _host = host;
         }
 
@@ -379,17 +398,12 @@ class I2PWebViewClient extends WebViewClient {
                 return;
             int prog = progress[0].intValue();
             if (prog < 0) {
-                // Can't change style on the fly later, results in an NPE in setMax()
-                //_dialog = ProgressDialog.show(_view.getContext(), "Fetching...", "from " + _host);
-                ProgressDialog d = new ProgressDialog(_view.getContext());
-                d.setCancelable(true);
-                d.setTitle("Contacting...");
-                d.setMessage(_host);
-                d.setIndeterminate(true);
-                d.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                d.show();
-                d.setOnCancelListener(this);
-                _dialog = d;
+                _dialog.setTitle("Contacting...");
+                _dialog.setMessage(_host);
+                _dialog.setIndeterminate(true);
+                _dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                _dialog.setOnCancelListener(this);
+                _dialog.show();
             } else if (prog == 0 && _total > 0) {
                 _dialog.setTitle("Downloading...");
                 _dialog.setMessage("...from " + _host);
@@ -397,7 +411,8 @@ class I2PWebViewClient extends WebViewClient {
                 _dialog.setMax(_total);
                 _dialog.setProgress(0);
             } else if (_total > 0) {
-                _dialog.setProgress(prog);
+                // so it isn't at 100% while loading images and CSS
+                _dialog.setProgress(Math.min(prog, _total * 99 / 100));
             } else if (prog > 0) {
                 // ugly, need custom
                 _dialog.setTitle("Downloading...");
