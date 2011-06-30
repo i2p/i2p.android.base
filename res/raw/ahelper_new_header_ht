@@ -1,0 +1,24 @@
+HTTP/1.1 409 New Address
+Content-Type: text/html; charset=UTF-8
+Cache-control: no-cache
+Connection: close
+Proxy-Connection: close
+
+<html><head>
+<title>I2P Information: New Host Name</title>
+<link href="file:///data/data/net.i2p.android.router/files/docs/themes/console/light/console.css" rel="stylesheet" type="text/css" >
+<link href="file:///data/data/net.i2p.android.router/files/docs/themes/console/light/android.css" rel="stylesheet" type="text/css" >
+</head>
+<body>
+<div class=logo>
+ <img src="file:///data/data/net.i2p.android.router/files/docs/themes/console/images/i2plogo.png" alt="I2P Router Console" border="0">
+</div>
+<div class=warning id=warning>
+<h3>Information: New Host Name with Address Helper</h3>
+<p>
+The address helper link you followed is for a new host name that is not in your address book.
+You may save this host name to your local address book.
+If you save it to your address book, you will not see this message again.
+If you do not save it, the host name will be forgotten after the next router restart.
+If you do not wish to visit this host, click the "back" button on your browser.
+</p>

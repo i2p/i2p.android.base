@@ -72,10 +72,39 @@ class Init {
             mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
             mergeResourceToFile(R.raw.more_hosts_txt, "hosts.txt", null);
             copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
+
             File abDir = new File(myDir, "addressbook");
             abDir.mkdir();
             copyResourceToFile(R.raw.subscriptions_txt, "addressbook/subscriptions.txt");
             mergeResourceToFile(R.raw.addressbook_config_txt, "addressbook/config.txt", null);
+
+            File docsDir = new File(myDir, "docs");
+            docsDir.mkdir();
+            copyResourceToFile(R.raw.ahelper_conflict_header_ht, "docs/ahelper-conflict-header.ht");
+            copyResourceToFile(R.raw.ahelper_new_header_ht, "docs/ahelper-new-header.ht");
+            copyResourceToFile(R.raw.auth_header_ht, "docs/auth-header.ht");
+            copyResourceToFile(R.raw.denied_header_ht, "docs/denied-header.ht");
+            copyResourceToFile(R.raw.dnf_header_ht, "docs/dnf-header.ht");
+            copyResourceToFile(R.raw.dnfb_header_ht, "docs/dnfb-header.ht");
+            copyResourceToFile(R.raw.dnfh_header_ht, "docs/dnfh-header.ht");
+            copyResourceToFile(R.raw.dnfp_header_ht, "docs/dnfp-header.ht");
+            copyResourceToFile(R.raw.localhost_header_ht, "docs/localhost-header.ht");
+            copyResourceToFile(R.raw.noproxy_header_ht, "docs/noproxy-header.ht");
+            copyResourceToFile(R.raw.protocol_header_ht, "docs/protocol-header.ht");
+
+            File cssDir = new File(docsDir, "themes/console/light");
+            cssDir.mkdirs();
+            copyResourceToFile(R.raw.console_css, "docs/themes/console/light/console.css");
+            copyResourceToFile(R.raw.android_css, "docs/themes/console/light/android.css");
+
+            File imgDir = new File(docsDir, "themes/console/images");
+            imgDir.mkdir();
+            copyResourceToFile(R.drawable.i2plogo, "docs/themes/console/images/i2plogo.png");
+            copyResourceToFile(R.drawable.itoopie_sm, "docs/themes/console/images/itoopie_sm.png");
+
+            File img2Dir = new File(cssDir, "images");
+            img2Dir.mkdir();
+            copyResourceToFile(R.drawable.header, "docs/themes/console/light/images/header.png");
         }
 
         deleteOldFiles();

@@ -1,0 +1,24 @@
+HTTP/1.1 407 Proxy Authorization Required
+Content-Type: text/html; charset=UTF-8
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.5
+Proxy-Authenticate: Basic realm="I2P HTTP Proxy"
+Cache-control: no-cache
+Connection: close
+Proxy-Connection: close
+
+<html><head>
+<title>Proxy Authorization Required</title>
+<link href="file:///data/data/net.i2p.android.router/files/docs/themes/console/light/console.css" rel="stylesheet" type="text/css" >
+<link href="file:///data/data/net.i2p.android.router/files/docs/themes/console/light/android.css" rel="stylesheet" type="text/css" >
+</head>
+<body>
+<div class=warning id=warning>
+<h3>I2P HTTP Proxy Authorization Required</h3>
+This proxy is configured to require a username and password for access.
+Please enter your username and password, or check your
+router configuration
+or
+I2PTunnel configuration.
+To disable authorization, remove the configuration
+<code>i2ptunnel.proxy.auth=basic</code>, then stop and restart the HTTP Proxy tunnel.
+</div>

@@ -1,0 +1,20 @@
+HTTP/1.1 503 Service Unavailable
+Content-Type: text/html; charset=UTF-8
+Cache-control: no-cache
+Connection: close
+Proxy-Connection: close
+
+<html><head>
+<title>I2P Warning: No outproxy configured</title>
+<link href="file:///data/data/net.i2p.android.router/files/docs/themes/console/light/console.css" rel="stylesheet" type="text/css" >
+<link href="file:///data/data/net.i2p.android.router/files/docs/themes/console/light/android.css" rel="stylesheet" type="text/css" >
+</head>
+<body>
+<div class=logo>
+ <img src="file:///data/data/net.i2p.android.router/files/docs/themes/console/images/i2plogo.png" alt="I2P Router Console" border="0">
+</div>
+<div class=warning id=warning>
+<h3>Warning: No Outproxy Configured</h3>
+Your request was for a site outside of I2P, but you have no
+HTTP outproxy configured.  Please configure an outproxy in I2PTunnel.
+</div>

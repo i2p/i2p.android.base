@@ -1,0 +1,13 @@
+/* overrides of console.css */
+
+div.logo {
+     margin: 0 auto;
+     float: none;
+}
+
+/* proxy error messages */
+
+div.warning {
+     margin: 20px;
+     min-width: 360px;
+}

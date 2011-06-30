@@ -1,0 +1,26 @@
+HTTP/1.1 404 Domain Not Found
+Content-Type: text/html; charset=UTF-8
+Cache-control: no-cache
+Connection: close
+Proxy-Connection: close
+
+<html><head>
+<title>I2P Warning: Eepsite unknown</title>
+<link href="file:///data/data/net.i2p.android.router/files/docs/themes/console/light/console.css" rel="stylesheet" type="text/css" >
+</head>
+<body>
+<div class=logo>
+ <img src="file:///data/data/net.i2p.android.router/files/docs/themes/console/images/i2plogo.png" alt="I2P Router Console" border="0">
+<link href="file:///data/data/net.i2p.android.router/files/docs/themes/console/light/android.css" rel="stylesheet" type="text/css" >
+</div>
+<div class=warning id=warning>
+<h3>Warning: Eepsite Not Found in Addressbook</h3>
+The eepsite was not found in your router's addressbook.
+Check the link or find a BASE64 address.
+If you have the BASE64 address,  paste it into your userhosts.txt in
+your address book,
+use a BASE64 address helper, or use a jump service link below.<br><br>
+Seeing this page often? See <a href="http://www.i2p2.i2p/faq.html#subscriptions">the FAQ</a>
+for help in adding some subscriptions
+to your addressbook.<hr>
+<b>Could not find the following destination:</b><BR><BR>

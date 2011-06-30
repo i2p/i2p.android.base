@@ -27,7 +27,7 @@ public class EepGetFetcher implements EepGet.StatusListener {
 
     private static final String ERROR_HEADER = "<html><head><title>Not Found</title></head><body>";
     private static final String ERROR_URL = "<p>Unable to load URL: ";
-    private static final String ERROR_ROUTER = "<p>Your router does not appear to be up.</p>";
+    private static final String ERROR_ROUTER = "<p>Your router (or the HTTP proxy) does not appear to be running.</p>";
     private static final String ERROR_FOOTER = "</body></html>";
 
     /**

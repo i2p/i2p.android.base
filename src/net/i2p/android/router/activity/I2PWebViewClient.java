@@ -38,7 +38,7 @@ class I2PWebViewClient extends WebViewClient {
     private static final String HEADER = "<html><head></head><body>";
     private static final String FOOTER = "</body></html>";
     private static final String ERROR_URL = "<p>Unable to load URL: ";
-    private static final String ERROR_ROUTER = "<p>Your router does not appear to be up.</p>";
+    private static final String ERROR_ROUTER = "<p>Your router (or the HTTP proxy) does not appear to be running.</p>";
 
     public I2PWebViewClient(Context ctx) {
         super();
