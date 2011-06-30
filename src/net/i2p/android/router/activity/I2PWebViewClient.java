@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.Gravity;
@@ -147,6 +148,18 @@ class I2PWebViewClient extends WebViewClient {
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         Util.e("ORE " + errorCode + " Desc: " + description + " URL: " + failingUrl);
         super.onReceivedError(view, errorCode, description, failingUrl);
+    }
+
+    @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        Util.e("OPS URL: " + url);
+        super.onPageStarted(view, url, favicon);
+    }
+
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        Util.e("OPF URL: " + url);
+        super.onPageFinished(view, url);
     }
 
 /******

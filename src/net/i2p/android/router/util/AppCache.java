@@ -115,14 +115,19 @@ public class AppCache {
     /**
      *  Return a content:// uri for any cached content in question.
      *  The file may or may not exist, and it may be deleted at any time.
+     *  Side effect: If exists, sets as current base
+     *
      *  @param key no fragment allowed
      */
     public Uri getCacheUri(Uri key) {
         int hash = toHash(key);
         // poke the LRU
+        Object present = null;
         synchronized(_cache) {
-            _cache.get(Integer.valueOf(hash));
+            present = _cache.get(Integer.valueOf(hash));
         }
+        if (present != null)
+            setAsCurrentBase(key);
         return CacheProvider.getContentUri(key);
     }
 
@@ -251,6 +256,17 @@ public class AppCache {
            return uri;
         }
         return null;
+    }
+
+    /**
+     *  Set key as current base. May be content or i2p key.
+     */
+    private static void setAsCurrentBase(Uri key) {
+        ContentValues cv = new ContentValues();
+        cv.put(CacheProvider.CURRENT_BASE, Boolean.TRUE);
+        Uri uri = CacheProvider.getContentUri(key);
+        if (uri != null)
+           _resolver.insert(uri, cv);
     }
 
     /** ok for now but we will need to store key in the map and delete by integer */
