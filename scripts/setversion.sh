@@ -34,19 +34,20 @@ VERSIONSTRING="${CORE}-${ROUTERBUILD}_b$(($ANDROIDBUILD % 512))-API$SDK"
 # MAJOR	 	4 bits 0-15
 # MINOR 	8 bits 0-255
 # RELEASE	8 bits 0-255
-# ROUTERBUILD	8 bits 0-255
-# ANDROIDBUILD	3 bits 0-7
+# ROUTERBUILD	7 bits 0-127
+# ANDROIDBUILD	4 bits 0-15
 #
-# Note that ANDROIDBUILD is modded % 8, it will wrap,
+# Note that ANDROIDBUILD is modded % 16, it will wrap,
 # beware of that if you release multiple builds using the
 # same ROUTERBUILD, or clear it if you update ROUTERBUILD
+# Subtract 1 from ANDROIDBUILD since it starts at 1 after distclean.
 #
 VERSIONINT=$(( \
 		(($MAJOR % 16) << 27) + \
 		(($MINOR % 256) << 19) + \
 		(($RELEASE % 256) << 11) + \
-		(($ROUTERBUILD % 256) << 3) + \
-		 ($ANDROIDBUILD % 8) \
+		(($ROUTERBUILD % 128) << 4) + \
+		(($ANDROIDBUILD - 1) % 16) \
 	      ))
 
 echo "Android version: '$VERSIONSTRING' (${VERSIONINT})"

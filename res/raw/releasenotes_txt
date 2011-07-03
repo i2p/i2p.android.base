@@ -1,5 +1,7 @@
 ******* Please read all of the following *******
 
+This is the first alpha release of the I2P Android app.
+
 WARNING - This is ALPHA SOFTWARE. It may crash your phone. Do not rely upon it for strong anonymity. Tunnels may be as short as one hop. There may be serious security holes in the app.
 
 Minimum Android OS is 2.2 (API 8). The app is only tested on the Motorola Droid. It uses a lot of RAM. You need at least 256 MB of RAM. 512 should be much better.
@@ -18,7 +20,7 @@ NTP is disabled. If you have cell service, your phone or tablet should have the 
 
 The app will work best when you are not changing IPs. If you are moving around, changing WIFI nodes, or switching between mobile and WIFI networks, it won't work well.
 
-There is no method to configure anything in the app.
+There is not yet any method to configure anything in the app.
 
 
 Embedded web browser

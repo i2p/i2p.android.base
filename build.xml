@@ -224,7 +224,7 @@
     <!-- just to make it easier -->
     <target name="create-signing-keys" >
         <echo message="key store is ${key.store}" />
-        <echo message="key store password is android" />
+        <echo message="key store password is ${key.store.password}" />
         <echo message="key alias is ${key.alias}" />
         <input message="Enter common name for new key (your name): " addproperty="release.cn" />
         <fail message="You must enter a name" >
@@ -253,7 +253,7 @@
             <arg value="-keysize" />
             <arg value="4096" />
             <arg value="-storepass" />
-            <arg value="android" />
+            <arg value="${key.store.password}" />
             <arg value="-dname" />
             <arg value="cn=${release.cn}, ou=Apps, o=I2P, c=DE" />
         </exec>
@@ -268,17 +268,48 @@
         </exec>
     </target>
 
-    <target name="hint" >
-        <echo message="key store password is android" />
+    <target name="verifyKeystore" >
+        <available file="${key.store}" property="keystore.present" />
+        <fail message="You must first create a keystore and keys with 'ant create-signing-keys'" >
+            <condition>
+                <not>
+                    <isset property="keystore.present" />
+                </not>
+            </condition>
+        </fail>
     </target>
 
-    <target name="verify" depends="hint, release" >
+    <target name="verifyWorkspace" >
+        <echo message="Everything is checked in, right? Let's be sure:" />
+        <exec executable="mtn" failonerror="true">
+            <arg value="st" />
+        </exec>
+        <echo message="If there are any modified files above, stop now!" />
+        <echo message="(except AndroidManifest.xml)" />
+    </target>
+
+    <target name="verify" depends="verifyKeystore, verifyWorkspace, release" >
         <exec executable="jarsigner" osfamily="unix" failonerror="true">
             <arg value="-verify" />
             <arg value="-verbose" />
             <arg value="-certs" />
             <arg value="${out.release.file}" />
         </exec>
+        <echo message="" />
+        <echo message="Release file is ${out.release.file}" />
+        <echo message="Android version name: ${my.version.name}" />
+        <echo message="Android version code: ${my.version.code}" />
+        <echo message="File size:" />
+        <exec executable="ls" failonerror="true">
+            <arg value="-l" />
+            <arg value="${out.release.file}" />
+        </exec>
+        <echo message="SHA256 sum:" />
+        <exec executable="sha256sum" failonerror="true">
+            <arg value="${out.release.file}" />
+        </exec>
+        <echo message="Don't forget to mtn ci AndroidManifest.xml" />
+        <echo message="Don't forget to mtn tag w: android-${my.version.name}" />
     </target>
 
     <!--
