@@ -291,7 +291,7 @@ public class RouterService extends Service {
             if (_state == State.STARTING)
                 _starterThread.interrupt();
             if (_state == State.STARTING || _state == State.RUNNING) {
-                _statusBar.replace("Quitting I2P");
+                _statusBar.replace("Stopping I2P");
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_QUITTING, State.MANUAL_QUITTED));
                 stopperThread.start();
             } else if (_state == State.WAITING) {

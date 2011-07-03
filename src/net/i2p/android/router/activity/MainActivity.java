@@ -141,6 +141,7 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
+        /* hidden, unused */
         b = (Button) findViewById(R.id.router_stop_button);
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

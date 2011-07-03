@@ -174,9 +174,25 @@ public abstract class I2PActivityBase extends Activity {
             startActivity(i3);
             return true;
 
-        case R.id.menu_reload:
         case R.id.menu_start:
+            RouterService svc = _routerService;
+            if (svc != null && _isBound && svc.canManualStart()) {
+                setPref(PREF_AUTO_START, true);
+                svc.manualStart();
+            } else {
+                startRouter();
+            }
+            return true;
+
         case R.id.menu_stop:
+            RouterService rsvc = _routerService;
+            if (rsvc != null && _isBound && rsvc.canManualStop()) {
+                setPref(PREF_AUTO_START, false);
+                rsvc.manualStop();
+            }
+            return true;
+
+        case R.id.menu_reload:  // handled in WebActivity
         default:
             return super.onOptionsItemSelected(item);
         }

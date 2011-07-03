@@ -27,13 +27,19 @@ Embedded web browser
 The browser does not use the outproxy for regular web sites. Javascript is disabled.
 
 The following problems with eepsites are probably not fixable except on Android 3.0 (Honeycomb - i.e. tablets) due to API limitations. I don't have a tablet to test on, so I haven't made any effort to work on it. The workaround is to use Firefox Mobile 4 and the ProxMob plugin (see below).
+  - Leaks .i2p DNS requests
+  - Can't load cross-site images or CSS
   - No POSTs to forms
 
 For eepsites, there are several other things to note:
-  - No cookies
   - No way to type in addresses
   - Several issues with images and CSS fetches
   - Non-HTML links (pdf, text, images, torrent, etc.) probably don't work
+  - Frame support is flaky
+
+For eepsites and websites, problems include:
+  - No cookies
+  - History and back issues
 
 
 Using clients with the router
@@ -48,8 +54,6 @@ The IRC proxy is tested with the "Android IRC Free" app. The IRC proxy destinati
   * Port 6669: irc.welterde.i2p
   * Port 6670: irc.telecomix.i2p
 
-Report results and bugs on the zzz.i2p Android forum. New versions will be announced there.
-
 
 Further anonymity warnings
 --------------------------
@@ -58,7 +62,19 @@ Further anonymity warnings
 * Exploratory and Client Tunnels are 1 hop + 0-1 hops
 * Sharing IRC and HTTP proxies on same tunnels allows for linking
 * Not well-tested
-* There may be DNS leaks
+* There are .i2p DNS leaks
 * Cell phones aren't exactly secure environments
 * This app does not attempt to "sanitize" your phone, make you safe from Google, or capture and route traffic from any other apps over I2P
 * The app does not require root or do anything with iptables, for example, to route or block traffic.
+
+
+Bugs and Support
+----------------
+
+Report results and bugs on the zzz.i2p Android forum (preferred) or on trac.i2p2.i2p. New versions will be announced on zzz.i2p.
+
+
+Help Wanted!
+------------
+
+Want to help make the app better? Volunteer on the zzz.i2p Android forum. Want to donate money or bitcoins to buy more Android devices, including tablets, for development and testing? Go to www.i2p2.i2p/donate.
