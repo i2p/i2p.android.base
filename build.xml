@@ -94,6 +94,14 @@
         <!-- override with i2psrc=path/to/source in local.properties -->
         <property name="i2psrc" value="../i2p.i2p" />
         <property name="i2pbase" location="${i2psrc}" />
+        <available file="${i2psrc}" property="i2p.present" />
+        <fail message="I2P source directory ${i2psrc} was not found. Install it there or set i2psrc=/path/to/source in local.properties" >
+            <condition>
+                <not>
+                    <isset property="i2p.present" />
+                </not>
+            </condition>
+        </fail>
         <echo message="Using I2P source at ${i2pbase}" />
     </target>
 
@@ -155,6 +163,7 @@
     <!-- some resources -->
     <target name="copy-i2p-resources" depends="findI2PSource, -dirs" >
         <copy file="LICENSE.txt" tofile="res/raw/license_app_txt" />
+        <copy file="licenses/LICENSE-Apache2.0.txt" tofile="res/raw/license_apache20_txt" />
         <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="res/drawable/" />
         <copy file="${i2pbase}/installer/resources/themes/console/light/images/header.png" todir="res/drawable/" />
         <copy file="${i2pbase}/installer/resources/themes/console/light/console.css" tofile="res/raw/console_css" />
@@ -206,6 +215,7 @@
         <delete file="res/raw/blocklist_txt" verbose="${verbose}" />
         <delete file="res/raw/hosts_txt" verbose="${verbose}" />
         <delete file="res/raw/license_app_txt" />
+        <delete file="res/raw/license_apache20_txt" />
         <delete file="res/raw/license_elgamaldsa_txt" />
         <delete file="res/raw/license_sha256_txt" />
         <delete file="res/raw/license_bsd_txt" />
@@ -238,7 +248,7 @@
                 <equals arg1="${release.password}" arg2="" />
             </condition>
         </fail>
-        <echo message="Generating keys..." />
+        <echo message="Generating keys, this may take a while..." />
         <exec executable="keytool" inputstring="${release.password}${line.separator}${release.password}${line.separator}" osfamily="unix" failonerror="true">
             <arg value="-genkey" />
             <arg value="-v" />
@@ -266,6 +276,7 @@
             <arg value="-keystore" />
             <arg value="${key.store}" />
         </exec>
+        <echo message="BACK UP your key store file ${key.store} and your password!" />
     </target>
 
     <target name="verifyKeystore" >
@@ -310,6 +321,8 @@
         </exec>
         <echo message="Don't forget to mtn ci AndroidManifest.xml" />
         <echo message="Don't forget to mtn tag w: android-${my.version.name}" />
+        <copy file="${out.release.file} tofile="I2PAndroid-${my.version.name}.apk" />
+        <echo message="Release file copied to I2PAndroid-${my.version.name}.apk" />
     </target>
 
     <!--

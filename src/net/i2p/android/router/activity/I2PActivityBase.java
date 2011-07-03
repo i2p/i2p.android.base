@@ -33,6 +33,8 @@ public abstract class I2PActivityBase extends Activity {
 
     private static final String SHARED_PREFS = "net.i2p.android.router";
     protected static final String PREF_AUTO_START = "autoStart";
+    /** true leads to a poor install experience, very slow to paint the screen */
+    protected static final boolean DEFAULT_AUTO_START = false;
     protected static final String PREF_INSTALLED_VERSION = "app.version";
 
     /** Called when the activity is first created. */
@@ -57,7 +59,7 @@ public abstract class I2PActivityBase extends Activity {
         System.err.println(this + " onStart called");
         super.onStart();
         _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
-        if (_sharedPrefs.getBoolean(PREF_AUTO_START, true))
+        if (_sharedPrefs.getBoolean(PREF_AUTO_START, DEFAULT_AUTO_START))
             startRouter();
         else
             bindRouter(false);

@@ -13,14 +13,14 @@ import net.i2p.android.router.R;
 public class LicenseActivity extends ListActivity {
 
     private static final String[] names = {
-        "Android Application License",
+        "Android Application License", "Apache 2.0",
         "Router License Overview", "Blockfile", "Crypto Filters", "ElGamal / DSA",
         "GPLv2", "LGPLv2.1", "GPLv3", "LGPLv3",
         "Ministreaming",
         "InstallCert", "SHA-256", "SNTP", "Addressbook"};
 
     private static final int[] files = {
-        R.raw.license_app_txt,
+        R.raw.license_app_txt, R.raw.license_apache20_txt,
         R.raw.licenses_txt, R.raw.license_blockfile_txt, R.raw.license_bsd_txt, R.raw.license_elgamaldsa_txt,
         R.raw.license_gplv2_txt, R.raw.license_lgplv2_1_txt, R.raw.license_gplv3_txt, R.raw.license_lgplv3_txt,
         R.raw.license_bsd_txt,
