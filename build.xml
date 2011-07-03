@@ -321,7 +321,7 @@
         </exec>
         <echo message="Don't forget to mtn ci AndroidManifest.xml" />
         <echo message="Don't forget to mtn tag w: android-${my.version.name}" />
-        <copy file="${out.release.file} tofile="I2PAndroid-${my.version.name}.apk" />
+        <copy file="${out.release.file}" tofile="I2PAndroid-${my.version.name}.apk" />
         <echo message="Release file copied to I2PAndroid-${my.version.name}.apk" />
     </target>
 
