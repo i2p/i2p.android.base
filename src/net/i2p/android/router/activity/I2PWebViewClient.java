@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.Gravity;
 import android.view.View;
+import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -171,6 +172,12 @@ class I2PWebViewClient extends WebViewClient {
             } catch (Exception e) {}
         }
         super.onPageFinished(view, url);
+    }
+
+    @Override
+    public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
+        Util.e("ORHAR URL: " + host);
+        super.onReceivedHttpAuthRequest(view, handler, host, realm);
     }
 
 /******

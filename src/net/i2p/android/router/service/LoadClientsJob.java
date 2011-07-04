@@ -2,6 +2,7 @@ package net.i2p.android.router.service;
 
 import net.i2p.addressbook.DaemonThread;
 import net.i2p.android.apps.NewsFetcher;
+import net.i2p.android.router.util.Util;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.router.Job;
 import net.i2p.router.JobImpl;
@@ -71,17 +72,17 @@ class LoadClientsJob extends JobImpl {
         public String getName() { return "Start I2P Tunnel"; };
 
         public void runJob() {
-            System.err.println("Starting i2ptunnel");
+            Util.i("Starting i2ptunnel");
             TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
             int sz = tcg.getControllers().size();
-            System.err.println("i2ptunnel started " + sz + " clients");
+            Util.i("i2ptunnel started " + sz + " clients");
 
         }
     }
 
     private class ClientShutdownHook implements Runnable {
         public void run() {
-            System.err.println("client shutdown hook");
+            Util.i("client shutdown hook");
             // i2ptunnel registers its own hook
             if (_fetcherThread != null)
                 _fetcherThread.interrupt();

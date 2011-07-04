@@ -11,7 +11,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import net.i2p.android.router.R;
 import net.i2p.android.router.activity.MainActivity;
 
-public class StatusBar {
+class StatusBar {
 
     private final Context ctx;
     private final Intent intent;
@@ -20,13 +20,20 @@ public class StatusBar {
 
     private static final int ID = 1;
 
+    public static final int ICON1 = R.drawable.ic_launcher_itoopie_300;
+    public static final int ICON2 = R.drawable.ic_launcher_itoopie_330;
+    public static final int ICON3 = R.drawable.ic_launcher_itoopie;
+    public static final int ICON4 = R.drawable.ic_launcher_itoopie_120;
+    public static final int ICON5 = R.drawable.ic_launcher_itoopie_150;
+    public static final int ICON6 = R.drawable.ic_launcher_itoopie_180;
+
     StatusBar(Context cx) {
         ctx = cx;
         String ns = Context.NOTIFICATION_SERVICE;
         mgr = (NotificationManager)ctx.getSystemService(ns);
         Thread.currentThread().setUncaughtExceptionHandler(new CrashHandler(mgr));
 
-        int icon = R.drawable.ic_launcher_itoopie;
+        int icon = ICON1;
         // won't be shown if replace() is called
         String text = "Starting I2P";
         long now = System.currentTimeMillis();
@@ -37,9 +44,10 @@ public class StatusBar {
     }
 
     /** remove and re-add */
-    public void replace(String tickerText) {
+    public void replace(int icon, String tickerText) {
         off();
-        notif.tickerText = tickerText;
+        notif.icon = icon;
+        notif.tickerText= tickerText;
         update(tickerText);
     }
 

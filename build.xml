@@ -165,6 +165,8 @@
         <copy file="LICENSE.txt" tofile="res/raw/license_app_txt" />
         <copy file="licenses/LICENSE-Apache2.0.txt" tofile="res/raw/license_apache20_txt" />
         <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="res/drawable/" />
+        <copy file="${i2pbase}/installer/resources/themes/console/images/outbound.png" todir="res/drawable/" />
+        <copy file="${i2pbase}/installer/resources/themes/console/images/inbound.png" todir="res/drawable/" />
         <copy file="${i2pbase}/installer/resources/themes/console/light/images/header.png" todir="res/drawable/" />
         <copy file="${i2pbase}/installer/resources/themes/console/light/console.css" tofile="res/raw/console_css" />
         <copy file="${i2pbase}/installer/resources/blocklist.txt" tofile="res/raw/blocklist_txt" />
@@ -210,6 +212,8 @@
     <target name="distclean" depends="clean">
         <delete dir="${jar.libs.dir}" verbose="${verbose}" />
         <delete file="res/drawable/i2plogo.png" verbose="${verbose}"/>
+        <delete file="res/drawable/outbound.png" verbose="${verbose}"/>
+        <delete file="res/drawable/inbound.png" verbose="${verbose}"/>
         <delete file="res/drawable/header.png" verbose="${verbose}"/>
         <delete file="res/raw/console_css" verbose="${verbose}"/>
         <delete file="res/raw/blocklist_txt" verbose="${verbose}" />

@@ -67,6 +67,7 @@
         </activity>
         <activity android:name=".activity.PeersActivity"
                   android:label="I2P Peers and Transport Status"
+                  android:configChanges="orientation|keyboardHidden"
                   android.theme="@android:style/Theme.NoTitleBar"
                   android:launchMode="singleTop" >
         </activity>

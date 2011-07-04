@@ -2,6 +2,7 @@ package net.i2p.android.router.activity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -70,6 +71,9 @@ public class PeersActivity extends I2PActivityBase {
         }
         try {
             wv.loadData(data, "text/html", "UTF-8");
+            // figure out a way to get /themes/console/images/outbound.png to load
+            //String url = "file://" + _myDir + "/docs/";
+            //wv.loadDataWithBaseURL(url, data, "text/html", "UTF-8", url);
         } catch (Exception e) {
         }
     }
@@ -86,5 +90,18 @@ public class PeersActivity extends I2PActivityBase {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        WebView wv = (WebView) findViewById(R.id.peers_webview);
+        switch (item.getItemId()) {
+        case R.id.menu_reload:
+            update();
+            return true;
+
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

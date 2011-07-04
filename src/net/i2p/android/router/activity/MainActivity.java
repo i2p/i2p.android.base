@@ -256,11 +256,11 @@ public class MainActivity extends I2PActivityBase {
     private void updateStatus() {
         RouterContext ctx = getRouterContext();
         TextView tv = (TextView) findViewById(R.id.main_status_text);
-/***
+
         if (!Util.isConnected(this)) {
             tv.setText("No Internet connection is available");
             tv.setVisibility(View.VISIBLE);
-        } else ****/ if (ctx != null) {
+        } else if (ctx != null) {
             int active = ctx.commSystem().countActivePeers();
             int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
             int inEx = ctx.tunnelManager().getFreeTunnelCount();
@@ -303,7 +303,9 @@ public class MainActivity extends I2PActivityBase {
             tv.setText(_savedStatus);
             tv.setVisibility(View.VISIBLE);
         } else {
-            //tv.setVisibility(View.INVISIBLE);
+            // network but no router context
+            tv.setVisibility(View.INVISIBLE);
+         /****
             RouterService svc = _routerService;
             String status =
                             "connected? " + Util.isConnected(this) +
@@ -317,6 +319,7 @@ public class MainActivity extends I2PActivityBase {
                             "\ncan stop? " + (svc == null ? "null" : svc.canManualStop());
             tv.setText(status);
             tv.setVisibility(View.VISIBLE);
+          ****/
         }
     }
 

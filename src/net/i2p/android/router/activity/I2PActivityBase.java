@@ -41,7 +41,7 @@ public abstract class I2PActivityBase extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-        System.err.println(this + " onCreate called");
+        Util.i(this + " onCreate called");
         super.onCreate(savedInstanceState);
         _myDir = getFilesDir().getAbsolutePath();
     }
@@ -49,14 +49,14 @@ public abstract class I2PActivityBase extends Activity {
     @Override
     public void onRestart()
     {
-        System.err.println(this + " onRestart called");
+        Util.i(this + " onRestart called");
         super.onRestart();
     }
 
     @Override
     public void onStart()
     {
-        System.err.println(this + " onStart called");
+        Util.i(this + " onStart called");
         super.onStart();
         _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
         if (_sharedPrefs.getBoolean(PREF_AUTO_START, DEFAULT_AUTO_START))
@@ -87,28 +87,28 @@ public abstract class I2PActivityBase extends Activity {
     @Override
     public void onResume()
     {
-        System.err.println(this + " onResume called");
+        Util.i(this + " onResume called");
         super.onResume();
     }
 
     @Override
     public void onPause()
     {
-        System.err.println(this + " onPause called");
+        Util.i(this + " onPause called");
         super.onPause();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState)
     {
-        System.err.println(this + " onSaveInstanceState called");
+        Util.i(this + " onSaveInstanceState called");
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onStop()
     {
-        System.err.println(this + " onStop called");
+        Util.i(this + " onStop called");
         unbindRouter();
         super.onStop();
     }
@@ -116,7 +116,7 @@ public abstract class I2PActivityBase extends Activity {
     @Override
     public void onDestroy()
     {
-        System.err.println(this + " onDestroy called");
+        Util.i(this + " onDestroy called");
         super.onDestroy();
     }
 
@@ -151,9 +151,11 @@ public abstract class I2PActivityBase extends Activity {
         MenuItem addressbook = menu.findItem(R.id.menu_addressbook);
         addressbook.setVisible(showAddressbook);
         addressbook.setEnabled(showAddressbook);
+
+        boolean showReload = showAddressbook || (this instanceof PeersActivity);
         MenuItem reload = menu.findItem(R.id.menu_reload);
-        reload.setVisible(showAddressbook);
-        reload.setEnabled(showAddressbook);
+        reload.setVisible(showReload);
+        reload.setEnabled(showReload);
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -208,14 +210,14 @@ public abstract class I2PActivityBase extends Activity {
     protected boolean startRouter() {
         Intent intent = new Intent();
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
-        System.err.println(this + " calling startService");
+        Util.i(this + " calling startService");
         ComponentName name = startService(intent);
         if (name == null)
-            System.err.println(this + " XXXXXXXXXXXXXXXXXXXX got from startService: " + name);
-        System.err.println(this + " got from startService: " + name);
+            Util.i(this + " XXXXXXXXXXXXXXXXXXXX got from startService: " + name);
+        Util.i(this + " got from startService: " + name);
         boolean success = bindRouter(true);
         if (!success)
-            System.err.println(this + " Bind router failed");
+            Util.i(this + " Bind router failed");
         return success;
     }
 
@@ -225,10 +227,10 @@ public abstract class I2PActivityBase extends Activity {
     protected boolean bindRouter(boolean autoCreate) {
         Intent intent = new Intent();
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
-        System.err.println(this + " calling bindService");
+        Util.i(this + " calling bindService");
         _connection = new RouterConnection();
         boolean success = bindService(intent, _connection, autoCreate ? BIND_AUTO_CREATE : 0);
-        System.err.println(this + " bindService: auto create? " + autoCreate + " success? " + success);
+        Util.i(this + " bindService: auto create? " + autoCreate + " success? " + success);
         return success;
     }
 
@@ -243,7 +245,7 @@ public abstract class I2PActivityBase extends Activity {
     protected class RouterConnection implements ServiceConnection {
 
         public void onServiceConnected(ComponentName name, IBinder service) {
-            System.err.println(this + " connected to router service");
+            Util.i(this + " connected to router service");
             RouterBinder binder = (RouterBinder) service;
             RouterService svc = binder.getService();
             _routerService = svc;
@@ -252,7 +254,7 @@ public abstract class I2PActivityBase extends Activity {
         }
 
         public void onServiceDisconnected(ComponentName name) {
-            System.err.println(this + " disconnected from router service!!!!!!!");
+            Util.i(this + " disconnected from router service!!!!!!!");
             // save memory
             _routerService = null;
             _isBound = false;

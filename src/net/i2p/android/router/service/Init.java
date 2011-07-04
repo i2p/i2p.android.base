@@ -41,23 +41,23 @@ class Init {
     }
 
     void debugStuff() {
-        System.err.println("java.io.tmpdir" + ": " + System.getProperty("java.io.tmpdir"));
-        System.err.println("java.vendor" + ": " + System.getProperty("java.vendor"));
-        System.err.println("java.version" + ": " + System.getProperty("java.version"));
-        System.err.println("os.arch" + ": " + System.getProperty("os.arch"));
-        System.err.println("os.name" + ": " + System.getProperty("os.name"));
-        System.err.println("os.version" + ": " + System.getProperty("os.version"));
-        System.err.println("user.dir" + ": " + System.getProperty("user.dir"));
-        System.err.println("user.home" + ": " + System.getProperty("user.home"));
-        System.err.println("user.name" + ": " + System.getProperty("user.name"));
-        System.err.println("getFilesDir()" + ": " + myDir);
-        System.err.println("max mem" + ": " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()));
-        System.err.println("Package" + ": " + ctx.getPackageName());
-        System.err.println("Version" + ": " + _ourVersion);
-        System.err.println("MODEL" + ": " + Build.MODEL);
-        System.err.println("DISPLAY" + ": " + Build.DISPLAY);
-        System.err.println("VERSION" + ": " + Build.VERSION.RELEASE);
-        System.err.println("SDK" + ": " + Build.VERSION.SDK);
+        Util.i("java.io.tmpdir" + ": " + System.getProperty("java.io.tmpdir"));
+        Util.i("java.vendor" + ": " + System.getProperty("java.vendor"));
+        Util.i("java.version" + ": " + System.getProperty("java.version"));
+        Util.i("os.arch" + ": " + System.getProperty("os.arch"));
+        Util.i("os.name" + ": " + System.getProperty("os.name"));
+        Util.i("os.version" + ": " + System.getProperty("os.version"));
+        Util.i("user.dir" + ": " + System.getProperty("user.dir"));
+        Util.i("user.home" + ": " + System.getProperty("user.home"));
+        Util.i("user.name" + ": " + System.getProperty("user.name"));
+        Util.i("getFilesDir()" + ": " + myDir);
+        Util.i("max mem" + ": " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()));
+        Util.i("Package" + ": " + ctx.getPackageName());
+        Util.i("Version" + ": " + _ourVersion);
+        Util.i("MODEL" + ": " + Build.MODEL);
+        Util.i("DISPLAY" + ": " + Build.DISPLAY);
+        Util.i("VERSION" + ": " + Build.VERSION.RELEASE);
+        Util.i("SDK" + ": " + Build.VERSION.SDK);
     }
 
     void initialize() {
@@ -101,6 +101,8 @@ class Init {
             imgDir.mkdir();
             copyResourceToFile(R.drawable.i2plogo, "docs/themes/console/images/i2plogo.png");
             copyResourceToFile(R.drawable.itoopie_sm, "docs/themes/console/images/itoopie_sm.png");
+            copyResourceToFile(R.drawable.outbound, "docs/themes/console/images/outbound.png");
+            copyResourceToFile(R.drawable.inbound, "docs/themes/console/images/inbound.png");
 
             File img2Dir = new File(cssDir, "images");
             img2Dir.mkdir();
@@ -122,7 +124,7 @@ class Init {
         InputStream in = null;
         FileOutputStream out = null;
 
-        System.err.println("Creating file " + f + " from resource");
+        Util.i("Creating file " + f + " from resource");
         byte buf[] = new byte[4096];
         try {
             // Context methods
@@ -165,9 +167,9 @@ class Init {
             try {
                 fin = new FileInputStream(new File(myDir, f));
                 DataHelper.loadProps(props,  fin);
-                System.err.println("Merging resource into file " + f);
+                Util.i("Merging resource into file " + f);
             } catch (IOException ioe) {
-                System.err.println("Creating file " + f + " from resource");
+                Util.i("Creating file " + f + " from resource");
             }
 
             // override user settings
@@ -177,7 +179,7 @@ class Init {
                 props.putAll(overrides);
             File path = new File(myDir, f);
             DataHelper.storeProps(props, path);
-            System.err.println("Saved " + props.size() +" properties in " + f);
+            Util.i("Saved " + props.size() +" properties in " + f);
         } catch (IOException ioe) {
         } catch (Resources.NotFoundException nfe) {
         } finally {
@@ -199,7 +201,7 @@ class Init {
             fin = ctx.openFileInput(CONFIG_FILE);
             DataHelper.loadProps(props,  fin);
         } catch (IOException ioe) {
-            System.err.println("Looks like a new install");
+            Util.i("Looks like a new install");
         } finally {
             if (fin != null) try { fin.close(); } catch (IOException ioe) {}
         }
@@ -209,12 +211,12 @@ class Init {
         boolean newVersion = !_ourVersion.equals(oldVersion);
 
         if (newVersion) {
-            System.err.println("New version " + _ourVersion);
+            Util.i("New version " + _ourVersion);
             props.setProperty(PROP_INSTALLED_VERSION, _ourVersion);
             try {
                 DataHelper.storeProps(props, ctx.getFileStreamPath(CONFIG_FILE));
             } catch (IOException ioe) {
-                System.err.println("Failed to write " + CONFIG_FILE);
+                Util.i("Failed to write " + CONFIG_FILE);
             }
         }
         return newVersion;
@@ -227,7 +229,7 @@ class Init {
         if (files != null) {
             for (int i = 0; i < files.length; i++) {
                 File f = files[i];
-                System.err.println("Deleting old file/dir " + f);
+                Util.i("Deleting old file/dir " + f);
                 FileUtil.rmdir(f, false);
             }
         }
