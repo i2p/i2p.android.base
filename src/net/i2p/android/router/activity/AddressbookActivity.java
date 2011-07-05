@@ -39,14 +39,21 @@ public class AddressbookActivity extends ListActivity {
 
         // get the names
         NamingService ns = ctx.namingService();
+        // After router shutdown we get nothing... why?
         Set<String> names = ns.getNames();
 
         // set the header
         TextView tv = (TextView) getLayoutInflater().inflate(R.layout.addressbook_header, null);
-        tv.setText(names.size() + " hosts in address book. Start typing to filter.");
+        int sz = names.size();
+        if (sz > 1)
+            tv.setText(sz + " hosts in address book. Start typing to filter.");
+        else if (sz > 0)
+            tv.setText("1 host in address book.");
+        else
+            tv.setText("No hosts in address book, or your router is not up.");
         ListView lv = getListView();
         lv.addHeaderView(tv, "", false);
-        lv.setTextFilterEnabled(true);
+        lv.setTextFilterEnabled(sz > 1);
 
         // set the list
         List<String> nameList = new ArrayList(names);
