@@ -1,6 +1,6 @@
 ******* Please read all of the following *******
 
-This is the first alpha release of the I2P Android app.
+This is the second alpha release of the I2P Android app.
 
 WARNING - This is ALPHA SOFTWARE. It may crash your phone. Do not rely upon it for strong anonymity. Tunnels may be as short as one hop. There may be serious security holes in the app.
 
@@ -14,7 +14,7 @@ The app runs on either WIFI or mobile networks. For now, the app is very low ban
 
 The app uses TCP only for router-router connections, with a maximum of 24 simultaneous. UDP is disabled.
 
-UPnP is enabled but it doesn't appear to be working.
+UPnP is disabled. With UDP disabled also, you do not publish an IP address and should not be getting incoming connections.
 
 NTP is disabled. If you have cell service, your phone or tablet should have the correct time. If you do not have cell service, ensure your device has accurate time.
 
