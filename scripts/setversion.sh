@@ -14,6 +14,7 @@ CORE=`grep 'public final static String VERSION' $I2PBASE/core/java/src/net/i2p/C
 MAJOR=`echo $CORE | cut -d '.' -f 1`
 MINOR=`echo $CORE | cut -d '.' -f 2`
 RELEASE=`echo $CORE | cut -d '.' -f 3`
+RELEASE=${RELEASE:-0}
 
 ROUTERBUILD=$((`grep 'public final static long BUILD' $I2PBASE/router/java/src/net/i2p/router/RouterVersion.java | \
          cut -d '=' -f 2 | \
@@ -26,7 +27,7 @@ SDK=`grep 'android:minSdkVersion' $MANIFEST | \
          cut -d '"' -f 2`
 
 # don't let build number get too long
-VERSIONSTRING="${CORE}-${ROUTERBUILD}_b$(($ANDROIDBUILD % 512))-API$SDK"
+VERSIONSTRING="${MAJOR}.${MINOR}.${RELEASE}-${ROUTERBUILD}_b$(($ANDROIDBUILD % 512))-API$SDK"
 
 #
 # Android version code is an integer.
