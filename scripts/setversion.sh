@@ -2,7 +2,17 @@
 #  Get the version number and fix up AndroidManifest.xml
 #  Public domain
 #
-THISDIR=$(realpath $(dirname $(which $0)))
+
+#
+# No, no no, 'realpath' is not standard unix or coreutils.
+#
+# Use of 'which' is pretty bad too. Since 'which' would hit anything
+# with the same filename that is +x in the path, and we don't want to do that,
+# we use $0 as-is, because it contains _exactly_ what we are looking for.
+#
+#THISDIR=$(realpath $(dirname $(which $0)))
+
+THISDIR=$(dirname $(readlink -ne $0))
 cd $THISDIR
 MANIFEST=../AndroidManifest.xml
 TMP=AndroidManifest.xml.tmp

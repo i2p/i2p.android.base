@@ -5,7 +5,16 @@
 # uncomment to skip
 # exit 0
 
-THISDIR=$(realpath $(dirname $(which $0)))
+#
+# No, no no, 'realpath' is not standard unix or coreutils.
+#
+# Use of 'which' is pretty bad too. Since 'which' would hit anything
+# with the same filename that is +x in the path, and we don't want to do that,
+# we use $0 as-is, because it contains _exactly_ what we are looking for.
+#
+#THISDIR=$(realpath $(dirname $(which $0)))
+
+THISDIR=$(dirname $(readlink -f $0))
 cd $THISDIR
 
 LIBFILE=$PWD/libjbigi.so
@@ -17,7 +26,14 @@ then
 fi
 
 I2PBASE=${1:-../../i2p.i2p}
-export NDK=$(realpath ../../android-ndk-r5b/)
+#
+# Wrong again. We want to be able to not have to update this script
+# every time a new NDK comes out. We solve this by using readlink with
+# a wild card, deglobbing automatically sorts to get the highest revision.
+# the dot at the end ensures that it is a directory, and not a file.
+#
+#export NDK=$(realpath ../../android-ndk-r5b/)
+export NDK=readlink -ne $(for last in ../../android-ndk-r*/.; do true; done ; echo $last)
 
 #
 # API level, must match that in ../AndroidManifest.xml

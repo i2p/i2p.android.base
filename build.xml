@@ -1,376 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-  -  Portions copied and modified from Android SDK
-  -  Copyright (c) 2005-2008, The Android Open Source Project
-  -  Apache 2.0 license
-  -  See licenses/LICENSE-Apache2.0.txt
- -->
-
 <project name="I2PAndroid" default="help">
 
     <!-- The local.properties file is created and updated by the 'android' tool.
-         It contain the path to the SDK. It should *NOT* be checked in in Version
-         Control Systems. -->
-    <property file="local.properties"/>
+         It contains the path to the SDK. It should *NOT* be checked into
+         Version Control Systems. -->
+    <property file="local.properties" />
 
-    <!-- The build.properties file can be created by you and is never touched
-         by the 'android' tool. This is the place to change some of the default property values
-         used by the Ant rules.
+    <!-- The ant.properties file can be created by you. It is only edited by the
+         'android' tool to add properties to it.
+         This is the place to change some Ant specific build properties.
          Here are some properties you may want to change/update:
 
-         application-package
-             the name of your application package as defined in the manifest. Used by the
-             'uninstall' rule.
-         source-folder
-             the name of the source folder. Default is 'src'.
-         out-folder
-             the name of the output folder. Default is 'bin'.
+         source.dir
+             The name of the source directory. Default is 'src'.
+         out.dir
+             The name of the output directory. Default is 'bin'.
 
-         Properties related to the SDK location or the project target should be updated
-          using the 'android' tool with the 'update' action.
+         For other overridable properties, look at the beginning of the rules
+         files in the SDK, at tools/ant/build.xml
 
-         This file is an integral part of the build system for your application and
-         should be checked in in Version Control Systems.
+         Properties related to the SDK location or the project target should
+         be updated using the 'android' tool with the 'update' action.
+
+         This file is an integral part of the build system for your
+         application and should be checked into Version Control Systems.
 
          -->
-    <property file="build.properties"/>
-    <!-- set the old name to the new name -->
-    <property name="sdk-location" value="${sdk.dir}" />
+    <property file="ant.properties" />
 
-    <!-- The default.properties file is created and updated by the 'android' tool, as well
-         as ADT. 
-         This file is an integral part of the build system for your application and
-         should be checked in in Version Control Systems. -->
-    <property file="default.properties"/>
+    <!-- The project.properties file is created and updated by the 'android'
+         tool, as well as ADT.
 
-    <!-- Custom Android task to deal with the project target, and import the proper rules.
-         This requires ant 1.6.0 or above. -->
-    <path id="android.antlibs">
-        <pathelement path="${sdk-location}/tools/lib/anttasks.jar" />
-        <pathelement path="${sdk-location}/tools/lib/sdklib.jar" />
-        <pathelement path="${sdk-location}/tools/lib/androidprefs.jar" />
-        <pathelement path="${sdk-location}/tools/lib/apkbuilder.jar" />
-        <pathelement path="${sdk-location}/tools/lib/jarutils.jar" />
-    </path>
+         This contains project specific properties such as project target, and library
+         dependencies. Lower level build properties are stored in ant.properties
+         (or in .classpath for Eclipse projects).
 
-    <taskdef name="setup"
-        classname="com.android.ant.SetupTask"
-        classpathref="android.antlibs"/>
+         This file is an integral part of the build system for your
+         application and should be checked into Version Control Systems. -->
+    <loadproperties srcFile="project.properties" />
 
-    <!-- Execute the Android Setup task that will setup some properties specific to the target,
-         and import the rules files.
-         To customize the rules, copy/paste them below the task, and disable import by setting
-         the import attribute to false:
-            <setup import="false" />
-         
-         This will ensure that the properties are setup correctly but that your customized
-         targets are used.
-    -->
-    <setup import="true" />
+    <!-- quick check on sdk.dir -->
+    <fail
+            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through an env var"
+            unless="sdk.dir"
+    />
 
     <!--
-         ================================================================================
-         New I2P rules
-         ================================================================================
+        Import per project custom build rules if present at the root of the project.
+        This is the place to put custom intermediary targets such as:
+            -pre-build
+            -pre-compile
+            -post-compile (This is typically used for code obfuscation.
+                           Compiled code location: ${out.classes.absolute.dir}
+                           If this is not done in place, override ${out.dex.input.absolute.dir})
+            -post-package
+            -post-build
+            -pre-clean
     -->
+    <import file="custom_rules.xml" optional="true" />
 
-    <!-- overrides of those in main_rules.xml -->
+    <!-- Import the actual build file.
 
-    <target name="-pre-build" depends="findI2PSource, copy-i2p-resources, incrementBuild" >
-        <!-- aapt messes up when resources are added or deleted, just build every time -->
-        <delete dir="${gen.absolute.dir}/net" verbose="${verbose}" />
-        <!-- screw it, do the classes too, until I add the depend class -->
-        <delete dir="${out.absolute.dir}/classes/net" verbose="${verbose}" />
-    </target>
+         To customize existing targets, there are two options:
+         - Customize only one target:
+             - copy/paste the target into this file, *before* the
+               <import> task.
+             - customize it to your needs.
+         - Customize the whole content of build.xml
+             - copy/paste the content of the rules files (minus the top node)
+               into this file, replacing the <import> task.
+             - customize to your needs.
 
-    <target name="-pre-compile" depends="buildrouter" />
-
-    <target name="-post-compile" depends="hackcleanup, jbigi" />
-
-    <!-- new rules -->
-
-    <target name="findI2PSource" >
-        <!-- override with i2psrc=path/to/source in local.properties -->
-        <property name="i2psrc" value="../i2p.i2p" />
-        <property name="i2pbase" location="${i2psrc}" />
-        <available file="${i2psrc}" property="i2p.present" />
-        <fail message="I2P source directory ${i2psrc} was not found. Install it there or set i2psrc=/path/to/source in local.properties" >
-            <condition>
-                <not>
-                    <isset property="i2p.present" />
-                </not>
-            </condition>
-        </fail>
-        <echo message="Using I2P source at ${i2pbase}" />
-    </target>
-
-    <target name="buildrouter" depends="findI2PSource, -dirs" >
-        <!-- build router and core -->
-        <ant dir="${i2pbase}" >
-            <target name="buildRouter" />
-            <target name="buildI2PTunnel" />
-            <target name="buildAddressbook" />
-        </ant>
-
-        <!-- router -->
-        <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
-
-        <!-- core -->
-
-        <!-- org.bouncycastle.crypto already in android
-             but we need a little trickery because our HMac is incompatible...
-             and the libs aren't in the SDK to compile against??? -->
-        <jar destfile="${jar.libs.dir}/crypto.jar" >
-            <zipfileset src="${i2pbase}/build/i2p.jar" >
-                <include name="org/bouncycastle/crypto/Digest.class" />
-                <include name="org/bouncycastle/crypto/Mac.class" />
-                <include name="org/bouncycastle/crypto/digests/GeneralDigest.class" />
-                <include name="org/bouncycastle/crypto/digests/MD5Digest.class" />
-            </zipfileset >
-        </jar>
-
-        <!-- lots of unneeded stuff could be deleted here -->
-        <jar destfile="${jar.libs.dir}/i2p.jar" >
-            <zipfileset src="${i2pbase}/build/i2p.jar" >
-                <exclude name="net/i2p/util/LogWriter.class" />
-                <exclude name="net/i2p/util/SecureDirectory.class" />
-                <exclude name="net/i2p/util/SecureFile.class" />
-                <exclude name="net/i2p/util/SecureFileOutputStream.class" />
-                <exclude name="org/bouncycastle/crypto/Digest.class" />
-                <exclude name="org/bouncycastle/crypto/Mac.class" />
-                <exclude name="org/bouncycastle/crypto/digests/GeneralDigest.class" />
-                <exclude name="org/bouncycastle/crypto/digests/MD5Digest.class" />
-            </zipfileset >
-        </jar>
-
-        <!-- i2ptunnel -->
-        <copy file="${i2pbase}/apps/ministreaming/java/build/mstreaming.jar" todir="${jar.libs.dir}" />
-        <copy file="${i2pbase}/apps/streaming/java/build/streaming.jar" todir="${jar.libs.dir}" />
-        <jar destfile="${jar.libs.dir}/i2ptunnel.jar" >
-            <zipfileset src="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" >
-                <exclude name="net/i2p/i2ptunnel/I2PTunnelGUI.class" />
-            </zipfileset >
-        </jar>
-
-        <!-- addressbook - make a jar, it's a war in the i2p distro -->
-        <jar destfile="${jar.libs.dir}/addressbook.jar"
-             basedir="${i2pbase}/apps/addressbook/build"
-             excludes="net/i2p/addressbook/Servlet.class" />
-
-    </target>
-
-    <!-- some resources -->
-    <target name="copy-i2p-resources" depends="findI2PSource, -dirs" >
-        <copy file="LICENSE.txt" tofile="res/raw/license_app_txt" />
-        <copy file="licenses/LICENSE-Apache2.0.txt" tofile="res/raw/license_apache20_txt" />
-        <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="res/drawable/" />
-        <copy file="${i2pbase}/installer/resources/themes/console/images/outbound.png" todir="res/drawable/" />
-        <copy file="${i2pbase}/installer/resources/themes/console/images/inbound.png" todir="res/drawable/" />
-        <copy file="${i2pbase}/installer/resources/themes/console/light/images/header.png" todir="res/drawable/" />
-        <copy file="${i2pbase}/installer/resources/themes/console/light/console.css" tofile="res/raw/console_css" />
-        <copy file="${i2pbase}/installer/resources/blocklist.txt" tofile="res/raw/blocklist_txt" />
-        <copy file="${i2pbase}/installer/resources/hosts.txt" tofile="res/raw/hosts_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-ElGamalDSA.txt" tofile="res/raw/license_elgamaldsa_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-SHA256.txt" tofile="res/raw/license_sha256_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-BSD.txt" tofile="res/raw/license_bsd_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-SNTP.txt" tofile="res/raw/license_sntp_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-LGPLv2.1.txt" tofile="res/raw/license_lgplv2_1_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-InstallCert.txt" tofile="res/raw/license_installcert_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-BlockFile.txt" tofile="res/raw/license_blockfile_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-GPLv2.txt" tofile="res/raw/license_gplv2_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-GPLv3.txt" tofile="res/raw/license_gplv3_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-LGPLv3.txt" tofile="res/raw/license_lgplv3_txt" />
-        <copy file="${i2pbase}/licenses/LICENSE-Addressbook.txt" tofile="res/raw/license_addressbook_txt" />
-    </target>
-
-    <target name="hackcleanup">
-        <delete file="${jar.libs.dir}/crypto.jar" />
-    </target>
-
-    <target name="jbigi" depends="findI2PSource" >
-        <exec executable="sh" osfamily="unix" failonerror="true">
-            <arg value="-c" />
-            <arg value="jni/build.sh ${i2pbase}" />
-        </exec>
-        <copy file="jni/libjbigi.so" todir="${native.libs.dir}/armeabi" />
-    </target>
-
-    <target name="incrementBuild" depends="findI2PSource" >
-        <buildnumber file="scripts/build.number" />
-        <exec executable="sh" osfamily="unix" failonerror="true">
-            <arg value="-c" />
-            <arg value="scripts/setversion.sh ${i2pbase}" />
-        </exec>
-        <!-- this loads my.version.code and my.version.name -->
-        <property file="scripts/version.properties" />
-    </target>
-
-    <!-- install now does both -->
-    <target name="reinstall" depends="install" />
-
-    <target name="distclean" depends="clean">
-        <delete dir="${jar.libs.dir}" verbose="${verbose}" />
-        <delete file="res/drawable/i2plogo.png" verbose="${verbose}"/>
-        <delete file="res/drawable/outbound.png" verbose="${verbose}"/>
-        <delete file="res/drawable/inbound.png" verbose="${verbose}"/>
-        <delete file="res/drawable/header.png" verbose="${verbose}"/>
-        <delete file="res/raw/console_css" verbose="${verbose}"/>
-        <delete file="res/raw/blocklist_txt" verbose="${verbose}" />
-        <delete file="res/raw/hosts_txt" verbose="${verbose}" />
-        <delete file="res/raw/license_app_txt" />
-        <delete file="res/raw/license_apache20_txt" />
-        <delete file="res/raw/license_elgamaldsa_txt" />
-        <delete file="res/raw/license_sha256_txt" />
-        <delete file="res/raw/license_bsd_txt" />
-        <delete file="res/raw/license_sntp_txt" />
-        <delete file="res/raw/license_lgplv2_1_txt" />
-        <delete file="res/raw/license_installcert_txt" />
-        <delete file="res/raw/license_blockfile_txt" />
-        <delete file="res/raw/license_gplv2_txt" />
-        <delete file="res/raw/license_gplv3_txt" />
-        <delete file="res/raw/license_lgplv3_txt" />
-        <delete dir="jni/build/" verbose="${verbose}" />
-        <delete file="scripts/build.number" verbose="${verbose}" />
-        <delete file="scripts/version.properties" verbose="${verbose}" />
-    </target>
-
-    <!-- just to make it easier -->
-    <target name="create-signing-keys" >
-        <echo message="key store is ${key.store}" />
-        <echo message="key store password is ${key.store.password}" />
-        <echo message="key alias is ${key.alias}" />
-        <input message="Enter common name for new key (your name): " addproperty="release.cn" />
-        <fail message="You must enter a name" >
-            <condition>
-                <equals arg1="${release.cn}" arg2="" />
-            </condition>
-        </fail>
-        <input message="Enter password for new key (6 characters minimum): " addproperty="release.password" />
-        <fail message="You must enter a password" >
-            <condition>
-                <equals arg1="${release.password}" arg2="" />
-            </condition>
-        </fail>
-        <echo message="Generating keys, this may take a while..." />
-        <exec executable="keytool" inputstring="${release.password}${line.separator}${release.password}${line.separator}" osfamily="unix" failonerror="true">
-            <arg value="-genkey" />
-            <arg value="-v" />
-            <arg value="-alias" />
-            <arg value="${key.alias}" />
-            <arg value="-keystore" />
-            <arg value="${key.store}" />
-            <arg value="-validity" />
-            <arg value="10000" />
-            <arg value="-keyalg" />
-            <arg value="RSA" />
-            <arg value="-keysize" />
-            <arg value="4096" />
-            <arg value="-storepass" />
-            <arg value="${key.store.password}" />
-            <arg value="-dname" />
-            <arg value="cn=${release.cn}, ou=Apps, o=I2P, c=DE" />
-        </exec>
-        <echo message="Created keys:" />
-        <exec executable="keytool" inputstring="android${line.separator}" osfamily="unix" failonerror="true">
-            <arg value="-list" />
-            <arg value="-v" />
-            <arg value="-alias" />
-            <arg value="${key.alias}" />
-            <arg value="-keystore" />
-            <arg value="${key.store}" />
-        </exec>
-        <echo message="BACK UP your key store file ${key.store} and your password!" />
-    </target>
-
-    <target name="verifyKeystore" >
-        <available file="${key.store}" property="keystore.present" />
-        <fail message="You must first create a keystore and keys with 'ant create-signing-keys'" >
-            <condition>
-                <not>
-                    <isset property="keystore.present" />
-                </not>
-            </condition>
-        </fail>
-    </target>
-
-    <target name="verifyWorkspace" >
-        <echo message="Everything is checked in, right? Let's be sure:" />
-        <exec executable="mtn" failonerror="true">
-            <arg value="st" />
-        </exec>
-        <echo message="If there are any modified files above, stop now!" />
-        <echo message="(except AndroidManifest.xml)" />
-    </target>
-
-    <target name="verify" depends="verifyKeystore, verifyWorkspace, release" >
-        <exec executable="jarsigner" osfamily="unix" failonerror="true">
-            <arg value="-verify" />
-            <arg value="-verbose" />
-            <arg value="-certs" />
-            <arg value="${out.release.file}" />
-        </exec>
-        <echo message="" />
-        <echo message="Release file is ${out.release.file}" />
-        <echo message="Android version name: ${my.version.name}" />
-        <echo message="Android version code: ${my.version.code}" />
-        <echo message="File size:" />
-        <exec executable="ls" failonerror="true">
-            <arg value="-l" />
-            <arg value="${out.release.file}" />
-        </exec>
-        <echo message="SHA256 sum:" />
-        <exec executable="sha256sum" failonerror="true">
-            <arg value="${out.release.file}" />
-        </exec>
-        <echo message="Don't forget to mtn ci AndroidManifest.xml" />
-        <echo message="Don't forget to mtn tag w: android-${my.version.name}" />
-        <copy file="${out.release.file}" tofile="I2PAndroid-${my.version.name}.apk" />
-        <echo message="Release file copied to I2PAndroid-${my.version.name}.apk" />
-    </target>
-
-    <!--
-         ================================================================================
-         From here down copied from SDK tools/ant/main_rules.xml from Tools version 11
-         and then modified
-         ================================================================================
+         ***********************
+         ****** IMPORTANT ******
+         ***********************
+         In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
+         in order to avoid having your file be overridden by tools such as "android update project"
     -->
-
-    <!-- not necessary to copy if setup import="true" -->
-
-
-    <!--
-         override this because the ant task com.android.ant.AaptExecLoopTask has issues:
-             a) it uses version.code which main_rules sets to "" and
-             b) it can't set versionName via the aapt task, have to use the aapt command line
-    -->
-
-    <!-- Puts the project's resources into the output package file
-         This actually can create multiple resource package in case
-         Some custom apk with specific configuration have been
-         declared in default.properties.
-         -->
-    <target name="-package-resources">
-        <echo>Packaging resources</echo>
-        <exec executable="${aapt}" failonerror="true" >
-            <arg value="package" />
-            <arg value="--version-code" />
-            <arg value="${my.version.code}" />
-            <arg value="--version-name" />
-            <arg value="${my.version.name}" />
-            <arg value="-f" />
-            <arg value="-m" />
-            <arg value="-M" />
-            <arg value="AndroidManifest.xml" />
-            <arg value="-I" />
-            <arg value="${android.jar}" />
-            <arg value="-S" />
-            <arg value="${resource.absolute.dir}" />
-            <arg value="-J" />
-            <arg value="${gen.absolute.dir}" />
-            <arg value="-F" />
-            <arg value="${out.absolute.dir}/${resource.package.file.name}" />
-        </exec>
-    </target>
+    <!-- version-tag: 1 -->
+    <import file="${sdk.dir}/tools/ant/build.xml" />
 
 </project>
