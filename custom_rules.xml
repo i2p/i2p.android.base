@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="imported">
+
+    <!-- override with i2psrc=path/to/source in local.properties -->
+    <property name="i2psrc" value="../i2p.i2p" />
+    <property name="i2pbase" location="${i2psrc}" />
+    <available file="${i2psrc}" property="i2p.present" />
+    <fail message="I2P source directory ${i2psrc} was not found. Install it there or set i2psrc=/path/to/source in local.properties" >
+        <condition>
+            <not>
+                <isset property="i2p.present" />
+            </not>
+        </condition>
+    </fail>
+    <echo message="Using I2P source at ${i2pbase}" />
+
+    <!-- 
+	TO-DO move this to js so that it is cross-platform, 
+	and so it does not actually store the version name or code.
+        In order to do that, we need a different temporary properties file.
+        To increment, we would copy this tempoary one to version.properties.
+        The MANIFEST would be also updated in incrementBuild.
+        
+	-*- Sponge
+    -->
+
+    <buildnumber file="scripts/build.number" />
+    <exec executable="sh" osfamily="unix" failonerror="true">
+        <arg value="-c" />
+        <arg value="scripts/setversion.sh ${i2pbase}" />
+    </exec>
+    <!-- this loads my.version.code and my.version.name -->
+    <property file="scripts/version.properties" />
+    <property name="version.code" value="${my.version.code}" />
+    <property name="version.name" value="${my.version.name}" />
+    <echo message="version.code '${version.code}', 'version.name '${version.name}', '${my.version.name}'" />
+
+
     <!--
          ================================================================================
          New I2P rules
          ================================================================================
     -->
+    <!-- TO-DO  make this actually store the increment. 
+	 All operations increment, this is not what we want.
+    -->
+
+    <target name="incrementBuild" >
+    </target>
 
     <!-- overrides of those in main_rules.xml -->
 
-    <target name="-pre-build" depends="findI2PSource, copy-i2p-resources, incrementBuild" >
+    <target name="-pre-build" depends="copy-i2p-resources, incrementBuild" >
         <!-- aapt messes up when resources are added or deleted, just build every time -->
         <delete dir="${gen.absolute.dir}/net" verbose="${verbose}" />
         <!-- screw it, do the classes too, until I add the depend class -->
@@ -19,25 +61,23 @@
 
     <target name="-post-compile" depends="hackcleanup, jbigi" />
 
-    <!-- new rules -->
-
-    <target name="findI2PSource" >
-        <!-- override with i2psrc=path/to/source in local.properties -->
-        <property name="i2psrc" value="../i2p.i2p" />
-        <property name="i2pbase" location="${i2psrc}" />
-        <available file="${i2psrc}" property="i2p.present" />
-        <fail message="I2P source directory ${i2psrc} was not found. Install it there or set i2psrc=/path/to/source in local.properties" >
-            <condition>
-                <not>
-                    <isset property="i2p.present" />
-                </not>
-            </condition>
-        </fail>
-        <echo message="Using I2P source at ${i2pbase}" />
+    <!-- 
+         Creates the output directories if they don't exist yet. 
+    -->
+    <target name="-dirs">
+        <echo>Creating output directories if needed...</echo>
+        <mkdir dir="${resource.absolute.dir}" />
+        <mkdir dir="${external.libs.absolute.dir}" />
+        <mkdir dir="${gen.absolute.dir}" />
+        <mkdir dir="${out.absolute.dir}" />
+        <mkdir dir="${out.classes.absolute.dir}" />
     </target>
 
-   <!--  <target name="buildrouter" depends="findI2PSource, -dirs" > -->
-    <target name="buildrouter" depends="findI2PSource" >
+    <!-- new rules -->
+
+
+
+    <target name="buildrouter" depends="-dirs" >
         <!-- build router and core -->
         <ant dir="${i2pbase}" >
             <target name="buildRouter" />
@@ -93,8 +133,7 @@
     </target>
 
     <!-- some resources -->
-<!--    <target name="copy-i2p-resources" depends="findI2PSource, -dirs" >   -->
-    <target name="copy-i2p-resources" depends="findI2PSource" >
+    <target name="copy-i2p-resources" depends="-dirs" >
         <copy file="LICENSE.txt" tofile="res/raw/license_app_txt" />
         <copy file="licenses/LICENSE-Apache2.0.txt" tofile="res/raw/license_apache20_txt" />
         <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="res/drawable/" />
@@ -121,23 +160,15 @@
         <delete file="${jar.libs.dir}/crypto.jar" />
     </target>
 
-    <target name="jbigi" depends="findI2PSource" >
+    <target name="jbigi" >
         <exec executable="sh" osfamily="unix" failonerror="true">
             <arg value="-c" />
             <arg value="jni/build.sh ${i2pbase}" />
         </exec>
-        <copy file="jni/libjbigi.so" todir="${native.libs.dir}/armeabi" />
+        <copy file="jni/libjbigi.so" todir="${native.libs.absolute.dir}/armeabi" />
     </target>
 
-    <target name="incrementBuild" depends="findI2PSource" >
-        <buildnumber file="scripts/build.number" />
-        <exec executable="sh" osfamily="unix" failonerror="true">
-            <arg value="-c" />
-            <arg value="scripts/setversion.sh ${i2pbase}" />
-        </exec>
-        <!-- this loads my.version.code and my.version.name -->
-        <property file="scripts/version.properties" />
-    </target>
+
 
     <!-- install now does both -->
     <target name="reinstall" depends="install" />
@@ -263,33 +294,25 @@
     </target>
 
     <!--
-         ================================================================================
-         From here down copied from SDK tools/ant/main_rules.xml from Tools version 11
-         and then modified
-         ================================================================================
-    -->
-
-    <!-- not necessary to copy if setup import="true" -->
-
-
-    <!--
          override this because the ant task com.android.ant.AaptExecLoopTask has issues:
              a) it uses version.code which main_rules sets to "" and
              b) it can't set versionName via the aapt task, have to use the aapt command line
+         We can't use this in the newer SDK, and since properties are
+         immutable, we don't need to do this. The trick is to call the target earlier,
+         _BEFORE_ the template is loaded.
     -->
 
-    <!-- Puts the project's resources into the output package file
-         This actually can create multiple resource package in case
-         Some custom apk with specific configuration have been
-         declared in default.properties.
-         -->
+    <!--
+    
     <target name="-package-resources">
         <echo>Packaging resources</echo>
+        <property name="dash" value="-" />
+        <property name="dashdash" value="${dash}${dash}" />
         <exec executable="${aapt}" failonerror="true" >
             <arg value="package" />
-            <arg value="--version-code" />
+            <arg value="${dashdash}version-code" />
             <arg value="${my.version.code}" />
-            <arg value="--version-name" />
+            <arg value="${dashdash}version-name" />
             <arg value="${my.version.name}" />
             <arg value="-f" />
             <arg value="-m" />
@@ -303,7 +326,7 @@
             <arg value="${gen.absolute.dir}" />
             <arg value="-F" />
             <arg value="${out.absolute.dir}/${resource.package.file.name}" />
-        </exec>
+        </exec>        
     </target>
-
+    -->
 </project>
