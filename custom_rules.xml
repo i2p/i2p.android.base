@@ -15,11 +15,11 @@
     <echo message="Using I2P source at ${i2pbase}" />
 
     <!-- 
-	TO-DO move this to js so that it is cross-platform, 
-	and so it does not actually store the version name or code.
-        In order to do that, we need a different temporary properties file.
-        To increment, we would copy this tempoary one to version.properties.
-        The MANIFEST would be also updated in incrementBuild.
+	TO-DO: Move this to js so that it is cross-platform.
+
+        TO-DO: Do not actually store the version name or code untill we really want to raise it.
+               Don't incrementbuild as part of building, have the dev run the target manually.
+               For now, it does not matter, so it is left as-is.
         
 	-*- Sponge
     -->
@@ -29,6 +29,8 @@
         <arg value="-c" />
         <arg value="scripts/setversion.sh ${i2pbase}" />
     </exec>
+
+    
     <!-- this loads my.version.code and my.version.name -->
     <property file="scripts/version.properties" />
     <property name="version.code" value="${my.version.code}" />
@@ -41,8 +43,9 @@
          New I2P rules
          ================================================================================
     -->
-    <!-- TO-DO  make this actually store the increment. 
-	 All operations increment, this is not what we want.
+    <!-- 
+        TO-DO:  Make this actually store the increment. 
+                All operations increment, this is not what we want.
     -->
 
     <target name="incrementBuild" >
@@ -50,7 +53,7 @@
 
     <!-- overrides of those in main_rules.xml -->
 
-    <target name="-pre-build" depends="copy-i2p-resources, incrementBuild" >
+    <target name="-pre-build" depends="copy-i2p-resources" >
         <!-- aapt messes up when resources are added or deleted, just build every time -->
         <delete dir="${gen.absolute.dir}/net" verbose="${verbose}" />
         <!-- screw it, do the classes too, until I add the depend class -->
@@ -154,6 +157,12 @@
         <copy file="${i2pbase}/licenses/LICENSE-GPLv3.txt" tofile="res/raw/license_gplv3_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-LGPLv3.txt" tofile="res/raw/license_lgplv3_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-Addressbook.txt" tofile="res/raw/license_addressbook_txt" />
+
+        <delete file="res/raw/certificates" />
+        <zip update="true" destfile="res/raw/certificates">
+            <fileset dir="${i2pbase}/installer/resources/certificates/" />
+        </zip>
+
     </target>
 
     <target name="hackcleanup">
