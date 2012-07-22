@@ -158,8 +158,8 @@
         <copy file="${i2pbase}/licenses/LICENSE-LGPLv3.txt" tofile="res/raw/license_lgplv3_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-Addressbook.txt" tofile="res/raw/license_addressbook_txt" />
 
-        <delete file="res/raw/certificates" />
-        <zip update="true" destfile="res/raw/certificates">
+        <delete file="res/raw/certificates_zip" />
+        <zip update="true" destfile="res/raw/certificates_zip">
             <fileset dir="${i2pbase}/installer/resources/certificates/" />
         </zip>
 

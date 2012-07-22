@@ -5,14 +5,11 @@ import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.os.Build;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.Properties;
-
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
@@ -107,6 +104,19 @@ class Init {
             File img2Dir = new File(cssDir, "images");
             img2Dir.mkdir();
             copyResourceToFile(R.drawable.header, "docs/themes/console/light/images/header.png");
+
+            File certDir = new File(myDir, "certificates");
+            certDir.mkdir();
+            File certificates = new File(myDir, "certificates");
+            File[] allcertificates = certificates.listFiles();
+            if ( allcertificates != null) {
+                for (int i = 0; i < allcertificates.length; i++) {
+                    File f = allcertificates[i];
+                    Util.i("Deleting old certificate file/dir " + f);
+                    FileUtil.rmdir(f, false);
+                }
+            }
+            unzipResourceToDir(R.raw.certificates_zip, "certificates");
         }
 
         deleteOldFiles();
@@ -135,6 +145,51 @@ class Init {
             while ( (read = in.read(buf)) != -1)
                 out.write(buf, 0, read);
             
+        } catch (IOException ioe) {
+        } catch (Resources.NotFoundException nfe) {
+        } finally {
+            if (in != null) try { in.close(); } catch (IOException ioe) {}
+            if (out != null) try { out.close(); } catch (IOException ioe) {}
+        }
+    }
+    /**
+     *  @param f relative to base dir
+     */
+    private void unzipResourceToDir(int resID, String f) {
+        InputStream in = null;
+        FileOutputStream out = null;
+        ZipInputStream zis = null;
+
+
+        Util.i("Creating files in '" + myDir + "/" + f + "/' from resource");
+        try {
+            // Context methods
+            in = ctx.getResources().openRawResource(resID);
+            zis = new ZipInputStream((in));
+            try {
+                ZipEntry ze;
+                while ((ze = zis.getNextEntry()) != null) {
+                    out = null;
+                    try {
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[1024];
+                        int count;
+                        while ((count = zis.read(buffer)) != -1) {
+                            baos.write(buffer, 0, count);
+                        }
+                        String filename = ze.getName();
+                        Util.i("Creating file " + myDir + "/" + f +"/" + filename + " from resource");
+                        byte[] bytes = baos.toByteArray();
+                        out = new FileOutputStream(new File(myDir + "/" + f +"/" + filename));
+                        out.write(bytes);
+                    } catch (IOException ioe) {
+                    } finally {
+                        if (out != null) try { out.close(); } catch (IOException ioe) {}
+                    }
+                }
+            } finally {
+                if (zis != null) zis.close();
+            }
         } catch (IOException ioe) {
         } catch (Resources.NotFoundException nfe) {
         } finally {
