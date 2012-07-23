@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
-
 import net.i2p.I2PAppContext;
 import net.i2p.util.Log;
 

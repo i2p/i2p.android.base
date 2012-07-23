@@ -1,16 +1,14 @@
 package net.i2p.android.router.activity;
 
-import android.content.res.Resources;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
-
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 
@@ -45,7 +43,7 @@ public class TextResourceActivity extends I2PActivityBase {
         try {
             in = getResources().openRawResource(id);
             
-            int read = 0;
+            int read;
             while ( (read = in.read(buf)) != -1)
                 out.write(buf, 0, read);
             

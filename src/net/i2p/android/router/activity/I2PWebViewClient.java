@@ -1,6 +1,5 @@
 package net.i2p.android.router.activity;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,14 +12,7 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
+import java.io.*;
 import net.i2p.android.apps.EepGetFetcher;
 import net.i2p.android.router.provider.CacheProvider;
 import net.i2p.android.router.util.AppCache;
@@ -280,9 +272,12 @@ class I2PWebViewClient extends WebViewClient {
             return Integer.valueOf(0);
         }
 
+        @Override
         protected void onProgressUpdate(Integer... progress) {
-            if (isCancelled())
-                return;
+            //if (isCancelled())
+            //    return;
+
+            
             //if (progress[0].intValue() < 0) {
             //    _dialog = ProgressDialog.show(_view.getContext(), "Loading", "some url");
             //    _dialog.setOnCancelListener(this);
@@ -401,6 +396,7 @@ class I2PWebViewClient extends WebViewClient {
             return Integer.valueOf(0);
         }
 
+        @Override
         protected void onProgressUpdate(Integer... progress) {
             if (isCancelled())
                 return;

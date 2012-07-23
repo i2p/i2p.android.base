@@ -4,18 +4,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import net.i2p.android.router.R;
+import java.io.*;
 import net.i2p.android.apps.NewsFetcher;
+import net.i2p.android.router.R;
 
 public class NewsActivity extends I2PActivityBase {
 
@@ -76,7 +68,7 @@ public class NewsActivity extends I2PActivityBase {
                 in = getResources().openRawResource(R.raw.initialnews_html);
             }
             
-            int read = 0;
+            int read;
             while ( (read = in.read(buf)) != -1)
                 out.write(buf, 0, read);
 

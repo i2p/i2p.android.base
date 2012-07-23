@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import net.i2p.I2PAppContext;
-
 /**
  *  setXXX() not available until API level 9 (Platform Version 2.3)
  *  @since 0.8.7

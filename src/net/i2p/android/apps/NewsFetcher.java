@@ -1,14 +1,7 @@
 package net.i2p.android.apps;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 import net.i2p.data.DataHelper;
-import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.util.RFC822Date;
 import net.i2p.util.EepGet;
@@ -104,6 +97,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private static final long INITIAL_DELAY = 5*60*1000;
     private static final long RUN_DELAY = 30*60*1000;
 
+    @SuppressWarnings("SleepWhileInLoop")
     public void run() {
         try {
             Thread.sleep(INITIAL_DELAY);
@@ -164,8 +158,8 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             _tempFile.delete();
         
         try {
-            EepGet get = null;
-            get = new EepGet(_context, true, proxyHost, proxyPort, 0, _tempFile.getAbsolutePath(), newsURL, true, null, _lastModified);
+            // EepGet get = null;
+            EepGet get = new EepGet(_context, true, proxyHost, proxyPort, 0, _tempFile.getAbsolutePath(), newsURL, true, null, _lastModified);
             get.addStatusListener(this);
             if (get.fetch()) {
                 _lastModified = get.getLastModified();

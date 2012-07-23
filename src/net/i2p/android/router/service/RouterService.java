@@ -1,19 +1,12 @@
 package net.i2p.android.router.service;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-
-import java.io.File;
 import java.text.DecimalFormat;
 import java.util.List;
-
-import net.i2p.android.router.R;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.receiver.I2PReceiver;
 import net.i2p.android.router.util.Util;
@@ -22,7 +15,6 @@ import net.i2p.router.Job;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.RouterLaunch;
-import net.i2p.util.NativeBigInteger;
 
 /**
  *  Runs the router

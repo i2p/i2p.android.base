@@ -4,13 +4,8 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.TextView;
-
-import java.io.StringWriter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
+import java.io.StringWriter;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.router.CommSystemFacade;

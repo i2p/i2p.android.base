@@ -2,22 +2,15 @@ package net.i2p.android.router.service;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.res.Resources.NotFoundException;
 import android.os.Build;
-
 import java.io.*;
-import java.util.List;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
-import net.i2p.router.Router;
-import net.i2p.router.RouterContext;
-import net.i2p.router.RouterLaunch;
 import net.i2p.util.FileUtil;
-import net.i2p.util.NativeBigInteger;
 import net.i2p.util.OrderedProperties;
 
 class Init {
@@ -141,7 +134,7 @@ class Init {
             in = ctx.getResources().openRawResource(resID);
             out = new FileOutputStream(new File(myDir, f));
             
-            int read = 0;
+            int read;
             while ( (read = in.read(buf)) != -1)
                 out.write(buf, 0, read);
             
@@ -166,35 +159,32 @@ class Init {
             // Context methods
             in = ctx.getResources().openRawResource(resID);
             zis = new ZipInputStream((in));
-            try {
-                ZipEntry ze;
-                while ((ze = zis.getNextEntry()) != null) {
-                    out = null;
-                    try {
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        byte[] buffer = new byte[1024];
-                        int count;
-                        while ((count = zis.read(buffer)) != -1) {
-                            baos.write(buffer, 0, count);
-                        }
-                        String filename = ze.getName();
-                        Util.i("Creating file " + myDir + "/" + f +"/" + filename + " from resource");
-                        byte[] bytes = baos.toByteArray();
-                        out = new FileOutputStream(new File(myDir + "/" + f +"/" + filename));
-                        out.write(bytes);
-                    } catch (IOException ioe) {
-                    } finally {
-                        if (out != null) try { out.close(); } catch (IOException ioe) {}
+            ZipEntry ze;
+            while ((ze = zis.getNextEntry()) != null) {
+                out = null;
+                try {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[1024];
+                    int count;
+                    while ((count = zis.read(buffer)) != -1) {
+                        baos.write(buffer, 0, count);
                     }
+                    String filename = ze.getName();
+                    Util.i("Creating file " + myDir + "/" + f +"/" + filename + " from resource");
+                    byte[] bytes = baos.toByteArray();
+                    out = new FileOutputStream(new File(myDir + "/" + f +"/" + filename));
+                    out.write(bytes);
+                } catch (IOException ioe) {
+                } finally {
+                    if (out != null) { try { out.close(); } catch (IOException ioe) {} out = null; }
                 }
-            } finally {
-                if (zis != null) zis.close();
             }
         } catch (IOException ioe) {
         } catch (Resources.NotFoundException nfe) {
         } finally {
             if (in != null) try { in.close(); } catch (IOException ioe) {}
             if (out != null) try { out.close(); } catch (IOException ioe) {}
+            if (zis != null) try { zis.close(); } catch (IOException ioe) {}
         }
     }
     

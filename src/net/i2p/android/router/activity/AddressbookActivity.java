@@ -9,15 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
-
-import net.i2p.android.router.R;
+import java.util.*;
 import net.i2p.I2PAppContext;
+import net.i2p.android.router.R;
 import net.i2p.client.naming.NamingService;
 
 public class AddressbookActivity extends ListActivity {

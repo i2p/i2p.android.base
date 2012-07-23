@@ -4,15 +4,11 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.Collections;
 import java.util.List;
-
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
 

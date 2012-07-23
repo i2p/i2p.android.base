@@ -7,14 +7,11 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
-
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-
 import net.i2p.android.router.R;
 
 public class WebActivity extends I2PActivityBase {
@@ -62,7 +59,7 @@ public class WebActivity extends I2PActivityBase {
         try {
             in = getResources().openRawResource(id);
             
-            int read = 0;
+            int read;
             while ( (read = in.read(buf)) != -1)
                 out.write(buf, 0, read);
             

@@ -10,16 +10,11 @@ import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 import net.i2p.android.router.R;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
-import net.i2p.router.CommSystemFacade;
-import net.i2p.router.NetworkDatabaseFacade;
-import net.i2p.router.Router;
-import net.i2p.router.RouterContext;
-import net.i2p.router.TunnelManagerFacade;
+import net.i2p.router.*;
 import net.i2p.router.peermanager.ProfileOrganizer;
 import net.i2p.router.transport.FIFOBandwidthLimiter;
 import net.i2p.stat.StatManager;

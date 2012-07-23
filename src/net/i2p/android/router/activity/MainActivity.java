@@ -10,9 +10,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.text.DecimalFormat;
-
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
@@ -334,6 +332,7 @@ public class MainActivity extends I2PActivityBase {
         }
     }
 
+    @Override
     protected Dialog onCreateDialog(int id) {
         final String currentVersion = Util.getOurVersion(this);
         Dialog rv = null;

@@ -5,9 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-
-import java.lang.Thread.UncaughtExceptionHandler;
-
 import net.i2p.android.router.R;
 import net.i2p.android.router.activity.MainActivity;
 

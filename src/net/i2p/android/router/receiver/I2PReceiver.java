@@ -1,15 +1,9 @@
 package net.i2p.android.router.receiver;
 
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
+import android.content.*;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
-
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
@@ -32,7 +26,7 @@ public class I2PReceiver extends BroadcastReceiver {
         intents.addAction(Intent.ACTION_TIME_CHANGED);
         intents.addAction(Intent.ACTION_TIME_TICK);  // once per minute, for testing
         intents.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        context.registerReceiver(this, intents);
+        Intent registerReceiver = context.registerReceiver(this, intents);
         _wasConnected = Util.isConnected(context);
     }
 

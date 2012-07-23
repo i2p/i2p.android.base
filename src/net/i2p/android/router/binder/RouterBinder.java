@@ -1,7 +1,6 @@
 package net.i2p.android.router.binder;
 
 import android.os.Binder;
-
 import net.i2p.android.router.service.RouterService;
 
 public class RouterBinder extends Binder {
