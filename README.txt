@@ -1,73 +1,89 @@
-These instructions are for a recent Android SDK (1.6 or later).
-These instructions were last updated for SDK Tools Version 11 with
-SDK Platform-tools Version 5, June 2011.
+These instructions are for a recent Android SDK (Rev 20 or better) on Linux.
+Windows building is not currently supported.
+
+These instructions were last updated for SDK Tools Version 20 with
+SDK Platform-tools Version 12 from updates.
 
 The i2p source must be installed in ../i2p.i2p,
 or else add i2psrc=/path/to/source in the local.properties file.
 
 =====================
 
-#Download the SDK from http://developer.android.com/sdk/index.html
-#Unzip the android SDK in ../
-#So then the android tools will be in ../android-sdk-linux_86/tools/
+# Download the SDK from http://developer.android.com/sdk/index.html
+# Unzip the android SDK in ../
+# So then the android tools will be in ../android-sdk-linux/tools/
 #
 # Run the GUI updater, which you must do to get an SDK Platform:
-../android-sdk-linux_86/tools/android &
+../android-sdk-linux/tools/android &
 
 # now go to the available packages tab, check the box and click refresh,
 # and download an SDK Platform
-# Since I2P is configured to run on 1.1 or higher
-# (API 2) download that one. Otherwise you must change the
-# target in default.properties from android-2 to andriod-x
+# Since I2P is configured to run on 2.2 or higher
+# (API 8) download at least that one. Otherwise you must change the
+# target in project.properties from android-8 to andriod-x
 # where x is the API version.
 
 # To run the debugger (ddms) you also need to download the
 # "Android SDK Platform-Tools" package from the GUI updater.
 
 # create a file local.properties with the following line (without the leading # of course):
-# sdk.dir=/path/to/your/android-sdk-linux_86
-# The old property was sdk-location=/path/to/your/android-sdk-linux_86
+# sdk.dir=/path/to/your/android-sdk-linux
+# The old property was sdk-location=/path/to/your/android-sdk-linux
 # but it changed in more recent tools.
 
 # DO NOT create a new project or anything. It's all set up right here for you.
 
 # Create the android 2.2 (API 8) virtual device
 # (don't make a custom hardware profile)
-../android-sdk-linux_86/tools/android create avd --name i2p --target 8
+../android-sdk-linux/tools/android create avd --name i2p --target 8
 
-#then run the emulator:
+# then run the emulator:
 #  This may take a LONG time the first time (half an hour or more)...
 #  Run the debugger to ensure it is making progress
-# -no-boot-anim for faster boot
-# -dns-server 8.8.8.8 if the router can't reseed
-#../android-sdk-linux_86/tools/emulator -avd i2p -no-boot-anim -dns-server 8.8.8.8 &
-../android-sdk-linux_86/tools/emulator -avd i2p &
+#   -no-boot-anim for faster boot
+#   -dns-server 8.8.8.8 if the router can't reseed
+#     ../android-sdk-linux/tools/emulator -avd i2p -no-boot-anim -dns-server 8.8.8.8 &
+../android-sdk-linux/tools/emulator -avd i2p &
 
-# or to talk to a real phone in debug mode:
+# or to talk to a real device in debug mode:
 # You have to do this if you get a permission error -
-# Stop ddms, unplug the phone, do the following,
-# then plug in the phone, then start ddms
+# Stop ddms, unplug the device, do the following,
+# then plug in the device, then start ddms
 adb kill-server
 sudo adb start-server
 adb devices
 
-#then wait a couple minutes until the emulator is up
-#then install the I2P app
-ant install
+# then wait a couple minutes until the emulator or device is up
+# compile and install for a release
+ant release
+ant installr
 
-#then run the debugger
-../android-sdk-linux_86/tools/ddms &
+# or compile and install for a debug version
+ant debug
+ant installd
 
-#to rebuild and reinstall to emulator or phone:
-ant reinstall
+# then run the debugger
+../android-sdk-linux/tools/ddms &
 
-# Now click on the I2P icon on your phone!
+# to rebuild and reinstall to emulator or device:
+ant clean
+# then do which ever from the above compile and install choices.
+
+
+# to uninstall
+ant uninstall
+# or use your device's menu.
+
+# Other ant tagets are available, just type
+ant
+
+# Anyway, with I2P installed, click on the I2P icon on your device and enjoy!
 
 #other helpful commands
-../android-sdk-linux_86/platform-tools/adb shell
-../android-sdk-linux_86/platform-tools/adb pull /some/file/on/emulator some-local-dir/
+../android-sdk-linux/platform-tools/adb shell
+../android-sdk-linux/platform-tools/adb pull /some/file/on/emulator some-local-dir/
 
-# copy the Dev Tools app from the emulator to your phone
+# copy the Dev Tools app from the emulator to your device
 adb -e pull /system/app/Development.apk ./Development.apk
 adb -d install Development.apk
 
