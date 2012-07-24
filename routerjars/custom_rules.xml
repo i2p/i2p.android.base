@@ -41,11 +41,14 @@
             <target name="buildRouter" />
             <target name="buildI2PTunnel" />
             <target name="buildAddressbook" />
+            <target name="buildBOB" />
         </ant>
 
         <!-- router -->
         <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
 
+        <!-- bob -->
+        <copy file="${i2pbase}/build/BOB.jar" todir="${jar.libs.dir}" />
         <!-- core -->
 
         <!-- lots of unneeded stuff could be deleted here -->
