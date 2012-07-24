@@ -25,7 +25,7 @@ then
 	exit 0
 fi
 
-I2PBASE=${1:-../../i2p.i2p}
+I2PBASE=${1:-../../../i2p.i2p}
 #
 # Wrong again. We want to be able to not have to update this script
 # every time a new NDK comes out. We solve this by using readlink with

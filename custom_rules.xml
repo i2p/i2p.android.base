@@ -37,7 +37,6 @@
     <property name="version.name" value="${my.version.name}" />
     <echo message="version.code '${version.code}', 'version.name '${version.name}', '${my.version.name}'" />
 
-
     <!--
          ================================================================================
          New I2P rules
@@ -60,79 +59,20 @@
         <delete dir="${out.absolute.dir}/classes/net" verbose="${verbose}" />
     </target>
 
-    <target name="-pre-compile" depends="buildrouter" />
+<!--
+    <target name="-pre-compile" depends="jbigi, buildrouter" />
 
-    <target name="-post-compile" depends="hackcleanup, jbigi" />
-
+    <target name="-post-compile" depends="hackcleanup" />
+-->
     <!-- 
          Creates the output directories if they don't exist yet. 
     -->
     <target name="-dirs">
         <echo>Creating output directories if needed...</echo>
         <mkdir dir="${resource.absolute.dir}" />
-        <mkdir dir="${external.libs.absolute.dir}" />
         <mkdir dir="${gen.absolute.dir}" />
         <mkdir dir="${out.absolute.dir}" />
         <mkdir dir="${out.classes.absolute.dir}" />
-    </target>
-
-    <!-- new rules -->
-
-
-
-    <target name="buildrouter" depends="-dirs" >
-        <!-- build router and core -->
-        <ant dir="${i2pbase}" >
-            <target name="buildRouter" />
-            <target name="buildI2PTunnel" />
-            <target name="buildAddressbook" />
-        </ant>
-
-        <!-- router -->
-        <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
-
-        <!-- core -->
-
-        <!-- org.bouncycastle.crypto already in android
-             but we need a little trickery because our HMac is incompatible...
-             and the libs aren't in the SDK to compile against??? -->
-        <jar destfile="${jar.libs.dir}/crypto.jar" >
-            <zipfileset src="${i2pbase}/build/i2p.jar" >
-                <include name="org/bouncycastle/crypto/Digest.class" />
-                <include name="org/bouncycastle/crypto/Mac.class" />
-                <include name="org/bouncycastle/crypto/digests/GeneralDigest.class" />
-                <include name="org/bouncycastle/crypto/digests/MD5Digest.class" />
-            </zipfileset >
-        </jar>
-
-        <!-- lots of unneeded stuff could be deleted here -->
-        <jar destfile="${jar.libs.dir}/i2p.jar" >
-            <zipfileset src="${i2pbase}/build/i2p.jar" >
-                <exclude name="net/i2p/util/LogWriter.class" />
-                <exclude name="net/i2p/util/SecureDirectory.class" />
-                <exclude name="net/i2p/util/SecureFile.class" />
-                <exclude name="net/i2p/util/SecureFileOutputStream.class" />
-                <exclude name="org/bouncycastle/crypto/Digest.class" />
-                <exclude name="org/bouncycastle/crypto/Mac.class" />
-                <exclude name="org/bouncycastle/crypto/digests/GeneralDigest.class" />
-                <exclude name="org/bouncycastle/crypto/digests/MD5Digest.class" />
-            </zipfileset >
-        </jar>
-
-        <!-- i2ptunnel -->
-        <copy file="${i2pbase}/apps/ministreaming/java/build/mstreaming.jar" todir="${jar.libs.dir}" />
-        <copy file="${i2pbase}/apps/streaming/java/build/streaming.jar" todir="${jar.libs.dir}" />
-        <jar destfile="${jar.libs.dir}/i2ptunnel.jar" >
-            <zipfileset src="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" >
-                <exclude name="net/i2p/i2ptunnel/I2PTunnelGUI.class" />
-            </zipfileset >
-        </jar>
-
-        <!-- addressbook - make a jar, it's a war in the i2p distro -->
-        <jar destfile="${jar.libs.dir}/addressbook.jar"
-             basedir="${i2pbase}/apps/addressbook/build"
-             excludes="net/i2p/addressbook/Servlet.class" />
-
     </target>
 
     <!-- some resources -->
@@ -157,27 +97,12 @@
         <copy file="${i2pbase}/licenses/LICENSE-GPLv3.txt" tofile="res/raw/license_gplv3_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-LGPLv3.txt" tofile="res/raw/license_lgplv3_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-Addressbook.txt" tofile="res/raw/license_addressbook_txt" />
-
         <delete file="res/raw/certificates_zip" />
         <zip update="true" destfile="res/raw/certificates_zip">
             <fileset dir="${i2pbase}/installer/resources/certificates/" />
         </zip>
 
     </target>
-
-    <target name="hackcleanup">
-        <delete file="${jar.libs.dir}/crypto.jar" />
-    </target>
-
-    <target name="jbigi" >
-        <exec executable="sh" osfamily="unix" failonerror="true">
-            <arg value="-c" />
-            <arg value="jni/build.sh ${i2pbase}" />
-        </exec>
-        <copy file="jni/libjbigi.so" todir="${native.libs.absolute.dir}/armeabi" />
-    </target>
-
-
 
     <!-- install now does both -->
     <target name="reinstall" depends="install" />
@@ -203,7 +128,7 @@
         <delete file="res/raw/license_gplv2_txt" />
         <delete file="res/raw/license_gplv3_txt" />
         <delete file="res/raw/license_lgplv3_txt" />
-        <delete dir="jni/build/" verbose="${verbose}" />
+        <delete file="res/raw/certificates_zip" />
         <delete file="scripts/build.number" verbose="${verbose}" />
         <delete file="scripts/version.properties" verbose="${verbose}" />
     </target>
@@ -302,40 +227,5 @@
         <echo message="Release file copied to I2PAndroid-${my.version.name}.apk" />
     </target>
 
-    <!--
-         override this because the ant task com.android.ant.AaptExecLoopTask has issues:
-             a) it uses version.code which main_rules sets to "" and
-             b) it can't set versionName via the aapt task, have to use the aapt command line
-         We can't use this in the newer SDK, and since properties are
-         immutable, we don't need to do this. The trick is to call the target earlier,
-         _BEFORE_ the template is loaded.
-    -->
 
-    <!--
-    
-    <target name="-package-resources">
-        <echo>Packaging resources</echo>
-        <property name="dash" value="-" />
-        <property name="dashdash" value="${dash}${dash}" />
-        <exec executable="${aapt}" failonerror="true" >
-            <arg value="package" />
-            <arg value="${dashdash}version-code" />
-            <arg value="${my.version.code}" />
-            <arg value="${dashdash}version-name" />
-            <arg value="${my.version.name}" />
-            <arg value="-f" />
-            <arg value="-m" />
-            <arg value="-M" />
-            <arg value="AndroidManifest.xml" />
-            <arg value="-I" />
-            <arg value="${android.jar}" />
-            <arg value="-S" />
-            <arg value="${resource.absolute.dir}" />
-            <arg value="-J" />
-            <arg value="${gen.absolute.dir}" />
-            <arg value="-F" />
-            <arg value="${out.absolute.dir}/${resource.package.file.name}" />
-        </exec>        
-    </target>
-    -->
 </project>

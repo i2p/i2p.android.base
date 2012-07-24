@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="routerjars">
+
+    <!-- override with i2psrc=path/to/source in local.properties -->
+    <property name="i2psrc" value="../../i2p.i2p" />
+    <property name="i2pbase" location="${i2psrc}" />
+    <available file="${i2psrc}" property="i2p.present" />
+    <fail message="I2P source directory ${i2psrc} was not found. Install it there or set i2psrc=/path/to/source in local.properties" >
+        <condition>
+            <not>
+                <isset property="i2p.present" />
+            </not>
+        </condition>
+    </fail>
+    <echo message="Using I2P source at ${i2pbase}" />
+
+    <target name="-pre-compile" depends="jbigi, buildrouter" />
+
+
+    <!-- 
+         Creates the output directories if they don't exist yet. 
+    -->
+    <target name="-dirs">
+        <echo>Creating output directories if needed...</echo>
+        <mkdir dir="${resource.absolute.dir}" />
+        <mkdir dir="${gen.absolute.dir}" />
+        <mkdir dir="${out.absolute.dir}" />
+        <mkdir dir="${out.classes.absolute.dir}" />
+    </target>
+
+    <!-- new rules -->
+
+    <target name="buildrouter" depends="-dirs" >
+        <!-- build router and core -->
+        <ant dir="${i2pbase}" >
+            <target name="buildRouter" />
+            <target name="buildI2PTunnel" />
+            <target name="buildAddressbook" />
+        </ant>
+
+        <!-- router -->
+        <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
+
+        <!-- core -->
+
+        <!-- lots of unneeded stuff could be deleted here -->
+        <jar destfile="${jar.libs.dir}/i2p.jar" >
+            <zipfileset src="${i2pbase}/build/i2p.jar" >
+                <exclude name="net/i2p/util/LogWriter.class" />
+                <exclude name="net/i2p/util/SecureDirectory.class" />
+                <exclude name="net/i2p/util/SecureFile.class" />
+                <exclude name="net/i2p/util/SecureFileOutputStream.class" />
+                <exclude name="org/bouncycastle/crypto/Digest.class" />
+                <exclude name="org/bouncycastle/crypto/Mac.class" />
+                <exclude name="org/bouncycastle/crypto/digests/GeneralDigest.class" />
+                <exclude name="org/bouncycastle/crypto/digests/MD5Digest.class" />
+            </zipfileset >
+        </jar>
+
+        <!-- i2ptunnel -->
+        <copy file="${i2pbase}/apps/ministreaming/java/build/mstreaming.jar" todir="${jar.libs.dir}" />
+        <copy file="${i2pbase}/apps/streaming/java/build/streaming.jar" todir="${jar.libs.dir}" />
+        <jar destfile="${jar.libs.dir}/i2ptunnel.jar" >
+            <zipfileset src="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" >
+                <exclude name="net/i2p/i2ptunnel/I2PTunnelGUI.class" />
+            </zipfileset >
+        </jar>
+
+        <!-- addressbook - make a jar, it's a war in the i2p distro -->
+        <jar destfile="${jar.libs.dir}/addressbook.jar"
+             basedir="${i2pbase}/apps/addressbook/build"
+             excludes="net/i2p/addressbook/Servlet.class" />
+
+    </target>
+
+    <target name="jbigi" >
+        <exec executable="sh" osfamily="unix" failonerror="true">
+            <arg value="-c" />
+            <arg value="jni/build.sh ${i2pbase}" />
+        </exec>
+        <copy file="jni/libjbigi.so" todir="${jar.libs.dir}/armeabi" />
+    </target>
+
+    <target name="distclean" depends="clean">
+        <delete dir="${jar.libs.dir}" verbose="${verbose}" />
+        <delete dir="jni/build/" verbose="${verbose}" />
+    </target>
+
+</project>
