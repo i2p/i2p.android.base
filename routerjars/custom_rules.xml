@@ -14,8 +14,13 @@
     </fail>
     <echo message="Using I2P source at ${i2pbase}" />
 
-    <target name="-pre-compile" depends="jbigi, buildrouter" />
+    <!-- this loads my.version.code and my.version.name -->
+    <property file="../scripts/version.properties" />
+    <property name="version.code" value="${my.version.code}" />
+    <property name="version.name" value="${my.version.name}" />
+    <echo message="version.code '${version.code}', 'version.name '${version.name}', '${my.version.name}'" />
 
+    <target name="-pre-compile" depends="jbigi, buildrouter" />
 
     <!-- 
          Creates the output directories if they don't exist yet. 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.i2p.android.router.guts"
-      android.versionCode=""
-      android.versionName=""
+      android.versionCode="4719040"
+      android.versionName="0.9.0-28_b1-API8"
       android:installLocation="preferExternal"
       >
 

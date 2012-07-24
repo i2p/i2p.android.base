@@ -226,6 +226,4 @@
         <copy file="${out.release.file}" tofile="I2PAndroid-${my.version.name}.apk" />
         <echo message="Release file copied to I2PAndroid-${my.version.name}.apk" />
     </target>
-
-
 </project>

@@ -15,6 +15,7 @@
 THISDIR=$(dirname $(readlink -ne $0))
 cd $THISDIR
 MANIFEST=../AndroidManifest.xml
+MANIFESTROUTER=../routerjars/AndroidManifest.xml
 TMP=AndroidManifest.xml.tmp
 I2PBASE=${1:-../../i2p.i2p}
 
@@ -69,4 +70,8 @@ SUBST='s/android.versionCode="[0-9]*"/android.versionCode="'${VERSIONINT}'"/'
 sed "$SUBST" < $MANIFEST > $TMP
 SUBST='s/android.versionName="[^"]*"/android.versionName="'${VERSIONSTRING}'"/'
 sed "$SUBST" < $TMP > $MANIFEST
+SUBST='s/android.versionCode="[0-9]*"/android.versionCode="'${VERSIONINT}'"/'
+sed "$SUBST" < $MANIFESTROUTER > $TMP
+SUBST='s/android.versionName="[^"]*"/android.versionName="'${VERSIONSTRING}'"/'
+sed "$SUBST" < $TMP > $MANIFESTROUTER
 rm -f $TMP
