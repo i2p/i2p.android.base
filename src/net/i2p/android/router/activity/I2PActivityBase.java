@@ -14,7 +14,11 @@ import net.i2p.android.router.R;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
-import net.i2p.router.*;
+import net.i2p.router.CommSystemFacade;
+import net.i2p.router.NetworkDatabaseFacade;
+import net.i2p.router.Router;
+import net.i2p.router.RouterContext;
+import net.i2p.router.TunnelManagerFacade;
 import net.i2p.router.peermanager.ProfileOrganizer;
 import net.i2p.router.transport.FIFOBandwidthLimiter;
 import net.i2p.stat.StatManager;
@@ -22,6 +26,7 @@ import net.i2p.stat.StatManager;
 public abstract class I2PActivityBase extends Activity {
     protected String _myDir;
     protected boolean _isBound;
+    protected boolean _triedBind;
     protected ServiceConnection _connection;
     protected RouterService _routerService;
     private SharedPreferences _sharedPrefs;
@@ -224,17 +229,20 @@ public abstract class I2PActivityBase extends Activity {
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
         Util.i(this + " calling bindService");
         _connection = new RouterConnection();
-        boolean success = bindService(intent, _connection, autoCreate ? BIND_AUTO_CREATE : 0);
-        Util.i(this + " bindService: auto create? " + autoCreate + " success? " + success);
-        return success;
+        _triedBind = bindService(intent, _connection, autoCreate ? BIND_AUTO_CREATE : 0);
+        Util.i(this + " bindService: auto create? " + autoCreate + " success? " + _triedBind);
+        return _triedBind;
     }
 
     protected void unbindRouter() {
-        if (_isBound && _connection != null) {
-            unbindService(_connection);
-            _routerService = null;
-            _isBound = false;
-        }
+        Util.i(this + " unbindRouter called with _isBound:" + _isBound + " _connection:" + _connection + " _triedBind:" + _triedBind);
+        if (_triedBind && _connection != null)
+                unbindService(_connection);
+
+        _triedBind = false;
+        _connection = null;
+        _routerService = null;
+        _isBound = false;
     }
 
     protected class RouterConnection implements ServiceConnection {

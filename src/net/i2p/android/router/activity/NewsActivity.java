@@ -5,7 +5,12 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.widget.TextView;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import net.i2p.android.apps.NewsFetcher;
 import net.i2p.android.router.R;
 
@@ -67,14 +72,14 @@ public class NewsActivity extends I2PActivityBase {
             } else {
                 in = getResources().openRawResource(R.raw.initialnews_html);
             }
-            
+
             int read;
             while ( (read = in.read(buf)) != -1)
                 out.write(buf, 0, read);
 
             if (newsExists)
                 out.write(FOOTER.getBytes());
-            
+
         } catch (IOException ioe) {
             System.err.println("news error " + ioe);
         } catch (Resources.NotFoundException nfe) {

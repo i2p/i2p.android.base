@@ -58,6 +58,7 @@ public class RouterService extends Service {
 
         //(new File(getFilesDir(), "wrapper.log")).delete();
         _myDir = getFilesDir().getAbsolutePath();
+        // init other stuff here, delete log, etc.
         Init init = new Init(this);
         init.debugStuff();
         init.initialize();
@@ -147,7 +148,7 @@ public class RouterService extends Service {
                     return;
                 setState(State.RUNNING);
                 List contexts = RouterContext.listContexts();
-                if ( (contexts == null) || (contexts.isEmpty()) ) 
+                if ( (contexts == null) || (contexts.isEmpty()) )
                       throw new IllegalStateException("No contexts. This is usually because the router is either starting up or shutting down.");
                 _statusBar.replace(StatusBar.ICON2, "I2P is running");
                 _context = (RouterContext)contexts.get(0);

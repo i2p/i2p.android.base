@@ -1,6 +1,11 @@
 package net.i2p.android.router.receiver;
 
-import android.content.*;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
@@ -26,6 +31,7 @@ public class I2PReceiver extends BroadcastReceiver {
         intents.addAction(Intent.ACTION_TIME_CHANGED);
         intents.addAction(Intent.ACTION_TIME_TICK);  // once per minute, for testing
         intents.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        @SuppressWarnings("LeakingThisInConstructor")
         Intent registerReceiver = context.registerReceiver(this, intents);
         _wasConnected = Util.isConnected(context);
     }
@@ -41,7 +47,7 @@ public class I2PReceiver extends BroadcastReceiver {
             NetworkInfo other = (NetworkInfo) intent.getParcelableExtra(ConnectivityManager.EXTRA_OTHER_NETWORK_INFO);
 
          /*****
-            Util.w("No conn? " + noConn + " failover? " + failover + 
+            Util.w("No conn? " + noConn + " failover? " + failover +
                                " info: " + info + " other: " + other);
             printInfo(info);
             printInfo(other);

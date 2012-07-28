@@ -26,7 +26,7 @@ class LogWriter implements Runnable {
     private LogManager _manager;
 
     private boolean _write;
-    
+
     private LogWriter() { // nop
     }
 
@@ -37,7 +37,7 @@ class LogWriter implements Runnable {
     public void stopWriting() {
         _write = false;
     }
-    
+
     public void run() {
         _write = true;
         try {
@@ -48,7 +48,7 @@ class LogWriter implements Runnable {
             }
         } catch (Exception e) {
             System.err.println("Error writing the logs: " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }
     }
 
@@ -72,12 +72,12 @@ class LogWriter implements Runnable {
                 }
             }
         } catch (Throwable t) {
-            t.printStackTrace();
+            t.printStackTrace(System.err);
         } finally {
             if (shouldWait) {
-                try { 
+                try {
                     synchronized (this) {
-                        this.wait(10*1000); 
+                        this.wait(10*1000);
                     }
                 } catch (InterruptedException ie) { // nop
                 }
@@ -88,7 +88,7 @@ class LogWriter implements Runnable {
     public String currentFile() {
         return _currentFile != null ? _currentFile.getAbsolutePath() : "uninitialized";
     }
-    
+
     private void rereadConfig() {
         long now = Clock.getInstance().now();
         if (now - _lastReadConfig > CONFIG_READ_ITERVAL) {
@@ -180,9 +180,10 @@ class LogWriter implements Runnable {
         }
     }
 
-    private static final String replace(String pattern, int num) {
+    // not even used yet.
+    private static /* final */ String replace(String pattern, int num) {
         char c[] = pattern.toCharArray();
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int i = 0; i < c.length; i++) {
             if ( (c[i] != '#') && (c[i] != '@') )
                 buf.append(c[i]);

@@ -83,7 +83,7 @@ class StatusBar {
                 } catch (Throwable ex) {}
             }
             System.err.println("In CrashHandler " + e);
-            e.printStackTrace();
+            e.printStackTrace(System.err);
             defaultUEH.uncaughtException(t, e);
         }
     }

@@ -1,6 +1,162 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="settings1">
+
+    <!--
+    Keys and the default values from current installation:
+    i2cp.disableInterface=true
+    -->
     <CheckBoxPreference
-        android:key="test" android:title="Check it or not"/>
+        android:key="i2cp.disableInterface"
+        android:defaultValue="true"
+        android:title="Disable i2cp interface"
+        />
+    <!--
+    i2np.bandwidth.inboundKBytesPerSecond=100
+    -->
+    <com.hlidskialf.android.preference.SeekBarPreference
+        android:key="i2np.bandwidth.inboundKBytesPerSecond"
+        android:defaultValue="100"
+        android:max="1000"
+        android:title="Inbound (KB/sec)"
+        android:summary="Maximum inbound speed"
+        android:dialogMessage="Maximum inbound speed"
+        android:text=" KByets/sec"
+        />
+    <!--
+    i2np.bandwidth.outboundKBytesPerSecond=30
+    -->
+    <com.hlidskialf.android.preference.SeekBarPreference
+        android:key="i2np.bandwidth.outboundKBytesPerSecond"
+        android:defaultValue="30"
+        android:max="1000"
+        android:title="Outbound speed"
+        android:summary="Maximum outbound speed"
+        android:dialogMessage="Maximum outbound speed"
+        android:text=" KByets/sec"
+        />
+    <!--
+    i2np.ntcp.maxConnections=24
+    -->
+    <com.hlidskialf.android.preference.SeekBarPreference
+        android:key="i2np.ntcp.maxConnections"
+        android:defaultValue="24"
+        android:max="250"
+        android:title="Max NTCP connections"
+        android:summary="Maximum NTCP connections allowed"
+        android:dialogMessage="Maximum NTCP connections"
+        android:text=" connections"
+        />
+    <!--
+    i2np.udp.enable=false
+    -->
+    <CheckBoxPreference
+        android:key="i2np.udp.enable"
+        android:defaultValue="false"
+        android:title="Enable UDP"
+        />
+    <!--
+    i2np.udp.maxConnections=12
+    -->
+    <com.hlidskialf.android.preference.SeekBarPreference
+        android:key="i2np.udp.maxConnections"
+        android:defaultValue="12"
+        android:max="500"
+        android:title="Max UDP connections"
+        android:summary="Maximum UDP connections allowed"
+        android:dialogMessage="Maximum UDP connections"
+        android:text=" connections"
+        android:dependency="i2np.udp.enable"
+        android:shouldDisableView="true"
+        />
+    <!--
+    i2np.upnp.enable=false
+    -->
+    <CheckBoxPreference
+        android:key="i2np.upnp.enable"
+        android:defaultValue="false"
+        android:title="Enable UPNP"
+        />
+
+
+
+    <CheckBoxPreference
+        android:key="DO_NOT_SAVErouter.maxParticipatingTunnels"
+        android:defaultValue="false"
+        android:title="Enable Participation"
+        />
+    <!--
+
+    router.maxParticipatingTunnels=0
+    -->
+    <com.hlidskialf.android.preference.SeekBarPreference
+        android:key="router.maxParticipatingTunnels"
+        android:defaultValue="0"
+        android:max="500"
+        android:title="Max Participating Tunnels"
+        android:summary="Maximum tunnels to participate in (default=0)"
+        android:dialogMessage="Maximum tunnels to participate in"
+        android:text=" Tunnels"
+        android:dependency="DO_NOT_SAVErouter.maxParticipatingTunnels"
+        />
+    <!--
+    router.sharePercentage=10
+    -->
+    <com.hlidskialf.android.preference.SeekBarPreference
+        android:key="router.sharePercentage"
+        android:defaultValue="10"
+        android:max="100"
+        android:title="Share Percentage"
+        android:summary="Percentage of bandwith to share (default=10)"
+        android:dialogMessage="Percentage of bandwith to share"
+        android:text="%"
+        android:dependency="DO_NOT_SAVErouter.maxParticipatingTunnels"
+        android:shouldDisableView="true"
+        />
+    <!--
+
+    i2p.dir.pid=/data/data/net.i2p.android.router/files/tmp
+    <EditTextPreference
+        android:key=""
+        android:defaultValue=""
+        android:title=""
+        />
+
+    i2p.dir.temp=/data/data/net.i2p.android.router/files/tmp
+    <EditTextPreference
+        android:key=""
+        android:defaultValue=""
+        android:title=""
+        />
+
+    Future advanced options:
+    router.inboundPool.backupQuantity=0
+    router.inboundPool.length=1
+    router.inboundPool.lengthVariance=1
+    router.inboundPool.quantity=2
+    router.outboundPool.backupQuantity=0
+    router.outboundPool.length=1
+    router.outboundPool.lengthVariance=1
+    router.outboundPool.quantity=2
+
+    Futute super advanced options:
+    prng.bufferSize=32768
+    prng.buffers=2
+    router.decayingBloomFilterM=20
+
+
+    No edit allowed for:
+    router.newsLastChecked=1343219142461
+    i2p.naming.impl=net.i2p.client.naming.HostsTxtNamingService
+    router.firstInstalled=1343089692415
+    router.firstVersion=0.9
+    router.previousVersion=0.9
+    router.updateLastInstalled=1343089692415
+    routerconsole.geoip.enable=false
+    stat.full=false
+    time.disabled=true
+    -->
+
+
+
 </PreferenceScreen>

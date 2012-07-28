@@ -34,6 +34,12 @@ public class MainActivity extends I2PActivityBase {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        // Init stuff here so settings work.
+        _myDir = getFilesDir().getAbsolutePath();
+        Init init = new Init(this);
+        init.debugStuff();
+        init.initialize();
+
         setContentView(R.layout.main);
 
         Button b = (Button) findViewById(R.id.news_button);
@@ -265,12 +271,13 @@ public class MainActivity extends I2PActivityBase {
             int outEx = ctx.tunnelManager().getOutboundTunnelCount();
             int inCl = ctx.tunnelManager().getInboundClientTunnelCount();
             int outCl = ctx.tunnelManager().getOutboundClientTunnelCount();
-            //int part = _context.tunnelManager().getParticipatingCount();
+            int part = ctx.tunnelManager().getParticipatingCount();
             double dLag = ctx.statManager().getRate("jobQueue.jobLag").getRate(60000).getAverageValue();
             String jobLag = DataHelper.formatDuration((long) dLag);
             String msgDelay = DataHelper.formatDuration(ctx.throttle().getMessageDelay());
             String uptime = DataHelper.formatDuration(ctx.router().getUptime());
-            //String tunnelStatus = _context.throttle().getTunnelStatus();
+            // String tunnelStatus = ctx.throttle().getTunnelStatus();
+            // ctx.commSystem().getReachabilityStatus();
             double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
             double outBW = ctx.bandwidthLimiter().getSendBps() / 1024;
             // control total width
@@ -286,8 +293,10 @@ public class MainActivity extends I2PActivityBase {
                    "ROUTER STATUS" +
                    "\nPeers active/known: " + active + " / " + known +
                    "\nExploratory Tunnels in/out: " + inEx + " / " + outEx +
-                   "\nClient Tunnels in/out: " + inCl + " / " + outCl;
-                   //" Pt " + part +
+                   "\nClient Tunnels in/out: " + inCl + " / " + outCl +
+                    // Need to see if we have the participation option set to on.
+                    // I thought there was a router setting for that?
+                   "\nParticipating " + part;
 
             String details =
                    "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps" +

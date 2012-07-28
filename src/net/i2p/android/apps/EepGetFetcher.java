@@ -1,6 +1,10 @@
 package net.i2p.android.apps;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import net.i2p.I2PAppContext;
 import net.i2p.data.DataHelper;
 import net.i2p.util.EepGet;
@@ -42,7 +46,7 @@ public class EepGetFetcher implements EepGet.StatusListener {
         _eepget.setWriteErrorToOutput();
         //_eepget.addStatusListener(this);
     }
-    
+
     /**
      *  Writes to output stream
      */
@@ -57,7 +61,7 @@ public class EepGetFetcher implements EepGet.StatusListener {
         if (writeErrorToStream)
             _eepget.setWriteErrorToOutput();
     }
-    
+
     public void addStatusListener(EepGet.StatusListener l) {
         _eepget.addStatusListener(l);
     }
@@ -144,7 +148,7 @@ public class EepGetFetcher implements EepGet.StatusListener {
     public void bytesTransferred(long alreadyTransferred, int currentWrite, long bytesTransferred, long bytesRemaining, String url) {}
 
     public void transferComplete(long alreadyTransferred, long bytesTransferred, long bytesRemaining, String url, String outputFile, boolean notModified) {}
-    
+
     public void transferFailed(String url, long bytesTransferred, long bytesRemaining, int currentAttempt) {}
 
     public void headerReceived(String url, int attemptNum, String key, String val) {}
