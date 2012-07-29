@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.i2p.android.router"
-      android.versionCode="4719056"
-      android.versionName="0.9.0-29_b1-API8"
+      android.versionCode="4719083"
+      android.versionName="0.9.0-30_b28-API8"
       android:installLocation="preferExternal"
       >
     <uses-permission android:name="android.permission.INTERNET" />

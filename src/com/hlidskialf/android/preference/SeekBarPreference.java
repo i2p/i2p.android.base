@@ -43,16 +43,19 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
     private String mDefault = "0";
     private int mMax = 0;
     private int mValue = 0;
+    private int mDirection = LinearLayout.HORIZONTAL;
+
 
     public SeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-
         mDialogMessage = attrs.getAttributeValue(androidns, "dialogMessage");
         mSuffix = attrs.getAttributeValue(androidns, "text");
         mDefault = attrs.getAttributeValue(androidns, "defaultValue");
         mMax = Integer.parseInt(attrs.getAttributeValue(androidns, "max"));
-
+        if (attrs.getAttributeValue(androidns, "direction") != null) {
+            mDirection = Integer.parseInt(attrs.getAttributeValue(androidns, "direction"));
+        }
     }
 
     @Override
@@ -61,6 +64,11 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         LinearLayout layout = new LinearLayout(mContext);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(6, 6, 6, 6);
+        if (mDirection == LinearLayout.HORIZONTAL) {
+            layout.setMinimumWidth(mMax);
+        } else {
+            layout.setMinimumHeight(mMax);
+        }
 
         mSplashText = new TextView(mContext);
         if (mDialogMessage != null) {
@@ -83,7 +91,6 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         if (shouldPersist()) {
             mValue = Integer.parseInt(getPersistedString(mDefault));
         }
-
         mSeekBar.setMax(mMax);
         mSeekBar.setProgress(mValue);
         return layout;
