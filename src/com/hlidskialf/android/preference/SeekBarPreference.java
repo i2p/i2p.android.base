@@ -63,11 +63,15 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         LinearLayout.LayoutParams params;
         LinearLayout layout = new LinearLayout(mContext);
         layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setPadding(6, 6, 6, 6);
+        layout.setPadding(6, 6, 6, 10);
+
+        // Set the width so that it is as usable as possible.
+        // We multiplymMax so that the smaller ranges will get a bigger area.
+
         if (mDirection == LinearLayout.HORIZONTAL) {
-            layout.setMinimumWidth(mMax);
+            layout.setMinimumWidth(mMax*5);
         } else {
-            layout.setMinimumHeight(mMax);
+            layout.setMinimumHeight(mMax*5);
         }
 
         mSplashText = new TextView(mContext);
@@ -86,6 +90,9 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
 
         mSeekBar = new SeekBar(mContext);
         mSeekBar.setOnSeekBarChangeListener(this);
+        // Move the bar away from the changing text, so you can see it, and
+        // move it away from the edges to improve usability for the end-ranges.
+        mSeekBar.setPadding(6, 30, 6, 6);
         layout.addView(mSeekBar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
         if (shouldPersist()) {
