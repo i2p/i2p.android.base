@@ -54,6 +54,3 @@ i2np.udp.maxConnections=12
 # not on android
 i2np.upnp.enable=false
 routerconsole.geoip.enable=false
-#
-# temp until certs are included
-router.reseedSSLDisable=true
