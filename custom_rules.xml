@@ -14,23 +14,8 @@
     </fail>
     <echo message="Using I2P source at ${i2pbase}" />
 
-    <!-- 
-	TO-DO: Move this to js so that it is cross-platform.
-
-        TO-DO: Do not actually store the version name or code untill we really want to raise it.
-               Don't incrementbuild as part of building, have the dev run the target manually.
-               For now, it does not matter, so it is left as-is.
-        
-	-*- Sponge
-    -->
 
     <buildnumber file="scripts/build.number" />
-    <exec executable="sh" osfamily="unix" failonerror="true">
-        <arg value="-c" />
-        <arg value="scripts/setversion.sh ${i2pbase}" />
-    </exec>
-
-    
     <!-- this loads my.version.code and my.version.name -->
     <property file="scripts/version.properties" />
     <property name="version.code" value="${my.version.code}" />
@@ -42,12 +27,21 @@
          New I2P rules
          ================================================================================
     -->
-    <!-- 
-        TO-DO:  Make this actually store the increment. 
-                All operations increment, this is not what we want.
+
+    <!--
+        You must execute this target manually to increment the build number.
+        Sorry if this is an extra step.
+
+	TO-DO: Move this to js so that it is cross-platform.
+	-*- Sponge
     -->
 
     <target name="incrementBuild" >
+        <exec executable="sh" osfamily="unix" failonerror="true">
+            <arg value="-c" />
+            <arg value="scripts/setversion.sh ${i2pbase}" />
+        </exec>
+
     </target>
 
     <!-- overrides of those in main_rules.xml -->
@@ -64,8 +58,8 @@
 
     <target name="-post-compile" depends="hackcleanup" />
 -->
-    <!-- 
-         Creates the output directories if they don't exist yet. 
+    <!--
+         Creates the output directories if they don't exist yet.
     -->
     <target name="-dirs">
         <echo>Creating output directories if needed...</echo>
