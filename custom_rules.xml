@@ -15,9 +15,334 @@
     <echo message="Using I2P source at ${i2pbase}" />
 
 
-    <buildnumber file="scripts/build.number" />
-    <!-- this loads my.version.code and my.version.name -->
-    <property file="scripts/version.properties" />
+    <!-- Utility scripts -->
+
+    <!-- Split a string -->
+    <scriptdef name="split" language="javascript">
+            <attribute name="value"/>
+            <attribute name="sep"/>
+            <attribute name="prefix"/>
+            <![CDATA[
+                values = attributes.get("value").split(attributes.get("sep"));
+                for(i = 0; i < values.length; i++) {
+                        project.setNewProperty(attributes.get("prefix") + "." + i, values[i]);
+                }
+            ]]>
+    </scriptdef>
+
+    <!-- Normalize the core version number -->
+    <scriptdef name="setcore" language="javascript">
+            <attribute name="value"/>
+            <![CDATA[
+                value = attributes.get("value").split("\n")[0];
+                values = value.split('\\.');
+                dots = values.length - 1;
+                major = values[0];
+                minor = "0";
+                release = "0";
+                if(dots > 0) {
+                    minor = values[1];
+                    if(dots > 1) {
+                        release = values[2];
+                    }
+                }
+                project.setNewProperty("CORE", major + "." + minor +"." + release);
+                project.setNewProperty("CORE.major", major);
+                project.setNewProperty("CORE.minor", minor);
+                project.setNewProperty("CORE.release", release);
+
+            ]]>
+    </scriptdef>
+
+    <!-- Normalize the router build number -->
+    <scriptdef name="normalizeitem" language="javascript">
+            <attribute name="value"/>
+            <attribute name="name" />
+            <![CDATA[
+                value = attributes.get("value").split("\n")[0].trim();
+                project.setNewProperty(attributes.get("name"), value);
+            ]]>
+    </scriptdef>
+
+    <!-- input prefix, major, minor, release, routerbuild, androidbuild, sdk
+         Assigns a version string and version number -->
+    <scriptdef name="generateversions" language="javascript">
+            <attribute name="prefix"/>
+            <attribute name="major"/>
+            <attribute name="minor"/>
+            <attribute name="release"/>
+            <attribute name="routerbuild"/>
+            <attribute name="androidbuild"/>
+            <attribute name="sdk"/>
+            <![CDATA[
+                Major = attributes.get("major") + ".";
+                Minor = attributes.get("minor") + ".";
+                Release = attributes.get("release") +"-";
+                Routerbuild = attributes.get("routerbuild") +"_b";
+                Androidbuild = attributes.get("androidbuild") +"-API";
+                SDK = attributes.get("sdk");
+                project.setNewProperty(attributes.get("prefix") + ".full", Major + Minor + Release + Routerbuild + Androidbuild + SDK);
+                /*
+                * Android version code is an integer.
+                * So we have 31 bits.
+                * MAJOR         4 bits 0-15
+                * MINOR         8 bits 0-255
+                * RELEASE       8 bits 0-255
+                * ROUTERBUILD   7 bits 0-127
+                * ANDROIDBUILD  4 bits 0-15
+                *
+                * Note that ANDROIDBUILD is modded % 16, it will wrap,
+                * beware of that if you release multiple builds using the
+                * same ROUTERBUILD, or clear it if you update ROUTERBUILD
+                * Subtract 1 from ANDROIDBUILD since it starts at 1 after distclean.
+                */
+                iMajor = ((parseInt(Major) % 16) << 27);
+                iMinor = ((parseInt(Minor) % 256) << 19);
+                iRelease = ((parseInt(Release)% 256) << 11);
+                iRouterbuild = ((parseInt(Routerbuild) % 128) << 4);
+                iAndroidbuild = ((parseInt(Androidbuild) - 1) % 16);
+                itotal = iMajor + iMinor + iRelease + iRouterbuild + iAndroidbuild;
+                project.setNewProperty(attributes.get("prefix") + ".vercode", itotal);
+            ]]>
+    </scriptdef>
+
+    <!-- if file 'condition' != "true" write 'properties' to file 'name' -->
+    <scriptdef name="ifnotpresent" language="javascript">
+        <attribute name="file" />
+        <attribute name="condition" />
+        <![CDATA[
+            importClass(java.io.File);
+            importClass(java.util.Properties);
+            importClass(java.io.FileOutputStream);
+            importClass(java.io.ByteArrayInputStream);
+
+            doit = !attributes.get("condition").equals("true");
+
+            if(doit) {
+                props = new Properties();
+                props.setProperty("build.number", "1");
+                cfg = new File(attributes.get("file"));
+                fo = new FileOutputStream(cfg);
+                props.store(fo, "AUTO-GENERATED FILE, DO NOT EDIT!");
+                fo.close();
+            }
+        ]]>
+    </scriptdef>
+    <!-- increment the build number -->
+    <scriptdef name="incbuildnumber" language="javascript">
+        <attribute name="file" />
+        <![CDATA[
+            importClass(java.io.File);
+            importClass(java.util.Properties);
+            importClass(java.io.FileOutputStream);
+            importClass(java.io.FileInputStream);
+
+            props = new Properties();
+            cfg = new File(attributes.get("file"));
+            fi = new FileInputStream(cfg);
+            props.load(fi);
+            fi.close();
+            m = (parseInt(props.getProperty("build.number")) + 1).toString();
+            props.setProperty("build.number", m);
+            fo = new FileOutputStream(cfg);
+            props.store(fo, "AUTO-GENERATED FILE, DO NOT EDIT!");
+            fo.close();
+        ]]>
+    </scriptdef>
+
+
+    <!-- Update property and xml files as needed -->
+    <scriptdef name="propertyfilechecks" language="javascript">
+        <attribute name="file" />
+        <attribute name="condition" />
+        <attribute name="propsdata" />
+        <attribute name="buildfile" />
+        <attribute name="mainxml" />
+        <attribute name="libxml" />
+        <![CDATA[
+            importClass(java.io.File);
+            importClass(java.util.Properties);
+            importClass(java.io.FileOutputStream);
+            importClass(java.io.FileInputStream);
+            importClass(java.io.ByteArrayInputStream);
+            importClass(java.io.InputStream);
+            importClass(java.util.regex.Matcher);
+            importClass(java.util.regex.Pattern);
+            importClass(java.io.BufferedReader);
+            importClass(java.io.BufferedWriter);
+            importClass(java.lang.StringBuffer);
+            importClass(java.io.InputStreamReader);
+            importClass(java.io.FileWriter);
+
+            doit = !attributes.get("condition").equals("true");
+
+            props = new Properties();
+            str = attributes.get("propsdata").toString();
+            is = new ByteArrayInputStream(str.getBytes());
+            props.load(is);
+            cfg = new File(attributes.get("file"));
+
+            if(doit) {
+                echo = project.createTask("echo");
+                echo.setMessage("Creating file='" + attributes.get("file") + "'\n" + props);
+                echo.perform();
+                fo = new FileOutputStream(cfg);
+                props.store(fo, "AUTO-GENERATED FILE, DO NOT EDIT!");
+                fo.close();
+            }
+
+            /* load and compare keys that start with 'last." */
+            oldprops = new Properties();
+            fi = new FileInputStream(cfg);
+            oldprops.load(fi);
+            fi.close();
+            keys = props.propertyNames();
+            ok = true;
+            while (keys.hasMoreElements()) {
+                key = keys.nextElement();
+                if (!oldprops.containsKey(key)) {
+                    ok = false;
+                    break;
+                }
+                if(key.startsWith("last.")) {
+                    if(!oldprops.getProperty(key).equals(props.getProperty(key))) {
+                    ok = false;
+                    break;
+                    }
+                }
+            }
+            if (!ok) {
+                /* update version.props */
+                echo = project.createTask("echo");
+                echo.setMessage("Updating file='" + attributes.get("file") + "'\n" + props);
+                echo.perform();
+                fo = new FileOutputStream(cfg);
+                props.store(fo, "AUTO-GENERATED FILE, DO NOT EDIT!");
+                fo.close();
+                /* reset build.number */
+                bprops = new Properties();
+                bprops.setProperty("build.number", "1");
+                echo = project.createTask("echo");
+                echo.setMessage("Updating file='" + attributes.get("buildfile") + "'\n" + bprops);
+                echo.perform();
+                cfg = new File(attributes.get("buildfile"));
+                fo = new FileOutputStream(cfg);
+                bprops.store(fo, "AUTO-GENERATED FILE, DO NOT EDIT!");
+                fo.close();
+            }
+            sp1 = 'android.versionCode="[0-9]*"';
+            rp1 = 'android.versionCode="' + props.getProperty("my.version.code") + '"';
+            sp2 = 'android.versionName="[^"]*"';
+            rp2 = 'android.versionName="' + props.getProperty("my.version.name") + '"';
+
+            /* sed primary manifest */
+            cfg = File(attributes.get("mainxml"));
+            buffer = new StringBuffer();
+            fi = new FileInputStream(cfg);
+            reader = new BufferedReader(new InputStreamReader(fi));
+            while((line = reader.readLine()) != null) {
+                rep = line.replaceAll(sp1, rp1);
+                newline = rep.replaceAll(sp2, rp2);
+                buffer.append(newline + "\n");
+            }
+            fi.close();
+            out = new BufferedWriter(new FileWriter(attributes.get("mainxml")));
+            out.write(buffer.toString());
+            out.close();
+            /* sed secondary manifest */
+            cfg = File(attributes.get("libxml"));
+            buffer = new StringBuffer();
+            fi = new FileInputStream(cfg);
+            reader = new BufferedReader(new InputStreamReader(fi));
+            while((line = reader.readLine()) != null) {
+                rep = line.replaceAll(sp1, rp1);
+                newline = rep.replaceAll(sp2, rp2);
+                buffer.append(newline + "\n");
+            }
+            fi.close();
+            out = new BufferedWriter(new FileWriter(attributes.get("libxml")));
+            out.write(buffer.toString());
+            out.close();
+
+        ]]>
+    </scriptdef>
+
+
+    <!-- files of interest -->
+    <property name="MANIFESTfilename" value="AndroidManifest.xml" />
+
+    <property name="MANIFESTROUTERfilename" value="routerjars/AndroidManifest.xml" />
+
+    <!-- Get i2p.i2p infos -->
+
+    <property name="COREfilename" value="${i2psrc}/core/java/src/net/i2p/CoreVersion.java"/>
+    <loadfile srcfile="${COREfilename}" property="COREfile" encoding="UTF-8" >
+        <filterchain>
+            <tokenfilter>
+                <containsregex pattern='^.*public.+final.+static.+String.+VERSION.*"(.*)".*' replace="\1" />
+            </tokenfilter>
+        </filterchain>
+    </loadfile>
+    <setcore value="${COREfile}" />
+    <echo message="CORE `${CORE}`" />
+
+    <property name="ROUTERBUILDfilename" value="${i2psrc}/router/java/src/net/i2p/router/RouterVersion.java" />
+    <loadfile srcfile="${ROUTERBUILDfilename}" property="ROUTERBUILDfile" encoding="UTF-8" >
+        <filterchain>
+            <tokenfilter>
+                <containsregex pattern='^.*public.+final.+static.+long.+BUILD.*=[^0-9]*([0-9]+)[^0-9]+.*' replace="\1" />
+            </tokenfilter>
+        </filterchain>
+    </loadfile>
+
+    <normalizeitem name="ROUTERBUILD" value="${ROUTERBUILDfile}" />
+    <echo message="ROUTERBUILD `${ROUTERBUILD}`" />
+
+
+    <property name="buildversionfilename" value="scripts/build.number" />
+    <available file="${buildversionfilename}" property="buildversionfilename.present" />
+
+    <!-- if the file isn't there, do buildnumber to create it! -->
+    <ifnotpresent file="${buildversionfilename}" condition="${buildversionfilename.present}" />
+
+    <loadfile srcfile="${buildversionfilename}" property="buildversionfile" encoding="UTF-8" >
+        <filterchain>
+            <tokenfilter>
+                <containsregex pattern='^build.number=[^0-9]*([0-9]+)[^0-9]*.*' replace="\1" />
+            </tokenfilter>
+        </filterchain>
+    </loadfile>
+
+    <normalizeitem name="buildversion" value="${buildversionfile}" />
+    <echo message="buildversion `${buildversion}`" />
+
+    <split value="${target}" sep="-" prefix="gettarget"/>
+    <echo message="API${gettarget.1}" />
+    <!-- generate the version infos that we will want to see -->
+    <generateversions prefix="zap" major="${CORE.major}"
+        minor="${CORE.minor}" release="${CORE.release}"
+        routerbuild="${ROUTERBUILD}" androidbuild="${buildversion}"
+        sdk="${gettarget.1}"/>
+
+    <echo message="checking for changes in ${zap.full}" />
+
+    <property name="allversionsfilename" value="scripts/version.properties" />
+    <available file="${allversionsfilename}" property="allversionsfilename.present" />
+    <!-- if the file is not available, create it with the current infos -->
+    <propertyfilechecks file="${allversionsfilename}" condition="${allversionsfilename.present}"
+        propsdata="my.version.name=${zap.full}&#10;my.version.code=${zap.vercode}&#10;last.CORE=${CORE}&#10;last.ROUTERBUILD=${ROUTERBUILD}&#10;"
+        buildfile="${buildversionfile}"
+        mainxml="${MANIFESTfilename}"
+        libxml="${MANIFESTROUTERfilename}"
+        />
+    <loadfile srcfile="${allversionsfilename}" property="allversionsfile" encoding="UTF-8"/>
+    <echo message="${allversionsfile}" />
+
+
+
+    <property file="${buildversionfile}" />
+    <!-- this loads my.version.code and my.version.name, and performs a copy -->
+    <property file="${allversionsfilename}" />
     <property name="version.code" value="${my.version.code}" />
     <property name="version.name" value="${my.version.name}" />
     <echo message="version.code '${version.code}', 'version.name '${version.name}', '${my.version.name}'" />
@@ -29,20 +354,15 @@
     -->
 
     <!--
-        You must execute this target manually to increment the build number.
+        You must execute this target manually to force increment of the build number.
         Sorry if this is an extra step.
-
-	TO-DO: Move this to js so that it is cross-platform.
 	-*- Sponge
     -->
 
     <target name="incrementBuild" >
-        <exec executable="sh" osfamily="unix" failonerror="true">
-            <arg value="-c" />
-            <arg value="scripts/setversion.sh ${i2pbase}" />
-        </exec>
-
+        <incbuildnumber file="${buildversionfilename}" />
     </target>
+
 
     <!-- overrides of those in main_rules.xml -->
 

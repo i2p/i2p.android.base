@@ -3,6 +3,7 @@
       package="net.i2p.android.router"
       android.versionCode="4720640"
       android.versionName="0.9.1-0_b1-API8"
+      android.versionCode="4719075"
       android:installLocation="preferExternal"
       >
     <uses-permission android:name="android.permission.INTERNET" />
