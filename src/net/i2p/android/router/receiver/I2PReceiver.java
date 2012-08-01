@@ -38,7 +38,7 @@ public class I2PReceiver extends BroadcastReceiver {
 
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        Util.w("Got broadcast: " + action);
+        //Util.w("Got broadcast: " + action);
 
         if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
             boolean failover = intent.getBooleanExtra(ConnectivityManager.EXTRA_IS_FAILOVER, false);
