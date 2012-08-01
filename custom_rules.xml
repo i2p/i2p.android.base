@@ -367,10 +367,12 @@
     <!-- overrides of those in main_rules.xml -->
 
     <target name="-pre-build" depends="copy-i2p-resources" >
-        <!-- aapt messes up when resources are added or deleted, just build every time -->
+        <!-- aapt messes up when resources are added or deleted, just build every time
         <delete dir="${gen.absolute.dir}/net" verbose="${verbose}" />
-        <!-- screw it, do the classes too, until I add the depend class -->
+         -->
+        <!-- screw it, do the classes too, until I add the depend class
         <delete dir="${out.absolute.dir}/classes/net" verbose="${verbose}" />
+        -->
     </target>
 
 <!--

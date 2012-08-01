@@ -4,8 +4,8 @@
     <!-- override with i2psrc=path/to/source in local.properties -->
     <property name="i2psrc" value="../../i2p.i2p" />
     <property name="i2pbase" location="${i2psrc}" />
-    <available file="${i2psrc}" property="i2p.present" />
-    <fail message="I2P source directory ${i2psrc} was not found. Install it there or set i2psrc=/path/to/source in local.properties" >
+    <available file="${i2pbase}" property="i2p.present" />
+    <fail message="I2P source directory ${i2pbase} was not found. Install it there or set i2psrc=/path/to/source in local.properties" >
         <condition>
             <not>
                 <isset property="i2p.present" />
@@ -22,8 +22,8 @@
 
     <target name="-pre-compile" depends="jbigi, buildrouter" />
 
-    <!-- 
-         Creates the output directories if they don't exist yet. 
+    <!--
+         Creates the output directories if they don't exist yet.
     -->
     <target name="-dirs">
         <echo>Creating output directories if needed...</echo>
@@ -37,7 +37,7 @@
 
     <target name="buildrouter" depends="-dirs" >
         <!-- build router and core -->
-        <ant dir="${i2pbase}" >
+        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" >
             <target name="buildRouter" />
             <target name="buildI2PTunnel" />
             <target name="buildAddressbook" />
@@ -48,7 +48,7 @@
         <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
 
         <!-- bob -->
-        <copy file="${i2pbase}/build/BOB.jar" todir="${jar.libs.dir}" />
+        <copy file="${i2pbase}/apps/BOB/dist/BOB.jar" todir="${jar.libs.dir}" />
         <!-- core -->
 
         <!-- lots of unneeded stuff could be deleted here -->
