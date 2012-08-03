@@ -60,7 +60,6 @@ public class RouterService extends Service {
         _myDir = getFilesDir().getAbsolutePath();
         // init other stuff here, delete log, etc.
         Init init = new Init(this);
-        init.debugStuff();
         init.initialize();
         //_apkPath = init.getAPKPath();
         _statusBar = new StatusBar(this);
