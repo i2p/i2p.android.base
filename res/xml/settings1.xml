@@ -113,6 +113,97 @@
         android:dependency="DO_NOT_SAVErouter.maxParticipatingTunnels"
         android:shouldDisableView="true"
         />
+
+    <!--
+    router.inboundPool.length=1
+    router.outboundPool.length=1
+    -->
+    <ListPreference
+        android:key="router.inboundPool.length"
+        android:entries="@array/setting0to3"
+        android:entryValues="@array/setting0to3"
+        android:title="inbound length"
+        android:summary="How many hops for inbound tunnel"
+        android:defaultValue="1"
+    />
+
+    <ListPreference
+        android:key="router.outboundPool.length"
+        android:entries="@array/setting0to3"
+        android:entryValues="@array/setting0to3"
+        android:title="outbound length"
+        android:summary="How many hops for outbound tunnel"
+        android:defaultValue="1"
+    />
+
+    <!--
+    router.inboundPool.lengthVariance=1
+    router.outboundPool.lengthVariance=1
+    -->
+    <ListPreference
+        android:key="router.inboundPool.lengthVariance"
+        android:entries="@array/setting2to2"
+        android:entryValues="@array/setting2to2"
+        android:title="inbound hop varience"
+        android:summary="How many hops to randomly add to inbound tunnels"
+        android:defaultValue="1"
+    />
+
+    <ListPreference
+        android:key="router.outboundPool.lengthVariance"
+        android:entries="@array/setting2to2"
+        android:entryValues="@array/setting2to2"
+        android:title="outbound hop varience"
+        android:summary="How many hops to randomly add to outbound tunnels"
+        android:defaultValue="1"
+    />
+
+
+    <!--
+    router.inboundPool.quantity=2
+    router.outboundPool.quantity=2
+    -->
+    <ListPreference
+        android:key="router.inboundPool.quantity"
+        android:entries="@array/setting0to3"
+        android:entryValues="@array/setting0to3"
+        android:title="inbound quantity"
+        android:summary="How many inbound tunnels"
+        android:defaultValue="2"
+    />
+
+    <ListPreference
+        android:key="router.outboundPool.quantity"
+        android:entries="@array/setting0to3"
+        android:entryValues="@array/setting0to3"
+        android:title="outbound quantity"
+        android:summary="How many outbound tunnels"
+        android:defaultValue="2"
+    />
+
+    <!--
+    router.inboundPool.backupQuantity=0
+    router.outboundPool.backupQuantity=0
+    -->
+    <ListPreference
+        android:key="router.inboundPool.backupQuantity"
+        android:entries="@array/setting0to3"
+        android:entryValues="@array/setting0to3"
+        android:title="inbound backup quantity"
+        android:summary="How many inbound tunnel backups"
+        android:defaultValue="0"
+    />
+
+    <ListPreference
+        android:key="router.outboundPool.backupQuantity"
+        android:entries="@array/setting0to3"
+        android:entryValues="@array/setting0to3"
+        android:title="outbound backup quantity"
+        android:summary="How many outbound tunnel backups"
+        android:defaultValue="0"
+    />
+
+
     <!--
 
     i2p.dir.pid=/data/data/net.i2p.android.router/files/tmp
@@ -129,15 +220,6 @@
         android:title=""
         />
 
-    Future advanced options:
-    router.inboundPool.backupQuantity=0
-    router.inboundPool.length=1
-    router.inboundPool.lengthVariance=1
-    router.inboundPool.quantity=2
-    router.outboundPool.backupQuantity=0
-    router.outboundPool.length=1
-    router.outboundPool.lengthVariance=1
-    router.outboundPool.quantity=2
 
     Futute super advanced options:
     prng.bufferSize=32768

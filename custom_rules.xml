@@ -229,6 +229,14 @@
                 fo = new FileOutputStream(cfg);
                 bprops.store(fo, "AUTO-GENERATED FILE, DO NOT EDIT!");
                 fo.close();
+            } else {
+                /* just update version.props */
+                echo = project.createTask("echo");
+                echo.setMessage("Updating file='" + attributes.get("file") + "'\n" + props);
+                echo.perform();
+                fo = new FileOutputStream(cfg);
+                props.store(fo, "AUTO-GENERATED FILE, DO NOT EDIT!");
+                fo.close();
             }
             sp1 = 'android.versionCode="[0-9]*"';
             rp1 = 'android.versionCode="' + props.getProperty("my.version.code") + '"';
