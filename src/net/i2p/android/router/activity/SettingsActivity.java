@@ -56,7 +56,7 @@ public class SettingsActivity extends PreferenceActivity {
             }
         }
         // Merge in new config settings, write the file.
-        Init init = new Init(this);
+        InitActivities init = new InitActivities(this);
         init.mergeResourceToFile(R.raw.router_config, "router.config", props);
         // Apply new config if we are running.
         List<RouterContext> contexts = RouterContext.listContexts();

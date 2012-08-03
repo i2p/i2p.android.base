@@ -20,7 +20,7 @@ import net.i2p.util.OrderedProperties;
 
 //  Wouldn't this be better as a private class in MainActivity?
 
-class Init {
+class InitActivities {
 
     private final Context ctx;
     private final String myDir;
@@ -31,7 +31,7 @@ class Init {
     private static final String PROP_NEW_VERSION = "i2p.newVersion";
     private static final String PROP_INSTALLED_VERSION = "i2p.version";
 
-    public Init(Context c) {
+    public InitActivities(Context c) {
         ctx = c;
         // This needs to be changed so that we can have an alternative place
         myDir = c.getFilesDir().getAbsolutePath();

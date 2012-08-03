@@ -236,7 +236,7 @@
             rp2 = 'android.versionName="' + props.getProperty("my.version.name") + '"';
 
             /* sed primary manifest */
-            cfg = File(attributes.get("mainxml"));
+            cfg = File(attributes.get("mainxml") + ".in");
             buffer = new StringBuffer();
             fi = new FileInputStream(cfg);
             reader = new BufferedReader(new InputStreamReader(fi));
@@ -250,7 +250,7 @@
             out.write(buffer.toString());
             out.close();
             /* sed secondary manifest */
-            cfg = File(attributes.get("libxml"));
+            cfg = File(attributes.get("libxml") + ".in");
             buffer = new StringBuffer();
             fi = new FileInputStream(cfg);
             reader = new BufferedReader(new InputStreamReader(fi));
@@ -423,7 +423,7 @@
     <!-- install now does both -->
     <target name="reinstall" depends="install" />
 
-    <target name="distclean" depends="clean">
+    <target name="-pre-clean">
         <delete dir="${jar.libs.dir}" verbose="${verbose}" />
         <delete file="res/drawable/i2plogo.png" verbose="${verbose}"/>
         <delete file="res/drawable/outbound.png" verbose="${verbose}"/>
@@ -445,6 +445,9 @@
         <delete file="res/raw/license_gplv3_txt" />
         <delete file="res/raw/license_lgplv3_txt" />
         <delete file="res/raw/certificates_zip" />
+    </target>
+
+    <target name="distclean" depends="clean">
         <delete file="scripts/build.number" verbose="${verbose}" />
         <delete file="scripts/version.properties" verbose="${verbose}" />
     </target>

@@ -36,7 +36,7 @@ public class MainActivity extends I2PActivityBase {
         super.onCreate(savedInstanceState);
         // Init stuff here so settings work.
         _myDir = getFilesDir().getAbsolutePath();
-        Init init = new Init(this);
+        InitActivities init = new InitActivities(this);
         init.debugStuff();
         init.initialize();
 

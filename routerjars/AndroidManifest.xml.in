@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.i2p.android.router"
-      android.versionCode="4720656"
-      android.versionName="0.9.1-1_b1-API8"
+      android.versionCode="0"
+      android.versionName="0.0.0-0_b0-API8"
       android:installLocation="preferExternal"
       >
 
     <uses-sdk android:minSdkVersion="8" />
 
-</manifest> 
+</manifest>
