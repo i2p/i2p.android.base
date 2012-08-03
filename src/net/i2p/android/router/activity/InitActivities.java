@@ -63,6 +63,12 @@ class InitActivities {
             Properties props = new Properties();
             props.setProperty("i2p.dir.temp", myDir + "/tmp");
             props.setProperty("i2p.dir.pid", myDir + "/tmp");
+            // Time disabled in default router.config
+            // But lots of time problems on Android, not all carriers support NITZ
+            // and there was no NTP before 3.0. Tablets should be fine?
+            // Phones in airplane mode with wifi enabled still a problem.
+            if (Build.VERSION.SDK_INT < 11)  // Honeycomb 3.0
+                props.setProperty("time.disabled", "false");
             mergeResourceToFile(R.raw.router_config, "router.config", props);
             mergeResourceToFile(R.raw.logger_config, "logger.config", null);
             mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config", null);
