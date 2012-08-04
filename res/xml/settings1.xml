@@ -225,6 +225,7 @@
     prng.bufferSize=32768
     prng.buffers=2
     router.decayingBloomFilterM=20
+    routerconsole.geoip.enable=false
 
 
     No edit allowed for:
@@ -234,7 +235,6 @@
     router.firstVersion=0.9
     router.previousVersion=0.9
     router.updateLastInstalled=1343089692415
-    routerconsole.geoip.enable=false
     stat.full=false
     time.disabled=true
     -->
