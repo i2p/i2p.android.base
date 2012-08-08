@@ -276,10 +276,12 @@ public class MainActivity extends I2PActivityBase {
             String jobLag = DataHelper.formatDuration((long) dLag);
             String msgDelay = DataHelper.formatDuration(ctx.throttle().getMessageDelay());
             String uptime = DataHelper.formatDuration(ctx.router().getUptime());
+
             // String tunnelStatus = ctx.throttle().getTunnelStatus();
             // ctx.commSystem().getReachabilityStatus();
             double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
             double outBW = ctx.bandwidthLimiter().getSendBps() / 1024;
+
             // control total width
             DecimalFormat fmt;
             if (inBW >= 1000 || outBW >= 1000)
@@ -288,6 +290,18 @@ public class MainActivity extends I2PActivityBase {
                 fmt = new DecimalFormat("#0.0");
             else
                 fmt = new DecimalFormat("#0.00");
+
+            double kBytesIn = ctx.bandwidthLimiter().getTotalAllocatedInboundBytes() / 1024;
+            double kBytesOut = ctx.bandwidthLimiter().getTotalAllocatedOutboundBytes() / 1024;
+
+            // control total width
+            DecimalFormat kBfmt;
+            if (kBytesIn >= 1000 || kBytesOut >= 1000)
+                kBfmt = new DecimalFormat("#0");
+            else if (kBytesIn >= 100 || kBytesOut >= 100)
+                kBfmt = new DecimalFormat("#0.0");
+            else
+                kBfmt = new DecimalFormat("#0.00");
 
             String status =
                    "ROUTER STATUS" +
@@ -300,6 +314,7 @@ public class MainActivity extends I2PActivityBase {
 
             String details =
                    "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps" +
+                   "\nData usage in/out: " + kBfmt.format(kBytesIn) + " / " + kBfmt.format(kBytesOut) + " KB" +
                    "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) +
                                   "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B' +
                    "\nJob Lag: " + jobLag +
