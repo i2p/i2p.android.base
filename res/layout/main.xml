@@ -8,120 +8,131 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/movie_wallpaper"
     >
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Statestics"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/main_status_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main Controls"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/router_start_button"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:text="Start Router" />
+
+    <Button
+        android:id="@+id/router_quit_button"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:text="Stop Router" />
+
 <ImageView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:src="@drawable/i2plogo"
     />
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-    >
- <Button 
-    android:id="@+id/website_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Web Site\n(non-anon)"
-    />
- <Button 
-    android:id="@+id/faq_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="FAQ\n(non-anon)"
-    />
- <Button 
-    android:id="@+id/welcome_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Welcome\nPage"
-    />
-</LinearLayout>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-    >
- <Button 
-    android:id="@+id/news_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="News"
-    />
- <Button 
-    android:id="@+id/releasenotes_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Release Notes"
-    />
- <Button 
-    android:id="@+id/licenses_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Licenses"
-    />
-</LinearLayout>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-    >
- <Button 
-    android:id="@+id/addressbook_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Address Book"
-    />
- <Button 
-    android:id="@+id/logs_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Logs"
-    />
- <Button 
-    android:id="@+id/error_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Error Logs"
-    />
- <Button 
-    android:id="@+id/peers_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Peers"
-    />
-</LinearLayout>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" 
-    >
- <Button 
-    android:id="@+id/router_start_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Start Router"
-    />
- <Button 
+
+<Button
     android:id="@+id/router_stop_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="OLD STOP"
-    />
- <Button 
-    android:id="@+id/router_quit_button"
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="Stop Router"
-    />
-</LinearLayout>
-<TextView  
-    android:id="@+id/main_status_text"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text=""
-    />
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="OLD STOP" />
+
+<TextView
+    android:id="@+id/textView2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="I2P Tools"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+<Button
+    android:id="@+id/addressbook_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Address Book" />
+
+<Button
+    android:id="@+id/logs_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Logs" />
+
+<Button
+    android:id="@+id/error_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Error Logs" />
+
+<Button
+    android:id="@+id/peers_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Peers" />
+
+<TextView
+    android:id="@+id/textView3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Information and pages"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+<Button
+    android:id="@+id/welcome_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Welcome\nPage" />
+
+<Button
+    android:id="@+id/news_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="News" />
+
+<Button
+    android:id="@+id/releasenotes_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Release Notes" />
+
+<Button
+    android:id="@+id/licenses_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Licenses" />
+
+<TextView
+    android:id="@+id/textView5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Non Anonymous Information"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+<Button
+    android:id="@+id/website_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Web Site (non-anon)" />
+
+<Button
+    android:id="@+id/faq_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="FAQ (non-anon)" />
+
 </LinearLayout>
 </ScrollView>
