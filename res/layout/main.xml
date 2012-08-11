@@ -10,11 +10,16 @@
     android:layout_height="wrap_content"
     >
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/i2plogo" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Statestics"
+        android:text="Statistics"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -40,12 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:text="Stop Router" />
-
-<ImageView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:src="@drawable/i2plogo"
-    />
 
 <Button
     android:id="@+id/router_stop_button"
