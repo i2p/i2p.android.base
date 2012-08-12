@@ -15,8 +15,12 @@
 #
 #THISDIR=$(realpath $(dirname $(which $0)))
 
-## Making it work on osx too.
-THISDIR=$(dirname $(readlink -ne $0))
+## works on linux and other unixes, but not osx.
+if [ "`uname -s`" != "Darwin" ]; then
+    THISDIR=$(dirname $(readlink -ne $0))
+else
+    THISDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+fi
 cd $THISDIR
 
 LIBFILE=$PWD/libjbigi.so
@@ -49,7 +53,11 @@ LEVEL=8
 ARCH=arm
 export SYSROOT=$NDK/platforms/android-$LEVEL/arch-$ARCH/
 export AABI=arm-linux-androideabi-4.4.3
-export SYSTEM=linux-x86
+if [ "`uname -s`" == "Darwin" ]; then
+    export SYSTEM=darwin-x86
+else
+    export SYSTEM=linux-x86
+fi
 export BINPREFIX=arm-linux-androideabi-
 export CC="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}gcc --sysroot=$SYSROOT"
 # worked without this on 4.3.2, but 5.0.2 couldn't find it
@@ -88,14 +96,20 @@ cd build
 if [ ! -f config.status ]
 then
 	echo "Configuring GMP..."
-	$GMP/configure --with-pic --build=x86-none-linux --host=armv5-eabi-linux || exit 1
+    if [ "`uname -s`" == "Darwin" ]; then
+	    $GMP/configure --with-pic --build=x86-darwin --host=armv5-eabi-linux || exit 1
+    else
+	    $GMP/configure --with-pic --build=x86-none-linux --host=armv5-eabi-linux || exit 1
+    fi
 fi
 
 echo "Building GMP..."
 make || exit 1
 
 if [ "`uname -s`" == "Darwin" ]; then
-    export JAVA_HOME="/Library/Java/Home"
+    # Depends on version
+    # TODO: Fix something for finding the newest jdk and set it as home.
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/"
 else
     export JAVA_HOME=$(dirname $(dirname $(realpath $(which javac))))
 fi
