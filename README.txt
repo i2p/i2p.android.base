@@ -9,6 +9,17 @@ or else add i2psrc=/path/to/source in the local.properties file.
 
 =====================
 
+Dependencies:
+
+- Java SDK (preferably Oracle/Sun or OpenJDK) 1.6.0 or higher
+- Apache Ant 1.8.0 or higher
+- I2P source in ../i2p.i2p
+- Android SDK (tested with Rev 20 and platform-tools version 12)
+
+=====================
+
+Instructions:
+
 # Download the SDK from http://developer.android.com/sdk/index.html
 # Unzip the android SDK in ../
 # So then the android tools will be in ../android-sdk-linux/tools/
@@ -26,10 +37,10 @@ or else add i2psrc=/path/to/source in the local.properties file.
 # To run the debugger (ddms) you also need to download the
 # "Android SDK Platform-Tools" package from the GUI updater.
 
-# create a file local.properties with the following line (without the leading # of course):
+# create a file local.properties with the following line (without the leading # of course),
+# do NOT use a relative path
 # sdk.dir=/path/to/your/android-sdk-linux
-# The old property was sdk-location=/path/to/your/android-sdk-linux
-# but it changed in more recent tools.
+# Copy this file to the routerjars/ directory, it is needed in both places.
 
 # DO NOT create a new project or anything. It's all set up right here for you.
 

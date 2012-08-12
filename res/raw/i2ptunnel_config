@@ -22,13 +22,13 @@ tunnel.0.option.outbound.lengthVariance=1
 tunnel.0.startOnLoad=true
 
 # irc
-tunnel.1.name=IRC Proxy postman/freshcoffee
+tunnel.1.name=IRC Proxy postman/freshcoffee/kytv
 tunnel.1.description=IRC proxy to access anonymous IRC servers
 tunnel.1.type=ircclient
 tunnel.1.sharedClient=true
 tunnel.1.interface=127.0.0.1
 tunnel.1.listenPort=6668
-tunnel.1.targetDestination=irc.postman.i2p,irc.freshcoffee.i2p
+tunnel.1.targetDestination=irc.postman.i2p,irc.freshcoffee.i2p,irc.killyourtv.i2p
 tunnel.1.i2cpHost=127.0.0.1
 tunnel.1.i2cpPort=7654
 tunnel.1.option.inbound.nickname=shared clients

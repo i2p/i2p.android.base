@@ -179,17 +179,4 @@ class LogWriter implements Runnable {
             return android.util.Log.ERROR;
         }
     }
-
-    // not even used yet.
-    private static /* final */ String replace(String pattern, int num) {
-        char c[] = pattern.toCharArray();
-        StringBuilder buf = new StringBuilder();
-        for (int i = 0; i < c.length; i++) {
-            if ( (c[i] != '#') && (c[i] != '@') )
-                buf.append(c[i]);
-            else
-                buf.append(num);
-        }
-        return buf.toString();
-    }
 }

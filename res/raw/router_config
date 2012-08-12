@@ -54,3 +54,6 @@ i2np.udp.maxConnections=12
 # not on android
 i2np.upnp.enable=false
 routerconsole.geoip.enable=false
+#
+# false is default but was true in 0.9.1-0_b1 release so have to set it back
+router.reseedSSLDisable=false

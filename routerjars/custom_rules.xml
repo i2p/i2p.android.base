@@ -43,7 +43,7 @@
         <!-- build router and core -->
         <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" >
             <target name="buildRouter" />
-            <target name="buildI2PTunnel" />
+            <target name="buildI2PTunnelJar" />
             <target name="buildAddressbook" />
             <target name="buildBOB" />
         </ant>
