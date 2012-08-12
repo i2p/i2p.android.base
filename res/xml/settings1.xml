@@ -1,7 +1,15 @@
-<PreferenceScreen
+    <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="settings1">
-
+    
+    <Preference
+        android:title="@string/settings_label_subscriptions"
+        android:key="addressbook_preferences">
+        
+        <intent android:targetPackage="net.i2p.android.router" android:targetClass="net.i2p.android.router.activity.AddressbookSettingsActivity" />
+        
+    </Preference>
+    
     <!--
     Keys and the default values from current installation:
     i2cp.disableInterface=true
