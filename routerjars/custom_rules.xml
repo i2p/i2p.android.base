@@ -34,7 +34,6 @@
     </target>
 
     <target name="-pre-clean">
-        <delete dir="${jar.libs.dir}" verbose="${verbose}" />
     </target>
 
     <!-- new rules -->
@@ -94,7 +93,9 @@
     </target>
 
     <target name="distclean" depends="clean">
+        <delete dir="${jar.libs.dir}" verbose="${verbose}" />
         <delete dir="jni/build/" verbose="${verbose}" />
+	<delete file="AndroidManifest.xml" verbose="${verbose}" />
     </target>
 
 </project>

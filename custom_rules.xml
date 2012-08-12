@@ -214,7 +214,7 @@
             if (!ok) {
                 /* update version.props */
                 echo = project.createTask("echo");
-                echo.setMessage("Updating file='" + attributes.get("file") + "'\n" + props);
+                echo.setMessage("(1)Updating file='" + attributes.get("file") + "'\n" + props);
                 echo.perform();
                 fo = new FileOutputStream(cfg);
                 props.store(fo, "AUTO-GENERATED FILE, DO NOT EDIT!");
@@ -223,7 +223,7 @@
                 bprops = new Properties();
                 bprops.setProperty("build.number", "1");
                 echo = project.createTask("echo");
-                echo.setMessage("Updating file='" + attributes.get("buildfile") + "'\n" + bprops);
+                echo.setMessage("(2)Updating file='" + attributes.get("buildfile") + "'\n" + bprops);
                 echo.perform();
                 cfg = new File(attributes.get("buildfile"));
                 fo = new FileOutputStream(cfg);
@@ -232,7 +232,7 @@
             } else {
                 /* just update version.props */
                 echo = project.createTask("echo");
-                echo.setMessage("Updating file='" + attributes.get("file") + "'\n" + props);
+                echo.setMessage("(3)Updating file='" + attributes.get("file") + "'\n" + props);
                 echo.perform();
                 fo = new FileOutputStream(cfg);
                 props.store(fo, "AUTO-GENERATED FILE, DO NOT EDIT!");
@@ -274,7 +274,6 @@
 
         ]]>
     </scriptdef>
-
 
     <!-- files of interest -->
     <property name="MANIFESTfilename" value="AndroidManifest.xml" />
@@ -339,14 +338,12 @@
     <!-- if the file is not available, create it with the current infos -->
     <propertyfilechecks file="${allversionsfilename}" condition="${allversionsfilename.present}"
         propsdata="my.version.name=${zap.full}&#10;my.version.code=${zap.vercode}&#10;last.CORE=${CORE}&#10;last.ROUTERBUILD=${ROUTERBUILD}&#10;"
-        buildfile="${buildversionfile}"
+        buildfile="${buildversionfilename}"
         mainxml="${MANIFESTfilename}"
         libxml="${MANIFESTROUTERfilename}"
         />
     <loadfile srcfile="${allversionsfilename}" property="allversionsfile" encoding="UTF-8"/>
     <echo message="${allversionsfile}" />
-
-
 
     <property file="${buildversionfile}" />
     <!-- this loads my.version.code and my.version.name, and performs a copy -->
@@ -355,6 +352,17 @@
     <property name="version.name" value="${my.version.name}" />
     <echo message="version.code '${version.code}', 'version.name '${version.name}', '${my.version.name}'" />
 
+    <!-- If we are missing any jars, we _MUST_ make them ahead of time so
+	 the build does not fail! _HOWEVER_ we must only do this if we are
+	 _BUILDING_! Apache Ant does not allow us to know what target we are
+	 about to run, because the authors believe it is 'evil' and other
+	 nonsense. So for now (so sorry!) we force build it ahead of time
+	 always, no matter what target was selected, until some better way
+	 of resolving this issue apears.
+    -->
+    <ant dir="routerjars" inheritall="false" useNativeBasedir="true" >
+	<target name="buildrouter" />
+    </ant>
     <!--
          ================================================================================
          New I2P rules
@@ -370,7 +378,6 @@
     <target name="incrementBuild" >
         <incbuildnumber file="${buildversionfilename}" />
     </target>
-
 
     <!-- overrides of those in main_rules.xml -->
 
@@ -456,8 +463,12 @@
     </target>
 
     <target name="distclean" depends="clean">
+    	<ant dir="routerjars" inheritall="false" useNativeBasedir="true" >
+    		<target name="distclean" />
+    	</ant>
         <delete file="scripts/build.number" verbose="${verbose}" />
         <delete file="scripts/version.properties" verbose="${verbose}" />
+        <delete file="AndroidManifest.xml" verbose="${verbose}" />
     </target>
 
     <!-- just to make it easier -->
