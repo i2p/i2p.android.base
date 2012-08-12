@@ -14,7 +14,8 @@
 #
 #THISDIR=$(realpath $(dirname $(which $0)))
 
-THISDIR=$(dirname $(readlink -f $0))
+## Making it work on osx too.
+THISDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $THISDIR
 
 LIBFILE=$PWD/libjbigi.so
@@ -33,8 +34,13 @@ I2PBASE=${1:-../../../i2p.i2p}
 # the dot at the end ensures that it is a directory, and not a file.
 #
 #export NDK=$(realpath ../../android-ndk-r5b/)
-export NDK=readlink -ne $(for last in ../../android-ndk-r*/.; do true; done ; echo $last)
 
+## Simple fix for osx development
+if [ "`uname -s`" == "Darwin" ]; then
+    export NDK=/Developer/android/ndk/
+else
+    export NDK=readlink -ne $(for last in ../../android-ndk-r*/.; do true; done ; echo $last)
+fi
 #
 # API level, must match that in ../AndroidManifest.xml
 #
@@ -51,7 +57,7 @@ STRIP="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}strip"
 
 #echo "CC is $CC"
 
-JBIGI=$(realpath $I2PBASE/core/c/jbigi)
+JBIGI="$I2PBASE/core/c/jbigi"
 #
 # GMP Version
 #
@@ -87,7 +93,11 @@ fi
 echo "Building GMP..."
 make || exit 1
 
-export JAVA_HOME=$(dirname $(dirname $(realpath $(which javac))))
+if [ "`uname -s`" == "Darwin" ]; then
+    export JAVA_HOME="/Library/Java/Home"
+else
+    export JAVA_HOME=$(dirname $(dirname $(realpath $(which javac))))
+fi
 if [ ! -f "$JAVA_HOME/include/jni.h" ]; then
     echo "Cannot find jni.h! Looked in '$JAVA_HOME/include/jni.h'"
     echo "Please set JAVA_HOME to a java home that has the JNI"
