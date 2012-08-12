@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 # build GMP and libjbigi.so using the Android tools directly
 #
@@ -15,7 +16,7 @@
 #THISDIR=$(realpath $(dirname $(which $0)))
 
 ## Making it work on osx too.
-THISDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+THISDIR=$(dirname $(readlink -ne $0))
 cd $THISDIR
 
 LIBFILE=$PWD/libjbigi.so
@@ -39,7 +40,7 @@ I2PBASE=${1:-../../../i2p.i2p}
 if [ "`uname -s`" == "Darwin" ]; then
     export NDK=/Developer/android/ndk/
 else
-    export NDK=readlink -ne $(for last in ../../android-ndk-r*/.; do true; done ; echo $last)
+    export NDK="`readlink -n -e $(for last in ../../android-ndk-r*/.; do true; done ; echo $last)`"
 fi
 #
 # API level, must match that in ../AndroidManifest.xml
