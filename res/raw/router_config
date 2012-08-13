@@ -9,8 +9,8 @@ router.decayingBloomFilterM=20
 stat.full=false
 #
 # Don't run NTP client, the phone should have a valid time
-#
-time.disabled=true
+# Tablets are not phones, turn this on
+time.disabled=false
 #
 # no external I2CP (7654)
 #
@@ -25,12 +25,12 @@ i2p.hostsfilelist=hosts.txt
 ##### Tunnels
 #
 router.inboundPool.backupQuantity=0
-router.inboundPool.length=1
-router.inboundPool.lengthVariance=1
+router.inboundPool.length=2
+router.inboundPool.lengthVariance=0
 router.inboundPool.quantity=2
 router.outboundPool.backupQuantity=0
-router.outboundPool.length=1
-router.outboundPool.lengthVariance=1
+router.outboundPool.length=2
+router.outboundPool.lengthVariance=0
 router.outboundPool.quantity=2
 router.maxParticipatingTunnels=0
 router.sharePercentage=10
@@ -38,22 +38,26 @@ router.sharePercentage=10
 ##### Transport
 #
 i2np.bandwidth.inboundKBytesPerSecond=100
-i2np.bandwidth.outboundKBytesPerSecond=30
+i2np.bandwidth.outboundKBytesPerSecond=100
 #
 # NTCP
 #
-#i2np.ntcp.enable=false
+i2np.ntcp.enable=true
 i2np.ntcp.maxConnections=24
 #
-# UDP disabled for now
+# UDP
 #
-i2np.udp.enable=false
+i2np.udp.enable=true
 i2np.udp.maxConnections=12
 #
 #
 # not on android
-i2np.upnp.enable=false
 routerconsole.geoip.enable=false
 #
 # false is default but was true in 0.9.1-0_b1 release so have to set it back
 router.reseedSSLDisable=false
+#
+# Tablets are not phones. It does not hurt to have this on by default.
+# A user can turn it off if they are not behind a router.
+#
+i2np.upnp.enable=true
