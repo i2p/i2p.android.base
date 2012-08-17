@@ -107,6 +107,7 @@ public class RouterService extends Service {
         }
         _handler.removeCallbacks(_updater);
         _handler.postDelayed(_updater, 50);
+        if(!restart) startForeground(1337, _statusBar.getNote());
 
         //return START_STICKY;
         return START_NOT_STICKY;
@@ -396,6 +397,7 @@ public class RouterService extends Service {
                 if (_state == nextState)
                     setState(stopState);
             }
+            stopForeground(true);
         }
     }
 

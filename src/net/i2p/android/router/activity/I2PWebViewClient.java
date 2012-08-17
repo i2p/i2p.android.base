@@ -133,7 +133,7 @@ class I2PWebViewClient extends WebViewClient {
     }
 
     private static void fail(View v, String s) {
-        Util.e("Fail toast: " + s);
+        Util.d("Fail toast: " + s);
         Toast toast = Toast.makeText(v.getContext(), s, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
@@ -141,25 +141,25 @@ class I2PWebViewClient extends WebViewClient {
 
     @Override
     public void onLoadResource(WebView view, String url) {
-        Util.e("OLR URL: " + url);
+        Util.d("OLR URL: " + url);
         super.onLoadResource(view, url);
     }
 
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-        Util.e("ORE " + errorCode + " Desc: " + description + " URL: " + failingUrl);
+        Util.d("ORE " + errorCode + " Desc: " + description + " URL: " + failingUrl);
         super.onReceivedError(view, errorCode, description, failingUrl);
     }
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        Util.e("OPS URL: " + url);
+        Util.d("OPS URL: " + url);
         super.onPageStarted(view, url, favicon);
     }
 
     @Override
     public void onPageFinished(WebView view, String url) {
-        Util.e("OPF URL: " + url);
+        Util.d("OPF URL: " + url);
         ProgressDialog d = _lastDialog;
         if (d != null && d.isShowing()) {
             try {
@@ -173,7 +173,7 @@ class I2PWebViewClient extends WebViewClient {
 
     @Override
     public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
-        Util.e("ORHAR URL: " + host);
+        Util.d("ORHAR URL: " + host);
         super.onReceivedHttpAuthRequest(view, handler, host, realm);
     }
 
@@ -190,7 +190,7 @@ class I2PWebViewClient extends WebViewClient {
     void cancelAll() {
         BGLoad task = _lastTask;
         if (task != null) {
-            Util.e("Cancelling fetches");
+            Util.d("Cancelling fetches");
             task.cancel(true);
         }
     }
@@ -205,12 +205,12 @@ class I2PWebViewClient extends WebViewClient {
             try {
                 //reverse back to a i2p URI so we can delete it from the AppCache
                 uri = CacheProvider.getI2PUri(uri);
-                Util.e("clearing AppCache entry for current page " + uri);
+                Util.d("clearing AppCache entry for current page " + uri);
                 AppCache.getInstance(view.getContext()).removeCacheFile(uri);
             } catch (FileNotFoundException fnfe) {
                 // this actually only deletes the row in the provider,
                 // not the actual file, but it will be overwritten in the reload.
-                Util.e("clearing provider entry for current page " + url);
+                Util.d("clearing provider entry for current page " + url);
                 view.getContext().getContentResolver().delete(uri, null, null);
             }
         }
@@ -311,7 +311,7 @@ class I2PWebViewClient extends WebViewClient {
             File cacheFile = AppCache.getInstance(_view.getContext()).getCacheFile(uri);
             if (cacheFile.exists()) {
                 Uri resUri = AppCache.getInstance(_view.getContext()).getCacheUri(uri);
-                Util.e("Loading " + url + " from resource cache " + resUri);
+                Util.d("Loading " + url + " from resource cache " + resUri);
                 _view.getSettings().setLoadsImagesAutomatically(true);
                 _view.getSettings().setBlockNetworkLoads(false);
                 try {
@@ -334,7 +334,7 @@ class I2PWebViewClient extends WebViewClient {
                 fetcher.addStatusListener(this);
                 boolean success = fetcher.fetch();
                 if (isCancelled()) {
-                    Util.e("Fetch cancelled for " + url);
+                    Util.d("Fetch cancelled for " + url);
                     return Integer.valueOf(0);
                 }
                 try { out.close(); } catch (IOException ioe) {}
@@ -343,10 +343,10 @@ class I2PWebViewClient extends WebViewClient {
                     // Set as current base
                     Uri content = AppCache.getInstance(_view.getContext()).addCacheFile(uri, true);
                     if (content != null) {
-                        Util.e("Stored cache in " + content);
+                        Util.d("Stored cache in " + content);
                     } else {
                         AppCache.getInstance(_view.getContext()).removeCacheFile(uri);
-                        Util.e("cache create error");
+                        Util.d("cache create error");
                         return Integer.valueOf(0);
                     }
                     Util.e("loading data, base URL: " + uri + " content URL: " + content);
@@ -356,7 +356,7 @@ class I2PWebViewClient extends WebViewClient {
                         // CalledFromWrongThreadException
                         cancel(false);
                     }
-                    Util.e("Fetch failed for " + url);
+                    Util.d("Fetch failed for " + url);
                 } else {
                     // Load the error message in as a string, delete the file
                     String t = fetcher.getContentType();
@@ -386,7 +386,7 @@ class I2PWebViewClient extends WebViewClient {
                     }
                     AppCache.getInstance(_view.getContext()).removeCacheFile(uri);
                     try {
-                         Util.e("loading error data URL: " + url);
+                         Util.d("loading error data URL: " + url);
                         _view.loadDataWithBaseURL(url, msg, t, e, url);
                     } catch (Exception exc) {
                         // CalledFromWrongThreadException
@@ -394,7 +394,7 @@ class I2PWebViewClient extends WebViewClient {
                     }
                 }
             } catch (IOException ioe) {
-                    Util.e("IOE for " + url, ioe);
+                    Util.d("IOE for " + url, ioe);
             } finally {
                 if (out != null) try { out.close(); } catch (IOException ioe) {}
             }

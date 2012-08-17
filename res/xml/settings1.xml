@@ -1,15 +1,15 @@
     <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="settings1">
-    
+
     <Preference
         android:title="@string/settings_label_subscriptions"
         android:key="addressbook_preferences">
-        
+
         <intent android:targetPackage="net.i2p.android.router" android:targetClass="net.i2p.android.router.activity.AddressbookSettingsActivity" />
-        
+
     </Preference>
-    
+
     <!--
     Keys and the default values from current installation:
     i2cp.disableInterface=true
@@ -68,7 +68,7 @@
     -->
     <com.hlidskialf.android.preference.SeekBarPreference
         android:key="i2np.udp.maxConnections"
-        android:defaultValue="12"
+        android:defaultValue="24"
         android:max="500"
         android:title="Max UDP connections"
         android:summary="Maximum UDP connections allowed"
@@ -89,9 +89,10 @@
 
 
     <CheckBoxPreference
-        android:key="DO_NOT_SAVErouter.maxParticipatingTunnels"
+        android:key="router.hiddenMode"
         android:defaultValue="false"
         android:title="Enable Participation"
+        android:summary="Enabling this option turns off hidden mode"
         />
     <!--
 
@@ -105,7 +106,7 @@
         android:summary="Maximum tunnels to participate in (default=0)"
         android:dialogMessage="Maximum tunnels to participate in"
         android:text=" Tunnels"
-        android:dependency="DO_NOT_SAVErouter.maxParticipatingTunnels"
+        android:dependency="router.hiddenMode"
         />
     <!--
     router.sharePercentage=10
@@ -118,7 +119,7 @@
         android:summary="Percentage of bandwith to share (default=10)"
         android:dialogMessage="Percentage of bandwith to share"
         android:text="%"
-        android:dependency="DO_NOT_SAVErouter.maxParticipatingTunnels"
+        android:dependency="router.hiddenMode"
         android:shouldDisableView="true"
         />
 
@@ -132,7 +133,7 @@
         android:entryValues="@array/setting0to3"
         android:title="inbound length"
         android:summary="How many hops for inbound tunnel"
-        android:defaultValue="1"
+        android:defaultValue="2"
     />
 
     <ListPreference
@@ -141,7 +142,7 @@
         android:entryValues="@array/setting0to3"
         android:title="outbound length"
         android:summary="How many hops for outbound tunnel"
-        android:defaultValue="1"
+        android:defaultValue="2"
     />
 
     <!--
@@ -154,7 +155,7 @@
         android:entryValues="@array/setting2to2"
         android:title="inbound hop varience"
         android:summary="How many hops to randomly add to inbound tunnels"
-        android:defaultValue="1"
+        android:defaultValue="0"
     />
 
     <ListPreference
@@ -163,7 +164,7 @@
         android:entryValues="@array/setting2to2"
         android:title="outbound hop varience"
         android:summary="How many hops to randomly add to outbound tunnels"
-        android:defaultValue="1"
+        android:defaultValue="0"
     />
 
 
@@ -234,17 +235,17 @@
     prng.buffers=2
     router.decayingBloomFilterM=20
     routerconsole.geoip.enable=false
+    time.disabled=false
 
 
     No edit allowed for:
-    router.newsLastChecked=1343219142461
-    i2p.naming.impl=net.i2p.client.naming.HostsTxtNamingService
-    router.firstInstalled=1343089692415
-    router.firstVersion=0.9
-    router.previousVersion=0.9
-    router.updateLastInstalled=1343089692415
-    stat.full=false
-    time.disabled=true
+    router.newsLastChecked
+    i2p.naming.impl
+    router.firstInstalled
+    router.firstVersion
+    router.previousVersion
+    router.updateLastInstalled
+    stat.full
     -->
 
 </PreferenceScreen>

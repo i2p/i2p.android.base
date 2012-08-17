@@ -15,7 +15,7 @@ class StatusBar {
     private final Notification notif;
     private final NotificationManager mgr;
 
-    private static final int ID = 1;
+    private static final int ID = 1337;
 
     public static final int ICON1 = R.drawable.ic_launcher_itoopie_300;
     public static final int ICON2 = R.drawable.ic_launcher_itoopie_330;
@@ -35,7 +35,7 @@ class StatusBar {
         String text = "Starting I2P";
         long now = System.currentTimeMillis();
         notif = new Notification(icon, text, now);
-        notif.flags |= Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+        notif.flags |= /* Notification.FLAG_ONGOING_EVENT | */ Notification.FLAG_NO_CLEAR;
         intent = new Intent(ctx, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
@@ -60,7 +60,7 @@ class StatusBar {
     }
 
     public void off() {
-        mgr.cancel(ID);
+        //mgr.cancel(ID);
     }
 
     /**
@@ -86,5 +86,9 @@ class StatusBar {
             e.printStackTrace(System.err);
             defaultUEH.uncaughtException(t, e);
         }
+    }
+
+    public Notification getNote() {
+        return notif;
     }
 }

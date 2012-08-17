@@ -2,14 +2,20 @@
 # temp directory now set in Init.java
 #i2p.dir.temp=/data/data/net.i2p.android.router/files/tmp
 #i2p.dir.pid=/data/data/net.i2p.android.router/files/tmp
+#
 # save memory
+# I've done some testing, and the amount 'saved' is not all that much.
+# I will, however, leave this alone, for now.
+#
 prng.buffers=2
 prng.bufferSize=32768
 router.decayingBloomFilterM=20
 stat.full=false
 #
 # Don't run NTP client, the phone should have a valid time
-# Tablets are not phones, turn this on
+# Tablets are not phones, turn this on. I've seen the phone not have
+# accurate time too (yes, really) and the router had too much skew.
+# I've even seen current tablets that have NTP on lose or gain time.
 time.disabled=false
 #
 # no external I2CP (7654)
@@ -48,7 +54,7 @@ i2np.ntcp.maxConnections=24
 # UDP
 #
 i2np.udp.enable=true
-i2np.udp.maxConnections=12
+i2np.udp.maxConnections=24
 #
 #
 # not on android
@@ -58,6 +64,17 @@ routerconsole.geoip.enable=false
 router.reseedSSLDisable=false
 #
 # Tablets are not phones. It does not hurt to have this on by default.
-# A user can turn it off if they are not behind a router.
+# A user can turn it on if they are behind a router.
+# The problem I found is that UPnP is broken. We need a replacement, soon.
 #
-i2np.upnp.enable=true
+i2np.upnp.enable=false
+
+#
+# Hidden by default, this turns off sharing, etc.
+#
+router.hiddenMode=true
+
+#
+# Bad idea, disable it!
+#
+router.floodfillParticipant=false

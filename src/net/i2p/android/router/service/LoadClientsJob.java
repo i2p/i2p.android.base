@@ -30,7 +30,7 @@ import net.i2p.util.I2PAppThread;
  *
  */
 class LoadClientsJob extends JobImpl {
-    
+
     private Thread _fetcherThread;
     private DaemonThread _addressbook;
     private Thread _BOB;
@@ -63,7 +63,6 @@ class LoadClientsJob extends JobImpl {
         Run_BOB bob = new Run_BOB();
         _BOB = new I2PAppThread(bob, "BOB", true);
         _BOB.start();
-
         getContext().addShutdownTask(new ClientShutdownHook());
     }
 

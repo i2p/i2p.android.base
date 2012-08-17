@@ -265,6 +265,7 @@ public class MainActivity extends I2PActivityBase {
             tv.setText("No Internet connection is available");
             tv.setVisibility(View.VISIBLE);
         } else if (ctx != null) {
+            short reach = ctx.commSystem().getReachabilityStatus();
             int active = ctx.commSystem().countActivePeers();
             int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
             int inEx = ctx.tunnelManager().getFreeTunnelCount();
@@ -277,6 +278,11 @@ public class MainActivity extends I2PActivityBase {
             String msgDelay = DataHelper.formatDuration(ctx.throttle().getMessageDelay());
             String uptime = DataHelper.formatDuration(ctx.router().getUptime());
 
+            String netstatus = "Unknown";
+            if(reach == net.i2p.router.CommSystemFacade.STATUS_DIFFERENT) netstatus = "Different";
+            if(reach == net.i2p.router.CommSystemFacade.STATUS_HOSED) netstatus = "Hosed";
+            if(reach == net.i2p.router.CommSystemFacade.STATUS_OK) netstatus = "OK";
+            if(reach == net.i2p.router.CommSystemFacade.STATUS_REJECT_UNSOLICITED) netstatus = "Reject Unsolicited";
             // String tunnelStatus = ctx.throttle().getTunnelStatus();
             // ctx.commSystem().getReachabilityStatus();
             double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
@@ -305,6 +311,7 @@ public class MainActivity extends I2PActivityBase {
 
             String status =
                    "ROUTER STATUS" +
+                   "\nNetwork: "+ netstatus +
                    "\nPeers active/known: " + active + " / " + known +
                    "\nExploratory Tunnels in/out: " + inEx + " / " + outEx +
                    "\nClient Tunnels in/out: " + inCl + " / " + outCl +

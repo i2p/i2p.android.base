@@ -36,7 +36,16 @@ public class SettingsActivity extends PreferenceActivity {
         // This loop avoids needing to convert each one, or even know it's type, or if it exists yet.
         while (iterator.hasNext()) {
             String x = iterator.next();
-            if(! x.startsWith("DO_NOT_SAVE")) {
+            // special exception, we must invert the bool for this property only.
+            if(x.equals("router.hiddenMode")) {
+                Preference findPreference = findPreference(x);
+                String string = all.get(x).toString();
+                String what="true";
+                if(string.equals(what)) {
+                    what="false";
+                }
+                props.setProperty(x, what);
+            } else if(! x.startsWith("DO_NOT_SAVE")) {
                 // Disabled?
                 Preference findPreference = findPreference(x);
                 if ( findPreference.isEnabled() ) {
