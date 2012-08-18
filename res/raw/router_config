@@ -64,10 +64,8 @@ routerconsole.geoip.enable=false
 router.reseedSSLDisable=false
 #
 # Tablets are not phones. It does not hurt to have this on by default.
-# A user can turn it on if they are behind a router.
-# The problem I found is that UPnP is broken. We need a replacement, soon.
 #
-i2np.upnp.enable=false
+i2np.upnp.enable=true
 
 #
 # Hidden by default, this turns off sharing, etc.
