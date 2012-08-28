@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import java.io.File;
 import java.text.DecimalFormat;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
@@ -24,6 +25,7 @@ public class MainActivity extends I2PActivityBase {
     private Runnable _oneShotUpdate;
     private String _savedStatus;
 
+
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
     protected static final String PROP_NEW_VERSION = "i2p.newVersion";
     protected static final int DIALOG_NEW_INSTALL = 0;
@@ -36,9 +38,20 @@ public class MainActivity extends I2PActivityBase {
         super.onCreate(savedInstanceState);
         // Init stuff here so settings work.
         _myDir = getFilesDir().getAbsolutePath();
-        InitActivities init = new InitActivities(this);
-        init.debugStuff();
-        init.initialize();
+        if (savedInstanceState != null) {
+            String saved = savedInstanceState.getString("status");
+            if (saved != null) {
+                _savedStatus = saved;
+            }
+        }
+
+        RouterService svc = _routerService;
+        if (!(svc != null && _isBound)) {
+            Util.e("Initializing...");
+            InitActivities init = new InitActivities(this);
+            init.debugStuff();
+            init.initialize();
+        }
 
         setContentView(R.layout.main);
 
@@ -139,6 +152,7 @@ public class MainActivity extends I2PActivityBase {
                     setPref(PREF_AUTO_START, true);
                     svc.manualStart();
                 } else {
+                    (new File(_myDir, "wrapper.log")).delete();
                     startRouter();
                 }
                 updateOneShot();
@@ -169,13 +183,6 @@ public class MainActivity extends I2PActivityBase {
                 }
             }
         });
-
-        if (savedInstanceState != null) {
-            String saved = savedInstanceState.getString("status");
-            if (saved != null) {
-                _savedStatus = saved;
-            }
-        }
 
         _handler = new Handler();
         _updater = new Updater();
@@ -212,8 +219,7 @@ public class MainActivity extends I2PActivityBase {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
+    public void onSaveInstanceState(Bundle outState) {
         if (_savedStatus != null)
             outState.putString("status", _savedStatus);
         super.onSaveInstanceState(outState);

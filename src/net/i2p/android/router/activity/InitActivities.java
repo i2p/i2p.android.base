@@ -59,7 +59,7 @@ class InitActivities {
     }
 
     void initialize() {
-        (new File(myDir, "wrapper.log")).delete();
+
         if (checkNewVersion()) {
             Properties props = new Properties();
             props.setProperty("i2p.dir.temp", myDir + "/tmp");

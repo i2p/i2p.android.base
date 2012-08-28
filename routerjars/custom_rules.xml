@@ -61,10 +61,6 @@
                 <exclude name="net/i2p/util/SecureDirectory.class" />
                 <exclude name="net/i2p/util/SecureFile.class" />
                 <exclude name="net/i2p/util/SecureFileOutputStream.class" />
-                <exclude name="org/bouncycastle/crypto/Digest.class" />
-                <exclude name="org/bouncycastle/crypto/Mac.class" />
-                <exclude name="org/bouncycastle/crypto/digests/GeneralDigest.class" />
-                <exclude name="org/bouncycastle/crypto/digests/MD5Digest.class" />
             </zipfileset >
         </jar>
 
