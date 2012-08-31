@@ -22,7 +22,7 @@ tunnel.0.option.outbound.lengthVariance=0
 tunnel.0.startOnLoad=true
 
 # irc
-tunnel.1.name=IRC Proxy postman/freshcoffee/kytv
+tunnel.1.name=IRC Proxy postman/freshcoffee
 tunnel.1.description=IRC proxy to access anonymous IRC servers
 tunnel.1.type=ircclient
 tunnel.1.sharedClient=true
