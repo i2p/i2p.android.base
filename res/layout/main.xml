@@ -38,19 +38,22 @@
         android:id="@+id/router_start_button"
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:text="Start Router" />
+        android:text="Start Router"
+        android:drawableLeft="@drawable/start_router_icon" />
 
     <Button
         android:id="@+id/router_quit_button"
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:text="Stop Router" />
+        android:text="Stop Router"
+        android:drawableLeft="@drawable/stop_router_icon" />
 
 <Button
     android:id="@+id/router_stop_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="OLD STOP" />
+    android:text="OLD STOP" 
+    android:drawableLeft="@drawable/stop_router_icon" />
 
 <TextView
     android:id="@+id/textView2"
@@ -63,25 +66,29 @@
     android:id="@+id/addressbook_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Address Book" />
+    android:text="Address Book" 
+    android:drawableLeft="@drawable/addressbook_icon" />
 
 <Button
     android:id="@+id/logs_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Logs" />
+    android:text="Logs"
+    android:drawableLeft="@drawable/log_icon" />
 
 <Button
     android:id="@+id/error_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Error Logs" />
+    android:text="Error Logs"
+    android:drawableLeft="@drawable/error_log_icon" />
 
 <Button
     android:id="@+id/peers_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Peers" />
+    android:text="Peers" 
+    android:drawableLeft="@drawable/peers_icon" />
 
 <TextView
     android:id="@+id/textView3"
@@ -94,25 +101,29 @@
     android:id="@+id/welcome_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Welcome\nPage" />
+    android:text="Welcome\nPage"
+    android:drawableLeft="@drawable/information_icon" />
 
 <Button
     android:id="@+id/news_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="News" />
+    android:text="News"
+    android:drawableLeft="@drawable/information_icon" />
 
 <Button
     android:id="@+id/releasenotes_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Release Notes" />
+    android:text="Release Notes"
+    android:drawableLeft="@drawable/information_icon" />
 
 <Button
     android:id="@+id/licenses_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Licenses" />
+    android:text="Licenses"
+    android:drawableLeft="@drawable/information_icon" />
 
 <TextView
     android:id="@+id/textView5"
@@ -125,13 +136,15 @@
     android:id="@+id/website_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Web Site (non-anon)" />
+    android:text="Web Site (non-anon)"
+    android:drawableLeft="@drawable/nonanon_info_icon" />
 
 <Button
     android:id="@+id/faq_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="FAQ (non-anon)" />
+    android:text="FAQ (non-anon)"
+    android:drawableLeft="@drawable/nonanon_info_icon" />
 
 </LinearLayout>
 </ScrollView>
