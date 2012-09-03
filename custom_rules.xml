@@ -427,6 +427,7 @@
         <copy file="${i2pbase}/licenses/LICENSE-GPLv2.txt" tofile="res/raw/license_gplv2_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-GPLv3.txt" tofile="res/raw/license_gplv3_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-LGPLv3.txt" tofile="res/raw/license_lgplv3_txt" />
+        <copy file="${i2pbase}/licenses/LICENSE-FatCowIcons.txt" tofile="res/raw/license_fatcowicons_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-Addressbook.txt" tofile="res/raw/license_addressbook_txt" />
         <delete file="res/raw/certificates_zip" />
         <zip update="true" destfile="res/raw/certificates_zip">
