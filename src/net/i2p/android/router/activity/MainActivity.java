@@ -323,7 +323,7 @@ public class MainActivity extends I2PActivityBase {
                    "\nClient Tunnels in/out: " + inCl + " / " + outCl +
                     // Need to see if we have the participation option set to on.
                     // I thought there was a router setting for that?
-                   "\nParticipating " + part;
+                   "\nParticipating: " + part;
 
             String details =
                    "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps" +
