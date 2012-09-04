@@ -3,18 +3,20 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:layout_margin="2dp"
+    android:padding="10px"
     >
-<TextView  
+<TextView
     android:id="@+id/peers_status"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_centerHorizontal="true" 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
     android:text="Peers"
     />
-<WebView  
+<WebView
     android:id="@+id/peers_webview"
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     />
 </LinearLayout>
 

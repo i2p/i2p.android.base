@@ -3,12 +3,13 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:padding="10px"
     >
-<TextView  
+<TextView
     android:id="@+id/text_resource_text"
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent" 
-    android:scrollbars="vertical" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="vertical"
     android:text="Release Notes"
     />
 </LinearLayout>

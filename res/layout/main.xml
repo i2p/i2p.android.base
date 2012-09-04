@@ -3,6 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
+    android:padding="10px"
+    android:scrollbarStyle="outsideInset"
     >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -52,7 +54,7 @@
     android:id="@+id/router_stop_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="OLD STOP" 
+    android:text="OLD STOP"
     android:drawableLeft="@drawable/stop_router_icon" />
 
 <TextView
@@ -66,7 +68,7 @@
     android:id="@+id/addressbook_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Address Book" 
+    android:text="Address Book"
     android:drawableLeft="@drawable/addressbook_icon" />
 
 <Button
@@ -87,7 +89,7 @@
     android:id="@+id/peers_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Peers" 
+    android:text="Peers"
     android:drawableLeft="@drawable/peers_icon" />
 
 <TextView
