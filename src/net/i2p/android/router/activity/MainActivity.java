@@ -320,10 +320,16 @@ public class MainActivity extends I2PActivityBase {
                    "\nNetwork: "+ netstatus +
                    "\nPeers active/known: " + active + " / " + known +
                    "\nExploratory Tunnels in/out: " + inEx + " / " + outEx +
-                   "\nClient Tunnels in/out: " + inCl + " / " + outCl +
-                    // Need to see if we have the participation option set to on.
-                    // I thought there was a router setting for that?
-                   "\nParticipating: " + part;
+                   "\nClient Tunnels in/out: " + inCl + " / " + outCl;
+
+
+            // Need to see if we have the participation option set to on.
+            // I thought there was a router setting for that?
+            // For now, if zero, don't show anything. This is done to not aleart the
+            // end user into thinking that this router must participate.
+            String participate = "";
+            if(part != 0)
+                   participate = "\nParticipating: " + part;
 
             String details =
                    "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps" +
@@ -334,7 +340,7 @@ public class MainActivity extends I2PActivityBase {
                    "\nMsg Delay: " + msgDelay +
                    "\nUptime: " + uptime;
 
-            _savedStatus = status + details;
+            _savedStatus = status + participate + details;
             tv.setText(_savedStatus);
             tv.setVisibility(View.VISIBLE);
         } else {
