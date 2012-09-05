@@ -159,7 +159,7 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
-        /* hidden, unused */
+        /* hidden, unused
         b = (Button) findViewById(R.id.router_stop_button);
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -171,6 +171,7 @@ public class MainActivity extends I2PActivityBase {
                 }
             }
         });
+        */
 
         b = (Button) findViewById(R.id.router_quit_button);
         b.setOnClickListener(new View.OnClickListener() {
@@ -256,8 +257,8 @@ public class MainActivity extends I2PActivityBase {
 
         boolean showStop = svc != null && _isBound && svc.canManualStop();
         // Old stop but leave in memory. Always hide for now.
-        Button stop = (Button) findViewById(R.id.router_stop_button);
-        stop.setVisibility( /* showStop ? View.VISIBLE : */ View.INVISIBLE);
+        // Button stop = (Button) findViewById(R.id.router_stop_button);
+        // stop.setVisibility( /* showStop ? View.VISIBLE : */ View.INVISIBLE);
 
         Button quit = (Button) findViewById(R.id.router_quit_button);
         quit.setVisibility(showStop ? View.VISIBLE : View.INVISIBLE);
@@ -324,8 +325,8 @@ public class MainActivity extends I2PActivityBase {
 
 
             // Need to see if we have the participation option set to on.
-            // I thought there was a router setting for that?
-            // For now, if zero, don't show anything. This is done to not aleart the
+            // I thought there was a router setting for that? I guess not! WHY NOT?
+            // For now, if zero, don't show anything. This is done to not alert the
             // end user into thinking that this router must participate.
             String participate = "";
             if(part != 0)
