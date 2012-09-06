@@ -210,7 +210,7 @@ public class RouterService extends Service {
                 // generate one for UDPinbound, and fall thru.
                 // FIX ME: Possibly not the best but should be OK.
                 Random generator = new Random(System.currentTimeMillis());
-                UDPinbound = generator.nextInt(65500) + 10000;
+                UDPinbound = generator.nextInt(55500) + 10000;
                 anyUDP = true;
             }
 
