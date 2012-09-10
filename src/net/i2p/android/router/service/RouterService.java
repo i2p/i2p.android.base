@@ -247,55 +247,37 @@ public class RouterService extends Service {
 
             if(!udp) {
                 props.setProperty("i2np.udp.enable", "false");
-                if(props.containsKey("i2np.udp.port")) {
-                    props.remove("i2np.udp.port");
-                }
-                if(props.containsKey("i2np.udp.internalPort")) {
-                    props.remove("i2np.udp.internalPort");
-                }
+                props.remove("i2np.udp.port");
+                props.remove("i2np.udp.internalPort");
             } else {
                 props.setProperty("i2np.udp.enable", "true");
                 if(hasUDPinbound) {
                     props.setProperty("i2np.udp.port", Integer.toString(UDPinbound));
                 } else {
-                    if(props.containsKey("i2np.udp.port")) {
-                        props.remove("i2np.udp.port");
-                }
-
+                    props.remove("i2np.udp.port");
                 }
                 if(hasUDPinlocal) {
                     props.setProperty("i2np.udp.internalPort", Integer.toString(UDPinlocal));
                 } else {
-                    if(props.containsKey("i2np.udp.internalPort")) {
-                        props.remove("i2np.udp.internalPort");
-                    }
+                    props.remove("i2np.udp.internalPort");
                 }
             }
 
             if(!tcp) {
                 props.setProperty("i2np.ntcp.enable", "false");
-                if(props.containsKey("i2np.ntcp.port")) {
-                    props.remove("i2np.ntcp.port");
-                }
-                if(props.containsKey("i2np.ntcp.internalPort")) {
-                    props.remove("i2np.ntcp.internalPort");
-                }
+                props.remove("i2np.ntcp.port");
+                props.remove("i2np.ntcp.internalPort");
             } else {
                 props.setProperty("i2np.ntcp.enable", "true");
                 if(hasTCPinbound) {
                     props.setProperty("i2np.ntcp.port", Integer.toString(TCPinbound));
                 } else {
-                    if(props.containsKey("i2np.ntcp.port")) {
-                        props.remove("i2np.ntcp.port");
-                }
-
+                    props.remove("i2np.ntcp.port");
                 }
                 if(hasTCPinlocal) {
                     props.setProperty("i2np.ntcp.internalPort", Integer.toString(TCPinlocal));
                 } else {
-                    if(props.containsKey("i2np.ntcp.internalPort")) {
-                        props.remove("i2np.ntcp.internalPort");
-                    }
+                    props.remove("i2np.ntcp.internalPort");
                 }
             }
             // WHEW! Now test for any changes.
