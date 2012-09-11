@@ -1,10 +1,8 @@
 package net.i2p.android.router.service;
 
 import android.content.Context;
-import android.os.Build;
 import java.io.File;
 import net.i2p.android.router.util.Util;
-import net.i2p.data.DataHelper;
 import net.i2p.util.FileUtil;
 
 class Init {

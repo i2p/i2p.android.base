@@ -7,6 +7,7 @@ import java.io.File;
  *  @since 0.8.7
  */
 public class SecureDirectory extends File {
+    private static final long serialVersionUID = 1L;
 
     public SecureDirectory(String pathname) {
         super(pathname);

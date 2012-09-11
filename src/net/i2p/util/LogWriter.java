@@ -120,7 +120,7 @@ class LogWriter implements Runnable {
 
     private static final String ANDROID_LOG_TAG = "I2P";
 
-    public void log(int priority, Class src, String name, String threadName, String msg) {
+    public void log(int priority, Class<?> src, String name, String threadName, String msg) {
             if (src != null) {
                 String tag = src.getName();
                 int dot = tag.lastIndexOf(".");
@@ -141,7 +141,7 @@ class LogWriter implements Runnable {
                                          '[' + threadName + "] " + msg);
     }
 
-    public void log(int priority, Class src, String name, String threadName, String msg, Throwable t) {
+    public void log(int priority, Class<?> src, String name, String threadName, String msg, Throwable t) {
             if (src != null) {
                 String tag = src.getName();
                 int dot = tag.lastIndexOf(".");

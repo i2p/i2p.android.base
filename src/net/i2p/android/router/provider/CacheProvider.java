@@ -302,7 +302,7 @@ public class CacheProvider extends ContentProvider {
 
     private void cleanup() {
         String pfx = CONTENT_URI.toString();
-        List<String> toDelete = new ArrayList();
+        List<String> toDelete = new ArrayList<String>();
         Map<String, ?> map = _sharedPrefs.getAll();
         for (Map.Entry<String, ?> e : map.entrySet()) {
             String path = (String) e.getValue();

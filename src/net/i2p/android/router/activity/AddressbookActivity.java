@@ -54,7 +54,7 @@ public class AddressbookActivity extends ListActivity {
         lv.setTextFilterEnabled(sz > 1);
 
         // set the list
-        List<String> nameList = new ArrayList(names);
+        List<String> nameList = new ArrayList<String>(names);
         Collections.sort(nameList);
         setListAdapter(new ArrayAdapter<String>(this, R.layout.addressbook_list_item, nameList));
 

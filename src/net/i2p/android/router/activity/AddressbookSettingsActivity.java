@@ -1,20 +1,18 @@
 package net.i2p.android.router.activity;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import net.i2p.util.FileUtil;
-
-import net.i2p.android.router.R;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import net.i2p.android.router.R;
+import net.i2p.util.FileUtil;
 
 public class AddressbookSettingsActivity extends Activity {
 
@@ -44,7 +42,7 @@ public class AddressbookSettingsActivity extends Activity {
         btn_save_subscriptions.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Context context = getApplicationContext();
-                CharSequence text = "";
+                CharSequence text;
                 if (save()) {
                     text = "subscriptions.txt successfully saved!";
                 } else {
@@ -67,6 +65,7 @@ public class AddressbookSettingsActivity extends Activity {
         return false;
     }
 
+    @SuppressWarnings("CallToThreadDumpStack")
     private boolean save() {
         //
         String content = text_content_subscriptions.getText().toString();

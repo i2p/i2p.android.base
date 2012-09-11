@@ -24,11 +24,11 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private File _tempFile;
     private static NewsFetcher _instance;
 
-    public static final NewsFetcher getInstance() { 
+    public static /*final */ NewsFetcher getInstance() {
         return _instance;
     }
 
-    public static final synchronized NewsFetcher getInstance(RouterContext ctx) { 
+    public static /* final */ synchronized NewsFetcher getInstance(RouterContext ctx) {
         if (_instance != null)
             return _instance;
         _instance = new NewsFetcher(ctx);
@@ -45,7 +45,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private static final String DEFAULT_REFRESH_FREQUENCY = 24*60*60*1000 + "";
     private static final String PROP_NEWS_URL = "router.newsURL";
     private static final String DEFAULT_NEWS_URL = "http://echelon.i2p/i2p/news.xml";
-    
+
     private NewsFetcher(RouterContext ctx) {
         _context = ctx;
         _log = ctx.logManager().getLog(NewsFetcher.class);
@@ -61,7 +61,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
         _tempFile = new File(_context.getTempDir(), TEMP_NEWS_FILE);
         updateLastFetched();
     }
-    
+
     private void updateLastFetched() {
         if (_newsFile.exists()) {
             if (_lastUpdated == 0)
@@ -76,7 +76,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             _lastModified = null;
         }
     }
-    
+
     public String status() {
          StringBuilder buf = new StringBuilder(128);
          long now = _context.clock().now();
@@ -93,7 +93,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
          }
          return buf.toString();
     }
-    
+
     private static final long INITIAL_DELAY = 5*60*1000;
     private static final long RUN_DELAY = 30*60*1000;
 
@@ -115,7 +115,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             }
         }
     }
-    
+
     private boolean shouldFetchNews() {
         if (_invalidated)
             return true;
@@ -126,7 +126,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             long ms = Long.parseLong(freq);
             if (ms <= 0)
                 return false;
-            
+
             if (_lastFetch + ms < _context.clock().now()) {
                 return true;
             } else {
@@ -156,7 +156,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
         int proxyPort = 4444;
         if (_tempFile.exists())
             _tempFile.delete();
-        
+
         try {
             // EepGet get = null;
             EepGet get = new EepGet(_context, true, proxyHost, proxyPort, 0, _tempFile.getAbsolutePath(), newsURL, true, null, _lastModified);
@@ -176,7 +176,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             _log.error("Error fetching the news", t);
         }
     }
-    
+
     public void attemptFailed(String url, long bytesTransferred, long bytesRemaining, int currentAttempt, int numRetries, Exception cause) {
         // ignore
     }
@@ -186,7 +186,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     public void transferComplete(long alreadyTransferred, long bytesTransferred, long bytesRemaining, String url, String outputFile, boolean notModified) {
         if (_log.shouldLog(Log.INFO))
             _log.info("News fetched from " + url + " with " + (alreadyTransferred+bytesTransferred));
-        
+
         long now = _context.clock().now();
         if (_tempFile.exists()) {
             boolean copied = FileUtil.copy(_tempFile.getAbsolutePath(), _newsFile.getAbsolutePath(), true);
@@ -206,7 +206,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
         _context.router().setConfigSetting(PROP_LAST_CHECKED, "" + now);
         _context.router().saveConfig();
     }
-    
+
     public void transferFailed(String url, long bytesTransferred, long bytesRemaining, int currentAttempt) {
         if (_log.shouldLog(Log.WARN))
             _log.warn("Failed to fetch the news from " + url);

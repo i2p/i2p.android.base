@@ -142,7 +142,7 @@ public class AppCache {
 
     private void initialize() {
         _totalSize = 0;
-        List<File> fileList = new ArrayList(MAX_FILES);
+        List<File> fileList = new ArrayList<File>(MAX_FILES);
         long total = enumerate(_cacheDir, fileList);
         Util.e("AppCache found " + fileList.size() + " files totalling " + total + " bytes");
         Collections.sort(fileList, new FileComparator());
@@ -282,6 +282,7 @@ public class AppCache {
      *  on remove.
      */
     private static class LHM extends LinkedHashMap<Integer, Object> {
+        private static final long serialVersionUID = 1L;
         private final int _max;
 
         public LHM(int max) {

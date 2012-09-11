@@ -47,7 +47,8 @@ public class LogActivity extends ListActivity {
                 Collections.reverse(msgs);
             }
         } else {
-            msgs = Collections.EMPTY_LIST;
+            //msgs = Collections.EMPTY_LIST;
+            msgs = Collections.emptyList();
             header = "No messages, router has not started yet.";
         }
 

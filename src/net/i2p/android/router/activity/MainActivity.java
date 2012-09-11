@@ -24,14 +24,13 @@ public class MainActivity extends I2PActivityBase {
     private Runnable _updater;
     private Runnable _oneShotUpdate;
     private String _savedStatus;
+    private boolean _keep;
 
 
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
     protected static final String PROP_NEW_VERSION = "i2p.newVersion";
     protected static final int DIALOG_NEW_INSTALL = 0;
     protected static final int DIALOG_NEW_VERSION = 1;
-    private boolean _keep = true;
-
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
@@ -57,6 +56,7 @@ public class MainActivity extends I2PActivityBase {
             }
         }
 
+        _keep = true;
         setContentView(R.layout.main);
 
         Button b = (Button) findViewById(R.id.news_button);
@@ -211,8 +211,6 @@ public class MainActivity extends I2PActivityBase {
     @Override
     public void onStop()
     {
-        RouterContext ctx = getRouterContext();
-        _keep = Util.isConnected(this) && ctx != null;
         super.onStop();
         _handler.removeCallbacks(_updater);
         _handler.removeCallbacks(_oneShotUpdate);
@@ -268,6 +266,14 @@ public class MainActivity extends I2PActivityBase {
 
         Button quit = (Button) findViewById(R.id.router_quit_button);
         quit.setVisibility(showStop ? View.VISIBLE : View.INVISIBLE);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        RouterContext ctx = getRouterContext();
+        _keep = Util.isConnected(this) && ctx != null;
+        super.onBackPressed();
     }
 
     @Override
