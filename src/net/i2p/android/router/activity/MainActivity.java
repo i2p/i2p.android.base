@@ -25,8 +25,7 @@ public class MainActivity extends I2PActivityBase {
     private Runnable _oneShotUpdate;
     private String _savedStatus;
     private boolean _keep = true;
-
-
+    private boolean _startPressed = false;
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
     protected static final String PROP_NEW_VERSION = "i2p.newVersion";
     protected static final int DIALOG_NEW_INSTALL = 0;
@@ -41,17 +40,17 @@ public class MainActivity extends I2PActivityBase {
         super.onPostCreate(savedInstanceState);
     }
 
-
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Init stuff here so settings work.
         _myDir = getFilesDir().getAbsolutePath();
-        if (savedInstanceState != null) {
+        if(savedInstanceState != null) {
             String saved = savedInstanceState.getString("status");
-            if (saved != null) {
+            if(saved != null) {
                 _savedStatus = saved;
             }
         }
@@ -61,6 +60,7 @@ public class MainActivity extends I2PActivityBase {
 
         Button b = (Button) findViewById(R.id.news_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), NewsActivity.class);
                 startActivity(intent);
@@ -69,6 +69,7 @@ public class MainActivity extends I2PActivityBase {
 
         b = (Button) findViewById(R.id.releasenotes_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
                 intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
@@ -78,6 +79,7 @@ public class MainActivity extends I2PActivityBase {
 
         b = (Button) findViewById(R.id.licenses_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), LicenseActivity.class);
                 //Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
@@ -88,6 +90,7 @@ public class MainActivity extends I2PActivityBase {
 
         b = (Button) findViewById(R.id.website_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/").build());
@@ -98,6 +101,7 @@ public class MainActivity extends I2PActivityBase {
 
         b = (Button) findViewById(R.id.faq_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/faq").build());
@@ -108,6 +112,7 @@ public class MainActivity extends I2PActivityBase {
 
         b = (Button) findViewById(R.id.welcome_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 intent.putExtra(WebActivity.HTML_RESOURCE_ID, R.raw.welcome_html);
@@ -117,6 +122,7 @@ public class MainActivity extends I2PActivityBase {
 
         b = (Button) findViewById(R.id.addressbook_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AddressbookActivity.class);
                 startActivity(intent);
@@ -125,6 +131,7 @@ public class MainActivity extends I2PActivityBase {
 
         b = (Button) findViewById(R.id.logs_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), LogActivity.class);
                 startActivity(intent);
@@ -133,6 +140,7 @@ public class MainActivity extends I2PActivityBase {
 
         b = (Button) findViewById(R.id.error_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), LogActivity.class);
                 intent.putExtra(LogActivity.ERRORS_ONLY, true);
@@ -142,17 +150,28 @@ public class MainActivity extends I2PActivityBase {
 
         b = (Button) findViewById(R.id.peers_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), PeersActivity.class);
                 startActivity(intent);
             }
         });
 
+        /*
+         * hidden, unused b = (Button) findViewById(R.id.router_stop_button);
+         * b.setOnClickListener(new View.OnClickListener() { public void
+         * onClick(View view) { RouterService svc = _routerService; if (svc !=
+         * null && _isBound) { setPref(PREF_AUTO_START, false);
+         * svc.manualStop(); updateOneShot(); } } });
+         */
+
         b = (Button) findViewById(R.id.router_start_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
+                _startPressed = true;
                 RouterService svc = _routerService;
-                if (svc != null && _isBound) {
+                if(svc != null && _isBound) {
                     setPref(PREF_AUTO_START, true);
                     svc.manualStart();
                 } else {
@@ -163,25 +182,12 @@ public class MainActivity extends I2PActivityBase {
             }
         });
 
-        /* hidden, unused
-        b = (Button) findViewById(R.id.router_stop_button);
-        b.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                RouterService svc = _routerService;
-                if (svc != null && _isBound) {
-                    setPref(PREF_AUTO_START, false);
-                    svc.manualStop();
-                    updateOneShot();
-                }
-            }
-        });
-        */
-
         b = (Button) findViewById(R.id.router_quit_button);
         b.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 RouterService svc = _routerService;
-                if (svc != null && _isBound) {
+                if(svc != null && _isBound) {
                     setPref(PREF_AUTO_START, false);
                     svc.manualQuit();
                     updateOneShot();
@@ -195,12 +201,11 @@ public class MainActivity extends I2PActivityBase {
     }
 
     @Override
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
         _handler.removeCallbacks(_updater);
         _handler.removeCallbacks(_oneShotUpdate);
-        if (_savedStatus != null) {
+        if(_savedStatus != null) {
             TextView tv = (TextView) findViewById(R.id.main_status_text);
             tv.setText(_savedStatus);
         }
@@ -209,24 +214,23 @@ public class MainActivity extends I2PActivityBase {
     }
 
     @Override
-    public void onStop()
-    {
+    public void onStop() {
         super.onStop();
         _handler.removeCallbacks(_updater);
         _handler.removeCallbacks(_oneShotUpdate);
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
         updateOneShot();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        if (_savedStatus != null)
+        if(_savedStatus != null) {
             outState.putString("status", _savedStatus);
+        }
         super.onSaveInstanceState(outState);
     }
 
@@ -235,6 +239,7 @@ public class MainActivity extends I2PActivityBase {
     }
 
     private class OneShotUpdate implements Runnable {
+
         public void run() {
             updateVisibility();
             updateStatus();
@@ -242,20 +247,24 @@ public class MainActivity extends I2PActivityBase {
     }
 
     private class Updater implements Runnable {
-        private int counter;
 
+        private int counter;
+        private final int delay = 1000;
+        private final int toloop = delay / 500;
         public void run() {
             updateVisibility();
-            if (counter++ % 3 == 0)
+            if(counter++ % toloop == 0) {
                 updateStatus();
-            _handler.postDelayed(this, 2500);
+            }
+            //_handler.postDelayed(this, 2500);
+            _handler.postDelayed(this, delay);
         }
     }
 
     private void updateVisibility() {
         RouterService svc = _routerService;
-        boolean showStart = ((svc == null) || (!_isBound) || svc.canManualStart()) &&
-                            Util.isConnected(this);
+        boolean showStart = ((svc == null) || (!_isBound) || svc.canManualStart())
+                && Util.isConnected(this);
         Button start = (Button) findViewById(R.id.router_start_button);
         start.setVisibility(showStart ? View.VISIBLE : View.INVISIBLE);
 
@@ -268,12 +277,11 @@ public class MainActivity extends I2PActivityBase {
         quit.setVisibility(showStop ? View.VISIBLE : View.INVISIBLE);
     }
 
-
     @Override
     public void onBackPressed() {
         RouterContext ctx = getRouterContext();
-        // RouterService svc = _routerService;
-        _keep = Util.isConnected(this) && ctx != null;
+        // RouterService svc = _routerService; Which is better to use?!
+        _keep = Util.isConnected(this) && (ctx != null || _startPressed);
         Util.e("*********************************************************");
         Util.e("Back pressed, Keep? " + _keep);
         Util.e("*********************************************************");
@@ -283,20 +291,21 @@ public class MainActivity extends I2PActivityBase {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (!_keep) {
+        if(!_keep) {
             Thread t = new Thread(new KillMe());
             t.start();
         }
     }
 
     private class KillMe implements Runnable {
+
         public void run() {
             Util.e("*********************************************************");
             Util.e("KillMe started!");
             Util.e("*********************************************************");
             try {
                 Thread.sleep(500); // is 500ms long enough?
-            } catch (InterruptedException ex) {
+            } catch(InterruptedException ex) {
             }
             System.exit(0);
         }
@@ -306,10 +315,13 @@ public class MainActivity extends I2PActivityBase {
         RouterContext ctx = getRouterContext();
         TextView tv = (TextView) findViewById(R.id.main_status_text);
 
-        if (!Util.isConnected(this)) {
+        if(!Util.isConnected(this)) {
             tv.setText("No Internet connection is available");
             tv.setVisibility(View.VISIBLE);
-        } else if (ctx != null) {
+        } else if(ctx != null) {
+            if(_startPressed) {
+                _startPressed = false;
+            }
             short reach = ctx.commSystem().getReachabilityStatus();
             int active = ctx.commSystem().countActivePeers();
             int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
@@ -324,10 +336,18 @@ public class MainActivity extends I2PActivityBase {
             String uptime = DataHelper.formatDuration(ctx.router().getUptime());
 
             String netstatus = "Unknown";
-            if(reach == net.i2p.router.CommSystemFacade.STATUS_DIFFERENT) netstatus = "Different";
-            if(reach == net.i2p.router.CommSystemFacade.STATUS_HOSED) netstatus = "Hosed";
-            if(reach == net.i2p.router.CommSystemFacade.STATUS_OK) netstatus = "OK";
-            if(reach == net.i2p.router.CommSystemFacade.STATUS_REJECT_UNSOLICITED) netstatus = "Reject Unsolicited";
+            if(reach == net.i2p.router.CommSystemFacade.STATUS_DIFFERENT) {
+                netstatus = "Different";
+            }
+            if(reach == net.i2p.router.CommSystemFacade.STATUS_HOSED) {
+                netstatus = "Hosed";
+            }
+            if(reach == net.i2p.router.CommSystemFacade.STATUS_OK) {
+                netstatus = "OK";
+            }
+            if(reach == net.i2p.router.CommSystemFacade.STATUS_REJECT_UNSOLICITED) {
+                netstatus = "Reject Unsolicited";
+            }
             // String tunnelStatus = ctx.throttle().getTunnelStatus();
             // ctx.commSystem().getReachabilityStatus();
             double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
@@ -335,31 +355,33 @@ public class MainActivity extends I2PActivityBase {
 
             // control total width
             DecimalFormat fmt;
-            if (inBW >= 1000 || outBW >= 1000)
+            if(inBW >= 1000 || outBW >= 1000) {
                 fmt = new DecimalFormat("#0");
-            else if (inBW >= 100 || outBW >= 100)
+            } else if(inBW >= 100 || outBW >= 100) {
                 fmt = new DecimalFormat("#0.0");
-            else
+            } else {
                 fmt = new DecimalFormat("#0.00");
+            }
 
             double kBytesIn = ctx.bandwidthLimiter().getTotalAllocatedInboundBytes() / 1024;
             double kBytesOut = ctx.bandwidthLimiter().getTotalAllocatedOutboundBytes() / 1024;
 
             // control total width
             DecimalFormat kBfmt;
-            if (kBytesIn >= 1000 || kBytesOut >= 1000)
+            if(kBytesIn >= 1000 || kBytesOut >= 1000) {
                 kBfmt = new DecimalFormat("#0");
-            else if (kBytesIn >= 100 || kBytesOut >= 100)
+            } else if(kBytesIn >= 100 || kBytesOut >= 100) {
                 kBfmt = new DecimalFormat("#0.0");
-            else
+            } else {
                 kBfmt = new DecimalFormat("#0.00");
+            }
 
             String status =
-                   "ROUTER STATUS" +
-                   "\nNetwork: "+ netstatus +
-                   "\nPeers active/known: " + active + " / " + known +
-                   "\nExploratory Tunnels in/out: " + inEx + " / " + outEx +
-                   "\nClient Tunnels in/out: " + inCl + " / " + outCl;
+                    "ROUTER STATUS"
+                    + "\nNetwork: " + netstatus
+                    + "\nPeers active/known: " + active + " / " + known
+                    + "\nExploratory Tunnels in/out: " + inEx + " / " + outEx
+                    + "\nClient Tunnels in/out: " + inCl + " / " + outCl;
 
 
             // Need to see if we have the participation option set to on.
@@ -367,50 +389,53 @@ public class MainActivity extends I2PActivityBase {
             // For now, if zero, don't show anything. This is done to not alert the
             // end user into thinking that this router must participate.
             String participate = "";
-            if(part != 0)
-                   participate = "\nParticipating: " + part;
+            if(part != 0) {
+                participate = "\nParticipating: " + part;
+            }
 
             String details =
-                   "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps" +
-                   "\nData usage in/out: " + kBfmt.format(kBytesIn) + " / " + kBfmt.format(kBytesOut) + " KB" +
-                   "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) +
-                                  "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B' +
-                   "\nJob Lag: " + jobLag +
-                   "\nMsg Delay: " + msgDelay +
-                   "\nUptime: " + uptime;
+                    "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps"
+                    + "\nData usage in/out: " + kBfmt.format(kBytesIn) + " / " + kBfmt.format(kBytesOut) + " KB"
+                    + "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
+                    + "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B'
+                    + "\nJob Lag: " + jobLag
+                    + "\nMsg Delay: " + msgDelay
+                    + "\nUptime: " + uptime;
 
             _savedStatus = status + participate + details;
             tv.setText(_savedStatus);
             tv.setVisibility(View.VISIBLE);
         } else {
             // network but no router context
+            tv.setText("");
             tv.setVisibility(View.INVISIBLE);
-         /****
-            RouterService svc = _routerService;
-            String status =
-                            "connected? " + Util.isConnected(this) +
-                            "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) +
-                                       "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B' +
-                            "\nhave ctx? " + (ctx != null) +
-                            "\nhave svc? " + (svc != null) +
-                            "\nis bound? " + _isBound +
-                            "\nsvc state: " + (svc == null ? "null" : svc.getState()) +
-                            "\ncan start? " + (svc == null ? "null" : svc.canManualStart()) +
-                            "\ncan stop? " + (svc == null ? "null" : svc.canManualStop());
-            tv.setText(status);
-            tv.setVisibility(View.VISIBLE);
-          ****/
+            /**
+             * **
+             * RouterService svc = _routerService; String status = "connected? "
+             * + Util.isConnected(this) + "\nMemory: " +
+             * DataHelper.formatSize(Runtime.getRuntime().totalMemory() -
+             * Runtime.getRuntime().freeMemory()) + "B / " +
+             * DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B' +
+             * "\nhave ctx? " + (ctx != null) + "\nhave svc? " + (svc != null) +
+             * "\nis bound? " + _isBound + "\nsvc state: " + (svc == null ?
+             * "null" : svc.getState()) + "\ncan start? " + (svc == null ?
+             * "null" : svc.canManualStart()) + "\ncan stop? " + (svc == null ?
+             * "null" : svc.canManualStop()); tv.setText(status);
+             * tv.setVisibility(View.VISIBLE);
+          ***
+             */
         }
     }
 
     private void checkDialog() {
         String oldVersion = getPref(PREF_INSTALLED_VERSION, "??");
-        if (oldVersion.equals("??")) {
+        if(oldVersion.equals("??")) {
             showDialog(DIALOG_NEW_INSTALL);
         } else {
             String currentVersion = Util.getOurVersion(this);
-            if (!oldVersion.equals(currentVersion))
+            if(!oldVersion.equals(currentVersion)) {
                 showDialog(DIALOG_NEW_VERSION);
+            }
         }
     }
 
@@ -419,67 +444,66 @@ public class MainActivity extends I2PActivityBase {
         final String currentVersion = Util.getOurVersion(this);
         Dialog rv = null;
         AlertDialog.Builder b = new AlertDialog.Builder(this);
-        switch (id) {
-          case DIALOG_NEW_INSTALL:
-            b.setMessage(getResources().getText(R.string.welcome_new_install))
-              .setCancelable(false)
-              .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                       public void onClick(DialogInterface dialog, int id) {
-                           setPref(PREF_INSTALLED_VERSION, currentVersion);
-                           dialog.cancel();
-                           MainActivity.this.removeDialog(id);
-                       }
-               })
-              .setNeutralButton("Release Notes", new DialogInterface.OnClickListener() {
-                       public void onClick(DialogInterface dialog, int id) {
-                           setPref(PREF_INSTALLED_VERSION, currentVersion);
-                           dialog.cancel();
-                           MainActivity.this.removeDialog(id);
-                           Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
-                           intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-                           startActivity(intent);
-                       }
-               })
-              .setNegativeButton("Licenses", new DialogInterface.OnClickListener() {
-                       public void onClick(DialogInterface dialog, int id) {
-                           setPref(PREF_INSTALLED_VERSION, currentVersion);
-                           dialog.cancel();
-                           MainActivity.this.removeDialog(id);
-                           Intent intent = new Intent(MainActivity.this, LicenseActivity.class);
-                           startActivity(intent);
-                       }
-               });
-            rv = b.create();
-            break;
+        switch(id) {
+            case DIALOG_NEW_INSTALL:
+                b.setMessage(getResources().getText(R.string.welcome_new_install)).setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-          case DIALOG_NEW_VERSION:
-            b.setMessage(getResources().getText(R.string.welcome_new_version) + " " + currentVersion)
-              .setCancelable(true)
-              .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                       public void onClick(DialogInterface dialog, int id) {
-                           setPref(PREF_INSTALLED_VERSION, currentVersion);
-                           try {
-                               dialog.dismiss();
-                           } catch (Exception e) {}
-                           MainActivity.this.removeDialog(id);
-                       }
-               })
-              .setNegativeButton("Release Notes", new DialogInterface.OnClickListener() {
-                       public void onClick(DialogInterface dialog, int id) {
-                           setPref(PREF_INSTALLED_VERSION, currentVersion);
-                           try {
-                               dialog.dismiss();
-                           } catch (Exception e) {}
-                           MainActivity.this.removeDialog(id);
-                           Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
-                           intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-                           startActivity(intent);
-                       }
-               });
+                    public void onClick(DialogInterface dialog, int id) {
+                        setPref(PREF_INSTALLED_VERSION, currentVersion);
+                        dialog.cancel();
+                        MainActivity.this.removeDialog(id);
+                    }
+                }).setNeutralButton("Release Notes", new DialogInterface.OnClickListener() {
 
+                    public void onClick(DialogInterface dialog, int id) {
+                        setPref(PREF_INSTALLED_VERSION, currentVersion);
+                        dialog.cancel();
+                        MainActivity.this.removeDialog(id);
+                        Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
+                        intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+                        startActivity(intent);
+                    }
+                }).setNegativeButton("Licenses", new DialogInterface.OnClickListener() {
 
-            rv = b.create();
-            break;
+                    public void onClick(DialogInterface dialog, int id) {
+                        setPref(PREF_INSTALLED_VERSION, currentVersion);
+                        dialog.cancel();
+                        MainActivity.this.removeDialog(id);
+                        Intent intent = new Intent(MainActivity.this, LicenseActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                rv = b.create();
+                break;
+
+            case DIALOG_NEW_VERSION:
+                b.setMessage(getResources().getText(R.string.welcome_new_version) + " " + currentVersion).setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+                        setPref(PREF_INSTALLED_VERSION, currentVersion);
+                        try {
+                            dialog.dismiss();
+                        } catch(Exception e) {
+                        }
+                        MainActivity.this.removeDialog(id);
+                    }
+                }).setNegativeButton("Release Notes", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+                        setPref(PREF_INSTALLED_VERSION, currentVersion);
+                        try {
+                            dialog.dismiss();
+                        } catch(Exception e) {
+                        }
+                        MainActivity.this.removeDialog(id);
+                        Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
+                        intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+                        startActivity(intent);
+                    }
+                });
+
+                rv = b.create();
+                break;
         }
         return rv;
     }
