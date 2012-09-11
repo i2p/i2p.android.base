@@ -63,6 +63,10 @@ class StatusBar {
         //mgr.cancel(ID);
     }
 
+    public void remove() {
+        mgr.cancel(ID);
+    }
+
     /**
      * http://stackoverflow.com/questions/4028742/how-to-clear-a-notification-if-activity-crashes
      */

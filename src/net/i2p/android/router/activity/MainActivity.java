@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import java.io.File;
 import java.text.DecimalFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
@@ -34,6 +32,17 @@ public class MainActivity extends I2PActivityBase {
     protected static final int DIALOG_NEW_VERSION = 1;
     private boolean _keep = true;
 
+
+    @Override
+    public void onPostCreate(Bundle savedInstanceState) {
+        Util.e("Initializing...");
+        InitActivities init = new InitActivities(this);
+        init.debugStuff();
+        init.initialize();
+        super.onPostCreate(savedInstanceState);
+    }
+
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -46,14 +55,6 @@ public class MainActivity extends I2PActivityBase {
             if (saved != null) {
                 _savedStatus = saved;
             }
-        }
-
-        RouterService svc = _routerService;
-        if (!(svc != null && _isBound)) {
-            Util.e("Initializing...");
-            InitActivities init = new InitActivities(this);
-            init.debugStuff();
-            init.initialize();
         }
 
         setContentView(R.layout.main);
