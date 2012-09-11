@@ -28,8 +28,8 @@ import net.i2p.util.OrderedProperties;
  */
 public class RouterService extends Service {
 
+    // These states persist even if we died... Yuck, it causes issues.
     public enum State {
-
         INIT, WAITING, STARTING, RUNNING,
         // unplanned (router stopped itself), next: killSelf()
         STOPPING, STOPPED,
@@ -80,8 +80,11 @@ public class RouterService extends Service {
             Intent intent = new Intent(this, RouterService.class);
             intent.putExtra(EXTRA_RESTART, true);
             onStartCommand(intent, 12345, 67890);
-        } else if(lastState == State.MANUAL_QUITTING || lastState == State.MANUAL_QUITTED) {
-            stopSelf(); // Die.
+        } else if(lastState == State.MANUAL_QUITTING) {
+            synchronized(_stateLock) {
+                setState(State.MANUAL_QUITTED);
+                stopSelf(); // Die.
+            }
         }
     }
 
@@ -657,14 +660,15 @@ public class RouterService extends Service {
                             || _state == State.STOPPING) {
                         Util.i(this + " died of unknown causes");
                         setState(State.STOPPED);
+                        stopForeground(true);
                         stopSelf();
                     } else if(_state == State.MANUAL_QUITTING) {
                         setState(State.MANUAL_QUITTED);
+                        stopForeground(true);
                         stopSelf();
                     }
                 }
             } finally {
-                stopForeground(true);
                 _statusBar.remove();
             }
         }

@@ -24,7 +24,7 @@ public class MainActivity extends I2PActivityBase {
     private Runnable _updater;
     private Runnable _oneShotUpdate;
     private String _savedStatus;
-    private boolean _keep;
+    private boolean _keep = true;
 
 
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
@@ -272,13 +272,16 @@ public class MainActivity extends I2PActivityBase {
     @Override
     public void onBackPressed() {
         RouterContext ctx = getRouterContext();
+        // RouterService svc = _routerService;
         _keep = Util.isConnected(this) && ctx != null;
+        Util.e("*********************************************************");
+        Util.e("Back pressed, Keep? " + _keep);
+        Util.e("*********************************************************");
         super.onBackPressed();
     }
 
     @Override
     public void onDestroy() {
-        // RouterContext ctx = getRouterContext();
         super.onDestroy();
         if (!_keep) {
             Thread t = new Thread(new KillMe());
@@ -288,6 +291,9 @@ public class MainActivity extends I2PActivityBase {
 
     private class KillMe implements Runnable {
         public void run() {
+            Util.e("*********************************************************");
+            Util.e("KillMe started!");
+            Util.e("*********************************************************");
             try {
                 Thread.sleep(500); // is 500ms long enough?
             } catch (InterruptedException ex) {
