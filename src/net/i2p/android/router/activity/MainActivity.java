@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
@@ -30,6 +32,7 @@ public class MainActivity extends I2PActivityBase {
     protected static final String PROP_NEW_VERSION = "i2p.newVersion";
     protected static final int DIALOG_NEW_INSTALL = 0;
     protected static final int DIALOG_NEW_VERSION = 1;
+    private boolean _keep = true;
 
     /** Called when the activity is first created. */
     @Override
@@ -207,6 +210,8 @@ public class MainActivity extends I2PActivityBase {
     @Override
     public void onStop()
     {
+        RouterContext ctx = getRouterContext();
+        _keep = Util.isConnected(this) && ctx != null;
         super.onStop();
         _handler.removeCallbacks(_updater);
         _handler.removeCallbacks(_oneShotUpdate);
@@ -262,6 +267,26 @@ public class MainActivity extends I2PActivityBase {
 
         Button quit = (Button) findViewById(R.id.router_quit_button);
         quit.setVisibility(showStop ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    @Override
+    public void onDestroy() {
+        // RouterContext ctx = getRouterContext();
+        super.onDestroy();
+        if (!_keep) {
+            Thread t = new Thread(new KillMe());
+            t.start();
+        }
+    }
+
+    private class KillMe implements Runnable {
+        public void run() {
+            try {
+                Thread.sleep(500); // is 500ms long enough?
+            } catch (InterruptedException ex) {
+            }
+            System.exit(0);
+        }
     }
 
     private void updateStatus() {

@@ -547,6 +547,7 @@ public class RouterService extends Service {
                     setState(stopState);
             }
             stopForeground(true);
+            _statusBar.off();
         }
     }
 
