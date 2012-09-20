@@ -348,8 +348,8 @@ public class MainActivity extends I2PActivityBase {
             if(reach == net.i2p.router.CommSystemFacade.STATUS_REJECT_UNSOLICITED) {
                 netstatus = "Reject Unsolicited";
             }
-            // String tunnelStatus = ctx.throttle().getTunnelStatus();
-            // ctx.commSystem().getReachabilityStatus();
+            String tunnelStatus = ctx.throttle().getTunnelStatus();
+            //ctx.commSystem().getReachabilityStatus();
             double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
             double outBW = ctx.bandwidthLimiter().getSendBps() / 1024;
 
@@ -385,13 +385,9 @@ public class MainActivity extends I2PActivityBase {
 
 
             // Need to see if we have the participation option set to on.
-            // I thought there was a router setting for that? I guess not! WHY NOT?
-            // For now, if zero, don't show anything. This is done to not alert the
-            // end user into thinking that this router must participate.
-            String participate = "";
-            if(part != 0) {
-                participate = "\nParticipating: " + part;
-            }
+            // I thought there was a router method for that? I guess not! WHY NOT?
+            // It would be easier if we had a number to test status.
+            String participate = "\nParticipation: " + tunnelStatus +" (" + part + ")";
 
             String details =
                     "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps"
