@@ -411,10 +411,23 @@
         <copy file="LICENSE.txt" tofile="res/raw/license_app_txt" />
         <copy file="licenses/LICENSE-Apache2.0.txt" tofile="res/raw/license_apache20_txt" />
         <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="res/drawable/" />
+	<!-- 
+	
+	No, no, no. Wrong, wrong, wrong. Static web sources should be in
+        the assets directory. 
+        
         <copy file="${i2pbase}/installer/resources/themes/console/images/outbound.png" todir="res/drawable/" />
         <copy file="${i2pbase}/installer/resources/themes/console/images/inbound.png" todir="res/drawable/" />
         <copy file="${i2pbase}/installer/resources/themes/console/light/images/header.png" todir="res/drawable/" />
-        <copy file="${i2pbase}/installer/resources/themes/console/light/console.css" tofile="res/raw/console_css" />
+        <copy file="${i2pbase}/installer/resources/themes/console/light/console.css" tofile="res/drawable/console_css" />
+        -->
+        
+        <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="assets/themes/console/images/" />
+        <copy file="${i2pbase}/installer/resources/themes/console/images/outbound.png" todir="assets/themes/console/images/" />
+        <copy file="${i2pbase}/installer/resources/themes/console/images/inbound.png" todir="assets/themes/console/images/" />
+        <copy file="${i2pbase}/installer/resources/themes/console/light/images/header.png" todir="assets/themes/console/light/images/" />
+        <copy file="${i2pbase}/installer/resources/themes/console/light/console.css" todir="assets/themes/console/light/" />
+
         <copy file="${i2pbase}/installer/resources/blocklist.txt" tofile="res/raw/blocklist_txt" />
         <copy file="${i2pbase}/installer/resources/hosts.txt" tofile="res/raw/hosts_txt" />
         <copy file="${i2pbase}/licenses/LICENSE-ElGamalDSA.txt" tofile="res/raw/license_elgamaldsa_txt" />
@@ -446,6 +459,14 @@
         <delete file="res/drawable/inbound.png" verbose="${verbose}"/>
         <delete file="res/drawable/header.png" verbose="${verbose}"/>
         <delete file="res/raw/console_css" verbose="${verbose}"/>
+
+        <delete file="assets/themes/console/images/i2plogo.png" />
+        <delete file="assets/themes/console/images/outbound.png" />
+        <delete file="assets/themes/console/images/inbound.png" />
+        <delete file="assets/themes/console/light/images/header.png" />
+        <delete file="assets/themes/console/light/console.css" />
+
+
         <delete file="res/raw/blocklist_txt" verbose="${verbose}" />
         <delete file="res/raw/hosts_txt" verbose="${verbose}" />
         <delete file="res/raw/license_app_txt" />

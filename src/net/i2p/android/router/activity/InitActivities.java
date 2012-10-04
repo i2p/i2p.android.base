@@ -100,19 +100,19 @@ class InitActivities {
 
             File cssDir = new File(docsDir, "themes/console/light");
             cssDir.mkdirs();
-            copyResourceToFile(R.raw.console_css, "docs/themes/console/light/console.css");
-            copyResourceToFile(R.raw.android_css, "docs/themes/console/light/android.css");
+            //copyResourceToFile(R.raw.console_css, "docs/themes/console/light/console.css");
+            //copyResourceToFile(R.raw.android_css, "docs/themes/console/light/android.css");
 
             File imgDir = new File(docsDir, "themes/console/images");
             imgDir.mkdir();
             copyResourceToFile(R.drawable.i2plogo, "docs/themes/console/images/i2plogo.png");
             copyResourceToFile(R.drawable.itoopie_sm, "docs/themes/console/images/itoopie_sm.png");
-            copyResourceToFile(R.drawable.outbound, "docs/themes/console/images/outbound.png");
-            copyResourceToFile(R.drawable.inbound, "docs/themes/console/images/inbound.png");
+            //copyResourceToFile(R.drawable.outbound, "docs/themes/console/images/outbound.png");
+            //copyResourceToFile(R.drawable.inbound, "docs/themes/console/images/inbound.png");
 
             File img2Dir = new File(cssDir, "images");
             img2Dir.mkdir();
-            copyResourceToFile(R.drawable.header, "docs/themes/console/light/images/header.png");
+            //copyResourceToFile(R.drawable.header, "docs/themes/console/light/images/header.png");
 
             File certDir = new File(myDir, "certificates");
             certDir.mkdir();

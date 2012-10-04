@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
+import net.i2p.android.router.util.Util;
 import net.i2p.router.CommSystemFacade;
 
 public class PeersActivity extends I2PActivityBase {
@@ -24,7 +25,7 @@ public class PeersActivity extends I2PActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.peers);
         WebView wv = (WebView) findViewById(R.id.peers_webview);
-        wv.getSettings().setLoadsImagesAutomatically(false);
+        wv.getSettings().setLoadsImagesAutomatically(true); // was false
         // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855
         wv.getSettings().setUseWideViewPort(true);
         _wvClient = new I2PWebViewClient(this);
@@ -49,6 +50,7 @@ public class PeersActivity extends I2PActivityBase {
 
     private void update() {
         WebView wv = (WebView) findViewById(R.id.peers_webview);
+        wv.clearHistory(); // fixes having to hit back.
         CommSystemFacade comm = getCommSystem();
         String data;
         if (comm != null) {
@@ -57,7 +59,7 @@ public class PeersActivity extends I2PActivityBase {
             try {
                 comm.renderStatusHTML(out, "http://thiswontwork.i2p/peers", 0);
                 out.append(FOOTER);
-                data = out.toString();
+                data = out.toString().replaceAll("/themes", "themes");
             } catch (IOException ioe) {
                 data = HEADER + "Error: " + ioe + FOOTER;
             }
@@ -65,10 +67,11 @@ public class PeersActivity extends I2PActivityBase {
             data = HEADER + "No peer data available. The router is not running." + FOOTER;
         }
         try {
-            wv.loadData(data, "text/html", "UTF-8");
+            // wv.loadData(data, "text/html", "UTF-8");
             // figure out a way to get /themes/console/images/outbound.png to load
-            //String url = "file://" + _myDir + "/docs/";
-            //wv.loadDataWithBaseURL(url, data, "text/html", "UTF-8", url);
+            // String url = "file://" + _myDir + "/docs/";
+            String url = "file:///android_asset/";
+            wv.loadDataWithBaseURL(url, data, "text/html", "UTF-8", url);
         } catch (Exception e) {
         }
     }
@@ -79,10 +82,13 @@ public class PeersActivity extends I2PActivityBase {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
             _wvClient.cancelAll();
             wv.stopLoading();
-            if (wv.canGoBack()) {
-                wv.goBack();
-                return true;
-            }
+
+            // We do not want to go back, or keep history... Theere is no need to.
+            // What we DO want to do is exit!
+            //if (wv.canGoBack()) {
+            //    wv.goBack();
+            //    return true;
+            //}
         }
         return super.onKeyDown(keyCode, event);
     }
