@@ -35,7 +35,9 @@ class StatusBar {
         String text = "Starting I2P";
         long now = System.currentTimeMillis();
         notif = new Notification(icon, text, now);
-        notif.flags |= /* Notification.FLAG_ONGOING_EVENT | */ Notification.FLAG_NO_CLEAR;
+        notif.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
+        // notif.flags |= Notification.FLAG_ONGOING_EVENT;
+        notif.flags |= Notification.FLAG_NO_CLEAR;
         intent = new Intent(ctx, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }

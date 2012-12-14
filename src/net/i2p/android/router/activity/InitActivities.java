@@ -126,6 +126,9 @@ class InitActivities {
                 }
             }
             unzipResourceToDir(R.raw.certificates_zip, "certificates");
+            //File netDBDir = new File(myDir, "netDB");
+            //netDBDir.mkdir();
+            //unzipResourceToDir(R.raw.netdb_zip, "netDB");
         }
 
         // Set up the locations so settings can find them

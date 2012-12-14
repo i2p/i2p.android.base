@@ -24,6 +24,7 @@ public class MainActivity extends I2PActivityBase {
     private Runnable _updater;
     private Runnable _oneShotUpdate;
     private String _savedStatus;
+    private String _ourVersion;
     private boolean _keep = true;
     private boolean _startPressed = false;
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
@@ -38,6 +39,7 @@ public class MainActivity extends I2PActivityBase {
         init.debugStuff();
         init.initialize();
         super.onPostCreate(savedInstanceState);
+        _ourVersion = Util.getOurVersion(this);
     }
 
     /**
@@ -316,7 +318,7 @@ public class MainActivity extends I2PActivityBase {
         TextView tv = (TextView) findViewById(R.id.main_status_text);
 
         if(!Util.isConnected(this)) {
-            tv.setText("No Internet connection is available");
+            tv.setText("Router version: " + _ourVersion + "\nNo Internet connection is available");
             tv.setVisibility(View.VISIBLE);
         } else if(ctx != null) {
             if(_startPressed) {
@@ -398,13 +400,13 @@ public class MainActivity extends I2PActivityBase {
                     + "\nMsg Delay: " + msgDelay
                     + "\nUptime: " + uptime;
 
-            _savedStatus = status + participate + details;
+            _savedStatus = "Router version: " + _ourVersion + "\n" + status + participate + details;
             tv.setText(_savedStatus);
             tv.setVisibility(View.VISIBLE);
         } else {
             // network but no router context
-            tv.setText("");
-            tv.setVisibility(View.INVISIBLE);
+            tv.setText("Router version: " + _ourVersion + "\n");
+            //tv.setVisibility(View.INVISIBLE);
             /**
              * **
              * RouterService svc = _routerService; String status = "connected? "
