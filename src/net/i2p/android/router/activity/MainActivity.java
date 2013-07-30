@@ -34,7 +34,7 @@ public class MainActivity extends I2PActivityBase {
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
-        Util.e("Initializing...");
+        Util.i("Initializing...");
         InitActivities init = new InitActivities(this);
         init.debugStuff();
         init.initialize();
@@ -284,9 +284,9 @@ public class MainActivity extends I2PActivityBase {
         RouterContext ctx = getRouterContext();
         // RouterService svc = _routerService; Which is better to use?!
         _keep = Util.isConnected(this) && (ctx != null || _startPressed);
-        Util.e("*********************************************************");
-        Util.e("Back pressed, Keep? " + _keep);
-        Util.e("*********************************************************");
+        Util.d("*********************************************************");
+        Util.d("Back pressed, Keep? " + _keep);
+        Util.d("*********************************************************");
         super.onBackPressed();
     }
 
@@ -302,9 +302,9 @@ public class MainActivity extends I2PActivityBase {
     private class KillMe implements Runnable {
 
         public void run() {
-            Util.e("*********************************************************");
-            Util.e("KillMe started!");
-            Util.e("*********************************************************");
+            Util.d("*********************************************************");
+            Util.d("KillMe started!");
+            Util.d("*********************************************************");
             try {
                 Thread.sleep(500); // is 500ms long enough?
             } catch(InterruptedException ex) {

@@ -59,7 +59,7 @@ public class AppCache {
     private AppCache(Context ctx) {
         _cacheDir = new File(ctx.getCacheDir(), DIR_NAME);
         _cacheDir.mkdir();
-        Util.e("AppCache cache dir " + _cacheDir);
+        Util.d("AppCache cache dir " + _cacheDir);
         _resolver = ctx.getContentResolver();
         _cache = new LHM(MAX_FILES);
         initialize();
@@ -144,7 +144,7 @@ public class AppCache {
         _totalSize = 0;
         List<File> fileList = new ArrayList<File>(MAX_FILES);
         long total = enumerate(_cacheDir, fileList);
-        Util.e("AppCache found " + fileList.size() + " files totalling " + total + " bytes");
+        Util.d("AppCache found " + fileList.size() + " files totalling " + total + " bytes");
         Collections.sort(fileList, new FileComparator());
         // oldest first, delete if too big or too old, else add to LHM
         long now = System.currentTimeMillis();
@@ -157,7 +157,7 @@ public class AppCache {
                 // TODO insertContent
             }
         }
-        Util.e("after init " + _cache.size() + " files totalling " + total + " bytes");
+        Util.d("after init " + _cache.size() + " files totalling " + total + " bytes");
     }
 
     /** oldest first */
@@ -198,7 +198,7 @@ public class AppCache {
                 _cache.put(Integer.valueOf(hash), DUMMY);
             }
         } catch (IllegalArgumentException iae) {
-            Util.e("Huh bad file?" + iae);
+            Util.d("Huh bad file?" + iae);
             f.delete();
         }
     }
@@ -310,7 +310,7 @@ public class AppCache {
                 if (f.exists()) {
                     _totalSize -= f.length();
                     f.delete();
-                    Util.e("AppCache deleted file " + f);
+                    Util.d("AppCache deleted file " + f);
                 }
             }
             return rv;

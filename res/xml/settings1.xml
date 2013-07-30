@@ -26,10 +26,10 @@
         android:key="i2np.bandwidth.inboundKBytesPerSecond"
         android:defaultValue="100"
         android:max="1000"
-        android:title="Inbound (KB/sec)"
+        android:title="Inbound speed"
         android:summary="Maximum inbound speed"
         android:dialogMessage="Maximum inbound speed"
-        android:text=" KByets/sec"
+        android:text=" KBytes/sec"
         />
     <!--
     i2np.bandwidth.outboundKBytesPerSecond=30
@@ -41,7 +41,7 @@
         android:title="Outbound speed"
         android:summary="Maximum outbound speed"
         android:dialogMessage="Maximum outbound speed"
-        android:text=" KByets/sec"
+        android:text=" KBytes/sec"
         />
 
     <CheckBoxPreference
@@ -165,7 +165,7 @@
         android:key="router.inboundPool.lengthVariance"
         android:entries="@array/setting2to2"
         android:entryValues="@array/setting2to2"
-        android:title="inbound hop varience"
+        android:title="inbound hop variance"
         android:summary="How many hops to randomly add to inbound tunnels"
         android:defaultValue="0"
     />
@@ -174,7 +174,7 @@
         android:key="router.outboundPool.lengthVariance"
         android:entries="@array/setting2to2"
         android:entryValues="@array/setting2to2"
-        android:title="outbound hop varience"
+        android:title="outbound hop variance"
         android:summary="How many hops to randomly add to outbound tunnels"
         android:defaultValue="0"
     />

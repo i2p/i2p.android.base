@@ -20,7 +20,7 @@ time.disabled=false
 #
 # no external I2CP (7654)
 #
-i2cp.disableInterface=false
+i2cp.disableInterface=true
 #
 # hosts.txt should be more crash-proof than blockfile
 # Todo: implement a NamingService using the android native SQLite
@@ -44,7 +44,7 @@ router.sharePercentage=80
 ##### Transport
 #
 i2np.bandwidth.inboundKBytesPerSecond=100
-i2np.bandwidth.outboundKBytesPerSecond=100
+i2np.bandwidth.outboundKBytesPerSecond=50
 #
 # NTCP
 #

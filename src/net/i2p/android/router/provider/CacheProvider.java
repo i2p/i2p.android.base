@@ -81,7 +81,7 @@ public class CacheProvider extends ContentProvider {
             if (q == null || !a.equals(AUTHORITY))
                 return key;
             if (p.contains(QUERY_MARKER)) {
-                Util.e("Key contains both queries ?!? " + key);
+                Util.d("Key contains both queries ?!? " + key);
                 return null;
             }
             // twizzle query
@@ -110,7 +110,7 @@ public class CacheProvider extends ContentProvider {
 
     @Override
     public ParcelFileDescriptor openFile(Uri uri, String mode) throws FileNotFoundException {
-        Util.e("CacheProvider open " + uri);
+        Util.d("CacheProvider open " + uri);
 
         // if uri is malformed and we have a current base, rectify it
         uri = rectifyContentUri(getCurrentBase(), uri);
@@ -121,17 +121,17 @@ public class CacheProvider extends ContentProvider {
             try {
                 File file = new File(filePath);
                 if (file.exists())
-                    Util.e("CacheProvider returning " + file);
+                    Util.d("CacheProvider returning " + file);
                 return ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
             } catch (FileNotFoundException fnfe) {
-                Util.e("CacheProvider not found", fnfe);
+                Util.d("CacheProvider not found", fnfe);
                 remove(uri);
             }
         }
-        Util.e("CacheProvider not in cache " + uri);
+        Util.d("CacheProvider not in cache " + uri);
 
         Uri newUri = getI2PUri(uri);
-        Util.e("CacheProvider fetching: " + newUri);
+        Util.d("CacheProvider fetching: " + newUri);
         return eepFetch(newUri);
     }
 
@@ -161,7 +161,7 @@ public class CacheProvider extends ContentProvider {
             }
         }
         String debug = "CacheProvider nonce: " + nonce + " scheme: " + scheme + " host: " + host + " realPath: " + realPath + " query: " + query;
-        Util.e(debug);
+        Util.d(debug);
         if ((!NONCE.equals(nonce)) ||
             (!"http".equals(scheme)) ||
             (host == null) ||
@@ -184,7 +184,7 @@ public class CacheProvider extends ContentProvider {
      *          or the original uri on error, or if no rectification needed
      */
     public static Uri rectifyContentUri(Uri base, Uri uri) {
-        Util.e("rectifyContentUri  base: " + base + " and uri: " + uri);
+        Util.d("rectifyContentUri  base: " + base + " and uri: " + uri);
         if (base == null)
             return uri;
         if (!SCHEME.equals(base.getScheme()))
@@ -222,7 +222,7 @@ public class CacheProvider extends ContentProvider {
             buf.append(path);
         if (query != null)
             buf.append(QUERY_MARKER).append(query);
-        Util.e("rectified from base: " + base + " and uri: " + uri + " to: " + buf);
+        Util.d("rectified from base: " + base + " and uri: " + uri + " to: " + buf);
         return Uri.parse(buf.toString());
     }
 
@@ -245,23 +245,23 @@ public class CacheProvider extends ContentProvider {
                 ParcelFileDescriptor parcel = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
                 return parcel;
             } else {
-                 Util.e("CacheProvider Sucess but no data " + uri);
+                 Util.d("CacheProvider Sucess but no data " + uri);
             }
         } else {
-            Util.e("CacheProvider Eepget fail " + uri);
+            Util.d("CacheProvider Eepget fail " + uri);
         }
         AppCache.getInstance().removeCacheFile(uri);
         throw new FileNotFoundException("eepget fail");
     }
 
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        Util.e("CacheProvider delete " + uri);
+        Util.d("CacheProvider delete " + uri);
         boolean deleted = remove(uri);
         return deleted ? 1 : 0;
     }
 
     public String getType(Uri uri) {
-        Util.e("CacheProvider getType " + uri);
+        Util.d("CacheProvider getType " + uri);
         return "text/html";
     }
 
@@ -271,12 +271,12 @@ public class CacheProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         String fileURI = values.getAsString(DATA);
         if (fileURI != null) {
-            Util.e("CacheProvider insert " + uri);
+            Util.d("CacheProvider insert " + uri);
             put(uri, fileURI);
         }
         Boolean setAsCurrentBase = values.getAsBoolean(CURRENT_BASE);
         if (setAsCurrentBase != null && setAsCurrentBase.booleanValue()) {
-            Util.e("CacheProvider set current base " + uri);
+            Util.d("CacheProvider set current base " + uri);
             setCurrentBase(uri);
         }
         return uri;
@@ -289,7 +289,7 @@ public class CacheProvider extends ContentProvider {
     }
 
     public Cursor query(Uri uri, String[] projection, String selection, String[] selecctionArgs, String sortOrder) {
-        Util.e("CacheProvider query " + uri);
+        Util.d("CacheProvider query " + uri);
         // TODO return a MatrixCursor with a _data entry
         return null;
     }

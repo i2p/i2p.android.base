@@ -44,7 +44,7 @@ class I2PWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        Util.e("Should override? " + url);
+        Util.d("Should override? " + url);
         view.stopLoading();
 
         Uri uri = Uri.parse(url);
@@ -59,7 +59,7 @@ class I2PWebViewClient extends WebViewClient {
             //reverse back to a i2p URI so we can load it here and not in ContentProvider
             try {
                 uri = CacheProvider.getI2PUri(uri);
-                Util.e("Reversed content uri back to " + uri);
+                Util.d("Reversed content uri back to " + uri);
             } catch (FileNotFoundException fnfe) {}
             url = uri.toString();
         }
@@ -73,7 +73,7 @@ class I2PWebViewClient extends WebViewClient {
             s = s.toLowerCase();
             if (!(s.equals("http") || s.equals("https") ||
                   s.equals(CONTENT))) {
-                Util.e("Not loading URL " + url);
+                Util.d("Not loading URL " + url);
                 return false;
             }
             String h = uri.getHost();
@@ -126,7 +126,7 @@ class I2PWebViewClient extends WebViewClient {
                 //view.loadUrl(url);
                 BGLoad task = new BackgroundLoad(view);
                 _lastTask = task;
-                Util.e("Fetching via web or resource: " + url);
+                Util.d("Fetching via web or resource: " + url);
                 task.execute(url);
             }
             return true;
@@ -349,7 +349,7 @@ class I2PWebViewClient extends WebViewClient {
                         Util.d("cache create error");
                         return Integer.valueOf(0);
                     }
-                    Util.e("loading data, base URL: " + uri + " content URL: " + content);
+                    Util.d("loading data, base URL: " + uri + " content URL: " + content);
                     try {
                         _view.loadUrl(content.toString());
                     } catch (Exception exc) {
@@ -378,7 +378,7 @@ class I2PWebViewClient extends WebViewClient {
                             DataHelper.read(fis, data);
                             msg = new String(data, e);
                         } catch (IOException ioe) {
-                            Util.e("WVC", ioe);
+                            Util.d("WVC", ioe);
                             msg = HEADER + "I/O error" + FOOTER;
                         } finally {
                               if (fis != null) try { fis.close(); } catch (IOException ioe) {}

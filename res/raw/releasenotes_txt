@@ -10,11 +10,9 @@ The app may use a lot of RAM even after the router has stopped and there is no i
 
 The app may be moved to the SD card. The app does not store any files on the SD card.
 
-The app runs on either WIFI or mobile networks. For now, the app is very low bandwidth, as it does not allow participating tunnels. It does not route traffic for other routers.
+The app runs on either WIFI or mobile networks. For now, the app is relatively low bandwidth. It allows a max of 20 participating tunnels.
 
-The app uses TCP only for router-router connections, with a maximum of 24 simultaneous. UDP is disabled.
-
-UPnP is disabled. With UDP disabled also, you do not publish an IP address and should not be getting incoming connections.
+The app uses both UDP and TCP for router-router connections, with a maximum of 36 connections on each transport. UPnP is enabled.
 
 I2P's NTP is disabled for API 11 (Honeycomb) and above, as those versions include NTP support. If you have cell service, your phone or tablet should have the correct time. If you do not have cell service, ensure your device has accurate time.
 
@@ -47,20 +45,21 @@ For eepsites and websites, problems include:
 Using clients with the router
 -----------------------------
 
-The app starts an HTTP proxy at localhost port 4444 and transparent IRC proxies at localhost ports 6668, 6669, and 6670. These are "shared clients" on the same tunnels. Once you see in and out client tunnels listed on the router status (several minutes after startup), you should be able to connect.
+The app starts an HTTP proxy at localhost port 4444 and transparent IRC proxies at localhost ports 6668 - 6671. These are "shared clients" on the same tunnels. Once you see in and out client tunnels listed on the router status (several minutes after startup), you should be able to connect.
 
 The HTTP proxy should work with Firefox 4 Mobile and the ProxyMob Firefox plugin, if you have at least 512 MB of RAM. If it works it should avoid all the problems with the embedded web browser listed above. I can't test it as I have a 256 MB Droid.
 
 The IRC proxy is tested with the "Android IRC Free" app. The IRC proxy destinations are:
-  * Port 6668: IRC2P - irc.postman.i2p, irc.freshcoffee.i2p, and irc.killyourtv.i2p
+  * Port 6668: IRC2P - irc.postman.i2p, irc.freshcoffee.i2p, and irc.echelon.i2p
   * Port 6669: irc.welterde.i2p
-  * Port 6670: irc.telecomix.i2p
+  * Port 6670: irc.telecomix.i2p (probably down)
+  * Port 6671: irc.killyourtv.i2p
 
 
 Further anonymity warnings
 --------------------------
 
-* Exploratory and Client Tunnels are 1 hop + 0-1 hops
+* Exploratory and Client Tunnels are 2 hops
 * Sharing IRC and HTTP proxies on same tunnels allows for linking
 * Not well-tested
 * There are .i2p DNS leaks
