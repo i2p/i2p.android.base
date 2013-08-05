@@ -4,7 +4,37 @@
     <string name="app_name">I2P</string>
     <string name="welcome_new_install">Welcome to I2P! This app is ALPHA software and it does not provide strong anonymity. Please read the release notes and license information.</string>
     <string name="welcome_new_version">New version installed. Please read the release notes. Version:</string>
-    <string name="settings_label_subscriptions">I2P Addressbook Settings</string>
+
     <string name="menu_settings">Settings</string>
+    <string name="settings_enable">Enable</string>
+    <string name="settings_label_subscriptions">I2P Addressbook</string>
+    <string name="settings_desc_subscriptions">Subscription URLs</string>
+    <string name="settings_label_bandwidth">Bandwidth and network</string>
+    <string name="settings_label_bw_inbound">Inbound speed</string>
+    <string name="settings_desc_bw_inbound">Maximum inbound speed</string>
+    <string name="settings_label_bw_outbound">Outbound speed</string>
+    <string name="settings_desc_bw_outbound">Maximum outbound speed</string>
+    <string name="settings_label_hiddenMode">Participation</string>
+    <string name="settings_desc_hiddenMode">Turn off hidden mode</string>
+    <string name="settings_label_maxPartTunnels">Max participating tunnels</string>
+    <string name="settings_label_sharePercent">Share percentage</string>
+    <string name="settings_desc_upnp">Open firewall ports automatically</string>
+    <string name="settings_label_advanced">Advanced</string>
+    <string name="settings_label_transports">Transports</string>
+    <string name="settings_label_maxConns">Max connections</string>
+    <string name="settings_label_i2cp">I2CP interface</string>
+    <string name="settings_desc_i2cp">Listen on port 7654</string>
+    <string name="settings_label_exploratory_pool">Exploratory pool</string>
+    <string name="settings_desc_exploratory_pool">Tunnel parameters</string>
+    <string name="settings_label_expl_inbound">Inbound tunnels</string>
+    <string name="settings_label_expl_outbound">Outbound tunnels</string>
+    <string name="settings_label_expl_length">Length</string>
+    <string name="settings_desc_expl_length">How many hops to use</string>
+    <string name="settings_label_expl_lengthVariance">Hop variance</string>
+    <string name="settings_desc_expl_lengthVariance">How many hops to randomly add</string>
+    <string name="settings_label_expl_quantity">Quantity</string>
+    <string name="settings_desc_expl_quantity">How many tunnels</string>
+    <string name="settings_label_expl_backupQuantity">Backup quantity</string>
+    <string name="settings_desc_expl_backupQuantity">How many tunnel backups</string>
 
 </resources>

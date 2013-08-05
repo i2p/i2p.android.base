@@ -1,9 +1,10 @@
-    <PreferenceScreen
+<PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="settings1">
 
     <Preference
         android:title="@string/settings_label_subscriptions"
+        android:summary="@string/settings_desc_subscriptions"
         android:key="addressbook_preferences">
 
         <intent android:targetPackage="net.i2p.android.router" android:targetClass="net.i2p.android.router.activity.AddressbookSettingsActivity" />
@@ -12,13 +13,11 @@
 
     <!--
     Keys and the default values from current installation:
-    i2cp.disableInterface=true
     -->
-    <CheckBoxPreference
-        android:key="i2cp.disableInterface"
-        android:defaultValue="false"
-        android:title="Disable i2cp interface"
-        />
+
+    <PreferenceCategory
+        android:key="settings_bandwidth"
+        android:title="@string/settings_label_bandwidth">
     <!--
     i2np.bandwidth.inboundKBytesPerSecond=100
     -->
@@ -26,9 +25,9 @@
         android:key="i2np.bandwidth.inboundKBytesPerSecond"
         android:defaultValue="100"
         android:max="1000"
-        android:title="Inbound speed"
-        android:summary="Maximum inbound speed"
-        android:dialogMessage="Maximum inbound speed"
+        android:title="@string/settings_label_bw_inbound"
+        android:summary="@string/settings_desc_bw_inbound"
+        android:dialogMessage="@string/settings_desc_bw_inbound"
         android:text=" KBytes/sec"
         />
     <!--
@@ -38,83 +37,25 @@
         android:key="i2np.bandwidth.outboundKBytesPerSecond"
         android:defaultValue="100"
         android:max="1000"
-        android:title="Outbound speed"
-        android:summary="Maximum outbound speed"
-        android:dialogMessage="Maximum outbound speed"
+        android:title="@string/settings_label_bw_outbound"
+        android:summary="@string/settings_desc_bw_outbound"
+        android:dialogMessage="@string/settings_desc_bw_outbound"
         android:text=" KBytes/sec"
         />
-
-    <CheckBoxPreference
-        android:key="i2np.ntcp.enable"
-        android:defaultValue="true"
-        android:title="Enable NTCP"
-        />
-
-    <!--
-    i2np.udp.enable=false
-    I might hide this one...
-    -->
-    <CheckBoxPreference
-        android:key="i2np.udp.enable"
-        android:defaultValue="true"
-        android:title="Enable UDP"
-        android:summary="DO NOT DISABLE THIS"
-        />
-
-    <!--
-    i2np.ntcp.maxConnections=24
-    -->
-    <com.hlidskialf.android.preference.SeekBarPreference
-        android:key="i2np.ntcp.maxConnections"
-        android:defaultValue="32"
-        android:max="250"
-        android:title="Max NTCP connections"
-        android:summary="Maximum NTCP connections allowed (default=32)"
-        android:dialogMessage="Maximum NTCP connections"
-        android:text=" connections"
-        android:dependency="i2np.ntcp.enable"
-        android:shouldDisableView="true"
-        />
-    <!--
-    i2np.udp.maxConnections=12
-    -->
-    <com.hlidskialf.android.preference.SeekBarPreference
-        android:key="i2np.udp.maxConnections"
-        android:defaultValue="32"
-        android:max="500"
-        android:title="Max UDP connections"
-        android:summary="Maximum UDP connections allowed"
-        android:dialogMessage="Maximum UDP connections"
-        android:text=" connections"
-        android:dependency="i2np.udp.enable"
-        android:shouldDisableView="true"
-        />
-    <!--
-    i2np.upnp.enable=false
-    -->
-    <CheckBoxPreference
-        android:key="i2np.upnp.enable"
-        android:defaultValue="true"
-        android:title="Enable UPNP"
-        />
-
-
-
     <CheckBoxPreference
         android:key="router.hiddenMode"
         android:defaultValue="false"
-        android:title="Enable Participation"
-        android:summary="Enabling this option turns off hidden mode"
+        android:title="@string/settings_label_hiddenMode"
+        android:summary="@string/settings_desc_hiddenMode"
         />
     <!--
-
     router.maxParticipatingTunnels=0
     -->
     <com.hlidskialf.android.preference.SeekBarPreference
         android:key="router.maxParticipatingTunnels"
         android:defaultValue="20"
         android:max="500"
-        android:title="Max Participating Tunnels"
+        android:title="@string/settings_label_maxPartTunnels"
         android:summary="Maximum tunnels to participate in (default=20)"
         android:dialogMessage="Maximum tunnels to participate in"
         android:text=" Tunnels"
@@ -127,102 +68,211 @@
         android:key="router.sharePercentage"
         android:defaultValue="80"
         android:max="100"
-        android:title="Share Percentage"
+        android:title="@string/settings_label_sharePercent"
         android:summary="Percentage of bandwith to share (default=80)"
-        android:dialogMessage="Percentage of bandwith to share"
+        android:dialogMessage="Percentage of bandwidth to share"
         android:text="%"
         android:dependency="router.hiddenMode"
         android:shouldDisableView="true"
         />
 
     <!--
+    i2np.upnp.enable=false
+    -->
+    <CheckBoxPreference
+        android:key="i2np.upnp.enable"
+        android:defaultValue="true"
+        android:title="UPnP"
+        android:summary="@string/settings_desc_upnp"
+        />
+    </PreferenceCategory>
+
+
+
+    <PreferenceCategory
+        android:key="settings_advanced"
+        android:title="@string/settings_label_advanced">
+
+    <PreferenceScreen
+        android:key="settings_transports"
+        android:title="@string/settings_label_transports">
+
+    <PreferenceCategory
+        android:key="settings_ntcp"
+        android:title="NTCP">
+    <CheckBoxPreference
+        android:key="i2np.ntcp.enable"
+        android:defaultValue="true"
+        android:title="@string/settings_enable"
+        />
+    <!--
+    i2np.ntcp.maxConnections=24
+    -->
+    <com.hlidskialf.android.preference.SeekBarPreference
+        android:key="i2np.ntcp.maxConnections"
+        android:defaultValue="32"
+        android:max="250"
+        android:title="@string/settings_label_maxConns"
+        android:summary="Maximum NTCP connections allowed (default=32)"
+        android:dialogMessage="Maximum NTCP connections"
+        android:text=" connections"
+        android:dependency="i2np.ntcp.enable"
+        android:shouldDisableView="true"
+        />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="settings_udp"
+        android:title="UDP">
+    <!--
+    i2np.udp.enable=false
+    I might hide this one...
+    -->
+    <CheckBoxPreference
+        android:key="i2np.udp.enable"
+        android:defaultValue="true"
+        android:title="@string/settings_enable"
+        android:summary="DO NOT DISABLE THIS"
+        />
+
+    <!--
+    i2np.udp.maxConnections=12
+    -->
+    <com.hlidskialf.android.preference.SeekBarPreference
+        android:key="i2np.udp.maxConnections"
+        android:defaultValue="32"
+        android:max="500"
+        android:title="@string/settings_label_maxConns"
+        android:summary="Maximum UDP connections allowed"
+        android:dialogMessage="Maximum UDP connections"
+        android:text=" connections"
+        android:dependency="i2np.udp.enable"
+        android:shouldDisableView="true"
+        />
+    </PreferenceCategory>
+    </PreferenceScreen>
+
+    <!--
+    i2cp.disableInterface=true
+    -->
+    <CheckBoxPreference
+        android:key="i2cp.disableInterface"
+        android:defaultValue="false"
+        android:title="@string/settings_label_i2cp"
+        android:summary="@string/settings_desc_i2cp"
+        />
+
+    <PreferenceScreen
+        android:key="settings_exploratory_pool"
+        android:title="@string/settings_label_exploratory_pool"
+        android:summary="@string/settings_desc_exploratory_pool">
+
+    <PreferenceCategory
+        android:key="settings_expl_inbound"
+        android:title="@string/settings_label_expl_inbound">
+    <!--
     router.inboundPool.length=1
-    router.outboundPool.length=1
     -->
     <ListPreference
         android:key="router.inboundPool.length"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
-        android:title="inbound length"
-        android:summary="How many hops for inbound tunnel"
-        android:defaultValue="2"
-    />
-
-    <ListPreference
-        android:key="router.outboundPool.length"
-        android:entries="@array/setting0to3"
-        android:entryValues="@array/setting0to3"
-        android:title="outbound length"
-        android:summary="How many hops for outbound tunnel"
+        android:title="@string/settings_label_expl_length"
+        android:summary="@string/settings_desc_expl_length"
         android:defaultValue="2"
     />
 
     <!--
     router.inboundPool.lengthVariance=1
-    router.outboundPool.lengthVariance=1
     -->
     <ListPreference
         android:key="router.inboundPool.lengthVariance"
         android:entries="@array/setting2to2"
         android:entryValues="@array/setting2to2"
-        android:title="inbound hop variance"
-        android:summary="How many hops to randomly add to inbound tunnels"
-        android:defaultValue="0"
-    />
-
-    <ListPreference
-        android:key="router.outboundPool.lengthVariance"
-        android:entries="@array/setting2to2"
-        android:entryValues="@array/setting2to2"
-        android:title="outbound hop variance"
-        android:summary="How many hops to randomly add to outbound tunnels"
+        android:title="@string/settings_label_expl_lengthVariance"
+        android:summary="@string/settings_desc_expl_lengthVariance"
         android:defaultValue="0"
     />
 
 
     <!--
     router.inboundPool.quantity=2
-    router.outboundPool.quantity=2
     -->
     <ListPreference
         android:key="router.inboundPool.quantity"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
-        android:title="inbound quantity"
-        android:summary="How many inbound tunnels"
-        android:defaultValue="2"
-    />
-
-    <ListPreference
-        android:key="router.outboundPool.quantity"
-        android:entries="@array/setting0to3"
-        android:entryValues="@array/setting0to3"
-        android:title="outbound quantity"
-        android:summary="How many outbound tunnels"
+        android:title="@string/settings_label_expl_quantity"
+        android:summary="@string/settings_desc_expl_quantity"
         android:defaultValue="2"
     />
 
     <!--
     router.inboundPool.backupQuantity=0
-    router.outboundPool.backupQuantity=0
     -->
     <ListPreference
         android:key="router.inboundPool.backupQuantity"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
-        android:title="inbound backup quantity"
-        android:summary="How many inbound tunnel backups"
+        android:title="@string/settings_label_expl_backupQuantity"
+        android:summary="@string/settings_desc_expl_backupQuantity"
+        android:defaultValue="0"
+    />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="settings_expl_outbound"
+        android:title="@string/settings_label_expl_outbound">
+    <!--
+    router.outboundPool.length=1
+    -->
+    <ListPreference
+        android:key="router.outboundPool.length"
+        android:entries="@array/setting0to3"
+        android:entryValues="@array/setting0to3"
+        android:title="@string/settings_label_expl_length"
+        android:summary="@string/settings_desc_expl_length"
+        android:defaultValue="2"
+    />
+
+    <!--
+    router.outboundPool.lengthVariance=1
+    -->
+    <ListPreference
+        android:key="router.outboundPool.lengthVariance"
+        android:entries="@array/setting2to2"
+        android:entryValues="@array/setting2to2"
+        android:title="@string/settings_label_expl_lengthVariance"
+        android:summary="@string/settings_desc_expl_lengthVariance"
         android:defaultValue="0"
     />
 
+    <!--
+    router.outboundPool.quantity=2
+    -->
+    <ListPreference
+        android:key="router.outboundPool.quantity"
+        android:entries="@array/setting0to3"
+        android:entryValues="@array/setting0to3"
+        android:title="@string/settings_label_expl_quantity"
+        android:summary="@string/settings_desc_expl_quantity"
+        android:defaultValue="2"
+    />
+
+    <!--
+    router.outboundPool.backupQuantity=0
+    -->
     <ListPreference
         android:key="router.outboundPool.backupQuantity"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
-        android:title="outbound backup quantity"
-        android:summary="How many outbound tunnel backups"
+        android:title="@string/settings_label_expl_backupQuantity"
+        android:summary="@string/settings_desc_expl_backupQuantity"
         android:defaultValue="0"
     />
+    </PreferenceCategory>
+    </PreferenceScreen>
+    </PreferenceCategory>
 
 
     <!--
