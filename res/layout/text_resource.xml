@@ -11,7 +11,7 @@
     android:layout_height="fill_parent"
     android:scrollbars="vertical"
     android:text="Release Notes"
-    android:textColor="#bebebe"
+    android:textColor="@android:color/secondary_text_dark"
     />
 </LinearLayout>
 
