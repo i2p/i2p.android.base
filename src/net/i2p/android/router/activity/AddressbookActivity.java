@@ -88,15 +88,11 @@ public class AddressbookActivity extends ActionBarActivity {
             case R.id.action_add_to_addressbook:
                 return true;
             case R.id.action_addressbook_settings:
-                openSettings();
+                Intent intent = new Intent(this, AddressbookSettingsActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void openSettings() {
-    	Intent intent = new Intent(this, AddressbookSettingsActivity.class);
-    	startActivity(intent);
     }
 }
