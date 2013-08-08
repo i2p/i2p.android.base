@@ -1,6 +1,5 @@
 package net.i2p.android.router.activity;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
