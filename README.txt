@@ -29,10 +29,14 @@ Instructions:
 
 # now go to the available packages tab, check the box and click refresh,
 # and download an SDK Platform
-# Since I2P is configured to run on 2.2 or higher
-# (API 8) download at least that one. Otherwise you must change the
-# target in project.properties from android-8 to andriod-x
+# Since I2P is targeted at 4.3 (API 18)
+# download at least that one. Otherwise you must change the
+# target in project.properties from android-18 to andriod-x
 # where x is the API version.
+
+# I2P is configured to run on 2.2 (API 8) or higher using the
+# Android Support Library, so download that as well
+# (it's under "Extras"). 
 
 # To run the debugger (ddms) you also need to download the
 # "Android SDK Platform-Tools" package from the GUI updater.
@@ -42,11 +46,18 @@ Instructions:
 # sdk.dir=/path/to/your/android-sdk-linux
 # Copy this file to the routerjars/ directory, it is needed in both places.
 
+# If your SDK is not in ../android-sdk-linux/ then you must
+# override the location of the Android Support Library. Add
+# the following line to local.properties
+# do NOT use an absolute path
+# android.library.reference.2=path/to/your/android-sdk-linux/extras/android/support/v7/appcompat
+# Don't add it to the local.properties in the routerjars/ directory.
+
 # DO NOT create a new project or anything. It's all set up right here for you.
 
-# Create the android 2.2 (API 8) virtual device
+# Create the android 4.3 (API 18) virtual device
 # (don't make a custom hardware profile)
-../android-sdk-linux/tools/android create avd --name i2p --target 8
+../android-sdk-linux/tools/android create avd --name i2p --target 18
 
 # then run the emulator:
 #  This may take a LONG time the first time (half an hour or more)...
