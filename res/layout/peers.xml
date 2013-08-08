@@ -10,7 +10,7 @@
     android:id="@+id/peers_status"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:text="Peers"
+    android:text="@string/label_peers_status"
     />
 <WebView
     android:id="@+id/peers_webview"

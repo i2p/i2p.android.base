@@ -5,6 +5,10 @@
     <string name="welcome_new_install">Welcome to I2P! This app is ALPHA software and it does not provide strong anonymity. Please read the release notes and license information.</string>
     <string name="welcome_new_version">New version installed. Please read the release notes. Version:</string>
 
+    <string name="label_news_status">Latest I2P News</string>
+    <string name="label_peers_status">Peers</string>
+    <string name="label_release_notes">Release Notes</string>
+
     <string name="action_add">Add</string>
 
     <string name="menu_settings">Settings</string>
@@ -19,7 +23,11 @@
     <string name="settings_label_hiddenMode">Participation</string>
     <string name="settings_desc_hiddenMode">Turn off hidden mode</string>
     <string name="settings_label_maxPartTunnels">Max participating tunnels</string>
+    <string name="settings_desc_maxPartTunnels">Maximum tunnels to participate in (default=20)</string>
+    <string name="settings_dialog_maxPartTunnels">Maximum tunnels to participate in</string>
     <string name="settings_label_sharePercent">Share percentage</string>
+    <string name="settings_desc_sharePercent">Percentage of bandwidth to share (default=80)</string>
+    <string name="settings_dialog_sharePercent">Percentage of bandwidth to share</string>
     <string name="settings_desc_upnp">Open firewall ports automatically</string>
     <string name="settings_label_advanced">Advanced</string>
     <string name="settings_label_transports">Transports</string>

@@ -9,7 +9,7 @@
     android:id="@+id/browser_status"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:text="Latest I2P News"
+    android:text="@string/label_news_status"
     />
 <WebView
     android:id="@+id/browser_webview"
