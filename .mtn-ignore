@@ -22,3 +22,9 @@ _jsp\.java$
 ~$
 /build/
 /classes/
+
+# Android-specific ignores
+^bin/
+^gen/
+AndroidManifest.xml
+local.properties
