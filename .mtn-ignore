@@ -24,7 +24,9 @@ _jsp\.java$
 /classes/
 
 # Android-specific ignores
-^bin/
-^gen/
+^bin
+^gen
+^routerjars/bin
+^routerjars/gen
 AndroidManifest.xml
 local.properties
