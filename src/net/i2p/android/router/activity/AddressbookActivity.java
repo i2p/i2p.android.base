@@ -4,6 +4,10 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,11 +22,12 @@ import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
 import net.i2p.client.naming.NamingService;
 
-public class AddressbookActivity extends ListActivity {
+public class AddressbookActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_addressbook);
 
         // Grab context if router has started, otherwise create new
         // FIXME dup contexts, locking, ...
@@ -49,14 +54,14 @@ public class AddressbookActivity extends ListActivity {
             tv.setText("1 host in address book.");
         else
             tv.setText("No hosts in address book, or your router is not up.");
-        ListView lv = getListView();
+        ListView lv = (ListView) findViewById(R.id.addressbook_list);
         lv.addHeaderView(tv, "", false);
         lv.setTextFilterEnabled(sz > 1);
 
         // set the list
         List<String> nameList = new ArrayList<String>(names);
         Collections.sort(nameList);
-        setListAdapter(new ArrayAdapter<String>(this, R.layout.addressbook_list_item, nameList));
+        lv.setAdapter(new ArrayAdapter<String>(this, R.layout.addressbook_list_item, nameList));
 
         // set the callback
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,5 +72,31 @@ public class AddressbookActivity extends ListActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.activity_addressbook_actions, menu);
+    	return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_add_to_addressbook:
+                return true;
+            case R.id.action_addressbook_settings:
+                openSettings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void openSettings() {
+    	Intent intent = new Intent(this, AddressbookSettingsActivity.class);
+    	startActivity(intent);
     }
 }

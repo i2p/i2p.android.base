@@ -5,6 +5,8 @@
     <string name="welcome_new_install">Welcome to I2P! This app is ALPHA software and it does not provide strong anonymity. Please read the release notes and license information.</string>
     <string name="welcome_new_version">New version installed. Please read the release notes. Version:</string>
 
+    <string name="action_add">Add</string>
+
     <string name="menu_settings">Settings</string>
     <string name="settings_enable">Enable</string>
     <string name="settings_label_subscriptions">I2P Addressbook</string>
