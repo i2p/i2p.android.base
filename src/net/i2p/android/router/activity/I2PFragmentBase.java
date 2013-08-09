@@ -144,11 +144,6 @@ public abstract class I2PFragmentBase extends Fragment {
         stop.setVisible(showStop);
         stop.setEnabled(showStop);
 
-        boolean showHome = ! (this instanceof MainFragment);
-        MenuItem home = menu.findItem(R.id.menu_home);
-        home.setVisible(showHome);
-        home.setEnabled(showHome);
-
         boolean showAddressbook = (this instanceof WebFragment);
         MenuItem addressbook = menu.findItem(R.id.menu_addressbook);
         addressbook.setVisible(showAddressbook);
@@ -166,11 +161,6 @@ public abstract class I2PFragmentBase extends Fragment {
         case R.id.menu_settings:
             Intent intent = new Intent(getActivity(), SettingsActivity.class);
             startActivity(intent);
-            return true;
-
-        case R.id.menu_home:
-            Intent i2 = new Intent(getActivity(), MainActivity.class);
-            startActivity(i2);
             return true;
 
         case R.id.menu_addressbook:

@@ -15,10 +15,6 @@
           android:id="@+id/menu_reload"
           android:icon="@drawable/ic_menu_refresh" >
     </item>
-    <item android:title="@string/label_home"
-          android:id="@+id/menu_home"
-          android:icon="@drawable/ic_menu_home" >
-    </item>
     <item android:title="@string/menu_settings"
           android:id="@+id/menu_settings"
           android:icon="@android:drawable/ic_menu_preferences" >
