@@ -1,7 +1,6 @@
 package net.i2p.android.router.fragment;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
-import net.i2p.android.router.util.Util;
 import net.i2p.router.CommSystemFacade;
 
 public class PeersFragment extends I2PFragmentBase {

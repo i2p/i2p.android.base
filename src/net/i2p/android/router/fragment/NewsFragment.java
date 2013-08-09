@@ -2,7 +2,6 @@ package net.i2p.android.router.fragment;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
