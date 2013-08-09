@@ -1,6 +1,7 @@
 package net.i2p.android.router.fragment;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -220,7 +221,7 @@ public abstract class I2PFragmentBase extends Fragment {
         intent.setClassName(getActivity(), "net.i2p.android.router.service.RouterService");
         Util.i(this + " calling bindService");
         _connection = new RouterConnection();
-        _triedBind = getActivity().bindService(intent, _connection, autoCreate ? getActivity().BIND_AUTO_CREATE : 0);
+        _triedBind = getActivity().bindService(intent, _connection, autoCreate ? Context.BIND_AUTO_CREATE : 0);
         Util.i(this + " bindService: auto create? " + autoCreate + " success? " + _triedBind);
         return _triedBind;
     }
