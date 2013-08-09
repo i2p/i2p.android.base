@@ -1,6 +1,5 @@
 package net.i2p.android.router.fragment;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -30,8 +29,7 @@ public class TextResourceFragment extends I2PFragmentBase {
         View v = inflater.inflate(R.layout.text_resource, container, false);
         TextView tv = (TextView) v.findViewById(R.id.text_resource_text);
         tv.setMovementMethod(ScrollingMovementMethod.getInstance());
-        Intent intent = getActivity().getIntent();
-        int id = intent.getIntExtra(TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+        int id = getArguments().getInt(TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
         if (id == R.raw.releasenotes_txt)
             tv.setText("Release Notes for Release " + Util.getOurVersion(getActivity()) + "\n\n" +
                        getResourceAsString(id));

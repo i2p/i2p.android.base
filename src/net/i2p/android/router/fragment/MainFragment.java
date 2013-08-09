@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -69,8 +68,11 @@ public class MainFragment extends I2PFragmentBase {
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), NewsFragment.class);
-                startActivity(intent);
+                getActivity().getSupportFragmentManager()
+                             .beginTransaction()
+                             .replace(R.id.main_content, new NewsFragment())
+                             .addToBackStack(null)
+                             .commit();
             }
         });
 
@@ -78,9 +80,15 @@ public class MainFragment extends I2PFragmentBase {
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), TextResourceFragment.class);
-                intent.putExtra(TextResourceFragment.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-                startActivity(intent);
+                TextResourceFragment f = new TextResourceFragment();
+                Bundle args = new Bundle();
+                args.putInt(TextResourceFragment.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+                f.setArguments(args);
+                getActivity().getSupportFragmentManager()
+                             .beginTransaction()
+                             .replace(R.id.main_content, f)
+                             .addToBackStack(null)
+                             .commit();
             }
         });
 
@@ -99,10 +107,16 @@ public class MainFragment extends I2PFragmentBase {
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), WebFragment.class);
                 //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/").build());
-                intent.setData(Uri.parse("http://www.i2p2.de/"));
-                startActivity(intent);
+                WebFragment f = new WebFragment();
+                Bundle args = new Bundle();
+                args.putString(WebFragment.HTML_URI, "http://www.i2p2.de/");
+                f.setArguments(args);
+                getActivity().getSupportFragmentManager()
+                             .beginTransaction()
+                             .replace(R.id.main_content, f)
+                             .addToBackStack(null)
+                             .commit();
             }
         });
 
@@ -110,10 +124,16 @@ public class MainFragment extends I2PFragmentBase {
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), WebFragment.class);
                 //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/faq").build());
-                intent.setData(Uri.parse("http://www.i2p2.de/faq"));
-                startActivity(intent);
+                WebFragment f = new WebFragment();
+                Bundle args = new Bundle();
+                args.putString(WebFragment.HTML_URI, "http://www.i2p2.de/faq");
+                f.setArguments(args);
+                getActivity().getSupportFragmentManager()
+                             .beginTransaction()
+                             .replace(R.id.main_content, f)
+                             .addToBackStack(null)
+                             .commit();
             }
         });
 
@@ -121,9 +141,15 @@ public class MainFragment extends I2PFragmentBase {
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), WebFragment.class);
-                intent.putExtra(WebFragment.HTML_RESOURCE_ID, R.raw.welcome_html);
-                startActivity(intent);
+                WebFragment f = new WebFragment();
+                Bundle args = new Bundle();
+                args.putInt(WebFragment.HTML_RESOURCE_ID, R.raw.welcome_html);
+                f.setArguments(args);
+                getActivity().getSupportFragmentManager()
+                             .beginTransaction()
+                             .replace(R.id.main_content, f)
+                             .addToBackStack(null)
+                             .commit();
             }
         });
 
@@ -159,8 +185,11 @@ public class MainFragment extends I2PFragmentBase {
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), PeersFragment.class);
-                startActivity(intent);
+                getActivity().getSupportFragmentManager()
+                             .beginTransaction()
+                             .replace(R.id.main_content, new PeersFragment())
+                             .addToBackStack(null)
+                             .commit();
             }
         });
 

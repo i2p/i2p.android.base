@@ -1,10 +1,8 @@
 package net.i2p.android.router.fragment;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +19,7 @@ public class WebFragment extends I2PFragmentBase {
 
     private I2PWebViewClient _wvClient;
 
+    final static String HTML_URI = "html_url";
     final static String HTML_RESOURCE_ID = "html_resource_id";
     private static final String WARNING = "Warning - " +
                "any non-I2P links visited in this window are fetched over the regular internet and are " +
@@ -39,16 +38,16 @@ public class WebFragment extends I2PFragmentBase {
         wv.getSettings().setBuiltInZoomControls(true);
         // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855
         wv.getSettings().setUseWideViewPort(true);
-        Intent intent = getActivity().getIntent();
-        Uri uri = intent.getData();
-        if (uri != null) {
+        String uriStr =  getArguments().getString(HTML_URI);
+        if (uriStr != null) {
+            Uri uri = Uri.parse(uriStr);
             //wv.getSettings().setLoadsImagesAutomatically(true);
             //wv.loadUrl(uri.toString());
             // go thru the client so .i2p will work too
             _wvClient.shouldOverrideUrlLoading(wv, uri.toString());
         } else {
             wv.getSettings().setLoadsImagesAutomatically(false);
-            int id = intent.getIntExtra(HTML_RESOURCE_ID, 0);
+            int id = getArguments().getInt(HTML_RESOURCE_ID, 0);
             // no default, so restart should keep previous view
             if (id != 0)
                 loadResource(wv, id);
