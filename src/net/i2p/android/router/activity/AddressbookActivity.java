@@ -66,7 +66,7 @@ public class AddressbookActivity extends ActionBarActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View view, int pos, long id) {
                 CharSequence host = ((TextView) view).getText();
-                Intent intent = new Intent(view.getContext(), WebActivity.class);
+                Intent intent = new Intent(view.getContext(), WebFragment.class);
                 intent.setData(Uri.parse("http://" + host + '/'));
                 startActivity(intent);
             }

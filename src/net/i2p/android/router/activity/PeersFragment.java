@@ -2,7 +2,10 @@ package net.i2p.android.router.activity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -11,7 +14,7 @@ import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
 import net.i2p.router.CommSystemFacade;
 
-public class PeersActivity extends I2PActivityBase {
+public class PeersFragment extends I2PFragmentBase {
 
     private I2PWebViewClient _wvClient;
 
@@ -20,17 +23,18 @@ public class PeersActivity extends I2PActivityBase {
     private static final String FOOTER = "</body></html>";
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.peers);
-        WebView wv = (WebView) findViewById(R.id.peers_webview);
+        View v = inflater.inflate(R.layout.peers, container, false);
+        WebView wv = (WebView) v.findViewById(R.id.peers_webview);
         wv.getSettings().setLoadsImagesAutomatically(true); // was false
         // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855
         wv.getSettings().setUseWideViewPort(true);
-        _wvClient = new I2PWebViewClient(this);
+        _wvClient = new I2PWebViewClient();
         wv.setWebViewClient(_wvClient);
         wv.getSettings().setBuiltInZoomControls(true);
+        return v;
     }
 
     @Override
@@ -49,7 +53,7 @@ public class PeersActivity extends I2PActivityBase {
     }
 
     private void update() {
-        WebView wv = (WebView) findViewById(R.id.peers_webview);
+        WebView wv = (WebView) getActivity().findViewById(R.id.peers_webview);
         wv.clearHistory(); // fixes having to hit back.
         CommSystemFacade comm = getCommSystem();
         String data;
@@ -77,25 +81,23 @@ public class PeersActivity extends I2PActivityBase {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        WebView wv = (WebView) findViewById(R.id.peers_webview);
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            _wvClient.cancelAll();
-            wv.stopLoading();
+    public boolean onBackPressed() {
+        WebView wv = (WebView) getActivity().findViewById(R.id.peers_webview);
+        _wvClient.cancelAll();
+        wv.stopLoading();
 
-            // We do not want to go back, or keep history... Theere is no need to.
-            // What we DO want to do is exit!
-            //if (wv.canGoBack()) {
-            //    wv.goBack();
-            //    return true;
-            //}
-        }
-        return super.onKeyDown(keyCode, event);
+        // We do not want to go back, or keep history... There is no need to.
+        // What we DO want to do is exit!
+        //if (wv.canGoBack()) {
+        //    wv.goBack();
+        //    return true;
+        //}
+        return false;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        WebView wv = (WebView) findViewById(R.id.peers_webview);
+        WebView wv = (WebView) getActivity().findViewById(R.id.peers_webview);
         switch (item.getItemId()) {
         case R.id.menu_reload:
             update();

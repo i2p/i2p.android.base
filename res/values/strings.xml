@@ -23,6 +23,8 @@
     <string name="label_website_nonanon">Web Site (non-anon)</string>
     <string name="label_faq_nonanon">FAQ (non-anon)</string>
 
+    <string name="drawer_open">Open nav</string>
+    <string name="drawer_close">Close nav</string>
     <string name="action_add">Add</string>
     <string name="action_router_start">Start Router</string>
     <string name="action_router_stop">Stop Router</string>

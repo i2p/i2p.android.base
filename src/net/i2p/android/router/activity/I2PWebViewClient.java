@@ -38,10 +38,6 @@ class I2PWebViewClient extends WebViewClient {
     private static final String ERROR_URL = "<p>Unable to load URL: ";
     private static final String ERROR_ROUTER = "<p>Your router (or the HTTP proxy) does not appear to be running.</p>";
 
-    public I2PWebViewClient(Context ctx) {
-        super();
-    }
-
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         Util.d("Should override? " + url);

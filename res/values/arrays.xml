@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+    <string-array name="main_fragments">
+        <item>net.i2p.android.router.activity.MainFragment</item>
+    </string-array>
+    <string-array name="main_fragment_titles">
+        <item>I2P</item>
+    </string-array>
     <string-array name="setting0to3">
         <item>0</item>
         <item>1</item>

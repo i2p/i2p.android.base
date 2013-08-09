@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,24 +19,25 @@ import net.i2p.android.router.util.Util;
  *  Display a raw text resource.
  *  The resource ID must be passed as an extra in the intent.
  */
-public class TextResourceActivity extends I2PActivityBase {
+public class TextResourceFragment extends I2PFragmentBase {
 
     final static String TEXT_RESOURCE_ID = "text_resource_id";
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.text_resource);
-        TextView tv = (TextView) findViewById(R.id.text_resource_text);
+        View v = inflater.inflate(R.layout.text_resource, container, false);
+        TextView tv = (TextView) v.findViewById(R.id.text_resource_text);
         tv.setMovementMethod(ScrollingMovementMethod.getInstance());
-        Intent intent = getIntent();
+        Intent intent = getActivity().getIntent();
         int id = intent.getIntExtra(TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
         if (id == R.raw.releasenotes_txt)
-            tv.setText("Release Notes for Release " + Util.getOurVersion(this) + "\n\n" +
+            tv.setText("Release Notes for Release " + Util.getOurVersion(getActivity()) + "\n\n" +
                        getResourceAsString(id));
         else
             tv.setText(getResourceAsString(id));
+        return v;
     }
 
     private String getResourceAsString(int id) {

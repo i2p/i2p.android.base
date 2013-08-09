@@ -36,8 +36,8 @@ public class LicenseActivity extends ListActivity {
         // set the callback
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View view, int pos, long id) {
-                Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
-                intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, files[pos]);
+                Intent intent = new Intent(view.getContext(), TextResourceFragment.class);
+                intent.putExtra(TextResourceFragment.TEXT_RESOURCE_ID, files[pos]);
                 startActivity(intent);
             }
         });

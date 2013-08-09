@@ -5,7 +5,10 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.TextView;
 import java.io.ByteArrayOutputStream;
@@ -14,7 +17,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import net.i2p.android.router.R;
 
-public class WebActivity extends I2PActivityBase {
+public class WebFragment extends I2PFragmentBase {
 
     private I2PWebViewClient _wvClient;
 
@@ -24,19 +27,19 @@ public class WebActivity extends I2PActivityBase {
                "not anonymous. I2P pages may not load images or CSS.";
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.web);
-        TextView tv = (TextView) findViewById(R.id.browser_status);
+        View v = inflater.inflate(R.layout.web, container, false);
+        TextView tv = (TextView) v.findViewById(R.id.browser_status);
         tv.setText(WARNING);
-        WebView wv = (WebView) findViewById(R.id.browser_webview);
-        _wvClient = new I2PWebViewClient(this);
+        WebView wv = (WebView) v.findViewById(R.id.browser_webview);
+        _wvClient = new I2PWebViewClient();
         wv.setWebViewClient(_wvClient);
         wv.getSettings().setBuiltInZoomControls(true);
         // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855
         wv.getSettings().setUseWideViewPort(true);
-        Intent intent = getIntent();
+        Intent intent = getActivity().getIntent();
         Uri uri = intent.getData();
         if (uri != null) {
             //wv.getSettings().setLoadsImagesAutomatically(true);
@@ -50,6 +53,7 @@ public class WebActivity extends I2PActivityBase {
             if (id != 0)
                 loadResource(wv, id);
         }
+        return v;
     }
 
     private void loadResource(WebView wv, int id) {
@@ -77,24 +81,22 @@ public class WebActivity extends I2PActivityBase {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        WebView wv = (WebView) findViewById(R.id.browser_webview);
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            _wvClient.cancelAll();
-            wv.stopLoading();
-            if (wv.canGoBack()) {
-                // TODO go into history, get url and call shouldOverrideUrlLoading()
-                // so we have control ??? But then back won't work right
-                wv.goBack();
-                return true;
-            }
+    public boolean onBackPressed() {
+        WebView wv = (WebView) getActivity().findViewById(R.id.browser_webview);
+        _wvClient.cancelAll();
+        wv.stopLoading();
+        if (wv.canGoBack()) {
+            // TODO go into history, get url and call shouldOverrideUrlLoading()
+            // so we have control ??? But then back won't work right
+            wv.goBack();
+            return true;
         }
-        return super.onKeyDown(keyCode, event);
+        return false;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        WebView wv = (WebView) findViewById(R.id.browser_webview);
+        WebView wv = (WebView) getActivity().findViewById(R.id.browser_webview);
         switch (item.getItemId()) {
         case R.id.menu_reload:
             _wvClient.cancelAll();

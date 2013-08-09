@@ -3,6 +3,9 @@ package net.i2p.android.router.activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.TextView;
 import java.io.ByteArrayOutputStream;
@@ -14,7 +17,7 @@ import java.io.UnsupportedEncodingException;
 import net.i2p.android.apps.NewsFetcher;
 import net.i2p.android.router.R;
 
-public class NewsActivity extends I2PActivityBase {
+public class NewsFragment extends I2PFragmentBase {
 
     private I2PWebViewClient _wvClient;
     private long _lastChanged;
@@ -29,17 +32,18 @@ public class NewsActivity extends I2PActivityBase {
     private static final String FOOTER = "</body></html>";
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.news);
-        WebView wv = (WebView) findViewById(R.id.news_webview);
+        View v = inflater.inflate(R.layout.news, container, false);
+        WebView wv = (WebView) v.findViewById(R.id.news_webview);
         wv.getSettings().setLoadsImagesAutomatically(false);
         // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855
         wv.getSettings().setUseWideViewPort(true);
-        _wvClient = new I2PWebViewClient(this);
+        _wvClient = new I2PWebViewClient();
         wv.setWebViewClient(_wvClient);
         wv.getSettings().setBuiltInZoomControls(true);
+        return v;
     }
 
     @Override
@@ -49,7 +53,7 @@ public class NewsActivity extends I2PActivityBase {
         NewsFetcher nf = NewsFetcher.getInstance();
         if (nf != null) {
             // always update the text
-            TextView tv = (TextView) findViewById(R.id.news_status);
+            TextView tv = (TextView) getActivity().findViewById(R.id.news_status);
             tv.setText(WARNING + nf.status().replace("&nbsp;", " "));
         }
 
@@ -60,7 +64,7 @@ public class NewsActivity extends I2PActivityBase {
             return;
         _lastChanged = System.currentTimeMillis();
 
-        WebView wv = (WebView) findViewById(R.id.news_webview);
+        WebView wv = (WebView) getActivity().findViewById(R.id.news_webview);
 
         InputStream in = null;
         ByteArrayOutputStream out = new ByteArrayOutputStream(2048);
@@ -94,16 +98,14 @@ public class NewsActivity extends I2PActivityBase {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        WebView wv = (WebView) findViewById(R.id.news_webview);
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            _wvClient.cancelAll();
-            wv.stopLoading();
-            if (wv.canGoBack()) {
-                wv.goBack();
-                return true;
-            }
+    public boolean onBackPressed() {
+        WebView wv = (WebView) getActivity().findViewById(R.id.news_webview);
+        _wvClient.cancelAll();
+        wv.stopLoading();
+        if (wv.canGoBack()) {
+            wv.goBack();
+            return true;
         }
-        return super.onKeyDown(keyCode, event);
+        return false;
     }
 }

@@ -6,6 +6,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +24,7 @@ import net.i2p.router.peermanager.ProfileOrganizer;
 import net.i2p.router.transport.FIFOBandwidthLimiter;
 import net.i2p.stat.StatManager;
 
-public abstract class I2PActivityBase extends ActionBarActivity {
+public abstract class I2PFragmentBase extends Fragment {
     protected String _myDir;
     protected boolean _isBound;
     protected boolean _triedBind;
@@ -43,14 +44,9 @@ public abstract class I2PActivityBase extends ActionBarActivity {
     {
         Util.i(this + " onCreate called");
         super.onCreate(savedInstanceState);
-        _myDir = getFilesDir().getAbsolutePath();
-    }
-
-    @Override
-    public void onRestart()
-    {
-        Util.i(this + " onRestart called");
-        super.onRestart();
+        _myDir = getActivity().getFilesDir().getAbsolutePath();
+        // Set this so onCreateOptionsMenu() is called
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -58,7 +54,7 @@ public abstract class I2PActivityBase extends ActionBarActivity {
     {
         Util.i(this + " onStart called");
         super.onStart();
-        _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
+        _sharedPrefs = getActivity().getSharedPreferences(SHARED_PREFS, 0);
         if (_sharedPrefs.getBoolean(PREF_AUTO_START, DEFAULT_AUTO_START))
             startRouter();
         else
@@ -113,6 +109,14 @@ public abstract class I2PActivityBase extends ActionBarActivity {
         super.onStop();
     }
 
+    /**
+     * Called by MainActivity.onBackPressed()
+     * @return true if the fragment should stay, false otherwise.
+     */
+    public boolean onBackPressed() {
+        return false;
+    }
+
     @Override
     public void onDestroy()
     {
@@ -121,18 +125,16 @@ public abstract class I2PActivityBase extends ActionBarActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu1, menu);
-        return true;
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(Menu menu) {
         // add/hide items here
         RouterService svc = _routerService;
         boolean showStart = ((svc == null) || (!_isBound) || svc.canManualStart()) &&
-                            Util.isConnected(this);
+                            Util.isConnected(getActivity());
         MenuItem start = menu.findItem(R.id.menu_start);
         start.setVisible(showStart);
         start.setEnabled(showStart);
@@ -142,39 +144,37 @@ public abstract class I2PActivityBase extends ActionBarActivity {
         stop.setVisible(showStop);
         stop.setEnabled(showStop);
 
-        boolean showHome = ! (this instanceof MainActivity);
+        boolean showHome = ! (this instanceof MainFragment);
         MenuItem home = menu.findItem(R.id.menu_home);
         home.setVisible(showHome);
         home.setEnabled(showHome);
 
-        boolean showAddressbook = (this instanceof WebActivity);
+        boolean showAddressbook = (this instanceof WebFragment);
         MenuItem addressbook = menu.findItem(R.id.menu_addressbook);
         addressbook.setVisible(showAddressbook);
         addressbook.setEnabled(showAddressbook);
 
-        boolean showReload = showAddressbook || (this instanceof PeersActivity);
+        boolean showReload = showAddressbook || (this instanceof PeersFragment);
         MenuItem reload = menu.findItem(R.id.menu_reload);
         reload.setVisible(showReload);
         reload.setEnabled(showReload);
-
-        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.menu_settings:
-            Intent intent = new Intent(I2PActivityBase.this, SettingsActivity.class);
+            Intent intent = new Intent(getActivity(), SettingsActivity.class);
             startActivity(intent);
             return true;
 
         case R.id.menu_home:
-            Intent i2 = new Intent(I2PActivityBase.this, MainActivity.class);
+            Intent i2 = new Intent(getActivity(), MainActivity.class);
             startActivity(i2);
             return true;
 
         case R.id.menu_addressbook:
-            Intent i3 = new Intent(I2PActivityBase.this, AddressbookActivity.class);
+            Intent i3 = new Intent(getActivity(), AddressbookActivity.class);
             startActivity(i3);
             return true;
 
@@ -209,9 +209,9 @@ public abstract class I2PActivityBase extends ActionBarActivity {
      */
     protected boolean startRouter() {
         Intent intent = new Intent();
-        intent.setClassName(this, "net.i2p.android.router.service.RouterService");
+        intent.setClassName(getActivity(), "net.i2p.android.router.service.RouterService");
         Util.i(this + " calling startService");
-        ComponentName name = startService(intent);
+        ComponentName name = getActivity().startService(intent);
         if (name == null)
             Util.i(this + " XXXXXXXXXXXXXXXXXXXX got from startService: " + name);
         Util.i(this + " got from startService: " + name);
@@ -226,10 +226,10 @@ public abstract class I2PActivityBase extends ActionBarActivity {
      */
     protected boolean bindRouter(boolean autoCreate) {
         Intent intent = new Intent();
-        intent.setClassName(this, "net.i2p.android.router.service.RouterService");
+        intent.setClassName(getActivity(), "net.i2p.android.router.service.RouterService");
         Util.i(this + " calling bindService");
         _connection = new RouterConnection();
-        _triedBind = bindService(intent, _connection, autoCreate ? BIND_AUTO_CREATE : 0);
+        _triedBind = getActivity().bindService(intent, _connection, autoCreate ? getActivity().BIND_AUTO_CREATE : 0);
         Util.i(this + " bindService: auto create? " + autoCreate + " success? " + _triedBind);
         return _triedBind;
     }
@@ -237,7 +237,7 @@ public abstract class I2PActivityBase extends ActionBarActivity {
     protected void unbindRouter() {
         Util.i(this + " unbindRouter called with _isBound:" + _isBound + " _connection:" + _connection + " _triedBind:" + _triedBind);
         if (_triedBind && _connection != null)
-                unbindService(_connection);
+            getActivity().unbindService(_connection);
 
         _triedBind = false;
         _connection = null;
