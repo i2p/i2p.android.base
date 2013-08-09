@@ -1,4 +1,4 @@
-package net.i2p.android.router.activity;
+package net.i2p.android.router.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,6 +15,9 @@ import android.widget.TextView;
 import java.io.File;
 import java.text.DecimalFormat;
 import net.i2p.android.router.R;
+import net.i2p.android.router.activity.AddressbookActivity;
+import net.i2p.android.router.activity.LicenseActivity;
+import net.i2p.android.router.activity.LogActivity;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;

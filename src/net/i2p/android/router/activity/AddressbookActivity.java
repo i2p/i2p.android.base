@@ -19,6 +19,7 @@ import java.util.Properties;
 import java.util.Set;
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
+import net.i2p.android.router.fragment.WebFragment;
 import net.i2p.client.naming.NamingService;
 
 public class AddressbookActivity extends ActionBarActivity {

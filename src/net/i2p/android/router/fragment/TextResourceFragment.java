@@ -1,4 +1,4 @@
-package net.i2p.android.router.activity;
+package net.i2p.android.router.fragment;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -21,7 +21,7 @@ import net.i2p.android.router.util.Util;
  */
 public class TextResourceFragment extends I2PFragmentBase {
 
-    final static String TEXT_RESOURCE_ID = "text_resource_id";
+    public final static String TEXT_RESOURCE_ID = "text_resource_id";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

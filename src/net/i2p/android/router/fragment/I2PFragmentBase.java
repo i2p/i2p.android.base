@@ -1,4 +1,4 @@
-package net.i2p.android.router.activity;
+package net.i2p.android.router.fragment;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import net.i2p.android.router.R;
+import net.i2p.android.router.activity.AddressbookActivity;
+import net.i2p.android.router.activity.SettingsActivity;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;

@@ -1,4 +1,4 @@
-package net.i2p.android.router.activity;
+package net.i2p.android.router.fragment;
 
 import android.os.Bundle;
 import android.view.KeyEvent;

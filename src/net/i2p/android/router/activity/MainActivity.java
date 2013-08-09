@@ -1,6 +1,8 @@
 package net.i2p.android.router.activity;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.fragment.I2PFragmentBase;
+import net.i2p.android.router.fragment.MainFragment;
 import net.i2p.android.router.util.Util;
 import android.app.AlertDialog;
 import android.app.Dialog;
