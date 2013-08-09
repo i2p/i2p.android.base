@@ -21,7 +21,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Statistics"
+        android:text="@string/label_statistics"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -33,21 +33,21 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Main Controls"
+        android:text="@string/label_main_controls"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/router_start_button"
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:text="Start Router"
+        android:text="@string/action_router_start"
         android:drawableLeft="@drawable/start_router_icon" />
 
     <Button
         android:id="@+id/router_quit_button"
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:text="Stop Router"
+        android:text="@string/action_router_stop"
         android:drawableLeft="@drawable/stop_router_icon" />
 <!--
 <Button
@@ -62,91 +62,91 @@
     android:id="@+id/textView2"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="I2P Tools"
+    android:text="@string/label_tools"
     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <Button
     android:id="@+id/addressbook_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Address Book"
+    android:text="@string/label_addressbook"
     android:drawableLeft="@drawable/addressbook_icon" />
 
 <Button
     android:id="@+id/logs_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Logs"
+    android:text="@string/label_logs"
     android:drawableLeft="@drawable/log_icon" />
 
 <Button
     android:id="@+id/error_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Error Logs"
+    android:text="@string/label_error_logs"
     android:drawableLeft="@drawable/error_log_icon" />
 
 <Button
     android:id="@+id/peers_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Peers"
+    android:text="@string/label_peers_status"
     android:drawableLeft="@drawable/peers_icon" />
 
 <TextView
     android:id="@+id/textView3"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Information and pages"
+    android:text="@string/label_info_and_pages"
     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <Button
     android:id="@+id/welcome_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Welcome\nPage"
+    android:text="@string/label_welcome_page"
     android:drawableLeft="@drawable/information_icon" />
 
 <Button
     android:id="@+id/news_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="News"
+    android:text="@string/label_news"
     android:drawableLeft="@drawable/information_icon" />
 
 <Button
     android:id="@+id/releasenotes_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Release Notes"
+    android:text="@string/label_release_notes"
     android:drawableLeft="@drawable/information_icon" />
 
 <Button
     android:id="@+id/licenses_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Licenses"
+    android:text="@string/label_licenses"
     android:drawableLeft="@drawable/information_icon" />
 
 <TextView
     android:id="@+id/textView5"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Non Anonymous Information"
+    android:text="@string/label_nonanon_info"
     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <Button
     android:id="@+id/website_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Web Site (non-anon)"
+    android:text="@string/label_website_nonanon"
     android:drawableLeft="@drawable/nonanon_info_icon" />
 
 <Button
     android:id="@+id/faq_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="FAQ (non-anon)"
+    android:text="@string/label_faq_nonanon"
     android:drawableLeft="@drawable/nonanon_info_icon" />
 
 </LinearLayout>
