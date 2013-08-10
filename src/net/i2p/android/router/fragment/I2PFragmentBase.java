@@ -127,7 +127,7 @@ public abstract class I2PFragmentBase extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu1, menu);
+        inflater.inflate(R.menu.activity_main_actions, menu);
     }
 
     @Override
