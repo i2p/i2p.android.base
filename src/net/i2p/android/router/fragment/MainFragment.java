@@ -32,8 +32,6 @@ public class MainFragment extends I2PFragmentBase {
     private boolean _startPressed = false;
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
     protected static final String PROP_NEW_VERSION = "i2p.newVersion";
-    protected static final int DIALOG_NEW_INSTALL = 0;
-    protected static final int DIALOG_NEW_VERSION = 1;
 
     /**
      * Called when the fragment is first created.
@@ -447,83 +445,21 @@ public class MainFragment extends I2PFragmentBase {
     }
 
     private void checkDialog() {
+        VersionDialog dialog = new VersionDialog();
         String oldVersion = getPref(PREF_INSTALLED_VERSION, "??");
-        /*if(oldVersion.equals("??")) {
-            getActivity().showDialog(DIALOG_NEW_INSTALL);
+        if(oldVersion.equals("??")) {
+            Bundle args = new Bundle();
+            args.putInt(VersionDialog.DIALOG_TYPE, VersionDialog.DIALOG_NEW_INSTALL);
+            dialog.setArguments(args);
+            dialog.show(getActivity().getSupportFragmentManager(), "newinstall");
         } else {
             String currentVersion = Util.getOurVersion(getActivity());
             if(!oldVersion.equals(currentVersion)) {
-                getActivity().showDialog(DIALOG_NEW_VERSION);
+                Bundle args = new Bundle();
+                args.putInt(VersionDialog.DIALOG_TYPE, VersionDialog.DIALOG_NEW_VERSION);
+                dialog.setArguments(args);
+                dialog.show(getActivity().getSupportFragmentManager(), "newversion");
             }
-        }*/
-    }
-
-    /*@Override
-    protected Dialog onCreateDialog(int id) {
-        final String currentVersion = Util.getOurVersion(this);
-        Dialog rv = null;
-        AlertDialog.Builder b = new AlertDialog.Builder(this);
-        switch(id) {
-            case DIALOG_NEW_INSTALL:
-                b.setMessage(getResources().getText(R.string.welcome_new_install)).setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int id) {
-                        setPref(PREF_INSTALLED_VERSION, currentVersion);
-                        dialog.cancel();
-                        MainActivity.this.removeDialog(id);
-                    }
-                }).setNeutralButton("Release Notes", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int id) {
-                        setPref(PREF_INSTALLED_VERSION, currentVersion);
-                        dialog.cancel();
-                        MainActivity.this.removeDialog(id);
-                        Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
-                        intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-                        startActivity(intent);
-                    }
-                }).setNegativeButton("Licenses", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int id) {
-                        setPref(PREF_INSTALLED_VERSION, currentVersion);
-                        dialog.cancel();
-                        MainActivity.this.removeDialog(id);
-                        Intent intent = new Intent(MainActivity.this, LicenseActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                rv = b.create();
-                break;
-
-            case DIALOG_NEW_VERSION:
-                b.setMessage(getResources().getText(R.string.welcome_new_version) + " " + currentVersion).setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int id) {
-                        setPref(PREF_INSTALLED_VERSION, currentVersion);
-                        try {
-                            dialog.dismiss();
-                        } catch(Exception e) {
-                        }
-                        MainActivity.this.removeDialog(id);
-                    }
-                }).setNegativeButton("Release Notes", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int id) {
-                        setPref(PREF_INSTALLED_VERSION, currentVersion);
-                        try {
-                            dialog.dismiss();
-                        } catch(Exception e) {
-                        }
-                        MainActivity.this.removeDialog(id);
-                        Intent intent = new Intent(MainActivity.this, TextResourceActivity.class);
-                        intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-                        startActivity(intent);
-                    }
-                });
-
-                rv = b.create();
-                break;
         }
-        return rv;
-    }*/
+    }
 }
