@@ -152,18 +152,6 @@ public class MainFragment extends I2PFragmentBase {
             }
         });
 
-        b = (Button) v.findViewById(R.id.addressbook_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager()
-                             .beginTransaction()
-                             .replace(R.id.main_content, new AddressbookFragment())
-                             .addToBackStack(null)
-                             .commit();
-            }
-        });
-
         b = (Button) v.findViewById(R.id.logs_button);
         b.setOnClickListener(new View.OnClickListener() {
 

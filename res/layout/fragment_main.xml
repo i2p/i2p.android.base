@@ -66,13 +66,6 @@
     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <Button
-    android:id="@+id/addressbook_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/label_addressbook"
-    android:drawableLeft="@drawable/addressbook_icon" />
-
-<Button
     android:id="@+id/logs_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

@@ -2,9 +2,11 @@
 <resources>
     <string-array name="main_fragments">
         <item>net.i2p.android.router.fragment.MainFragment</item>
+        <item>net.i2p.android.router.fragment.AddressbookFragment</item>
     </string-array>
     <string-array name="main_fragment_titles">
         <item>@string/label_home</item>
+        <item>@string/label_addressbook</item>
     </string-array>
     <string-array name="setting0to3">
         <item>0</item>
