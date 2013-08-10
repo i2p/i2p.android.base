@@ -3,6 +3,7 @@ package net.i2p.android.router.activity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.I2PFragmentBase;
 import net.i2p.android.router.fragment.MainFragment;
+import net.i2p.android.router.fragment.VersionDialog.VersionDialogListener;
 import net.i2p.android.router.util.Util;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -19,7 +20,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity
+                          implements VersionDialogListener {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -156,5 +158,9 @@ public class MainActivity extends ActionBarActivity {
                 return;
         }
         super.onBackPressed();
+    }
+
+    public void onFirstRun() {
+        mDrawerLayout.openDrawer(mDrawerList);
     }
 }
