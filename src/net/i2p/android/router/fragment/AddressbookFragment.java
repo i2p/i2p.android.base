@@ -76,9 +76,15 @@ public class AddressbookFragment extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View view, int pos, long id) {
                 CharSequence host = ((TextView) view).getText();
-                Intent intent = new Intent(view.getContext(), WebFragment.class);
-                intent.setData(Uri.parse("http://" + host + '/'));
-                startActivity(intent);
+                WebFragment f = new WebFragment();
+                Bundle args = new Bundle();
+                args.putString(WebFragment.HTML_URI, "http://" + host + '/');
+                f.setArguments(args);
+                getActivity().getSupportFragmentManager()
+                             .beginTransaction()
+                             .replace(R.id.main_content, f)
+                             .addToBackStack(null)
+                             .commit();
             }
         });
 
