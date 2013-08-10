@@ -1,9 +1,11 @@
 [main]
 host = https://www.transifex.com
+lang_map = tr_TR: tr-rTR
 
 [I2P.android]
 file_filter = res/values-<lang>/strings.xml
 source_file = res/values/strings.xml
 source_lang = en
 type = ANDROID
+minimum_perc = 50
 
