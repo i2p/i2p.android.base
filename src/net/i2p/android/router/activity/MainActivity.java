@@ -42,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
         // Set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        mDrawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, mFragmentTitles));
