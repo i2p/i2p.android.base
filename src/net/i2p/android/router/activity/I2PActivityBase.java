@@ -30,7 +30,7 @@ public class I2PActivityBase extends ActionBarActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_navdrawer);
 
         mTitle = mDrawerTitle = getTitle();
         mFragments = getResources().getStringArray(R.array.main_fragments);
