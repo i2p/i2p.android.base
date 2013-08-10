@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import net.i2p.android.router.R;
-import net.i2p.android.router.activity.AddressbookActivity;
 import net.i2p.android.router.activity.SettingsActivity;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.service.RouterService;
@@ -166,8 +165,11 @@ public abstract class I2PFragmentBase extends Fragment {
             return true;
 
         case R.id.menu_addressbook:
-            Intent i3 = new Intent(getActivity(), AddressbookActivity.class);
-            startActivity(i3);
+            getActivity().getSupportFragmentManager()
+                         .beginTransaction()
+                         .replace(R.id.main_content, new AddressbookFragment())
+                         .addToBackStack(null)
+                         .commit();
             return true;
 
         case R.id.menu_start:

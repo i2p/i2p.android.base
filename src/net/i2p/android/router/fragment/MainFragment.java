@@ -14,7 +14,6 @@ import android.widget.TextView;
 import java.io.File;
 import java.text.DecimalFormat;
 import net.i2p.android.router.R;
-import net.i2p.android.router.activity.AddressbookActivity;
 import net.i2p.android.router.activity.LicenseActivity;
 import net.i2p.android.router.activity.LogActivity;
 import net.i2p.android.router.service.RouterService;
@@ -157,8 +156,11 @@ public class MainFragment extends I2PFragmentBase {
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), AddressbookActivity.class);
-                startActivity(intent);
+                getActivity().getSupportFragmentManager()
+                             .beginTransaction()
+                             .replace(R.id.main_content, new AddressbookFragment())
+                             .addToBackStack(null)
+                             .commit();
             }
         });
 
