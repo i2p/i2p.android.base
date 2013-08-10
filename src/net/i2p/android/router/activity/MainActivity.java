@@ -147,10 +147,13 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        I2PFragmentBase fragment = (I2PFragmentBase) getSupportFragmentManager().findFragmentById(R.id.main_content);
-        // If we shouldn't stay on this fragment, go back.
-        if (!fragment.onBackPressed()) {
-            super.onBackPressed();
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_content);
+        if (fragment instanceof I2PFragmentBase) {
+            I2PFragmentBase ifb = (I2PFragmentBase) fragment;
+            // If we shouldn't stay on this fragment, go back.
+            if (ifb.onBackPressed())
+                return;
         }
+        super.onBackPressed();
     }
 }
