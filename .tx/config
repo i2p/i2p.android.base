@@ -1,6 +1,6 @@
 [main]
 host = https://www.transifex.com
-lang_map = tr_TR: tr-rTR
+lang_map = tr_TR: tr
 
 [I2P.android]
 file_filter = res/values-<lang>/strings.xml
