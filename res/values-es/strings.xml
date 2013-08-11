@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">I2P</string>
+  <string name="welcome_new_install">¡Bienvenido a I2P! Esta aplicación es un software ALFA y no proporciona un fuerte anonimato. Por favor, lea las notas de veriones y la información sobre la licencia.</string>
+  <string name="welcome_new_version">Nueva versión instalada. Por favor lea las notas de versiones. Versión:</string>
+  <string name="label_home">Inicio de I2P</string>
+  <string name="label_statistics">Estadísticas</string>
+  <string name="label_main_controls">Controles Principales</string>
+  <string name="label_tools">Herramientas de I2P</string>
+  <string name="label_addressbook">Libreta de direcciones</string>
+  <string name="label_logs">Registros</string>
+  <string name="label_error_logs">Registros de Errores</string>
+  <string name="label_info_and_pages">Información y páginas</string>
+  <string name="label_welcome_page">Página de Bienvenida</string>
+  <string name="label_news">Noticias</string>
+  <string name="label_news_status">Últimas noticias sobre I2P</string>
+  <string name="label_peers_status">Pares</string>
+  <string name="label_release_notes">Notas de Versiones</string>
+  <string name="label_licenses">Licencias</string>
+  <string name="label_nonanon_info">Información no anónima</string>
+  <string name="label_website_nonanon">Página web (no anónima)</string>
+  <string name="label_faq_nonanon">FAQ (no anónimo)</string>
+  <string name="action_add">Añadir</string>
+  <string name="action_router_start">Iniciar el Ruter</string>
+  <string name="action_router_stop">Apagar el Ruter</string>
+  <string name="action_reload">Recargar</string>
+  <string name="menu_settings">Preferencias</string>
+  <string name="settings_enable">Activar</string>
+  <string name="settings_label_subscriptions">Librete de direcciones I2P</string>
+  <string name="settings_desc_subscriptions">URLs de subscripción</string>
+  <string name="settings_label_bandwidth">Red y ancho de banda</string>
+  <string name="settings_label_bw_inbound">Velocidad de entrada</string>
+  <string name="settings_desc_bw_inbound">Velocidad máxima de entrada</string>
+  <string name="settings_label_bw_outbound">Velocidad de salida</string>
+  <string name="settings_desc_bw_outbound">Velocidad máxima de salida</string>
+  <string name="settings_label_hiddenMode">Participación</string>
+  <string name="settings_desc_hiddenMode">Desactivar modo oculto</string>
+  <string name="settings_label_maxPartTunnels">Máximo número de túneles participantes</string>
+  <string name="settings_desc_maxPartTunnels">Máximo núemero de túneles en los que participar (por defecto=20)</string>
+  <string name="settings_dialog_maxPartTunnels">Máximo número de túneles en los que participar</string>
+  <string name="settings_label_sharePercent">Porcentaje de participación</string>
+  <string name="settings_desc_sharePercent">Porcentaje y ancho de banda a compartir (por defecto=80)</string>
+  <string name="settings_dialog_sharePercent">Procentaje del ancho de banda a compartir</string>
+  <string name="settings_desc_upnp">Abrir los puertos del cortafuegos automáticamente</string>
+  <string name="settings_label_advanced">Avanzado</string>
+  <string name="settings_label_transports">Trnasportes</string>
+  <string name="settings_label_maxConns">Máximo número de conexiones</string>
+  <string name="settings_label_i2cp">Interfaz de I2CP</string>
+  <string name="settings_desc_i2cp">Escuchar en el puerto 7654</string>
+  <string name="settings_label_exploratory_pool">Grupo exploratiorio</string>
+  <string name="settings_desc_exploratory_pool">Parámetros del Túnel</string>
+  <string name="settings_label_expl_inbound">Túneles de entrada</string>
+  <string name="settings_label_expl_outbound">Túneles de salida</string>
+  <string name="settings_label_expl_length">Tamaño</string>
+  <string name="settings_desc_expl_length">Cuantos saltos usar</string>
+  <string name="settings_label_expl_lengthVariance">Variación del salto</string>
+  <string name="settings_desc_expl_lengthVariance">Cuántos saltos se añadirán aleatoriamente.</string>
+  <string name="settings_label_expl_quantity">Cantidad</string>
+  <string name="settings_desc_expl_quantity">Cuantos túneles</string>
+  <string name="settings_label_expl_backupQuantity">Cantidad de respaldos</string>
+  <string name="settings_desc_expl_backupQuantity">Cuantos túneles de respaldo</string>
+</resources>
