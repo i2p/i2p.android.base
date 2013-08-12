@@ -27,7 +27,7 @@
         android:max="1000"
         android:title="@string/settings_label_bw_inbound"
         android:summary="@string/settings_desc_bw_inbound"
-        android:dialogMessage="@string/settings_desc_bw_inbound"
+        android:dialogMessage="Maximum inbound speed"
         android:text=" KBytes/sec"
         />
     <!--
@@ -39,7 +39,7 @@
         android:max="1000"
         android:title="@string/settings_label_bw_outbound"
         android:summary="@string/settings_desc_bw_outbound"
-        android:dialogMessage="@string/settings_desc_bw_outbound"
+        android:dialogMessage="Maximum outbound speed"
         android:text=" KBytes/sec"
         />
     <CheckBoxPreference
@@ -57,7 +57,7 @@
         android:max="500"
         android:title="@string/settings_label_maxPartTunnels"
         android:summary="@string/settings_desc_maxPartTunnels"
-        android:dialogMessage="@string/settings_dialog_maxPartTunnels"
+        android:dialogMessage="Maximum tunnels to participate in"
         android:text=" Tunnels"
         android:dependency="router.hiddenMode"
         />
@@ -70,7 +70,7 @@
         android:max="100"
         android:title="@string/settings_label_sharePercent"
         android:summary="@string/settings_desc_sharePercent"
-        android:dialogMessage="@string/settings_dialog_sharePercent"
+        android:dialogMessage="Percentage of bandwidth to share"
         android:text="%"
         android:dependency="router.hiddenMode"
         android:shouldDisableView="true"
