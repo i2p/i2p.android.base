@@ -40,16 +40,21 @@
                 major = values[0];
                 minor = "0";
                 release = "0";
+                point = "";
                 if(dots > 0) {
                     minor = values[1];
                     if(dots > 1) {
                         release = values[2];
+                        if (dots > 2) {
+                            point = "." + values[3];
+                        }
                     }
                 }
-                project.setNewProperty("CORE", major + "." + minor +"." + release);
+                project.setNewProperty("CORE", major + "." + minor + "." + release + point);
                 project.setNewProperty("CORE.major", major);
                 project.setNewProperty("CORE.minor", minor);
                 project.setNewProperty("CORE.release", release);
+                project.setNewProperty("CORE.point", point);
 
             ]]>
     </scriptdef>
@@ -71,17 +76,19 @@
             <attribute name="major"/>
             <attribute name="minor"/>
             <attribute name="release"/>
+            <attribute name="point"/>
             <attribute name="routerbuild"/>
             <attribute name="androidbuild"/>
             <attribute name="sdk"/>
             <![CDATA[
                 Major = attributes.get("major") + ".";
                 Minor = attributes.get("minor") + ".";
-                Release = attributes.get("release") +"-";
+                Release = attributes.get("release");
+                Point = attributes.get("point") + "-";
                 Routerbuild = attributes.get("routerbuild") +"_b";
                 Androidbuild = attributes.get("androidbuild") +"-API";
                 SDK = attributes.get("sdk");
-                project.setNewProperty(attributes.get("prefix") + ".full", Major + Minor + Release + Routerbuild + Androidbuild + SDK);
+                project.setNewProperty(attributes.get("prefix") + ".full", Major + Minor + Release + Point + Routerbuild + Androidbuild + SDK);
                 /*
                 * Android version code is an integer.
                 * So we have 31 bits.
@@ -95,6 +102,8 @@
                 * beware of that if you release multiple builds using the
                 * same ROUTERBUILD, or clear it if you update ROUTERBUILD
                 * Subtract 1 from ANDROIDBUILD since it starts at 1 after distclean.
+                *
+                * WARNING - 4th core field ("point") is ignored. Be sure to increment android build number.
                 */
                 iMajor = ((parseInt(Major) % 16) << 27);
                 iMinor = ((parseInt(Minor) % 256) << 19);
@@ -323,11 +332,14 @@
     <normalizeitem name="buildversion" value="${buildversionfile}" />
     <echo message="buildversion `${buildversion}`" />
 
+   <!--
     <split value="${target}" sep="-" prefix="gettarget"/>
+   -->
+    <property name="gettarget.1" value="${minSdkVersion}" />
     <echo message="API${gettarget.1}" />
     <!-- generate the version infos that we will want to see -->
     <generateversions prefix="zap" major="${CORE.major}"
-        minor="${CORE.minor}" release="${CORE.release}"
+        minor="${CORE.minor}" release="${CORE.release}"  point="${CORE.point}"
         routerbuild="${ROUTERBUILD}" androidbuild="${buildversion}"
         sdk="${gettarget.1}"/>
 
