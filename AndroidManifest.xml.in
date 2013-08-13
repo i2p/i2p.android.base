@@ -59,6 +59,11 @@
         <activity android:name=".activity.AddressbookActivity"
                   android:label="Addressbook"
                   android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable_addressbook"/>
         </activity>
         <activity android:name=".activity.LogActivity"
                   android:label="I2P Logs" >

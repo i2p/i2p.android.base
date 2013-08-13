@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <string-array name="main_fragments">
-        <item>net.i2p.android.router.fragment.MainFragment</item>
-        <item>net.i2p.android.router.fragment.AddressbookFragment</item>
+    <string-array name="navdrawer_activities">
+        <item>net.i2p.android.router.activity.MainActivity</item>
+        <item>net.i2p.android.router.activity.AddressbookActivity</item>
     </string-array>
-    <string-array name="main_fragment_titles">
+    <string-array name="navdrawer_activity_titles">
         <item>@string/label_home</item>
         <item>@string/label_addressbook</item>
     </string-array>

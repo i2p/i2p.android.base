@@ -2,6 +2,7 @@ package net.i2p.android.router.activity;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.I2PFragmentBase;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -24,8 +25,11 @@ public class I2PActivityBase extends ActionBarActivity {
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private String[] mFragments;
-    private String[] mFragmentTitles;
+    private final Class[] mActivities = {
+            MainActivity.class,
+            AddressbookActivity.class
+    };
+    private String[] mActivityTitles;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,8 +37,7 @@ public class I2PActivityBase extends ActionBarActivity {
         setContentView(R.layout.activity_navdrawer);
 
         mTitle = mDrawerTitle = getTitle();
-        mFragments = getResources().getStringArray(R.array.main_fragments);
-        mFragmentTitles = getResources().getStringArray(R.array.main_fragment_titles);
+        mActivityTitles = getResources().getStringArray(R.array.navdrawer_activity_titles);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.drawer);
 
@@ -43,7 +46,7 @@ public class I2PActivityBase extends ActionBarActivity {
         mDrawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, mFragmentTitles));
+                android.R.layout.simple_list_item_1, mActivityTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -98,6 +101,12 @@ public class I2PActivityBase extends ActionBarActivity {
     }
 
     private void selectItem(int pos) {
+        Intent i = new Intent(I2PActivityBase.this, mActivities[pos]);
+        startActivity(i);
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    /*private void selectFragmentItem(int pos) {
         Fragment fragment = Fragment.instantiate(I2PActivityBase.this, mFragments[pos]);
 
         // Insert the fragment by replacing any existing fragment
@@ -110,7 +119,7 @@ public class I2PActivityBase extends ActionBarActivity {
         mDrawerList.setItemChecked(pos, true);
         setTitle(mFragmentTitles[pos]);
         mDrawerLayout.closeDrawer(mDrawerList);
-    }
+    }*/
 
     @Override
     public void setTitle(CharSequence title) {
