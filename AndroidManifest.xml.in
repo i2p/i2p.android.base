@@ -32,11 +32,9 @@
                   android:label="I2P News"
                   android:configChanges="orientation|keyboardHidden" >
         </activity>
-        <activity android:name=".activity.TextResourceActivity"
-                  android:label="I2P Information" >
-        </activity>
         <activity android:name=".activity.LicenseActivity"
-                  android:label="I2P License Information" >
+                  android:label="I2P License Information"
+                  android:parentActivityName=".activity.MainActivity" >
         </activity>
         <activity android:name=".activity.WebActivity"
                   android:label="I2P Web Browser"
@@ -50,10 +48,12 @@
         </activity>
         <activity android:name=".activity.SettingsActivity"
                   android:label="I2P Settings"
+                  android:parentActivityName=".activity.MainActivity"
                   android:launchMode="singleTop" >
         </activity>
         <activity android:name=".activity.AddressbookSettingsActivity"
                   android:label="I2P Addressbook Settings"
+                  android:parentActivityName=".activity.AddressbookActivity"
                   android:launchMode="singleTop" >
         </activity>
         <activity android:name=".activity.AddressbookActivity"
