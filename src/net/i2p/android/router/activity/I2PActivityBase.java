@@ -25,11 +25,6 @@ public class I2PActivityBase extends ActionBarActivity {
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private static final Class[] mActivities = {
-            MainActivity.class,
-            AddressbookActivity.class,
-            LicenseActivity.class,
-    };
     private String[] mActivityTitles;
 
     @Override
@@ -102,8 +97,29 @@ public class I2PActivityBase extends ActionBarActivity {
     }
 
     private void selectItem(int pos) {
-        Intent i = new Intent(I2PActivityBase.this, mActivities[pos]);
-        startActivity(i);
+        switch (pos) {
+        case 1:
+            Intent ab = new Intent(I2PActivityBase.this, AddressbookActivity.class);
+            startActivity(ab);
+            break;
+        case 2:
+            Intent log = new Intent(I2PActivityBase.this, LogActivity.class);
+            startActivity(log);
+            break;
+        case 3:
+            Intent err = new Intent(I2PActivityBase.this, LogActivity.class);
+            err.putExtra(LogActivity.ERRORS_ONLY, true);
+            startActivity(err);
+            break;
+        case 4:
+            Intent lic = new Intent(I2PActivityBase.this, LicenseActivity.class);
+            startActivity(lic);
+            break;
+        default:
+            Intent main = new Intent(I2PActivityBase.this, MainActivity.class);
+            startActivity(main);
+            break;
+        }
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 

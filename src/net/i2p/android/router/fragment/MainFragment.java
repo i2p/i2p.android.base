@@ -136,25 +136,6 @@ public class MainFragment extends I2PFragmentBase {
             }
         });
 
-        b = (Button) v.findViewById(R.id.logs_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), LogActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        b = (Button) v.findViewById(R.id.error_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), LogActivity.class);
-                intent.putExtra(LogActivity.ERRORS_ONLY, true);
-                startActivity(intent);
-            }
-        });
-
         b = (Button) v.findViewById(R.id.peers_button);
         b.setOnClickListener(new View.OnClickListener() {
 

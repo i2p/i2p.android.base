@@ -67,20 +67,6 @@
     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <Button
-    android:id="@+id/logs_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/label_logs"
-    android:drawableLeft="@drawable/log_icon" />
-
-<Button
-    android:id="@+id/error_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/label_error_logs"
-    android:drawableLeft="@drawable/error_log_icon" />
-
-<Button
     android:id="@+id/peers_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

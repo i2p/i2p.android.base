@@ -66,7 +66,8 @@
                        android:resource="@xml/searchable_addressbook"/>
         </activity>
         <activity android:name=".activity.LogActivity"
-                  android:label="I2P Logs" >
+                  android:label="I2P Logs"
+                  android:parentActivityName=".activity.MainActivity" >
         </activity>
         <activity android:name=".activity.PeersActivity"
                   android:label="I2P Peers and Transport Status"
