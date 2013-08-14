@@ -86,17 +86,6 @@ public class MainFragment extends I2PFragmentBase {
             }
         });
 
-        b = (Button) v.findViewById(R.id.licenses_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), LicenseActivity.class);
-                //Intent intent = new Intent(view.getContext(), TextResourceActivity.class);
-                //intent.putExtra(TextResourceActivity.TEXT_RESOURCE_ID, R.raw.licenses_txt);
-                startActivity(intent);
-            }
-        });
-
         b = (Button) v.findViewById(R.id.website_button);
         b.setOnClickListener(new View.OnClickListener() {
 

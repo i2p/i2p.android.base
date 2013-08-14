@@ -25,9 +25,10 @@ public class I2PActivityBase extends ActionBarActivity {
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private final Class[] mActivities = {
+    private static final Class[] mActivities = {
             MainActivity.class,
-            AddressbookActivity.class
+            AddressbookActivity.class,
+            LicenseActivity.class,
     };
     private String[] mActivityTitles;
 

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <string-array name="navdrawer_activities">
-        <item>net.i2p.android.router.activity.MainActivity</item>
-        <item>net.i2p.android.router.activity.AddressbookActivity</item>
-    </string-array>
     <string-array name="navdrawer_activity_titles">
         <item>@string/label_home</item>
         <item>@string/label_addressbook</item>
+        <item>@string/label_licenses</item>
     </string-array>
     <string-array name="setting0to3">
         <item>0</item>
