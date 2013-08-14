@@ -24,6 +24,7 @@ import net.i2p.android.router.activity.AddressbookSettingsActivity;
 import net.i2p.client.naming.NamingService;
 
 public class AddressbookFragment extends Fragment {
+    private ArrayAdapter<String> mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,8 @@ public class AddressbookFragment extends Fragment {
         // set the list
         List<String> nameList = new ArrayList<String>(names);
         Collections.sort(nameList);
-        lv.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.addressbook_list_item, nameList));
+        mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.addressbook_list_item, nameList);
+        lv.setAdapter(mAdapter);
 
         // set the callback
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -106,5 +108,9 @@ public class AddressbookFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void filterAddresses(String query) {
+        mAdapter.getFilter().filter(query);
     }
 }

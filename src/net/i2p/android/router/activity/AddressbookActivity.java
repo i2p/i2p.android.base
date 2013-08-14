@@ -5,13 +5,14 @@ import net.i2p.android.router.fragment.AddressbookFragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class AddressbookActivity extends I2PActivityBase {
+public class AddressbookActivity extends I2PActivityBase
+                                 implements SearchView.OnQueryTextListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,25 @@ public class AddressbookActivity extends I2PActivityBase {
         MenuItem searchItem = menu.findItem(R.id.action_search_addressbook);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(this);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onQueryTextChange(String newText) {
+        filterAddresses(newText);
+        return true;
+    }
+
+    public boolean onQueryTextSubmit(String query) {
+        filterAddresses(query);
+        return true;
+    }
+
+    private void filterAddresses(String query) {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.main_content);
+        if (f instanceof AddressbookFragment) {
+            AddressbookFragment af = (AddressbookFragment) f;
+            af.filterAddresses(query);
+        }
     }
 }
