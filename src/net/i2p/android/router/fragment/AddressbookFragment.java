@@ -35,7 +35,7 @@ public class AddressbookFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                 Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_addressbook, container, false);
+        View v = inflater.inflate(R.layout.fragment_listview, container, false);
 
         // Grab context if router has started, otherwise create new
         // FIXME dup contexts, locking, ...
@@ -62,7 +62,7 @@ public class AddressbookFragment extends Fragment {
             tv.setText("1 host in address book.");
         else
             tv.setText("No hosts in address book, or your router is not up.");
-        ListView lv = (ListView) v.findViewById(R.id.addressbook_list);
+        ListView lv = (ListView) v.findViewById(R.id.listview);
         lv.addHeaderView(tv, "", false);
 
         // set the list

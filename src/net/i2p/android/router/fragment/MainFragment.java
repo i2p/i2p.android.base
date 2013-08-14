@@ -74,9 +74,9 @@ public class MainFragment extends I2PFragmentBase {
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                TextResourceFragment f = new TextResourceFragment();
+                TextResourceDialog f = new TextResourceDialog();
                 Bundle args = new Bundle();
-                args.putInt(TextResourceFragment.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+                args.putInt(TextResourceDialog.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
                 f.setArguments(args);
                 getActivity().getSupportFragmentManager()
                              .beginTransaction()

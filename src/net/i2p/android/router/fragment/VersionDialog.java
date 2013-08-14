@@ -65,9 +65,9 @@ public class VersionDialog extends DialogFragment {
                                 .findFragmentById(R.id.main_content);
                         fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         dialog.cancel();
-                        TextResourceFragment f = new TextResourceFragment();
+                        TextResourceDialog f = new TextResourceDialog();
                         Bundle args = new Bundle();
-                        args.putInt(TextResourceFragment.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+                        args.putInt(TextResourceDialog.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
                         f.setArguments(args);
                         getActivity().getSupportFragmentManager()
                                      .beginTransaction()
@@ -116,9 +116,9 @@ public class VersionDialog extends DialogFragment {
                             dialog.dismiss();
                         } catch(Exception e) {
                         }
-                        TextResourceFragment f = new TextResourceFragment();
+                        TextResourceDialog f = new TextResourceDialog();
                         Bundle args = new Bundle();
-                        args.putInt(TextResourceFragment.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+                        args.putInt(TextResourceDialog.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
                         f.setArguments(args);
                         getActivity().getSupportFragmentManager()
                                      .beginTransaction()

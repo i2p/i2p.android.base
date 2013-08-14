@@ -2,6 +2,7 @@ package net.i2p.android.router.fragment;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,9 @@ import net.i2p.android.router.util.Util;
  *  Display a raw text resource.
  *  The resource ID must be passed as an extra in the intent.
  */
-public class TextResourceFragment extends I2PFragmentBase {
+public class TextResourceDialog extends DialogFragment {
 
+    public static final String TEXT_DIALOG_TITLE = "text_title";
     public final static String TEXT_RESOURCE_ID = "text_resource_id";
 
     @Override
@@ -29,6 +31,9 @@ public class TextResourceFragment extends I2PFragmentBase {
         View v = inflater.inflate(R.layout.text_resource, container, false);
         TextView tv = (TextView) v.findViewById(R.id.text_resource_text);
         tv.setMovementMethod(ScrollingMovementMethod.getInstance());
+        String title = getArguments().getString(TEXT_DIALOG_TITLE);
+        if (title != null)
+            getDialog().setTitle(title);
         int id = getArguments().getInt(TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
         if (id == R.raw.releasenotes_txt)
             tv.setText("Release Notes for Release " + Util.getOurVersion(getActivity()) + "\n\n" +
