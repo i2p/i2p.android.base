@@ -103,15 +103,19 @@ public class I2PActivityBase extends ActionBarActivity {
             startActivity(ab);
             break;
         case 2:
+            Intent itb = new Intent(I2PActivityBase.this, I2PTunnelActivity.class);
+            startActivity(itb);
+            break;
+        case 3:
             Intent log = new Intent(I2PActivityBase.this, LogActivity.class);
             startActivity(log);
             break;
-        case 3:
+        case 4:
             Intent err = new Intent(I2PActivityBase.this, LogActivity.class);
             err.putExtra(LogActivity.ERRORS_ONLY, true);
             startActivity(err);
             break;
-        case 4:
+        case 5:
             Intent lic = new Intent(I2PActivityBase.this, LicenseActivity.class);
             startActivity(lic);
             break;

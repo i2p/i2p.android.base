@@ -11,6 +11,7 @@
     <string name="label_main_controls">Main Controls</string>
     <string name="label_tools">I2P Tools</string>
     <string name="label_addressbook">Addressbook</string>
+    <string name="label_i2ptunnel">I2PTunnel</string>
     <string name="label_logs">Logs</string>
     <string name="label_error_logs">Error Logs</string>
     <string name="label_info_and_pages">Information and pages</string>
@@ -69,4 +70,5 @@
     <string name="settings_label_expl_backupQuantity">Backup quantity</string>
     <string name="settings_desc_expl_backupQuantity">How many tunnel backups</string>
 
+    <string name="i2ptunnel_not_initialized">Tunnels are not initialized yet, please reload in two minutes.</string>
 </resources>

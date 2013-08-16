@@ -3,6 +3,7 @@
     <string-array name="navdrawer_activity_titles">
         <item>@string/label_home</item>
         <item>@string/label_addressbook</item>
+        <item>@string/label_i2ptunnel</item>
         <item>@string/label_logs</item>
         <item>@string/label_error_logs</item>
         <item>@string/label_licenses</item>

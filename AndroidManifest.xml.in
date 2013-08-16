@@ -65,6 +65,10 @@
             <meta-data android:name="android.app.searchable"
                        android:resource="@xml/searchable_addressbook"/>
         </activity>
+        <activity android:name=".activity.I2PTunnelActivity"
+                  android:label="I2PTunnel"
+                  android:launchMode="singleTop" >
+        </activity>
         <activity android:name=".activity.LogActivity"
                   android:label="I2P Logs"
                   android:parentActivityName=".activity.MainActivity" >
