@@ -9,6 +9,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class I2PTunnelFragment extends ListFragment {
+    public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";
+
     private TunnelControllerGroup mGroup;
 
     @Override
@@ -21,21 +23,25 @@ public class I2PTunnelFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TunnelControllerGroup tcg;
         String error;
         try {
-            tcg = TunnelControllerGroup.getInstance();
-            error = tcg == null ? getResources().getString(R.string.i2ptunnel_not_initialized) : null;
+            mGroup = TunnelControllerGroup.getInstance();
+            error = mGroup == null ? getResources().getString(R.string.i2ptunnel_not_initialized) : null;
         } catch (IllegalArgumentException iae) {
-            tcg = null;
+            mGroup = null;
             error = iae.toString();
         }
 
-        if (tcg != null) {
-            mGroup = tcg;
-            setEmptyText("Win!");
-        } else {
+        if (mGroup == null) {
             setEmptyText(error);
+            setListAdapter(null);
+        } else {
+            boolean clientTunnels = getArguments().getBoolean(SHOW_CLIENT_TUNNELS);
+            if (clientTunnels)
+                setEmptyText("No configured client tunnels.");
+            else
+                setEmptyText("No configured server tunnels.");
+            setListAdapter(null);
         }
     }
 

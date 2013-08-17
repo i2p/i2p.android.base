@@ -12,6 +12,8 @@
     <string name="label_tools">I2P Tools</string>
     <string name="label_addressbook">Addressbook</string>
     <string name="label_i2ptunnel">I2PTunnel</string>
+    <string name="label_i2ptunnel_client">Client tunnels</string>
+    <string name="label_i2ptunnel_server">Server tunnels</string>
     <string name="label_logs">Logs</string>
     <string name="label_error_logs">Error Logs</string>
     <string name="label_info_and_pages">Information and pages</string>

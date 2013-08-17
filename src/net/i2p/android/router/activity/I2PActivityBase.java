@@ -2,14 +2,18 @@ package net.i2p.android.router.activity;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.I2PFragmentBase;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -172,5 +176,25 @@ public class I2PActivityBase extends ActionBarActivity {
                 return;
         }
         super.onBackPressed();
+    }
+
+    public static class TabListener implements ActionBar.TabListener {
+        private Fragment mFragment;
+
+        public TabListener(Fragment fragment) {
+            mFragment = fragment;
+        }
+
+        public void onTabSelected(Tab tab, FragmentTransaction ft) {
+            ft.replace(R.id.main_content, mFragment);
+        }
+
+        public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+            ft.remove(mFragment);
+        }
+
+        public void onTabReselected(Tab tab, FragmentTransaction ft) {
+            // User selected the already selected tab.
+        }
     }
 }
