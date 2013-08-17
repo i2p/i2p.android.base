@@ -1,16 +1,13 @@
 package net.i2p.android.router.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import net.i2p.android.router.R;
 
-public class LicenseFragment extends Fragment {
+public class LicenseFragment extends ListFragment {
 
     private static final String[] names = {
         "Android Application License", "Apache 2.0",
@@ -27,25 +24,19 @@ public class LicenseFragment extends Fragment {
         R.raw.license_installcert_txt, R.raw.license_sha256_txt, R.raw.license_sntp_txt, R.raw.license_addressbook_txt};
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_listview, container, false);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        ListView lv = (ListView) v.findViewById(R.id.listview);
-        lv.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, names));
+        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, names));
+    }
 
-        // set the callback
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View view, int pos, long id) {
-                TextResourceDialog dialog = new TextResourceDialog();
-                Bundle args = new Bundle();
-                args.putString(TextResourceDialog.TEXT_DIALOG_TITLE, names[pos]);
-                args.putInt(TextResourceDialog.TEXT_RESOURCE_ID, files[pos]);
-                dialog.setArguments(args);
-                dialog.show(getActivity().getSupportFragmentManager(), "license");
-            }
-        });
-
-        return v;
+    @Override
+    public void onListItemClick(ListView parent, View view, int pos, long id) {
+        TextResourceDialog dialog = new TextResourceDialog();
+        Bundle args = new Bundle();
+        args.putString(TextResourceDialog.TEXT_DIALOG_TITLE, names[pos]);
+        args.putInt(TextResourceDialog.TEXT_RESOURCE_ID, files[pos]);
+        dialog.setArguments(args);
+        dialog.show(getActivity().getSupportFragmentManager(), "license");
     }
 }
