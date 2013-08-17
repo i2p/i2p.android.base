@@ -1,5 +1,6 @@
 package net.i2p.android.router.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -13,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -52,16 +55,6 @@ public class AddressbookFragment extends ListFragment {
         // After router shutdown we get nothing... why?
         Set<String> names = ns.getNames();
 
-        // set the header
-        int sz = names.size();
-        if (sz > 0) {
-            TextView tv = (TextView) getActivity().getLayoutInflater().inflate(R.layout.addressbook_header, null);
-            if (sz > 1)
-                tv.setText(sz + " hosts in address book.");
-            else
-                tv.setText("1 host in address book.");
-            getListView().addHeaderView(tv, "", false);
-        }
         // set the empty text
         setEmptyText("No hosts in address book, or your router is not up.");
 
@@ -70,6 +63,14 @@ public class AddressbookFragment extends ListFragment {
         Collections.sort(nameList);
         mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.addressbook_list_item, nameList);
         setListAdapter(mAdapter);
+
+        // Show Toast with addressbook size
+        int sz = names.size();
+        Context context = getActivity().getApplicationContext();
+        CharSequence text = sz + " hosts in address book.";
+        if (sz == 1)
+            text = "1 host in address book.";
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show();
     }
 
     @Override
