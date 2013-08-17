@@ -2,7 +2,7 @@ package net.i2p.android.router.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +23,7 @@ import net.i2p.android.router.R;
 import net.i2p.android.router.activity.AddressbookSettingsActivity;
 import net.i2p.client.naming.NamingService;
 
-public class AddressbookFragment extends Fragment {
+public class AddressbookFragment extends ListFragment {
     private ArrayAdapter<String> mAdapter;
 
     @Override
@@ -33,9 +33,8 @@ public class AddressbookFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_listview, container, false);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         // Grab context if router has started, otherwise create new
         // FIXME dup contexts, locking, ...
@@ -54,40 +53,37 @@ public class AddressbookFragment extends Fragment {
         Set<String> names = ns.getNames();
 
         // set the header
-        TextView tv = (TextView) inflater.inflate(R.layout.addressbook_header, null);
         int sz = names.size();
-        if (sz > 1)
-            tv.setText(sz + " hosts in address book.");
-        else if (sz > 0)
-            tv.setText("1 host in address book.");
-        else
-            tv.setText("No hosts in address book, or your router is not up.");
-        ListView lv = (ListView) v.findViewById(R.id.listview);
-        lv.addHeaderView(tv, "", false);
+        if (sz > 0) {
+            TextView tv = (TextView) getActivity().getLayoutInflater().inflate(R.layout.addressbook_header, null);
+            if (sz > 1)
+                tv.setText(sz + " hosts in address book.");
+            else
+                tv.setText("1 host in address book.");
+            getListView().addHeaderView(tv, "", false);
+        }
+        // set the empty text
+        setEmptyText("No hosts in address book, or your router is not up.");
 
         // set the list
         List<String> nameList = new ArrayList<String>(names);
         Collections.sort(nameList);
         mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.addressbook_list_item, nameList);
-        lv.setAdapter(mAdapter);
+        setListAdapter(mAdapter);
+    }
 
-        // set the callback
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View view, int pos, long id) {
-                CharSequence host = ((TextView) view).getText();
-                WebFragment f = new WebFragment();
-                Bundle args = new Bundle();
-                args.putString(WebFragment.HTML_URI, "http://" + host + '/');
-                f.setArguments(args);
-                getActivity().getSupportFragmentManager()
-                             .beginTransaction()
-                             .replace(R.id.main_content, f)
-                             .addToBackStack(null)
-                             .commit();
-            }
-        });
-
-        return v;
+    @Override
+    public void onListItemClick(ListView parent, View view, int pos, long id) {
+        CharSequence host = ((TextView) view).getText();
+        WebFragment f = new WebFragment();
+        Bundle args = new Bundle();
+        args.putString(WebFragment.HTML_URI, "http://" + host + '/');
+        f.setArguments(args);
+        getActivity().getSupportFragmentManager()
+                     .beginTransaction()
+                     .replace(R.id.main_content, f)
+                     .addToBackStack(null)
+                     .commit();
     }
 
     @Override
@@ -98,6 +94,7 @@ public class AddressbookFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
+        
         switch (item.getItemId()) {
             //case R.id.action_add_to_addressbook:
             //    return true;
