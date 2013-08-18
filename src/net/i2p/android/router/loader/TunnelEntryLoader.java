@@ -10,14 +10,14 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.content.AsyncTaskLoader;
 
-public class TunnelControllerLoader extends AsyncTaskLoader<List<TunnelController>> {
+public class TunnelEntryLoader extends AsyncTaskLoader<List<TunnelEntry>> {
     private TunnelControllerGroup mGroup;
     private boolean mClientTunnels;
-    private List<TunnelController> mData;
+    private List<TunnelEntry> mData;
     private Handler mHandler;
     private TunnelControllerMonitor mMonitor;
 
-    public TunnelControllerLoader(Context context, TunnelControllerGroup tcg, boolean clientTunnels) {
+    public TunnelEntryLoader(Context context, TunnelControllerGroup tcg, boolean clientTunnels) {
         super(context);
         mGroup = tcg;
         mClientTunnels = clientTunnels;
@@ -25,27 +25,19 @@ public class TunnelControllerLoader extends AsyncTaskLoader<List<TunnelControlle
     }
 
     @Override
-    public List<TunnelController> loadInBackground() {
-        List<TunnelController> ret = new ArrayList<TunnelController>();
-        for (TunnelController controller : mGroup.getControllers())
-            if ( (mClientTunnels && isClient(controller.getType())) ||
-                 (!mClientTunnels && !isClient(controller.getType())) )
-                ret.add(controller);
+    public List<TunnelEntry> loadInBackground() {
+        List<TunnelEntry> ret = new ArrayList<TunnelEntry>();
+        for (TunnelController controller : mGroup.getControllers()) {
+            TunnelEntry tunnel = new TunnelEntry(this, controller);
+            if ( (mClientTunnels && tunnel.isClient()) ||
+                 (!mClientTunnels && !tunnel.isClient()) )
+                ret.add(tunnel);
+        }
         return ret;
     }
 
-    private static boolean isClient(String type) {
-        return ( ("client".equals(type)) ||
-                 ("httpclient".equals(type)) ||
-                 ("sockstunnel".equals(type)) ||
-                 ("socksirctunnel".equals(type)) ||
-                 ("connectclient".equals(type)) ||
-                 ("streamrclient".equals(type)) ||
-                 ("ircclient".equals(type)));
-    }
-
     @Override
-    public void deliverResult(List<TunnelController> data) {
+    public void deliverResult(List<TunnelEntry> data) {
         if (isReset()) {
             // The Loader has been reset; ignore the result and invalidate the data.
             if (data != null) {
@@ -56,7 +48,7 @@ public class TunnelControllerLoader extends AsyncTaskLoader<List<TunnelControlle
 
         // Hold a reference to the old data so it doesn't get garbage collected.
         // We must protect it until the new data has been delivered.
-        List<TunnelController> oldData = mData;
+        List<TunnelEntry> oldData = mData;
         mData = data;
 
         if (isStarted()) {
@@ -121,7 +113,7 @@ public class TunnelControllerLoader extends AsyncTaskLoader<List<TunnelControlle
     }
 
     @Override
-    public void onCanceled(List<TunnelController> data) {
+    public void onCanceled(List<TunnelEntry> data) {
         // Attempt to cancel the current asynchronous load.
         super.onCanceled(data);
 
@@ -130,7 +122,7 @@ public class TunnelControllerLoader extends AsyncTaskLoader<List<TunnelControlle
         releaseResources(data);
     }
 
-    private void releaseResources(List<TunnelController> data) {
+    private void releaseResources(List<TunnelEntry> data) {
         // For a simple List, there is nothing to do. For something like a Cursor, we 
         // would close it in this method. All resources associated with the Loader
         // should be released here.

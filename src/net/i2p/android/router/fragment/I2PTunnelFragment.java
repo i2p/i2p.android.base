@@ -3,9 +3,9 @@ package net.i2p.android.router.fragment;
 import java.util.List;
 
 import net.i2p.android.router.R;
-import net.i2p.android.router.adapter.TunnelControllerAdapter;
-import net.i2p.android.router.loader.TunnelControllerLoader;
-import net.i2p.i2ptunnel.TunnelController;
+import net.i2p.android.router.adapter.TunnelEntryAdapter;
+import net.i2p.android.router.loader.TunnelEntryLoader;
+import net.i2p.android.router.loader.TunnelEntry;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -16,14 +16,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class I2PTunnelFragment extends ListFragment
-        implements LoaderManager.LoaderCallbacks<List<TunnelController>> {
+        implements LoaderManager.LoaderCallbacks<List<TunnelEntry>> {
     public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";
 
     private static final int CLIENT_LOADER_ID = 1;
     private static final int SERVER_LOADER_ID = 2;
 
     private TunnelControllerGroup mGroup;
-    private TunnelControllerAdapter mAdapter;
+    private TunnelEntryAdapter mAdapter;
     private boolean mClientTunnels;
 
     @Override
@@ -35,7 +35,7 @@ public class I2PTunnelFragment extends ListFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mAdapter = new TunnelControllerAdapter(getActivity());
+        mAdapter = new TunnelEntryAdapter(getActivity());
         mClientTunnels = getArguments().getBoolean(SHOW_CLIENT_TUNNELS);
 
         String error;
@@ -63,12 +63,12 @@ public class I2PTunnelFragment extends ListFragment
                 : SERVER_LOADER_ID, null, this);
     }
 
-    public Loader<List<TunnelController>> onCreateLoader(int id, Bundle args) {
-        return new TunnelControllerLoader(getActivity(), mGroup, mClientTunnels);
+    public Loader<List<TunnelEntry>> onCreateLoader(int id, Bundle args) {
+        return new TunnelEntryLoader(getActivity(), mGroup, mClientTunnels);
     }
 
-    public void onLoadFinished(Loader<List<TunnelController>> loader,
-            List<TunnelController> data) {
+    public void onLoadFinished(Loader<List<TunnelEntry>> loader,
+            List<TunnelEntry> data) {
         if (loader.getId() == (mClientTunnels ?
                 CLIENT_LOADER_ID : SERVER_LOADER_ID)) {
             mAdapter.setData(data);
@@ -81,7 +81,7 @@ public class I2PTunnelFragment extends ListFragment
         }
     }
 
-    public void onLoaderReset(Loader<List<TunnelController>> loader) {
+    public void onLoaderReset(Loader<List<TunnelEntry>> loader) {
         if (loader.getId() == (mClientTunnels ?
                 CLIENT_LOADER_ID : SERVER_LOADER_ID)) {
             mAdapter.setData(null);
