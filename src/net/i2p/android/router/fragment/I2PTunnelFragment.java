@@ -1,6 +1,11 @@
 package net.i2p.android.router.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.i2p.android.router.R;
+import net.i2p.android.router.adapter.TunnelControllerAdapter;
+import net.i2p.i2ptunnel.TunnelController;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -12,6 +17,7 @@ public class I2PTunnelFragment extends ListFragment {
     public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";
 
     private TunnelControllerGroup mGroup;
+    private TunnelControllerAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,7 @@ public class I2PTunnelFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mAdapter = new TunnelControllerAdapter(getActivity());
 
         String error;
         try {
@@ -32,17 +39,36 @@ public class I2PTunnelFragment extends ListFragment {
             error = iae.toString();
         }
 
+        boolean clientTunnels = getArguments().getBoolean(SHOW_CLIENT_TUNNELS);
         if (mGroup == null) {
             setEmptyText(error);
-            setListAdapter(null);
         } else {
-            boolean clientTunnels = getArguments().getBoolean(SHOW_CLIENT_TUNNELS);
             if (clientTunnels)
                 setEmptyText("No configured client tunnels.");
             else
                 setEmptyText("No configured server tunnels.");
-            setListAdapter(null);
         }
+        mAdapter.setData(getControllers(clientTunnels));
+        setListAdapter(mAdapter);
+    }
+
+    private List<TunnelController> getControllers(boolean clientTunnels) {
+        List<TunnelController> ret = new ArrayList<TunnelController>();
+        for (TunnelController controller : mGroup.getControllers())
+            if ( (clientTunnels && isClient(controller.getType())) ||
+                 (!clientTunnels && !isClient(controller.getType())) )
+                ret.add(controller);
+        return ret;
+    }
+
+    private static boolean isClient(String type) {
+        return ( ("client".equals(type)) ||
+                 ("httpclient".equals(type)) ||
+                 ("sockstunnel".equals(type)) ||
+                 ("socksirctunnel".equals(type)) ||
+                 ("connectclient".equals(type)) ||
+                 ("streamrclient".equals(type)) ||
+                 ("ircclient".equals(type)));
     }
 
     @Override
