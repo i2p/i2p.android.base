@@ -38,7 +38,7 @@ public class TunnelEntryAdapter extends ArrayAdapter<TunnelEntry> {
         name.setText(tunnel.getName());
 
         TextView type = (TextView) v.findViewById(R.id.tunnel_type);
-        type.setText(tunnel.getType());
+        type.setText(tunnel.getTypeName());
 
         TextView ifacePort = (TextView) v.findViewById(R.id.tunnel_interface_port);
         ifacePort.setText(tunnel.getIfacePort());
@@ -47,6 +47,7 @@ public class TunnelEntryAdapter extends ArrayAdapter<TunnelEntry> {
         details.setText(tunnel.getDetails());
 
         ImageView status = (ImageView) v.findViewById(R.id.tunnel_status);
+        status.setImageDrawable(tunnel.getStatusIcon());
 
         return v;
     }

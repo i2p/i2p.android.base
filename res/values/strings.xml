@@ -72,5 +72,17 @@
     <string name="settings_label_expl_backupQuantity">Backup quantity</string>
     <string name="settings_desc_expl_backupQuantity">How many tunnel backups</string>
 
+    <string name="i2ptunnel_type_client">Standard client</string>
+    <string name="i2ptunnel_type_httpclient">HTTP client</string>
+    <string name="i2ptunnel_type_ircclient">IRC client</string>
+    <string name="i2ptunnel_type_server">Standard server</string>
+    <string name="i2ptunnel_type_httpserver">HTTP server</string>
+    <string name="i2ptunnel_type_sockstunnel">SOCKS 4/4a/5 proxy</string>
+    <string name="i2ptunnel_type_socksirctunnel">SOCKS IRC proxy</string>
+    <string name="i2ptunnel_type_connectclient">CONNECT/SSL/HTTPS proxy</string>
+    <string name="i2ptunnel_type_ircserver">IRC server</string>
+    <string name="i2ptunnel_type_streamrclient">Streamr client</string>
+    <string name="i2ptunnel_type_streamrserver">Streamr server</string>
+    <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
     <string name="i2ptunnel_not_initialized">Tunnels are not initialized yet, please reload in two minutes.</string>
 </resources>
