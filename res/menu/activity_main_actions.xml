@@ -10,10 +10,6 @@
           android:icon="@android:drawable/ic_menu_close_clear_cancel"
           i2pandroid:showAsAction="ifRoom" >
     </item>
-    <item android:title="@string/label_addressbook"
-          android:id="@+id/menu_addressbook"
-          android:icon="@drawable/ic_menu_friendslist" >
-    </item>
     <item android:title="@string/action_reload"
           android:id="@+id/menu_reload"
           android:icon="@drawable/ic_menu_refresh"

@@ -145,12 +145,7 @@ public abstract class I2PFragmentBase extends Fragment {
         stop.setVisible(showStop);
         stop.setEnabled(showStop);
 
-        boolean showAddressbook = (this instanceof WebFragment);
-        MenuItem addressbook = menu.findItem(R.id.menu_addressbook);
-        addressbook.setVisible(showAddressbook);
-        addressbook.setEnabled(showAddressbook);
-
-        boolean showReload = showAddressbook || (this instanceof PeersFragment);
+        boolean showReload = (this instanceof WebFragment) || (this instanceof PeersFragment);
         MenuItem reload = menu.findItem(R.id.menu_reload);
         reload.setVisible(showReload);
         reload.setEnabled(showReload);
@@ -162,14 +157,6 @@ public abstract class I2PFragmentBase extends Fragment {
         case R.id.menu_settings:
             Intent intent = new Intent(getActivity(), SettingsActivity.class);
             startActivity(intent);
-            return true;
-
-        case R.id.menu_addressbook:
-            getActivity().getSupportFragmentManager()
-                         .beginTransaction()
-                         .replace(R.id.main_content, new AddressbookFragment())
-                         .addToBackStack(null)
-                         .commit();
             return true;
 
         case R.id.menu_start:
