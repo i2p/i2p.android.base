@@ -1,16 +1,14 @@
 package net.i2p.android.router.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,7 +25,28 @@ import net.i2p.android.router.activity.AddressbookSettingsActivity;
 import net.i2p.client.naming.NamingService;
 
 public class AddressbookFragment extends ListFragment {
+    OnAddressSelectedListener mCallback;
     private ArrayAdapter<String> mAdapter;
+
+    // Container Activity must implement this interface
+    public interface OnAddressSelectedListener {
+        public void onAddressSelected(CharSequence host);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnAddressSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnAddressSelectedListener");
+        }
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,15 +95,7 @@ public class AddressbookFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView parent, View view, int pos, long id) {
         CharSequence host = ((TextView) view).getText();
-        WebFragment f = new WebFragment();
-        Bundle args = new Bundle();
-        args.putString(WebFragment.HTML_URI, "http://" + host + '/');
-        f.setArguments(args);
-        getActivity().getSupportFragmentManager()
-                     .beginTransaction()
-                     .replace(R.id.main_content, f)
-                     .addToBackStack(null)
-                     .commit();
+        mCallback.onAddressSelected(host);
     }
 
     @Override

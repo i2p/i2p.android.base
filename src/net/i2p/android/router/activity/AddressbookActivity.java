@@ -2,6 +2,7 @@ package net.i2p.android.router.activity;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.AddressbookFragment;
+import net.i2p.android.router.fragment.WebFragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,7 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class AddressbookActivity extends I2PActivityBase
-                                 implements SearchView.OnQueryTextListener {
+                                 implements AddressbookFragment.OnAddressSelectedListener,
+                                 SearchView.OnQueryTextListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,22 @@ public class AddressbookActivity extends I2PActivityBase
         searchView.setOnQueryTextListener(this);
         return super.onCreateOptionsMenu(menu);
     }
+
+    // AddressbookFragment.OnAddressSelectedListener
+
+    public void onAddressSelected(CharSequence host) {
+        WebFragment f = new WebFragment();
+        Bundle args = new Bundle();
+        args.putString(WebFragment.HTML_URI, "http://" + host + '/');
+        f.setArguments(args);
+        getSupportFragmentManager().beginTransaction()
+            .replace(R.id.main_content, f)
+            .addToBackStack(null)
+            .commit();
+        
+    }
+
+    // SearchView.OnQueryTextListener
 
     public boolean onQueryTextChange(String newText) {
         filterAddresses(newText);
