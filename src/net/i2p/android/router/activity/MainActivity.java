@@ -3,11 +3,11 @@ package net.i2p.android.router.activity;
 import android.os.Bundle;
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.MainFragment;
-import net.i2p.android.router.fragment.VersionDialog.VersionDialogListener;
+import net.i2p.android.router.fragment.VersionDialog;
 import net.i2p.android.router.util.Util;
 
 public class MainActivity extends I2PActivityBase
-                          implements VersionDialogListener {
+                          implements VersionDialog.VersionDialogListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +29,8 @@ public class MainActivity extends I2PActivityBase
         init.initialize();
         super.onPostCreate(savedInstanceState);
     }
+
+    // VersionDialog.VersionDialogListener
 
     public void onFirstRun() {
         mDrawerLayout.openDrawer(mDrawerList);
