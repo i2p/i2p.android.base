@@ -13,8 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class AddressbookActivity extends I2PActivityBase
-                                 implements AddressbookFragment.OnAddressSelectedListener,
-                                 SearchView.OnQueryTextListener {
+        implements AddressbookFragment.OnAddressSelectedListener,
+        SearchView.OnQueryTextListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
