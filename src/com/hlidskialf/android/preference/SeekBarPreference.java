@@ -49,8 +49,14 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
     public SeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-        mDialogMessage = attrs.getAttributeValue(androidns, "dialogMessage");
-        mSuffix = attrs.getAttributeValue(androidns, "text");
+        int dialogMessageR = attrs.getAttributeResourceValue(androidns, "dialogMessage", 0);
+        mDialogMessage = (dialogMessageR == 0)
+                ? attrs.getAttributeValue(androidns, "dialogMessage")
+                : context.getResources().getString(dialogMessageR);
+        int textR = attrs.getAttributeResourceValue(androidns, "text", 0);
+        mSuffix = (textR == 0)
+                ? attrs.getAttributeValue(androidns, "text")
+                : context.getResources().getString(textR);
         mDefault = attrs.getAttributeValue(androidns, "defaultValue");
         mMax = Integer.parseInt(attrs.getAttributeValue(androidns, "max"));
         if (attrs.getAttributeValue(androidns, "direction") != null) {
