@@ -79,8 +79,13 @@ public class I2PActivityBase extends ActionBarActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        //menu.findItem(R.id.action_add_to_addressbook).setVisible(!drawerOpen);
+        onDrawerChange(drawerOpen);
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    protected void onDrawerChange(boolean drawerOpen) {
+        // Override in subclass with e.g.
+        //menu.findItem(R.id.action_add_to_addressbook).setVisible(!drawerOpen);
     }
 
     @Override
