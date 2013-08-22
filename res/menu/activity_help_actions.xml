@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:i2pandroid="http://schemas.android.com/apk/res-auto" >
+    <item android:id="@+id/menu_help_licenses"
+        android:title="@string/label_licenses"
+        i2pandroid:showAsAction="never" />
+    <item android:id="@+id/menu_help_release_notes"
+        android:title="@string/label_release_notes"
+        i2pandroid:showAsAction="never" />
+
+</menu>

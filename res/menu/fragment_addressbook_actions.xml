@@ -6,8 +6,11 @@
           android:title="@string/action_add"
           android:icon="@drawable/ic_content_new"
           i2pandroid:showAsAction="ifRoom" />
-    <!-- Settings, should always be in the overflow -->
+    <!-- Settings, Help, should always be in the overflow -->
     <item android:id="@+id/action_addressbook_settings"
           android:title="@string/menu_settings"
+          i2pandroid:showAsAction="never" />
+    <item android:id="@+id/action_addressbook_help"
+          android:title="@string/menu_help"
           i2pandroid:showAsAction="never" />
 </menu>

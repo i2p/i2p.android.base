@@ -22,6 +22,7 @@ import java.util.Set;
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
 import net.i2p.android.router.activity.AddressbookSettingsActivity;
+import net.i2p.android.router.activity.HelpActivity;
 import net.i2p.client.naming.NamingService;
 
 public class AddressbookFragment extends ListFragment {
@@ -110,12 +111,17 @@ public class AddressbookFragment extends ListFragment {
         switch (item.getItemId()) {
             //case R.id.action_add_to_addressbook:
             //    return true;
-            case R.id.action_addressbook_settings:
-                Intent intent = new Intent(getActivity(), AddressbookSettingsActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        case R.id.action_addressbook_settings:
+            Intent si = new Intent(getActivity(), AddressbookSettingsActivity.class);
+            startActivity(si);
+            return true;
+        case R.id.action_addressbook_help:
+            Intent hi = new Intent(getActivity(), HelpActivity.class);
+            hi.putExtra(HelpActivity.REFERRER, "addressbook");
+            startActivity(hi);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 

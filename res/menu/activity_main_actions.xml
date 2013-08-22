@@ -20,4 +20,8 @@
           android:icon="@android:drawable/ic_menu_preferences"
           i2pandroid:showAsAction="never" >
     </item>
+    <item android:title="@string/menu_help"
+          android:id="@+id/menu_help"
+          i2pandroid:showAsAction="never" >
+    </item>
 </menu>

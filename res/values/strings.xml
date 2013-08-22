@@ -72,6 +72,8 @@
     <string name="settings_label_expl_backupQuantity">Backup quantity</string>
     <string name="settings_desc_expl_backupQuantity">How many tunnel backups</string>
 
+    <string name="menu_help">Help</string>
+
     <string name="i2ptunnel_type_client">Standard client</string>
     <string name="i2ptunnel_type_httpclient">HTTP client</string>
     <string name="i2ptunnel_type_ircclient">IRC client</string>

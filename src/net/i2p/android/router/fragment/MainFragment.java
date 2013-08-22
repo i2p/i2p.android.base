@@ -67,22 +67,6 @@ public class MainFragment extends I2PFragmentBase {
             }
         });
 
-        b = (Button) v.findViewById(R.id.releasenotes_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                TextResourceDialog f = new TextResourceDialog();
-                Bundle args = new Bundle();
-                args.putInt(TextResourceDialog.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-                f.setArguments(args);
-                getActivity().getSupportFragmentManager()
-                             .beginTransaction()
-                             .replace(R.id.main_content, f)
-                             .addToBackStack(null)
-                             .commit();
-            }
-        });
-
         b = (Button) v.findViewById(R.id.website_button);
         b.setOnClickListener(new View.OnClickListener() {
 

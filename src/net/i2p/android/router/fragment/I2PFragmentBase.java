@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import net.i2p.android.router.R;
+import net.i2p.android.router.activity.HelpActivity;
 import net.i2p.android.router.activity.SettingsActivity;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.service.RouterService;
@@ -157,6 +158,12 @@ public abstract class I2PFragmentBase extends Fragment {
         case R.id.menu_settings:
             Intent intent = new Intent(getActivity(), SettingsActivity.class);
             startActivity(intent);
+            return true;
+
+        case R.id.menu_help:
+            Intent hi = new Intent(getActivity(), HelpActivity.class);
+            hi.putExtra(HelpActivity.REFERRER, "main");
+            startActivity(hi);
             return true;
 
         case R.id.menu_start:

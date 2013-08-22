@@ -124,10 +124,6 @@ public class I2PActivityBase extends ActionBarActivity {
             err.putExtra(LogActivity.ERRORS_ONLY, true);
             startActivity(err);
             break;
-        case 5:
-            Intent lic = new Intent(I2PActivityBase.this, LicenseActivity.class);
-            startActivity(lic);
-            break;
         default:
             Intent main = new Intent(I2PActivityBase.this, MainActivity.class);
             startActivity(main);

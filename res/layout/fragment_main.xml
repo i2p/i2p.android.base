@@ -94,13 +94,6 @@
     android:text="@string/label_news"
     android:drawableLeft="@drawable/information_icon" />
 
-<Button
-    android:id="@+id/releasenotes_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/label_release_notes"
-    android:drawableLeft="@drawable/information_icon" />
-
 <TextView
     android:id="@+id/textView5"
     android:layout_width="wrap_content"
