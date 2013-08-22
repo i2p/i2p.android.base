@@ -15,9 +15,29 @@ import android.view.MenuItem;
 public class AddressbookActivity extends I2PActivityBase
         implements AddressbookFragment.OnAddressSelectedListener,
         SearchView.OnQueryTextListener {
+    /**
+     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
+     * device.
+     */
+    private boolean mTwoPane;
+
+    @Override
+    protected boolean canUseTwoPanes() {
+        return true;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (findViewById(R.id.detail_fragment) != null) {
+            // The detail container view will be present only in the
+            // large-screen layouts (res/values-large and
+            // res/values-sw600dp). If this view is present, then the
+            // activity should be in two-pane mode.
+            mTwoPane = true;
+        }
+
         // Start with the base view
         if (savedInstanceState == null) {
             AddressbookFragment f = new AddressbookFragment();
