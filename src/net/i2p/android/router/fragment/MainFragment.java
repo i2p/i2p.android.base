@@ -61,7 +61,7 @@ public class MainFragment extends I2PFragmentBase {
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager()
                              .beginTransaction()
-                             .replace(R.id.main_content, new NewsFragment())
+                             .replace(R.id.main_fragment, new NewsFragment())
                              .addToBackStack(null)
                              .commit();
             }
@@ -78,7 +78,7 @@ public class MainFragment extends I2PFragmentBase {
                 f.setArguments(args);
                 getActivity().getSupportFragmentManager()
                              .beginTransaction()
-                             .replace(R.id.main_content, f)
+                             .replace(R.id.main_fragment, f)
                              .addToBackStack(null)
                              .commit();
             }
@@ -95,7 +95,7 @@ public class MainFragment extends I2PFragmentBase {
                 f.setArguments(args);
                 getActivity().getSupportFragmentManager()
                              .beginTransaction()
-                             .replace(R.id.main_content, f)
+                             .replace(R.id.main_fragment, f)
                              .addToBackStack(null)
                              .commit();
             }
@@ -111,7 +111,7 @@ public class MainFragment extends I2PFragmentBase {
                 f.setArguments(args);
                 getActivity().getSupportFragmentManager()
                              .beginTransaction()
-                             .replace(R.id.main_content, f)
+                             .replace(R.id.main_fragment, f)
                              .addToBackStack(null)
                              .commit();
             }
@@ -123,7 +123,7 @@ public class MainFragment extends I2PFragmentBase {
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager()
                              .beginTransaction()
-                             .replace(R.id.main_content, new PeersFragment())
+                             .replace(R.id.main_fragment, new PeersFragment())
                              .addToBackStack(null)
                              .commit();
             }

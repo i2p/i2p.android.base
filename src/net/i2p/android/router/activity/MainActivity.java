@@ -17,7 +17,7 @@ public class MainActivity extends I2PActivityBase
             MainFragment mainFragment = new MainFragment();
             mainFragment.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.main_content, mainFragment).commit();
+                    .add(R.id.main_fragment, mainFragment).commit();
         }
     }
 

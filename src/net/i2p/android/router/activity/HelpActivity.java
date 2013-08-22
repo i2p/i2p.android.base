@@ -19,7 +19,7 @@ public class HelpActivity extends I2PActivityBase {
             HelpFragment f = new HelpFragment();
             f.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.main_content, f).commit();
+                    .add(R.id.main_fragment, f).commit();
         }*/
     }
 

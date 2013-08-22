@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- The name of the tunnel -->
+    <TextView android:id="@+id/tunnel_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:textSize="16sp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dp"
+        android:text="Tunnel name" />
+
+    <!-- The type of tunnel -->
+    <TextView android:id="@+id/tunnel_type"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tunnel_name"
+        android:text="Tunnel type" />
+
+    <!-- Additional tunnel details -->
+    <TextView android:id="@+id/tunnel_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tunnel_type"
+        android:text="Tunnel details" />
+
+    <!-- Interface:port the tunnel listens on or points to -->
+    <TextView android:id="@+id/tunnel_interface_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tunnel_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/tunnel_name"
+        android:gravity="right"
+        android:text="Interface:port" />
+
+</RelativeLayout>

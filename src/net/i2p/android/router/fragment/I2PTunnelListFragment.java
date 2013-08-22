@@ -18,21 +18,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-public class I2PTunnelFragment extends ListFragment
+public class I2PTunnelListFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<List<TunnelEntry>> {
     public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";
 
     private static final int CLIENT_LOADER_ID = 1;
     private static final int SERVER_LOADER_ID = 2;
+    /**
+     * The serialization (saved instance state) Bundle key representing the
+     * activated item position. Only used on tablets.
+     */
+    private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     OnTunnelSelectedListener mCallback;
     private TunnelControllerGroup mGroup;
     private TunnelEntryAdapter mAdapter;
     private boolean mClientTunnels;
+    /**
+     * The current activated item position. Only used on tablets.
+     */
+    private int mActivatedPosition = ListView.INVALID_POSITION;
+    private boolean mActivateOnItemClick = false;
 
     // Container Activity must implement this interface
     public interface OnTunnelSelectedListener {
-        public void onTunnelSelected(TunnelEntry host);
+        public void onTunnelSelected(int tunnelId);
     }
 
     @Override
@@ -54,6 +64,24 @@ public class I2PTunnelFragment extends ListFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Restore the previously serialized activated item position.
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+            setActivatedPosition(savedInstanceState
+                    .getInt(STATE_ACTIVATED_POSITION));
+        }
+
+        // When setting CHOICE_MODE_SINGLE, ListView will automatically
+        // give items the 'activated' state when touched.
+        getListView().setChoiceMode(
+                mActivateOnItemClick ? ListView.CHOICE_MODE_SINGLE
+                        : ListView.CHOICE_MODE_NONE);
     }
 
     @Override
@@ -89,7 +117,17 @@ public class I2PTunnelFragment extends ListFragment
 
     @Override
     public void onListItemClick(ListView parent, View view, int pos, long id) {
-        mCallback.onTunnelSelected(mAdapter.getItem(pos));
+        super.onListItemClick(parent, view, pos, id);
+        mCallback.onTunnelSelected(mAdapter.getItem(pos).getId());
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mActivatedPosition != ListView.INVALID_POSITION) {
+            // Serialize and persist the activated item position.
+            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
+        }
     }
 
     @Override
@@ -106,6 +144,24 @@ public class I2PTunnelFragment extends ListFragment
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Turns on activate-on-click mode. When this mode is on, list items will be
+     * given the 'activated' state when touched.
+     */
+    public void setActivateOnItemClick(boolean activateOnItemClick) {
+        mActivateOnItemClick = activateOnItemClick;
+    }
+
+    private void setActivatedPosition(int position) {
+        if (position == ListView.INVALID_POSITION) {
+            getListView().setItemChecked(mActivatedPosition, false);
+        } else {
+            getListView().setItemChecked(position, true);
+        }
+
+        mActivatedPosition = position;
     }
 
     // LoaderManager.LoaderCallbacks<List<TunnelEntry>>

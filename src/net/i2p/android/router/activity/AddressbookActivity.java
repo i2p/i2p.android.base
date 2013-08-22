@@ -23,7 +23,7 @@ public class AddressbookActivity extends I2PActivityBase
             AddressbookFragment f = new AddressbookFragment();
             f.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.main_content, f).commit();
+                    .add(R.id.main_fragment, f).commit();
         }
     }
 
@@ -46,7 +46,7 @@ public class AddressbookActivity extends I2PActivityBase
         args.putString(WebFragment.HTML_URI, "http://" + host + '/');
         f.setArguments(args);
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.main_content, f)
+            .replace(R.id.main_fragment, f)
             .addToBackStack(null)
             .commit();
         
@@ -65,7 +65,7 @@ public class AddressbookActivity extends I2PActivityBase
     }
 
     private void filterAddresses(String query) {
-        Fragment f = getSupportFragmentManager().findFragmentById(R.id.main_content);
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.main_fragment);
         if (f instanceof AddressbookFragment) {
             AddressbookFragment af = (AddressbookFragment) f;
             af.filterAddresses(query);

@@ -27,8 +27,9 @@ public class TunnelEntryLoader extends AsyncTaskLoader<List<TunnelEntry>> {
     @Override
     public List<TunnelEntry> loadInBackground() {
         List<TunnelEntry> ret = new ArrayList<TunnelEntry>();
-        for (TunnelController controller : mGroup.getControllers()) {
-            TunnelEntry tunnel = new TunnelEntry(this, controller);
+        List<TunnelController> controllers = mGroup.getControllers();
+        for (int i = 0; i < controllers.size(); i++) {
+            TunnelEntry tunnel = new TunnelEntry(getContext(), controllers.get(i), i);
             if ( (mClientTunnels && tunnel.isClient()) ||
                  (!mClientTunnels && !tunnel.isClient()) )
                 ret.add(tunnel);

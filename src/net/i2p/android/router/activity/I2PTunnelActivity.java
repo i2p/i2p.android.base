@@ -1,15 +1,26 @@
 package net.i2p.android.router.activity;
 
 import net.i2p.android.router.R;
-import net.i2p.android.router.fragment.I2PTunnelFragment;
-import net.i2p.android.router.loader.TunnelEntry;
+import net.i2p.android.router.fragment.I2PTunnelDetailFragment;
+import net.i2p.android.router.fragment.I2PTunnelListFragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 
 public class I2PTunnelActivity extends I2PActivityBase
-        implements I2PTunnelFragment.OnTunnelSelectedListener {
+        implements I2PTunnelListFragment.OnTunnelSelectedListener {
+    /**
+     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
+     * device.
+     */
+    private boolean mTwoPane;
+
+    @Override
+    protected boolean canUseTwoPanes() {
+        return true;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,28 +30,55 @@ public class I2PTunnelActivity extends I2PActivityBase
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Client tunnels tab
-        Fragment f = new I2PTunnelFragment();
+        I2PTunnelListFragment cf = new I2PTunnelListFragment();
         Bundle args = new Bundle();
-        args.putBoolean(I2PTunnelFragment.SHOW_CLIENT_TUNNELS, true);
-        f.setArguments(args);
+        args.putBoolean(I2PTunnelListFragment.SHOW_CLIENT_TUNNELS, true);
+        cf.setArguments(args);
         Tab tab = actionBar.newTab()
                 .setText(R.string.label_i2ptunnel_client)
-                .setTabListener(new TabListener(f));
+                .setTabListener(new TabListener(cf));
         actionBar.addTab(tab);
 
         // Server tunnels tab
-        f = new I2PTunnelFragment();
+        I2PTunnelListFragment sf = new I2PTunnelListFragment();
         args = new Bundle();
-        args.putBoolean(I2PTunnelFragment.SHOW_CLIENT_TUNNELS, false);
-        f.setArguments(args);
+        args.putBoolean(I2PTunnelListFragment.SHOW_CLIENT_TUNNELS, false);
+        sf.setArguments(args);
         tab = actionBar.newTab()
                 .setText(R.string.label_i2ptunnel_server)
-                .setTabListener(new TabListener(f));
+                .setTabListener(new TabListener(sf));
         actionBar.addTab(tab);
+
+        if (findViewById(R.id.detail_fragment) != null) {
+            // The detail container view will be present only in the
+            // large-screen layouts (res/values-large and
+            // res/values-sw600dp). If this view is present, then the
+            // activity should be in two-pane mode.
+            mTwoPane = true;
+
+            // In two-pane mode, list items should be given the
+            // 'activated' state when touched.
+            cf.setActivateOnItemClick(true);
+            sf.setActivateOnItemClick(true);
+        }
     }
 
-    // I2PTunnelFragment.OnTunnelSelectedListener
+    // I2PTunnelListFragment.OnTunnelSelectedListener
 
-    public void onTunnelSelected(TunnelEntry tunnel) {
+    public void onTunnelSelected(int tunnelId) {
+        if (mTwoPane) {
+            // In two-pane mode, show the detail view in this activity by
+            // adding or replacing the detail fragment using a
+            // fragment transaction.
+            I2PTunnelDetailFragment detailFrag = I2PTunnelDetailFragment.newInstance(tunnelId);
+            getSupportFragmentManager().beginTransaction()
+                .replace(R.id.detail_fragment, detailFrag).commit();
+        } else {
+            // In single-pane mode, simply start the detail activity
+            // for the selected item ID.
+            Intent detailIntent = new Intent(this, I2PTunnelDetailActivity.class);
+            detailIntent.putExtra(I2PTunnelDetailFragment.TUNNEL_ID, tunnelId);
+            startActivity(detailIntent);
+        }
     }
 }

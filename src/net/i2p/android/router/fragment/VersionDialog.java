@@ -52,7 +52,7 @@ public class VersionDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         I2PFragmentBase fb = (I2PFragmentBase) getActivity()
                                 .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_content);
+                                .findFragmentById(R.id.main_fragment);
                         fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         dialog.cancel();
                         mListener.onFirstRun();
@@ -62,7 +62,7 @@ public class VersionDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         I2PFragmentBase fb = (I2PFragmentBase) getActivity()
                                 .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_content);
+                                .findFragmentById(R.id.main_fragment);
                         fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         dialog.cancel();
                         TextResourceDialog f = new TextResourceDialog();
@@ -71,7 +71,7 @@ public class VersionDialog extends DialogFragment {
                         f.setArguments(args);
                         getActivity().getSupportFragmentManager()
                                      .beginTransaction()
-                                     .replace(R.id.main_content, f)
+                                     .replace(R.id.main_fragment, f)
                                      .addToBackStack(null)
                                      .commit();
                     }
@@ -80,7 +80,7 @@ public class VersionDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         I2PFragmentBase fb = (I2PFragmentBase) getActivity()
                                 .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_content);
+                                .findFragmentById(R.id.main_fragment);
                         fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         dialog.cancel();
                         Intent intent = new Intent(getActivity(), LicenseActivity.class);
@@ -98,7 +98,7 @@ public class VersionDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         I2PFragmentBase fb = (I2PFragmentBase) getActivity()
                                 .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_content);
+                                .findFragmentById(R.id.main_fragment);
                         fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         try {
                             dialog.dismiss();
@@ -110,7 +110,7 @@ public class VersionDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         I2PFragmentBase fb = (I2PFragmentBase) getActivity()
                                 .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_content);
+                                .findFragmentById(R.id.main_fragment);
                         fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         try {
                             dialog.dismiss();
@@ -122,7 +122,7 @@ public class VersionDialog extends DialogFragment {
                         f.setArguments(args);
                         getActivity().getSupportFragmentManager()
                                      .beginTransaction()
-                                     .replace(R.id.main_content, f)
+                                     .replace(R.id.main_fragment, f)
                                      .addToBackStack(null)
                                      .commit();
                     }

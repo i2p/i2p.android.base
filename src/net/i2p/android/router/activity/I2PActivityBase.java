@@ -31,10 +31,26 @@ public class I2PActivityBase extends ActionBarActivity {
     private CharSequence mTitle;
     private String[] mActivityTitles;
 
+    /**
+     * Override this in subclasses that can use two panes, such as a
+     * list/detail class. 
+     * @return whether this Activity can use a two-pane layout.
+     */
+    protected boolean canUseTwoPanes() {
+        return false;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navdrawer);
+
+        // If the Activity can make use of two panes (if available),
+        // load the layout that will enable them. Otherwise, load the
+        // layout that will only ever have a single pane.
+        if (canUseTwoPanes())
+            setContentView(R.layout.activity_navdrawer);
+        else
+            setContentView(R.layout.activity_navdrawer_onepane);
 
         mTitle = mDrawerTitle = getTitle();
         mActivityTitles = getResources().getStringArray(R.array.navdrawer_activity_titles);
@@ -138,7 +154,7 @@ public class I2PActivityBase extends ActionBarActivity {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                       .replace(R.id.main_content, fragment)
+                       .replace(R.id.main_fragment, fragment)
                        .commit();
 
         // Highlight the selected item, update the title, and close the drawer
@@ -169,7 +185,7 @@ public class I2PActivityBase extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_content);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_fragment);
         if (fragment instanceof I2PFragmentBase) {
             I2PFragmentBase ifb = (I2PFragmentBase) fragment;
             // If we shouldn't stay on this fragment, go back.
@@ -187,7 +203,7 @@ public class I2PActivityBase extends ActionBarActivity {
         }
 
         public void onTabSelected(Tab tab, FragmentTransaction ft) {
-            ft.replace(R.id.main_content, mFragment);
+            ft.replace(R.id.main_fragment, mFragment);
         }
 
         public void onTabUnselected(Tab tab, FragmentTransaction ft) {

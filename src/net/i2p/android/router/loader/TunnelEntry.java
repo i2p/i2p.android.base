@@ -1,16 +1,23 @@
 package net.i2p.android.router.loader;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import net.i2p.android.router.R;
 import net.i2p.i2ptunnel.TunnelController;
 
 public class TunnelEntry {
-    private final TunnelEntryLoader mLoader;
+    private final Context mContext;
     private final TunnelController mController;
+    private final int mId;
 
-    public TunnelEntry(TunnelEntryLoader loader, TunnelController controller) {
-        mLoader = loader;
+    public TunnelEntry(Context context, TunnelController controller, int id) {
+        mContext = context;
         mController = controller;
+        mId = id;
+    }
+
+    public int getId() {
+        return mId;
     }
 
     public TunnelController getController() {
@@ -41,40 +48,40 @@ public class TunnelEntry {
 
     public String getTypeName() {
         if ("client".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_client);
         else if ("httpclient".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_httpclient);
         else if ("ircclient".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_ircclient);
         else if ("server".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_server);
         else if ("httpserver".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_httpserver);
         else if ("sockstunnel".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_sockstunnel);
         else if ("socksirctunnel".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_socksirctunnel);
         else if ("connectclient".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_connectclient);
         else if ("ircserver".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_ircserver);
         else if ("streamrclient".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_streamrclient);
         else if ("streamrserver".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_streamrserver);
         else if ("httpbidirserver".equals(mController.getType()))
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getString(R.string.i2ptunnel_type_httpbidirserver);
         else
             return mController.getType();
@@ -118,16 +125,16 @@ public class TunnelEntry {
     public Drawable getStatusIcon() {
         if (mController.getIsRunning()) {
             if (isClient() && mController.getIsStandby())
-                return mLoader.getContext().getResources()
+                return mContext.getResources()
                         .getDrawable(R.drawable.local_inprogress);
             else
-                return mLoader.getContext().getResources()
+                return mContext.getResources()
                         .getDrawable(R.drawable.local_up);
         } else if (mController.getIsStarting())
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getDrawable(R.drawable.local_inprogress);
         else
-            return mLoader.getContext().getResources()
+            return mContext.getResources()
                     .getDrawable(R.drawable.local_down);
     }
 }
