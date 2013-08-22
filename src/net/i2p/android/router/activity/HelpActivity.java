@@ -4,6 +4,7 @@ import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.TextResourceDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,6 +15,12 @@ public class HelpActivity extends I2PActivityBase {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDrawerToggle.setDrawerIndicatorEnabled(false);
+        /*if (savedInstanceState == null) {
+            HelpFragment f = new HelpFragment();
+            f.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.main_content, f).commit();
+        }*/
     }
 
     @Override
