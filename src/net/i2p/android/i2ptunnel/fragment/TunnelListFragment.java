@@ -1,11 +1,11 @@
-package net.i2p.android.router.fragment;
+package net.i2p.android.i2ptunnel.fragment;
 
 import java.util.List;
 
+import net.i2p.android.i2ptunnel.adapter.TunnelEntryAdapter;
+import net.i2p.android.i2ptunnel.loader.TunnelEntry;
+import net.i2p.android.i2ptunnel.loader.TunnelEntryLoader;
 import net.i2p.android.router.R;
-import net.i2p.android.router.adapter.TunnelEntryAdapter;
-import net.i2p.android.router.loader.TunnelEntryLoader;
-import net.i2p.android.router.loader.TunnelEntry;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-public class I2PTunnelListFragment extends ListFragment
+public class TunnelListFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<List<TunnelEntry>> {
     public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";
 

@@ -1,15 +1,16 @@
-package net.i2p.android.router.activity;
+package net.i2p.android.i2ptunnel.activity;
 
+import net.i2p.android.i2ptunnel.fragment.TunnelDetailFragment;
+import net.i2p.android.i2ptunnel.fragment.TunnelListFragment;
 import net.i2p.android.router.R;
-import net.i2p.android.router.fragment.I2PTunnelDetailFragment;
-import net.i2p.android.router.fragment.I2PTunnelListFragment;
+import net.i2p.android.router.activity.I2PActivityBase;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 
-public class I2PTunnelActivity extends I2PActivityBase
-        implements I2PTunnelListFragment.OnTunnelSelectedListener {
+public class TunnelListActivity extends I2PActivityBase
+        implements TunnelListFragment.OnTunnelSelectedListener {
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -30,9 +31,9 @@ public class I2PTunnelActivity extends I2PActivityBase
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Client tunnels tab
-        I2PTunnelListFragment cf = new I2PTunnelListFragment();
+        TunnelListFragment cf = new TunnelListFragment();
         Bundle args = new Bundle();
-        args.putBoolean(I2PTunnelListFragment.SHOW_CLIENT_TUNNELS, true);
+        args.putBoolean(TunnelListFragment.SHOW_CLIENT_TUNNELS, true);
         cf.setArguments(args);
         Tab tab = actionBar.newTab()
                 .setText(R.string.label_i2ptunnel_client)
@@ -40,9 +41,9 @@ public class I2PTunnelActivity extends I2PActivityBase
         actionBar.addTab(tab);
 
         // Server tunnels tab
-        I2PTunnelListFragment sf = new I2PTunnelListFragment();
+        TunnelListFragment sf = new TunnelListFragment();
         args = new Bundle();
-        args.putBoolean(I2PTunnelListFragment.SHOW_CLIENT_TUNNELS, false);
+        args.putBoolean(TunnelListFragment.SHOW_CLIENT_TUNNELS, false);
         sf.setArguments(args);
         tab = actionBar.newTab()
                 .setText(R.string.label_i2ptunnel_server)
@@ -70,14 +71,14 @@ public class I2PTunnelActivity extends I2PActivityBase
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
             // fragment transaction.
-            I2PTunnelDetailFragment detailFrag = I2PTunnelDetailFragment.newInstance(tunnelId);
+            TunnelDetailFragment detailFrag = TunnelDetailFragment.newInstance(tunnelId);
             getSupportFragmentManager().beginTransaction()
                 .replace(R.id.detail_fragment, detailFrag).commit();
         } else {
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
-            Intent detailIntent = new Intent(this, I2PTunnelDetailActivity.class);
-            detailIntent.putExtra(I2PTunnelDetailFragment.TUNNEL_ID, tunnelId);
+            Intent detailIntent = new Intent(this, TunnelDetailActivity.class);
+            detailIntent.putExtra(TunnelDetailFragment.TUNNEL_ID, tunnelId);
             startActivity(detailIntent);
         }
     }

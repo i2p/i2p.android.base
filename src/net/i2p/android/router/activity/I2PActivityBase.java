@@ -1,5 +1,6 @@
 package net.i2p.android.router.activity;
 
+import net.i2p.android.i2ptunnel.activity.TunnelListActivity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.I2PFragmentBase;
 import android.app.Activity;
@@ -128,7 +129,7 @@ public class I2PActivityBase extends ActionBarActivity {
             startActivity(ab);
             break;
         case 2:
-            Intent itb = new Intent(I2PActivityBase.this, I2PTunnelActivity.class);
+            Intent itb = new Intent(I2PActivityBase.this, TunnelListActivity.class);
             startActivity(itb);
             break;
         case 3:

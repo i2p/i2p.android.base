@@ -1,4 +1,4 @@
-package net.i2p.android.router.loader;
+package net.i2p.android.i2ptunnel.loader;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

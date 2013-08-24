@@ -1,9 +1,9 @@
-package net.i2p.android.router.adapter;
+package net.i2p.android.i2ptunnel.adapter;
 
 import java.util.List;
 
+import net.i2p.android.i2ptunnel.loader.TunnelEntry;
 import net.i2p.android.router.R;
-import net.i2p.android.router.loader.TunnelEntry;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

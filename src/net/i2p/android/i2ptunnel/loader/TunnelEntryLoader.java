@@ -1,4 +1,4 @@
-package net.i2p.android.router.loader;
+package net.i2p.android.i2ptunnel.loader;
 
 import java.util.ArrayList;
 import java.util.List;

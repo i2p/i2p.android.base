@@ -1,7 +1,7 @@
-package net.i2p.android.router.fragment;
+package net.i2p.android.i2ptunnel.fragment;
 
+import net.i2p.android.i2ptunnel.loader.TunnelEntry;
 import net.i2p.android.router.R;
-import net.i2p.android.router.loader.TunnelEntry;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,13 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class I2PTunnelDetailFragment extends Fragment {
+public class TunnelDetailFragment extends Fragment {
     public static final String TUNNEL_ID = "tunnel_id";
 
     private TunnelEntry mTunnel;
 
-    public static I2PTunnelDetailFragment newInstance(int tunnelId) {
-        I2PTunnelDetailFragment f = new I2PTunnelDetailFragment();
+    public static TunnelDetailFragment newInstance(int tunnelId) {
+        TunnelDetailFragment f = new TunnelDetailFragment();
         Bundle args = new Bundle();
         args.putInt(TUNNEL_ID, tunnelId);
         f.setArguments(args);
