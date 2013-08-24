@@ -87,4 +87,5 @@
     <string name="i2ptunnel_type_streamrserver">Streamr server</string>
     <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
     <string name="i2ptunnel_not_initialized">Tunnels are not initialized yet, please reload in two minutes.</string>
+    <string name="i2ptunnel_new_tunnel">New Tunnel</string>
 </resources>

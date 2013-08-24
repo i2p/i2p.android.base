@@ -57,13 +57,16 @@ public class I2PTunnelDetailFragment extends Fragment {
             name.setText(mTunnel.getName());
 
             TextView type = (TextView) v.findViewById(R.id.tunnel_type);
-            type.setText(mTunnel.getTypeName());
+            type.setText(mTunnel.getType());
 
-            TextView ifacePort = (TextView) v.findViewById(R.id.tunnel_interface_port);
-            ifacePort.setText(mTunnel.getIfacePort());
+            TextView description = (TextView) v.findViewById(R.id.tunnel_description);
+            description.setText(mTunnel.getDescription());
 
-            TextView details = (TextView) v.findViewById(R.id.tunnel_details);
-            details.setText(mTunnel.getDetails());
+            TextView targetIfacePort = (TextView) v.findViewById(R.id.tunnel_target_interface_port);
+            targetIfacePort.setText(mTunnel.getIfacePort());
+
+            TextView accessIfacePort = (TextView) v.findViewById(R.id.tunnel_access_interface_port);
+            accessIfacePort.setText(mTunnel.getIfacePort());
         }
 
         return v;

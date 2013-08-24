@@ -38,7 +38,7 @@ public class TunnelEntryAdapter extends ArrayAdapter<TunnelEntry> {
         name.setText(tunnel.getName());
 
         TextView type = (TextView) v.findViewById(R.id.tunnel_type);
-        type.setText(tunnel.getTypeName());
+        type.setText(tunnel.getType());
 
         TextView ifacePort = (TextView) v.findViewById(R.id.tunnel_interface_port);
         ifacePort.setText(tunnel.getIfacePort());

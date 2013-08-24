@@ -3,38 +3,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <!-- The name of the tunnel -->
-    <TextView android:id="@+id/tunnel_name"
+    <TextView
+        android:id="@+id/tunnel_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:textSize="16sp"
         android:layout_alignParentLeft="true"
-        android:layout_marginRight="5dp"
-        android:text="Tunnel name" />
+        android:layout_alignParentTop="true"
+        android:padding="3dp"
+        android:text="Tunnel name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <!-- The type of tunnel -->
-    <TextView android:id="@+id/tunnel_type"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tunnel_name"
-        android:text="Tunnel type" />
-
-    <!-- Additional tunnel details -->
-    <TextView android:id="@+id/tunnel_details"
+    <TextView
+        android:id="@+id/tunnel_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tunnel_type"
-        android:text="Tunnel details" />
-
-    <!-- Interface:port the tunnel listens on or points to -->
-    <TextView android:id="@+id/tunnel_interface_port"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tunnel_name"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/tunnel_name"
+        android:layout_below="@+id/tunnel_type"
+        android:text="Tunnel description" />
+
+    <TextView
+        android:id="@+id/tunnel_target_interface_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tunnel_description"
         android:gravity="right"
         android:text="Interface:port" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tunnel_name"
+        android:text="Type:" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView2"
+        android:text="Description:" />
+
+    <TextView
+        android:id="@+id/tunnel_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tunnel_name"
+        android:text="Tunnel type" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:text="Target:" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView3"
+        android:text="Access point:" />
+
+    <TextView
+        android:id="@+id/tunnel_access_interface_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:text="Interface:port" />
+
+    <CheckBox
+        android:id="@+id/tunnel_autostart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:clickable="false"
+        android:text="Auto start" />
 
 </RelativeLayout>
