@@ -93,6 +93,7 @@
     <string name="prev">Previous</string>
     <string name="finish">Submit</string>
     <string name="review">Review</string>
+    <string name="enabled">Enabled</string>
 
     <string name="i2ptunnel_wizard_submit_confirm_message">Create tunnel?</string>
     <string name="i2ptunnel_wizard_submit_confirm_button">Create tunnel</string>

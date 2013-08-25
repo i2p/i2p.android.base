@@ -5,6 +5,7 @@ import net.i2p.android.wizard.model.AbstractWizardModel;
 import net.i2p.android.wizard.model.BranchPage;
 import net.i2p.android.wizard.model.MultipleFixedChoicePage;
 import net.i2p.android.wizard.model.PageList;
+import net.i2p.android.wizard.model.SingleFixedBooleanPage;
 import net.i2p.android.wizard.model.SingleFixedChoicePage;
 import net.i2p.android.wizard.model.TextFieldPage;
 
@@ -30,7 +31,10 @@ public class TunnelWizardModel extends AbstractWizardModel {
                 .setDescription("The name of the tunnel, for identification in the tunnel list.")
                 .setRequired(true),
             new TextFieldPage(this, "Description")
-                .setDescription("A description of the tunnel. This is optional and purely informative.")
+                .setDescription("A description of the tunnel. This is optional and purely informative."),
+            new SingleFixedBooleanPage(this, "Auto start")
+                .setDescription("Should the tunnel automatically start when the router starts?")
+                .setRequired(true)
             );
     }
 
