@@ -77,6 +77,10 @@
                   android:label="I2PTunnel"
                   android:parentActivityName="net.i2p.android.i2ptunnel.activity.TunnelListActivity" >
         </activity>
+        <activity android:name="net.i2p.android.i2ptunnel.activity.TunnelWizardActivity"
+                  android:label="Tunnel Creation Wizard"
+                  android:parentActivityName="net.i2p.android.i2ptunnel.activity.TunnelListActivity" >
+        </activity>
         <activity android:name=".activity.LogActivity"
                   android:label="I2P Logs"
                   android:parentActivityName=".activity.MainActivity" >

@@ -2,12 +2,14 @@ package net.i2p.android.i2ptunnel.fragment;
 
 import java.util.List;
 
+import net.i2p.android.i2ptunnel.activity.TunnelWizardActivity;
 import net.i2p.android.i2ptunnel.adapter.TunnelEntryAdapter;
 import net.i2p.android.i2ptunnel.loader.TunnelEntry;
 import net.i2p.android.i2ptunnel.loader.TunnelEntryLoader;
 import net.i2p.android.router.R;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
@@ -140,7 +142,8 @@ public class TunnelListFragment extends ListFragment
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_add_tunnel:
-                return true;
+                Intent wi = new Intent(getActivity(), TunnelWizardActivity.class);
+                startActivity(wi);
             default:
                 return super.onOptionsItemSelected(item);
         }

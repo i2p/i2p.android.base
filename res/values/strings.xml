@@ -88,4 +88,12 @@
     <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
     <string name="i2ptunnel_not_initialized">Tunnels are not initialized yet, please reload in two minutes.</string>
     <string name="i2ptunnel_new_tunnel">New Tunnel</string>
+
+    <string name="next">Next</string>
+    <string name="prev">Previous</string>
+    <string name="finish">Submit</string>
+    <string name="review">Review</string>
+
+    <string name="i2ptunnel_wizard_submit_confirm_message">Create tunnel?</string>
+    <string name="i2ptunnel_wizard_submit_confirm_button">Create tunnel</string>
 </resources>
