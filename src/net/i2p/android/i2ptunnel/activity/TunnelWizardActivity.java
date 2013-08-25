@@ -11,6 +11,7 @@ import net.i2p.android.wizard.ui.ReviewFragment;
 import net.i2p.android.wizard.ui.StepPagerStrip;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -90,7 +91,13 @@ public class TunnelWizardActivity extends FragmentActivity implements
                         public Dialog onCreateDialog(Bundle savedInstanceState) {
                             return new AlertDialog.Builder(getActivity())
                                     .setMessage(R.string.i2ptunnel_wizard_submit_confirm_message)
-                                    .setPositiveButton(R.string.i2ptunnel_wizard_submit_confirm_button, null)
+                                    .setPositiveButton(R.string.i2ptunnel_wizard_submit_confirm_button,
+                                            new DialogInterface.OnClickListener() {
+
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    
+                                                }
+                                            })
                                     .setNegativeButton(android.R.string.cancel, null)
                                     .create();
                         }
