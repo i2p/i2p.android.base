@@ -18,7 +18,7 @@ package net.i2p.android.wizard.ui;
 
 import net.i2p.android.router.R;
 import net.i2p.android.wizard.model.Page;
-import net.i2p.android.wizard.model.TextFieldPage;
+import net.i2p.android.wizard.model.SingleTextFieldPage;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,24 +32,24 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
-public class TextFieldFragment extends Fragment {
+public class SingleTextFieldFragment extends Fragment {
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;
     private String mKey;
-    private TextFieldPage mPage;
+    private SingleTextFieldPage mPage;
     private TextView mFieldView;
 
-    public static TextFieldFragment create(String key) {
+    public static SingleTextFieldFragment create(String key) {
         Bundle args = new Bundle();
         args.putString(ARG_KEY, key);
 
-        TextFieldFragment fragment = new TextFieldFragment();
+        SingleTextFieldFragment fragment = new SingleTextFieldFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public TextFieldFragment() {
+    public SingleTextFieldFragment() {
     }
 
     @Override
@@ -58,13 +58,13 @@ public class TextFieldFragment extends Fragment {
 
         Bundle args = getArguments();
         mKey = args.getString(ARG_KEY);
-        mPage = (TextFieldPage) mCallbacks.onGetPage(mKey);
+        mPage = (SingleTextFieldPage) mCallbacks.onGetPage(mKey);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_wizard_page_text_field, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_wizard_page_single_text_field, container, false);
         ((TextView) rootView.findViewById(android.R.id.title)).setText(mPage.getTitle());
         ((TextView) rootView.findViewById(R.id.wizard_text_field_desc)).setText(mPage.getDesc());
 
