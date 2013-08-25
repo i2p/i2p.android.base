@@ -32,6 +32,16 @@ public class TunnelWizardModel extends AbstractWizardModel {
                 .setRequired(true),
             new SingleTextFieldPage(this, "Description")
                 .setDescription("A description of the tunnel. This is optional and purely informative."),
+            new SingleTextFieldPage(this, "Destination")
+                .setDescription("Type in the I2P destination of the service that this client tunnel should connect to. This could be the full base 64 destination key, or an I2P URL from your address book."),
+            new SingleTextFieldPage(this, "Reachable on")
+                .setDescription("This limits what computers or smartphones can access this tunnel."),
+            new SingleTextFieldPage(this, "Binding port")
+                .setDescription("This is the port that the client tunnel will be accessed from locally. This is also the client port for the HTTP bidir server tunnel."),
+            new SingleTextFieldPage(this, "Target host")
+                .setDescription("This is the IP that your service is running on, this is usually on the same machine so 127.0.0.1 is autofilled."),
+            new SingleTextFieldPage(this, "Target port")
+                .setDescription("This is the port that the service is accepting connections on."),
             new SingleFixedBooleanPage(this, "Auto start")
                 .setDescription("Should the tunnel automatically start when the router starts?")
                 .setRequired(true)
