@@ -63,6 +63,7 @@ public class TunnelWizardModel extends AbstractWizardModel {
                 .setEqualAnyCondition(cServerType, "HTTP bidir", "Streamr"),
             new SingleTextFieldPage(this, "Binding port")
                 .setDescription("This is the port that the client tunnel will be accessed from locally. This is also the client port for the HTTP bidir server tunnel.")
+                .setRequired(true)
                 .setEqualCondition(cTunnelType, "Client tunnel")
                 .setEqualCondition(cServerType, "HTTP bidir"),
             new SingleFixedBooleanPage(this, "Auto start")
