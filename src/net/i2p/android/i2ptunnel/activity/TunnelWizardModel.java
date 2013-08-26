@@ -45,6 +45,7 @@ public class TunnelWizardModel extends AbstractWizardModel {
                 .setDescription("If you know of any outproxies for this type of tunnel (either HTTP or SOCKS), fill them in. Separate multiple proxies with commas.")
                 .setEqualAnyCondition(cClientType, "HTTP", "CONNECT", "SOCKS 4/4a/5", "SOCKS IRC"),
             new SingleTextFieldPage(this, "Target host")
+                .setDefault("127.0.0.1")
                 .setDescription("This is the IP that your service is running on, this is usually on the same machine so 127.0.0.1 is autofilled.")
                 .setEqualCondition(cClientType, "Streamr")
                 .setEqualAnyCondition(cServerType, "Standard", "HTTP", "HTTP bidir", "IRC"),
@@ -52,6 +53,7 @@ public class TunnelWizardModel extends AbstractWizardModel {
                 .setDescription("This is the port that the service is accepting connections on.")
                 .setEqualCondition(cTunnelType, "Server tunnel"),
             new SingleTextFieldPage(this, "Reachable on")
+                .setDefault("127.0.0.1")
                 .setDescription("This limits what computers or smartphones can access this tunnel.")
                 .setEqualAnyCondition(cClientType, "Standard", "HTTP", "IRC", "SOCKS 4/4a/5", "SOCKS IRC", "CONNECT")
                 .setEqualAnyCondition(cServerType, "HTTP bidir", "Streamr"),

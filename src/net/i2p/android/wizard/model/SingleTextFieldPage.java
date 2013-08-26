@@ -27,6 +27,8 @@ import java.util.ArrayList;
  * A page asking for a text field.
  */
 public class SingleTextFieldPage extends Page {
+    // The null is checked in SingleTextFieldFragment
+    protected String mDef = null;
     protected String mDesc = "";
 
     public SingleTextFieldPage(ModelCallbacks callbacks, String title) {
@@ -46,6 +48,15 @@ public class SingleTextFieldPage extends Page {
     @Override
     public boolean isCompleted() {
         return !TextUtils.isEmpty(mData.getString(SIMPLE_DATA_KEY));
+    }
+
+    public SingleTextFieldPage setDefault(String def) {
+        mDef = def;
+        return this;
+    }
+
+    public String getDefault() {
+        return mDef;
     }
 
     public SingleTextFieldPage setDescription(String desc) {

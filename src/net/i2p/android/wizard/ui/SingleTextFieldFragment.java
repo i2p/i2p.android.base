@@ -70,7 +70,13 @@ public class SingleTextFieldFragment extends Fragment {
 
         mFieldView = ((TextView) rootView.findViewById(R.id.wizard_text_field));
         mFieldView.setHint(mPage.getTitle());
-        mFieldView.setText(mPage.getData().getString(Page.SIMPLE_DATA_KEY));
+        if (mPage.getData().getString(Page.SIMPLE_DATA_KEY) != null)
+            mFieldView.setText(mPage.getData().getString(Page.SIMPLE_DATA_KEY));
+        else if (mPage.getDefault() != null) {
+            mFieldView.setText(mPage.getDefault());
+            mPage.getData().putString(Page.SIMPLE_DATA_KEY, mPage.getDefault());
+            mPage.notifyDataChanged();
+        }
         return rootView;
     }
 
