@@ -40,6 +40,7 @@ public class TunnelWizardModel extends AbstractWizardModel {
                 .setDescription("A description of the tunnel. This is optional and purely informative."),
             new SingleTextFieldPage(this, "Destination")
                 .setDescription("Type in the I2P destination of the service that this client tunnel should connect to. This could be the full base 64 destination key, or an I2P URL from your address book.")
+                .setRequired(true)
                 .setEqualAnyCondition(cClientType, "Standard", "IRC", "Streamr"),
             new SingleTextFieldPage(this, "Outproxies")
                 .setDescription("If you know of any outproxies for this type of tunnel (either HTTP or SOCKS), fill them in. Separate multiple proxies with commas.")
@@ -47,14 +48,17 @@ public class TunnelWizardModel extends AbstractWizardModel {
             new SingleTextFieldPage(this, "Target host")
                 .setDefault("127.0.0.1")
                 .setDescription("This is the IP that your service is running on, this is usually on the same machine so 127.0.0.1 is autofilled.")
+                .setRequired(true)
                 .setEqualCondition(cClientType, "Streamr")
                 .setEqualAnyCondition(cServerType, "Standard", "HTTP", "HTTP bidir", "IRC"),
             new SingleTextFieldPage(this, "Target port")
                 .setDescription("This is the port that the service is accepting connections on.")
+                .setRequired(true)
                 .setEqualCondition(cTunnelType, "Server tunnel"),
             new SingleTextFieldPage(this, "Reachable on")
                 .setDefault("127.0.0.1")
                 .setDescription("This limits what computers or smartphones can access this tunnel.")
+                .setRequired(true)
                 .setEqualAnyCondition(cClientType, "Standard", "HTTP", "IRC", "SOCKS 4/4a/5", "SOCKS IRC", "CONNECT")
                 .setEqualAnyCondition(cServerType, "HTTP bidir", "Streamr"),
             new SingleTextFieldPage(this, "Binding port")
