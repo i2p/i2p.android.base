@@ -19,6 +19,7 @@ public class TunnelWizardModel extends AbstractWizardModel {
         Conditional cTunnelType = new Conditional();
         Conditional cClientType = new Conditional();
         Conditional cServerType = new Conditional();
+
         return new PageList(
             new BranchPage(this, "Client or Server")
                 .addBranch("Client tunnel",
@@ -33,37 +34,50 @@ public class TunnelWizardModel extends AbstractWizardModel {
                         .makeConditional(cServerType))
                 .setRequired(true)
                 .makeConditional(cTunnelType),
+
             new SingleTextFieldPage(this, "Name")
                 .setDescription("The name of the tunnel, for identification in the tunnel list.")
                 .setRequired(true),
+
             new SingleTextFieldPage(this, "Description")
                 .setDescription("A description of the tunnel. This is optional and purely informative."),
+
             new SingleTextFieldPage(this, "Destination")
                 .setDescription("Type in the I2P destination of the service that this client tunnel should connect to. This could be the full base 64 destination key, or an I2P URL from your address book.")
                 .setRequired(true)
                 .setEqualAnyCondition(cClientType, "Standard", "IRC", "Streamr"),
+
             new SingleTextFieldPage(this, "Outproxies")
                 .setDescription("If you know of any outproxies for this type of tunnel (either HTTP or SOCKS), fill them in. Separate multiple proxies with commas.")
                 .setEqualAnyCondition(cClientType, "HTTP", "CONNECT", "SOCKS 4/4a/5", "SOCKS IRC"),
+
+            // Not set required because a default is specified.
+            // Otherwise user would need to edit the field to
+            // enable the Next button.
             new SingleTextFieldPage(this, "Target host")
                 .setDefault("127.0.0.1")
                 .setDescription("This is the IP that your service is running on, this is usually on the same machine so 127.0.0.1 is autofilled.")
                 .setEqualCondition(cClientType, "Streamr")
                 .setEqualAnyCondition(cServerType, "Standard", "HTTP", "HTTP bidir", "IRC"),
+
             new SingleTextFieldPage(this, "Target port")
                 .setDescription("This is the port that the service is accepting connections on.")
                 .setRequired(true)
                 .setEqualCondition(cTunnelType, "Server tunnel"),
+
+            // Not set required because a default is specified.
             new SingleTextFieldPage(this, "Reachable on")
                 .setDefault("127.0.0.1")
                 .setDescription("This limits what computers or smartphones can access this tunnel.")
                 .setEqualAnyCondition(cClientType, "Standard", "HTTP", "IRC", "SOCKS 4/4a/5", "SOCKS IRC", "CONNECT")
                 .setEqualAnyCondition(cServerType, "HTTP bidir", "Streamr"),
+
             new SingleTextFieldPage(this, "Binding port")
                 .setDescription("This is the port that the client tunnel will be accessed from locally. This is also the client port for the HTTP bidir server tunnel.")
                 .setRequired(true)
                 .setEqualCondition(cTunnelType, "Client tunnel")
                 .setEqualCondition(cServerType, "HTTP bidir"),
+
             new SingleFixedBooleanPage(this, "Auto start")
                 .setDescription("Should the tunnel automatically start when the router starts?")
                 .setRequired(true)
