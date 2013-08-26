@@ -29,7 +29,7 @@ public class TunnelWizardActivity extends FragmentActivity implements
         ReviewFragment.Callbacks,
         ModelCallbacks {
     private ViewPager mPager;
-    private PagerAdapter mPagerAdapter;
+    private MyPagerAdapter mPagerAdapter;
 
     private boolean mEditingAfterReview;
 
@@ -52,7 +52,7 @@ public class TunnelWizardActivity extends FragmentActivity implements
 
         mWizardModel.registerListener(this);
 
-        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mPagerAdapter);
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.strip);
@@ -208,11 +208,11 @@ public class TunnelWizardActivity extends FragmentActivity implements
         return false;
     }
 
-    public class PagerAdapter extends FragmentStatePagerAdapter {
+    public class MyPagerAdapter extends FragmentStatePagerAdapter {
         private int mCutOffPage;
         private Fragment mPrimaryItem;
 
-        public PagerAdapter(FragmentManager fm) {
+        public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
