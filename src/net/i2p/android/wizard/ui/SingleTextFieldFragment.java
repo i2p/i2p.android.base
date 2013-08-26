@@ -75,7 +75,6 @@ public class SingleTextFieldFragment extends Fragment {
         else if (mPage.getDefault() != null) {
             mFieldView.setText(mPage.getDefault());
             mPage.getData().putString(Page.SIMPLE_DATA_KEY, mPage.getDefault());
-            mPage.notifyDataChanged();
         }
         return rootView;
     }

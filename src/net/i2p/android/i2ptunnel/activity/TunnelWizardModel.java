@@ -48,7 +48,6 @@ public class TunnelWizardModel extends AbstractWizardModel {
             new SingleTextFieldPage(this, "Target host")
                 .setDefault("127.0.0.1")
                 .setDescription("This is the IP that your service is running on, this is usually on the same machine so 127.0.0.1 is autofilled.")
-                .setRequired(true)
                 .setEqualCondition(cClientType, "Streamr")
                 .setEqualAnyCondition(cServerType, "Standard", "HTTP", "HTTP bidir", "IRC"),
             new SingleTextFieldPage(this, "Target port")
@@ -58,7 +57,6 @@ public class TunnelWizardModel extends AbstractWizardModel {
             new SingleTextFieldPage(this, "Reachable on")
                 .setDefault("127.0.0.1")
                 .setDescription("This limits what computers or smartphones can access this tunnel.")
-                .setRequired(true)
                 .setEqualAnyCondition(cClientType, "Standard", "HTTP", "IRC", "SOCKS 4/4a/5", "SOCKS IRC", "CONNECT")
                 .setEqualAnyCondition(cServerType, "HTTP bidir", "Streamr"),
             new SingleTextFieldPage(this, "Binding port")
