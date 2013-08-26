@@ -2,6 +2,7 @@ package net.i2p.android.i2ptunnel.activity;
 
 import java.util.List;
 
+import net.i2p.android.i2ptunnel.fragment.TunnelListFragment;
 import net.i2p.android.router.R;
 import net.i2p.android.wizard.model.AbstractWizardModel;
 import net.i2p.android.wizard.model.ModelCallbacks;
@@ -9,9 +10,11 @@ import net.i2p.android.wizard.model.Page;
 import net.i2p.android.wizard.ui.PageFragmentCallbacks;
 import net.i2p.android.wizard.ui.ReviewFragment;
 import net.i2p.android.wizard.ui.StepPagerStrip;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -95,14 +98,17 @@ public class TunnelWizardActivity extends FragmentActivity implements
                                             new DialogInterface.OnClickListener() {
 
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    
+                                                    Intent result = new Intent();
+                                                    result.putExtra(TunnelListFragment.TUNNEL_WIZARD_DATA, mWizardModel.save());
+                                                    setResult(Activity.RESULT_OK, result);
+                                                    finish();
                                                 }
                                             })
                                     .setNegativeButton(android.R.string.cancel, null)
                                     .create();
                         }
                     };
-                    dg.show(getSupportFragmentManager(), "place_order_dialog");
+                    dg.show(getSupportFragmentManager(), "create_tunnel_dialog");
                 } else {
                     if (mEditingAfterReview) {
                         mPager.setCurrentItem(mPagerAdapter.getCount() - 1);

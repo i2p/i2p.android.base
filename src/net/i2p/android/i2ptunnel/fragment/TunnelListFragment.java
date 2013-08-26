@@ -23,6 +23,9 @@ import android.widget.ListView;
 public class TunnelListFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<List<TunnelEntry>> {
     public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";
+    public static final String TUNNEL_WIZARD_DATA = "tunnel_wizard_data";
+
+    static final int TUNNEL_WIZARD_REQUEST = 1;
 
     private static final int CLIENT_LOADER_ID = 1;
     private static final int SERVER_LOADER_ID = 2;
@@ -143,9 +146,18 @@ public class TunnelListFragment extends ListFragment
         switch (item.getItemId()) {
             case R.id.action_add_tunnel:
                 Intent wi = new Intent(getActivity(), TunnelWizardActivity.class);
-                startActivity(wi);
+                startActivityForResult(wi, TUNNEL_WIZARD_REQUEST);
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == TUNNEL_WIZARD_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bundle tunnelData = data.getExtras().getBundle(TUNNEL_WIZARD_DATA);
+            }
         }
     }
 
