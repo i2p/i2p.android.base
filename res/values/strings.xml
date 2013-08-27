@@ -35,6 +35,11 @@
     <string name="action_delete">Delete</string>
     <string name="action_router_start">Start Router</string>
     <string name="action_router_stop">Stop Router</string>
+    <string name="action_i2ptunnel_start">Start tunnel</string>
+    <string name="action_i2ptunnel_stop">Stop tunnel</string>
+    <string name="action_i2ptunnel_start_all">Start all tunnels</string>
+    <string name="action_i2ptunnel_stop_all">Stop all tunnels</string>
+    <string name="action_i2ptunnel_restart_all">Restart all tunnels</string>
     <string name="action_reload">Reload</string>
     <string name="hint_search_addressbook">Search addressbook</string>
 

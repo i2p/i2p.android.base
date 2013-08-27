@@ -115,6 +115,19 @@ public class TunnelDetailFragment extends Fragment {
     }
 
     @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        boolean isStopped = mTunnel.getStatus() == TunnelEntry.NOT_RUNNING;
+
+        MenuItem start = menu.findItem(R.id.action_start_tunnel);
+        start.setVisible(isStopped);
+        start.setEnabled(isStopped);
+
+        MenuItem stop = menu.findItem(R.id.action_stop_tunnel);
+        stop.setVisible(!isStopped);
+        stop.setEnabled(!isStopped);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {

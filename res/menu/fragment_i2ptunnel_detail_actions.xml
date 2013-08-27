@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:i2pandroid="http://schemas.android.com/apk/res-auto" >
+    <item android:id="@+id/action_start_tunnel"
+          android:title="@string/action_i2ptunnel_start"
+          android:icon="@drawable/ic_av_play"
+          i2pandroid:showAsAction="ifRoom" />
+    <item android:id="@+id/action_stop_tunnel"
+          android:title="@string/action_i2ptunnel_stop"
+          android:icon="@drawable/ic_av_stop"
+          i2pandroid:showAsAction="ifRoom" />
     <item android:id="@+id/action_edit_tunnel"
           android:title="@string/action_edit"
           android:icon="@drawable/ic_content_edit"
