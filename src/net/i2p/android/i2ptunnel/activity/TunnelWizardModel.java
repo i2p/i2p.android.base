@@ -51,14 +51,14 @@ public class TunnelWizardModel extends AbstractWizardModel {
                 .makeConditional(cTunnelType),
 
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_name))
-                .setDescription("The name of the tunnel, for identification in the tunnel list.")
+                .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_name))
                 .setRequired(true),
 
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_desc))
-                .setDescription("A description of the tunnel. This is optional and purely informative."),
+                .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_desc)),
 
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_dest))
-                .setDescription("Type in the I2P destination of the service that this client tunnel should connect to. This could be the full base 64 destination key, or an I2P URL from your address book.")
+                .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_dest))
                 .setRequired(true)
                 .setEqualAnyCondition(cClientType,
                         res.getString(R.string.i2ptunnel_type_client),
@@ -66,7 +66,7 @@ public class TunnelWizardModel extends AbstractWizardModel {
                         res.getString(R.string.i2ptunnel_type_streamrclient)),
 
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_outproxies))
-                .setDescription("If you know of any outproxies for this type of tunnel (either HTTP or SOCKS), fill them in. Separate multiple proxies with commas.")
+                .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_outproxies))
                 .setEqualAnyCondition(cClientType,
                         res.getString(R.string.i2ptunnel_type_httpclient),
                         res.getString(R.string.i2ptunnel_type_connectclient),
@@ -78,7 +78,7 @@ public class TunnelWizardModel extends AbstractWizardModel {
             // enable the Next button.
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_target_host))
                 .setDefault("127.0.0.1")
-                .setDescription("This is the IP that your service is running on, this is usually on the same machine so 127.0.0.1 is autofilled.")
+                .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_target_host))
                 .setEqualCondition(cClientType,
                         res.getString(R.string.i2ptunnel_type_streamrclient))
                 .setEqualAnyCondition(cServerType,
@@ -88,14 +88,14 @@ public class TunnelWizardModel extends AbstractWizardModel {
                         res.getString(R.string.i2ptunnel_type_ircserver)),
 
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_target_port))
-                .setDescription("This is the port that the service is accepting connections on.")
+                .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_target_port))
                 .setRequired(true)
                 .setEqualCondition(cTunnelType, res.getString(R.string.i2ptunnel_wizard_v_server)),
 
             // Not set required because a default is specified.
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_reachable_on))
                 .setDefault("127.0.0.1")
-                .setDescription("This limits what computers or smartphones can access this tunnel.")
+                .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_reachable_on))
                 .setEqualAnyCondition(cClientType,
                         res.getString(R.string.i2ptunnel_type_client),
                         res.getString(R.string.i2ptunnel_type_httpclient),
@@ -108,13 +108,13 @@ public class TunnelWizardModel extends AbstractWizardModel {
                         res.getString(R.string.i2ptunnel_type_streamrserver)),
 
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_binding_port))
-                .setDescription("This is the port that the client tunnel will be accessed from locally. This is also the client port for the HTTP bidir server tunnel.")
+                .setDescription(res.getString(R.string.i2ptunnel_wizard_k_binding_port))
                 .setRequired(true)
                 .setEqualCondition(cTunnelType, res.getString(R.string.i2ptunnel_wizard_v_client))
                 .setEqualCondition(cServerType, res.getString(R.string.i2ptunnel_type_httpbidirserver)),
 
             new SingleFixedBooleanPage(this, res.getString(R.string.i2ptunnel_wizard_k_auto_start))
-                .setDescription("Should the tunnel automatically start when the router starts?")
+                .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_auto_start))
                 .setRequired(true)
             );
     }
