@@ -36,7 +36,7 @@ public class TunnelWizardActivity extends FragmentActivity implements
 
     private boolean mEditingAfterReview;
 
-    private AbstractWizardModel mWizardModel = new TunnelWizardModel(this);
+    private AbstractWizardModel mWizardModel;
 
     private boolean mConsumePageSelectedEvent;
 
@@ -50,6 +50,7 @@ public class TunnelWizardActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wizard);
 
+        mWizardModel = new TunnelWizardModel(this);
         if (savedInstanceState != null)
             mWizardModel.load(savedInstanceState.getBundle("model"));
 
@@ -101,6 +102,7 @@ public class TunnelWizardActivity extends FragmentActivity implements
                                                     Intent result = new Intent();
                                                     result.putExtra(TunnelListFragment.TUNNEL_WIZARD_DATA, mWizardModel.save());
                                                     setResult(Activity.RESULT_OK, result);
+                                                    dialog.dismiss();
                                                     finish();
                                                 }
                                             })
