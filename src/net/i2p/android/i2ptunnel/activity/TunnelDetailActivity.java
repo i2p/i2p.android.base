@@ -5,7 +5,8 @@ import net.i2p.android.router.R;
 import net.i2p.android.router.activity.I2PActivityBase;
 import android.os.Bundle;
 
-public class TunnelDetailActivity extends I2PActivityBase {
+public class TunnelDetailActivity extends I2PActivityBase implements
+        TunnelDetailFragment.OnTunnelDeletedListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,5 +18,11 @@ public class TunnelDetailActivity extends I2PActivityBase {
             getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_fragment, detailFrag).commit();
         }
+    }
+
+    // TunnelDetailFragment.OnTunnelDeletedListener
+
+    public void onTunnelDeleted() {
+        finish();
     }
 }

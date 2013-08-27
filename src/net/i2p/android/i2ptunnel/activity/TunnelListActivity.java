@@ -9,8 +9,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 
-public class TunnelListActivity extends I2PActivityBase
-        implements TunnelListFragment.OnTunnelSelectedListener {
+public class TunnelListActivity extends I2PActivityBase implements
+        TunnelListFragment.OnTunnelSelectedListener,
+        TunnelDetailFragment.OnTunnelDeletedListener {
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -64,7 +65,7 @@ public class TunnelListActivity extends I2PActivityBase
         }
     }
 
-    // I2PTunnelListFragment.OnTunnelSelectedListener
+    // TunnelListFragment.OnTunnelSelectedListener
 
     public void onTunnelSelected(int tunnelId) {
         if (mTwoPane) {
@@ -81,5 +82,11 @@ public class TunnelListActivity extends I2PActivityBase
             detailIntent.putExtra(TunnelDetailFragment.TUNNEL_ID, tunnelId);
             startActivity(detailIntent);
         }
+    }
+
+    // TunnelDetailFragment.OnTunnelDeletedListener
+
+    public void onTunnelDeleted() {
+        getSupportFragmentManager().popBackStack();
     }
 }

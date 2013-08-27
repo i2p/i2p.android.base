@@ -31,6 +31,8 @@
     <string name="drawer_close">Close nav</string>
     <string name="action_search">Search</string>
     <string name="action_add">Add</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
     <string name="action_router_start">Start Router</string>
     <string name="action_router_stop">Stop Router</string>
     <string name="action_reload">Reload</string>
@@ -91,6 +93,8 @@
     <string name="i2ptunnel_new_tunnel">New Tunnel</string>
     <string name="i2ptunnel_msg_config_saved">Configuration changes saved</string>
     <string name="i2ptunnel_msg_config_save_failed">Failed to save configuration</string>
+    <string name="i2ptunnel_delete_confirm_message">Delete tunnel?</string>
+    <string name="i2ptunnel_delete_confirm_button">Delete tunnel</string>
 
     <string name="i2ptunnel_wizard_k_client_server">Client or Server</string>
     <string name="i2ptunnel_wizard_v_client">Client tunnel</string>
