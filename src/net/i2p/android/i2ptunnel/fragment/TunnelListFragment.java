@@ -8,6 +8,7 @@ import net.i2p.android.i2ptunnel.loader.TunnelEntry;
 import net.i2p.android.i2ptunnel.loader.TunnelEntryLoader;
 import net.i2p.android.i2ptunnel.util.TunnelConfig;
 import net.i2p.android.router.R;
+import net.i2p.android.router.activity.HelpActivity;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import android.app.Activity;
 import android.content.Intent;
@@ -148,6 +149,11 @@ public class TunnelListFragment extends ListFragment
             case R.id.action_add_tunnel:
                 Intent wi = new Intent(getActivity(), TunnelWizardActivity.class);
                 startActivityForResult(wi, TUNNEL_WIZARD_REQUEST);
+            case R.id.action_i2ptunnel_help:
+                Intent hi = new Intent(getActivity(), HelpActivity.class);
+                hi.putExtra(HelpActivity.REFERRER, "i2ptunnel");
+                startActivity(hi);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

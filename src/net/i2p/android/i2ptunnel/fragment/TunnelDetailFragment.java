@@ -2,18 +2,14 @@ package net.i2p.android.i2ptunnel.fragment;
 
 import java.util.List;
 
-import net.i2p.android.i2ptunnel.activity.TunnelWizardActivity;
-import net.i2p.android.i2ptunnel.fragment.TunnelListFragment.OnTunnelSelectedListener;
 import net.i2p.android.i2ptunnel.loader.TunnelEntry;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
-import net.i2p.android.router.activity.HelpActivity;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -156,11 +152,6 @@ public class TunnelDetailFragment extends Fragment {
                     }
                 };
                 dg.show(getFragmentManager(), "delete_tunnel_dialog");
-                return true;
-            case R.id.action_i2ptunnel_help:
-                Intent hi = new Intent(getActivity(), HelpActivity.class);
-                hi.putExtra(HelpActivity.REFERRER, "i2ptunnel");
-                startActivity(hi);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
