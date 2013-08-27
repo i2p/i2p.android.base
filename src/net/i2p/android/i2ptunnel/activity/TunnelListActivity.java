@@ -86,7 +86,19 @@ public class TunnelListActivity extends I2PActivityBase implements
 
     // TunnelDetailFragment.OnTunnelDeletedListener
 
-    public void onTunnelDeleted() {
-        getSupportFragmentManager().popBackStack();
+    public void onTunnelDeleted(int tunnelId, int numTunnelsLeft) {
+        // Should only get here in two-pane mode, but just to be safe:
+        if (mTwoPane) {
+            if (numTunnelsLeft > 0) {
+                TunnelDetailFragment detailFrag = TunnelDetailFragment.newInstance(
+                        (tunnelId > 0 ? tunnelId - 1 : 0));
+                getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.detail_fragment, detailFrag).commit();
+            } else {
+                TunnelDetailFragment detailFrag = (TunnelDetailFragment) getSupportFragmentManager().findFragmentById(R.id.detail_fragment);
+                getSupportFragmentManager().beginTransaction()
+                    .remove(detailFrag).commit();
+            }
+        }
     }
 }

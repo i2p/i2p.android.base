@@ -22,7 +22,7 @@ public class TunnelDetailActivity extends I2PActivityBase implements
 
     // TunnelDetailFragment.OnTunnelDeletedListener
 
-    public void onTunnelDeleted() {
+    public void onTunnelDeleted(int tunnelId, int numTunnelsLeft) {
         finish();
     }
 }

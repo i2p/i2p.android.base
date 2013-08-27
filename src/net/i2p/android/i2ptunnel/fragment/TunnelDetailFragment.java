@@ -42,7 +42,7 @@ public class TunnelDetailFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface OnTunnelDeletedListener {
-        public void onTunnelDeleted();
+        public void onTunnelDeleted(int tunnelId, int numTunnelsLeft);
     }
 
     @Override
@@ -133,7 +133,8 @@ public class TunnelDetailFragment extends Fragment {
                                             dialog.dismiss();
                                             Toast.makeText(getActivity().getApplicationContext(),
                                                     msgs.get(0), Toast.LENGTH_LONG).show();
-                                            mCallback.onTunnelDeleted();
+                                            mCallback.onTunnelDeleted(mTunnel.getId(),
+                                                    mGroup.getControllers().size());
                                         }
                                     })
                             .setNegativeButton(android.R.string.cancel, null)
