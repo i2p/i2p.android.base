@@ -128,33 +128,33 @@ public class TunnelDetailFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.action_delete_tunnel:
-                DialogFragment dg = new DialogFragment() {
-                    @Override
-                    public Dialog onCreateDialog(Bundle savedInstanceState) {
-                        return new AlertDialog.Builder(getActivity())
-                            .setMessage(R.string.i2ptunnel_delete_confirm_message)
-                            .setPositiveButton(R.string.i2ptunnel_delete_confirm_button,
-                                    new DialogInterface.OnClickListener() {
+        case R.id.action_delete_tunnel:
+            DialogFragment dg = new DialogFragment() {
+                @Override
+                public Dialog onCreateDialog(Bundle savedInstanceState) {
+                    return new AlertDialog.Builder(getActivity())
+                        .setMessage(R.string.i2ptunnel_delete_confirm_message)
+                        .setPositiveButton(R.string.i2ptunnel_delete_confirm_button,
+                                new DialogInterface.OnClickListener() {
 
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            List<String> msgs = TunnelUtil.deleteTunnel(
-                                                    getActivity(), mGroup, mTunnel.getId());
-                                            dialog.dismiss();
-                                            Toast.makeText(getActivity().getApplicationContext(),
-                                                    msgs.get(0), Toast.LENGTH_LONG).show();
-                                            mCallback.onTunnelDeleted(mTunnel.getId(),
-                                                    mGroup.getControllers().size());
-                                        }
-                                    })
-                            .setNegativeButton(android.R.string.cancel, null)
-                            .create();
-                    }
-                };
-                dg.show(getFragmentManager(), "delete_tunnel_dialog");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        List<String> msgs = TunnelUtil.deleteTunnel(
+                                                getActivity(), mGroup, mTunnel.getId());
+                                        dialog.dismiss();
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                msgs.get(0), Toast.LENGTH_LONG).show();
+                                        mCallback.onTunnelDeleted(mTunnel.getId(),
+                                                mGroup.getControllers().size());
+                                    }
+                                })
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .create();
+                }
+            };
+            dg.show(getFragmentManager(), "delete_tunnel_dialog");
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 }
