@@ -146,16 +146,16 @@ public class TunnelListFragment extends ListFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.action_add_tunnel:
-                Intent wi = new Intent(getActivity(), TunnelWizardActivity.class);
-                startActivityForResult(wi, TUNNEL_WIZARD_REQUEST);
-            case R.id.action_i2ptunnel_help:
-                Intent hi = new Intent(getActivity(), HelpActivity.class);
-                hi.putExtra(HelpActivity.REFERRER, "i2ptunnel");
-                startActivity(hi);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        case R.id.action_add_tunnel:
+            Intent wi = new Intent(getActivity(), TunnelWizardActivity.class);
+            startActivityForResult(wi, TUNNEL_WIZARD_REQUEST);
+        case R.id.action_i2ptunnel_help:
+            Intent hi = new Intent(getActivity(), HelpActivity.class);
+            hi.putExtra(HelpActivity.REFERRER, "i2ptunnel");
+            startActivity(hi);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 
