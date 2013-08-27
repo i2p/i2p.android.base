@@ -1,11 +1,17 @@
 package net.i2p.android.i2ptunnel.loader;
 
+import java.util.List;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.widget.Toast;
+import net.i2p.android.i2ptunnel.util.TunnelConfig;
+import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 import net.i2p.data.Destination;
 import net.i2p.data.PrivateKeyFile;
 import net.i2p.i2ptunnel.TunnelController;
+import net.i2p.i2ptunnel.TunnelControllerGroup;
 
 public class TunnelEntry {
     public static final int RUNNING = 1;
@@ -16,6 +22,20 @@ public class TunnelEntry {
     private final Context mContext;
     private final TunnelController mController;
     private final int mId;
+
+    public static TunnelEntry createNewTunnel(
+            Context ctx,
+            TunnelControllerGroup tcg,
+            TunnelConfig cfg) {
+        int tunnelId = tcg.getControllers().size();
+        List<String> msgs = TunnelUtil.saveTunnel(
+                ctx, tcg, -1, cfg.getConfig());
+        // TODO: Do something else with the other messages.
+        Toast.makeText(ctx.getApplicationContext(),
+                msgs.get(0), Toast.LENGTH_LONG).show();
+        TunnelController cur = TunnelUtil.getController(tcg, tunnelId);
+        return new TunnelEntry(ctx, cur, tunnelId);
+    }
 
     public TunnelEntry(Context context, TunnelController controller, int id) {
         mContext = context;
@@ -46,44 +66,7 @@ public class TunnelEntry {
     }
 
     public String getType() {
-        if ("client".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_client);
-        else if ("httpclient".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_httpclient);
-        else if ("ircclient".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_ircclient);
-        else if ("server".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_server);
-        else if ("httpserver".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_httpserver);
-        else if ("sockstunnel".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_sockstunnel);
-        else if ("socksirctunnel".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_socksirctunnel);
-        else if ("connectclient".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_connectclient);
-        else if ("ircserver".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_ircserver);
-        else if ("streamrclient".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_streamrclient);
-        else if ("streamrserver".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_streamrserver);
-        else if ("httpbidirserver".equals(mController.getType()))
-            return mContext.getResources()
-                    .getString(R.string.i2ptunnel_type_httpbidirserver);
-        else
-            return mController.getType();
+        return TunnelUtil.getTypeName(mController.getType(), mContext);
     }
 
     public String getDescription() {
@@ -108,17 +91,7 @@ public class TunnelEntry {
     }
 
     public boolean isClient() {
-        return isClient(mController.getType());
-    }
-
-    public static boolean isClient(String type) {
-        return ( ("client".equals(type)) ||
-                 ("httpclient".equals(type)) ||
-                 ("sockstunnel".equals(type)) ||
-                 ("socksirctunnel".equals(type)) ||
-                 ("connectclient".equals(type)) ||
-                 ("streamrclient".equals(type)) ||
-                 ("ircclient".equals(type)));
+        return TunnelUtil.isClient(mController.getType());
     }
 
     /* Client tunnel data */

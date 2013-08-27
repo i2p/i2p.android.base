@@ -6,6 +6,7 @@ import net.i2p.android.i2ptunnel.activity.TunnelWizardActivity;
 import net.i2p.android.i2ptunnel.adapter.TunnelEntryAdapter;
 import net.i2p.android.i2ptunnel.loader.TunnelEntry;
 import net.i2p.android.i2ptunnel.loader.TunnelEntryLoader;
+import net.i2p.android.i2ptunnel.util.TunnelConfig;
 import net.i2p.android.router.R;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import android.app.Activity;
@@ -157,6 +158,9 @@ public class TunnelListFragment extends ListFragment
         if (requestCode == TUNNEL_WIZARD_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Bundle tunnelData = data.getExtras().getBundle(TUNNEL_WIZARD_DATA);
+                TunnelConfig cfg = TunnelConfig.createFromWizard(getActivity(), mGroup, tunnelData);
+                TunnelEntry tunnel = TunnelEntry.createNewTunnel(getActivity(), mGroup, cfg);
+                mAdapter.add(tunnel);
             }
         }
     }

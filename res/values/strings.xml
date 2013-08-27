@@ -89,6 +89,8 @@
 
     <string name="i2ptunnel_not_initialized">Tunnels are not initialized yet, please reload in two minutes.</string>
     <string name="i2ptunnel_new_tunnel">New Tunnel</string>
+    <string name="i2ptunnel_msg_config_saved">Configuration changes saved</string>
+    <string name="i2ptunnel_msg_config_save_failed">Failed to save configuration</string>
 
     <string name="i2ptunnel_wizard_k_client_server">Client or Server</string>
     <string name="i2ptunnel_wizard_v_client">Client tunnel</string>
