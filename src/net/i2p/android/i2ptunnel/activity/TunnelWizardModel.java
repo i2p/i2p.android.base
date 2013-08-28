@@ -6,6 +6,7 @@ import net.i2p.android.router.R;
 import net.i2p.android.wizard.model.AbstractWizardModel;
 import net.i2p.android.wizard.model.BranchPage;
 import net.i2p.android.wizard.model.Conditional;
+import net.i2p.android.wizard.model.I2PDestinationPage;
 import net.i2p.android.wizard.model.PageList;
 import net.i2p.android.wizard.model.SingleFixedBooleanPage;
 import net.i2p.android.wizard.model.SingleFixedChoicePage;
@@ -57,7 +58,7 @@ public class TunnelWizardModel extends AbstractWizardModel {
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_desc))
                 .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_desc)),
 
-            new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_dest))
+            new I2PDestinationPage(this, res.getString(R.string.i2ptunnel_wizard_k_dest))
                 .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_dest))
                 .setRequired(true)
                 .setEqualAnyCondition(cClientType,
