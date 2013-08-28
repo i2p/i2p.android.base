@@ -2,6 +2,9 @@ package net.i2p.android.wizard.model;
 
 import java.util.Locale;
 
+import android.support.v4.app.Fragment;
+
+import net.i2p.android.wizard.ui.I2PDestinationFragment;
 import net.i2p.data.DataFormatException;
 import net.i2p.data.Destination;
 
@@ -15,6 +18,11 @@ public class I2PDestinationPage extends SingleTextFieldPage {
 
     public I2PDestinationPage(ModelCallbacks callbacks, String title) {
         super(callbacks, title);
+    }
+
+    @Override
+    public Fragment createFragment() {
+        return I2PDestinationFragment.create(getKey());
     }
 
     @Override

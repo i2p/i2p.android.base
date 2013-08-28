@@ -3,8 +3,11 @@ package net.i2p.android.router.activity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.AddressbookFragment;
 import net.i2p.android.router.fragment.WebFragment;
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -61,15 +64,21 @@ public class AddressbookActivity extends I2PActivityBase
     // AddressbookFragment.OnAddressSelectedListener
 
     public void onAddressSelected(CharSequence host) {
-        WebFragment f = new WebFragment();
-        Bundle args = new Bundle();
-        args.putString(WebFragment.HTML_URI, "http://" + host + '/');
-        f.setArguments(args);
-        getSupportFragmentManager().beginTransaction()
-            .replace(R.id.main_fragment, f)
-            .addToBackStack(null)
-            .commit();
-        
+        if (getIntent().getAction() == Intent.ACTION_PICK) {
+            Intent result = new Intent();
+            result.setData(Uri.parse("http://" + host));
+            setResult(Activity.RESULT_OK, result);
+            finish();
+        } else {
+            WebFragment f = new WebFragment();
+            Bundle args = new Bundle();
+            args.putString(WebFragment.HTML_URI, "http://" + host + '/');
+            f.setArguments(args);
+            getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment, f)
+                .addToBackStack(null)
+                .commit();
+        }
     }
 
     // SearchView.OnQueryTextListener

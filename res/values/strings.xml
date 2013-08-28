@@ -26,6 +26,7 @@
     <string name="label_nonanon_info">Non Anonymous Information</string>
     <string name="label_website_nonanon">Web Site (non-anon)</string>
     <string name="label_faq_nonanon">FAQ (non-anon)</string>
+    <string name="label_browse">Browse</string>
 
     <string name="drawer_open">Open nav</string>
     <string name="drawer_close">Close nav</string>
