@@ -47,7 +47,7 @@ public class SingleTextFieldPage extends Page {
 
     @Override
     public boolean isCompleted() {
-        return !TextUtils.isEmpty(mData.getString(SIMPLE_DATA_KEY));
+        return (!TextUtils.isEmpty(mData.getString(SIMPLE_DATA_KEY))) && isValid();
     }
 
     public SingleTextFieldPage setDefault(String def) {
@@ -66,5 +66,19 @@ public class SingleTextFieldPage extends Page {
 
     public String getDesc() {
         return mDesc;
+    }
+
+    // Override these in subclasses to add content verification.
+
+    public boolean isValid() {
+        return true;
+    }
+
+    public boolean showFeedback() {
+        return false;
+    }
+
+    public String getFeedback() {
+        return "";
     }
 }

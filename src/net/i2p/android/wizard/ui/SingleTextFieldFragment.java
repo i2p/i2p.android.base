@@ -39,6 +39,7 @@ public class SingleTextFieldFragment extends Fragment {
     private String mKey;
     private SingleTextFieldPage mPage;
     private TextView mFieldView;
+    private TextView mFeedbackView;
 
     public static SingleTextFieldFragment create(String key) {
         Bundle args = new Bundle();
@@ -76,6 +77,9 @@ public class SingleTextFieldFragment extends Fragment {
             mFieldView.setText(mPage.getDefault());
             mPage.getData().putString(Page.SIMPLE_DATA_KEY, mPage.getDefault());
         }
+
+        mFeedbackView = (TextView) rootView.findViewById(R.id.wizard_text_field_feedback);
+
         return rootView;
     }
 
@@ -112,6 +116,9 @@ public class SingleTextFieldFragment extends Fragment {
                 mPage.getData().putString(Page.SIMPLE_DATA_KEY,
                         (editable != null) ? editable.toString() : null);
                 mPage.notifyDataChanged();
+                if (mPage.showFeedback()) {
+                    mFeedbackView.setText(mPage.getFeedback());
+                }
             }
         });
     }

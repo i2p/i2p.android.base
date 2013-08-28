@@ -37,6 +37,10 @@
                 android:inputType="text"
                 android:layout_marginBottom="16dp" />
 
+            <TextView android:id="@+id/wizard_text_field_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <TextView style="@style/WizardFormLabel"
                 android:id="@+id/wizard_text_field_desc" />
 
