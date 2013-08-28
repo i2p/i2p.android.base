@@ -128,6 +128,24 @@ public class TunnelDetailFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
+        case R.id.action_start_tunnel:
+            mTunnel.getController().startTunnelBackground();
+            Toast.makeText(getActivity().getApplicationContext(),
+                    getResources().getString(R.string.i2ptunnel_msg_tunnel_starting)
+                    + ' ' + mTunnel.getName(), Toast.LENGTH_LONG).show();
+            // Reload the action bar to change the start/stop action
+            getActivity().supportInvalidateOptionsMenu();
+            return true;
+        case R.id.action_stop_tunnel:
+            mTunnel.getController().stopTunnel();
+            Toast.makeText(getActivity().getApplicationContext(),
+                    getResources().getString(R.string.i2ptunnel_msg_tunnel_stopping)
+                    + ' ' + mTunnel.getName(), Toast.LENGTH_LONG).show();
+            // Reload the action bar to change the start/stop action
+            getActivity().supportInvalidateOptionsMenu();
+            return true;
+        case R.id.action_edit_tunnel:
+            return true;
         case R.id.action_delete_tunnel:
             DialogFragment dg = new DialogFragment() {
                 @Override

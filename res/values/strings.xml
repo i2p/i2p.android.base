@@ -98,6 +98,8 @@
     <string name="i2ptunnel_new_tunnel">New Tunnel</string>
     <string name="i2ptunnel_msg_config_saved">Configuration changes saved</string>
     <string name="i2ptunnel_msg_config_save_failed">Failed to save configuration</string>
+    <string name="i2ptunnel_msg_tunnel_starting">Starting tunnel</string>
+    <string name="i2ptunnel_msg_tunnel_stopping">Stopping tunnel</string>
     <string name="i2ptunnel_delete_confirm_message">Delete tunnel?</string>
     <string name="i2ptunnel_delete_confirm_button">Delete tunnel</string>
 

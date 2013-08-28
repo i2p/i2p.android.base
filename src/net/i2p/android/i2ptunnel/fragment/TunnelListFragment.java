@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class TunnelListFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<List<TunnelEntry>> {
@@ -145,10 +146,21 @@ public class TunnelListFragment extends ListFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
+        List<String> msgs;
         switch (item.getItemId()) {
         case R.id.action_add_tunnel:
             Intent wi = new Intent(getActivity(), TunnelWizardActivity.class);
             startActivityForResult(wi, TUNNEL_WIZARD_REQUEST);
+            return true;
+        case R.id.action_start_all_tunnels:
+            msgs = mGroup.startAllControllers();
+            break;
+        case R.id.action_stop_all_tunnels:
+            msgs = mGroup.stopAllControllers();
+            break;
+        case R.id.action_restart_all_tunnels:
+            msgs = mGroup.restartAllControllers();
+            break;
         case R.id.action_i2ptunnel_help:
             Intent hi = new Intent(getActivity(), HelpActivity.class);
             hi.putExtra(HelpActivity.REFERRER, "i2ptunnel");
@@ -157,6 +169,11 @@ public class TunnelListFragment extends ListFragment
         default:
             return super.onOptionsItemSelected(item);
         }
+        // TODO: Do something with the other messages
+        if (msgs.size() > 0)
+            Toast.makeText(getActivity().getApplicationContext(),
+                    msgs.get(0), Toast.LENGTH_LONG).show();
+        return true;
     }
 
     @Override
