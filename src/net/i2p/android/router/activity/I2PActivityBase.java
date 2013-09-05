@@ -16,7 +16,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar.Tab;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -232,31 +231,11 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         super.onDestroy();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main_actions, menu);
-        return true;
-    }
-
     /**
      * Called whenever we call invalidateOptionsMenu()
      */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        // add/hide items here
-        RouterService svc = _routerService;
-        boolean showStart = ((svc == null) || (!_isBound) || svc.canManualStart()) &&
-                            Util.isConnected(this);
-        MenuItem start = menu.findItem(R.id.menu_start);
-        start.setVisible(showStart);
-        start.setEnabled(showStart);
-
-        boolean showStop = svc != null && _isBound && svc.canManualStop();
-        MenuItem stop = menu.findItem(R.id.menu_stop);
-        stop.setVisible(showStop);
-        stop.setEnabled(showStop);
-
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         onDrawerChange(drawerOpen);
