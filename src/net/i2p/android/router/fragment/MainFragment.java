@@ -1,5 +1,6 @@
 package net.i2p.android.router.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -7,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import java.io.File;
 import java.text.DecimalFormat;
 import net.i2p.android.router.R;
-import net.i2p.android.router.service.RouterService;
+import net.i2p.android.router.activity.I2PActivityBase;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.router.RouterContext;
@@ -26,6 +26,30 @@ public class MainFragment extends I2PFragmentBase {
     private boolean _startPressed = false;
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
     protected static final String PROP_NEW_VERSION = "i2p.newVersion";
+    RouterControlListener mCallback;
+
+    // Container Activity must implement this interface
+    public interface RouterControlListener {
+        public boolean shouldShowStart();
+        public boolean shouldShowStop();
+        public void onStartRouterClicked();
+        public boolean onStopRouterClicked();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (RouterControlListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement RouterControlListener");
+        }
+
+    }
 
     /**
      * Called when the fragment is first created.
@@ -34,7 +58,6 @@ public class MainFragment extends I2PFragmentBase {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Init stuff here so settings work.
-        _myDir = getActivity().getFilesDir().getAbsolutePath();
         if(savedInstanceState != null) {
             String saved = savedInstanceState.getString("status");
             if(saved != null) {
@@ -142,14 +165,7 @@ public class MainFragment extends I2PFragmentBase {
 
             public void onClick(View view) {
                 _startPressed = true;
-                RouterService svc = _routerService;
-                if(svc != null && _isBound) {
-                    setPref(PREF_AUTO_START, true);
-                    svc.manualStart();
-                } else {
-                    (new File(_myDir, "wrapper.log")).delete();
-                    startRouter();
-                }
+                mCallback.onStartRouterClicked();
                 updateOneShot();
             }
         });
@@ -158,10 +174,7 @@ public class MainFragment extends I2PFragmentBase {
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                RouterService svc = _routerService;
-                if(svc != null && _isBound) {
-                    setPref(PREF_AUTO_START, false);
-                    svc.manualQuit();
+                if(mCallback.onStopRouterClicked()) {
                     updateOneShot();
                 }
             }
@@ -232,13 +245,11 @@ public class MainFragment extends I2PFragmentBase {
     }
 
     private void updateVisibility() {
-        RouterService svc = _routerService;
-        boolean showStart = ((svc == null) || (!_isBound) || svc.canManualStart())
-                && Util.isConnected(getActivity());
+        boolean showStart = mCallback.shouldShowStart();
         Button start = (Button) getActivity().findViewById(R.id.router_start_button);
         start.setVisibility(showStart ? View.VISIBLE : View.INVISIBLE);
 
-        boolean showStop = svc != null && _isBound && svc.canManualStop();
+        boolean showStop = mCallback.shouldShowStop();
         // Old stop but leave in memory. Always hide for now.
         // Button stop = (Button) findViewById(R.id.router_stop_button);
         // stop.setVisibility( /* showStop ? View.VISIBLE : */ View.INVISIBLE);
@@ -394,7 +405,7 @@ public class MainFragment extends I2PFragmentBase {
 
     private void checkDialog() {
         VersionDialog dialog = new VersionDialog();
-        String oldVersion = getPref(PREF_INSTALLED_VERSION, "??");
+        String oldVersion = ((I2PActivityBase) getActivity()).getPref(PREF_INSTALLED_VERSION, "??");
         if(oldVersion.equals("??")) {
             Bundle args = new Bundle();
             args.putInt(VersionDialog.DIALOG_TYPE, VersionDialog.DIALOG_NEW_INSTALL);

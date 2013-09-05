@@ -78,7 +78,6 @@ public class PeersFragment extends I2PFragmentBase {
         }
     }
 
-    @Override
     public boolean onBackPressed() {
         WebView wv = (WebView) getActivity().findViewById(R.id.peers_webview);
         _wvClient.cancelAll();

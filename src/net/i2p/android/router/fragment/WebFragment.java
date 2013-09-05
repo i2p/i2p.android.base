@@ -79,7 +79,6 @@ public class WebFragment extends I2PFragmentBase {
         }
     }
 
-    @Override
     public boolean onBackPressed() {
         WebView wv = (WebView) getActivity().findViewById(R.id.browser_webview);
         _wvClient.cancelAll();

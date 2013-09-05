@@ -57,7 +57,8 @@ public class NewsFragment extends I2PFragmentBase {
         }
 
         // only update the webview if we need to
-        File newsFile = new File(_myDir, "docs/news.xml");
+        // XXX Gets dir directly instead of the one stored in the Activity (for now)
+        File newsFile = new File(getActivity().getFilesDir().getAbsolutePath(), "docs/news.xml");
         boolean newsExists = newsFile.exists();
         if (_lastChanged > 0 && ((!newsExists) || newsFile.lastModified() < _lastChanged))
             return;
@@ -96,7 +97,6 @@ public class NewsFragment extends I2PFragmentBase {
         }
     }
 
-    @Override
     public boolean onBackPressed() {
         WebView wv = (WebView) getActivity().findViewById(R.id.news_webview);
         _wvClient.cancelAll();

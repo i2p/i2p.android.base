@@ -25,18 +25,13 @@ import android.widget.ListView;
 import net.i2p.android.i2ptunnel.activity.TunnelListActivity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.binder.RouterBinder;
+import net.i2p.android.router.fragment.I2PFragmentBase;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
-import net.i2p.router.CommSystemFacade;
-import net.i2p.router.NetworkDatabaseFacade;
-import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
-import net.i2p.router.TunnelManagerFacade;
-import net.i2p.router.peermanager.ProfileOrganizer;
-import net.i2p.router.transport.FIFOBandwidthLimiter;
-import net.i2p.stat.StatManager;
 
-public abstract class I2PActivityBase extends ActionBarActivity {
+public abstract class I2PActivityBase extends ActionBarActivity implements
+        I2PFragmentBase.RouterContextProvider {
     /**
      * Navigation drawer variables
      */
@@ -62,7 +57,6 @@ public abstract class I2PActivityBase extends ActionBarActivity {
     protected static final String PREF_AUTO_START = "autoStart";
     /** true leads to a poor install experience, very slow to paint the screen */
     protected static final boolean DEFAULT_AUTO_START = false;
-    protected static final String PREF_INSTALLED_VERSION = "app.version";
 
     /**
      * Override this in subclasses that can use two panes, such as a
@@ -180,19 +174,19 @@ public abstract class I2PActivityBase extends ActionBarActivity {
     }
 
     /** @param def default */
-    protected String getPref(String pref, String def) {
+    public String getPref(String pref, String def) {
         return _sharedPrefs.getString(pref, def);
     }
 
     /** @return success */
-    protected boolean setPref(String pref, boolean val) {
+    public boolean setPref(String pref, boolean val) {
         SharedPreferences.Editor edit = _sharedPrefs.edit();
         edit.putBoolean(pref, val);
         return edit.commit();
     }
 
     /** @return success */
-    protected boolean setPref(String pref, String val) {
+    public boolean setPref(String pref, String val) {
         SharedPreferences.Editor edit = _sharedPrefs.edit();
         edit.putString(pref, val);
         return edit.commit();
@@ -427,61 +421,12 @@ public abstract class I2PActivityBase extends ActionBarActivity {
     /** callback from ServiceConnection, override as necessary */
     protected void onRouterUnbind() {}
 
-    ////// Router stuff
+    // I2PFragmentBase.RouterContextProvider
 
-    protected RouterContext getRouterContext() {
+    public RouterContext getRouterContext() {
         RouterService svc = _routerService;
         if (svc == null || !_isBound)
             return null;
         return svc.getRouterContext();
-    }
-
-    protected Router getRouter() {
-        RouterContext ctx = getRouterContext();
-        if (ctx == null)
-            return null;
-        return ctx.router();
-    }
-
-    protected NetworkDatabaseFacade getNetDb() {
-        RouterContext ctx = getRouterContext();
-        if (ctx == null)
-            return null;
-        return ctx.netDb();
-    }
-
-    protected ProfileOrganizer getProfileOrganizer() {
-        RouterContext ctx = getRouterContext();
-        if (ctx == null)
-            return null;
-        return ctx.profileOrganizer();
-    }
-
-    protected TunnelManagerFacade getTunnelManager() {
-        RouterContext ctx = getRouterContext();
-        if (ctx == null)
-            return null;
-        return ctx.tunnelManager();
-    }
-
-    protected CommSystemFacade getCommSystem() {
-        RouterContext ctx = getRouterContext();
-        if (ctx == null)
-            return null;
-        return ctx.commSystem();
-    }
-
-    protected FIFOBandwidthLimiter getBandwidthLimiter() {
-        RouterContext ctx = getRouterContext();
-        if (ctx == null)
-            return null;
-        return ctx.bandwidthLimiter();
-    }
-
-    protected StatManager getStatManager() {
-        RouterContext ctx = getRouterContext();
-        if (ctx == null)
-            return null;
-        return ctx.statManager();
     }
 }

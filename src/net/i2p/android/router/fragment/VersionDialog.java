@@ -1,6 +1,7 @@
 package net.i2p.android.router.fragment;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.activity.I2PActivityBase;
 import net.i2p.android.router.activity.LicenseActivity;
 import net.i2p.android.router.util.Util;
 import android.app.Activity;
@@ -50,20 +51,16 @@ public class VersionDialog extends DialogFragment {
                  .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int id) {
-                        I2PFragmentBase fb = (I2PFragmentBase) getActivity()
-                                .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_fragment);
-                        fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
+                        I2PActivityBase ab = (I2PActivityBase) getActivity();
+                        ab.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         dialog.cancel();
                         mListener.onFirstRun();
                     }
                 }).setNeutralButton(R.string.label_release_notes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int id) {
-                        I2PFragmentBase fb = (I2PFragmentBase) getActivity()
-                                .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_fragment);
-                        fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
+                        I2PActivityBase ab = (I2PActivityBase) getActivity();
+                        ab.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         dialog.cancel();
                         TextResourceDialog f = new TextResourceDialog();
                         Bundle args = new Bundle();
@@ -78,10 +75,8 @@ public class VersionDialog extends DialogFragment {
                 }).setNegativeButton(R.string.label_licenses, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int id) {
-                        I2PFragmentBase fb = (I2PFragmentBase) getActivity()
-                                .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_fragment);
-                        fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
+                        I2PActivityBase ab = (I2PActivityBase) getActivity();
+                        ab.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         dialog.cancel();
                         Intent intent = new Intent(getActivity(), LicenseActivity.class);
                         startActivity(intent);
@@ -96,10 +91,8 @@ public class VersionDialog extends DialogFragment {
                  .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int id) {
-                        I2PFragmentBase fb = (I2PFragmentBase) getActivity()
-                                .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_fragment);
-                        fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
+                        I2PActivityBase ab = (I2PActivityBase) getActivity();
+                        ab.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         try {
                             dialog.dismiss();
                         } catch(Exception e) {
@@ -108,10 +101,8 @@ public class VersionDialog extends DialogFragment {
                 }).setNegativeButton(R.string.label_release_notes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int id) {
-                        I2PFragmentBase fb = (I2PFragmentBase) getActivity()
-                                .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_fragment);
-                        fb.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
+                        I2PActivityBase ab = (I2PActivityBase) getActivity();
+                        ab.setPref(MainFragment.PREF_INSTALLED_VERSION, currentVersion);
                         try {
                             dialog.dismiss();
                         } catch(Exception e) {
