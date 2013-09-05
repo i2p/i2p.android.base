@@ -6,6 +6,7 @@
         <item>@string/label_i2ptunnel</item>
         <item>@string/label_logs</item>
         <item>@string/label_error_logs</item>
+        <item>@string/label_peers_status</item>
     </string-array>
     <string-array name="setting0to3">
         <item>0</item>

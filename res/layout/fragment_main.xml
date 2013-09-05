@@ -60,20 +60,6 @@
 -->
 
 <TextView
-    android:id="@+id/textView2"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/label_tools"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-<Button
-    android:id="@+id/peers_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/label_peers_status"
-    android:drawableLeft="@drawable/peers_icon" />
-
-<TextView
     android:id="@+id/textView3"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

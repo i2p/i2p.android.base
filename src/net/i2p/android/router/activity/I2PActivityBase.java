@@ -73,6 +73,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     {
         Util.i(this + " onCreate called");
         super.onCreate(savedInstanceState);
+        _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
         _myDir = getFilesDir().getAbsolutePath();
 
         // If the Activity can make use of two panes (if available),
@@ -146,6 +147,10 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
             err.putExtra(LogActivity.ERRORS_ONLY, true);
             startActivity(err);
             break;
+        case 5:
+            Intent peers = new Intent(I2PActivityBase.this, PeersActivity.class);
+            startActivity(peers);
+            break;
         default:
             Intent main = new Intent(I2PActivityBase.this, MainActivity.class);
             startActivity(main);
@@ -166,7 +171,6 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     {
         Util.i(this + " onStart called");
         super.onStart();
-        _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
         if (_sharedPrefs.getBoolean(PREF_AUTO_START, DEFAULT_AUTO_START))
             startRouter();
         else

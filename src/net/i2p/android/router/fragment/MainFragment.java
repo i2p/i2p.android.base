@@ -140,18 +140,6 @@ public class MainFragment extends I2PFragmentBase {
             }
         });
 
-        b = (Button) v.findViewById(R.id.peers_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager()
-                             .beginTransaction()
-                             .replace(R.id.main_fragment, new PeersFragment())
-                             .addToBackStack(null)
-                             .commit();
-            }
-        });
-
         /*
          * hidden, unused b = (Button) v.findViewById(R.id.router_stop_button);
          * b.setOnClickListener(new View.OnClickListener() { public void

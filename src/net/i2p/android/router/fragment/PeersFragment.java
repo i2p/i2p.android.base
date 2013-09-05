@@ -9,7 +9,6 @@ import android.webkit.WebView;
 import java.io.IOException;
 import java.io.StringWriter;
 import net.i2p.android.router.R;
-import net.i2p.android.router.service.RouterService;
 import net.i2p.router.CommSystemFacade;
 
 public class PeersFragment extends I2PFragmentBase {
@@ -41,16 +40,7 @@ public class PeersFragment extends I2PFragmentBase {
         update();
     }
 
-    /**
-     *  Not bound by the time onResume() is called, so we have to do it here.
-     *  If it is bound we update twice.
-     */
-    @Override
-    protected void onRouterBind(RouterService svc) {
-        update();
-    }
-
-    private void update() {
+    public void update() {
         WebView wv = (WebView) getActivity().findViewById(R.id.peers_webview);
         wv.clearHistory(); // fixes having to hit back.
         CommSystemFacade comm = getCommSystem();

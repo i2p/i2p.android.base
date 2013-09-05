@@ -40,6 +40,10 @@
                   android:label="I2P License Information"
                   android:parentActivityName=".activity.HelpActivity" >
         </activity>
+        <activity android:name=".activity.PeersActivity"
+                  android:label="Peers Information"
+                  android:parentActivityName=".activity.MainActivity" >
+        </activity>
         <activity android:name=".activity.WebActivity"
                   android:label="I2P Web Browser"
                   android:configChanges="orientation|keyboardHidden" >
