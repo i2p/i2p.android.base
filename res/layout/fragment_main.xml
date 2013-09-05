@@ -59,47 +59,5 @@
     android:drawableLeft="@drawable/stop_router_icon" />
 -->
 
-<TextView
-    android:id="@+id/textView3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/label_info_and_pages"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-<Button
-    android:id="@+id/welcome_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/label_welcome_page"
-    android:drawableLeft="@drawable/information_icon" />
-
-<Button
-    android:id="@+id/news_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/label_news"
-    android:drawableLeft="@drawable/information_icon" />
-
-<TextView
-    android:id="@+id/textView5"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/label_nonanon_info"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-<Button
-    android:id="@+id/website_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/label_website_nonanon"
-    android:drawableLeft="@drawable/nonanon_info_icon" />
-
-<Button
-    android:id="@+id/faq_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/label_faq_nonanon"
-    android:drawableLeft="@drawable/nonanon_info_icon" />
-
 </LinearLayout>
 </ScrollView>

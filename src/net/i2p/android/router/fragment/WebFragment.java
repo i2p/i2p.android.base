@@ -20,7 +20,7 @@ public class WebFragment extends I2PFragmentBase {
     private I2PWebViewClient _wvClient;
 
     public final static String HTML_URI = "html_url";
-    final static String HTML_RESOURCE_ID = "html_resource_id";
+    public final static String HTML_RESOURCE_ID = "html_resource_id";
     private static final String WARNING = "Warning - " +
                "any non-I2P links visited in this window are fetched over the regular internet and are " +
                "not anonymous. I2P pages may not load images or CSS.";

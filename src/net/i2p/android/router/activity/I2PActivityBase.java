@@ -25,6 +25,8 @@ import net.i2p.android.i2ptunnel.activity.TunnelListActivity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.fragment.I2PFragmentBase;
+import net.i2p.android.router.fragment.NewsFragment;
+import net.i2p.android.router.fragment.WebFragment;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
@@ -149,6 +151,28 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         case 5:
             Intent peers = new Intent(I2PActivityBase.this, PeersActivity.class);
             startActivity(peers);
+            break;
+        case 6:
+            Intent wp = new Intent(I2PActivityBase.this, WebActivity.class);
+            wp.putExtra(WebFragment.HTML_RESOURCE_ID, R.raw.welcome_html);
+            startActivity(wp);
+            break;
+        case 7:
+            getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_fragment, new NewsFragment())
+                .addToBackStack(null)
+                .commit();
+            break;
+        case 8:
+            Intent website = new Intent(I2PActivityBase.this, WebActivity.class);
+            website.putExtra(WebFragment.HTML_URI, "http://www.i2p2.de/");
+            startActivity(website);
+            break;
+        case 9:
+            Intent faq = new Intent(I2PActivityBase.this, WebActivity.class);
+            faq.putExtra(WebFragment.HTML_URI, "http://www.i2p2.de/faq");
+            startActivity(faq);
             break;
         default:
             Intent main = new Intent(I2PActivityBase.this, MainActivity.class);

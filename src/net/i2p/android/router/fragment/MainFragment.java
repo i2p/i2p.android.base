@@ -78,67 +78,7 @@ public class MainFragment extends I2PFragmentBase {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Button b = (Button) v.findViewById(R.id.news_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager()
-                             .beginTransaction()
-                             .replace(R.id.main_fragment, new NewsFragment())
-                             .addToBackStack(null)
-                             .commit();
-            }
-        });
-
-        b = (Button) v.findViewById(R.id.website_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/").build());
-                WebFragment f = new WebFragment();
-                Bundle args = new Bundle();
-                args.putString(WebFragment.HTML_URI, "http://www.i2p2.de/");
-                f.setArguments(args);
-                getActivity().getSupportFragmentManager()
-                             .beginTransaction()
-                             .replace(R.id.main_fragment, f)
-                             .addToBackStack(null)
-                             .commit();
-            }
-        });
-
-        b = (Button) v.findViewById(R.id.faq_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/faq").build());
-                WebFragment f = new WebFragment();
-                Bundle args = new Bundle();
-                args.putString(WebFragment.HTML_URI, "http://www.i2p2.de/faq");
-                f.setArguments(args);
-                getActivity().getSupportFragmentManager()
-                             .beginTransaction()
-                             .replace(R.id.main_fragment, f)
-                             .addToBackStack(null)
-                             .commit();
-            }
-        });
-
-        b = (Button) v.findViewById(R.id.welcome_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                WebFragment f = new WebFragment();
-                Bundle args = new Bundle();
-                args.putInt(WebFragment.HTML_RESOURCE_ID, R.raw.welcome_html);
-                f.setArguments(args);
-                getActivity().getSupportFragmentManager()
-                             .beginTransaction()
-                             .replace(R.id.main_fragment, f)
-                             .addToBackStack(null)
-                             .commit();
-            }
-        });
+        Button b;
 
         /*
          * hidden, unused b = (Button) v.findViewById(R.id.router_stop_button);
