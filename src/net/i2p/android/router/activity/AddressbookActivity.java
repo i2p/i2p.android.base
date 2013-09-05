@@ -70,14 +70,9 @@ public class AddressbookActivity extends I2PActivityBase
             setResult(Activity.RESULT_OK, result);
             finish();
         } else {
-            WebFragment f = new WebFragment();
-            Bundle args = new Bundle();
-            args.putString(WebFragment.HTML_URI, "http://" + host + '/');
-            f.setArguments(args);
-            getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment, f)
-                .addToBackStack(null)
-                .commit();
+            Intent wa = new Intent(this, WebActivity.class);
+            wa.putExtra(WebFragment.HTML_URI, "http://" + host + '/');
+            startActivity(wa);
         }
     }
 
