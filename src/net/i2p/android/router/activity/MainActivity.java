@@ -2,7 +2,11 @@ package net.i2p.android.router.activity;
 
 import java.io.File;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.MainFragment;
 import net.i2p.android.router.fragment.VersionDialog;
@@ -32,6 +36,32 @@ public class MainActivity extends I2PActivityBase implements
         init.debugStuff();
         init.initialize();
         super.onPostCreate(savedInstanceState);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_settings:
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+
+        case R.id.menu_help:
+            Intent hi = new Intent(MainActivity.this, HelpActivity.class);
+            hi.putExtra(HelpActivity.REFERRER, "main");
+            startActivity(hi);
+            return true;
+
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     // MainFragment.RouterControlListener

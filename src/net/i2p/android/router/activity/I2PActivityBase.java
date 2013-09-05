@@ -260,39 +260,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         }
 
         // Handle action buttons and overflow
-        switch (item.getItemId()) {
-        case R.id.menu_settings:
-            Intent intent = new Intent(I2PActivityBase.this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-
-        case R.id.menu_help:
-            Intent hi = new Intent(I2PActivityBase.this, HelpActivity.class);
-            hi.putExtra(HelpActivity.REFERRER, "main");
-            startActivity(hi);
-            return true;
-
-        case R.id.menu_start:
-            RouterService svc = _routerService;
-            if (svc != null && _isBound && svc.canManualStart()) {
-                setPref(PREF_AUTO_START, true);
-                svc.manualStart();
-            } else {
-                startRouter();
-            }
-            return true;
-
-        case R.id.menu_stop:
-            RouterService rsvc = _routerService;
-            if (rsvc != null && _isBound && rsvc.canManualStop()) {
-                setPref(PREF_AUTO_START, false);
-                rsvc.manualStop();
-            }
-            return true;
-
-        default:
-            return super.onOptionsItemSelected(item);
-        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

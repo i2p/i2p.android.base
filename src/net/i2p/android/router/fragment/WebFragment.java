@@ -96,6 +96,7 @@ public class WebFragment extends I2PFragmentBase {
     public boolean onOptionsItemSelected(MenuItem item) {
         WebView wv = (WebView) getActivity().findViewById(R.id.browser_webview);
         switch (item.getItemId()) {
+        /*
         case R.id.menu_reload:
             _wvClient.cancelAll();
             wv.stopLoading();
@@ -110,6 +111,7 @@ public class WebFragment extends I2PFragmentBase {
                 _wvClient.shouldOverrideUrlLoading(wv, url);
             }
             return true;
+            */
 
         default:
             return super.onOptionsItemSelected(item);
