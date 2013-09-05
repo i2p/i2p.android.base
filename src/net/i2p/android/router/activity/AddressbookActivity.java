@@ -15,7 +15,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class AddressbookActivity extends I2PNavDrawerBase
+public class AddressbookActivity extends I2PActivityBase
         implements AddressbookFragment.OnAddressSelectedListener,
         SearchView.OnQueryTextListener {
     /**

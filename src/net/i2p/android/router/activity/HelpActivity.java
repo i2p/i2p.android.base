@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class HelpActivity extends I2PNavDrawerBase {
+public class HelpActivity extends I2PActivityBase {
     public static final String REFERRER = "help_referrer";
 
     @Override

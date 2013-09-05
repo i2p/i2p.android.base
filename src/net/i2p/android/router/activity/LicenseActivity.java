@@ -4,7 +4,7 @@ import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.LicenseFragment;
 import android.os.Bundle;
 
-public class LicenseActivity extends I2PNavDrawerBase {
+public class LicenseActivity extends I2PActivityBase {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

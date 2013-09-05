@@ -3,13 +3,13 @@ package net.i2p.android.i2ptunnel.activity;
 import net.i2p.android.i2ptunnel.fragment.TunnelDetailFragment;
 import net.i2p.android.i2ptunnel.fragment.TunnelListFragment;
 import net.i2p.android.router.R;
-import net.i2p.android.router.activity.I2PNavDrawerBase;
+import net.i2p.android.router.activity.I2PActivityBase;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 
-public class TunnelListActivity extends I2PNavDrawerBase implements
+public class TunnelListActivity extends I2PActivityBase implements
         TunnelListFragment.OnTunnelSelectedListener,
         TunnelDetailFragment.OnTunnelDeletedListener {
     /**
