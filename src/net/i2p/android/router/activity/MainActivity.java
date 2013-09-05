@@ -6,7 +6,7 @@ import net.i2p.android.router.fragment.MainFragment;
 import net.i2p.android.router.fragment.VersionDialog;
 import net.i2p.android.router.util.Util;
 
-public class MainActivity extends I2PActivityBase
+public class MainActivity extends I2PNavDrawerBase
                           implements VersionDialog.VersionDialogListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
