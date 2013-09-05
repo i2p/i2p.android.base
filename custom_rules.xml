@@ -247,10 +247,10 @@
                 props.store(fo, "AUTO-GENERATED FILE, DO NOT EDIT!");
                 fo.close();
             }
-            sp1 = 'android.versionCode="[0-9]*"';
-            rp1 = 'android.versionCode="' + props.getProperty("my.version.code") + '"';
-            sp2 = 'android.versionName="[^"]*"';
-            rp2 = 'android.versionName="' + props.getProperty("my.version.name") + '"';
+            sp1 = 'android:versionCode="[0-9]*"';
+            rp1 = 'android:versionCode="' + props.getProperty("my.version.code") + '"';
+            sp2 = 'android:versionName="[^"]*"';
+            rp2 = 'android:versionName="' + props.getProperty("my.version.name") + '"';
 
             /* sed primary manifest */
             cfg = File(attributes.get("mainxml") + ".in");

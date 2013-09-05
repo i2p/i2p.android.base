@@ -20,7 +20,7 @@ public class LogActivity extends ListActivity {
     private ArrayAdapter<String> _adap;
     private TextView _headerView;
 
-    final static String ERRORS_ONLY = "errors_only";
+    public final static String ERRORS_ONLY = "errors_only";
     private static final int MAX = 250;
 
     @Override

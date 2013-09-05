@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.i2p.android.router"
-      android.versionCode="0"
-      android.versionName="0.0.0-0_b0-API8"
+      android:versionCode="0"
+      android:versionName="0.0.0-0_b0-API8"
       android:installLocation="auto"
       >
     <uses-permission android:name="android.permission.INTERNET" />
@@ -32,11 +32,17 @@
                   android:label="I2P News"
                   android:configChanges="orientation|keyboardHidden" >
         </activity>
-        <activity android:name=".activity.TextResourceActivity"
-                  android:label="I2P Information" >
+        <activity android:name=".activity.HelpActivity"
+                  android:label="Help"
+                  android:parentActivityName=".activity.MainActivity" >
         </activity>
         <activity android:name=".activity.LicenseActivity"
-                  android:label="I2P License Information" >
+                  android:label="I2P License Information"
+                  android:parentActivityName=".activity.HelpActivity" >
+        </activity>
+        <activity android:name=".activity.PeersActivity"
+                  android:label="Peers Information"
+                  android:parentActivityName=".activity.MainActivity" >
         </activity>
         <activity android:name=".activity.WebActivity"
                   android:label="I2P Web Browser"
@@ -50,18 +56,42 @@
         </activity>
         <activity android:name=".activity.SettingsActivity"
                   android:label="I2P Settings"
+                  android:parentActivityName=".activity.MainActivity"
                   android:launchMode="singleTop" >
         </activity>
         <activity android:name=".activity.AddressbookSettingsActivity"
                   android:label="I2P Addressbook Settings"
+                  android:parentActivityName=".activity.AddressbookActivity"
                   android:launchMode="singleTop" >
         </activity>
         <activity android:name=".activity.AddressbookActivity"
                   android:label="Addressbook"
                   android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable_addressbook"/>
+        </activity>
+        <activity android:name="net.i2p.android.i2ptunnel.activity.TunnelListActivity"
+                  android:label="I2PTunnel"
+                  android:launchMode="singleTop" >
+        </activity>
+        <activity android:name="net.i2p.android.i2ptunnel.activity.TunnelDetailActivity"
+                  android:label="I2PTunnel"
+                  android:parentActivityName="net.i2p.android.i2ptunnel.activity.TunnelListActivity" >
+        </activity>
+        <activity android:name="net.i2p.android.i2ptunnel.activity.TunnelWizardActivity"
+                  android:label="Tunnel Creation Wizard"
+                  android:parentActivityName="net.i2p.android.i2ptunnel.activity.TunnelListActivity" >
         </activity>
         <activity android:name=".activity.LogActivity"
-                  android:label="I2P Logs" >
+                  android:label="I2P Logs"
+                  android:parentActivityName=".activity.MainActivity" >
         </activity>
         <activity android:name=".activity.PeersActivity"
                   android:label="I2P Peers and Transport Status"

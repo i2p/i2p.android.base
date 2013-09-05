@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">I2P</string>
+    <string name="desc_i2p_logo">I2P logo</string>
     <string name="welcome_new_install">Welcome to I2P! This app is ALPHA software and it does not provide strong anonymity. Please read the release notes and license information.</string>
     <string name="welcome_new_version">New version installed. Please read the release notes. Version:</string>
 
@@ -10,6 +11,9 @@
     <string name="label_main_controls">Main Controls</string>
     <string name="label_tools">I2P Tools</string>
     <string name="label_addressbook">Addressbook</string>
+    <string name="label_i2ptunnel">I2PTunnel</string>
+    <string name="label_i2ptunnel_client">Client tunnels</string>
+    <string name="label_i2ptunnel_server">Server tunnels</string>
     <string name="label_logs">Logs</string>
     <string name="label_error_logs">Error Logs</string>
     <string name="label_info_and_pages">Information and pages</string>
@@ -22,11 +26,23 @@
     <string name="label_nonanon_info">Non Anonymous Information</string>
     <string name="label_website_nonanon">Web Site (non-anon)</string>
     <string name="label_faq_nonanon">FAQ (non-anon)</string>
+    <string name="label_browse">Browse</string>
 
+    <string name="drawer_open">Open nav</string>
+    <string name="drawer_close">Close nav</string>
+    <string name="action_search">Search</string>
     <string name="action_add">Add</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
     <string name="action_router_start">Start Router</string>
     <string name="action_router_stop">Stop Router</string>
+    <string name="action_i2ptunnel_start">Start tunnel</string>
+    <string name="action_i2ptunnel_stop">Stop tunnel</string>
+    <string name="action_i2ptunnel_start_all">Start all tunnels</string>
+    <string name="action_i2ptunnel_stop_all">Stop all tunnels</string>
+    <string name="action_i2ptunnel_restart_all">Restart all tunnels</string>
     <string name="action_reload">Reload</string>
+    <string name="hint_search_addressbook">Search addressbook</string>
 
     <string name="menu_settings">Settings</string>
     <string name="settings_enable">Enable</string>
@@ -64,4 +80,59 @@
     <string name="settings_label_expl_backupQuantity">Backup quantity</string>
     <string name="settings_desc_expl_backupQuantity">How many tunnel backups</string>
 
+    <string name="menu_help">Help</string>
+
+    <string name="i2ptunnel_type_client">Standard client</string>
+    <string name="i2ptunnel_type_httpclient">HTTP client</string>
+    <string name="i2ptunnel_type_ircclient">IRC client</string>
+    <string name="i2ptunnel_type_server">Standard server</string>
+    <string name="i2ptunnel_type_httpserver">HTTP server</string>
+    <string name="i2ptunnel_type_sockstunnel">SOCKS 4/4a/5 proxy</string>
+    <string name="i2ptunnel_type_socksirctunnel">SOCKS IRC proxy</string>
+    <string name="i2ptunnel_type_connectclient">CONNECT/SSL/HTTPS proxy</string>
+    <string name="i2ptunnel_type_ircserver">IRC server</string>
+    <string name="i2ptunnel_type_streamrclient">Streamr client</string>
+    <string name="i2ptunnel_type_streamrserver">Streamr server</string>
+    <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
+
+    <string name="i2ptunnel_not_initialized">Tunnels are not initialized yet, please reload in two minutes.</string>
+    <string name="i2ptunnel_new_tunnel">New Tunnel</string>
+    <string name="i2ptunnel_msg_config_saved">Configuration changes saved</string>
+    <string name="i2ptunnel_msg_config_save_failed">Failed to save configuration</string>
+    <string name="i2ptunnel_msg_tunnel_starting">Starting tunnel</string>
+    <string name="i2ptunnel_msg_tunnel_stopping">Stopping tunnel</string>
+    <string name="i2ptunnel_delete_confirm_message">Delete tunnel?</string>
+    <string name="i2ptunnel_delete_confirm_button">Delete tunnel</string>
+
+    <string name="i2ptunnel_wizard_k_client_server">Client or Server</string>
+    <string name="i2ptunnel_wizard_v_client">Client tunnel</string>
+    <string name="i2ptunnel_wizard_v_server">Server tunnel</string>
+    <string name="i2ptunnel_wizard_k_type">Tunnel type</string>
+    <string name="i2ptunnel_wizard_k_name">Name</string>
+    <string name="i2ptunnel_wizard_k_desc">Description</string>
+    <string name="i2ptunnel_wizard_k_dest">Destination</string>
+    <string name="i2ptunnel_wizard_k_outproxies">Outproxies</string>
+    <string name="i2ptunnel_wizard_k_target_host">Target host</string>
+    <string name="i2ptunnel_wizard_k_target_port">Target port</string>
+    <string name="i2ptunnel_wizard_k_reachable_on">Reachable on</string>
+    <string name="i2ptunnel_wizard_k_binding_port">Binding port</string>
+    <string name="i2ptunnel_wizard_k_auto_start">Auto start</string>
+
+    <string name="next">Next</string>
+    <string name="prev">Previous</string>
+    <string name="finish">Submit</string>
+    <string name="review">Review</string>
+    <string name="enabled">Enabled</string>
+
+    <string name="i2ptunnel_wizard_desc_name">The name of the tunnel, for identification in the tunnel list.</string>
+    <string name="i2ptunnel_wizard_desc_desc">A description of the tunnel. This is optional and purely informative.</string>
+    <string name="i2ptunnel_wizard_desc_dest">Type in the I2P destination of the service that this client tunnel should connect to. This could be the full base 64 destination key, or an I2P URL from your address book.</string>
+    <string name="i2ptunnel_wizard_desc_outproxies">If you know of any outproxies for this type of tunnel (either HTTP or SOCKS), fill them in. Separate multiple proxies with commas.</string>
+    <string name="i2ptunnel_wizard_desc_target_host">This is the IP that your service is running on, this is usually on the same machine so 127.0.0.1 is autofilled.</string>
+    <string name="i2ptunnel_wizard_desc_target_port">This is the port that the service is accepting connections on.</string>
+    <string name="i2ptunnel_wizard_desc_reachable_on">This limits what computers or smartphones can access this tunnel.</string>
+    <string name="i2ptunnel_wizard_desc_binding_port">This is the port that the client tunnel will be accessed from locally. This is also the client port for the HTTP bidir server tunnel.</string>
+    <string name="i2ptunnel_wizard_desc_auto_start">Should the tunnel automatically start when the router starts?</string>
+    <string name="i2ptunnel_wizard_submit_confirm_message">Create tunnel?</string>
+    <string name="i2ptunnel_wizard_submit_confirm_button">Create tunnel</string>
 </resources>

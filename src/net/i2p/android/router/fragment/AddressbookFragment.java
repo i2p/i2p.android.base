@@ -1,0 +1,131 @@
+package net.i2p.android.router.fragment;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
+import net.i2p.I2PAppContext;
+import net.i2p.android.router.R;
+import net.i2p.android.router.activity.AddressbookSettingsActivity;
+import net.i2p.android.router.activity.HelpActivity;
+import net.i2p.client.naming.NamingService;
+
+public class AddressbookFragment extends ListFragment {
+    OnAddressSelectedListener mCallback;
+    private ArrayAdapter<String> mAdapter;
+
+    // Container Activity must implement this interface
+    public interface OnAddressSelectedListener {
+        public void onAddressSelected(CharSequence host);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnAddressSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnAddressSelectedListener");
+        }
+
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // Grab context if router has started, otherwise create new
+        // FIXME dup contexts, locking, ...
+        I2PAppContext ctx = I2PAppContext.getCurrentContext();
+        if (ctx == null) {
+            Properties props = new Properties();
+            String myDir = getActivity().getFilesDir().getAbsolutePath();
+            props.setProperty("i2p.dir.base", myDir);
+            props.setProperty("i2p.dir.config", myDir);
+            ctx = new I2PAppContext(props);
+        }
+
+        // get the names
+        NamingService ns = ctx.namingService();
+        // After router shutdown we get nothing... why?
+        Set<String> names = ns.getNames();
+
+        // set the empty text
+        setEmptyText("No hosts in address book, or your router is not up.");
+
+        // set the list
+        List<String> nameList = new ArrayList<String>(names);
+        Collections.sort(nameList);
+        mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.addressbook_list_item, nameList);
+        setListAdapter(mAdapter);
+
+        // Show Toast with addressbook size
+        int sz = names.size();
+        Context context = getActivity().getApplicationContext();
+        CharSequence text = sz + " hosts in address book.";
+        if (sz == 1)
+            text = "1 host in address book.";
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onListItemClick(ListView parent, View view, int pos, long id) {
+        CharSequence host = ((TextView) view).getText();
+        mCallback.onAddressSelected(host);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    	inflater.inflate(R.menu.fragment_addressbook_actions, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        
+        switch (item.getItemId()) {
+            //case R.id.action_add_to_addressbook:
+            //    return true;
+        case R.id.action_addressbook_settings:
+            Intent si = new Intent(getActivity(), AddressbookSettingsActivity.class);
+            startActivity(si);
+            return true;
+        case R.id.action_addressbook_help:
+            Intent hi = new Intent(getActivity(), HelpActivity.class);
+            hi.putExtra(HelpActivity.REFERRER, "addressbook");
+            startActivity(hi);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void filterAddresses(String query) {
+        mAdapter.getFilter().filter(query);
+    }
+}
