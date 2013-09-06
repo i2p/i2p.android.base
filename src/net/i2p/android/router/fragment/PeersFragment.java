@@ -2,6 +2,8 @@ package net.i2p.android.router.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,12 @@ public class PeersFragment extends I2PFragmentBase {
     // TODO add some inline style
     private static final String HEADER = "<html><head></head><body>";
     private static final String FOOTER = "</body></html>";
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,14 +91,17 @@ public class PeersFragment extends I2PFragmentBase {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_web_actions, menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         WebView wv = (WebView) getActivity().findViewById(R.id.peers_webview);
         switch (item.getItemId()) {
-        /*
         case R.id.menu_reload:
             update();
             return true;
-            */
 
         default:
             return super.onOptionsItemSelected(item);

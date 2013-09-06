@@ -28,4 +28,11 @@ public class PeersActivity extends I2PActivityBase {
         PeersFragment f = (PeersFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment);
         f.update();
     }
+
+    @Override
+    public void onBackPressed() {
+        PeersFragment f = (PeersFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment);
+        if (!f.onBackPressed())
+            super.onBackPressed();
+    }
 }

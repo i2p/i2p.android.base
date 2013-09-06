@@ -16,4 +16,11 @@ public class WebActivity extends I2PActivityBase {
                     .add(R.id.main_fragment, f).commit();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        WebFragment f = (WebFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment);
+        if (!f.onBackPressed())
+            super.onBackPressed();
+    }
 }

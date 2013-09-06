@@ -4,6 +4,8 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,12 @@ public class WebFragment extends I2PFragmentBase {
     private static final String WARNING = "Warning - " +
                "any non-I2P links visited in this window are fetched over the regular internet and are " +
                "not anonymous. I2P pages may not load images or CSS.";
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,10 +101,14 @@ public class WebFragment extends I2PFragmentBase {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_web_actions, menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         WebView wv = (WebView) getActivity().findViewById(R.id.browser_webview);
         switch (item.getItemId()) {
-        /*
         case R.id.menu_reload:
             _wvClient.cancelAll();
             wv.stopLoading();
@@ -111,7 +123,6 @@ public class WebFragment extends I2PFragmentBase {
                 _wvClient.shouldOverrideUrlLoading(wv, url);
             }
             return true;
-            */
 
         default:
             return super.onOptionsItemSelected(item);
