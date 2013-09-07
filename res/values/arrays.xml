@@ -6,15 +6,18 @@
         <item>@string/label_i2ptunnel</item>
         <item>@string/label_logs</item>
         <item>@string/label_error_logs</item>
+        <item>@string/label_graphs</item>
         <item>@string/label_peers_status</item>
         <item>@string/label_welcome_page</item>
         <item>@string/label_news</item>
         <item>@string/label_website_nonanon</item>
         <item>@string/label_faq_nonanon</item>
-        <item>Active peers</item>
-        <item>Memory used</item>
-        <item>Incoming bandwidth used</item>
-        <item>Outgoing bandwidth used</item>
+    </string-array>
+    <string-array name="graph_list">
+        <item>router.activePeers</item>
+        <item>router.memoryUsed</item>
+        <item>bw.sendRate</item>
+        <item>bw.recvRate</item>
     </string-array>
     <string-array name="setting0to3">
         <item>0</item>
