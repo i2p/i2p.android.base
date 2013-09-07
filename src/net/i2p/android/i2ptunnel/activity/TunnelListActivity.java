@@ -18,6 +18,8 @@ public class TunnelListActivity extends I2PActivityBase implements
      */
     private boolean mTwoPane;
 
+    private static final String SELECTED_TAB = "selected_tab";
+
     @Override
     protected boolean canUseTwoPanes() {
         return true;
@@ -51,6 +53,11 @@ public class TunnelListActivity extends I2PActivityBase implements
                 .setTabListener(new TabListener(sf));
         actionBar.addTab(tab);
 
+        if (savedInstanceState != null) {
+            int selected = savedInstanceState.getInt(SELECTED_TAB);
+            actionBar.setSelectedNavigationItem(selected);
+        }
+
         if (findViewById(R.id.detail_fragment) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -63,6 +70,13 @@ public class TunnelListActivity extends I2PActivityBase implements
             cf.setActivateOnItemClick(true);
             sf.setActivateOnItemClick(true);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SELECTED_TAB,
+                getSupportActionBar().getSelectedNavigationIndex());
     }
 
     // TunnelListFragment.OnTunnelSelectedListener
