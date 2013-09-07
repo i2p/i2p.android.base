@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
 public class GraphActivity extends I2PActivityBase {
+    private static final String SELECTED_RATE = "selected_rate";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,5 +37,17 @@ public class GraphActivity extends I2PActivityBase {
         };
 
         actionBar.setListNavigationCallbacks(mSpinnerAdapter, mNavigationListener);
+
+        if (savedInstanceState != null) {
+            int selected = savedInstanceState.getInt(SELECTED_RATE);
+            actionBar.setSelectedNavigationItem(selected);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SELECTED_RATE,
+                getSupportActionBar().getSelectedNavigationIndex());
     }
 }
