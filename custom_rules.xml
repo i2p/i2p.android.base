@@ -465,7 +465,7 @@
     <target name="reinstall" depends="install" />
 
     <target name="-pre-clean">
-        <delete dir="${jar.libs.dir}" verbose="${verbose}" />
+        <!--<delete dir="${jar.libs.dir}" verbose="${verbose}" />-->
         <delete file="res/drawable/i2plogo.png" verbose="${verbose}"/>
         <delete file="res/drawable/outbound.png" verbose="${verbose}"/>
         <delete file="res/drawable/inbound.png" verbose="${verbose}"/>
