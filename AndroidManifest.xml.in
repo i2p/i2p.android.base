@@ -93,6 +93,10 @@
                   android:label="I2P Logs"
                   android:parentActivityName=".activity.MainActivity" >
         </activity>
+        <activity android:name=".activity.GraphActivity"
+                  android:label="Graph"
+                  android:parentActivityName=".activity.MainActivity" >
+        </activity>
         <activity android:name=".activity.PeersActivity"
                   android:label="I2P Peers and Transport Status"
                   android:configChanges="orientation|keyboardHidden"

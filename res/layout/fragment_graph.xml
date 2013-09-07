@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <com.androidplot.xy.XYPlot
+        android:id="@+id/rate_stat_plot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        androidplot.title="Rate Stat Plot" />
+</LinearLayout>

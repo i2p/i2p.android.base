@@ -50,6 +50,10 @@ class LoadClientsJob extends JobImpl {
         Job j = new RunI2PTunnel(getContext());
         getContext().jobQueue().addJob(j);
 
+        Thread t = new I2PAppThread(new StatSummarizer(), "StatSummarizer", true);
+        t.setPriority(Thread.NORM_PRIORITY - 1);
+        t.start();
+
         NewsFetcher fetcher = NewsFetcher.getInstance(getContext());
         _fetcherThread = new I2PAppThread(fetcher, "NewsFetcher", true);
         _fetcherThread.start();
@@ -96,6 +100,7 @@ class LoadClientsJob extends JobImpl {
         public void run() {
             Util.i("client shutdown hook");
             // i2ptunnel registers its own hook
+            // statsummarizer registers its own hook
             if (_BOB != null)
                 BOB.stop();
             if (_fetcherThread != null)

@@ -24,6 +24,7 @@ import android.widget.ListView;
 import net.i2p.android.i2ptunnel.activity.TunnelListActivity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.binder.RouterBinder;
+import net.i2p.android.router.fragment.GraphFragment;
 import net.i2p.android.router.fragment.I2PFragmentBase;
 import net.i2p.android.router.fragment.NewsFragment;
 import net.i2p.android.router.fragment.WebFragment;
@@ -173,6 +174,30 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
             Intent faq = new Intent(I2PActivityBase.this, WebActivity.class);
             faq.putExtra(WebFragment.HTML_URI, "http://www.i2p2.de/faq");
             startActivity(faq);
+            break;
+        case 10:
+            Intent active = new Intent(I2PActivityBase.this, GraphActivity.class);
+            active.putExtra(GraphFragment.RATE_NAME, "router.activePeers");
+            active.putExtra(GraphFragment.RATE_PERIOD, 60 * 1000);
+            startActivity(active);
+            break;
+        case 11:
+            Intent mem = new Intent(I2PActivityBase.this, GraphActivity.class);
+            mem.putExtra(GraphFragment.RATE_NAME, "router.memoryUsed");
+            mem.putExtra(GraphFragment.RATE_PERIOD, 60 * 1000);
+            startActivity(mem);
+            break;
+        case 12:
+            Intent bwR = new Intent(I2PActivityBase.this, GraphActivity.class);
+            bwR.putExtra(GraphFragment.RATE_NAME, "bw.recvRate");
+            bwR.putExtra(GraphFragment.RATE_PERIOD, 60 * 1000);
+            startActivity(bwR);
+            break;
+        case 13:
+            Intent bwS = new Intent(I2PActivityBase.this, GraphActivity.class);
+            bwS.putExtra(GraphFragment.RATE_NAME, "bw.sendRate");
+            bwS.putExtra(GraphFragment.RATE_PERIOD, 60 * 1000);
+            startActivity(bwS);
             break;
         default:
             Intent main = new Intent(I2PActivityBase.this, MainActivity.class);
