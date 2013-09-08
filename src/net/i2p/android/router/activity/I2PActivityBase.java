@@ -144,36 +144,31 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
             startActivity(log);
             break;
         case 4:
-            Intent err = new Intent(I2PActivityBase.this, LogActivity.class);
-            err.putExtra(LogActivity.ERRORS_ONLY, true);
-            startActivity(err);
-            break;
-        case 5:
             Intent active = new Intent(I2PActivityBase.this, GraphActivity.class);
             startActivity(active);
             break;
-        case 6:
+        case 5:
             Intent peers = new Intent(I2PActivityBase.this, PeersActivity.class);
             startActivity(peers);
             break;
-        case 7:
+        case 6:
             Intent wp = new Intent(I2PActivityBase.this, WebActivity.class);
             wp.putExtra(WebFragment.HTML_RESOURCE_ID, R.raw.welcome_html);
             startActivity(wp);
             break;
-        case 8:
+        case 7:
             getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_fragment, new NewsFragment())
                 .addToBackStack(null)
                 .commit();
             break;
-        case 9:
+        case 8:
             Intent website = new Intent(I2PActivityBase.this, WebActivity.class);
             website.putExtra(WebFragment.HTML_URI, "http://www.i2p2.de/");
             startActivity(website);
             break;
-        case 10:
+        case 9:
             Intent faq = new Intent(I2PActivityBase.this, WebActivity.class);
             faq.putExtra(WebFragment.HTML_URI, "http://www.i2p2.de/faq");
             startActivity(faq);
