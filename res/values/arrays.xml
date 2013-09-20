@@ -7,6 +7,7 @@
         <item>@string/label_logs</item>
         <item>@string/label_graphs</item>
         <item>@string/label_peers_status</item>
+        <item>NetDB</item>
         <item>@string/label_welcome_page</item>
         <item>@string/label_news</item>
         <item>@string/label_website_nonanon</item>

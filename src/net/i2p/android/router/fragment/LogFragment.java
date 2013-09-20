@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
-import net.i2p.android.router.util.Util;
 
 public class LogFragment extends ListFragment {
 

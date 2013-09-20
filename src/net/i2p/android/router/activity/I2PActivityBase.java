@@ -60,8 +60,17 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     protected static final boolean DEFAULT_AUTO_START = false;
 
     /**
+     * Override this in subclasses that need a ViewPager, such as a
+     * category view.
+     * @return whether this Activity needs a ViewPager.
+     */
+    protected boolean useViewPager() {
+        return false;
+    }
+
+    /**
      * Override this in subclasses that can use two panes, such as a
-     * list/detail class. 
+     * list/detail class.
      * @return whether this Activity can use a two-pane layout.
      */
     protected boolean canUseTwoPanes() {
@@ -77,10 +86,13 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
         _myDir = getFilesDir().getAbsolutePath();
 
+        // If the Activity wants to use a ViewPager, provide it.
         // If the Activity can make use of two panes (if available),
         // load the layout that will enable them. Otherwise, load the
         // layout that will only ever have a single pane.
-        if (canUseTwoPanes())
+        if (useViewPager())
+            setContentView(R.layout.activity_navdrawer_viewpager);
+        else if (canUseTwoPanes())
             setContentView(R.layout.activity_navdrawer);
         else
             setContentView(R.layout.activity_navdrawer_onepane);
@@ -152,23 +164,27 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
             startActivity(peers);
             break;
         case 6:
+            Intent netdb = new Intent(I2PActivityBase.this, NetDbActivity.class);
+            startActivity(netdb);
+            break;
+        case 7:
             Intent wp = new Intent(I2PActivityBase.this, WebActivity.class);
             wp.putExtra(WebFragment.HTML_RESOURCE_ID, R.raw.welcome_html);
             startActivity(wp);
             break;
-        case 7:
+        case 8:
             getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_fragment, new NewsFragment())
                 .addToBackStack(null)
                 .commit();
             break;
-        case 8:
+        case 9:
             Intent website = new Intent(I2PActivityBase.this, WebActivity.class);
             website.putExtra(WebFragment.HTML_URI, "http://www.i2p2.de/");
             startActivity(website);
             break;
-        case 9:
+        case 10:
             Intent faq = new Intent(I2PActivityBase.this, WebActivity.class);
             faq.putExtra(WebFragment.HTML_URI, "http://www.i2p2.de/faq");
             startActivity(faq);
