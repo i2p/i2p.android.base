@@ -17,12 +17,12 @@ class StatusBar {
 
     private static final int ID = 1337;
 
-    public static final int ICON1 = R.drawable.ic_launcher_itoopie_300;
-    public static final int ICON2 = R.drawable.ic_launcher_itoopie_330;
-    public static final int ICON3 = R.drawable.ic_launcher_itoopie;
-    public static final int ICON4 = R.drawable.ic_launcher_itoopie_120;
-    public static final int ICON5 = R.drawable.ic_launcher_itoopie_150;
-    public static final int ICON6 = R.drawable.ic_launcher_itoopie_180;
+    public static final int ICON_STARTING = R.drawable.ic_stat_router_starting;
+    public static final int ICON_RUNNING = R.drawable.ic_stat_router_running;
+    public static final int ICON_ACTIVE = R.drawable.ic_stat_router_active;
+    public static final int ICON_STOPPING = R.drawable.ic_stat_router_stopping;
+    public static final int ICON_SHUTTING_DOWN = R.drawable.ic_stat_router_shutting_down;
+    public static final int ICON_WAITING_NETWORK = R.drawable.ic_stat_router_waiting_network;
 
     StatusBar(Context cx) {
         ctx = cx;
@@ -30,7 +30,7 @@ class StatusBar {
         mgr = (NotificationManager)ctx.getSystemService(ns);
         Thread.currentThread().setUncaughtExceptionHandler(new CrashHandler(mgr));
 
-        int icon = ICON1;
+        int icon = ICON_STARTING;
         // won't be shown if replace() is called
         String text = "Starting I2P";
         long now = System.currentTimeMillis();
