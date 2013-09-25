@@ -113,15 +113,24 @@ public class TunnelDetailFragment extends Fragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        boolean isStopped = mTunnel.getStatus() == TunnelEntry.NOT_RUNNING;
-
         MenuItem start = menu.findItem(R.id.action_start_tunnel);
-        start.setVisible(isStopped);
-        start.setEnabled(isStopped);
-
         MenuItem stop = menu.findItem(R.id.action_stop_tunnel);
-        stop.setVisible(!isStopped);
-        stop.setEnabled(!isStopped);
+
+        if (mTunnel != null) {
+            boolean isStopped = mTunnel.getStatus() == TunnelEntry.NOT_RUNNING;
+
+            start.setVisible(isStopped);
+            start.setEnabled(isStopped);
+
+            stop.setVisible(!isStopped);
+            stop.setEnabled(!isStopped);
+        } else {
+            start.setVisible(false);
+            start.setEnabled(false);
+
+            stop.setVisible(false);
+            stop.setEnabled(false);
+        }
     }
 
     @Override
