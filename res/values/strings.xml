@@ -73,12 +73,16 @@
     <string name="settings_label_expl_inbound">Inbound tunnels</string>
     <string name="settings_label_expl_outbound">Outbound tunnels</string>
     <string name="settings_label_expl_length">Length</string>
+    <string name="settings_summ_expl_length">%s hops</string>
     <string name="settings_desc_expl_length">How many hops to use</string>
     <string name="settings_label_expl_lengthVariance">Hop variance</string>
+    <string name="settings_summ_expl_lengthVariance">%s</string>
     <string name="settings_desc_expl_lengthVariance">How many hops to randomly add</string>
     <string name="settings_label_expl_quantity">Quantity</string>
+    <string name="settings_summ_expl_quantity">%s tunnels</string>
     <string name="settings_desc_expl_quantity">How many tunnels</string>
     <string name="settings_label_expl_backupQuantity">Backup quantity</string>
+    <string name="settings_summ_expl_backupQuantity">%s tunnels</string>
     <string name="settings_desc_expl_backupQuantity">How many tunnel backups</string>
 
     <string name="menu_help">Help</string>

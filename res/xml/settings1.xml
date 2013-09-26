@@ -178,7 +178,8 @@
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_length"
-        android:summary="@string/settings_desc_expl_length"
+        android:summary="@string/settings_summ_expl_length"
+        android:dialogTitle="@string/settings_desc_expl_length"
         android:defaultValue="2"
     />
 
@@ -190,7 +191,8 @@
         android:entries="@array/setting2to2"
         android:entryValues="@array/setting2to2"
         android:title="@string/settings_label_expl_lengthVariance"
-        android:summary="@string/settings_desc_expl_lengthVariance"
+        android:summary="@string/settings_summ_expl_lengthVariance"
+        android:dialogTitle="@string/settings_desc_expl_lengthVariance"
         android:defaultValue="0"
     />
 
@@ -203,7 +205,8 @@
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_quantity"
-        android:summary="@string/settings_desc_expl_quantity"
+        android:summary="@string/settings_summ_expl_quantity"
+        android:dialogTitle="@string/settings_desc_expl_quantity"
         android:defaultValue="2"
     />
 
@@ -215,7 +218,8 @@
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_backupQuantity"
-        android:summary="@string/settings_desc_expl_backupQuantity"
+        android:summary="@string/settings_summ_expl_backupQuantity"
+        android:dialogTitle="@string/settings_desc_expl_backupQuantity"
         android:defaultValue="0"
     />
     </PreferenceCategory>
@@ -231,7 +235,8 @@
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_length"
-        android:summary="@string/settings_desc_expl_length"
+        android:summary="@string/settings_summ_expl_length"
+        android:dialogTitle="@string/settings_desc_expl_length"
         android:defaultValue="2"
     />
 
@@ -243,7 +248,8 @@
         android:entries="@array/setting2to2"
         android:entryValues="@array/setting2to2"
         android:title="@string/settings_label_expl_lengthVariance"
-        android:summary="@string/settings_desc_expl_lengthVariance"
+        android:summary="@string/settings_summ_expl_lengthVariance"
+        android:dialogTitle="@string/settings_desc_expl_lengthVariance"
         android:defaultValue="0"
     />
 
@@ -255,7 +261,8 @@
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_quantity"
-        android:summary="@string/settings_desc_expl_quantity"
+        android:summary="@string/settings_summ_expl_quantity"
+        android:dialogTitle="@string/settings_desc_expl_quantity"
         android:defaultValue="2"
     />
 
@@ -267,7 +274,8 @@
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_backupQuantity"
-        android:summary="@string/settings_desc_expl_backupQuantity"
+        android:summary="@string/settings_summ_expl_backupQuantity"
+        android:dialogTitle="@string/settings_desc_expl_backupQuantity"
         android:defaultValue="0"
     />
     </PreferenceCategory>
