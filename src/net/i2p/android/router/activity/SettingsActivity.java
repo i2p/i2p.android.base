@@ -60,7 +60,6 @@ public class SettingsActivity extends PreferenceActivity {
             String x = iterator.next();
             // special exception, we must invert the bool for this property only.
             if(x.equals("router.hiddenMode")) {
-                Preference findPreference = findPreference(x);
                 String string = all.get(x).toString();
                 String what="true";
                 if(string.equals(what)) {
@@ -69,6 +68,7 @@ public class SettingsActivity extends PreferenceActivity {
                 props.setProperty(x, what);
             } else if(! x.startsWith("DO_NOT_SAVE")) {
                 // Disabled?
+                @SuppressWarnings("deprecation")
                 Preference findPreference = findPreference(x);
                 if (findPreference == null)
                     continue;
@@ -135,7 +135,6 @@ public class SettingsActivity extends PreferenceActivity {
                 String x = iterator.next();
                 // special exception, we must invert the bool for this property only.
                 if(x.equals("router.hiddenMode")) {
-                    Preference findPreference = findPreference(x);
                     String string = all.get(x).toString();
                     String what="true";
                     if(string.equals(what)) {
