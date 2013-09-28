@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <Preference android:title="@string/settings_label_bandwidth_net">
+        <intent
+            android:targetPackage="net.i2p.android.router"
+            android:targetClass="net.i2p.android.router.activity.SettingsActivity"
+            android:action="net.i2p.android.router.PREFS_NET" />
+    </Preference>
+    <Preference android:title="@string/settings_label_subscriptions">
+        <intent
+            android:targetPackage="net.i2p.android.router"
+            android:targetClass="net.i2p.android.router.activity.AddressbookSettingsActivity" />
+    </Preference>
+    <Preference android:title="@string/settings_label_advanced">
+        <intent
+            android:targetPackage="net.i2p.android.router"
+            android:targetClass="net.i2p.android.router.activity.SettingsActivity"
+            android:action="net.i2p.android.router.PREFS_ADVANCED" />
+    </Preference>
+</PreferenceScreen>

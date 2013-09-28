@@ -49,11 +49,13 @@
     <string name="settings_enable">Enable</string>
     <string name="settings_label_subscriptions">I2P Addressbook</string>
     <string name="settings_desc_subscriptions">Subscription URLs</string>
-    <string name="settings_label_bandwidth">Bandwidth and network</string>
+    <string name="settings_label_bandwidth_net">Bandwidth and network</string>
+    <string name="settings_label_bandwidth">Bandwidth</string>
     <string name="settings_label_bw_inbound">Inbound speed</string>
     <string name="settings_desc_bw_inbound">Maximum inbound speed</string>
     <string name="settings_label_bw_outbound">Outbound speed</string>
     <string name="settings_desc_bw_outbound">Maximum outbound speed</string>
+    <string name="settings_label_network">Network</string>
     <string name="settings_label_hiddenMode">Participation</string>
     <string name="settings_desc_hiddenMode">Turn off hidden mode</string>
     <string name="settings_label_maxPartTunnels">Max participating tunnels</string>
