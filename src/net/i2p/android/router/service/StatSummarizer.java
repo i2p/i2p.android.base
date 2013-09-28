@@ -35,6 +35,9 @@ public class StatSummarizer implements Runnable {
         }
     }
 
+    /** list of SummaryListener instances */
+    public List<SummaryListener> getListeners() { return _listeners; }
+
     public SummaryListener getListener(String rateName, long period) {
         for (SummaryListener lsnr : _listeners) {
             if (lsnr.getName().equals(rateName + "." + period))

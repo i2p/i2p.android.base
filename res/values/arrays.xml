@@ -17,12 +17,6 @@
         <item>ERROR</item>
         <item>All</item>
     </string-array>
-    <string-array name="graph_list">
-        <item>router.activePeers</item>
-        <item>router.memoryUsed</item>
-        <item>bw.sendRate</item>
-        <item>bw.recvRate</item>
-    </string-array>
     <string-array name="setting0to3">
         <item>0</item>
         <item>1</item>

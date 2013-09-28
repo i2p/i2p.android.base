@@ -1,7 +1,15 @@
 package net.i2p.android.router.activity;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeSet;
+
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.GraphFragment;
+import net.i2p.android.router.service.StatSummarizer;
+import net.i2p.android.router.service.SummaryListener;
+import net.i2p.stat.Rate;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.widget.ArrayAdapter;
@@ -20,27 +28,43 @@ public class GraphActivity extends I2PActivityBase {
 
         mDrawerToggle.setDrawerIndicatorEnabled(false);
 
-        SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.graph_list, android.R.layout.simple_spinner_dropdown_item);
-
-        ActionBar.OnNavigationListener mNavigationListener = new ActionBar.OnNavigationListener() {
-            String[] rates = getResources().getStringArray(R.array.graph_list);
-            
-            public boolean onNavigationItemSelected(int position, long itemId) {
-                String rateName = rates[position];
-                long period = (60 * 1000);
-                GraphFragment f = GraphFragment.newInstance(rateName, period);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_fragment, f, rates[position]).commit();
-                return true;
+        if (StatSummarizer.instance() != null) {
+            List<SummaryListener> listeners = StatSummarizer.instance().getListeners();
+            TreeSet<SummaryListener> ordered = new TreeSet<SummaryListener>(new AlphaComparator());
+            ordered.addAll(listeners);
+            final String[] mRates = new String[ordered.size()];
+            final long[] mPeriods = new long[ordered.size()];
+            int i = 0;
+            for (SummaryListener listener : ordered) {
+                Rate r = listener.getRate();
+                mRates[i] = r.getRateStat().getName();
+                mPeriods[i] = r.getPeriod();
+                i++;
             }
-        };
 
-        actionBar.setListNavigationCallbacks(mSpinnerAdapter, mNavigationListener);
+            SpinnerAdapter mSpinnerAdapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_dropdown_item, mRates);
 
-        if (savedInstanceState != null) {
-            int selected = savedInstanceState.getInt(SELECTED_RATE);
-            actionBar.setSelectedNavigationItem(selected);
+            ActionBar.OnNavigationListener mNavigationListener = new ActionBar.OnNavigationListener() {
+                String[] rates = mRates;
+                long[] periods = mPeriods;
+
+                public boolean onNavigationItemSelected(int position, long itemId) {
+                    String rateName = rates[position];
+                    long period = periods[position];
+                    GraphFragment f = GraphFragment.newInstance(rateName, period);
+                    getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_fragment, f, rates[position]).commit();
+                    return true;
+                }
+            };
+
+            actionBar.setListNavigationCallbacks(mSpinnerAdapter, mNavigationListener);
+
+            if (savedInstanceState != null) {
+                int selected = savedInstanceState.getInt(SELECTED_RATE);
+                actionBar.setSelectedNavigationItem(selected);
+            }
         }
     }
 
@@ -49,5 +73,16 @@ public class GraphActivity extends I2PActivityBase {
         super.onSaveInstanceState(outState);
         outState.putInt(SELECTED_RATE,
                 getSupportActionBar().getSelectedNavigationIndex());
+    }
+
+    private static class AlphaComparator implements Comparator<SummaryListener> {
+        public int compare(SummaryListener l, SummaryListener r) {
+            String lName = l.getRate().getRateStat().getName();
+            String rName = r.getRate().getRateStat().getName();
+            int rv = lName.compareTo(rName);
+            if (rv != 0)
+                return rv;
+            return (int) (l.getRate().getPeriod() - r.getRate().getPeriod());
+        }
     }
 }
