@@ -52,8 +52,7 @@
         </activity>
         <activity android:name=".activity.SettingsActivity"
                   android:label="I2P Settings"
-                  android:parentActivityName=".activity.MainActivity"
-                  android:launchMode="singleTop" >
+                  android:parentActivityName=".activity.MainActivity" >
         </activity>
         <activity android:name=".activity.AddressbookSettingsActivity"
                   android:label="I2P Addressbook Settings"
