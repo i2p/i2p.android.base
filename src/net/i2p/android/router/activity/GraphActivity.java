@@ -9,7 +9,11 @@ import net.i2p.android.router.fragment.GraphFragment;
 import net.i2p.android.router.service.StatSummarizer;
 import net.i2p.android.router.service.SummaryListener;
 import net.i2p.stat.Rate;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
@@ -21,13 +25,14 @@ public class GraphActivity extends I2PActivityBase {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set up action bar for drop-down list
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-
         mDrawerToggle.setDrawerIndicatorEnabled(false);
 
         if (StatSummarizer.instance() != null) {
+            // Set up action bar for drop-down list
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+
+            // Get the rates currently being graphed
             List<SummaryListener> listeners = StatSummarizer.instance().getListeners();
             TreeSet<SummaryListener> ordered = new TreeSet<SummaryListener>(new AlphaComparator());
             ordered.addAll(listeners);
@@ -64,6 +69,22 @@ public class GraphActivity extends I2PActivityBase {
                 int selected = savedInstanceState.getInt(SELECTED_RATE);
                 actionBar.setSelectedNavigationItem(selected);
             }
+        } else {
+            DialogFragment df = new DialogFragment() {
+                @Override
+                public Dialog onCreateDialog(Bundle savedInstanceState) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage(R.string.graphs_not_ready)
+                           .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                            }
+                        });
+                    return builder.create();
+                }
+            };
+            df.show(getSupportFragmentManager(), "nographs");
         }
     }
 
