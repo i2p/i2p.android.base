@@ -8,7 +8,14 @@
             android:value="net" />
     </header>
     <header
-        android:title="@string/settings_label_subscriptions">
+        android:fragment="net.i2p.android.router.activity.SettingsActivity$SettingsFragment"
+        android:title="@string/label_graphs">
+        <extra
+            android:name="settings"
+            android:value="graphs" />
+    </header>
+    <header
+        android:title="@string/label_addressbook">
         <intent
             android:targetPackage="net.i2p.android.router"
             android:targetClass="net.i2p.android.router.activity.AddressbookSettingsActivity" />

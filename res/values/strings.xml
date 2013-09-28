@@ -47,7 +47,6 @@
 
     <string name="menu_settings">Settings</string>
     <string name="settings_enable">Enable</string>
-    <string name="settings_label_subscriptions">I2P Addressbook</string>
     <string name="settings_desc_subscriptions">Subscription URLs</string>
     <string name="settings_label_bandwidth_net">Bandwidth and network</string>
     <string name="settings_label_bandwidth">Bandwidth</string>

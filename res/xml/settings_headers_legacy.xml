@@ -6,7 +6,13 @@
             android:targetClass="net.i2p.android.router.activity.SettingsActivity"
             android:action="net.i2p.android.router.PREFS_NET" />
     </Preference>
-    <Preference android:title="@string/settings_label_subscriptions">
+    <Preference android:title="@string/label_graphs">
+        <intent
+            android:targetPackage="net.i2p.android.router"
+            android:targetClass="net.i2p.android.router.activity.SettingsActivity"
+            android:action="net.i2p.android.router.PREFS_GRAPHS" />
+    </Preference>
+    <Preference android:title="@string/label_addressbook">
         <intent
             android:targetPackage="net.i2p.android.router"
             android:targetClass="net.i2p.android.router.activity.AddressbookSettingsActivity" />
