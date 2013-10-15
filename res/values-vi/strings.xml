@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">I2P</string>
+  <string name="welcome_new_install">Chào mừng bạn đã sử dụng I2P! Đây là phiên bản ALPHA và có thể vẫn chưa được hoàn thiện đầy đủ các tính năng. Vui lòng đọc các tính năng có trong phần ghi chú về phiên bản cũng như thông tin về giấy phép sử dụng.</string>
+  <string name="welcome_new_version">Phiên bản mới đã được cài đặt. Vui lòng đọc kỹ phần chú ý cài đặt. Phiên bản:</string>
+  <string name="label_home">Trang chủ I2P</string>
+  <string name="label_statistics">Thống kê</string>
+  <string name="label_main_controls">Điều khiển chính</string>
+  <string name="label_tools">Công cụ I2P</string>
+  <string name="label_addressbook">Sổ địa chỉ</string>
+  <string name="label_logs">Nhật trình</string>
+  <string name="label_error_logs">Nhật trình về lỗi</string>
+  <string name="label_info_and_pages">Tin tức và trang tin</string>
+  <string name="label_welcome_page">Trang chào mừng</string>
+  <string name="label_news">Tin tức</string>
+  <string name="label_news_status">Thông tin mới nhất về I2P</string>
+  <string name="label_peers_status">Mạng ngang hàng</string>
+  <string name="label_release_notes">Ghi chú phát hành</string>
+  <string name="label_licenses">Giấy phép</string>
+  <string name="label_nonanon_info">Thông tin không được ẩn danh</string>
+  <string name="label_website_nonanon">Website (trang chính)</string>
+  <string name="label_faq_nonanon">Các câu hỏi thường gặp (chính)</string>
+  <string name="action_add">Thêm vào</string>
+  <string name="action_router_start">Bắt đầu định tuyến</string>
+  <string name="action_router_stop">Dừng lại định tuyến</string>
+  <string name="action_reload">Tải lại</string>
+  <string name="menu_settings">Thiết lập</string>
+  <string name="settings_enable">Cho phép</string>
+  <string name="settings_label_subscriptions">Sổ địa chỉ I2P</string>
+  <string name="settings_desc_subscriptions">Đường dẫn đăng ký theo dõi</string>
+  <string name="settings_label_bandwidth">Băng thông và mạng lưới</string>
+  <string name="settings_label_bw_inbound">Tốc độ hướng vào</string>
+  <string name="settings_desc_bw_inbound">Tốc độ hướng vào tối đa</string>
+  <string name="settings_label_bw_outbound">Tốc độ hướng ra</string>
+  <string name="settings_desc_bw_outbound">Tốc độ hướng ra tối đa</string>
+  <string name="settings_label_hiddenMode">Sự tham gia</string>
+  <string name="settings_desc_hiddenMode">Tắt chế độ ẩn</string>
+  <string name="settings_label_maxPartTunnels">Số đường hầm tối đa liên quan</string>
+  <string name="settings_desc_maxPartTunnels">Số đường hầm tối đa tham gia vào (mặc định là=20)</string>
+  <string name="settings_dialog_maxPartTunnels">Số đường hầm tối đa có liên quan</string>
+  <string name="settings_label_sharePercent">Chia tỉ lệ phần trăm</string>
+  <string name="settings_desc_sharePercent">Phần trăm của lượng băng thông dùng cho chia sẻ (mặc định=80)</string>
+  <string name="settings_dialog_sharePercent">Phần trăm của lượng băng thông dùng cho chia sẻ</string>
+  <string name="settings_desc_upnp">Tự động mở kết nối ở cổng dữ liệu cho tường lửa</string>
+  <string name="settings_label_advanced">Nâng cao</string>
+  <string name="settings_label_transports">Giao thông</string>
+  <string name="settings_label_maxConns">Số kết nối tối đa</string>
+  <string name="settings_label_i2cp">Giao diện I2CP</string>
+  <string name="settings_desc_i2cp">Đón nhận thông tin trên cổng 7654</string>
+  <string name="settings_label_exploratory_pool">Công cụ khám phá</string>
+  <string name="settings_desc_exploratory_pool">Thông số đường hầm</string>
+  <string name="settings_label_expl_inbound">Hướng vào đường hầm</string>
+  <string name="settings_label_expl_outbound">Hướng đi ra đường hầm</string>
+  <string name="settings_label_expl_length">Độ dài</string>
+  <string name="settings_desc_expl_length">Số lượng hop được sử dụng</string>
+  <string name="settings_label_expl_lengthVariance">Khoảng chênh lệch hop</string>
+  <string name="settings_desc_expl_lengthVariance">Số lượng hop ngẫu nhiên được thêm vào</string>
+  <string name="settings_label_expl_quantity">Số lượng</string>
+  <string name="settings_desc_expl_quantity">Số lượng đường hầm</string>
+  <string name="settings_label_expl_backupQuantity">Đường hầm dự trữ</string>
+  <string name="settings_desc_expl_backupQuantity">Số lượng đường hầm dự phòng</string>
+</resources>

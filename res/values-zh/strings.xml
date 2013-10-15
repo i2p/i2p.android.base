@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">I2P</string>
+  <string name="welcome_new_install">欢迎来到 I2P ! 此程序为 Alpha 版的测试程序，不提供很强的匿名性。请阅读版本发布说明和许可证信息。</string>
+  <string name="welcome_new_version">新版本已安装，请阅读版本说明。版本：</string>
+  <string name="label_home">I2P 主页</string>
+  <string name="label_statistics">统计</string>
+  <string name="label_main_controls">主要控制项</string>
+  <string name="label_tools">I2P 工具</string>
+  <string name="label_addressbook">地址簿</string>
+  <string name="label_logs">日志</string>
+  <string name="label_error_logs">错误日志</string>
+  <string name="label_info_and_pages">信息及页面</string>
+  <string name="label_welcome_page">欢迎页面</string>
+  <string name="label_news">新闻</string>
+  <string name="label_news_status">I2P 最新消息</string>
+  <string name="label_peers_status">节点</string>
+  <string name="label_release_notes">版本说明</string>
+  <string name="label_licenses">许可证</string>
+  <string name="label_nonanon_info">非匿名信息</string>
+  <string name="label_website_nonanon">网站(公网)</string>
+  <string name="label_faq_nonanon">FAQ(公网)</string>
+  <string name="action_add">添加</string>
+  <string name="action_router_start">启动路由器</string>
+  <string name="action_router_stop">关闭路由器</string>
+  <string name="action_reload">重新载入</string>
+  <string name="menu_settings">设置</string>
+  <string name="settings_enable">启用</string>
+  <string name="settings_label_subscriptions">I2P 地址簿</string>
+  <string name="settings_desc_subscriptions">订阅链接</string>
+  <string name="settings_label_bandwidth">带宽和网络</string>
+  <string name="settings_label_bw_inbound">入站速度</string>
+  <string name="settings_desc_bw_inbound">最大入站速度</string>
+  <string name="settings_label_bw_outbound">出站速度</string>
+  <string name="settings_desc_bw_outbound">最大出站速度</string>
+  <string name="settings_label_hiddenMode">参与</string>
+  <string name="settings_desc_hiddenMode">关闭隐藏模式</string>
+  <string name="settings_label_maxPartTunnels">最大参与隧道数</string>
+  <string name="settings_desc_maxPartTunnels">参与贡献的最大隧道数量(默认=20)</string>
+  <string name="settings_dialog_maxPartTunnels">参与的最大隧道数量</string>
+  <string name="settings_label_sharePercent">共享比例</string>
+  <string name="settings_desc_sharePercent">共享带宽的最大比例(默认=80%)</string>
+  <string name="settings_dialog_sharePercent">共享的带宽比例</string>
+  <string name="settings_desc_upnp">自动打开防火墙端口</string>
+  <string name="settings_label_advanced">高级</string>
+  <string name="settings_label_transports">传输</string>
+  <string name="settings_label_maxConns">最大连接数</string>
+  <string name="settings_label_i2cp">I2CP 接口</string>
+  <string name="settings_desc_i2cp">监听端口 7654</string>
+  <string name="settings_label_exploratory_pool">探索隧道池</string>
+  <string name="settings_desc_exploratory_pool">隧道参数</string>
+  <string name="settings_label_expl_inbound">入站隧道</string>
+  <string name="settings_label_expl_outbound">出站隧道</string>
+  <string name="settings_label_expl_length">长度</string>
+  <string name="settings_desc_expl_length">使用跳点数量</string>
+  <string name="settings_label_expl_lengthVariance">跳数变化量</string>
+  <string name="settings_desc_expl_lengthVariance">随机添加的跳点数量</string>
+  <string name="settings_label_expl_quantity">数量</string>
+  <string name="settings_desc_expl_quantity">隧道数量</string>
+  <string name="settings_label_expl_backupQuantity">备用数量</string>
+  <string name="settings_desc_expl_backupQuantity">备用隧道数量</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">I2P</string>
+  <string name="label_home">I2P Home</string>
+  <string name="label_statistics">Statistiche</string>
+  <string name="label_main_controls">Controlli principali</string>
+  <string name="label_tools">I2P Tools</string>
+  <string name="label_addressbook">Rubrica</string>
+  <string name="label_logs">Logs</string>
+  <string name="label_error_logs">Log errori</string>
+  <string name="label_info_and_pages">Informazioni e pagine</string>
+  <string name="label_welcome_page">Pagina di benvenuto</string>
+  <string name="label_news">News</string>
+  <string name="label_news_status">Ultime news I2P</string>
+  <string name="label_peers_status">Peers</string>
+  <string name="label_release_notes">Note di rilascio</string>
+  <string name="label_licenses">Licenze</string>
+  <string name="label_nonanon_info">Informazioni non anonime</string>
+  <string name="label_website_nonanon">Sito (non-anon)</string>
+  <string name="label_faq_nonanon">FAQ (non-anon)</string>
+  <string name="action_add">Aggiungi</string>
+  <string name="action_router_start">Start Router</string>
+  <string name="action_router_stop">Stop Router</string>
+  <string name="action_reload">Ricarica</string>
+  <string name="menu_settings">Impostazioni</string>
+  <string name="settings_enable">Attiva</string>
+  <string name="settings_label_subscriptions">Rubrica I2P</string>
+  <string name="settings_desc_subscriptions">URL sottoscrizioni</string>
+  <string name="settings_label_bandwidth">Banda e rete</string>
+  <string name="settings_label_bw_inbound">Velocità in entrata</string>
+  <string name="settings_desc_bw_inbound">Velocità massima in entrata</string>
+  <string name="settings_label_bw_outbound">Velocità in uscita</string>
+  <string name="settings_desc_bw_outbound">Velocità massima in uscita</string>
+</resources>

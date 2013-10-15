@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">I2P</string>
+  <string name="welcome_new_install">Добро пожаловать в I2P! Это приложение является альфа-версией и оно не обеспечивает сильной анонимности. Пожалуйста, прочтите примечания к выпуску и информацию о лицензии.</string>
+  <string name="welcome_new_version">Новая версия установлена. Пожалуйста, прочтите примечания к выпуску. Версия:</string>
+  <string name="label_home">Домашняя страница I2P</string>
+  <string name="label_statistics">Статистика</string>
+  <string name="label_main_controls">Основные средства управления</string>
+  <string name="label_tools">Инструменты I2P</string>
+  <string name="label_addressbook">Адресная книга</string>
+  <string name="label_logs">Журналы</string>
+  <string name="label_error_logs">Журнал ошибок</string>
+  <string name="label_info_and_pages">Информация и страницы</string>
+  <string name="label_welcome_page">Начальная страница</string>
+  <string name="label_news">Новости</string>
+  <string name="label_news_status">Последние новости I2P</string>
+  <string name="label_peers_status">Пиры</string>
+  <string name="label_release_notes">Примечания к выпуску</string>
+  <string name="label_licenses">Лицензии</string>
+  <string name="label_nonanon_info">Не анонимная информация</string>
+  <string name="label_website_nonanon">Веб Сайт (не анонимно)</string>
+  <string name="label_faq_nonanon">FAQ (не анонимно)</string>
+  <string name="action_add">Добавить</string>
+  <string name="action_router_start">Запустить маршрутизатор</string>
+  <string name="action_router_stop">Остановить маршрутизатор</string>
+  <string name="action_reload">Перезагрузить</string>
+  <string name="menu_settings">Настройки</string>
+  <string name="settings_enable">Включить</string>
+  <string name="settings_label_subscriptions">Адресная книга I2P</string>
+  <string name="settings_desc_subscriptions">Подписки на URL</string>
+  <string name="settings_label_bandwidth">Пропускная способность и сети</string>
+  <string name="settings_label_bw_inbound">Входящая скорость</string>
+  <string name="settings_desc_bw_inbound">Максимальная входящая скорость</string>
+  <string name="settings_label_bw_outbound">Исходящая скорость</string>
+  <string name="settings_desc_bw_outbound">Максимальная исходящая скорость</string>
+  <string name="settings_label_hiddenMode">Транзит</string>
+  <string name="settings_desc_hiddenMode">Выключить скрытый режим</string>
+  <string name="settings_label_maxPartTunnels">Максимальное количество транзитных туннелей</string>
+  <string name="settings_desc_maxPartTunnels">Максимальное количество участвующих туннелей (по умолчанию = 20)</string>
+  <string name="settings_dialog_maxPartTunnels">Максимальное количество участвующих туннелей</string>
+  <string name="settings_label_sharePercent">Процент транзитного трафика</string>
+  <string name="settings_desc_sharePercent">Процент пропускной способности на раздачу (по умолчанию = 80)</string>
+  <string name="settings_dialog_sharePercent">Процент пропускной способности на раздачу</string>
+  <string name="settings_desc_upnp">Автооткрытие портов брандмауэра</string>
+  <string name="settings_label_advanced">Расширенные</string>
+  <string name="settings_label_transports">Транспортные протоколы</string>
+  <string name="settings_label_maxConns">Максимум соединений</string>
+  <string name="settings_label_i2cp">I2CP-интерфейс</string>
+  <string name="settings_desc_i2cp">Слушать на порту 7654</string>
+  <string name="settings_label_exploratory_pool">Зондирующий пул</string>
+  <string name="settings_desc_exploratory_pool">Параметры тоннелей</string>
+  <string name="settings_label_expl_inbound">Входящие туннели</string>
+  <string name="settings_label_expl_outbound">Исходящие туннели</string>
+  <string name="settings_label_expl_length">Длина</string>
+  <string name="settings_desc_expl_length">Сколько хопов использовать</string>
+  <string name="settings_label_expl_lengthVariance">Хоп разброс</string>
+  <string name="settings_desc_expl_lengthVariance">Сколько хопов добавлять случайно</string>
+  <string name="settings_label_expl_quantity">Количество</string>
+  <string name="settings_desc_expl_quantity">Сколько туннелей</string>
+  <string name="settings_label_expl_backupQuantity">Резервное количество</string>
+  <string name="settings_desc_expl_backupQuantity"> Сколько туннелей резервировать</string>
+</resources>
