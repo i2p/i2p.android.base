@@ -41,8 +41,8 @@ I2PBASE=${1:-../../../i2p.i2p}
 #export NDK=$(realpath ../../android-ndk-r5b/)
 
 ## Simple fix for osx development
-if [ "`uname -s`" == "Darwin" ]; then
-    export NDK=/Developer/android/ndk/
+if [ `uname -s` = "Darwin" ]; then
+    export NDK="/Developer/android/ndk/"
 else
     export NDK="`readlink -n -e $(for last in ../../android-ndk-r*/.; do true; done ; echo $last)`"
 fi
@@ -50,15 +50,17 @@ fi
 # API level, must match that in ../AndroidManifest.xml
 #
 LEVEL=8
-ARCH=arm
-export SYSROOT=$NDK/platforms/android-$LEVEL/arch-$ARCH/
-export AABI=arm-linux-androideabi-4.4.3
-if [ "`uname -s`" == "Darwin" ]; then
-    export SYSTEM=darwin-x86
+ARCH="arm"
+export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
+export AABI="arm-linux-androideabi-4.4.3"
+if [ `uname -s` = "Darwin" ]; then
+    export SYSTEM="darwin-x86"
+elif [ `uname -m` = "x86_64" ]; then
+    export SYSTEM="linux-x86_64"
 else
-    export SYSTEM=linux-x86
+    export SYSTEM="linux-x86"
 fi
-export BINPREFIX=arm-linux-androideabi-
+export BINPREFIX="arm-linux-androideabi-"
 export CC="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}gcc --sysroot=$SYSROOT"
 # worked without this on 4.3.2, but 5.0.2 couldn't find it
 export NM="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}nm"
@@ -78,13 +80,12 @@ JBIGI="$I2PBASE/core/c/jbigi"
 # jbigi about 20-25% slower than java on emulator
 #
 GMPVER=4.3.2
-GMP=$JBIGI/gmp-$GMPVER
+GMP="$JBIGI/gmp-$GMPVER"
 
-if [ ! -d $GMP ]
-then
-	echo "Source dir for GMP version $GMPVER not found in $GMP"
-	echo "Install it there or change GMPVER and/or GMP in this script"
-	exit 1
+if [ ! -d "$GMP" ]; then
+    echo "Source dir for GMP version $GMPVER not found in $GMP"
+    echo "Install it there or change GMPVER and/or GMP in this script"
+    exit 1
 fi
 
 mkdir -p build
@@ -93,25 +94,24 @@ cd build
 # we must set both build and host, so that the configure
 # script will set cross_compile=yes, so that it
 # won't attempt to run the a.out files
-if [ ! -f config.status ]
-then
-	echo "Configuring GMP..."
-    if [ "`uname -s`" == "Darwin" ]; then
-	    $GMP/configure --with-pic --build=x86-darwin --host=armv5-eabi-linux || exit 1
+if [ ! -f config.status ]; then
+    echo "Configuring GMP..."
+    if [ `uname -s` = "Darwin" ]; then
+        $GMP/configure --with-pic --build=x86-darwin --host=armv5-eabi-linux || exit 1
     else
-	    $GMP/configure --with-pic --build=x86-none-linux --host=armv5-eabi-linux || exit 1
+        $GMP/configure --with-pic --build=x86-none-linux --host=armv5-eabi-linux || exit 1
     fi
 fi
 
 echo "Building GMP..."
 make || exit 1
 
-if [ "`uname -s`" == "Darwin" ]; then
-    # Depends on version
-    # TODO: Fix something for finding the newest jdk and set it as home.
-    export JAVA_HOME="/Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/"
+if [ `uname -s` = "Darwin" ]; then
+    export JAVA_HOME=$(/usr/libexec/java_home)
 else
-    export JAVA_HOME=$(dirname $(dirname $(realpath $(which javac))))
+    # FIXME This will not work everywhere (e.g. BSD). Could borrow my
+    # 'find-java-home' script for this
+    export JAVA_HOME="$(dirname $(dirname $(realpath $(which javac))))"
 fi
 if [ ! -f "$JAVA_HOME/include/jni.h" ]; then
     echo "Cannot find jni.h! Looked in '$JAVA_HOME/include/jni.h'"
