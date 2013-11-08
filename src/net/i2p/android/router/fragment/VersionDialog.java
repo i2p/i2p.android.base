@@ -86,7 +86,8 @@ public class VersionDialog extends DialogFragment {
                 break;
 
             case DIALOG_NEW_VERSION:
-                b.setMessage(R.string.welcome_new_version + " " + currentVersion)
+                b.setMessage(getResources().getString(R.string.welcome_new_version) +
+                             " " + currentVersion)
                  .setCancelable(true)
                  .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
