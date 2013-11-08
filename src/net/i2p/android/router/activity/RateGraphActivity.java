@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 import net.i2p.android.router.R;
-import net.i2p.android.router.fragment.GraphFragment;
+import net.i2p.android.router.fragment.RateGraphFragment;
 import net.i2p.android.router.service.StatSummarizer;
 import net.i2p.android.router.service.SummaryListener;
 import net.i2p.stat.Rate;
@@ -18,7 +18,7 @@ import android.support.v7.app.ActionBar;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
-public class GraphActivity extends I2PActivityBase {
+public class RateGraphActivity extends I2PActivityBase {
     private static final String SELECTED_RATE = "selected_rate";
 
     @Override
@@ -56,7 +56,7 @@ public class GraphActivity extends I2PActivityBase {
                 public boolean onNavigationItemSelected(int position, long itemId) {
                     String rateName = rates[position];
                     long period = periods[position];
-                    GraphFragment f = GraphFragment.newInstance(rateName, period);
+                    RateGraphFragment f = RateGraphFragment.newInstance(rateName, period);
                     getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_fragment, f, rates[position]).commit();
                     return true;

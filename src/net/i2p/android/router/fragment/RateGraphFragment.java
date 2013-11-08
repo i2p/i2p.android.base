@@ -24,7 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class GraphFragment extends I2PFragmentBase {
+public class RateGraphFragment extends I2PFragmentBase {
     // redraws a plot whenever an update is received:
     private class MyPlotUpdater implements Observer {
         Plot plot;
@@ -48,8 +48,8 @@ public class GraphFragment extends I2PFragmentBase {
     private XYPlot _ratePlot;
     private MyPlotUpdater _plotUpdater;
 
-    public static GraphFragment newInstance(String name, long period) {
-        GraphFragment f = new GraphFragment();
+    public static RateGraphFragment newInstance(String name, long period) {
+        RateGraphFragment f = new RateGraphFragment();
         Bundle args = new Bundle();
         args.putString(RATE_NAME, name);
         args.putLong(RATE_PERIOD, period);

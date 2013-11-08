@@ -156,7 +156,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
             startActivity(log);
             break;
         case 4:
-            Intent active = new Intent(I2PActivityBase.this, GraphActivity.class);
+            Intent active = new Intent(I2PActivityBase.this, RateGraphActivity.class);
             startActivity(active);
             break;
         case 5:
