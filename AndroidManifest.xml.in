@@ -88,8 +88,8 @@
                   android:label="I2P Logs"
                   android:parentActivityName=".activity.MainActivity" >
         </activity>
-        <activity android:name=".activity.GraphActivity"
-                  android:label="Graph"
+        <activity android:name=".activity.RateGraphActivity"
+                  android:label="Rate Graph"
                   android:parentActivityName=".activity.MainActivity" >
         </activity>
         <activity android:name=".activity.PeersActivity"
