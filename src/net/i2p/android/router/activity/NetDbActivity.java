@@ -1,27 +1,25 @@
 package net.i2p.android.router.activity;
 
 import net.i2p.android.router.R;
-import net.i2p.android.router.fragment.NetDbSummaryTableFragment;
+import net.i2p.android.router.fragment.NetDbListFragment;
+import net.i2p.android.router.fragment.NetDbSummaryPagerFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 
 public class NetDbActivity extends I2PActivityBase {
-    static final int TAB_SUMMARY = 0;
-    static final int TAB_ROUTERS = 1;
-    static final int TAB_LEASESETS = 2;
+    /**
+     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
+     * device.
+     */
+    private boolean mTwoPane;
+
     private static final String SELECTED_TAB = "selected_tab";
 
-    NetDbPagerAdapter mNetDbPagerAdapter;
-    ViewPager mViewPager;
-
     @Override
-    protected boolean useViewPager() {
+    protected boolean canUseTwoPanes() {
         return true;
     }
 
@@ -33,53 +31,49 @@ public class NetDbActivity extends I2PActivityBase {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        // Set up NetDbPagerAdapter containing the categories
-        mNetDbPagerAdapter = new NetDbPagerAdapter(getSupportFragmentManager());
-
-        // Set up ViewPager for swiping between categories
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mNetDbPagerAdapter);
-        mViewPager.setOnPageChangeListener(
-                new ViewPager.SimpleOnPageChangeListener() {
-                    @Override
-                    public void onPageSelected(int position) {
-                        mViewPager.setCurrentItem(position);
-                    }
-                });
-
-        // Set up TabListener to update NetDbPagerAdapter with the
-        // current section to display categories for
-        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-
-            public void onTabSelected(Tab tab, FragmentTransaction ft) {
-                mNetDbPagerAdapter.setCurrentSection(tab.getPosition());
-            }
-
-            public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-                mNetDbPagerAdapter.setCurrentSection(TAB_SUMMARY);
-            }
-
-            public void onTabReselected(Tab tab, FragmentTransaction ft) {
-                // User selected the already selected tab.
-            }
-        };
-
+        // Statistics tab
+        NetDbSummaryPagerFragment sf = new NetDbSummaryPagerFragment();
         actionBar.addTab(
                 actionBar.newTab()
                         .setText("Statistics")
-                        .setTabListener(tabListener));
+                        .setTabListener(new NetDbSummaryPagerTabListener(sf)));
+
+        // Routers tab
+        NetDbListFragment rf = new NetDbListFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(NetDbListFragment.SHOW_ROUTERS, true);
+        rf.setArguments(args);
         actionBar.addTab(
                 actionBar.newTab()
                         .setText("Routers")
-                        .setTabListener(tabListener));
+                        .setTabListener(new TabListener(rf)));
+
+        // LeaseSets tab
+        NetDbListFragment lf = new NetDbListFragment();
+        args = new Bundle();
+        args.putBoolean(NetDbListFragment.SHOW_ROUTERS, false);
+        lf.setArguments(args);
         actionBar.addTab(
                 actionBar.newTab()
                         .setText("LeaseSets")
-                        .setTabListener(tabListener));
+                        .setTabListener(new TabListener(lf)));
 
         if (savedInstanceState != null) {
             int selected = savedInstanceState.getInt(SELECTED_TAB);
             actionBar.setSelectedNavigationItem(selected);
+        }
+
+        if (findViewById(R.id.detail_fragment) != null) {
+            // The detail container view will be present only in the
+            // large-screen layouts (res/values-large and
+            // res/values-sw600dp). If this view is present, then the
+            // activity should be in two-pane mode.
+            mTwoPane = true;
+
+            // In two-pane mode, list items should be given the
+            // 'activated' state when touched.
+            //rf.setActivateOnItemClick(true);
+            //lf.setActivateOnItemClick(true);
         }
     }
 
@@ -90,61 +84,22 @@ public class NetDbActivity extends I2PActivityBase {
                 getSupportActionBar().getSelectedNavigationIndex());
     }
 
-    public class NetDbPagerAdapter extends FragmentStatePagerAdapter {
-        private int mSection;
-
-        public NetDbPagerAdapter(FragmentManager fm) {
-            super(fm);
-            mSection = TAB_SUMMARY;
-        }
-
-        public void setCurrentSection(int section) {
-            // Change the ViewPager item (in case the
-            // new section doesn't have as many items)
-            mViewPager.setCurrentItem(0);
-            // Update the section
-            mSection = section;
-            notifyDataSetChanged();
+    public static class NetDbSummaryPagerTabListener extends TabListener {
+        public NetDbSummaryPagerTabListener(Fragment fragment) {
+            super(fragment);
         }
 
         @Override
-        public Fragment getItem(int i) {
-            switch (mSection) {
-            case TAB_ROUTERS:
-            case TAB_LEASESETS:
-            default: // TAB_SUMMARY
-                return NetDbSummaryTableFragment.newInstance(i);
-            }
-        }
-
-        @Override
-        public int getCount() {
-            switch (mSection) {
-            case TAB_ROUTERS:
-                return 2;
-            case TAB_LEASESETS:
-                return 1;
-            default: // TAB_SUMMARY
-                return 3;
-            }
-        }
-
-        @Override
-        public CharSequence getPageTitle(int i) {
-            switch (mSection) {
-            case TAB_ROUTERS:
-            case TAB_LEASESETS:
-                return "CAT " + (i + 1);
-            default: // TAB_SUMMARY
-                switch (i) {
-                case 1:
-                    return "Countries";
-                case 2:
-                    return "Transports";
-                default:
-                    return "Versions";
-                }
-            } 
+        public void onTabSelected(Tab tab, FragmentTransaction ft) {
+            /**
+             * This is a work-around for Issue 42601
+             * https://code.google.com/p/android/issues/detail?id=42601
+             * 
+             * The method getChildFragmentManager() does not clear up
+             * when the Fragment is detached.
+             */
+            mFragment = new NetDbSummaryPagerFragment();
+            super.onTabSelected(tab, ft);
         }
     }
 }

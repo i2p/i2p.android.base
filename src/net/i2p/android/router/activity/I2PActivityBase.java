@@ -323,7 +323,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     }
 
     public static class TabListener implements ActionBar.TabListener {
-        private Fragment mFragment;
+        protected Fragment mFragment;
 
         public TabListener(Fragment fragment) {
             mFragment = fragment;
