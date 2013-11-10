@@ -3,13 +3,16 @@ package net.i2p.android.router.activity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.NetDbListFragment;
 import net.i2p.android.router.fragment.NetDbSummaryPagerFragment;
+import net.i2p.android.router.loader.NetDbEntry;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 
-public class NetDbActivity extends I2PActivityBase {
+public class NetDbActivity extends I2PActivityBase implements
+        NetDbListFragment.RouterContextProvider,
+        NetDbListFragment.OnEntrySelectedListener {
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -72,8 +75,8 @@ public class NetDbActivity extends I2PActivityBase {
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-            //rf.setActivateOnItemClick(true);
-            //lf.setActivateOnItemClick(true);
+            rf.setActivateOnItemClick(true);
+            lf.setActivateOnItemClick(true);
         }
     }
 
@@ -101,5 +104,10 @@ public class NetDbActivity extends I2PActivityBase {
             mFragment = new NetDbSummaryPagerFragment();
             super.onTabSelected(tab, ft);
         }
+    }
+
+    // NetDbListFragment.OnEntrySelectedListener
+
+    public void onEntrySelected(NetDbEntry entry) {
     }
 }

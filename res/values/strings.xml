@@ -45,7 +45,12 @@
     <string name="action_reload">Reload</string>
     <string name="hint_search_addressbook">Search addressbook</string>
 
+    <string name="router_not_running">The router is not running.</string>
+
     <string name="graphs_not_ready">Graphs are not ready, or the router is not running. Try again later.</string>
+
+    <string name="netdb_routers_empty">No routers in your NetDB.</string>
+    <string name="netdb_leases_empty">No LeaseSets in your NetDB.</string>
 
     <string name="menu_settings">Settings</string>
     <string name="settings_enable">Enable</string>
