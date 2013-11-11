@@ -34,6 +34,7 @@ public class NetDbSummaryTableFragment extends Fragment {
         return f;
     }
 
+    @SuppressWarnings("unchecked")
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_table, container, false);

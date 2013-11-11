@@ -134,6 +134,7 @@ public class NetDbDetailFragment extends I2PFragmentBase {
         }
 
         TableLayout stats = (TableLayout) getView().findViewById(R.id.ri_stats);
+        @SuppressWarnings("unchecked")
         Map<String, String> p = ri.getOptionsMap();
         for (Map.Entry<String,String> e : (Set<Map.Entry<String,String>>) p.entrySet()) {
             String key = e.getKey();
@@ -152,6 +153,7 @@ public class NetDbDetailFragment extends I2PFragmentBase {
         if (!((style.equals("SSU") && cost == 5) || (style.equals("NTCP") && cost == 10)))
             addTableRow(table, "cost", ""+cost);
 
+        @SuppressWarnings("unchecked")
         Map<String, String> p = addr.getOptionsMap();
         for (Map.Entry<String,String> e : (Set<Map.Entry<String,String>>) p.entrySet()) {
             String key = e.getKey();
