@@ -101,5 +101,9 @@
                   android:label="NetDB"
                   android:parentActivityName=".activity.MainActivity" >
         </activity>
+        <activity android:name=".activity.NetDbDetailActivity"
+                  android:label="NetDB Detail"
+                  android:parentActivityName=".activity.NetDbActivity" >
+        </activity>
     </application>
 </manifest>
