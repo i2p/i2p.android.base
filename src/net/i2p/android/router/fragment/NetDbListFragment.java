@@ -108,17 +108,20 @@ public class NetDbListFragment extends ListFragment
 
         setListAdapter(mAdapter);
 
-        if (getRouterContext() == null) {
-            setEmptyText(getResources().getString(
-                    R.string.router_not_running));
-        } else {
+        LoaderManager lm = getLoaderManager();
+        // If the Router is running, or there is an existing Loader
+        if (getRouterContext() != null || lm.getLoader(mRouters ?
+                ROUTER_LOADER_ID : LEASESET_LOADER_ID) != null) {
             setEmptyText(getResources().getString((mRouters ?
                     R.string.netdb_routers_empty :
                     R.string.netdb_leases_empty)));
 
             setListShown(false);
-            getLoaderManager().initLoader(mRouters ? ROUTER_LOADER_ID
+            lm.initLoader(mRouters ? ROUTER_LOADER_ID
                     : LEASESET_LOADER_ID, null, this);
+        } else {
+            setEmptyText(getResources().getString(
+                    R.string.router_not_running));
         }
     }
 
