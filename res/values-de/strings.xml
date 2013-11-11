@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">I2P</string>
+  <string name="welcome_new_install">Willkommen zu I2P! Diese App ist eine Alpha-Software und bietet keine starke Anonymität. Bitte lies die Bekanntmachung zur Veröffentlichung und der Lizenzeninformation.</string>
+  <string name="welcome_new_version">Neue Version installiert. Bitte lies die Hinweise zur Veröffentlichung. Version:</string>
+  <string name="label_home">I2P Home</string>
+  <string name="label_statistics">Statistiken</string>
+  <string name="label_main_controls">Haupteinstellungen</string>
+  <string name="label_tools">I2P Werkzeuge</string>
+  <string name="label_addressbook">Adressbuch</string>
+  <string name="label_logs">Protokolle</string>
+  <string name="label_error_logs">Fehler Protokolle</string>
+  <string name="label_info_and_pages">Informationen und Seiten</string>
+  <string name="label_welcome_page">Willkommen Seite</string>
+  <string name="label_news">Neuigkeiten</string>
+  <string name="label_news_status">Neuste I2P Nachrichten</string>
+  <string name="label_peers_status">Netzwerke</string>
+  <string name="label_release_notes">Hinweise zu Veröffentlichungen</string>
+  <string name="label_licenses">Lizenzen</string>
+  <string name="label_nonanon_info">Nicht anonyme Informationen</string>
+  <string name="label_website_nonanon">Webseite (nicht anonym)</string>
+  <string name="label_faq_nonanon">FAQ (nicht anonym)</string>
+  <string name="action_add">Hinzufügen</string>
+  <string name="action_router_start">Router starten</string>
+  <string name="action_router_stop">Router stoppen</string>
+  <string name="action_reload">Neu laden</string>
+  <string name="menu_settings">Einstellungen</string>
+  <string name="settings_enable">Einschlaten</string>
+  <string name="settings_label_subscriptions">I2P Adressbuch</string>
+  <string name="settings_desc_subscriptions">abonnierte URLs</string>
+  <string name="settings_label_bandwidth">Bandbreite und Netzwerk</string>
+  <string name="settings_label_bw_inbound">ankommende Geschwindigkeit</string>
+  <string name="settings_desc_bw_inbound">maximal angekommende Geschwindigkeit</string>
+  <string name="settings_label_bw_outbound">ausgehende Geschwindigkeit</string>
+  <string name="settings_desc_bw_outbound">maximal ausgehende Geschwindigkeit</string>
+  <string name="settings_label_hiddenMode">Beteiligung</string>
+  <string name="settings_desc_hiddenMode">\"Versteckt Modus\" ausschalten</string>
+  <string name="settings_label_maxPartTunnels">maximal teilnehmende Tunnel</string>
+  <string name="settings_desc_maxPartTunnels">Maximum an Tunneln zum teilnehmen (Standard=20)</string>
+  <string name="settings_dialog_maxPartTunnels">Maximum an Tunneln zum teilnehmen</string>
+  <string name="settings_label_sharePercent">tausche Prozente</string>
+  <string name="settings_desc_sharePercent">Prozentsatz der Bandbreite zum tauschen (Standard=80)</string>
+  <string name="settings_dialog_sharePercent">Prozentsatz der Bandbreite zum tauschen</string>
+  <string name="settings_desc_upnp">Firewallports automatisch öffnen</string>
+  <string name="settings_label_advanced">Erweitert</string>
+  <string name="settings_label_transports">Transporte</string>
+  <string name="settings_label_maxConns">max. Verbindungen</string>
+  <string name="settings_label_i2cp">I2CP Benutzerinterface</string>
+  <string name="settings_desc_i2cp">lausche auf Port 7654</string>
+  <string name="settings_label_exploratory_pool">Informationspool</string>
+  <string name="settings_desc_exploratory_pool">Tunnel Parameter</string>
+  <string name="settings_label_expl_inbound">eingehende Tunnel</string>
+  <string name="settings_label_expl_outbound">ausgehende Tunnel</string>
+  <string name="settings_label_expl_length">Länge</string>
+  <string name="settings_desc_expl_length">Wie viele Hops zum benutzen</string>
+  <string name="settings_label_expl_lengthVariance">Hop Abweichung</string>
+  <string name="settings_desc_expl_lengthVariance">Wie viele Hops zufällig hinzufügt werden</string>
+  <string name="settings_label_expl_quantity">Menge</string>
+  <string name="settings_desc_expl_quantity">Wie viele Tunnel</string>
+  <string name="settings_label_expl_backupQuantity">Sicherungsmenge</string>
+  <string name="settings_desc_expl_backupQuantity">Wie viele Tunnelsicherungen</string>
+</resources>

@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">I2P</string>
+  <string name="welcome_new_install">Benvenuto su I2P! Questa app è software in versione ALFA e non fornisce un anonimato robusto. Leggi le note di rilascio e le informazioni sulla licenza.</string>
+  <string name="welcome_new_version">Nuova versione installata. Leggi le note di rilascio. Versione:</string>
   <string name="label_home">I2P Home</string>
   <string name="label_statistics">Statistiche</string>
   <string name="label_main_controls">Controlli principali</string>
@@ -31,4 +33,30 @@
   <string name="settings_desc_bw_inbound">Velocità massima in entrata</string>
   <string name="settings_label_bw_outbound">Velocità in uscita</string>
   <string name="settings_desc_bw_outbound">Velocità massima in uscita</string>
+  <string name="settings_label_hiddenMode">Partecipazione</string>
+  <string name="settings_desc_hiddenMode">Spegni la modalità nascosta</string>
+  <string name="settings_label_maxPartTunnels">Limite tunnel partecipanti</string>
+  <string name="settings_desc_maxPartTunnels">Limite tunnel a cui partecipare (predefinito=20)</string>
+  <string name="settings_dialog_maxPartTunnels">Limite tunnel a cui partecipare in</string>
+  <string name="settings_label_sharePercent">Percentuale di condivisione</string>
+  <string name="settings_desc_sharePercent">Percentuale di banda da condividiere (predefinita=80)</string>
+  <string name="settings_dialog_sharePercent">Percentuale di banda da condividere</string>
+  <string name="settings_desc_upnp">Apri automaticamente le porte sul firewall</string>
+  <string name="settings_label_advanced">Avanzato</string>
+  <string name="settings_label_transports">Trasporti</string>
+  <string name="settings_label_maxConns">Limite connessioni</string>
+  <string name="settings_label_i2cp">Interfaccia I2CP</string>
+  <string name="settings_desc_i2cp">Ascolta sulla porta 7654</string>
+  <string name="settings_label_exploratory_pool">Esplorazione pool</string>
+  <string name="settings_desc_exploratory_pool">Parametri tunnel</string>
+  <string name="settings_label_expl_inbound">Tunnel in ingresso</string>
+  <string name="settings_label_expl_outbound">Tunnel in uscita</string>
+  <string name="settings_label_expl_length">Lunghezza</string>
+  <string name="settings_desc_expl_length">Quantità di hop da usare</string>
+  <string name="settings_label_expl_lengthVariance">Varianza hop</string>
+  <string name="settings_desc_expl_lengthVariance">Quantità di hop da aggiungere a caso</string>
+  <string name="settings_label_expl_quantity">Quantità</string>
+  <string name="settings_desc_expl_quantity">Quantità di tunnel</string>
+  <string name="settings_label_expl_backupQuantity">Quantità di backup</string>
+  <string name="settings_desc_expl_backupQuantity">Quantità di backup di tunnel</string>
 </resources>

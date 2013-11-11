@@ -28,7 +28,33 @@
   <string name="settings_enable">Habilitar</string>
   <string name="settings_label_subscriptions">Endereços I2P</string>
   <string name="settings_desc_subscriptions">Subscrição de URLs</string>
+  <string name="settings_label_bandwidth">Largura de banda e rede</string>
+  <string name="settings_label_bw_inbound">Velocidade de entrada</string>
+  <string name="settings_desc_bw_inbound">Máxima velocidade de entrada</string>
+  <string name="settings_label_bw_outbound">Velocidade de saída</string>
+  <string name="settings_desc_bw_outbound">Máxima velocidade de saída</string>
   <string name="settings_label_hiddenMode">Participação</string>
+  <string name="settings_desc_hiddenMode">Desligar modo escondido</string>
+  <string name="settings_label_maxPartTunnels">Nº máximo de túneis participantes</string>
+  <string name="settings_desc_maxPartTunnels">Máximo de túneis para participar (padrão=20)</string>
+  <string name="settings_dialog_maxPartTunnels">Máximo de túneis para participar</string>
+  <string name="settings_label_sharePercent">Percentagem de compartilhamento</string>
+  <string name="settings_desc_sharePercent">Percentagem de largura de banda para compartilhar (padrão=80)</string>
+  <string name="settings_dialog_sharePercent">Percentagem de largura de banda compartilhada</string>
+  <string name="settings_desc_upnp">Abrir portas do firewall automaticamente</string>
   <string name="settings_label_advanced">Avançado</string>
+  <string name="settings_label_transports">Transportes</string>
+  <string name="settings_label_maxConns">Máx. nº de conexões</string>
+  <string name="settings_label_i2cp">Interface I2CP</string>
   <string name="settings_desc_i2cp">Escutando na porta 7654</string>
+  <string name="settings_label_exploratory_pool">Poço exploratório</string>
+  <string name="settings_desc_exploratory_pool">Parâmetros dos túneis</string>
+  <string name="settings_label_expl_inbound">Túneis de entrada</string>
+  <string name="settings_label_expl_outbound">Túneis de saída</string>
+  <string name="settings_label_expl_length">Duração</string>
+  <string name="settings_desc_expl_length">Quantos saltos usar</string>
+  <string name="settings_label_expl_lengthVariance">Variação de saltos</string>
+  <string name="settings_desc_expl_lengthVariance">Quantos saltos adicionar aleatoriamente</string>
+  <string name="settings_label_expl_quantity">Quantidade</string>
+  <string name="settings_desc_expl_quantity">Quantos túneis</string>
 </resources>

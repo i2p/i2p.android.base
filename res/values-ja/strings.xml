@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">I2P</string>
+  <string name="welcome_new_install">I2P へようこそ！このアプリはアルファ版のソフトウェアであり、強い匿名性を提供いたしません。リリース・ノート及びライセンス情報をご覧ください。</string>
+  <string name="welcome_new_version">新しいバージョンがインストールされました。リリース・ノートをご覧ください。バージョン:</string>
+  <string name="label_home">I2P ホーム</string>
+  <string name="label_statistics">統計</string>
+  <string name="label_main_controls">メインコントロール</string>
+  <string name="label_tools">I2P ツール</string>
+  <string name="label_addressbook">アドレス帳</string>
+  <string name="label_logs">ログ</string>
+  <string name="label_error_logs">エラーログ</string>
+  <string name="label_info_and_pages">情報とページ</string>
+  <string name="label_welcome_page">ウェルカムページ</string>
+  <string name="label_news">ニュース</string>
+  <string name="label_news_status">最新の I2P のニュース</string>
+  <string name="label_peers_status">ピア</string>
+  <string name="label_release_notes">リリース・ノート</string>
+  <string name="label_licenses">ライセンス</string>
+  <string name="label_nonanon_info">非匿名の情報</string>
+  <string name="label_website_nonanon">ウェブサイト (非匿名)</string>
+  <string name="label_faq_nonanon">FAQ (非匿名)</string>
+  <string name="action_add">追加</string>
+  <string name="action_router_start">ルーターを開始</string>
+  <string name="action_router_stop">ルーターを停止</string>
+  <string name="action_reload">再読み込み</string>
+  <string name="menu_settings">設定</string>
+  <string name="settings_enable">有効</string>
+  <string name="settings_label_subscriptions">I2P アドレス帳</string>
+  <string name="settings_desc_subscriptions">URL を登録</string>
+  <string name="settings_label_bandwidth">帯域幅とネットワーク</string>
+  <string name="settings_label_bw_inbound">受信速度</string>
+  <string name="settings_desc_bw_inbound">最大受信速度</string>
+  <string name="settings_label_bw_outbound">送信速度</string>
+  <string name="settings_desc_bw_outbound">最大送信速度</string>
+  <string name="settings_label_hiddenMode">参加</string>
+  <string name="settings_desc_hiddenMode">ヒドゥン・モードを切る</string>
+  <string name="settings_label_maxPartTunnels">最大参加トンネル数</string>
+  <string name="settings_desc_maxPartTunnels">参加するトンネルの最大数 (既定=20)</string>
+  <string name="settings_dialog_maxPartTunnels">参加するトンネルの最大数</string>
+  <string name="settings_label_sharePercent">共有割合</string>
+  <string name="settings_desc_sharePercent">共有する帯域幅の割合 (既定=80)</string>
+  <string name="settings_dialog_sharePercent">共有する帯域幅の割合</string>
+  <string name="settings_desc_upnp">自動的にファイアーウォールのポートを開く</string>
+  <string name="settings_label_advanced">高度</string>
+  <string name="settings_label_transports">トランスポート</string>
+  <string name="settings_label_maxConns">最大接続数</string>
+  <string name="settings_label_i2cp">I2CP インターフェース</string>
+  <string name="settings_desc_i2cp">7654番ポートでリッスン</string>
+  <string name="settings_label_exploratory_pool">予備プール</string>
+  <string name="settings_desc_exploratory_pool">トンネルパラーメーター</string>
+  <string name="settings_label_expl_inbound">受信トンネル</string>
+  <string name="settings_label_expl_outbound">送信トンネル</string>
+  <string name="settings_label_expl_length">長さ</string>
+  <string name="settings_desc_expl_length">使用するホップの回数</string>
+  <string name="settings_label_expl_lengthVariance">ホップ分散</string>
+  <string name="settings_desc_expl_lengthVariance">ホップをランダムに追加する回数</string>
+  <string name="settings_label_expl_quantity">数量</string>
+  <string name="settings_desc_expl_quantity">トンネルの数</string>
+  <string name="settings_label_expl_backupQuantity">バックアップの数量</string>
+  <string name="settings_desc_expl_backupQuantity">トンネルバックアップの数</string>
+</resources>
