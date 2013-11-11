@@ -10,8 +10,6 @@ import net.i2p.data.Destination;
 import net.i2p.data.LeaseSet;
 import net.i2p.data.RouterInfo;
 import net.i2p.router.RouterContext;
-import net.i2p.router.TunnelPoolSettings;
-
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
@@ -52,31 +50,14 @@ public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
                 Set<RouterInfo> routers = new TreeSet<RouterInfo>(new RouterInfoComparator());
                 routers.addAll(mRContext.netDb().getRouters());
                 for (RouterInfo ri : routers) {
-                    String country = mRContext.commSystem().getCountry(ri.getIdentity().getHash());
-                    NetDbEntry entry = NetDbEntry.fromRouterInfo(ri, country);
+                    NetDbEntry entry = NetDbEntry.fromRouterInfo(mRContext, ri);
                     ret.add(entry);
                 }
             } else {
                 Set<LeaseSet> leases = new TreeSet<LeaseSet>(new LeaseSetComparator());
                 leases.addAll(mRContext.netDb().getLeases());
                 for (LeaseSet ls : leases) {
-                    String nick;
-                    Destination dest = ls.getDestination();
-                    if (mRContext.clientManager().isLocal(dest)) {
-                        TunnelPoolSettings in = mRContext.tunnelManager().getInboundSettings(
-                                dest.calculateHash());
-                        if (in != null && in.getDestinationNickname() != null)
-                            nick = in.getDestinationNickname();
-                        else
-                            nick = dest.toBase64().substring(0, 6);
-                    } else {
-                        String host = mRContext.namingService().reverseLookup(dest);
-                        if (host != null)
-                            nick = host;
-                        else
-                            nick = dest.toBase64().substring(0, 6);
-                    }
-                    NetDbEntry entry = NetDbEntry.fromLeaseSet(ls, nick);
+                    NetDbEntry entry = NetDbEntry.fromLeaseSet(mRContext, ls);
                     ret.add(entry);
                 }
             }

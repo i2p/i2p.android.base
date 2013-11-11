@@ -15,7 +15,7 @@
         android:text="LeaseSet nickname" />
 
     <!-- The hash of the LeaseSet -->
-    <TextView android:id="@+id/ls_hash"
+    <TextView android:id="@+id/dbentry_hash"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ls_nickname"

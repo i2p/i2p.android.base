@@ -37,9 +37,6 @@ public class NetDbEntryAdapter extends ArrayAdapter<NetDbEntry> {
         if (entry.isRouterInfo()) {
             v = mInflater.inflate(R.layout.listitem_routerinfo, parent, false);
 
-            TextView hash = (TextView) v.findViewById(R.id.ri_hash);
-            hash.setText(entry.getHash());
-
             int countryIcon = entry.getCountryIcon();
             if (countryIcon > 0) {
                 ImageView country = (ImageView) v.findViewById(R.id.ri_country);
@@ -49,12 +46,12 @@ public class NetDbEntryAdapter extends ArrayAdapter<NetDbEntry> {
         } else {
             v = mInflater.inflate(R.layout.listitem_leaseset, parent, false);
 
-            TextView hash = (TextView) v.findViewById(R.id.ls_hash);
-            hash.setText(entry.getHash());
-
             TextView nickname = (TextView) v.findViewById(R.id.ls_nickname);
             nickname.setText(entry.getNickname());
         }
+
+        TextView hash = (TextView) v.findViewById(R.id.dbentry_hash);
+        hash.setText(entry.getHash().toBase64());
 
         return v;
     }

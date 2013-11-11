@@ -5,7 +5,7 @@
     android:padding="5dp" >
 
     <!-- The hash of the RouterInfo -->
-    <TextView android:id="@+id/ri_hash"
+    <TextView android:id="@+id/dbentry_hash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="3dp"
