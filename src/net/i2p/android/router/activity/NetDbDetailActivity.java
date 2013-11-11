@@ -2,13 +2,16 @@ package net.i2p.android.router.activity;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.NetDbDetailFragment;
+import net.i2p.android.router.fragment.NetDbListFragment;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataFormatException;
 import net.i2p.data.Hash;
+import android.content.Intent;
 import android.os.Bundle;
 
-public class NetDbDetailActivity extends I2PActivityBase {
+public class NetDbDetailActivity extends I2PActivityBase implements
+        NetDbListFragment.OnEntrySelectedListener {
     NetDbDetailFragment mDetailFrag;
 
     @Override
@@ -33,5 +36,16 @@ public class NetDbDetailActivity extends I2PActivityBase {
     @Override
     protected void onRouterBind(RouterService svc) {
         mDetailFrag.onRouterBind();
+    }
+
+    // NetDbListFragment.OnEntrySelectedListener
+
+    public void onEntrySelected(boolean isRouterInfo, Hash entryHash) {
+        // Start the detail activity for the selected item ID.
+        Intent detailIntent = new Intent(this, NetDbDetailActivity.class);
+        detailIntent.putExtra(NetDbDetailFragment.IS_RI, isRouterInfo);
+        detailIntent.putExtra(NetDbDetailFragment.ENTRY_HASH,
+                entryHash.toBase64());
+        startActivity(detailIntent);
     }
 }

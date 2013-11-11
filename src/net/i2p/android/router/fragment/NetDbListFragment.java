@@ -6,6 +6,7 @@ import net.i2p.android.router.R;
 import net.i2p.android.router.adapter.NetDbEntryAdapter;
 import net.i2p.android.router.loader.NetDbEntry;
 import net.i2p.android.router.loader.NetDbEntryLoader;
+import net.i2p.data.Hash;
 import net.i2p.router.RouterContext;
 
 import android.app.Activity;
@@ -48,7 +49,7 @@ public class NetDbListFragment extends ListFragment
 
     // Container Activity must implement this interface
     public interface OnEntrySelectedListener {
-        public void onEntrySelected(NetDbEntry entry);
+        public void onEntrySelected(boolean isRouterInfo, Hash entryHash);
     }
 
     @Override
@@ -124,7 +125,9 @@ public class NetDbListFragment extends ListFragment
     @Override
     public void onListItemClick(ListView parent, View view, int pos, long id) {
         super.onListItemClick(parent, view, pos, id);
-        mEntrySelectedCallback.onEntrySelected(mAdapter.getItem(pos));
+        NetDbEntry entry = mAdapter.getItem(pos);
+        mEntrySelectedCallback.onEntrySelected(
+                entry.isRouterInfo(), entry.getHash());
     }
 
     @Override

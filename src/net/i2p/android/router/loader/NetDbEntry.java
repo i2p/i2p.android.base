@@ -15,21 +15,31 @@ public class NetDbEntry {
     private final boolean mIsRI;
     private final DatabaseEntry mEntry;
 
+    private final boolean mIsUs;
     private final String mCountry;
 
     private final String mNick;
+    private final boolean mLocal;
+    private final boolean mUnpublished;
 
     public static NetDbEntry fromRouterInfo(RouterContext ctx, RouterInfo ri) {
+        Hash us = ctx.routerHash();
+        boolean isUs = ri.getHash().equals(us);
         String country = ctx.commSystem().getCountry(ri.getIdentity().getHash());
-        return new NetDbEntry(true, ri, country, "");
+        return new NetDbEntry(ri, isUs, country);
     }
 
     public static NetDbEntry fromLeaseSet(RouterContext ctx, LeaseSet ls) {
-        String nick;
+        String nick = "";
+        boolean local = false;
+        boolean unpublished = false;
         Destination dest = ls.getDestination();
+        Hash key = dest.calculateHash();
         if (ctx.clientManager().isLocal(dest)) {
-            TunnelPoolSettings in = ctx.tunnelManager().getInboundSettings(
-                    dest.calculateHash());
+            local = true;
+            if (! ctx.clientManager().shouldPublishLeaseSet(key))
+                unpublished = true;
+            TunnelPoolSettings in = ctx.tunnelManager().getInboundSettings(key);
             if (in != null && in.getDestinationNickname() != null)
                 nick = in.getDestinationNickname();
             else
@@ -41,18 +51,32 @@ public class NetDbEntry {
             else
                 nick = dest.toBase64().substring(0, 6);
         }
-        return new NetDbEntry(false, ls, "", nick);
+        return new NetDbEntry(ls, nick, local, unpublished);
     }
 
-    public NetDbEntry(boolean isRI, DatabaseEntry entry,
-            String country,
-            String nick) {
-        mIsRI = isRI;
-        mEntry = entry;
+    public NetDbEntry(RouterInfo ri,
+            boolean isUs, String country) {
+        mIsRI = true;
+        mEntry = ri;
 
+        mIsUs = isUs;
         mCountry = country;
 
+        mNick = "";
+        mLocal = mUnpublished = false;
+    }
+
+    public NetDbEntry(LeaseSet ls,
+        String nick, boolean local, boolean unpublished) {
+        mIsRI = false;
+        mEntry = ls;
+
         mNick = nick;
+        mLocal = local;
+        mUnpublished = unpublished;
+
+        mIsUs = false;
+        mCountry = "";
     }
 
     public boolean isRouterInfo() {
@@ -66,6 +90,10 @@ public class NetDbEntry {
     }
 
     // RouterInfo-specific methods
+
+    public boolean isUs() {
+        return mIsUs;
+    }
 
     public int getCountryIcon() {
         // http://daniel-codes.blogspot.com/2009/12/dynamically-retrieving-resources-in.html
@@ -83,5 +111,13 @@ public class NetDbEntry {
 
     public String getNickname() {
         return mNick;
+    }
+
+    public boolean isLocal() {
+        return mLocal;
+    }
+
+    public boolean isUnpublished() {
+        return mUnpublished;
     }
 }

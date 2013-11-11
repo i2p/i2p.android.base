@@ -14,11 +14,53 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/dbentry_hash"
+        android:id="@+id/ls_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/ls_nickname"
+        android:text="Destination" />
+
+    <TextView
+        android:id="@+id/dbentry_hash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ls_type"
         android:text="LeaseSet hash" />
+
+    <TextView
+        android:id="@+id/label_ls_expiry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/dbentry_hash"
+        android:text="Expires in:" />
+
+    <TextView
+        android:id="@+id/ls_expiry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/label_ls_expiry"
+        android:layout_alignBottom="@+id/label_ls_expiry"
+        android:layout_alignParentRight="true"
+        android:text="X min" />
+
+    <TextView
+        android:id="@+id/label_leases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/label_ls_expiry"
+        android:text="Leases:" />
+
+    <LinearLayout
+        android:id="@+id/ls_leases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/label_leases"
+        android:orientation="vertical" >
+    </LinearLayout>
 
 </RelativeLayout>

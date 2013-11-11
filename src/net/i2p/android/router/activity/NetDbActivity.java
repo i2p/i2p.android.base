@@ -4,7 +4,7 @@ import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.NetDbDetailFragment;
 import net.i2p.android.router.fragment.NetDbListFragment;
 import net.i2p.android.router.fragment.NetDbSummaryPagerFragment;
-import net.i2p.android.router.loader.NetDbEntry;
+import net.i2p.data.Hash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -110,22 +110,22 @@ public class NetDbActivity extends I2PActivityBase implements
 
     // NetDbListFragment.OnEntrySelectedListener
 
-    public void onEntrySelected(NetDbEntry entry) {
+    public void onEntrySelected(boolean isRouterInfo, Hash entryHash) {
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
             // fragment transaction.
             NetDbDetailFragment detailFrag = NetDbDetailFragment.newInstance(
-                    entry.isRouterInfo(), entry.getHash());
+                    isRouterInfo, entryHash);
             getSupportFragmentManager().beginTransaction()
                 .replace(R.id.detail_fragment, detailFrag).commit();
         } else {
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, NetDbDetailActivity.class);
-            detailIntent.putExtra(NetDbDetailFragment.IS_RI, entry.isRouterInfo());
+            detailIntent.putExtra(NetDbDetailFragment.IS_RI, isRouterInfo);
             detailIntent.putExtra(NetDbDetailFragment.ENTRY_HASH,
-                    entry.getHash().toBase64());
+                    entryHash.toBase64());
             startActivity(detailIntent);
         }
     }
