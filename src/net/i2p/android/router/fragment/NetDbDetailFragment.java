@@ -43,7 +43,18 @@ public class NetDbDetailFragment extends I2PFragmentBase {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (getRouterContext() != null && getNetDb().isInitialized()) {
+        if (getRouterContext() != null && mEntry == null)
+            loadEntry();
+    }
+
+    // Called by NetDbDetailActivity
+    public void onRouterBind() {
+        if (mEntry == null)
+            loadEntry();
+    }
+
+    private void loadEntry() {
+        if (getNetDb().isInitialized()) {
             Hash hash = new Hash();
             try {
                 hash.fromBase64(getArguments().getString(ENTRY_HASH));
