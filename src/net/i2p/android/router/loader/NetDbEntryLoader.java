@@ -13,21 +13,17 @@ import net.i2p.router.RouterContext;
 import net.i2p.router.TunnelPoolSettings;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.v4.content.AsyncTaskLoader;
 
 public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
     private RouterContext mRContext;
     private boolean mRouters;
     private List<NetDbEntry> mData;
-    private Handler mHandler;
-    private NetDbMonitor mMonitor;
 
     public NetDbEntryLoader(Context context, RouterContext rContext, boolean routers) {
         super(context);
         mRContext = rContext;
         mRouters = routers;
-        mHandler = new Handler();
     }
 
     private static class RouterInfoComparator implements Comparator<RouterInfo> {
@@ -122,10 +118,6 @@ public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
             deliverResult(mData);
         }
 
-        // Begin monitoring the underlying data source.
-        mMonitor = new NetDbMonitor();
-        mHandler.postDelayed(mMonitor, 50);
-
         if (takeContentChanged() || mData == null) {
             // When the observer detects a change, it should call onContentChanged()
             // on the Loader, which will cause the next call to takeContentChanged()
@@ -156,12 +148,6 @@ public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
             releaseResources(mData);
             mData = null;
         }
-
-        // The Loader is being reset, so we should stop monitoring for changes.
-        if (mMonitor != null) {
-            mHandler.removeCallbacks(mMonitor);
-            mMonitor = null;
-        }
     }
 
     @Override
@@ -178,14 +164,5 @@ public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
         // For a simple List, there is nothing to do. For something like a Cursor, we 
         // would close it in this method. All resources associated with the Loader
         // should be released here.
-    }
-
-    private class NetDbMonitor implements Runnable {
-        public void run() {
-            // There is no way (yet) to monitor for changes to the NetDB,
-            // so just force a refresh every 10 seconds.
-            onContentChanged();
-            mHandler.postDelayed(this, 10 * 1000);
-        }
     }
 }

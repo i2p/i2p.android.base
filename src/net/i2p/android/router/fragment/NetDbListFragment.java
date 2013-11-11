@@ -13,8 +13,12 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class NetDbListFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<List<NetDbEntry>> {
@@ -73,6 +77,12 @@ public class NetDbListFragment extends ListFragment
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -124,6 +134,25 @@ public class NetDbListFragment extends ListFragment
         if (mActivatedPosition != ListView.INVALID_POSITION) {
             // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_netdb_list_actions, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+        case R.id.action_refresh:
+            setListShown(false);
+            getLoaderManager().restartLoader(mRouters ? ROUTER_LOADER_ID
+                    : LEASESET_LOADER_ID, null, this);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 
