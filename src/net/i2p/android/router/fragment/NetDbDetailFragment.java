@@ -2,6 +2,7 @@ package net.i2p.android.router.fragment;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.loader.NetDbEntry;
+import net.i2p.android.router.util.Util;
 import net.i2p.data.DataFormatException;
 import net.i2p.data.Hash;
 import net.i2p.data.LeaseSet;
@@ -72,7 +73,7 @@ public class NetDbDetailFragment extends I2PFragmentBase {
                 TextView entryHash = (TextView) getView().findViewById(R.id.dbentry_hash);
                 entryHash.setText(hash.toBase64());
             } catch (DataFormatException e) {
-                e.printStackTrace();
+                Util.e(e.toString());
             }
         }
     }

@@ -3,6 +3,7 @@ package net.i2p.android.router.activity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.NetDbDetailFragment;
 import net.i2p.android.router.service.RouterService;
+import net.i2p.android.router.util.Util;
 import net.i2p.data.DataFormatException;
 import net.i2p.data.Hash;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ public class NetDbDetailActivity extends I2PActivityBase {
                 getSupportFragmentManager().beginTransaction()
                     .add(R.id.main_fragment, mDetailFrag).commit();
             } catch (DataFormatException e) {
-                e.printStackTrace();
+                Util.e(e.toString());
             }
         }
     }
