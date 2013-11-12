@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,6 +37,7 @@ public class AddressbookFragment extends ListFragment implements
     OnAddressSelectedListener mCallback;
     private AddressEntryAdapter mAdapter;
     private String mBook;
+    private String mCurFilter;
 
     // Container Activity must implement this interface
     public interface OnAddressSelectedListener {
@@ -128,7 +130,9 @@ public class AddressbookFragment extends ListFragment implements
     }
 
     public void filterAddresses(String query) {
-        mAdapter.getFilter().filter(query);
+        mCurFilter = !TextUtils.isEmpty(query) ? query : null;
+        getLoaderManager().restartLoader("private".equals(mBook) ?
+                PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
     }
 
     // Duplicated from I2PFragmentBase because this extends ListFragment
@@ -140,7 +144,7 @@ public class AddressbookFragment extends ListFragment implements
 
     public Loader<List<AddressEntry>> onCreateLoader(int id, Bundle args) {
         return new AddressEntryLoader(getActivity(),
-                getRouterContext(), mBook);
+                getRouterContext(), mBook, mCurFilter);
     }
 
     public void onLoadFinished(Loader<List<AddressEntry>> loader,

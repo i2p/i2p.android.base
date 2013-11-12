@@ -2,6 +2,7 @@ package net.i2p.android.router.loader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -16,12 +17,15 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
     private static final String DEFAULT_NS = "BlockfileNamingService";
     private RouterContext mRContext;
     private String mBook;
+    private String mFilter;
     private List<AddressEntry> mData;
 
-    public AddressEntryLoader(Context context, RouterContext rContext, String book) {
+    public AddressEntryLoader(Context context, RouterContext rContext,
+            String book, String filter) {
         super(context);
         mRContext = rContext;
         mBook = book;
+        mFilter = filter;
     }
 
     @Override
@@ -34,6 +38,10 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
         Set<String> names = new TreeSet<String>();
         names.addAll(ns.getNames());
         for (String hostName : names) {
+            if (mFilter != null && !hostName.toLowerCase(Locale.US).contains(
+                    mFilter.toLowerCase(Locale.US)))
+                continue;
+
             AddressEntry name = new AddressEntry(hostName);
             ret.add(name);
         }
