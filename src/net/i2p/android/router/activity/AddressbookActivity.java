@@ -44,7 +44,8 @@ public class AddressbookActivity extends I2PActivityBase
         // Router book tab
         AddressbookFragment rf = new AddressbookFragment();
         Bundle args = new Bundle();
-        args.putString(AddressbookFragment.BOOK_NAME, "router");
+        args.putString(AddressbookFragment.BOOK_NAME,
+                AddressbookFragment.ROUTER_BOOK);
         rf.setArguments(args);
         Tab tab = actionBar.newTab()
                 .setText("Router")
@@ -54,7 +55,8 @@ public class AddressbookActivity extends I2PActivityBase
         // Private book tab
         AddressbookFragment pf = new AddressbookFragment();
         args = new Bundle();
-        args.putString(AddressbookFragment.BOOK_NAME, "private");
+        args.putString(AddressbookFragment.BOOK_NAME,
+                AddressbookFragment.PRIVATE_BOOK);
         pf.setArguments(args);
         tab = actionBar.newTab()
                 .setText("Private")

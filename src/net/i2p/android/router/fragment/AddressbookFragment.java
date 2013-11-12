@@ -1,7 +1,6 @@
 package net.i2p.android.router.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -14,8 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.List;
 import net.i2p.android.router.R;
 import net.i2p.android.router.activity.AddressbookSettingsActivity;
@@ -29,6 +26,8 @@ import net.i2p.router.RouterContext;
 public class AddressbookFragment extends ListFragment implements
         LoaderManager.LoaderCallbacks<List<AddressEntry>> {
     public static final String BOOK_NAME = "book_name";
+    public static final String ROUTER_BOOK = "hosts.txt";
+    public static final String PRIVATE_BOOK = "privatehosts.txt";
 
     private static final int ROUTER_LOADER_ID = 1;
     private static final int PRIVATE_LOADER_ID = 2;
@@ -84,12 +83,12 @@ public class AddressbookFragment extends ListFragment implements
 
         LoaderManager lm = getLoaderManager();
         // If the Router is running, or there is an existing Loader
-        if (getRouterContext() != null || lm.getLoader("private".equals(mBook) ?
+        if (getRouterContext() != null || lm.getLoader(PRIVATE_BOOK.equals(mBook) ?
                 PRIVATE_LOADER_ID : ROUTER_LOADER_ID) != null) {
             setEmptyText("No hosts in address book " + mBook);
 
             setListShown(false);
-            lm.initLoader("private".equals(mBook) ?
+            lm.initLoader(PRIVATE_BOOK.equals(mBook) ?
                     PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
         } else {
             setEmptyText(getResources().getString(
@@ -132,7 +131,7 @@ public class AddressbookFragment extends ListFragment implements
     public void filterAddresses(String query) {
         mCurFilter = !TextUtils.isEmpty(query) ? query : null;
         setListShown(false);
-        getLoaderManager().restartLoader("private".equals(mBook) ?
+        getLoaderManager().restartLoader(PRIVATE_BOOK.equals(mBook) ?
                 PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
     }
 
@@ -150,7 +149,7 @@ public class AddressbookFragment extends ListFragment implements
 
     public void onLoadFinished(Loader<List<AddressEntry>> loader,
             List<AddressEntry> data) {
-        if (loader.getId() == ("private".equals(mBook) ?
+        if (loader.getId() == (PRIVATE_BOOK.equals(mBook) ?
                 PRIVATE_LOADER_ID : ROUTER_LOADER_ID)) {
             mAdapter.setData(data);
 
@@ -163,7 +162,7 @@ public class AddressbookFragment extends ListFragment implements
     }
 
     public void onLoaderReset(Loader<List<AddressEntry>> loader) {
-        if (loader.getId() == ("private".equals(mBook) ?
+        if (loader.getId() == (PRIVATE_BOOK.equals(mBook) ?
                 PRIVATE_LOADER_ID : ROUTER_LOADER_ID)) {
             mAdapter.setData(null);
         }
