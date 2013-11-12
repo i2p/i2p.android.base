@@ -13,7 +13,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 
 public class NetDbActivity extends I2PActivityBase implements
-        NetDbListFragment.RouterContextProvider,
         NetDbListFragment.OnEntrySelectedListener {
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet

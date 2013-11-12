@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.adapter.NetDbEntryAdapter;
+import net.i2p.android.router.fragment.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.loader.NetDbEntry;
 import net.i2p.android.router.loader.NetDbEntryLoader;
 import net.i2p.data.Hash;
@@ -41,11 +42,6 @@ public class NetDbListFragment extends ListFragment
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
     private boolean mActivateOnItemClick = false;
-
-    // Container Activity must implement this interface
-    public interface RouterContextProvider {
-        public RouterContext getRouterContext();
-    }
 
     // Container Activity must implement this interface
     public interface OnEntrySelectedListener {
