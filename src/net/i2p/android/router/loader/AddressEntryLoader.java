@@ -1,8 +1,10 @@
 package net.i2p.android.router.loader;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 import net.i2p.android.router.util.Util;
 import net.i2p.client.naming.NamingService;
 import net.i2p.router.RouterContext;
@@ -29,11 +31,12 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
         Util.i("NamingService: " + ns.getName());
         // After router shutdown we get nothing... why?
         List<AddressEntry> ret = new ArrayList<AddressEntry>();
-        for (String hostName : ns.getNames()) {
+        Set<String> names = new TreeSet<String>();
+        names.addAll(ns.getNames());
+        for (String hostName : names) {
             AddressEntry name = new AddressEntry(hostName);
             ret.add(name);
         }
-        Collections.sort(ret);
         return ret;
     }
 

@@ -1,6 +1,6 @@
 package net.i2p.android.router.loader;
 
-public class AddressEntry implements Comparable<Object> {
+public class AddressEntry {
     private final String mHostName;
 
     public AddressEntry(String hostName) {
@@ -9,11 +9,5 @@ public class AddressEntry implements Comparable<Object> {
 
     public String getHostName() {
         return mHostName;
-    }
-
-    public int compareTo(Object another) {
-        if (another instanceof AddressEntry)
-            return -1;
-        return mHostName.compareTo(((AddressEntry) another).getHostName());
     }
 }
