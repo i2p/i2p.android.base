@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,8 @@ public class AddressbookActivity extends I2PActivityBase
      */
     private boolean mTwoPane;
 
+    private static final String SELECTED_TAB = "selected_tab";
+
     @Override
     protected boolean canUseTwoPanes() {
         return true;
@@ -33,6 +37,35 @@ public class AddressbookActivity extends I2PActivityBase
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Set up action bar for tabs
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        // Router book tab
+        AddressbookFragment rf = new AddressbookFragment();
+        Bundle args = new Bundle();
+        args.putString(AddressbookFragment.BOOK_NAME, "router");
+        rf.setArguments(args);
+        Tab tab = actionBar.newTab()
+                .setText("Router")
+                .setTabListener(new TabListener(rf));
+        actionBar.addTab(tab);
+
+        // Private book tab
+        AddressbookFragment pf = new AddressbookFragment();
+        args = new Bundle();
+        args.putString(AddressbookFragment.BOOK_NAME, "private");
+        pf.setArguments(args);
+        tab = actionBar.newTab()
+                .setText("Private")
+                .setTabListener(new TabListener(pf));
+        actionBar.addTab(tab);
+
+        if (savedInstanceState != null) {
+            int selected = savedInstanceState.getInt(SELECTED_TAB);
+            actionBar.setSelectedNavigationItem(selected);
+        }
+
         if (findViewById(R.id.detail_fragment) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -40,14 +73,13 @@ public class AddressbookActivity extends I2PActivityBase
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
+    }
 
-        // Start with the base view
-        if (savedInstanceState == null) {
-            AddressbookFragment f = new AddressbookFragment();
-            f.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.main_fragment, f).commit();
-        }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SELECTED_TAB,
+                getSupportActionBar().getSelectedNavigationIndex());
     }
 
     @Override
