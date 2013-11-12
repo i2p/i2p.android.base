@@ -25,7 +25,8 @@ public class NetDbEntry {
     public static NetDbEntry fromRouterInfo(RouterContext ctx, RouterInfo ri) {
         Hash us = ctx.routerHash();
         boolean isUs = ri.getHash().equals(us);
-        String country = ctx.commSystem().getCountry(ri.getIdentity().getHash());
+        // XXX Disabled, no GeoIP file
+        String country = "";//ctx.commSystem().getCountry(ri.getIdentity().getHash());
         return new NetDbEntry(ri, isUs, country);
     }
 

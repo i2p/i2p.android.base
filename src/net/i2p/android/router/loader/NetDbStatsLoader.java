@@ -48,7 +48,8 @@ public class NetDbStatsLoader extends AsyncTaskLoader<List<ObjectCounter<String>
                     String routerVersion = ri.getOption("router.version");
                     if (routerVersion != null)
                         versions.increment(routerVersion);
-                    String country = mRContext.commSystem().getCountry(key);
+                    // XXX Disabled, no GeoIP file
+                    String country = null;//mRContext.commSystem().getCountry(key);
                     if(country != null)
                         countries.increment(country);
                     transports.increment(classifyTransports(ri));
