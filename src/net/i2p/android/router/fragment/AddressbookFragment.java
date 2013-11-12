@@ -131,6 +131,7 @@ public class AddressbookFragment extends ListFragment implements
 
     public void filterAddresses(String query) {
         mCurFilter = !TextUtils.isEmpty(query) ? query : null;
+        setListShown(false);
         getLoaderManager().restartLoader("private".equals(mBook) ?
                 PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
     }
@@ -158,14 +159,6 @@ public class AddressbookFragment extends ListFragment implements
             } else {
                 setListShownNoAnimation(true);
             }
-
-            // Show Toast with addressbook size
-            int sz = data.size();
-            Context context = getActivity().getApplicationContext();
-            CharSequence text = sz + " hosts in address book.";
-            if (sz == 1)
-                text = "1 host in address book.";
-            Toast.makeText(context, text, Toast.LENGTH_LONG).show();
         }
     }
 
