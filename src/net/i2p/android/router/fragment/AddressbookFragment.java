@@ -105,6 +105,10 @@ public class AddressbookFragment extends ListFragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     	inflater.inflate(R.menu.fragment_addressbook_actions, menu);
+
+    	// Only allow adding to private book 
+    	if (!PRIVATE_BOOK.equals(mBook))
+    	    menu.findItem(R.id.action_add_to_addressbook).setVisible(false);
     }
 
     @Override
