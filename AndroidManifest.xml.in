@@ -72,6 +72,10 @@
             <meta-data android:name="android.app.searchable"
                        android:resource="@xml/searchable_addressbook"/>
         </activity>
+        <activity android:name=".activity.AddressbookAddWizardActivity"
+                  android:label="Add new Destination"
+                  android:parentActivityName=".activity.AddressbookActivity" >
+        </activity>
         <activity android:name="net.i2p.android.i2ptunnel.activity.TunnelListActivity"
                   android:label="I2PTunnel"
                   android:launchMode="singleTop" >
