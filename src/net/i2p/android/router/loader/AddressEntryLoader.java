@@ -2,12 +2,12 @@ package net.i2p.android.router.loader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.TreeSet;
-
+import java.util.Map;
+import java.util.Properties;
+import java.util.TreeMap;
 import net.i2p.android.router.util.Util;
 import net.i2p.client.naming.NamingService;
+import net.i2p.data.Destination;
 import net.i2p.router.RouterContext;
 
 import android.content.Context;
@@ -35,16 +35,17 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
         Util.i("NamingService: " + ns.getName());
         // After router shutdown we get nothing... why?
         List<AddressEntry> ret = new ArrayList<AddressEntry>();
-        Set<String> names = new TreeSet<String>();
-        names.addAll(ns.getNames());
-        for (String hostName : names) {
-            if (mFilter != null && !hostName.toLowerCase(Locale.US).contains(
-                    mFilter.toLowerCase(Locale.US)))
-                continue;
+        Map<String, Destination> names = new TreeMap<String, Destination>();
 
-            AddressEntry name = new AddressEntry(hostName);
-            ret.add(name);
-        }
+        Properties searchProps = new Properties();
+        // Needed for HostsTxtNamingService
+        searchProps.setProperty("file", mBook);
+        if (mFilter != null && mFilter.length() > 0)
+            searchProps.setProperty("search", mFilter);
+
+        names.putAll(ns.getEntries(searchProps));
+        for (String hostName : names.keySet())
+            ret.add(new AddressEntry(hostName, names.get(hostName)));
         return ret;
     }
 
