@@ -70,16 +70,8 @@ public class NetDbDetailFragment extends I2PFragmentBase {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
+    public void onRouterConnectionReady() {
         if (getRouterContext() != null && mEntry == null)
-            loadEntry();
-    }
-
-    // Called by NetDbDetailActivity
-    public void onRouterBind() {
-        if (mEntry == null)
             loadEntry();
     }
 

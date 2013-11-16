@@ -3,7 +3,6 @@ package net.i2p.android.router.activity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.fragment.NetDbDetailFragment;
 import net.i2p.android.router.fragment.NetDbListFragment;
-import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataFormatException;
 import net.i2p.data.Hash;
@@ -31,11 +30,6 @@ public class NetDbDetailActivity extends I2PActivityBase implements
                 Util.e(e.toString());
             }
         }
-    }
-
-    @Override
-    protected void onRouterBind(RouterService svc) {
-        mDetailFrag.onRouterBind();
     }
 
     // NetDbListFragment.OnEntrySelectedListener
