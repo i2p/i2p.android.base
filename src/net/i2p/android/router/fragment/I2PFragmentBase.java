@@ -47,7 +47,9 @@ public class I2PFragmentBase extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mOnActivityCreated = true;
-        if (mOnRouterBind)
+        // Check getRouterContext() in case this was not the
+        // active Fragment when onRouterBind() was called.
+        if (mOnRouterBind || getRouterContext() != null)
             onRouterConnectionReady();
     }
 

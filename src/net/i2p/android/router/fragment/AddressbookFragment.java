@@ -94,7 +94,9 @@ public class AddressbookFragment extends ListFragment implements
         setListAdapter(mAdapter);
 
         mOnActivityCreated = true;
-        if (mOnRouterBind)
+        // Check getRouterContext() in case this was not the
+        // active Fragment when onRouterBind() was called.
+        if (mOnRouterBind || getRouterContext() != null)
             onRouterConnectionReady();
     }
 
