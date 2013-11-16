@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
+
+import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.android.router.util.Util;
 import net.i2p.client.naming.NamingService;
 import net.i2p.data.Destination;
@@ -14,7 +16,6 @@ import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
 public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
-    private static final String DEFAULT_NS = "BlockfileNamingService";
     private RouterContext mRContext;
     private String mBook;
     private String mFilter;
@@ -31,7 +32,7 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
     @Override
     public List<AddressEntry> loadInBackground() {
         // get the names
-        NamingService ns = getNamingService();
+        NamingService ns = NamingServiceUtil.getNamingService(mRContext, mBook);
         Util.i("NamingService: " + ns.getName());
         // After router shutdown we get nothing... why?
         List<AddressEntry> ret = new ArrayList<AddressEntry>();
@@ -47,38 +48,6 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
         for (String hostName : names.keySet())
             ret.add(new AddressEntry(hostName, names.get(hostName)));
         return ret;
-    }
-
-    /** @return the NamingService for the current file name, or the root NamingService */
-    private NamingService getNamingService()
-    {
-        NamingService root = mRContext.namingService();
-        NamingService rv = searchNamingService(root, mBook);
-        return rv != null ? rv : root;
-    }
-
-    /** depth-first search */
-    private static NamingService searchNamingService(NamingService ns, String srch)
-    {
-        String name = ns.getName();
-        if (name.equals(srch) || basename(name).equals(srch) || name.equals(DEFAULT_NS))
-            return ns;
-        List<NamingService> list = ns.getNamingServices();
-        if (list != null) {
-            for (NamingService nss : list) {
-                NamingService rv = searchNamingService(nss, srch);
-                if (rv != null)
-                    return rv;
-            }
-        }
-        return null;
-    }
-
-    private static String basename(String filename) {
-        int slash = filename.lastIndexOf('/');
-        if (slash >= 0)
-            filename = filename.substring(slash + 1);
-        return filename;
     }
 
     @Override

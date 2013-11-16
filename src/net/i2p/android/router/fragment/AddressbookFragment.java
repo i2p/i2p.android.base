@@ -22,6 +22,8 @@ import net.i2p.android.router.adapter.AddressEntryAdapter;
 import net.i2p.android.router.fragment.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.loader.AddressEntry;
 import net.i2p.android.router.loader.AddressEntryLoader;
+import net.i2p.android.router.util.NamingServiceUtil;
+import net.i2p.client.naming.NamingService;
 import net.i2p.router.RouterContext;
 
 public class AddressbookFragment extends ListFragment implements
@@ -143,14 +145,16 @@ public class AddressbookFragment extends ListFragment implements
         if (requestCode == ADD_WIZARD_REQUEST &&
                 resultCode == Activity.RESULT_OK &&
                 PRIVATE_BOOK.equals(mBook)) {
-            // Save the new entry
-            Bundle entryData = data.getExtras().getBundle(ADD_WIZARD_DATA);
-            // Reload the list
             if (getRouterContext() != null) {
-                setListShown(false);
-                getLoaderManager().restartLoader(PRIVATE_LOADER_ID, null, this);
-            } else {
-                // Just add to list
+                // Save the new entry
+                Bundle entryData = data.getExtras().getBundle(ADD_WIZARD_DATA);
+                NamingService ns = NamingServiceUtil.getNamingService(getRouterContext(), mBook);
+                boolean success = NamingServiceUtil.addFromWizard(getActivity(), ns, entryData, false);
+                if (success) {
+                    // Reload the list
+                    setListShown(false);
+                    getLoaderManager().restartLoader(PRIVATE_LOADER_ID, null, this);
+                }
             }
         }
     }
