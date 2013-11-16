@@ -9,12 +9,19 @@ import net.i2p.router.peermanager.ProfileOrganizer;
 import net.i2p.router.transport.FIFOBandwidthLimiter;
 import net.i2p.stat.StatManager;
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 public class I2PFragmentBase extends Fragment {
+    private boolean mOnActivityCreated;
+    private boolean mOnRouterBind;
     RouterContextProvider mCallback;
 
     protected static final String PREF_INSTALLED_VERSION = "app.version";
+
+    public interface RouterContextUser {
+        public void onRouterBind();
+    }
 
     // Container Activity must implement this interface
     public interface RouterContextProvider {
@@ -35,6 +42,23 @@ public class I2PFragmentBase extends Fragment {
         }
 
     }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mOnActivityCreated = true;
+        if (mOnRouterBind)
+            onRouterConnectionReady();
+    }
+
+    public void onRouterBind() {
+        mOnRouterBind = true;
+        if (mOnActivityCreated)
+            onRouterConnectionReady();
+    }
+
+    /** callback from I2PFragmentBase, override as necessary */
+    public void onRouterConnectionReady() {}
 
     protected RouterContext getRouterContext() {
         return mCallback.getRouterContext();

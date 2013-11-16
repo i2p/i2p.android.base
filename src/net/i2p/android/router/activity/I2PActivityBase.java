@@ -406,7 +406,13 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     }
 
     /** callback from ServiceConnection, override as necessary */
-    protected void onRouterBind(RouterService svc) {}
+    protected void onRouterBind(RouterService svc) {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.main_fragment);
+        if (f instanceof I2PFragmentBase)
+            ((I2PFragmentBase) f).onRouterBind();
+        else if (f instanceof I2PFragmentBase.RouterContextUser)
+            ((I2PFragmentBase.RouterContextUser) f).onRouterBind();
+    }
 
     /** callback from ServiceConnection, override as necessary */
     protected void onRouterUnbind() {}
