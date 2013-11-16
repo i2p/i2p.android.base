@@ -27,6 +27,7 @@ import net.i2p.client.naming.NamingService;
 import net.i2p.router.RouterContext;
 
 public class AddressbookFragment extends ListFragment implements
+        I2PFragmentBase.RouterContextUser,
         LoaderManager.LoaderCallbacks<List<AddressEntry>> {
     public static final String BOOK_NAME = "book_name";
     public static final String ROUTER_BOOK = "hosts.txt";
@@ -38,11 +39,16 @@ public class AddressbookFragment extends ListFragment implements
     private static final int ROUTER_LOADER_ID = 1;
     private static final int PRIVATE_LOADER_ID = 2;
 
+    private boolean mOnActivityCreated;
+    private boolean mOnRouterBind;
     RouterContextProvider mRouterContextProvider;
     OnAddressSelectedListener mCallback;
     private AddressEntryAdapter mAdapter;
     private String mBook;
     private String mCurFilter;
+
+    // Set in onActivityResult()
+    private Intent mAddWizardData;
 
     // Container Activity must implement this interface
     public interface OnAddressSelectedListener {
@@ -87,18 +93,38 @@ public class AddressbookFragment extends ListFragment implements
 
         setListAdapter(mAdapter);
 
-        LoaderManager lm = getLoaderManager();
-        // If the Router is running, or there is an existing Loader
-        if (getRouterContext() != null || lm.getLoader(PRIVATE_BOOK.equals(mBook) ?
-                PRIVATE_LOADER_ID : ROUTER_LOADER_ID) != null) {
-            setEmptyText("No hosts in address book " + mBook);
+        mOnActivityCreated = true;
+        if (mOnRouterBind)
+            onRouterConnectionReady();
+    }
 
-            setListShown(false);
-            lm.initLoader(PRIVATE_BOOK.equals(mBook) ?
-                    PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
+    public void onRouterConnectionReady() {
+        LoaderManager lm = getLoaderManager();
+        if (mAddWizardData != null) {
+            if (getRouterContext() != null) {
+                // Save the new entry
+                Bundle entryData = mAddWizardData.getExtras().getBundle(ADD_WIZARD_DATA);
+                NamingService ns = NamingServiceUtil.getNamingService(getRouterContext(), mBook);
+                boolean success = NamingServiceUtil.addFromWizard(getActivity(), ns, entryData, false);
+                if (success) {
+                    // Reload the list
+                    setListShown(false);
+                    getLoaderManager().restartLoader(PRIVATE_LOADER_ID, null, this);
+                }
+            }
         } else {
-            setEmptyText(getResources().getString(
-                    R.string.router_not_running));
+            // If the Router is running, or there is an existing Loader
+            if (getRouterContext() != null || lm.getLoader(PRIVATE_BOOK.equals(mBook) ?
+                    PRIVATE_LOADER_ID : ROUTER_LOADER_ID) != null) {
+                setEmptyText("No hosts in address book " + mBook);
+
+                setListShown(false);
+                lm.initLoader(PRIVATE_BOOK.equals(mBook) ?
+                        PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
+            } else {
+                setEmptyText(getResources().getString(
+                        R.string.router_not_running));
+            }
         }
     }
 
@@ -145,17 +171,7 @@ public class AddressbookFragment extends ListFragment implements
         if (requestCode == ADD_WIZARD_REQUEST &&
                 resultCode == Activity.RESULT_OK &&
                 PRIVATE_BOOK.equals(mBook)) {
-            if (getRouterContext() != null) {
-                // Save the new entry
-                Bundle entryData = data.getExtras().getBundle(ADD_WIZARD_DATA);
-                NamingService ns = NamingServiceUtil.getNamingService(getRouterContext(), mBook);
-                boolean success = NamingServiceUtil.addFromWizard(getActivity(), ns, entryData, false);
-                if (success) {
-                    // Reload the list
-                    setListShown(false);
-                    getLoaderManager().restartLoader(PRIVATE_LOADER_ID, null, this);
-                }
-            }
+            mAddWizardData = data;
         }
     }
 
@@ -169,6 +185,14 @@ public class AddressbookFragment extends ListFragment implements
     // Duplicated from I2PFragmentBase because this extends ListFragment
     private RouterContext getRouterContext() {
         return mRouterContextProvider.getRouterContext();
+    }
+
+    // I2PFragmentBase.RouterContextUser
+
+    public void onRouterBind() {
+        mOnRouterBind = true;
+        if (mOnActivityCreated)
+            onRouterConnectionReady();
     }
 
     // LoaderManager.LoaderCallbacks<List<AddressEntry>>
