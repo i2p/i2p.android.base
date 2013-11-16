@@ -97,7 +97,6 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private static final long INITIAL_DELAY = 5*60*1000;
     private static final long RUN_DELAY = 30*60*1000;
 
-    @SuppressWarnings("SleepWhileInLoop")
     public void run() {
         try {
             Thread.sleep(INITIAL_DELAY);

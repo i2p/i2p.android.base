@@ -97,7 +97,6 @@ public class PeersFragment extends I2PFragmentBase {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        WebView wv = (WebView) getActivity().findViewById(R.id.peers_webview);
         switch (item.getItemId()) {
         case R.id.menu_reload:
             update();

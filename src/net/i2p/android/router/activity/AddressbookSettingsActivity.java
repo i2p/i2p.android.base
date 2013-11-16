@@ -65,7 +65,6 @@ public class AddressbookSettingsActivity extends Activity {
         return false;
     }
 
-    @SuppressWarnings("CallToThreadDumpStack")
     private boolean save() {
         //
         String content = text_content_subscriptions.getText().toString();

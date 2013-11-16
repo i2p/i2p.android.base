@@ -94,8 +94,6 @@ public class LogFragment extends ListFragment {
     }
 
     private class Updater implements Runnable {
-        private int counter;
-
         public void run() {
             I2PAppContext ctx = I2PAppContext.getCurrentContext();
             if (ctx != null) {

@@ -99,7 +99,7 @@ public class NetDbEntry {
     public int getCountryIcon() {
         // http://daniel-codes.blogspot.com/2009/12/dynamically-retrieving-resources-in.html
         try {
-            Class res = R.drawable.class;
+            Class<R.drawable> res = R.drawable.class;
             Field field = res.getField("flag_" + mCountry);
             return field.getInt(null);
         }
