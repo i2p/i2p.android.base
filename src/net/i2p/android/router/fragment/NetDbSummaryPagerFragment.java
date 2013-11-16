@@ -57,9 +57,7 @@ public class NetDbSummaryPagerFragment extends I2PFragmentBase implements
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
+    public void onRouterConnectionReady() {
         LoaderManager lm = getLoaderManager();
         // If the Router is running, or there is an existing Loader
         if (getRouterContext() != null || lm.getLoader(0) != null) {

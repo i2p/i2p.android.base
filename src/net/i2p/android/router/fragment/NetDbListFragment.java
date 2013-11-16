@@ -21,8 +21,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-public class NetDbListFragment extends ListFragment
-        implements LoaderManager.LoaderCallbacks<List<NetDbEntry>> {
+public class NetDbListFragment extends ListFragment implements 
+        I2PFragmentBase.RouterContextUser,
+        LoaderManager.LoaderCallbacks<List<NetDbEntry>> {
     public static final String SHOW_ROUTERS = "show_routers";
 
     private static final int ROUTER_LOADER_ID = 1;
@@ -33,6 +34,8 @@ public class NetDbListFragment extends ListFragment
      */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
+    private boolean mOnActivityCreated;
+    private boolean mOnRouterBind;
     RouterContextProvider mRouterContextProvider;
     OnEntrySelectedListener mEntrySelectedCallback;
     private NetDbEntryAdapter mAdapter;
@@ -104,6 +107,12 @@ public class NetDbListFragment extends ListFragment
 
         setListAdapter(mAdapter);
 
+        mOnActivityCreated = true;
+        if (mOnRouterBind)
+            onRouterConnectionReady();
+    }
+
+    public void onRouterConnectionReady() {
         LoaderManager lm = getLoaderManager();
         // If the Router is running, or there is an existing Loader
         if (getRouterContext() != null || lm.getLoader(mRouters ?
@@ -178,6 +187,14 @@ public class NetDbListFragment extends ListFragment
     // Duplicated from I2PFragmentBase because this extends ListFragment
     private RouterContext getRouterContext() {
         return mRouterContextProvider.getRouterContext();
+    }
+
+    // I2PFragmentBase.RouterContextUser
+
+    public void onRouterBind() {
+        mOnRouterBind = true;
+        if (mOnActivityCreated)
+            onRouterConnectionReady();
     }
 
     // LoaderManager.LoaderCallbacks<List<NetDbEntry>>
