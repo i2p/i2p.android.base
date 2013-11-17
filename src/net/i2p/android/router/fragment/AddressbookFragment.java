@@ -133,6 +133,11 @@ public class AddressbookFragment extends ListFragment implements
     	// Only allow adding to private book 
     	if (!PRIVATE_BOOK.equals(mBook))
     	    menu.findItem(R.id.action_add_to_addressbook).setVisible(false);
+
+    	if (getRouterContext() == null) {
+    	    menu.findItem(R.id.action_search_addressbook).setVisible(false);
+    	    menu.findItem(R.id.action_add_to_addressbook).setVisible(false);
+    	}
     }
 
     @Override

@@ -165,6 +165,12 @@ public class TunnelListFragment extends ListFragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_i2ptunnel_list_actions, menu);
+        if (getRouterContext() == null) {
+            menu.findItem(R.id.action_add_tunnel).setVisible(false);
+            menu.findItem(R.id.action_start_all_tunnels).setVisible(false);
+            menu.findItem(R.id.action_stop_all_tunnels).setVisible(false);
+            menu.findItem(R.id.action_restart_all_tunnels).setVisible(false);
+        }
     }
 
     @Override
