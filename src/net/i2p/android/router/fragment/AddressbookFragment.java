@@ -169,9 +169,11 @@ public class AddressbookFragment extends ListFragment implements
 
     public void filterAddresses(String query) {
         mCurFilter = !TextUtils.isEmpty(query) ? query : null;
-        setListShown(false);
-        getLoaderManager().restartLoader(PRIVATE_BOOK.equals(mBook) ?
-                PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
+        if (getRouterContext() != null) {
+            setListShown(false);
+            getLoaderManager().restartLoader(PRIVATE_BOOK.equals(mBook) ?
+                    PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
+        }
     }
 
     // Duplicated from I2PFragmentBase because this extends ListFragment
