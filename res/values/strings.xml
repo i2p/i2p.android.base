@@ -96,6 +96,8 @@
 
     <string name="menu_help">Help</string>
 
+    <string name="addressbook_search_header">%s found</string>
+
     <string name="addressbook_add_wizard_k_name">Name</string>
     <string name="addressbook_add_wizard_k_destination">Destination</string>
 
