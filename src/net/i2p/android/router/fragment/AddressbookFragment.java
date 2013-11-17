@@ -90,6 +90,10 @@ public class AddressbookFragment extends ListFragment implements
         mAdapter = new AddressEntryAdapter(getActivity());
         mBook = getArguments().getString(BOOK_NAME);
 
+        TextView v = new TextView(getActivity());
+        v.setTag("addressbook_header");
+        getListView().addHeaderView(v);
+
         setListAdapter(mAdapter);
 
         mOnActivityCreated = true;
@@ -205,6 +209,14 @@ public class AddressbookFragment extends ListFragment implements
         if (loader.getId() == (PRIVATE_BOOK.equals(mBook) ?
                 PRIVATE_LOADER_ID : ROUTER_LOADER_ID)) {
             mAdapter.setData(data);
+
+            TextView v = (TextView) getListView().findViewWithTag("addressbook_header");
+            if (mCurFilter != null)
+                v.setText(getActivity().getResources().getString(
+                        R.string.addressbook_search_header,
+                        data.size()));
+            else
+                v.setText("");
 
             if (isResumed()) {
                 setListShown(true);
