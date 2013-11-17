@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import net.i2p.android.router.R;
 import net.i2p.android.wizard.model.AbstractWizardModel;
+import net.i2p.android.wizard.model.I2PB64DestinationPage;
 import net.i2p.android.wizard.model.PageList;
 import net.i2p.android.wizard.model.SingleTextFieldPage;
 
@@ -21,7 +22,7 @@ public class AddressbookAddWizardModel extends AbstractWizardModel {
                 .setDescription(res.getString(R.string.addressbook_add_wizard_desc_name))
                 .setRequired(true),
 
-            new SingleTextFieldPage(this, res.getString(R.string.addressbook_add_wizard_k_destination))
+            new I2PB64DestinationPage(this, res.getString(R.string.addressbook_add_wizard_k_destination))
                 .setDescription(res.getString(R.string.addressbook_add_wizard_desc_destination))
                 .setRequired(true)
             );
