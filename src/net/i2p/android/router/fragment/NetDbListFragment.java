@@ -112,6 +112,9 @@ public class NetDbListFragment extends ListFragment implements
         // active Fragment when onRouterBind() was called.
         if (mOnRouterBind || getRouterContext() != null)
             onRouterConnectionReady();
+        else
+            setEmptyText(getResources().getString(
+                    R.string.router_not_running));
     }
 
     public void onRouterConnectionReady() {
@@ -159,9 +162,11 @@ public class NetDbListFragment extends ListFragment implements
         // Handle presses on the action bar items
         switch (item.getItemId()) {
         case R.id.action_refresh:
-            setListShown(false);
-            getLoaderManager().restartLoader(mRouters ? ROUTER_LOADER_ID
-                    : LEASESET_LOADER_ID, null, this);
+            if (getRouterContext() != null) {
+                setListShown(false);
+                getLoaderManager().restartLoader(mRouters ? ROUTER_LOADER_ID
+                        : LEASESET_LOADER_ID, null, this);
+            }
             return true;
         default:
             return super.onOptionsItemSelected(item);

@@ -98,6 +98,9 @@ public class AddressbookFragment extends ListFragment implements
         // active Fragment when onRouterBind() was called.
         if (mOnRouterBind || getRouterContext() != null)
             onRouterConnectionReady();
+        else
+            setEmptyText(getResources().getString(
+                    R.string.router_not_running));
     }
 
     public void onRouterConnectionReady() {
