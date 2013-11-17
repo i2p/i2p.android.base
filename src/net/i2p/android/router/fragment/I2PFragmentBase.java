@@ -14,7 +14,6 @@ import android.support.v4.app.Fragment;
 
 public class I2PFragmentBase extends Fragment {
     private boolean mOnActivityCreated;
-    private boolean mOnRouterBind;
     RouterContextProvider mCallback;
 
     protected static final String PREF_INSTALLED_VERSION = "app.version";
@@ -47,20 +46,22 @@ public class I2PFragmentBase extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mOnActivityCreated = true;
-        // Check getRouterContext() in case this was not the
-        // active Fragment when onRouterBind() was called.
-        if (mOnRouterBind || getRouterContext() != null)
+        if (getRouterContext() != null)
             onRouterConnectionReady();
+        else
+            onRouterConnectionNotReady();
     }
 
     public void onRouterBind() {
-        mOnRouterBind = true;
         if (mOnActivityCreated)
             onRouterConnectionReady();
     }
 
     /** callback from I2PFragmentBase, override as necessary */
     public void onRouterConnectionReady() {}
+
+    /** callback from I2PFragmentBase, override as necessary */
+    public void onRouterConnectionNotReady() {}
 
     protected RouterContext getRouterContext() {
         return mCallback.getRouterContext();

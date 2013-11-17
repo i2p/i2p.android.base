@@ -35,7 +35,6 @@ public class NetDbListFragment extends ListFragment implements
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     private boolean mOnActivityCreated;
-    private boolean mOnRouterBind;
     RouterContextProvider mRouterContextProvider;
     OnEntrySelectedListener mEntrySelectedCallback;
     private NetDbEntryAdapter mAdapter;
@@ -108,9 +107,7 @@ public class NetDbListFragment extends ListFragment implements
         setListAdapter(mAdapter);
 
         mOnActivityCreated = true;
-        // Check getRouterContext() in case this was not the
-        // active Fragment when onRouterBind() was called.
-        if (mOnRouterBind || getRouterContext() != null)
+        if (getRouterContext() != null)
             onRouterConnectionReady();
         else
             setEmptyText(getResources().getString(
@@ -118,21 +115,13 @@ public class NetDbListFragment extends ListFragment implements
     }
 
     public void onRouterConnectionReady() {
-        LoaderManager lm = getLoaderManager();
-        // If the Router is running, or there is an existing Loader
-        if (getRouterContext() != null || lm.getLoader(mRouters ?
-                ROUTER_LOADER_ID : LEASESET_LOADER_ID) != null) {
-            setEmptyText(getResources().getString((mRouters ?
-                    R.string.netdb_routers_empty :
+        setEmptyText(getResources().getString((mRouters ?
+                R.string.netdb_routers_empty :
                     R.string.netdb_leases_empty)));
 
-            setListShown(false);
-            lm.initLoader(mRouters ? ROUTER_LOADER_ID
-                    : LEASESET_LOADER_ID, null, this);
-        } else {
-            setEmptyText(getResources().getString(
-                    R.string.router_not_running));
-        }
+        setListShown(false);
+        getLoaderManager().initLoader(mRouters ? ROUTER_LOADER_ID
+                : LEASESET_LOADER_ID, null, this);
     }
 
     @Override
@@ -199,7 +188,6 @@ public class NetDbListFragment extends ListFragment implements
     // I2PFragmentBase.RouterContextUser
 
     public void onRouterBind() {
-        mOnRouterBind = true;
         if (mOnActivityCreated)
             onRouterConnectionReady();
     }

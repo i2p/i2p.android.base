@@ -58,14 +58,12 @@ public class NetDbSummaryPagerFragment extends I2PFragmentBase implements
 
     @Override
     public void onRouterConnectionReady() {
-        LoaderManager lm = getLoaderManager();
-        // If the Router is running, or there is an existing Loader
-        if (getRouterContext() != null || lm.getLoader(0) != null) {
-            lm.initLoader(0, null, this);
-        } else {
-            // Router is not running or is not bound yet.
-            Util.i("Router not running or not bound to NetDbSummaryPagerFragment");
-        }
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public void onRouterConnectionNotReady() {
+        Util.i("Router not running or not bound to NetDbSummaryPagerFragment");
     }
 
     @Override
@@ -78,10 +76,12 @@ public class NetDbSummaryPagerFragment extends I2PFragmentBase implements
         // Handle presses on the action bar items
         switch (item.getItemId()) {
         case R.id.action_refresh:
-            Util.i("Refresh called, restarting Loader");
-            mNetDbPagerAdapter.setData(null);
-            mViewPager.invalidate();
-            getLoaderManager().restartLoader(0, null, this);
+            if (getRouterContext() != null) {
+                Util.i("Refresh called, restarting Loader");
+                mNetDbPagerAdapter.setData(null);
+                mViewPager.invalidate();
+                getLoaderManager().restartLoader(0, null, this);
+            }
             return true;
         default:
             return super.onOptionsItemSelected(item);
