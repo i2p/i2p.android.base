@@ -90,6 +90,9 @@ public class AddressbookFragment extends ListFragment implements
         mAdapter = new AddressEntryAdapter(getActivity());
         mBook = getArguments().getString(BOOK_NAME);
 
+        // Set adapter to null before setting the header
+        setListAdapter(null);
+
         TextView v = new TextView(getActivity());
         v.setTag("addressbook_header");
         getListView().addHeaderView(v);
