@@ -83,11 +83,15 @@ public class NetDbDetailFragment extends I2PFragmentBase {
                 if (getArguments().getBoolean(IS_RI)) {
                     // Load RouterInfo
                     RouterInfo ri = getNetDb().lookupRouterInfoLocally(hash);
-                    loadRouterInfo(ri);
+                    if (ri != null)
+                        loadRouterInfo(ri);
+                    // TODO: Handle null case in UI
                 } else {
                     // Load LeaseSet
                     LeaseSet ls = getNetDb().lookupLeaseSetLocally(hash);
-                    loadLeaseSet(ls);
+                    if (ls != null)
+                        loadLeaseSet(ls);
+                    // TODO: Handle null case in UI
                 }
             } catch (DataFormatException e) {
                 Util.e(e.toString());
