@@ -1,5 +1,6 @@
 package net.i2p.android.router.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
@@ -25,6 +26,7 @@ public class LogFragment extends ListFragment implements
     private static final int LEVEL_ERROR = 1;
     private static final int LEVEL_ALL = 2;
 
+    OnEntrySelectedListener mEntrySelectedCallback;
     private LogAdapter mAdapter;
     private TextView mHeaderView;
     private String mLogLevel;
@@ -34,12 +36,32 @@ public class LogFragment extends ListFragment implements
     private int mActivatedPosition = ListView.INVALID_POSITION;
     private boolean mActivateOnItemClick = false;
 
+    // Container Activity must implement this interface
+    public interface OnEntrySelectedListener {
+        public void onEntrySelected(String entry);
+    }
+
     public static LogFragment newInstance(String level) {
         LogFragment f = new LogFragment();
         Bundle args = new Bundle();
         args.putString(LOG_LEVEL, level);
         f.setArguments(args);
         return f;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mEntrySelectedCallback = (OnEntrySelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnEntrySelectedListener");
+        }
+
     }
 
     @Override
@@ -84,6 +106,13 @@ public class LogFragment extends ListFragment implements
         } else
             setEmptyText(getResources().getString(
                     R.string.router_not_running));
+    }
+
+    @Override
+    public void onListItemClick(ListView parent, View view, int pos, long id) {
+        super.onListItemClick(parent, view, pos, id);
+        String entry = mAdapter.getItem(pos);
+        mEntrySelectedCallback.onEntrySelected(entry);
     }
 
     @Override

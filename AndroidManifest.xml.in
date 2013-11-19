@@ -92,6 +92,10 @@
                   android:label="I2P Logs"
                   android:parentActivityName=".activity.MainActivity" >
         </activity>
+        <activity android:name=".activity.LogDetailActivity"
+                  android:label="Log Entry"
+                  android:parentActivityName=".activity.LogActivity" >
+        </activity>
         <activity android:name=".activity.RateGraphActivity"
                   android:label="Rate Graph"
                   android:parentActivityName=".activity.MainActivity" >
