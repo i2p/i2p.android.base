@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 public class LogAdapter extends ArrayAdapter<String> {
 
     public LogAdapter(Context context) {
-        super(context, R.layout.logs_list_item);
+        super(context, R.layout.listitem_logs);
     }
 
     public void setData(List<String> entries) {
