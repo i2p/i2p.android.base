@@ -1,26 +1,38 @@
 package net.i2p.android.router.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ListFragment;
-import android.widget.ArrayAdapter;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import java.util.Collections;
 import java.util.List;
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
+import net.i2p.android.router.adapter.LogAdapter;
+import net.i2p.android.router.loader.LogLoader;
 
-public class LogFragment extends ListFragment {
-
-    String _logLevel;
-    private Handler _handler;
-    private Runnable _updater;
-    private ArrayAdapter<String> _adap;
-    private TextView _headerView;
-
+public class LogFragment extends ListFragment implements
+        LoaderManager.LoaderCallbacks<List<String>> {
     public static final String LOG_LEVEL = "log_level";
-    private static final int MAX = 250;
+    /**
+     * The serialization (saved instance state) Bundle key representing the
+     * activated item position. Only used on tablets.
+     */
+    private static final String STATE_ACTIVATED_POSITION = "activated_position";
+
+    private static final int LEVEL_ERROR = 1;
+    private static final int LEVEL_ALL = 2;
+
+    private LogAdapter mAdapter;
+    private TextView mHeaderView;
+    private String mLogLevel;
+    /**
+     * The current activated item position. Only used on tablets.
+     */
+    private int mActivatedPosition = ListView.INVALID_POSITION;
+    private boolean mActivateOnItemClick = false;
 
     public static LogFragment newInstance(String level) {
         LogFragment f = new LogFragment();
@@ -31,106 +43,74 @@ public class LogFragment extends ListFragment {
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Restore the previously serialized activated item position.
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+            setActivatedPosition(savedInstanceState
+                    .getInt(STATE_ACTIVATED_POSITION));
+        }
+
+        // When setting CHOICE_MODE_SINGLE, ListView will automatically
+        // give items the 'activated' state when touched.
+        getListView().setChoiceMode(
+                mActivateOnItemClick ? ListView.CHOICE_MODE_SINGLE
+                        : ListView.CHOICE_MODE_NONE);
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-
-        // Grab context if router has started, otherwise create new
-        // FIXME dup contexts, locking, ...
-        List<String> msgs;
-        String header;
-        I2PAppContext ctx = I2PAppContext.getCurrentContext();
-        if (ctx != null) {
-            Bundle args = getArguments();
-            _logLevel = args.getString(LOG_LEVEL);
-            if ("ERROR".equals(_logLevel)) {
-                msgs = ctx.logManager().getBuffer().getMostRecentCriticalMessages();
-            } else {
-                msgs = ctx.logManager().getBuffer().getMostRecentMessages();
-            }
-            int sz = msgs.size();
-            header = getHeader(sz, ("ERROR".equals(_logLevel)));
-            if (sz > 1) {
-                Collections.reverse(msgs);
-            }
-        } else {
-            //msgs = Collections.EMPTY_LIST;
-            msgs = Collections.emptyList();
-            header = "No messages, router has not started yet.";
-        }
+        mAdapter = new LogAdapter(getActivity());
+        mLogLevel = getArguments().getString(LOG_LEVEL);
 
         // set the header
-        _headerView = (TextView) getActivity().getLayoutInflater().inflate(R.layout.logs_header, null);
-        _headerView.setText(header);
-        ListView lv = getListView();
-        lv.addHeaderView(_headerView, "", false);
-        _adap = new ArrayAdapter<String>(getActivity(), R.layout.logs_list_item, msgs);
-        setListAdapter(_adap);
+        mHeaderView = (TextView) getActivity().getLayoutInflater().inflate(R.layout.logs_header, null);
+        getListView().addHeaderView(mHeaderView, "", false);
 
-/***
-        // set the callback
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View view, int pos, long id) {
-                // make it bigger or something
-            }
-        });
-***/
+        setListAdapter(mAdapter);
 
-        _handler = new Handler();
-        _updater = new Updater();
+        I2PAppContext ctx = I2PAppContext.getCurrentContext();
+        if (ctx != null) {
+            setEmptyText("ERROR".equals(mLogLevel) ?
+                    "No error messages" : "No messages");
+
+            setListShown(false);
+            getLoaderManager().initLoader("ERROR".equals(mLogLevel) ?
+                    LEVEL_ERROR : LEVEL_ALL, null, this);
+        } else
+            setEmptyText(getResources().getString(
+                    R.string.router_not_running));
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        _handler.removeCallbacks(_updater);
-        _handler.postDelayed(_updater, 10*1000);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        _handler.removeCallbacks(_updater);
-    }
-
-    private class Updater implements Runnable {
-        public void run() {
-            I2PAppContext ctx = I2PAppContext.getCurrentContext();
-            if (ctx != null) {
-                List<String> msgs;
-                if ("ERROR".equals(_logLevel)) {
-                    msgs = ctx.logManager().getBuffer().getMostRecentCriticalMessages();
-                } else {
-                    msgs = ctx.logManager().getBuffer().getMostRecentMessages();
-                }
-		int sz = msgs.size();
-                if (sz > 0) {
-                    Collections.reverse(msgs);
-                    String oldNewest = _adap.getCount() > 0 ? _adap.getItem(0) : null;
-                    boolean changed = false;
-                    for (int i = 0; i < sz; i++) {
-                        String newItem = msgs.get(i);
-                        if (newItem.equals(oldNewest))
-                            break;
-                        _adap.insert(newItem, i);
-                        changed = true;
-                    }
-                    int newSz = _adap.getCount();
-                    for (int i = newSz - 1; i > MAX; i--) {
-                        _adap.remove(_adap.getItem(i));
-                    }
-                    if (changed) {
-                        // fixme update header
-                        newSz = _adap.getCount();
-                        String header = getHeader(newSz, (_logLevel == "ERROR"));
-                        _headerView.setText(header);
-                        _adap.notifyDataSetChanged();
-                    }
-                }
-            }
-            // LogWriter only processes queue every 10 seconds
-            _handler.postDelayed(this, 10*1000);
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mActivatedPosition != ListView.INVALID_POSITION) {
+            // Serialize and persist the activated item position.
+            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
+    }
+
+    /**
+     * Turns on activate-on-click mode. When this mode is on, list items will be
+     * given the 'activated' state when touched.
+     */
+    public void setActivateOnItemClick(boolean activateOnItemClick) {
+        mActivateOnItemClick = activateOnItemClick;
+    }
+
+    private void setActivatedPosition(int position) {
+        if (position == ListView.INVALID_POSITION) {
+            getListView().setItemChecked(mActivatedPosition, false);
+        } else {
+            getListView().setItemChecked(position, true);
+        }
+
+        mActivatedPosition = position;
     }
 
     /** fixme plurals */
@@ -147,5 +127,35 @@ public class LogFragment extends ListFragment {
         if (sz == 1)
             return "1 message";
         return sz + " messages, newest first";
+    }
+
+    // LoaderManager.LoaderCallbacks<List<String>>
+
+    public Loader<List<String>> onCreateLoader(int id, Bundle args) {
+        return new LogLoader(getActivity(),
+                I2PAppContext.getCurrentContext(), mLogLevel);
+    }
+
+    public void onLoadFinished(Loader<List<String>> loader,
+            List<String> data) {
+        if (loader.getId() == ("ERROR".equals(mLogLevel) ?
+                LEVEL_ERROR : LEVEL_ALL)) {
+            mAdapter.setData(data);
+            String header = getHeader(data.size(), (mLogLevel == "ERROR"));
+            mHeaderView.setText(header);
+
+            if (isResumed()) {
+                setListShown(true);
+            } else {
+                setListShownNoAnimation(true);
+            }
+        }
+    }
+
+    public void onLoaderReset(Loader<List<String>> loader) {
+        if (loader.getId() == ("ERROR".equals(mLogLevel) ?
+                LEVEL_ERROR : LEVEL_ALL)) {
+            mAdapter.setData(null);
+        }
     }
 }
