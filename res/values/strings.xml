@@ -109,11 +109,11 @@
     <string name="addressbook_add_wizard_desc_name">The name</string>
     <string name="addressbook_add_wizard_desc_destination">Paste the B64 of the Destination here. If you have a File Manager installed, you can browse for a text file containing the B64.</string>
 
-    <string name="nsu_iae_illegal_char">Host name \"{0}\" contains illegal character {1}</string>
-    <string name="nsu_iae_cannot_start_with">Host name cannot start with \"{0}\"</string>
-    <string name="nsu_iae_cannot_end_with">Host name cannot end with \"{0}\"</string>
-    <string name="nsu_iae_cannot_contain">Host name cannot contain \"{0}\"</string>
-    <string name="nsu_iae_requires_conversion">Host name \"{0}\" requires conversion to ASCII but the conversion library is unavailable in this Android version</string>
+    <string name="nsu_iae_illegal_char">Host name \"%1$s\" contains illegal character %2$s</string>
+    <string name="nsu_iae_cannot_start_with">Host name cannot start with \"%s\"</string>
+    <string name="nsu_iae_cannot_end_with">Host name cannot end with \"%s\"</string>
+    <string name="nsu_iae_cannot_contain">Host name cannot contain \"%s\"</string>
+    <string name="nsu_iae_requires_conversion">Host name \"%s\" requires conversion to ASCII but the conversion library is unavailable in this Android version</string>
 
     <string name="i2ptunnel_type_client">Standard client</string>
     <string name="i2ptunnel_type_httpclient">HTTP client</string>
