@@ -50,6 +50,7 @@ class StatusBar {
 
     public void replace(int icon, String text) {
         mNotifyBuilder.setSmallIcon(icon)
+            .setStyle(null)
             .setTicker(text);
         update(text);
     }
