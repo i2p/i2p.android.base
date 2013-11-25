@@ -5,15 +5,16 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import net.i2p.android.router.R;
 import net.i2p.android.router.activity.MainActivity;
 
 class StatusBar {
 
     private final Context ctx;
-    private final Intent intent;
-    private final Notification notif;
-    private final NotificationManager mgr;
+    private final NotificationManager mNotificationManager;
+    private final NotificationCompat.Builder mNotifyBuilder;
+    private Notification mNotif;
 
     private static final int ID = 1337;
 
@@ -26,28 +27,31 @@ class StatusBar {
 
     StatusBar(Context cx) {
         ctx = cx;
-        String ns = Context.NOTIFICATION_SERVICE;
-        mgr = (NotificationManager)ctx.getSystemService(ns);
-        Thread.currentThread().setUncaughtExceptionHandler(new CrashHandler(mgr));
+        mNotificationManager = (NotificationManager) ctx.getSystemService(
+                Context.NOTIFICATION_SERVICE);
+        Thread.currentThread().setUncaughtExceptionHandler(
+                new CrashHandler(mNotificationManager));
 
         int icon = ICON_STARTING;
         // won't be shown if replace() is called
         String text = "Starting I2P";
-        long now = System.currentTimeMillis();
-        notif = new Notification(icon, text, now);
-        notif.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
-        // notif.flags |= Notification.FLAG_ONGOING_EVENT;
-        notif.flags |= Notification.FLAG_NO_CLEAR;
-        intent = new Intent(ctx, MainActivity.class);
+
+        mNotifyBuilder = new NotificationCompat.Builder(ctx)
+            .setContentText(text)
+            .setSmallIcon(icon)
+            .setOngoing(true)
+            .setOnlyAlertOnce(true);
+
+        Intent intent = new Intent(ctx, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pi = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mNotifyBuilder.setContentIntent(pi);
     }
 
-    /** remove and re-add */
-    public void replace(int icon, String tickerText) {
-        off();
-        notif.icon = icon;
-        notif.tickerText= tickerText;
-        update(tickerText);
+    public void replace(int icon, String details) {
+        mNotifyBuilder.setSmallIcon(icon)
+            .setTicker(details);
+        update(details);
     }
 
     public void update(String details) {
@@ -56,17 +60,14 @@ class StatusBar {
     }
 
     public void update(String title, String details) {
-        PendingIntent pi = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        notif.setLatestEventInfo(ctx, title, details, pi);
-        mgr.notify(ID, notif);
-    }
-
-    public void off() {
-        //mgr.cancel(ID);
+        mNotifyBuilder.setContentTitle(title)
+            .setContentText(details);
+        mNotif = mNotifyBuilder.build();
+        mNotificationManager.notify(ID, mNotif);
     }
 
     public void remove() {
-        mgr.cancel(ID);
+        mNotificationManager.cancel(ID);
     }
 
     /**
@@ -95,6 +96,6 @@ class StatusBar {
     }
 
     public Notification getNote() {
-        return notif;
+        return mNotif;
     }
 }
