@@ -13,6 +13,8 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+
+import net.i2p.android.router.R;
 import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.receiver.I2PReceiver;
 import net.i2p.android.router.util.Util;
@@ -345,6 +347,7 @@ public class RouterService extends Service {
             _handler.postDelayed(this, 15 * 1000);
         }
     }
+    private String _currTitle;
     private boolean _hadTunnels;
 
     private void updateStatus(RouterContext ctx) {
@@ -367,25 +370,33 @@ public class RouterService extends Service {
             fmt = new DecimalFormat("#0.00");
         }
 
-        String status =
-                "I2P "
-                + active + '/' + known + " peers connected";
+        String text =
+                getResources().getString(R.string.notification_status_bw,
+                        fmt.format(inBW), fmt.format(outBW)); 
 
-        String details =
-                fmt.format(inBW) + '/' + fmt.format(outBW) + " KBps"
-                + "; Expl " + inEx + '/' + outEx
-                + "; Client " + inCl + '/' + outCl;
+        String bigText =
+                getResources().getString(R.string.notification_status_bw,
+                        fmt.format(inBW), fmt.format(outBW)) + '\n'
+                + getResources().getString(R.string.notification_status_peers,
+                        active, known) + '\n'
+                + getResources().getString(R.string.notification_status_expl,
+                        inEx, outEx) + '\n'
+                + getResources().getString(R.string.notification_status_client,
+                        inCl, outCl);
 
         boolean haveTunnels = inCl > 0 && outCl > 0;
         if(haveTunnels != _hadTunnels) {
             if(haveTunnels) {
-                _statusBar.replace(StatusBar.ICON_ACTIVE, "Client tunnels are ready");
+                _currTitle = "Client tunnels are ready";
+                _statusBar.replace(StatusBar.ICON_ACTIVE, _currTitle);
             } else {
-                _statusBar.replace(StatusBar.ICON_RUNNING, "Client tunnels are down");
+                _currTitle = "Client tunnels are down";
+                _statusBar.replace(StatusBar.ICON_RUNNING, _currTitle);
             }
             _hadTunnels = haveTunnels;
-        }
-        _statusBar.update(status, details);
+        } else if (_currTitle == null || _currTitle.equals(""))
+            _currTitle = "I2P is running";
+        _statusBar.update(_currTitle, text, bigText);
     }
 
     @Override

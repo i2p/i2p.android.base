@@ -48,20 +48,26 @@ class StatusBar {
         mNotifyBuilder.setContentIntent(pi);
     }
 
-    public void replace(int icon, String details) {
+    public void replace(int icon, String text) {
         mNotifyBuilder.setSmallIcon(icon)
-            .setTicker(details);
-        update(details);
+            .setTicker(text);
+        update(text);
     }
 
-    public void update(String details) {
+    public void update(String text) {
         String title = "I2P Status";
-        update(title, details);
+        update(title, text);
     }
 
-    public void update(String title, String details) {
+    public void update(String title, String text, String bigText) {
+        mNotifyBuilder.setStyle(new NotificationCompat.BigTextStyle()
+                .bigText(bigText));
+        update(title, text);
+    }
+
+    public void update(String title, String text) {
         mNotifyBuilder.setContentTitle(title)
-            .setContentText(details);
+            .setContentText(text);
         mNotif = mNotifyBuilder.build();
         mNotificationManager.notify(ID, mNotif);
     }

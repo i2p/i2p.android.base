@@ -53,6 +53,11 @@
     <string name="netdb_routers_empty">No routers in your NetDB.</string>
     <string name="netdb_leases_empty">No LeaseSets in your NetDB.</string>
 
+    <string name="notification_status_bw">Bandwidth: %1$s KBps down / %2$s KBps up</string>
+    <string name="notification_status_peers">Peers: %1$d active, %2$d known</string>
+    <string name="notification_status_expl">Exploratory tunnels: %1$d/%2$d</string>
+    <string name="notification_status_client">Client tunnels: %1$d/%2$d</string>
+
     <string name="menu_settings">Settings</string>
     <string name="settings_enable">Enable</string>
     <string name="settings_desc_subscriptions">Subscription URLs</string>
