@@ -1,12 +1,14 @@
 package net.i2p.android.router.fragment;
 
 import android.app.Activity;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ToggleButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.text.DecimalFormat;
 import net.i2p.android.router.R;
@@ -78,32 +80,26 @@ public class MainFragment extends I2PFragmentBase {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Button b;
+        final ImageView lightImage = (ImageView) v.findViewById(R.id.main_lights);
+        lightImage.setImageResource(R.drawable.routerled_r);
 
-        /*
-         * hidden, unused b = (Button) v.findViewById(R.id.router_stop_button);
-         * b.setOnClickListener(new View.OnClickListener() { public void
-         * onClick(View view) { RouterService svc = _routerService; if (svc !=
-         * null && _isBound) { setPref(PREF_AUTO_START, false);
-         * svc.manualStop(); updateOneShot(); } } });
-         */
-
-        b = (Button) v.findViewById(R.id.router_start_button);
+        ToggleButton b = (ToggleButton) v.findViewById(R.id.router_onoff_button);
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                _startPressed = true;
-                mCallback.onStartRouterClicked();
-                updateOneShot();
-            }
-        });
-
-        b = (Button) v.findViewById(R.id.router_quit_button);
-        b.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                if(mCallback.onStopRouterClicked()) {
+                boolean on = ((ToggleButton) view).isChecked();
+                if (on) {
+                    _startPressed = true;
+                    lightImage.setImageResource(R.drawable.routerled_ry);
+                    ((AnimationDrawable) lightImage.getDrawable()).start();
+                    mCallback.onStartRouterClicked();
                     updateOneShot();
+                } else {
+                    if(mCallback.onStopRouterClicked()) {
+                        lightImage.setImageResource(R.drawable.routerled_ry);
+                        ((AnimationDrawable) lightImage.getDrawable()).start();
+                        updateOneShot();
+                    }
                 }
             }
         });
@@ -152,7 +148,6 @@ public class MainFragment extends I2PFragmentBase {
     private class OneShotUpdate implements Runnable {
 
         public void run() {
-            updateVisibility();
             updateStatus();
         }
     }
@@ -163,27 +158,12 @@ public class MainFragment extends I2PFragmentBase {
         private final int delay = 1000;
         private final int toloop = delay / 500;
         public void run() {
-            updateVisibility();
             if(counter++ % toloop == 0) {
                 updateStatus();
             }
             //_handler.postDelayed(this, 2500);
             _handler.postDelayed(this, delay);
         }
-    }
-
-    private void updateVisibility() {
-        boolean showStart = mCallback.shouldShowStart();
-        Button start = (Button) getActivity().findViewById(R.id.router_start_button);
-        start.setVisibility(showStart ? View.VISIBLE : View.INVISIBLE);
-
-        boolean showStop = mCallback.shouldShowStop();
-        // Old stop but leave in memory. Always hide for now.
-        // Button stop = (Button) findViewById(R.id.router_stop_button);
-        // stop.setVisibility( /* showStop ? View.VISIBLE : */ View.INVISIBLE);
-
-        Button quit = (Button) getActivity().findViewById(R.id.router_quit_button);
-        quit.setVisibility(showStop ? View.VISIBLE : View.INVISIBLE);
     }
 
     public boolean onBackPressed() {

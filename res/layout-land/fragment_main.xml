@@ -2,26 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="horizontal"
+    android:baselineAligned="false" >
 
-    <ImageView
-        android:id="@+id/main_lights"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/desc_i2p_logo"
-        android:scaleType="centerInside"
-        android:src="@drawable/routerled_r" />
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
-    <ToggleButton
-        android:id="@+id/router_onoff_button"
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:textOff="@string/button_router_off"
-        android:textOn="@string/button_router_on" />
+        <ImageView
+            android:id="@+id/main_lights"
+            android:src="@drawable/routerled_r"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/desc_i2p_logo" />
+
+        <ToggleButton
+            android:id="@+id/router_onoff_button"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:textOff="@string/button_router_off"
+            android:textOn="@string/button_router_on" />
+    </LinearLayout>
 
     <ScrollView
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="fill_parent"
+        android:layout_weight="2"
         android:fillViewport="true"
         android:padding="10dp"
         android:scrollbarStyle="outsideInset" >

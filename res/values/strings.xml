@@ -29,6 +29,9 @@
     <string name="label_browse">Browse</string>
     <string name="label_graphs">Graphs</string>
 
+    <string name="button_router_off">Press to start I2P</string>
+    <string name="button_router_on">I2P is running (press to stop)</string>
+
     <string name="drawer_open">Open nav</string>
     <string name="drawer_close">Close nav</string>
     <string name="action_search">Search</string>
