@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
     <header
-        android:fragment="net.i2p.android.router.activity.SettingsActivity$SettingsFragment"
+        android:fragment="net.i2p.android.router.SettingsActivity$SettingsFragment"
         android:title="@string/settings_label_bandwidth_net">
         <extra
             android:name="settings"
             android:value="net" />
     </header>
     <header
-        android:fragment="net.i2p.android.router.activity.SettingsActivity$SettingsFragment"
+        android:fragment="net.i2p.android.router.SettingsActivity$SettingsFragment"
         android:title="@string/label_graphs">
         <extra
             android:name="settings"
@@ -18,10 +18,10 @@
         android:title="@string/label_addressbook">
         <intent
             android:targetPackage="net.i2p.android.router"
-            android:targetClass="net.i2p.android.router.activity.AddressbookSettingsActivity" />
+            android:targetClass="net.i2p.android.router.addressbook.AddressbookSettingsActivity" />
     </header>
     <header
-        android:fragment="net.i2p.android.router.activity.SettingsActivity$SettingsFragment"
+        android:fragment="net.i2p.android.router.SettingsActivity$SettingsFragment"
         android:title="@string/settings_label_advanced">
         <extra
             android:name="settings"

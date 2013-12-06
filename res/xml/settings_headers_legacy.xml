@@ -3,24 +3,24 @@
     <Preference android:title="@string/settings_label_bandwidth_net">
         <intent
             android:targetPackage="net.i2p.android.router"
-            android:targetClass="net.i2p.android.router.activity.SettingsActivity"
+            android:targetClass="net.i2p.android.router.SettingsActivity"
             android:action="net.i2p.android.router.PREFS_NET" />
     </Preference>
     <Preference android:title="@string/label_graphs">
         <intent
             android:targetPackage="net.i2p.android.router"
-            android:targetClass="net.i2p.android.router.activity.SettingsActivity"
+            android:targetClass="net.i2p.android.router.SettingsActivity"
             android:action="net.i2p.android.router.PREFS_GRAPHS" />
     </Preference>
     <Preference android:title="@string/label_addressbook">
         <intent
             android:targetPackage="net.i2p.android.router"
-            android:targetClass="net.i2p.android.router.activity.AddressbookSettingsActivity" />
+            android:targetClass="net.i2p.android.router.addressbook.AddressbookSettingsActivity" />
     </Preference>
     <Preference android:title="@string/settings_label_advanced">
         <intent
             android:targetPackage="net.i2p.android.router"
-            android:targetClass="net.i2p.android.router.activity.SettingsActivity"
+            android:targetClass="net.i2p.android.router.SettingsActivity"
             android:action="net.i2p.android.router.PREFS_ADVANCED" />
     </Preference>
 </PreferenceScreen>

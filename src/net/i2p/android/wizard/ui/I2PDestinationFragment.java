@@ -17,7 +17,7 @@
 package net.i2p.android.wizard.ui;
 
 import net.i2p.android.router.R;
-import net.i2p.android.router.activity.AddressbookActivity;
+import net.i2p.android.router.addressbook.AddressbookActivity;
 import net.i2p.android.wizard.model.Page;
 import net.i2p.android.wizard.model.SingleTextFieldPage;
 

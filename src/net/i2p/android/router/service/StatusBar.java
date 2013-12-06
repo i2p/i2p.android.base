@@ -6,8 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import net.i2p.android.router.MainActivity;
 import net.i2p.android.router.R;
-import net.i2p.android.router.activity.MainActivity;
 
 class StatusBar {
 

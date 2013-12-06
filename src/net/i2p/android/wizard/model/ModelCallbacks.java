@@ -18,7 +18,7 @@ package net.i2p.android.wizard.model;
 
 /**
  * Callback interface connecting {@link Page}, {@link AbstractWizardModel}, and model container
- * objects (e.g. {@link net.i2p.android.i2ptunnel.activity.TunnelWizardActivity}.
+ * objects (e.g. {@link net.i2p.android.i2ptunnel.TunnelWizardActivity}.
  */
 public interface ModelCallbacks {
     void onPageDataChanged(Page page);

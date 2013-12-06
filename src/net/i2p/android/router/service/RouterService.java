@@ -15,7 +15,6 @@ import java.util.Properties;
 import java.util.Random;
 
 import net.i2p.android.router.R;
-import net.i2p.android.router.binder.RouterBinder;
 import net.i2p.android.router.receiver.I2PReceiver;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
