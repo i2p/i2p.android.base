@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">I2P</string>
+  <string name="welcome_new_install">Bine ati venit la I2P! Aceasta aplicatie este un software ALPHA și nu oferă anonimatul puternic. Vă rugăm să citiți notele de lansare și licență.</string>
+  <string name="welcome_new_version">Noua versiune instalată. Vă rugăm să citiți notele de lansare. versiune:</string>
+  <string name="label_home">I2P Acasă</string>
+  <string name="label_statistics">Statistici</string>
+  <string name="label_main_controls">Comenzile principale</string>
+  <string name="label_tools">Instrumente I2P</string>
+  <string name="label_addressbook">Agendă</string>
+  <string name="label_logs">Jurnale</string>
+  <string name="label_error_logs">jurnalele de erori</string>
+  <string name="label_info_and_pages">Informații și pagini</string>
+  <string name="label_welcome_page">Pagina de start</string>
+  <string name="label_news">Noutăți</string>
+  <string name="label_news_status">Ultimele știri I2P</string>
+  <string name="label_peers_status">Parteneri</string>
+  <string name="label_release_notes">Note de publicare</string>
+  <string name="label_licenses">Licențe</string>
+  <string name="label_nonanon_info">Informații  non-anonim</string>
+  <string name="label_website_nonanon">Site-ul web (non-Anonim)</string>
+  <string name="label_faq_nonanon">FAQ (non-Anonim)</string>
+  <string name="action_add">Adaugă</string>
+  <string name="action_router_start">Pornirea router-ului</string>
+  <string name="action_router_stop">Oprirea router-ului</string>
+  <string name="action_reload">Reîncarcă</string>
+  <string name="menu_settings">Configurări</string>
+  <string name="settings_enable">Activează</string>
+  <string name="settings_label_subscriptions">I2P agendă</string>
+  <string name="settings_desc_subscriptions">URLs de abonare:</string>
+  <string name="settings_label_bandwidth">Lățime de bandă și rețea</string>
+  <string name="settings_label_bw_inbound">viteza de intrare</string>
+  <string name="settings_desc_bw_inbound">Viteza maximă de încărcare:</string>
+  <string name="settings_label_bw_outbound">viteza de iesire</string>
+  <string name="settings_desc_bw_outbound">Viteza maximă de încărcare:</string>
+  <string name="settings_label_hiddenMode">Participare</string>
+  <string name="settings_desc_hiddenMode">Dezactivați modul ascuns</string>
+  <string name="settings_label_maxPartTunnels">Max tunele participante</string>
+  <string name="settings_desc_maxPartTunnels">Numarul maxim de tuneluri pentru  participarea la (implicit = 20)</string>
+  <string name="settings_dialog_maxPartTunnels">Numarul maxim de tuneluri pentru participarea </string>
+  <string name="settings_label_sharePercent">procent cota</string>
+  <string name="settings_desc_sharePercent">Procentul de lățime de bandă pentru  partajare (implicit = 80)</string>
+  <string name="settings_dialog_sharePercent">Procentul de lățime de bandă pentru partajare </string>
+  <string name="settings_desc_upnp">Deschide automat porturile firewall</string>
+  <string name="settings_label_advanced">Avansat</string>
+  <string name="settings_label_transports">Transporturi</string>
+  <string name="settings_label_maxConns">Maxim conexiuni</string>
+  <string name="settings_label_i2cp">Interfata I2CP</string>
+  <string name="settings_desc_i2cp">Asculta pe portul 7654</string>
+  <string name="settings_label_exploratory_pool">pool de explorare</string>
+  <string name="settings_desc_exploratory_pool">Parametri tunelului</string>
+  <string name="settings_label_expl_inbound">Tunele de intrare</string>
+  <string name="settings_label_expl_outbound">Tunele de iesire</string>
+  <string name="settings_label_expl_length">Lungime</string>
+  <string name="settings_desc_expl_length">Cât de multe hamei să utilizeze</string>
+  <string name="settings_label_expl_lengthVariance">variație hamei</string>
+  <string name="settings_desc_expl_lengthVariance">Cât de multe hamei de a adăuga la întâmplare</string>
+  <string name="settings_label_expl_quantity">Cantitate</string>
+  <string name="settings_desc_expl_quantity">Cât de multe tunele</string>
+  <string name="settings_label_expl_backupQuantity">Cantitatea de rezervă</string>
+  <string name="settings_desc_expl_backupQuantity">Câți copii de rezervă tunel</string>
+</resources>

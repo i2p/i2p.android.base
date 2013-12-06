@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">I2P</string>
+  <string name="label_home">I2P - Página inicial</string>
+  <string name="label_statistics">Estatísticas</string>
+  <string name="label_main_controls">Principais controles</string>
+  <string name="label_tools">I2P - Ferramentas</string>
+  <string name="label_addressbook">Livro de endereços</string>
+  <string name="label_logs">Registros</string>
+  <string name="label_error_logs">Registros de erros</string>
+  <string name="label_welcome_page">Página de boas-vindas</string>
+  <string name="label_news">Novidades</string>
+  <string name="label_news_status">Últimas notícias sobre a I2P</string>
+  <string name="label_peers_status">Nós</string>
+  <string name="label_release_notes">Comunicados de lançamento</string>
+  <string name="label_licenses">Licenças</string>
+  <string name="label_nonanon_info">Informação não-anônima</string>
+  <string name="action_add">Adicionar</string>
+  <string name="action_router_start">Iniciar roteamento</string>
+  <string name="action_router_stop">Interrompear roteamento</string>
+  <string name="action_reload">Recarregar</string>
+  <string name="menu_settings">Especificações</string>
+  <string name="settings_label_subscriptions">Livro de endereços da I2P</string>
+  <string name="settings_label_bandwidth">Rede e Largura de banda</string>
+  <string name="settings_label_hiddenMode">Participação</string>
+  <string name="settings_label_sharePercent">Percentual de compartilhamento</string>
+  <string name="settings_desc_sharePercent">Percentual da largura de banda compartilhada (por omissão=80)</string>
+  <string name="settings_label_advanced">Avançado</string>
+  <string name="settings_label_maxConns">Número máximo de conexões</string>
+  <string name="settings_label_i2cp">Interface do I2CP</string>
+  <string name="settings_desc_i2cp">Ouvindo na porta 7654</string>
+  <string name="settings_label_expl_inbound">Túneis entrantes</string>
+  <string name="settings_label_expl_length">Comprimento</string>
+  <string name="settings_label_expl_quantity">Quantidade</string>
+  <string name="settings_desc_expl_quantity">Quantos túneis</string>
+</resources>
