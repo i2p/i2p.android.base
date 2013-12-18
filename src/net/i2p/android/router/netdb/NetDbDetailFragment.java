@@ -130,11 +130,10 @@ public class NetDbDetailFragment extends I2PFragmentBase {
         }
 
         TableLayout stats = (TableLayout) getView().findViewById(R.id.ri_stats);
-        @SuppressWarnings("unchecked")
-        Map<String, String> p = ri.getOptionsMap();
-        for (Map.Entry<String,String> e : (Set<Map.Entry<String,String>>) p.entrySet()) {
-            String key = e.getKey();
-            String val = e.getValue();
+        Map<Object, Object> p = ri.getOptionsMap();
+        for (Map.Entry<Object,Object> e : (Set<Map.Entry<Object,Object>>) p.entrySet()) {
+            String key = (String)e.getKey();
+            String val = (String)e.getValue();
             addTableRow(stats, DataHelper.stripHTML(key), DataHelper.stripHTML(val));
         }
     }
@@ -149,11 +148,10 @@ public class NetDbDetailFragment extends I2PFragmentBase {
         if (!((style.equals("SSU") && cost == 5) || (style.equals("NTCP") && cost == 10)))
             addTableRow(table, "cost", ""+cost);
 
-        @SuppressWarnings("unchecked")
-        Map<String, String> p = addr.getOptionsMap();
-        for (Map.Entry<String,String> e : (Set<Map.Entry<String,String>>) p.entrySet()) {
-            String key = e.getKey();
-            String val = e.getValue();
+        Map<Object, Object> p = addr.getOptionsMap();
+        for (Map.Entry<Object,Object> e : (Set<Map.Entry<Object,Object>>) p.entrySet()) {
+            String key = (String)e.getKey();
+            String val = (String)e.getValue();
             addTableRow(table, DataHelper.stripHTML(key), DataHelper.stripHTML(val));
         }
 
