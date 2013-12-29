@@ -19,7 +19,6 @@ import net.i2p.android.router.HelpActivity;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.R;
 import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
-import net.i2p.android.router.I2PFragmentBase.RouterContextUser;
 import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.client.naming.NamingService;
 import net.i2p.router.RouterContext;
@@ -179,7 +178,7 @@ public class AddressbookFragment extends ListFragment implements
 
     public void filterAddresses(String query) {
         mCurFilter = !TextUtils.isEmpty(query) ? query : null;
-        if (getRouterContext() != null) {
+        if (getRouterContext() != null && mAdapter != null) {
             setListShown(false);
             getLoaderManager().restartLoader(PRIVATE_BOOK.equals(mBook) ?
                     PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
