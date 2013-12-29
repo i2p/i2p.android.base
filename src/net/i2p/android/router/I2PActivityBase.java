@@ -369,7 +369,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
      *  Bind only
      */
     protected boolean bindRouter(boolean autoCreate) {
-        Intent intent = new Intent();
+        Intent intent = new Intent(RouterBinder.class.getName());
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
         Util.i(this + " calling bindService");
         _connection = new RouterConnection();
@@ -389,6 +389,9 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         _isBound = false;
     }
 
+    /**
+     * Class for interacting with the main interface of the RouterService.
+     */
     protected class RouterConnection implements ServiceConnection {
 
         public void onServiceConnected(ComponentName name, IBinder service) {

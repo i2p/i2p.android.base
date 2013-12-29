@@ -32,8 +32,8 @@ public class MainFragment extends I2PFragmentBase {
 
     // Container Activity must implement this interface
     public interface RouterControlListener {
-        public boolean shouldShowStart();
-        public boolean shouldShowStop();
+        public boolean shouldShowOnOff();
+        public boolean shouldBeOn();
         public void onStartRouterClicked();
         public boolean onStopRouterClicked();
     }
@@ -90,14 +90,10 @@ public class MainFragment extends I2PFragmentBase {
                 boolean on = ((ToggleButton) view).isChecked();
                 if (on) {
                     _startPressed = true;
-                    lightImage.setImageResource(R.drawable.routerled_ry);
-                    ((AnimationDrawable) lightImage.getDrawable()).start();
                     mCallback.onStartRouterClicked();
                     updateOneShot();
                 } else {
                     if(mCallback.onStopRouterClicked()) {
-                        lightImage.setImageResource(R.drawable.routerled_ry);
-                        ((AnimationDrawable) lightImage.getDrawable()).start();
                         updateOneShot();
                     }
                 }
@@ -148,6 +144,7 @@ public class MainFragment extends I2PFragmentBase {
     private class OneShotUpdate implements Runnable {
 
         public void run() {
+            updateVisibility();
             updateStatus();
         }
     }
@@ -158,12 +155,22 @@ public class MainFragment extends I2PFragmentBase {
         private final int delay = 1000;
         private final int toloop = delay / 500;
         public void run() {
+            updateVisibility();
             if(counter++ % toloop == 0) {
                 updateStatus();
             }
             //_handler.postDelayed(this, 2500);
             _handler.postDelayed(this, delay);
         }
+    }
+
+    private void updateVisibility() {
+        boolean showOnOff = mCallback.shouldShowOnOff();
+        ToggleButton b = (ToggleButton) getActivity().findViewById(R.id.router_onoff_button);
+        b.setVisibility(showOnOff ? View.VISIBLE : View.INVISIBLE);
+
+        boolean isOn = mCallback.shouldBeOn();
+        b.setChecked(isOn);
     }
 
     public boolean onBackPressed() {
@@ -197,6 +204,28 @@ public class MainFragment extends I2PFragmentBase {
             }
             System.exit(0);
         }
+    }
+
+    public void updateState(String newState) {
+        final ImageView lightImage = (ImageView) getView().findViewById(R.id.main_lights);
+        if ("INIT".equals(newState) ||
+                "STOPPED".equals(newState) ||
+                "MANUAL_STOPPED".equals(newState) ||
+                "MANUAL_QUITTED".equals(newState) ||
+                "NETWORK_STOPPED".equals(newState)) {
+            lightImage.setImageResource(R.drawable.routerled_r);
+        } else if ("STARTING".equals(newState) ||
+                "STOPPING".equals(newState) ||
+                "MANUAL_STOPPING".equals(newState) ||
+                "MANUAL_QUITTING".equals(newState) ||
+                "NETWORK_STOPPING".equals(newState)) {
+            lightImage.setImageResource(R.drawable.routerled_ry);
+            ((AnimationDrawable) lightImage.getDrawable()).start();
+        } else if ("RUNNING".equals(newState)) {
+            lightImage.setImageResource(R.drawable.routerled_y);
+        } else if ("WAITING".equals(newState)) {
+            lightImage.setImageResource(R.drawable.routerled_r);
+        } // Ignore unknown states.
     }
 
     private void updateStatus() {

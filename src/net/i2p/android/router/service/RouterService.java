@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteCallbackList;
+import android.os.RemoteException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -52,13 +56,23 @@ public class RouterService extends Service {
     private final Object _stateLock = new Object();
     private Handler _handler;
     private Runnable _updater;
+    private boolean mStartCalled;
     private static final String SHARED_PREFS = "net.i2p.android.router";
     private static final String LAST_STATE = "service.lastState";
     private static final String EXTRA_RESTART = "restart";
     private static final String MARKER = "**************************************  ";
 
+    /**
+     * This is a list of callbacks that have been registered with the
+     * service.  Note that this is package scoped (instead of private) so
+     * that it can be accessed more efficiently from inner classes.
+     */
+    final RemoteCallbackList<IRouterStateCallback> mStateCallbacks
+            = new RemoteCallbackList<IRouterStateCallback>();
+
     @Override
     public void onCreate() {
+        mStartCalled = false;
         State lastState = getSavedState();
         setState(State.INIT);
         Util.i(this + " onCreate called"
@@ -99,6 +113,7 @@ public class RouterService extends Service {
                 + " Flags is: " + flags
                 + " ID is: " + startId
                 + " Current state is: " + _state);
+        mStartCalled = true;
         boolean restart = intent != null && intent.getBooleanExtra(EXTRA_RESTART, false);
         if(restart) {
             Util.i(this + " RESTARTING");
@@ -402,8 +417,45 @@ public class RouterService extends Service {
     public IBinder onBind(Intent intent) {
         Util.i(this + "onBind called"
                 + " Current state is: " + _state);
-        return _binder;
+        Util.i("Intent action: " + intent.getAction());
+        // Select the interface to return.
+        if (RouterBinder.class.getName().equals(intent.getAction())) {
+            // Local Activity wanting access to the RouterContext
+            Util.i("Returning RouterContext binder");
+            return _binder;
+        }
+        if (IRouterState.class.getName().equals(intent.getAction())) {
+            // Someone wants to monitor the router state.
+            Util.i("Returning state binder");
+            return mStatusBinder;
+        }
+        Util.i("Unknown binder request, returning null");
+        return null;
     }
+
+    /**
+     * IRouterState is defined through IDL
+     */
+    private final IRouterState.Stub mStatusBinder = new IRouterState.Stub() {
+
+        public void registerCallback(IRouterStateCallback cb)
+                throws RemoteException {
+            if (cb != null) mStateCallbacks.register(cb);
+        }
+
+        public void unregisterCallback(IRouterStateCallback cb)
+                throws RemoteException {
+            if (cb != null) mStateCallbacks.unregister(cb);
+        }
+
+        public boolean isStarted() throws RemoteException {
+            return mStartCalled;
+        }
+
+        public String getState() throws RemoteException {
+            return _state.name();
+        }
+    };
 
     @Override
     public boolean onUnbind(Intent intent) {
@@ -527,6 +579,36 @@ public class RouterService extends Service {
     }
 
     // ******** end methods accessed from Activities and Receivers ************
+
+    private static final int STATE_MSG = 1;
+
+    /**
+     * Our Handler used to execute operations on the main thread.
+     */
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+            case STATE_MSG:
+                String state = _state.name();
+                // Broadcast to all clients the new state.
+                final int N = mStateCallbacks.beginBroadcast();
+                for (int i = 0; i < N; i++) {
+                    try {
+                        mStateCallbacks.getBroadcastItem(i).stateChanged(state);
+                    } catch (RemoteException e) {
+                        // The RemoteCallbackList will take care of removing
+                        // the dead object for us.
+                    }
+                }
+                mStateCallbacks.finishBroadcast();
+                break;
+            default:
+                super.handleMessage(msg);
+            }
+        }
+    };
+
     /**
      * Turn off the status bar. Unregister the receiver. If we were running,
      * fire up the Stopper thread.
@@ -670,10 +752,14 @@ public class RouterService extends Service {
                             || _state == State.STOPPING) {
                         Util.i(this + " died of unknown causes");
                         setState(State.STOPPED);
+                        // Unregister all callbacks.
+                        mStateCallbacks.kill();
                         stopForeground(true);
                         stopSelf();
                     } else if(_state == State.MANUAL_QUITTING) {
                         setState(State.MANUAL_QUITTED);
+                        // Unregister all callbacks.
+                        mStateCallbacks.kill();
                         stopForeground(true);
                         stopSelf();
                     }
@@ -698,6 +784,7 @@ public class RouterService extends Service {
     private void setState(State s) {
         _state = s;
         saveState();
+        mHandler.sendEmptyMessage(STATE_MSG);
     }
 
     /**
