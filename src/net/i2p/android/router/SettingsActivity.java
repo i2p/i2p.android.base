@@ -109,6 +109,10 @@ public class SettingsActivity extends PreferenceActivity {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onBuildHeaders(List<Header> target) {
+        // The resource com.android.internal.R.bool.preferences_prefer_dual_pane
+        // has different definitions based upon screen size. At present, it will
+        // be true for -sw720dp devices, false otherwise. For your curiosity, in
+        // Nexus 7 it is false.
         loadHeadersFromResource(R.xml.settings_headers, target);
     }
 
