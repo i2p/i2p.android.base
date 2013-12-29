@@ -109,7 +109,7 @@ public class LogFragment extends ListFragment implements
     @Override
     public void onListItemClick(ListView parent, View view, int pos, long id) {
         super.onListItemClick(parent, view, pos, id);
-        String entry = mAdapter.getItem(pos);
+        String entry = mAdapter.getItem(pos - 1);
         mEntrySelectedCallback.onEntrySelected(entry);
     }
 
