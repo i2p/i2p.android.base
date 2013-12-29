@@ -3,6 +3,7 @@ package net.i2p.android.router.log;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.R;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class LogDetailFragment extends I2PFragmentBase {
 
         mEntry = getArguments().getString(LOG_ENTRY);
         TextView tv = (TextView) v.findViewById(R.id.log_entry);
+        tv.setMovementMethod(new ScrollingMovementMethod());
         tv.setText(mEntry);
 
         return v;
