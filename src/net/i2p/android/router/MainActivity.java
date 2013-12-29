@@ -114,6 +114,7 @@ public class MainActivity extends I2PActivityBase implements
                 } else {
                     // Unbind
                     unbindService(mStateConnection);
+                    mStateService = null;
                 }
             } catch (RemoteException e) {
                 // In this case the service has crashed before we could even
