@@ -79,8 +79,10 @@ public class MainActivity extends I2PActivityBase implements
             try {
                 mStateService.unregisterCallback(mStateCallback);
             } catch (RemoteException e) {}
-            unbindService(mStateConnection);
         }
+        if (mTriedBindState)
+            unbindService(mStateConnection);
+        mTriedBindState = false;
         super.onStop();
     }
 
@@ -91,14 +93,15 @@ public class MainActivity extends I2PActivityBase implements
             // Don't auto-create the RouterService.
             Intent intent = new Intent(IRouterState.class.getName());
             intent.setClassName(this, "net.i2p.android.router.service.RouterService");
-            boolean b = bindService(intent,
+            mTriedBindState = bindService(intent,
                     mStateConnection, 0);
-            Util.i("Bind to IRouterState successful: " + b);
+            Util.i("Bind to IRouterState successful: " + mTriedBindState);
         }
 
         super.onRouterBind(svc);
     }
 
+    private boolean mTriedBindState;
     private ServiceConnection mStateConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className,
                 IBinder service) {
