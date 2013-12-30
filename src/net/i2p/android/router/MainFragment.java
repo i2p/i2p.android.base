@@ -171,6 +171,14 @@ public class MainFragment extends I2PFragmentBase {
 
         boolean isOn = mCallback.shouldBeOn();
         b.setChecked(isOn);
+
+        if (!isOn) {
+            // Sometimes the final state message from the RouterService
+            // is not received. Ensure that the state image is correct.
+            // TODO: Fix the race between RouterService shutdown and
+            // IRouterState unbinding.
+            updateState("INIT");
+        }
     }
 
     public boolean onBackPressed() {
