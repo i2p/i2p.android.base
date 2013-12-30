@@ -35,7 +35,7 @@ public class RouterService extends Service {
 
     // These states persist even if we died... Yuck, it causes issues.
     public enum State {
-        INIT, WAITING, STARTING, RUNNING,
+        INIT, WAITING, STARTING, RUNNING, ACTIVE,
         // unplanned (router stopped itself), next: killSelf()
         STOPPING, STOPPED,
         // button, don't kill service when stopped, stay in MANUAL_STOPPED
@@ -91,7 +91,7 @@ public class RouterService extends Service {
         _binder = new RouterBinder(this);
         _handler = new Handler();
         _updater = new Updater();
-        if(lastState == State.RUNNING) {
+        if(lastState == State.RUNNING || lastState == State.ACTIVE) {
             Intent intent = new Intent(this, RouterService.class);
             intent.putExtra(EXTRA_RESTART, true);
             onStartCommand(intent, 12345, 67890);
@@ -352,7 +352,7 @@ public class RouterService extends Service {
 
         public void run() {
             RouterContext ctx = _context;
-            if(ctx != null && _state == State.RUNNING) {
+            if(ctx != null && (_state == State.RUNNING || _state == State.ACTIVE)) {
                 Router router = ctx.router();
                 if(router.isAlive()) {
                     updateStatus(ctx);
@@ -402,9 +402,11 @@ public class RouterService extends Service {
         if(haveTunnels != _hadTunnels) {
             if(haveTunnels) {
                 _currTitle = "Client tunnels are ready";
+                setState(State.ACTIVE);
                 _statusBar.replace(StatusBar.ICON_ACTIVE, _currTitle);
             } else {
                 _currTitle = "Client tunnels are down";
+                setState(State.RUNNING);
                 _statusBar.replace(StatusBar.ICON_RUNNING, _currTitle);
             }
             _hadTunnels = haveTunnels;
@@ -475,6 +477,7 @@ public class RouterService extends Service {
             return null;
         }
         if(_state != State.RUNNING
+                && _state != State.ACTIVE
                 && _state != State.STOPPING
                 && _state != State.MANUAL_STOPPING
                 && _state != State.MANUAL_QUITTING
@@ -492,7 +495,7 @@ public class RouterService extends Service {
     }
 
     public boolean canManualStop() {
-        return _state == State.WAITING || _state == State.STARTING || _state == State.RUNNING;
+        return _state == State.WAITING || _state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE;
     }
 
     /**
@@ -508,7 +511,7 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING) {
+            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
                 _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P");
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_STOPPING, State.MANUAL_STOPPED));
                 stopperThread.start();
@@ -529,7 +532,7 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING) {
+            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
                 _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P");
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_QUITTING, State.MANUAL_QUITTED));
                 stopperThread.start();
@@ -550,7 +553,7 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING) {
+            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
                 _statusBar.replace(StatusBar.ICON_STOPPING, "Network disconnected, stopping I2P");
                 // don't change state, let the shutdown hook do it
                 Thread stopperThread = new Thread(new Stopper(State.NETWORK_STOPPING, State.NETWORK_STOPPING));
@@ -637,7 +640,7 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING) {
+            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
                 // should this be in a thread?
                 _statusBar.replace(StatusBar.ICON_SHUTTING_DOWN, "I2P is shutting down");
                 Thread stopperThread = new Thread(new Stopper(State.STOPPING, State.STOPPED));
@@ -714,7 +717,7 @@ public class RouterService extends Service {
                     _starterThread.interrupt();
                 }
                 if(_state == State.WAITING || _state == State.STARTING
-                        || _state == State.RUNNING) {
+                        || _state == State.RUNNING || _state == State.ACTIVE) {
                     setState(State.STOPPING);
                 }
             }
@@ -749,7 +752,7 @@ public class RouterService extends Service {
                         setState(State.WAITING);
                         _handler.postDelayed(new Waiter(), 10 * 1000);
                     } else if(_state == State.STARTING || _state == State.RUNNING
-                            || _state == State.STOPPING) {
+                            || _state == State.ACTIVE || _state == State.STOPPING) {
                         Util.i(this + " died of unknown causes");
                         setState(State.STOPPED);
                         // Unregister all callbacks.

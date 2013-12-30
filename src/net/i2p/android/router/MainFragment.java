@@ -223,6 +223,8 @@ public class MainFragment extends I2PFragmentBase {
             ((AnimationDrawable) lightImage.getDrawable()).start();
         } else if ("RUNNING".equals(newState)) {
             lightImage.setImageResource(R.drawable.routerled_y);
+        } else if ("ACTIVE".equals(newState)) {
+            lightImage.setImageResource(R.drawable.routerled_g);
         } else if ("WAITING".equals(newState)) {
             lightImage.setImageResource(R.drawable.routerled_r);
         } // Ignore unknown states.
