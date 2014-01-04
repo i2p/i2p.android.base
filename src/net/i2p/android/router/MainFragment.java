@@ -81,7 +81,7 @@ public class MainFragment extends I2PFragmentBase {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
         final ImageView lightImage = (ImageView) v.findViewById(R.id.main_lights);
-        lightImage.setImageResource(R.drawable.routerled_r);
+        lightImage.setImageResource(R.drawable.routerlogo_0);
 
         ToggleButton b = (ToggleButton) v.findViewById(R.id.router_onoff_button);
         b.setOnClickListener(new View.OnClickListener() {
@@ -221,20 +221,19 @@ public class MainFragment extends I2PFragmentBase {
                 "MANUAL_STOPPED".equals(newState) ||
                 "MANUAL_QUITTED".equals(newState) ||
                 "NETWORK_STOPPED".equals(newState)) {
-            lightImage.setImageResource(R.drawable.routerled_r);
+            lightImage.setImageResource(R.drawable.routerlogo_0);
         } else if ("STARTING".equals(newState) ||
                 "STOPPING".equals(newState) ||
                 "MANUAL_STOPPING".equals(newState) ||
                 "MANUAL_QUITTING".equals(newState) ||
                 "NETWORK_STOPPING".equals(newState)) {
-            lightImage.setImageResource(R.drawable.routerled_ry);
-            ((AnimationDrawable) lightImage.getDrawable()).start();
+            lightImage.setImageResource(R.drawable.routerlogo_1);
         } else if ("RUNNING".equals(newState)) {
-            lightImage.setImageResource(R.drawable.routerled_y);
+            lightImage.setImageResource(R.drawable.routerlogo_2);
         } else if ("ACTIVE".equals(newState)) {
-            lightImage.setImageResource(R.drawable.routerled_g);
+            lightImage.setImageResource(R.drawable.routerlogo_3);
         } else if ("WAITING".equals(newState)) {
-            lightImage.setImageResource(R.drawable.routerled_r);
+            lightImage.setImageResource(R.drawable.routerlogo_0);
         } // Ignore unknown states.
     }
 
