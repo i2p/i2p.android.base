@@ -105,6 +105,11 @@ public class AddressbookFragment extends ListFragment implements
     }
 
     public void onRouterConnectionReady() {
+        // Show actions
+        mSearchAddressbook.setVisible(true);
+        if (mAddToAddressbook != null)
+            mAddToAddressbook.setVisible(false);
+
         if (mAddWizardData != null) {
             // Save the new entry
             Bundle entryData = mAddWizardData.getExtras().getBundle(ADD_WIZARD_DATA);
@@ -130,24 +135,33 @@ public class AddressbookFragment extends ListFragment implements
         mCallback.onAddressSelected(host);
     }
 
+    private MenuItem mSearchAddressbook;
+    private MenuItem mAddToAddressbook;
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-    	inflater.inflate(R.menu.fragment_addressbook_actions, menu);
+        inflater.inflate(R.menu.fragment_addressbook_actions, menu);
 
-    	// Only allow adding to private book 
-    	if (!PRIVATE_BOOK.equals(mBook))
-    	    menu.findItem(R.id.action_add_to_addressbook).setVisible(false);
+        mSearchAddressbook = menu.findItem(R.id.action_search_addressbook);
+        mAddToAddressbook = menu.findItem(R.id.action_add_to_addressbook);
 
-    	if (getRouterContext() == null) {
-    	    menu.findItem(R.id.action_search_addressbook).setVisible(false);
-    	    menu.findItem(R.id.action_add_to_addressbook).setVisible(false);
-    	}
+        // Hide until needed
+        if (getRouterContext() == null) {
+            mSearchAddressbook.setVisible(false);
+            mAddToAddressbook.setVisible(false);
+        }
+
+        // Only allow adding to private book 
+        if (!PRIVATE_BOOK.equals(mBook)) {
+            mAddToAddressbook.setVisible(false);
+            mAddToAddressbook = null;
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
-        
+
         switch (item.getItemId()) {
         case R.id.action_add_to_addressbook:
             Intent wi = new Intent(getActivity(), AddressbookAddWizardActivity.class);

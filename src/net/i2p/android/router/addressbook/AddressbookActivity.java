@@ -2,9 +2,6 @@ package net.i2p.android.router.addressbook;
 
 import net.i2p.android.router.I2PActivityBase;
 import net.i2p.android.router.R;
-import net.i2p.android.router.I2PActivityBase.TabListener;
-import net.i2p.android.router.web.WebActivity;
-import net.i2p.android.router.web.WebFragment;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
