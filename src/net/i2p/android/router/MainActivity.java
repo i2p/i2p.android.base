@@ -48,6 +48,25 @@ public class MainActivity extends I2PActivityBase implements
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (mStateService != null) {
+            try {
+                if (mStateService.isStarted()) {
+                    // Update for the current state.
+                    Util.i("Fetching state.");
+                    String curState = mStateService.getState();
+                    Message msg = mHandler.obtainMessage(STATE_MSG);
+                    msg.getData().putString("state", curState);
+                    mHandler.sendMessage(msg);
+                } else {
+                    Util.i("StateService not started yet");
+                }
+            } catch (RemoteException e) {}
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main_actions, menu);
@@ -106,10 +125,12 @@ public class MainActivity extends I2PActivityBase implements
         public void onServiceConnected(ComponentName className,
                 IBinder service) {
             mStateService = IRouterState.Stub.asInterface(service);
+            Util.i("StateService bound");
             try {
                 if (mStateService.isStarted()) {
                     mStateService.registerCallback(mStateCallback);
                     // Update for the current state.
+                    Util.i("Fetching state.");
                     String curState = mStateService.getState();
                     Message msg = mHandler.obtainMessage(STATE_MSG);
                     msg.getData().putString("state", curState);
