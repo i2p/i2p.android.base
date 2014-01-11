@@ -1,7 +1,6 @@
 package net.i2p.android.router;
 
 import android.app.Activity;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
