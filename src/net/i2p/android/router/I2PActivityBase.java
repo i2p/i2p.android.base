@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -184,13 +185,13 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
                 .commit();
             break;
         case 9:
-            Intent website = new Intent(I2PActivityBase.this, WebActivity.class);
-            website.putExtra(WebFragment.HTML_URI, "http://www.i2p2.de/");
+            Intent website = new Intent(Intent.ACTION_VIEW);
+            website.setData(Uri.parse("http://www.i2p2.de/"));
             startActivity(website);
             break;
         case 10:
-            Intent faq = new Intent(I2PActivityBase.this, WebActivity.class);
-            faq.putExtra(WebFragment.HTML_URI, "http://www.i2p2.de/faq");
+            Intent faq = new Intent(Intent.ACTION_VIEW);
+            faq.setData(Uri.parse("http://www.i2p2.de/faq"));
             startActivity(faq);
             break;
         default:

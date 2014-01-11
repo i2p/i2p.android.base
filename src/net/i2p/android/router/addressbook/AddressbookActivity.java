@@ -106,9 +106,9 @@ public class AddressbookActivity extends I2PActivityBase
             setResult(Activity.RESULT_OK, result);
             finish();
         } else {
-            Intent wa = new Intent(this, WebActivity.class);
-            wa.putExtra(WebFragment.HTML_URI, "http://" + host + '/');
-            startActivity(wa);
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("http://" + host));
+            startActivity(i);
         }
     }
 
