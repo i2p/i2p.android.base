@@ -14,7 +14,7 @@ Dependencies:
 - Java SDK (preferably Oracle/Sun or OpenJDK) 1.6.0 or higher
 - Apache Ant 1.8.0 or higher
 - I2P source in ../i2p.i2p
-- Android SDK (tested with Rev 20 and platform-tools version 12)
+- Android SDK (tested with Rev 22.3 and platform-tools version 19)
 
 =====================
 
@@ -29,14 +29,17 @@ Instructions:
 
 # now go to the available packages tab, check the box and click refresh,
 # and download an SDK Platform
-# Since I2P is targeted at 4.3 (API 18)
+# Since I2P is targeted at 4.4 (API 19)
 # download at least that one. Otherwise you must change the
-# target in project.properties from android-18 to andriod-x
+# target in project.properties from android-19 to andriod-x
 # where x is the API version.
 
 # I2P is configured to run on 2.2 (API 8) or higher using the
 # Android Support Library, so download that as well
 # (it's under "Extras"). 
+
+# update the compatibility project
+../android-sdk-linux/tools/android update lib-project -p ../android-sdk-linux/extras/android/support/v7/appcompat -t android-19
 
 # To run the debugger (ddms) you also need to download the
 # "Android SDK Platform-Tools" package from the GUI updater.
@@ -55,9 +58,9 @@ Instructions:
 
 # DO NOT create a new project or anything. It's all set up right here for you.
 
-# Create the android 4.3 (API 18) virtual device
+# Create the android 4.4 (API 19) virtual device
 # (don't make a custom hardware profile)
-../android-sdk-linux/tools/android create avd --name i2p --target 18
+../android-sdk-linux/tools/android create avd --name i2p --target 19
 
 # then run the emulator:
 #  This may take a LONG time the first time (half an hour or more)...
