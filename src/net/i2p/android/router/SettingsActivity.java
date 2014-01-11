@@ -103,6 +103,10 @@ public class SettingsActivity extends PreferenceActivity {
                     groupPrefs.addPreference(statPref);
                 }
             }
+        } else {
+            PreferenceCategory noRouter = new PreferenceCategory(context);
+            noRouter.setTitle(R.string.router_not_running);
+            ps.addPreference(noRouter);
         }
     }
 
