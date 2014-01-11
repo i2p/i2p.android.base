@@ -11,7 +11,12 @@ public class WebActivity extends I2PActivityBase {
         // Start with the base view
         if (savedInstanceState == null) {
             WebFragment f = new WebFragment();
-            f.setArguments(getIntent().getExtras());
+            if (getIntent().getData() != null) {
+                Bundle b = new Bundle();
+                b.putString(WebFragment.HTML_URI, getIntent().getDataString());
+                f.setArguments(b);
+            } else
+                f.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.main_fragment, f).commit();
         }
