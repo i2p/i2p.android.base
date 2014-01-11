@@ -81,9 +81,9 @@ public abstract class Util {
 
     public static void i(String m, Throwable t) {
         I2PAppContext ctx = I2PAppContext.getCurrentContext();
-        /*if (ctx != null)
+        if (ctx != null)
             ctx.logManager().getLog(Util.class).log(Log.INFO, m, t);
-        else*/ if (t != null)
+        else if (t != null)
             android.util.Log.i(ANDROID_TAG, m + ' ' + t + ' ' + android.util.Log.getStackTraceString(t));
         else
             android.util.Log.i(ANDROID_TAG, m);
