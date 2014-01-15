@@ -1,5 +1,8 @@
 package net.i2p.android.router.service;
 
+import java.io.IOException;
+
+import net.i2p.I2PAppContext;
 import net.i2p.BOB.BOB;
 import net.i2p.addressbook.DaemonThread;
 import net.i2p.android.apps.NewsFetcher;
@@ -33,7 +36,7 @@ class LoadClientsJob extends JobImpl {
 
     private Thread _fetcherThread;
     private DaemonThread _addressbook;
-    private Thread _BOB;
+    private BOB _bob;
 
     /** this is the delay to load (and start) the clients. */
     private static final long LOAD_DELAY = 90*1000;
@@ -64,19 +67,12 @@ class LoadClientsJob extends JobImpl {
         _addressbook.start();
 
         // add other clients here
-        Run_BOB bob = new Run_BOB();
-        _BOB = new I2PAppThread(bob, "BOB", true);
-        _BOB.start();
-        getContext().addShutdownTask(new ClientShutdownHook());
-    }
+        _bob = new BOB(I2PAppContext.getGlobalContext(), null, new String[0]);
+        try {
+            _bob.startup();
+        } catch (IOException ioe) {}
 
-    private class Run_BOB implements Runnable {
-        public void run() {
-            Util.i("BOB starting...");
-            BOB.main(null);
-            Util.i("BOB Stopped.");
-            _BOB = null;
-        }
+        getContext().addShutdownTask(new ClientShutdownHook());
     }
 
     private class RunI2PTunnel extends JobImpl {
@@ -101,8 +97,8 @@ class LoadClientsJob extends JobImpl {
             Util.i("client shutdown hook");
             // i2ptunnel registers its own hook
             // statsummarizer registers its own hook
-            if (_BOB != null)
-                BOB.stop();
+            if (_bob != null)
+                _bob.shutdown(null);
             if (_fetcherThread != null)
                 _fetcherThread.interrupt();
             if (_addressbook != null)
