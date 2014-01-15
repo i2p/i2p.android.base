@@ -13,8 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.List;
 
+import net.i2p.addressbook.Daemon;
 import net.i2p.android.router.HelpActivity;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.R;
@@ -106,7 +109,8 @@ public class AddressbookFragment extends ListFragment implements
 
     public void onRouterConnectionReady() {
         // Show actions
-        mSearchAddressbook.setVisible(true);
+        if (mSearchAddressbook != null)
+            mSearchAddressbook.setVisible(true);
         if (mAddToAddressbook != null)
             mAddToAddressbook.setVisible(false);
 
@@ -166,6 +170,11 @@ public class AddressbookFragment extends ListFragment implements
         case R.id.action_add_to_addressbook:
             Intent wi = new Intent(getActivity(), AddressbookAddWizardActivity.class);
             startActivityForResult(wi, ADD_WIZARD_REQUEST);
+            return true;
+        case R.id.action_reload_subscriptions:
+            Daemon.wakeup();
+            Toast.makeText(getActivity(), "Reloading subscriptions...",
+                    Toast.LENGTH_SHORT).show();
             return true;
         case R.id.action_addressbook_settings:
             Intent si = new Intent(getActivity(), AddressbookSettingsActivity.class);

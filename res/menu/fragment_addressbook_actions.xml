@@ -7,6 +7,9 @@
           android:icon="@drawable/ic_content_new"
           i2pandroid:showAsAction="ifRoom" />
     <!-- Settings, Help, should always be in the overflow -->
+    <item android:id="@+id/action_reload_subscriptions"
+          android:title="@string/action_reload_subscriptions"
+          i2pandroid:showAsAction="never" />
     <item android:id="@+id/action_addressbook_settings"
           android:title="@string/menu_settings"
           i2pandroid:showAsAction="never" />

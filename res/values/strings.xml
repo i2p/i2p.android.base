@@ -46,6 +46,7 @@
     <string name="action_reload">Reload</string>
     <string name="action_refresh">Refresh</string>
     <string name="hint_search_addressbook">Search addressbook</string>
+    <string name="action_reload_subscriptions">Reload subscriptions</string>
 
     <string name="router_not_running">The router is not running.</string>
 
