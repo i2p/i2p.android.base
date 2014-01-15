@@ -12,6 +12,12 @@
             android:targetClass="net.i2p.android.router.SettingsActivity"
             android:action="net.i2p.android.router.PREFS_GRAPHS" />
     </Preference>
+    <Preference android:title="@string/settings_label_logging">
+        <intent
+            android:targetPackage="net.i2p.android.router"
+            android:targetClass="net.i2p.android.router.SettingsActivity"
+            android:action="net.i2p.android.router.PREFS_LOGGING" />
+    </Preference>
     <Preference android:title="@string/label_addressbook">
         <intent
             android:targetPackage="net.i2p.android.router"

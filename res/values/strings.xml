@@ -79,6 +79,8 @@
     <string name="settings_desc_sharePercent">Percentage of bandwidth to share (default=80)</string>
     <string name="settings_dialog_sharePercent">Percentage of bandwidth to share</string>
     <string name="settings_desc_upnp">Open firewall ports automatically</string>
+    <string name="settings_label_logging">Logging</string>
+    <string name="settings_label_default_log_level">Default log level</string>
     <string name="settings_label_advanced">Advanced</string>
     <string name="settings_label_transports">Transports</string>
     <string name="settings_label_maxConns">Max connections</string>

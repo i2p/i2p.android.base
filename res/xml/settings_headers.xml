@@ -15,6 +15,13 @@
             android:value="graphs" />
     </header>
     <header
+        android:fragment="net.i2p.android.router.SettingsActivity$SettingsFragment"
+        android:title="@string/settings_label_logging">
+        <extra
+            android:name="settings"
+            android:value="logging" />
+    </header>
+    <header
         android:title="@string/label_addressbook">
         <intent
             android:targetPackage="net.i2p.android.router"
