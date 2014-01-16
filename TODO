@@ -5,7 +5,6 @@
   - change tab when viewing RI from LS
   - Refresh detail fragment when changing tab
 - I2PTunnel
-  - Hide edit button
   - Fix bug with HTTP client tunnel wizard
 - Text content
   - Move help content from release notes to help page
@@ -14,6 +13,7 @@
 - Change navbar first-open mechanics to match Android design docs
 - Pull out internal I2P web browser, or disable it
   - What will this require elsewhere?
+- New status image for "no internet"
 
 # Short-term
 

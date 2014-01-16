@@ -108,6 +108,8 @@ public class TunnelDetailFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_i2ptunnel_detail_actions, menu);
+        // Hide the edit action until we have an edit UI
+        menu.findItem(R.id.action_edit_tunnel).setVisible(false);
     }
 
     @Override
