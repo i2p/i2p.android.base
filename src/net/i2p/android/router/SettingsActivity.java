@@ -135,7 +135,21 @@ public class SettingsActivity extends PreferenceActivity {
     protected static void setupLoggingSettings(Context context, PreferenceScreen ps, RouterContext ctx) {
         if (ctx != null) {
             LogManager mgr = ctx.logManager();
-            // TODO: Add other log config settings
+            // Log level overrides
+            /*
+            StringBuilder buf = new StringBuilder(32*1024);
+            Properties limits = mgr.getLimits();
+            TreeSet<String> sortedLogs = new TreeSet<String>();
+            for (Iterator iter = limits.keySet().iterator(); iter.hasNext(); ) {
+                String prefix = (String)iter.next();
+                sortedLogs.add(prefix);
+            }
+            for (Iterator iter = sortedLogs.iterator(); iter.hasNext(); ) {
+                String prefix = (String)iter.next();
+                String level = limits.getProperty(prefix);
+                buf.append(prefix).append('=').append(level).append('\n');
+            }
+            */
         } else {
             PreferenceCategory noRouter = new PreferenceCategory(context);
             noRouter.setTitle(R.string.router_not_running);
