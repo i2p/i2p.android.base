@@ -204,7 +204,7 @@ public class SettingsActivity extends PreferenceActivity {
                     if (defaultval.endsWith(")")) {
                         // strip the ")" off the tail end, this is the default value!
                         String string = defaultval.substring(0, defaultval.length() - 1);
-                        Util.i("Resetting property '" + x + "' to default '" + string +"'");
+                        Util.d("Resetting property '" + x + "' to default '" + string +"'");
                         props.setProperty(x, string);
                     }
 

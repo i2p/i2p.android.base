@@ -75,7 +75,7 @@ public class RouterService extends Service {
         mStartCalled = false;
         State lastState = getSavedState();
         setState(State.INIT);
-        Util.i(this + " onCreate called"
+        Util.d(this + " onCreate called"
                 + " Saved state is: " + lastState
                 + " Current state is: " + _state);
 
@@ -108,7 +108,7 @@ public class RouterService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Util.i(this + " onStart called"
+        Util.d(this + " onStart called"
                 + " Intent is: " + intent
                 + " Flags is: " + flags
                 + " ID is: " + startId
@@ -116,7 +116,7 @@ public class RouterService extends Service {
         mStartCalled = true;
         boolean restart = intent != null && intent.getBooleanExtra(EXTRA_RESTART, false);
         if(restart) {
-            Util.i(this + " RESTARTING");
+            Util.d(this + " RESTARTING");
         }
         synchronized(_stateLock) {
             if(_state != State.INIT) //return START_STICKY;
@@ -155,7 +155,7 @@ public class RouterService extends Service {
     private class Waiter implements Runnable {
 
         public void run() {
-            Util.i(MARKER + this + " waiter handler"
+            Util.d(MARKER + this + " waiter handler"
                     + " Current state is: " + _state);
             if(_state == State.WAITING) {
                 if(Util.isConnected(RouterService.this)) {
@@ -178,11 +178,11 @@ public class RouterService extends Service {
     private class Starter implements Runnable {
 
         public void run() {
-            Util.i(MARKER + this + " starter thread"
+            Util.d(MARKER + this + " starter thread"
                     + " Current state is: " + _state);
-            //Util.i(MARKER + this + " JBigI speed test started");
+            //Util.d(MARKER + this + " JBigI speed test started");
             //NativeBigInteger.main(null);
-            //Util.i(MARKER + this + " JBigI speed test finished, launching router");
+            //Util.d(MARKER + this + " JBigI speed test finished, launching router");
 
 
             // Before we launch, fix up any settings that need to be fixed here.
@@ -344,7 +344,7 @@ public class RouterService extends Service {
                 _context.addFinalShutdownTask(new FinalShutdownHook());
                 _starterThread = null;
             }
-            Util.i("Router.main finished");
+            Util.d("Router.main finished");
         }
     }
 
@@ -417,21 +417,21 @@ public class RouterService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Util.i(this + "onBind called"
+        Util.d(this + "onBind called"
                 + " Current state is: " + _state);
-        Util.i("Intent action: " + intent.getAction());
+        Util.d("Intent action: " + intent.getAction());
         // Select the interface to return.
         if (RouterBinder.class.getName().equals(intent.getAction())) {
             // Local Activity wanting access to the RouterContext
-            Util.i("Returning RouterContext binder");
+            Util.d("Returning RouterContext binder");
             return _binder;
         }
         if (IRouterState.class.getName().equals(intent.getAction())) {
             // Someone wants to monitor the router state.
-            Util.i("Returning state binder");
+            Util.d("Returning state binder");
             return mStatusBinder;
         }
-        Util.i("Unknown binder request, returning null");
+        Util.d("Unknown binder request, returning null");
         return null;
     }
 
@@ -502,7 +502,7 @@ public class RouterService extends Service {
      * Stop and don't restart the router, but keep the service
      */
     public void manualStop() {
-        Util.i("manualStop called"
+        Util.d("manualStop called"
                 + " Current state is: " + _state);
         synchronized(_stateLock) {
             if(!canManualStop()) {
@@ -523,7 +523,7 @@ public class RouterService extends Service {
      * Stop the router and kill the service
      */
     public void manualQuit() {
-        Util.i("manualQuit called"
+        Util.d("manualQuit called"
                 + " Current state is: " + _state);
         synchronized(_stateLock) {
             if(!canManualStop()) {
@@ -547,7 +547,7 @@ public class RouterService extends Service {
      * Stop and then spin waiting for a network connection, then restart
      */
     public void networkStop() {
-        Util.i("networkStop called"
+        Util.d("networkStop called"
                 + " Current state is: " + _state);
         synchronized(_stateLock) {
             if(_state == State.STARTING) {
@@ -568,7 +568,7 @@ public class RouterService extends Service {
     }
 
     public void manualStart() {
-        Util.i("restart called"
+        Util.d("restart called"
                 + " Current state is: " + _state);
         synchronized(_stateLock) {
             if(!canManualStart()) {
@@ -618,7 +618,7 @@ public class RouterService extends Service {
      */
     @Override
     public void onDestroy() {
-        Util.i("onDestroy called"
+        Util.d("onDestroy called"
                 + " Current state is: " + _state);
 
         _handler.removeCallbacks(_updater);
@@ -669,14 +669,14 @@ public class RouterService extends Service {
 
         public void run() {
             try {
-                Util.i(MARKER + this + " stopper thread"
+                Util.d(MARKER + this + " stopper thread"
                         + " Current state is: " + _state);
                 RouterContext ctx = _context;
                 if(ctx != null) {
                     ctx.router().shutdown(Router.EXIT_HARD);
                 }
                 _statusBar.remove();
-                Util.i("********** Router shutdown complete");
+                Util.d("********** Router shutdown complete");
                 synchronized(_stateLock) {
                     if(_state == nextState) {
                         setState(stopState);
@@ -695,7 +695,7 @@ public class RouterService extends Service {
     private class ShutdownHook implements Runnable {
 
         public void run() {
-            Util.i(this + " shutdown hook"
+            Util.d(this + " shutdown hook"
                     + " Current state is: " + _state);
             _statusBar.replace(StatusBar.ICON_SHUTTING_DOWN, "I2P is shutting down");
             I2PReceiver rcvr = _receiver;
@@ -734,7 +734,7 @@ public class RouterService extends Service {
 
         public void run() {
             try {
-                Util.i(this + " final shutdown hook"
+                Util.d(this + " final shutdown hook"
                         + " Current state is: " + _state);
                 //I2PReceiver rcvr = _receiver;
 
@@ -753,7 +753,7 @@ public class RouterService extends Service {
                         _handler.postDelayed(new Waiter(), 10 * 1000);
                     } else if(_state == State.STARTING || _state == State.RUNNING
                             || _state == State.ACTIVE || _state == State.STOPPING) {
-                        Util.i(this + " died of unknown causes");
+                        Util.w(this + " died of unknown causes");
                         setState(State.STOPPED);
                         // Unregister all callbacks.
                         mStateCallbacks.kill();

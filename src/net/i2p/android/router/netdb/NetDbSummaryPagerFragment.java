@@ -63,7 +63,7 @@ public class NetDbSummaryPagerFragment extends I2PFragmentBase implements
 
     @Override
     public void onRouterConnectionNotReady() {
-        Util.i("Router not running or not bound to NetDbSummaryPagerFragment");
+        Util.d("Router not running or not bound to NetDbSummaryPagerFragment");
     }
 
     @Override
@@ -77,7 +77,7 @@ public class NetDbSummaryPagerFragment extends I2PFragmentBase implements
         switch (item.getItemId()) {
         case R.id.action_refresh:
             if (getRouterContext() != null) {
-                Util.i("Refresh called, restarting Loader");
+                Util.d("Refresh called, restarting Loader");
                 mNetDbPagerAdapter.setData(null);
                 mViewPager.invalidate();
                 getLoaderManager().restartLoader(0, null, this);

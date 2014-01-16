@@ -84,17 +84,17 @@ class LoadClientsJob extends JobImpl {
         public String getName() { return "Start I2P Tunnel"; };
 
         public void runJob() {
-            Util.i("Starting i2ptunnel");
+            Util.d("Starting i2ptunnel");
             TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
             int sz = tcg.getControllers().size();
-            Util.i("i2ptunnel started " + sz + " clients");
+            Util.d("i2ptunnel started " + sz + " clients");
 
         }
     }
 
     private class ClientShutdownHook implements Runnable {
         public void run() {
-            Util.i("client shutdown hook");
+            Util.d("client shutdown hook");
             // i2ptunnel registers its own hook
             // statsummarizer registers its own hook
             if (_bob != null)

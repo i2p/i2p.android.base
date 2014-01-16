@@ -35,7 +35,7 @@ public class RateGraphFragment extends I2PFragmentBase {
         }
 
         public void update(Observable o, Object arg) {
-            Util.i("Redrawing plot");
+            Util.d("Redrawing plot");
             plot.redraw();
         }
     }
@@ -86,7 +86,7 @@ public class RateGraphFragment extends I2PFragmentBase {
     public void onStop() {
         super.onStop();
         if (_listener != null && _plotUpdater != null) {
-            Util.i("Removing plot updater from listener");
+            Util.d("Removing plot updater from listener");
             _listener.removeObserver(_plotUpdater);
         }
         _handler.removeCallbacks(_setupTask);
@@ -97,15 +97,15 @@ public class RateGraphFragment extends I2PFragmentBase {
             String rateName = getArguments().getString(RATE_NAME);
             long period = getArguments().getLong(RATE_PERIOD);
 
-            Util.i("Setting up " + rateName + "." + period);
+            Util.d("Setting up " + rateName + "." + period);
             if (StatSummarizer.instance() == null) {
-                Util.i("StatSummarizer is null, delaying setup");
+                Util.d("StatSummarizer is null, delaying setup");
                 _handler.postDelayed(this, 1000);
                 return;
             }
             _listener = StatSummarizer.instance().getListener(rateName, period);
             if (_listener == null) {
-                Util.i("Listener is null, delaying setup");
+                Util.d("Listener is null, delaying setup");
                 _handler.postDelayed(this, 1000);
                 return;
             }
@@ -116,7 +116,7 @@ public class RateGraphFragment extends I2PFragmentBase {
 
             _ratePlot.addSeries(rateSeries, new LineAndPointFormatter(Color.rgb(0, 0, 0), null, Color.rgb(0, 80, 0), null));
 
-            Util.i("Adding plot updater to listener");
+            Util.d("Adding plot updater to listener");
             _listener.addObserver(_plotUpdater);
 
             _ratePlot.setDomainStepMode(XYStepMode.SUBDIVIDE);
@@ -153,7 +153,7 @@ public class RateGraphFragment extends I2PFragmentBase {
 
             });
 
-            Util.i("Redrawing plot");
+            Util.d("Redrawing plot");
             _ratePlot.redraw();
         }
     }

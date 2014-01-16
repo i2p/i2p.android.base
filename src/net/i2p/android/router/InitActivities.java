@@ -39,23 +39,23 @@ class InitActivities {
     }
 
     void debugStuff() {
-        Util.i("java.io.tmpdir" + ": " + System.getProperty("java.io.tmpdir"));
-        Util.i("java.vendor" + ": " + System.getProperty("java.vendor"));
-        Util.i("java.version" + ": " + System.getProperty("java.version"));
-        Util.i("os.arch" + ": " + System.getProperty("os.arch"));
-        Util.i("os.name" + ": " + System.getProperty("os.name"));
-        Util.i("os.version" + ": " + System.getProperty("os.version"));
-        Util.i("user.dir" + ": " + System.getProperty("user.dir"));
-        Util.i("user.home" + ": " + System.getProperty("user.home"));
-        Util.i("user.name" + ": " + System.getProperty("user.name"));
-        Util.i("getFilesDir()" + ": " + myDir);
-        Util.i("max mem" + ": " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()));
-        Util.i("Package" + ": " + ctx.getPackageName());
-        Util.i("Version" + ": " + _ourVersion);
-        Util.i("MODEL" + ": " + Build.MODEL);
-        Util.i("DISPLAY" + ": " + Build.DISPLAY);
-        Util.i("VERSION" + ": " + Build.VERSION.RELEASE);
-        Util.i("SDK" + ": " + Build.VERSION.SDK);
+        Util.d("java.io.tmpdir" + ": " + System.getProperty("java.io.tmpdir"));
+        Util.d("java.vendor" + ": " + System.getProperty("java.vendor"));
+        Util.d("java.version" + ": " + System.getProperty("java.version"));
+        Util.d("os.arch" + ": " + System.getProperty("os.arch"));
+        Util.d("os.name" + ": " + System.getProperty("os.name"));
+        Util.d("os.version" + ": " + System.getProperty("os.version"));
+        Util.d("user.dir" + ": " + System.getProperty("user.dir"));
+        Util.d("user.home" + ": " + System.getProperty("user.home"));
+        Util.d("user.name" + ": " + System.getProperty("user.name"));
+        Util.d("getFilesDir()" + ": " + myDir);
+        Util.d("max mem" + ": " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()));
+        Util.d("Package" + ": " + ctx.getPackageName());
+        Util.d("Version" + ": " + _ourVersion);
+        Util.d("MODEL" + ": " + Build.MODEL);
+        Util.d("DISPLAY" + ": " + Build.DISPLAY);
+        Util.d("VERSION" + ": " + Build.VERSION.RELEASE);
+        Util.d("SDK" + ": " + Build.VERSION.SDK);
     }
 
     void initialize() {
@@ -121,7 +121,7 @@ class InitActivities {
             if ( allcertificates != null) {
                 for (int i = 0; i < allcertificates.length; i++) {
                     File f = allcertificates[i];
-                    Util.i("Deleting old certificate file/dir " + f);
+                    Util.d("Deleting old certificate file/dir " + f);
                     FileUtil.rmdir(f, false);
                 }
             }
@@ -144,7 +144,7 @@ class InitActivities {
         InputStream in = null;
         FileOutputStream out = null;
 
-        Util.i("Creating file " + f + " from resource");
+        Util.d("Creating file " + f + " from resource");
         byte buf[] = new byte[4096];
         try {
             // Context methods
@@ -170,7 +170,7 @@ class InitActivities {
         FileOutputStream out = null;
         ZipInputStream zis = null;
 
-        Util.i("Creating files in '" + myDir + "/" + f + "/' from resource");
+        Util.d("Creating files in '" + myDir + "/" + f + "/' from resource");
         try {
             // Context methods
             in = ctx.getResources().openRawResource(resID);
@@ -186,7 +186,7 @@ class InitActivities {
                         baos.write(buffer, 0, count);
                     }
                     String filename = ze.getName();
-                    Util.i("Creating file " + myDir + "/" + f +"/" + filename + " from resource");
+                    Util.d("Creating file " + myDir + "/" + f +"/" + filename + " from resource");
                     byte[] bytes = baos.toByteArray();
                     out = new FileOutputStream(new File(myDir + "/" + f +"/" + filename));
                     out.write(bytes);
@@ -228,9 +228,9 @@ class InitActivities {
             try {
                 fin = new FileInputStream(new File(myDir, f));
                 DataHelper.loadProps(props,  fin);
-                Util.i("Merging resource into file " + f);
+                Util.d("Merging resource into file " + f);
             } catch (IOException ioe) {
-                Util.i("Creating file " + f + " from resource");
+                Util.d("Creating file " + f + " from resource");
             }
 
             // override user settings
@@ -240,7 +240,7 @@ class InitActivities {
                 props.putAll(overrides);
             File path = new File(myDir, f);
             DataHelper.storeProps(props, path);
-            Util.i("Saved " + props.size() +" properties in " + f);
+            Util.d("Saved " + props.size() +" properties in " + f);
         } catch (IOException ioe) {
         } catch (Resources.NotFoundException nfe) {
         } finally {
@@ -262,7 +262,7 @@ class InitActivities {
             fin = ctx.openFileInput(CONFIG_FILE);
             DataHelper.loadProps(props,  fin);
         } catch (IOException ioe) {
-            Util.i("Looks like a new install");
+            Util.d("Looks like a new install");
         } finally {
             if (fin != null) try { fin.close(); } catch (IOException ioe) {}
         }
@@ -272,12 +272,12 @@ class InitActivities {
         boolean newVersion = !_ourVersion.equals(oldVersion);
 
         if (newVersion) {
-            Util.i("New version " + _ourVersion);
+            Util.d("New version " + _ourVersion);
             props.setProperty(PROP_INSTALLED_VERSION, _ourVersion);
             try {
                 DataHelper.storeProps(props, ctx.getFileStreamPath(CONFIG_FILE));
             } catch (IOException ioe) {
-                Util.i("Failed to write " + CONFIG_FILE);
+                Util.d("Failed to write " + CONFIG_FILE);
             }
         }
         return newVersion;

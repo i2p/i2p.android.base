@@ -40,7 +40,7 @@ public class MainActivity extends I2PActivityBase implements
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
-        Util.i("Initializing...");
+        Util.d("Initializing...");
         InitActivities init = new InitActivities(this);
         init.debugStuff();
         init.initialize();
@@ -54,13 +54,13 @@ public class MainActivity extends I2PActivityBase implements
             try {
                 if (mStateService.isStarted()) {
                     // Update for the current state.
-                    Util.i("Fetching state.");
+                    Util.d("Fetching state.");
                     String curState = mStateService.getState();
                     Message msg = mHandler.obtainMessage(STATE_MSG);
                     msg.getData().putString("state", curState);
                     mHandler.sendMessage(msg);
                 } else {
-                    Util.i("StateService not started yet");
+                    Util.d("StateService not started yet");
                 }
             } catch (RemoteException e) {}
         }
@@ -114,7 +114,7 @@ public class MainActivity extends I2PActivityBase implements
             intent.setClassName(this, "net.i2p.android.router.service.RouterService");
             mTriedBindState = bindService(intent,
                     mStateConnection, 0);
-            Util.i("Bind to IRouterState successful: " + mTriedBindState);
+            Util.d("Bind to IRouterState successful: " + mTriedBindState);
         }
 
         super.onRouterBind(svc);
@@ -125,12 +125,12 @@ public class MainActivity extends I2PActivityBase implements
         public void onServiceConnected(ComponentName className,
                 IBinder service) {
             mStateService = IRouterState.Stub.asInterface(service);
-            Util.i("StateService bound");
+            Util.d("StateService bound");
             try {
                 if (mStateService.isStarted()) {
                     mStateService.registerCallback(mStateCallback);
                     // Update for the current state.
-                    Util.i("Fetching state.");
+                    Util.d("Fetching state.");
                     String curState = mStateService.getState();
                     Message msg = mHandler.obtainMessage(STATE_MSG);
                     msg.getData().putString("state", curState);

@@ -33,7 +33,7 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
     public List<AddressEntry> loadInBackground() {
         // get the names
         NamingService ns = NamingServiceUtil.getNamingService(mRContext, mBook);
-        Util.i("NamingService: " + ns.getName());
+        Util.d("NamingService: " + ns.getName());
         // After router shutdown we get nothing... why?
         List<AddressEntry> ret = new ArrayList<AddressEntry>();
         Map<String, Destination> names = new TreeMap<String, Destination>();

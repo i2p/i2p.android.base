@@ -86,7 +86,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-        Util.i(this + " onCreate called");
+        Util.d(this + " onCreate called");
         super.onCreate(savedInstanceState);
         _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
         _myDir = getFilesDir().getAbsolutePath();
@@ -205,14 +205,14 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     @Override
     public void onRestart()
     {
-        Util.i(this + " onRestart called");
+        Util.d(this + " onRestart called");
         super.onRestart();
     }
 
     @Override
     public void onStart()
     {
-        Util.i(this + " onStart called");
+        Util.d(this + " onStart called");
         super.onStart();
         if (_sharedPrefs.getBoolean(PREF_AUTO_START, DEFAULT_AUTO_START))
             startRouter();
@@ -242,28 +242,28 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     @Override
     public void onResume()
     {
-        Util.i(this + " onResume called");
+        Util.d(this + " onResume called");
         super.onResume();
     }
 
     @Override
     public void onPause()
     {
-        Util.i(this + " onPause called");
+        Util.d(this + " onPause called");
         super.onPause();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState)
     {
-        Util.i(this + " onSaveInstanceState called");
+        Util.d(this + " onSaveInstanceState called");
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onStop()
     {
-        Util.i(this + " onStop called");
+        Util.d(this + " onStop called");
         unbindRouter();
         super.onStop();
     }
@@ -271,7 +271,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     @Override
     public void onDestroy()
     {
-        Util.i(this + " onDestroy called");
+        Util.d(this + " onDestroy called");
         super.onDestroy();
     }
 
@@ -355,14 +355,14 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     protected boolean startRouter() {
         Intent intent = new Intent();
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
-        Util.i(this + " calling startService");
+        Util.d(this + " calling startService");
         ComponentName name = startService(intent);
         if (name == null)
-            Util.i(this + " XXXXXXXXXXXXXXXXXXXX got from startService: " + name);
-        Util.i(this + " got from startService: " + name);
+            Util.d(this + " XXXXXXXXXXXXXXXXXXXX got from startService: " + name);
+        Util.d(this + " got from startService: " + name);
         boolean success = bindRouter(true);
         if (!success)
-            Util.i(this + " Bind router failed");
+            Util.d(this + " Bind router failed");
         return success;
     }
 
@@ -372,15 +372,15 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     protected boolean bindRouter(boolean autoCreate) {
         Intent intent = new Intent(RouterBinder.class.getName());
         intent.setClassName(this, "net.i2p.android.router.service.RouterService");
-        Util.i(this + " calling bindService");
+        Util.d(this + " calling bindService");
         _connection = new RouterConnection();
         _triedBind = bindService(intent, _connection, autoCreate ? BIND_AUTO_CREATE : 0);
-        Util.i(this + " bindService: auto create? " + autoCreate + " success? " + _triedBind);
+        Util.d(this + " bindService: auto create? " + autoCreate + " success? " + _triedBind);
         return _triedBind;
     }
 
     protected void unbindRouter() {
-        Util.i(this + " unbindRouter called with _isBound:" + _isBound + " _connection:" + _connection + " _triedBind:" + _triedBind);
+        Util.d(this + " unbindRouter called with _isBound:" + _isBound + " _connection:" + _connection + " _triedBind:" + _triedBind);
         if (_triedBind && _connection != null)
                 unbindService(_connection);
 
@@ -396,7 +396,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     protected class RouterConnection implements ServiceConnection {
 
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Util.i(this + " connected to router service");
+            Util.d(this + " connected to router service");
             RouterBinder binder = (RouterBinder) service;
             RouterService svc = binder.getService();
             _routerService = svc;
@@ -405,7 +405,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         }
 
         public void onServiceDisconnected(ComponentName name) {
-            Util.i(this + " disconnected from router service!!!!!!!");
+            Util.d(this + " disconnected from router service!!!!!!!");
             // save memory
             _routerService = null;
             _isBound = false;
