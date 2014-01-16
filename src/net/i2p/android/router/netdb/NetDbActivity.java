@@ -2,7 +2,6 @@ package net.i2p.android.router.netdb;
 
 import net.i2p.android.router.I2PActivityBase;
 import net.i2p.android.router.R;
-import net.i2p.android.router.I2PActivityBase.TabListener;
 import net.i2p.data.Hash;
 import android.content.Intent;
 import android.os.Bundle;
