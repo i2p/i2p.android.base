@@ -1,0 +1,36 @@
+# Required for release
+
+- Fix LS/RI scrolling
+- NetDB
+  - change tab when viewing RI from LS
+  - Refresh detail fragment when changing tab
+- I2PTunnel
+  - Hide edit button
+  - Fix bug with HTTP client tunnel wizard
+- Text content
+  - Move help content from release notes to help page
+  - Rewrite release notes to be release-specific
+  - Fill out help page
+- Change navbar first-open mechanics to match Android design docs
+- Pull out internal I2P web browser, or disable it
+  - What will this require elsewhere?
+
+# Short-term
+
+- Expose log level overrides
+- Improve graphs
+  - Show time on bottom axis
+  - Show fixed x range, not only available data
+  - Think about pan/zoom
+  - How to persist data across restarts?
+- I2PTunnel
+  - Improve detail page, expose advanced settings
+  - Add edit page
+
+# Long-term
+
+- Remote router support
+  - Implement a "router wrapper" that can represent a local or remote router
+  - Implement/use client APIs to talk to remote router
+    - I2CP
+    - I2PControl
