@@ -116,6 +116,11 @@ public class NetDbActivity extends I2PActivityBase implements
                     isRouterInfo, entryHash);
             getSupportFragmentManager().beginTransaction()
                 .replace(R.id.detail_fragment, detailFrag).commit();
+
+            // If we are coming from a LS to a RI, change the tab
+            int currentTab = getSupportActionBar().getSelectedNavigationIndex();
+            if (isRouterInfo && currentTab !=1)
+                getSupportActionBar().setSelectedNavigationItem(1);
         } else {
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
