@@ -14,7 +14,6 @@
 - Change navbar first-open mechanics to match Android design docs
 - Pull out internal I2P web browser, or disable it
   - What will this require elsewhere?
-- New status image for "no internet"
 - Add link from Log Activity to Logging settings
 
 # Short-term

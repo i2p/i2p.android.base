@@ -232,7 +232,7 @@ public class MainFragment extends I2PFragmentBase {
         } else if ("ACTIVE".equals(newState)) {
             lightImage.setImageResource(R.drawable.routerlogo_3);
         } else if ("WAITING".equals(newState)) {
-            lightImage.setImageResource(R.drawable.routerlogo_0);
+            lightImage.setImageResource(R.drawable.routerlogo_4);
         } // Ignore unknown states.
     }
 
