@@ -1,9 +1,10 @@
 # Required for release
 
-- Fix LS/RI scrolling
-- NetDB
-  - change tab when viewing RI from LS
+- NetDB tablet view fixes
   - Refresh detail fragment when changing tab
+  - Move list to correct item when changing tab
+  - Create nav history when viewing RI from LS
+- Include GeoIP db for country info
 - I2PTunnel
   - Fix bug with HTTP client tunnel wizard
 - Text content
@@ -14,6 +15,7 @@
 - Pull out internal I2P web browser, or disable it
   - What will this require elsewhere?
 - New status image for "no internet"
+- Add link from Log Activity to Logging settings
 
 # Short-term
 
@@ -24,6 +26,7 @@
   - Think about pan/zoom
   - How to persist data across restarts?
 - I2PTunnel
+  - Show all messages somewhere
   - Improve detail page, expose advanced settings
   - Add edit page
 
