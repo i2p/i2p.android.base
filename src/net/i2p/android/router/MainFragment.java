@@ -241,6 +241,8 @@ public class MainFragment extends I2PFragmentBase {
         TextView tv = (TextView) getActivity().findViewById(R.id.main_status_text);
 
         if(!Util.isConnected(getActivity())) {
+            // Manually set state, RouterService won't be running
+            updateState("WAITING");
             tv.setText("Router version: " + _ourVersion + "\nNo Internet connection is available");
             tv.setVisibility(View.VISIBLE);
         } else if(ctx != null) {
