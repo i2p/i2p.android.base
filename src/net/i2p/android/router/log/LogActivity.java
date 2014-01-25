@@ -2,9 +2,14 @@ package net.i2p.android.router.log;
 
 import net.i2p.android.router.I2PActivityBase;
 import net.i2p.android.router.R;
+import net.i2p.android.router.SettingsActivity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
@@ -65,6 +70,35 @@ public class LogActivity extends I2PActivityBase implements
         if (savedInstanceState != null) {
             int selected = savedInstanceState.getInt(SELECTED_LEVEL);
             actionBar.setSelectedNavigationItem(selected);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main_actions, menu);
+        // Help menu not needed (yet), hide
+        menu.findItem(R.id.menu_help).setVisible(false);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_settings:
+            Intent intent = new Intent(LogActivity.this, SettingsActivity.class);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+                intent.setAction("net.i2p.android.router.PREFS_LOGGING");
+            } else { // TODO: Test if this works, fix if not
+                Bundle args = new Bundle();
+                args.putString("settings", "logging");
+                intent.putExtras(args);
+            }
+            startActivity(intent);
+            return true;
+
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 
