@@ -28,6 +28,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/main_status_scrollview"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="2"
