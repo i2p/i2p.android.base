@@ -103,6 +103,15 @@
     <string name="settings_summ_expl_backupQuantity">%s tunnels</string>
     <string name="settings_desc_expl_backupQuantity">How many tunnel backups</string>
 
+    <string name="menu_about">About</string>
+    <string name="about_version">Version</string>
+    <string name="about_bugs">Bugs and Support</string>
+    <string name="url_android_forum">http://zzz.i2p/</string>
+    <string name="about_helpwanted">Help Wanted!</string>
+    <string name="about_volunteer">Want to help make the app better? Volunteer on the Android forum:</string>
+    <string name="about_donate">Want to donate money or bitcoins to buy more Android devices for development and testing? Go to:</string>
+    <string name="url_donate">https://geti2p.net/en/donate</string>
+
     <string name="menu_help">Help</string>
 
     <string name="addressbook_search_header">%s found</string>

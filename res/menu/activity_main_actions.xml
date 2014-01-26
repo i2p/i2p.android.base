@@ -1,12 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:i2pandroid="http://schemas.android.com/apk/res-auto">
-    <item android:title="@string/menu_settings"
-          android:id="@+id/menu_settings"
-          android:icon="@android:drawable/ic_menu_preferences"
-          i2pandroid:showAsAction="never" >
-    </item>
-    <item android:title="@string/menu_help"
-          android:id="@+id/menu_help"
+    <item android:title="@string/menu_about"
+          android:id="@+id/menu_about"
           i2pandroid:showAsAction="never" >
     </item>
 </menu>

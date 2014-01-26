@@ -70,6 +70,7 @@ public class MainActivity extends I2PActivityBase implements
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main_actions, menu);
+        inflater.inflate(R.menu.activity_base_actions, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -79,6 +80,11 @@ public class MainActivity extends I2PActivityBase implements
         case R.id.menu_settings:
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
+            return true;
+
+        case R.id.menu_about:
+            AboutDialog dialog = new AboutDialog();
+            dialog.show(getSupportFragmentManager(), "about");
             return true;
 
         case R.id.menu_help:

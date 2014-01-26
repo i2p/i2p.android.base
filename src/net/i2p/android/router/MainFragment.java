@@ -22,7 +22,6 @@ public class MainFragment extends I2PFragmentBase {
     private Runnable _updater;
     private Runnable _oneShotUpdate;
     private String _savedStatus;
-    private String _ourVersion;
     private boolean _keep = true;
     private boolean _startPressed = false;
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
@@ -65,7 +64,6 @@ public class MainFragment extends I2PFragmentBase {
                 _savedStatus = saved;
             }
         }
-        _ourVersion = Util.getOurVersion(getActivity());
 
         _keep = true;
 
@@ -243,7 +241,7 @@ public class MainFragment extends I2PFragmentBase {
         if(!Util.isConnected(getActivity())) {
             // Manually set state, RouterService won't be running
             updateState("WAITING");
-            tv.setText("Router version: " + _ourVersion + "\nNo Internet connection is available");
+            tv.setText("No Internet connection is available");
             tv.setVisibility(View.VISIBLE);
         } else if(ctx != null) {
             if(_startPressed) {
@@ -304,8 +302,7 @@ public class MainFragment extends I2PFragmentBase {
             }
 
             String status =
-                    "ROUTER STATUS"
-                    + "\nNetwork: " + netstatus
+                    "Network: " + netstatus
                     + "\nPeers active/known: " + active + " / " + known
                     + "\nExploratory Tunnels in/out: " + inEx + " / " + outEx
                     + "\nClient Tunnels in/out: " + inCl + " / " + outCl;
@@ -325,12 +322,12 @@ public class MainFragment extends I2PFragmentBase {
                     + "\nMsg Delay: " + msgDelay
                     + "\nUptime: " + uptime;
 
-            _savedStatus = "Router version: " + _ourVersion + "\n" + status + participate + details;
+            _savedStatus = status + participate + details;
             tv.setText(_savedStatus);
             tv.setVisibility(View.VISIBLE);
         } else {
             // network but no router context
-            tv.setText("Router version: " + _ourVersion + "\n");
+            tv.setText("Not running");
             //tv.setVisibility(View.INVISIBLE);
             /**
              * **

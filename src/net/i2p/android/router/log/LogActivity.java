@@ -76,7 +76,7 @@ public class LogActivity extends I2PActivityBase implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main_actions, menu);
+        inflater.inflate(R.menu.activity_base_actions, menu);
         // Help menu not needed (yet), hide
         menu.findItem(R.id.menu_help).setVisible(false);
         return super.onCreateOptionsMenu(menu);
