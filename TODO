@@ -12,8 +12,6 @@
   - Rewrite release notes to be release-specific
   - Fill out help page
 - Change navbar first-open mechanics to match Android design docs
-- Pull out internal I2P web browser, or disable it
-  - What will this require elsewhere?
 
 # Short-term
 
