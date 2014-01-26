@@ -20,8 +20,7 @@ import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
 
 public class MainActivity extends I2PActivityBase implements
-        MainFragment.RouterControlListener,
-        VersionDialog.VersionDialogListener {
+        MainFragment.RouterControlListener {
     IRouterState mStateService = null;
     MainFragment mMainFragment = null;
 
@@ -36,6 +35,10 @@ public class MainActivity extends I2PActivityBase implements
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.main_fragment, mMainFragment).commit();
         }
+
+        // Open nav drawer if the user has never opened it themselves
+        if (!getPref(PREF_NAV_DRAWER_OPENED, false))
+            mDrawerLayout.openDrawer(mDrawerList);
     }
 
     @Override
@@ -233,11 +236,5 @@ public class MainActivity extends I2PActivityBase implements
             return true;
         }
         return false;
-    }
-
-    // VersionDialog.VersionDialogListener
-
-    public void onFirstRun() {
-        mDrawerLayout.openDrawer(mDrawerList);
     }
 }

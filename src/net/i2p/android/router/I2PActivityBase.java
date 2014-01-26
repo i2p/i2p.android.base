@@ -63,6 +63,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     protected static final String PREF_AUTO_START = "autoStart";
     /** true leads to a poor install experience, very slow to paint the screen */
     protected static final boolean DEFAULT_AUTO_START = false;
+    protected static final String PREF_NAV_DRAWER_OPENED = "navDrawerOpened";
 
     /**
      * Override this in subclasses that need a ViewPager, such as a
@@ -122,17 +123,29 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
+            private boolean wasDragged = false;
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
+                // Don't mark as opened if the user closed by dragging
+                // but uses the action bar icon to open
+                wasDragged = false;
                 getSupportActionBar().setTitle(mTitle);
                 supportInvalidateOptionsMenu();
             }
 
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View view) {
+                if (wasDragged && !getPref(PREF_NAV_DRAWER_OPENED, false))
+                    setPref(PREF_NAV_DRAWER_OPENED, true);
                 getSupportActionBar().setTitle(mDrawerTitle);
                 supportInvalidateOptionsMenu();
+            }
+
+            /** Called when the drawer motion state changes. */
+            public void onDrawerStateChanged(int newState) {
+                if (newState == DrawerLayout.STATE_DRAGGING)
+                    wasDragged = true;
             }
         };
 
@@ -218,6 +231,11 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
             startRouter();
         else
             bindRouter(false);
+    }
+
+    /** @param def default */
+    public boolean getPref(String pref, boolean def) {
+        return _sharedPrefs.getBoolean(pref, def);
     }
 
     /** @param def default */
