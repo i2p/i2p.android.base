@@ -20,6 +20,7 @@
         android:textOn="@string/button_router_on" />
 
     <ScrollView
+        android:id="@+id/main_status_scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:fillViewport="true"

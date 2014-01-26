@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.ToggleButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -236,13 +237,14 @@ public class MainFragment extends I2PFragmentBase {
 
     private void updateStatus() {
         RouterContext ctx = getRouterContext();
+        ScrollView sv = (ScrollView) getActivity().findViewById(R.id.main_status_scrollview);
         TextView tv = (TextView) getActivity().findViewById(R.id.main_status_text);
 
         if(!Util.isConnected(getActivity())) {
             // Manually set state, RouterService won't be running
             updateState("WAITING");
             tv.setText("No Internet connection is available");
-            tv.setVisibility(View.VISIBLE);
+            sv.setVisibility(View.VISIBLE);
         } else if(ctx != null) {
             if(_startPressed) {
                 _startPressed = false;
@@ -324,11 +326,11 @@ public class MainFragment extends I2PFragmentBase {
 
             _savedStatus = status + participate + details;
             tv.setText(_savedStatus);
-            tv.setVisibility(View.VISIBLE);
+            sv.setVisibility(View.VISIBLE);
         } else {
             // network but no router context
             tv.setText("Not running");
-            //tv.setVisibility(View.INVISIBLE);
+            sv.setVisibility(View.INVISIBLE);
             /**
              * **
              * RouterService svc = _routerService; String status = "connected? "
