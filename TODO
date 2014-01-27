@@ -1,7 +1,5 @@
 # Required for release
 
-- Main status
-  - Show tunnel list with status
 - NetDB tablet view fixes
   - Refresh detail fragment when changing tab
   - Move list to correct item when changing tab

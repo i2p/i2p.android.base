@@ -28,7 +28,6 @@
         android:scrollbarStyle="outsideInset" >
 
         <LinearLayout
-            android:id="@+id/main_status"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -36,13 +35,31 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_status"
+                android:text="@string/label_tunnels"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/main_status_text"
+            <TableLayout
+                android:id="@+id/main_tunnels"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/main_status"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_status"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/main_status_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

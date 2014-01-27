@@ -7,17 +7,31 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.ToggleButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.text.Collator;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
+import net.i2p.data.Destination;
+import net.i2p.data.Hash;
+import net.i2p.data.LeaseSet;
 import net.i2p.router.RouterContext;
+import net.i2p.router.TunnelPoolSettings;
+import net.i2p.util.Translate;
 
 public class MainFragment extends I2PFragmentBase {
 
@@ -242,17 +256,22 @@ public class MainFragment extends I2PFragmentBase {
         RouterContext ctx = getRouterContext();
         ScrollView sv = (ScrollView) getActivity().findViewById(R.id.main_scrollview);
         LinearLayout vStatus = (LinearLayout) getActivity().findViewById(R.id.main_status);
-        TextView tv = (TextView) getActivity().findViewById(R.id.main_status_text);
+        TextView vStatusText = (TextView) getActivity().findViewById(R.id.main_status_text);
 
         if(!Util.isConnected(getActivity())) {
             // Manually set state, RouterService won't be running
             updateState("WAITING");
-            tv.setText("No Internet connection is available");
+            vStatusText.setText("No Internet connection is available");
+            vStatus.setVisibility(View.VISIBLE);
             sv.setVisibility(View.VISIBLE);
         } else if(ctx != null) {
             if(_startPressed) {
                 _startPressed = false;
             }
+
+            // Load running tunnels
+            loadDestinations(ctx);
+
             if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean(PREF_SHOW_STATS, false)) {
                 short reach = ctx.commSystem().getReachabilityStatus();
                 int active = ctx.commSystem().countActivePeers();
@@ -330,14 +349,14 @@ public class MainFragment extends I2PFragmentBase {
                                 + "\nUptime: " + uptime;
 
                 _savedStatus = status + participate + details;
-                tv.setText(_savedStatus);
+                vStatusText.setText(_savedStatus);
                 vStatus.setVisibility(View.VISIBLE);
             } else
                 vStatus.setVisibility(View.INVISIBLE);
             sv.setVisibility(View.VISIBLE);
         } else {
             // network but no router context
-            tv.setText("Not running");
+            vStatusText.setText("Not running");
             sv.setVisibility(View.INVISIBLE);
             /**
              * **
@@ -355,6 +374,113 @@ public class MainFragment extends I2PFragmentBase {
           ***
              */
         }
+    }
+
+    /**
+     * Based on net.i2p.router.web.SummaryHelper.getDestinations()
+     * @param ctx The RouterContext
+     */
+    private void loadDestinations(RouterContext ctx) {
+        TableLayout dests = (TableLayout) getView().findViewById(R.id.main_tunnels);
+        dests.removeAllViews();
+
+        List<Destination> clients = new ArrayList<Destination>(ctx.clientManager().listClients());
+        if (!clients.isEmpty()) {
+            Collections.sort(clients, new AlphaComparator(ctx));
+            for (Destination client : clients) {
+                String name = getName(ctx, client);
+                Hash h = client.calculateHash();
+                TableRow dest = new TableRow(getActivity());
+                //dest.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+
+                // Client or server
+                ImageView type = new ImageView(getActivity());
+                if (ctx.clientManager().shouldPublishLeaseSet(h))
+                    type.setImageDrawable(getActivity().getResources()
+                            .getDrawable(R.drawable.server));
+                else
+                    type.setImageDrawable(getActivity().getResources()
+                            .getDrawable(R.drawable.client));
+                dest.addView(type);
+
+                // Name
+                TextView destName = new TextView(getActivity());
+                destName.setText(name);
+                //destName.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+                dest.addView(destName);
+
+                // Status
+                ImageView status = new ImageView(getActivity());
+                LeaseSet ls = ctx.netDb().lookupLeaseSetLocally(h);
+                if (ls != null && ctx.tunnelManager().getOutboundClientTunnelCount(h) > 0) {
+                    long timeToExpire = ls.getEarliestLeaseDate() - ctx.clock().now();
+                    if (timeToExpire < 0) {
+                        // red or yellow light
+                        status.setImageDrawable(getActivity().getResources()
+                                    .getDrawable(R.drawable.local_inprogress));
+                    } else {
+                        // green light
+                        status.setImageDrawable(getActivity().getResources()
+                                .getDrawable(R.drawable.local_up));
+                    }
+                } else {
+                    // yellow light
+                    status.setImageDrawable(getActivity().getResources()
+                                .getDrawable(R.drawable.local_inprogress));
+                }
+                dest.addView(status);
+
+                dests.addView(dest);
+            }
+        } else {
+            TableRow empty = new TableRow(getActivity());
+            TextView emptyText = new TextView(getActivity());
+            emptyText.setText("No client tunnels are running yet.");
+            empty.addView(emptyText);
+            dests.addView(empty);
+        }
+    }
+
+    /** compare translated nicknames - put "shared clients" first in the sort */
+    private class AlphaComparator implements Comparator<Destination> {
+        private String xsc;
+        private RouterContext _ctx;
+
+        public AlphaComparator(RouterContext ctx) {
+            _ctx = ctx;
+            xsc = _(ctx, "shared clients");
+        }
+
+        public int compare(Destination lhs, Destination rhs) {
+            String lname = getName(_ctx, lhs);
+            String rname = getName(_ctx, rhs);
+            if (lname.equals(xsc))
+                return -1;
+            if (rname.equals(xsc))
+                return 1;
+            return Collator.getInstance().compare(lname, rname);
+        }
+    }
+
+    /** translate here so collation works above */
+    private String getName(RouterContext ctx, Destination d) {
+        TunnelPoolSettings in = ctx.tunnelManager().getInboundSettings(d.calculateHash());
+        String name = (in != null ? in.getDestinationNickname() : null);
+        if (name == null) {
+            TunnelPoolSettings out = ctx.tunnelManager().getOutboundSettings(d.calculateHash());
+            name = (out != null ? out.getDestinationNickname() : null);
+            if (name == null)
+                name = d.calculateHash().toBase64().substring(0,6);
+            else
+                name = _(ctx, name);
+        } else {
+            name = _(ctx, name);
+        }
+        return name;
+    }
+
+    private String _(RouterContext ctx, String s) {
+        return Translate.getString(s, ctx, "net.i2p.router.web.messages");
     }
 
     private void checkDialog() {

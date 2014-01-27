@@ -7,6 +7,7 @@
     <string name="welcome_new_version">New version installed. Please read the release notes. Version:</string>
 
     <string name="label_home">Controls and Status</string>
+    <string name="label_tunnels">Tunnels</string>
     <string name="label_status">Status</string>
     <string name="label_addressbook">Addressbook</string>
     <string name="label_i2ptunnel">I2PTunnel</string>
