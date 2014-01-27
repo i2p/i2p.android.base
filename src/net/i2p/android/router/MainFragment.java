@@ -237,7 +237,7 @@ public class MainFragment extends I2PFragmentBase {
 
     private void updateStatus() {
         RouterContext ctx = getRouterContext();
-        ScrollView sv = (ScrollView) getActivity().findViewById(R.id.main_status_scrollview);
+        ScrollView sv = (ScrollView) getActivity().findViewById(R.id.main_scrollview);
         TextView tv = (TextView) getActivity().findViewById(R.id.main_status_text);
 
         if(!Util.isConnected(getActivity())) {

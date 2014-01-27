@@ -20,7 +20,7 @@
         android:textOn="@string/button_router_on" />
 
     <ScrollView
-        android:id="@+id/main_status_scrollview"
+        android:id="@+id/main_scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:fillViewport="true"
@@ -28,12 +28,12 @@
         android:scrollbarStyle="outsideInset" >
 
         <LinearLayout
+            android:id="@+id/main_status"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_status"
