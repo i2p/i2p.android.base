@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -196,16 +195,6 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
                 .replace(R.id.main_fragment, new NewsFragment())
                 .addToBackStack(null)
                 .commit();
-            break;
-        case 9:
-            Intent website = new Intent(Intent.ACTION_VIEW);
-            website.setData(Uri.parse("http://www.i2p2.de/"));
-            startActivity(website);
-            break;
-        case 10:
-            Intent faq = new Intent(Intent.ACTION_VIEW);
-            faq.setData(Uri.parse("http://www.i2p2.de/faq"));
-            startActivity(faq);
             break;
         default:
             Intent main = new Intent(I2PActivityBase.this, MainActivity.class);
