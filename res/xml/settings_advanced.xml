@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:key="i2pandroid.main.showStats"
+        android:defaultValue="false"
+        android:title="@string/settings_label_showStats"
+        android:summary="@string/settings_summ_showStats" />
+
     <PreferenceScreen
         android:key="settings_transports"
         android:title="@string/settings_label_transports">

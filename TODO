@@ -2,7 +2,6 @@
 
 - Main status
   - Show tunnel list with status
-  - Settings menu option to display full stats (or expanding section?)
 - NetDB tablet view fixes
   - Refresh detail fragment when changing tab
   - Move list to correct item when changing tab

@@ -203,6 +203,9 @@ public class SettingsActivity extends PreferenceActivity {
                 }
             } else if ( x.startsWith("logger.")) {
                 logSettings.put(x, all.get(x).toString());
+            } else if ( x.startsWith("i2pandroid.")) {
+                // Don't save UI-related I2P Android settings in router.config
+                continue;
             } else if(! x.startsWith("DO_NOT_SAVE")) {
                 // Disabled?
                 @SuppressWarnings("deprecation")

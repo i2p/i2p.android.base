@@ -3,9 +3,11 @@ package net.i2p.android.router;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.ToggleButton;
 import android.widget.ImageView;
@@ -25,6 +27,7 @@ public class MainFragment extends I2PFragmentBase {
     private String _savedStatus;
     private boolean _keep = true;
     private boolean _startPressed = false;
+    private static final String PREF_SHOW_STATS = "i2pandroid.main.showStats";
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
     protected static final String PROP_NEW_VERSION = "i2p.newVersion";
     RouterControlListener mCallback;
@@ -238,6 +241,7 @@ public class MainFragment extends I2PFragmentBase {
     private void updateStatus() {
         RouterContext ctx = getRouterContext();
         ScrollView sv = (ScrollView) getActivity().findViewById(R.id.main_scrollview);
+        LinearLayout vStatus = (LinearLayout) getActivity().findViewById(R.id.main_status);
         TextView tv = (TextView) getActivity().findViewById(R.id.main_status_text);
 
         if(!Util.isConnected(getActivity())) {
@@ -249,83 +253,87 @@ public class MainFragment extends I2PFragmentBase {
             if(_startPressed) {
                 _startPressed = false;
             }
-            short reach = ctx.commSystem().getReachabilityStatus();
-            int active = ctx.commSystem().countActivePeers();
-            int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
-            int inEx = ctx.tunnelManager().getFreeTunnelCount();
-            int outEx = ctx.tunnelManager().getOutboundTunnelCount();
-            int inCl = ctx.tunnelManager().getInboundClientTunnelCount();
-            int outCl = ctx.tunnelManager().getOutboundClientTunnelCount();
-            int part = ctx.tunnelManager().getParticipatingCount();
-            double dLag = ctx.statManager().getRate("jobQueue.jobLag").getRate(60000).getAverageValue();
-            String jobLag = DataHelper.formatDuration((long) dLag);
-            String msgDelay = DataHelper.formatDuration(ctx.throttle().getMessageDelay());
-            String uptime = DataHelper.formatDuration(ctx.router().getUptime());
+            if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean(PREF_SHOW_STATS, false)) {
+                short reach = ctx.commSystem().getReachabilityStatus();
+                int active = ctx.commSystem().countActivePeers();
+                int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
+                int inEx = ctx.tunnelManager().getFreeTunnelCount();
+                int outEx = ctx.tunnelManager().getOutboundTunnelCount();
+                int inCl = ctx.tunnelManager().getInboundClientTunnelCount();
+                int outCl = ctx.tunnelManager().getOutboundClientTunnelCount();
+                int part = ctx.tunnelManager().getParticipatingCount();
+                double dLag = ctx.statManager().getRate("jobQueue.jobLag").getRate(60000).getAverageValue();
+                String jobLag = DataHelper.formatDuration((long) dLag);
+                String msgDelay = DataHelper.formatDuration(ctx.throttle().getMessageDelay());
+                String uptime = DataHelper.formatDuration(ctx.router().getUptime());
 
-            String netstatus = "Unknown";
-            if(reach == net.i2p.router.CommSystemFacade.STATUS_DIFFERENT) {
-                netstatus = "Different";
-            }
-            if(reach == net.i2p.router.CommSystemFacade.STATUS_HOSED) {
-                netstatus = "Hosed";
-            }
-            if(reach == net.i2p.router.CommSystemFacade.STATUS_OK) {
-                netstatus = "OK";
-            }
-            if(reach == net.i2p.router.CommSystemFacade.STATUS_REJECT_UNSOLICITED) {
-                netstatus = "Reject Unsolicited";
-            }
-            String tunnelStatus = ctx.throttle().getTunnelStatus();
-            //ctx.commSystem().getReachabilityStatus();
-            double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
-            double outBW = ctx.bandwidthLimiter().getSendBps() / 1024;
+                String netstatus = "Unknown";
+                if(reach == net.i2p.router.CommSystemFacade.STATUS_DIFFERENT) {
+                    netstatus = "Different";
+                }
+                if(reach == net.i2p.router.CommSystemFacade.STATUS_HOSED) {
+                    netstatus = "Hosed";
+                }
+                if(reach == net.i2p.router.CommSystemFacade.STATUS_OK) {
+                    netstatus = "OK";
+                }
+                if(reach == net.i2p.router.CommSystemFacade.STATUS_REJECT_UNSOLICITED) {
+                    netstatus = "Reject Unsolicited";
+                }
+                String tunnelStatus = ctx.throttle().getTunnelStatus();
+                //ctx.commSystem().getReachabilityStatus();
+                double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
+                double outBW = ctx.bandwidthLimiter().getSendBps() / 1024;
 
-            // control total width
-            DecimalFormat fmt;
-            if(inBW >= 1000 || outBW >= 1000) {
-                fmt = new DecimalFormat("#0");
-            } else if(inBW >= 100 || outBW >= 100) {
-                fmt = new DecimalFormat("#0.0");
-            } else {
-                fmt = new DecimalFormat("#0.00");
-            }
+                // control total width
+                DecimalFormat fmt;
+                if(inBW >= 1000 || outBW >= 1000) {
+                    fmt = new DecimalFormat("#0");
+                } else if(inBW >= 100 || outBW >= 100) {
+                    fmt = new DecimalFormat("#0.0");
+                } else {
+                    fmt = new DecimalFormat("#0.00");
+                }
 
-            double kBytesIn = ctx.bandwidthLimiter().getTotalAllocatedInboundBytes() / 1024;
-            double kBytesOut = ctx.bandwidthLimiter().getTotalAllocatedOutboundBytes() / 1024;
+                double kBytesIn = ctx.bandwidthLimiter().getTotalAllocatedInboundBytes() / 1024;
+                double kBytesOut = ctx.bandwidthLimiter().getTotalAllocatedOutboundBytes() / 1024;
 
-            // control total width
-            DecimalFormat kBfmt;
-            if(kBytesIn >= 1000 || kBytesOut >= 1000) {
-                kBfmt = new DecimalFormat("#0");
-            } else if(kBytesIn >= 100 || kBytesOut >= 100) {
-                kBfmt = new DecimalFormat("#0.0");
-            } else {
-                kBfmt = new DecimalFormat("#0.00");
-            }
+                // control total width
+                DecimalFormat kBfmt;
+                if(kBytesIn >= 1000 || kBytesOut >= 1000) {
+                    kBfmt = new DecimalFormat("#0");
+                } else if(kBytesIn >= 100 || kBytesOut >= 100) {
+                    kBfmt = new DecimalFormat("#0.0");
+                } else {
+                    kBfmt = new DecimalFormat("#0.00");
+                }
 
-            String status =
-                    "Network: " + netstatus
-                    + "\nPeers active/known: " + active + " / " + known
-                    + "\nExploratory Tunnels in/out: " + inEx + " / " + outEx
-                    + "\nClient Tunnels in/out: " + inCl + " / " + outCl;
+                String status =
+                        "Network: " + netstatus
+                        + "\nPeers active/known: " + active + " / " + known
+                        + "\nExploratory Tunnels in/out: " + inEx + " / " + outEx
+                        + "\nClient Tunnels in/out: " + inCl + " / " + outCl;
 
 
-            // Need to see if we have the participation option set to on.
-            // I thought there was a router method for that? I guess not! WHY NOT?
-            // It would be easier if we had a number to test status.
-            String participate = "\nParticipation: " + tunnelStatus +" (" + part + ")";
+                // Need to see if we have the participation option set to on.
+                // I thought there was a router method for that? I guess not! WHY NOT?
+                // It would be easier if we had a number to test status.
+                String participate = "\nParticipation: " + tunnelStatus +" (" + part + ")";
 
-            String details =
-                    "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps"
-                    + "\nData usage in/out: " + kBfmt.format(kBytesIn) + " / " + kBfmt.format(kBytesOut) + " KB"
-                    + "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-                    + "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B'
-                    + "\nJob Lag: " + jobLag
-                    + "\nMsg Delay: " + msgDelay
-                    + "\nUptime: " + uptime;
+                String details =
+                        "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps"
+                                + "\nData usage in/out: " + kBfmt.format(kBytesIn) + " / " + kBfmt.format(kBytesOut) + " KB"
+                                + "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
+                                + "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B'
+                                + "\nJob Lag: " + jobLag
+                                + "\nMsg Delay: " + msgDelay
+                                + "\nUptime: " + uptime;
 
-            _savedStatus = status + participate + details;
-            tv.setText(_savedStatus);
+                _savedStatus = status + participate + details;
+                tv.setText(_savedStatus);
+                vStatus.setVisibility(View.VISIBLE);
+            } else
+                vStatus.setVisibility(View.INVISIBLE);
             sv.setVisibility(View.VISIBLE);
         } else {
             // network but no router context

@@ -80,6 +80,8 @@
     <string name="settings_label_logging">Logging</string>
     <string name="settings_label_default_log_level">Default log level</string>
     <string name="settings_label_advanced">Advanced</string>
+    <string name="settings_label_showStats">Router statistics</string>
+    <string name="settings_summ_showStats">Display advanced stats in main console</string>
     <string name="settings_label_transports">Transports</string>
     <string name="settings_label_maxConns">Max connections</string>
     <string name="settings_label_i2cp">I2CP interface</string>
