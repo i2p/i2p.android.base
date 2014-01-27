@@ -1,13 +1,13 @@
 package net.i2p.android.router;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -410,25 +410,20 @@ public class MainFragment extends I2PFragmentBase {
                 dest.addView(destName);
 
                 // Status
-                ImageView status = new ImageView(getActivity());
                 LeaseSet ls = ctx.netDb().lookupLeaseSetLocally(h);
                 if (ls != null && ctx.tunnelManager().getOutboundClientTunnelCount(h) > 0) {
                     long timeToExpire = ls.getEarliestLeaseDate() - ctx.clock().now();
                     if (timeToExpire < 0) {
                         // red or yellow light
-                        status.setImageDrawable(getActivity().getResources()
-                                    .getDrawable(R.drawable.local_inprogress));
+                        type.setBackgroundColor(Color.TRANSPARENT);
                     } else {
                         // green light
-                        status.setImageDrawable(getActivity().getResources()
-                                .getDrawable(R.drawable.local_up));
+                        type.setBackgroundColor(Color.GREEN);
                     }
                 } else {
                     // yellow light
-                    status.setImageDrawable(getActivity().getResources()
-                                .getDrawable(R.drawable.local_inprogress));
+                    type.setBackgroundColor(Color.TRANSPARENT);
                 }
-                dest.addView(status);
 
                 dests.addView(dest);
             }
