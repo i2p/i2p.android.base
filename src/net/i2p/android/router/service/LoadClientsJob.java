@@ -34,7 +34,6 @@ import net.i2p.util.I2PAppThread;
  */
 class LoadClientsJob extends JobImpl {
 
-    private Thread _fetcherThread;
     private DaemonThread _addressbook;
     private BOB _bob;
 
@@ -58,8 +57,8 @@ class LoadClientsJob extends JobImpl {
         t.start();
 
         NewsFetcher fetcher = NewsFetcher.getInstance(getContext());
-        _fetcherThread = new I2PAppThread(fetcher, "NewsFetcher", true);
-        _fetcherThread.start();
+        t = new I2PAppThread(fetcher, "NewsFetcher", true);
+        t.start();
 
         _addressbook = new DaemonThread(new String[] {"addressbook"});
         _addressbook.setName("Addressbook");
@@ -96,11 +95,10 @@ class LoadClientsJob extends JobImpl {
         public void run() {
             Util.d("client shutdown hook");
             // i2ptunnel registers its own hook
-            // statsummarizer registers its own hook
+            // StatSummarizer registers its own hook
+            // NewsFetcher registers its own hook
             if (_bob != null)
                 _bob.shutdown(null);
-            if (_fetcherThread != null)
-                _fetcherThread.interrupt();
             if (_addressbook != null)
                 _addressbook.halt();
         }

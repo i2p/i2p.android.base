@@ -23,6 +23,8 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private File _newsFile;
     private File _tempFile;
     private static NewsFetcher _instance;
+    private volatile boolean _isRunning = true;
+    private Thread _thread;
 
     public static /*final */ NewsFetcher getInstance() {
         return _instance;
@@ -48,6 +50,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
 
     private NewsFetcher(RouterContext ctx) {
         _context = ctx;
+        _context.addShutdownTask(new Shutdown());
         _log = ctx.logManager().getLog(NewsFetcher.class);
         try {
             String last = ctx.getProperty(PROP_LAST_CHECKED);
@@ -98,12 +101,13 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private static final long RUN_DELAY = 30*60*1000;
 
     public void run() {
+        _thread = Thread.currentThread();
         try {
             Thread.sleep(INITIAL_DELAY);
         } catch (InterruptedException ie) {
             return;
         }
-        while (true) {
+        while (_isRunning && _context.router().isAlive()) {
             if (shouldFetchNews()) {
                 fetchNews();
             }
@@ -213,4 +217,12 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     }
     public void headerReceived(String url, int attemptNum, String key, String val) {}
     public void attempting(String url) {}
+
+    private class Shutdown implements Runnable {
+        public void run() {
+            _isRunning = false;
+            if (_thread != null)
+                _thread.interrupt();
+        }
+    }
 }
