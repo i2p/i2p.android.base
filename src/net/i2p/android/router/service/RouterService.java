@@ -328,7 +328,7 @@ public class RouterService extends Service {
             }
 
             // _NOW_ launch the router!
-            RouterLaunch.main(new String[0]);
+            RouterLaunch.main(null);
             synchronized(_stateLock) {
                 if(_state != State.STARTING) {
                     return;
