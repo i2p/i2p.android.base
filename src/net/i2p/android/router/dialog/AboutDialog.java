@@ -1,4 +1,4 @@
-package net.i2p.android.router;
+package net.i2p.android.router.dialog;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.I2Patterns;
@@ -16,7 +16,7 @@ public class AboutDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle SavedInstanceState) {
         LayoutInflater li = LayoutInflater.from(getActivity());
-        View view = li.inflate(R.layout.fragment_about, null);
+        View view = li.inflate(R.layout.fragment_dialog_about, null);
 
         final String currentVersion = Util.getOurVersion(getActivity());
         TextView tv = (TextView)view.findViewById(R.id.about_version);

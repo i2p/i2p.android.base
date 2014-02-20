@@ -1,5 +1,8 @@
-package net.i2p.android.router;
+package net.i2p.android.router.dialog;
 
+import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.router.LicenseActivity;
+import net.i2p.android.router.MainFragment;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import android.app.AlertDialog;
@@ -10,9 +13,9 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 public class VersionDialog extends DialogFragment {
-    protected static final String DIALOG_TYPE = "dialog_type";
-    protected static final int DIALOG_NEW_INSTALL = 0;
-    protected static final int DIALOG_NEW_VERSION = 1;
+    public static final String DIALOG_TYPE = "dialog_type";
+    public static final int DIALOG_NEW_INSTALL = 0;
+    public static final int DIALOG_NEW_VERSION = 1;
 
     @Override
     public Dialog onCreateDialog(Bundle SavedInstanceState) {

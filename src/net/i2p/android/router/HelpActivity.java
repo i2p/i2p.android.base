@@ -1,6 +1,7 @@
 package net.i2p.android.router;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.dialog.TextResourceDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

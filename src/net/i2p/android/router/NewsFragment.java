@@ -35,7 +35,7 @@ public class NewsFragment extends I2PFragmentBase {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.news, container, false);
+        View v = inflater.inflate(R.layout.fragment_news, container, false);
         WebView wv = (WebView) v.findViewById(R.id.news_webview);
         wv.getSettings().setLoadsImagesAutomatically(false);
         // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855

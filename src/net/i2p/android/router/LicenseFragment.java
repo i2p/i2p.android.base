@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import net.i2p.android.router.R;
+import net.i2p.android.router.dialog.TextResourceDialog;
 
 public class LicenseFragment extends ListFragment {
 

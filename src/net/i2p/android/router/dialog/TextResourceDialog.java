@@ -1,4 +1,4 @@
-package net.i2p.android.router;
+package net.i2p.android.router.dialog;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -28,7 +28,7 @@ public class TextResourceDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.text_resource, container, false);
+        View v = inflater.inflate(R.layout.fragment_dialog_text_resource, container, false);
         TextView tv = (TextView) v.findViewById(R.id.text_resource_text);
         tv.setMovementMethod(ScrollingMovementMethod.getInstance());
         String title = getArguments().getString(TEXT_DIALOG_TITLE);

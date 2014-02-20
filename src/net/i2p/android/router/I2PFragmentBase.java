@@ -16,7 +16,7 @@ public class I2PFragmentBase extends Fragment {
     private boolean mOnActivityCreated;
     RouterContextProvider mCallback;
 
-    protected static final String PREF_INSTALLED_VERSION = "app.version";
+    public static final String PREF_INSTALLED_VERSION = "app.version";
 
     public interface RouterContextUser {
         public void onRouterBind();

@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.dialog.VersionDialog;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.data.Destination;
