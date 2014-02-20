@@ -26,10 +26,10 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/url_project"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/url_project"
-            android:autoLink="web" />
+            android:text="@string/url_project" />
 
         <TextView
             android:layout_width="match_parent"
@@ -38,10 +38,10 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/url_android_bugs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/url_android_forum"
-            android:autoLink="web" />
+            android:text="@string/url_android_forum" />
 
         <TextView
             android:layout_width="match_parent"
@@ -55,10 +55,10 @@
             android:text="@string/about_volunteer" />
 
         <TextView
+            android:id="@+id/url_android_volunteer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/url_android_forum"
-            android:autoLink="web" />
+            android:text="@string/url_android_forum" />
 
         <TextView
             android:layout_width="match_parent"
@@ -66,10 +66,10 @@
             android:text="@string/about_donate" />
 
         <TextView
+            android:id="@+id/url_donate"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/url_donate"
-            android:autoLink="web" />
+            android:text="@string/url_donate" />
 
     </LinearLayout>
     
