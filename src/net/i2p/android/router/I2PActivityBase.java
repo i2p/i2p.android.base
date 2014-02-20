@@ -190,11 +190,8 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
             startActivity(wp);
             break;
         case 8:
-            getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.main_fragment, new NewsFragment())
-                .addToBackStack(null)
-                .commit();
+            Intent news = new Intent(I2PActivityBase.this, NewsActivity.class);
+            startActivity(news);
             break;
         default:
             Intent main = new Intent(I2PActivityBase.this, MainActivity.class);

@@ -20,6 +20,7 @@ import java.util.Random;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.receiver.I2PReceiver;
+import net.i2p.android.router.util.Notifications;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.router.Job;
@@ -51,6 +52,7 @@ public class RouterService extends Service {
     private State _state = State.INIT;
     private Thread _starterThread;
     private StatusBar _statusBar;
+    private Notifications _notif;
     private I2PReceiver _receiver;
     private IBinder _binder;
     private final Object _stateLock = new Object();
@@ -88,6 +90,7 @@ public class RouterService extends Service {
         _statusBar = new StatusBar(this);
         // Remove stale notification icon.
         _statusBar.remove();
+        _notif = new Notifications(this);
         _binder = new RouterBinder(this);
         _handler = new Handler();
         _updater = new Updater();
@@ -338,7 +341,7 @@ public class RouterService extends Service {
                 _statusBar.replace(StatusBar.ICON_RUNNING, "I2P is running");
                 _context = (RouterContext) contexts.get(0);
                 _context.router().setKillVMOnEnd(false);
-                Job loadJob = new LoadClientsJob(_context);
+                Job loadJob = new LoadClientsJob(_context, _notif);
                 _context.jobQueue().addJob(loadJob);
                 _context.addShutdownTask(new ShutdownHook());
                 _context.addFinalShutdownTask(new FinalShutdownHook());

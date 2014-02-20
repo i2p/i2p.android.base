@@ -1,6 +1,9 @@
 package net.i2p.android.apps;
 
 import java.io.File;
+
+import net.i2p.android.router.NewsActivity;
+import net.i2p.android.router.util.Notifications;
 import net.i2p.data.DataHelper;
 import net.i2p.router.RouterContext;
 import net.i2p.router.util.RFC822Date;
@@ -15,6 +18,7 @@ import net.i2p.util.Translate;
  */
 public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private final RouterContext _context;
+    private final Notifications _notif;
     private final Log _log;
     private long _lastFetch;
     private long _lastUpdated;
@@ -30,10 +34,11 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
         return _instance;
     }
 
-    public static /* final */ synchronized NewsFetcher getInstance(RouterContext ctx) {
+    public static /* final */ synchronized NewsFetcher getInstance(
+            RouterContext ctx, Notifications notif) {
         if (_instance != null)
             return _instance;
-        _instance = new NewsFetcher(ctx);
+        _instance = new NewsFetcher(ctx, notif);
         return _instance;
     }
 
@@ -48,8 +53,9 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private static final String PROP_NEWS_URL = "router.newsURL";
     private static final String DEFAULT_NEWS_URL = "http://echelon.i2p/i2p/news.xml";
 
-    private NewsFetcher(RouterContext ctx) {
+    private NewsFetcher(RouterContext ctx, Notifications notif) {
         _context = ctx;
+        _notif = notif;
         _context.addShutdownTask(new Shutdown());
         _log = ctx.logManager().getLog(NewsFetcher.class);
         try {
@@ -196,7 +202,10 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             if (copied) {
                 _lastUpdated = now;
                 _tempFile.delete();
-                // notify somebody?
+
+                // Notify user
+                _notif.notify("News Updated", "Touch to view latest I2P news",
+                        NewsActivity.class);
             } else {
                 if (_log.shouldLog(Log.ERROR))
                     _log.error("Failed to copy the news file!");
