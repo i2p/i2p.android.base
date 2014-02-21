@@ -38,6 +38,14 @@ public class I2Patterns {
                         // input.  This is to stop foo.sure from
                         // matching as foo.su
 
+    public static final Pattern IRC_URL = Pattern.compile(
+        "(irc:\\/\\/127\\.0\\.0\\.1\\:\\d{1,5})"
+        + "(\\/(?:(?:[" + Patterns.GOOD_IRI_CHAR + "\\;\\/\\?\\:\\@\\&\\=\\#\\~"  // plus option query params
+        + "\\-\\.\\+\\!\\*\\'\\(\\)\\,\\_])|(?:\\%[a-fA-F0-9]{2}))*)?"
+        + "(?:\\b|$)"); // and finally, a word boundary or end of
+                                // input.  This is to stop foo.sure from
+                                // matching as foo.su
+
     private I2Patterns() {
     }
 }

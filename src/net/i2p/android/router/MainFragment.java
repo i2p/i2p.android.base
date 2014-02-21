@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.dialog.FirstStartDialog;
 import net.i2p.android.router.dialog.VersionDialog;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
@@ -42,6 +43,7 @@ public class MainFragment extends I2PFragmentBase {
     private String _savedStatus;
     private boolean _keep = true;
     private boolean _startPressed = false;
+    private static final String PREF_FIRST_START = "app.router.firstStart";
     private static final String PREF_SHOW_STATS = "i2pandroid.main.showStats";
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
     protected static final String PROP_NEW_VERSION = "i2p.newVersion";
@@ -108,6 +110,7 @@ public class MainFragment extends I2PFragmentBase {
                     _startPressed = true;
                     mCallback.onStartRouterClicked();
                     updateOneShot();
+                    checkFirstStart();
                 } else {
                     if(mCallback.onStopRouterClicked()) {
                         updateOneShot();
@@ -495,6 +498,16 @@ public class MainFragment extends I2PFragmentBase {
                 dialog.setArguments(args);
                 dialog.show(getActivity().getSupportFragmentManager(), "newversion");
             }
+        }
+    }
+
+    private void checkFirstStart() {
+        I2PActivityBase ab = (I2PActivityBase) getActivity();
+        boolean firstStart = ab.getPref(PREF_FIRST_START, true);
+        if (firstStart) {
+            FirstStartDialog dialog = new FirstStartDialog();
+            dialog.show(getActivity().getSupportFragmentManager(), "firststart");
+            ab.setPref(PREF_FIRST_START, false);
         }
     }
 }
