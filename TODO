@@ -7,7 +7,6 @@
 - Prevent accidental shutdown
   - Add pop-up confirming router shutdown
   - OR: make router button long-press
-- Display "No news" text for when router is first started
 - Display release notes directly on new router version
 - Text content
   - Move help content from release notes to help page
