@@ -28,5 +28,15 @@ _jsp\.java$
 ^gen
 ^routerjars/bin
 ^routerjars/gen
+^routerjars/lib
 AndroidManifest.xml
+lint.xml
 local.properties
+
+# I2P-specific ignores
+^res/raw/blocklist_txt
+^res/raw/certificates_zip
+^res/raw/hosts_txt
+^res/raw/license_
+^scripts/build.number
+^scripts/version.properties
