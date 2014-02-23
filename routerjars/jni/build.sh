@@ -2,6 +2,8 @@
 #
 # build GMP and libjbigi.so using the Android tools directly
 #
+# TODO: Get more settings from environment variables set in ../custom-rules.xml
+#
 
 # uncomment to skip
 # exit 0
@@ -31,28 +33,56 @@ then
 	exit 0
 fi
 
-I2PBASE=${1:-../../../i2p.i2p}
+I2PBASE=${1:-$THISDIR/../../../i2p.i2p}
 #
-# Wrong again. We want to be able to not have to update this script
+# We want to be able to not have to update this script
 # every time a new NDK comes out. We solve this by using readlink with
 # a wild card, deglobbing automatically sorts to get the highest revision.
 # the dot at the end ensures that it is a directory, and not a file.
 #
-#export NDK=$(realpath ../../android-ndk-r5b/)
 
 ## Simple fix for osx development
 if [ `uname -s` = "Darwin" ]; then
     export NDK="/Developer/android/ndk/"
 else
-    export NDK="`readlink -n -e $(for last in ../../android-ndk-r*/.; do true; done ; echo $last)`"
+    NDK_GLOB=$THISDIR/'../../../android-ndk-r*/.'
+    export NDK="`readlink -n -e $(for last in $NDK_GLOB; do true; done ; echo $last)`"
 fi
+
+if [ "$NDK" == "" ]; then
+	echo "Cannot find NDK in $NDK_GLOB, install it or adjust NDK_GLOB in script"
+	exit 1
+fi
+if [ ! -d "$NDK" ]; then
+	echo "Cannot find NDK in $NDK, install it"
+	exit 1
+fi
+
 #
 # API level, must match that in ../AndroidManifest.xml
 #
 LEVEL=8
 ARCH="arm"
 export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
-export AABI="arm-linux-androideabi-4.4.3"
+if [ ! -d "$SYSROOT" ]; then
+	echo "Cannot find $SYSROOT in NDK, check for support of level: $LEVEL arch: $ARCH or adjust LEVEL and ARCH in script"
+	exit 1
+fi
+
+#
+# 4.6 is the GCC version. GCC 4.4.3 support was removed in NDK r9b.
+# Available in r9b:
+#	arm-linux-androideabi-4.6
+#	arm-linux-androideabi-4.8
+#	arm-linux-androideabi-clang3.3
+#	llvm-3.3
+#	mipsel-linux-android-4.6
+#	mipsel-linux-android-4.8
+#	mipsel-linux-android-clang3.3
+#	x86-4.6
+#	x86-4.8
+#	x86-clang3.3
+export AABI="arm-linux-androideabi-4.6"
 if [ `uname -s` = "Darwin" ]; then
     export SYSTEM="darwin-x86"
 elif [ `uname -m` = "x86_64" ]; then
@@ -60,8 +90,14 @@ elif [ `uname -m` = "x86_64" ]; then
 else
     export SYSTEM="linux-x86"
 fi
+
 export BINPREFIX="arm-linux-androideabi-"
-export CC="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}gcc --sysroot=$SYSROOT"
+COMPILER="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}gcc"
+if [ ! -f "$COMPILER" ]; then
+	echo "Cannot find compiler $COMPILER in NDK, check for support of system: $SYSTEM ABI: $AABI or adjust AABI and SYSTEM in script"
+	exit 1
+fi
+export CC="$COMPILER --sysroot=$SYSROOT"
 # worked without this on 4.3.2, but 5.0.2 couldn't find it
 export NM="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}nm"
 STRIP="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}strip"
@@ -109,9 +145,7 @@ make || exit 1
 if [ `uname -s` = "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
 else
-    # FIXME This will not work everywhere (e.g. BSD). Could borrow my
-    # 'find-java-home' script for this
-    export JAVA_HOME="$(dirname $(dirname $(realpath $(which javac))))"
+    [ -z $JAVA_HOME ] && . $I2PBASE/core/c/find-java-home
 fi
 if [ ! -f "$JAVA_HOME/include/jni.h" ]; then
     echo "Cannot find jni.h! Looked in '$JAVA_HOME/include/jni.h'"
