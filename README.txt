@@ -60,7 +60,7 @@ Instructions:
 
 # Create the android 4.4 (API 19) virtual device
 # (don't make a custom hardware profile)
-../android-sdk-linux/tools/android create avd --name i2p --target 19
+../android-sdk-linux/tools/android create avd --name i2p --target android-19
 
 # then run the emulator:
 #  This may take a LONG time the first time (half an hour or more)...
