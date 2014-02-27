@@ -38,14 +38,28 @@
 
     <!-- new rules -->
 
-    <target name="buildrouter" depends="-dirs" >
-        <!-- build router and core -->
-        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" >
-            <target name="buildRouter" />
-            <target name="buildI2PTunnelJar" />
-            <target name="buildAddressbook" />
-            <target name="buildBOB" />
-        </ant>
+
+    <available property="have.router" file="${i2pbase}/build/router.jar" />
+    <available property="have.bob" file="${i2pbase}/apps/BOB/dist/BOB.jar" />
+    <available property="have.i2ptunnel" file="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" />
+    <available property="have.addressbook" file="${i2pbase}/apps/addressbook/build" />
+
+    <target name="buildRouter" unless="have.router">
+        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildRouter" />
+    </target>
+
+    <target name="buildI2PTunnelJar" unless="have.i2ptunnel">
+        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildI2PTunnelJar" />
+    </target>
+    <target name="buildAddressbook" unless="have.addressbook">
+        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildAddressbook" />
+    </target>
+
+    <target name="buildBOB" unless="have.bob">
+        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildBOB" />
+    </target>
+
+    <target name="buildrouter" depends="-dirs, buildRouter, buildI2PTunnelJar, buildAddressbook, buildBOB">
 
         <!-- router -->
         <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
@@ -91,7 +105,8 @@
     <target name="distclean" depends="clean">
         <delete dir="${jar.libs.dir}" verbose="${verbose}" />
         <delete dir="jni/build/" verbose="${verbose}" />
-	<delete file="AndroidManifest.xml" verbose="${verbose}" />
+        <delete file="AndroidManifest.xml" verbose="${verbose}" />
+        <ant dir="${i2pbase}" target="distclean" />
     </target>
 
 </project>
