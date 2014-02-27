@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+    <string-array name="navdrawer_activity_titles">
+        <item>@string/label_home</item>
+        <item>@string/label_addressbook</item>
+        <item>@string/label_i2ptunnel</item>
+        <item>@string/label_logs</item>
+        <item>@string/label_graphs</item>
+        <item>@string/label_peers_status</item>
+        <item>NetDB</item>
+        <item>@string/label_welcome_page</item>
+        <item>@string/label_news</item>
+    </string-array>
+    <string-array name="log_level_list">
+        <item>ERROR</item>
+        <item>All</item>
+    </string-array>
+    <string-array name="log_levels">
+        <item>CRIT</item>
+        <item>ERROR</item>
+        <item>WARN</item>
+        <item>INFO</item>
+        <item>DEBUG</item>
+    </string-array>
     <string-array name="setting0to3">
         <item>0</item>
         <item>1</item>

@@ -1,6 +1,9 @@
 package net.i2p.android.apps;
 
 import java.io.File;
+
+import net.i2p.android.router.NewsActivity;
+import net.i2p.android.router.util.Notifications;
 import net.i2p.data.DataHelper;
 import net.i2p.router.RouterContext;
 import net.i2p.router.util.RFC822Date;
@@ -15,6 +18,7 @@ import net.i2p.util.Translate;
  */
 public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private final RouterContext _context;
+    private final Notifications _notif;
     private final Log _log;
     private long _lastFetch;
     private long _lastUpdated;
@@ -23,15 +27,18 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private File _newsFile;
     private File _tempFile;
     private static NewsFetcher _instance;
+    private volatile boolean _isRunning = true;
+    private Thread _thread;
 
     public static /*final */ NewsFetcher getInstance() {
         return _instance;
     }
 
-    public static /* final */ synchronized NewsFetcher getInstance(RouterContext ctx) {
+    public static /* final */ synchronized NewsFetcher getInstance(
+            RouterContext ctx, Notifications notif) {
         if (_instance != null)
             return _instance;
-        _instance = new NewsFetcher(ctx);
+        _instance = new NewsFetcher(ctx, notif);
         return _instance;
     }
 
@@ -46,8 +53,10 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private static final String PROP_NEWS_URL = "router.newsURL";
     private static final String DEFAULT_NEWS_URL = "http://echelon.i2p/i2p/news.xml";
 
-    private NewsFetcher(RouterContext ctx) {
+    private NewsFetcher(RouterContext ctx, Notifications notif) {
         _context = ctx;
+        _notif = notif;
+        _context.addShutdownTask(new Shutdown());
         _log = ctx.logManager().getLog(NewsFetcher.class);
         try {
             String last = ctx.getProperty(PROP_LAST_CHECKED);
@@ -97,14 +106,14 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private static final long INITIAL_DELAY = 5*60*1000;
     private static final long RUN_DELAY = 30*60*1000;
 
-    @SuppressWarnings("SleepWhileInLoop")
     public void run() {
+        _thread = Thread.currentThread();
         try {
             Thread.sleep(INITIAL_DELAY);
         } catch (InterruptedException ie) {
             return;
         }
-        while (true) {
+        while (_isRunning && _context.router().isAlive()) {
             if (shouldFetchNews()) {
                 fetchNews();
             }
@@ -193,7 +202,10 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             if (copied) {
                 _lastUpdated = now;
                 _tempFile.delete();
-                // notify somebody?
+
+                // Notify user
+                _notif.notify("News Updated", "Touch to view latest I2P news",
+                        NewsActivity.class);
             } else {
                 if (_log.shouldLog(Log.ERROR))
                     _log.error("Failed to copy the news file!");
@@ -214,4 +226,12 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     }
     public void headerReceived(String url, int attemptNum, String key, String val) {}
     public void attempting(String url) {}
+
+    private class Shutdown implements Runnable {
+        public void run() {
+            _isRunning = false;
+            if (_thread != null)
+                _thread.interrupt();
+        }
+    }
 }
