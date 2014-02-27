@@ -61,7 +61,7 @@
                 <exclude name="net/i2p/util/SecureDirectory.class" />
                 <exclude name="net/i2p/util/SecureFile.class" />
                 <exclude name="net/i2p/util/SecureFileOutputStream.class" />
-            </zipfileset >
+            </zipfileset>
         </jar>
 
         <!-- i2ptunnel -->
@@ -70,7 +70,7 @@
         <jar destfile="${jar.libs.dir}/i2ptunnel.jar" >
             <zipfileset src="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" >
                 <exclude name="net/i2p/i2ptunnel/I2PTunnelGUI.class" />
-            </zipfileset >
+            </zipfileset>
         </jar>
 
         <!-- addressbook - make a jar, it's a war in the i2p distro -->
