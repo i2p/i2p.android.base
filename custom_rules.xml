@@ -364,17 +364,6 @@
     <property name="version.name" value="${my.version.name}" />
     <echo message="version.code '${version.code}', 'version.name '${version.name}', '${my.version.name}'" />
 
-    <!-- If we are missing any jars, we _MUST_ make them ahead of time so
-	 the build does not fail! _HOWEVER_ we must only do this if we are
-	 _BUILDING_! Apache Ant does not allow us to know what target we are
-	 about to run, because the authors believe it is 'evil' and other
-	 nonsense. So for now (so sorry!) we force build it ahead of time
-	 always, no matter what target was selected, until some better way
-	 of resolving this issue apears.
-    -->
-    <ant dir="routerjars" inheritall="false" useNativeBasedir="true" >
-	<target name="buildrouter" />
-    </ant>
     <!--
          ================================================================================
          New I2P rules
@@ -394,12 +383,9 @@
     <!-- overrides of those in main_rules.xml -->
 
     <target name="-pre-build" depends="copy-i2p-resources" >
-        <!-- aapt messes up when resources are added or deleted, just build every time
-        <delete dir="${gen.absolute.dir}/net" verbose="${verbose}" />
-         -->
-        <!-- screw it, do the classes too, until I add the depend class
-        <delete dir="${out.absolute.dir}/classes/net" verbose="${verbose}" />
-        -->
+        <ant dir="routerjars" inheritall="false" useNativeBasedir="true" >
+            <target name="buildrouter" />
+        </ant>
     </target>
 
 <!--
@@ -423,17 +409,8 @@
         <copy file="LICENSE.txt" tofile="res/raw/license_app_txt" />
         <copy file="licenses/LICENSE-Apache2.0.txt" tofile="res/raw/license_apache20_txt" />
         <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="res/drawable/" />
-	<!-- 
-	
-	No, no, no. Wrong, wrong, wrong. Static web sources should be in
-        the assets directory. 
-        
-        <copy file="${i2pbase}/installer/resources/themes/console/images/outbound.png" todir="res/drawable/" />
-        <copy file="${i2pbase}/installer/resources/themes/console/images/inbound.png" todir="res/drawable/" />
-        <copy file="${i2pbase}/installer/resources/themes/console/light/images/header.png" todir="res/drawable/" />
-        <copy file="${i2pbase}/installer/resources/themes/console/light/console.css" tofile="res/drawable/console_css" />
-        -->
-        
+
+        <!-- Static web sources should be in the assets directory.  -->
         <copy file="${i2pbase}/installer/resources/themes/console/images/i2plogo.png" todir="assets/themes/console/images/" />
         <copy file="${i2pbase}/installer/resources/themes/console/images/outbound.png" todir="assets/themes/console/images/" />
         <copy file="${i2pbase}/installer/resources/themes/console/images/inbound.png" todir="assets/themes/console/images/" />
@@ -497,9 +474,9 @@
     </target>
 
     <target name="distclean" depends="clean">
-    	<ant dir="routerjars" inheritall="false" useNativeBasedir="true" >
-    		<target name="distclean" />
-    	</ant>
+        <ant dir="routerjars" inheritall="false" useNativeBasedir="true" >
+            <target name="distclean" />
+        </ant>
         <delete file="scripts/build.number" verbose="${verbose}" />
         <delete file="scripts/version.properties" verbose="${verbose}" />
         <delete file="AndroidManifest.xml" verbose="${verbose}" />
