@@ -470,6 +470,7 @@
         <delete file="res/raw/license_gplv2_txt" />
         <delete file="res/raw/license_gplv3_txt" />
         <delete file="res/raw/license_lgplv3_txt" />
+        <delete file="res/raw/license_fatcowicons_txt" />
         <delete file="res/raw/certificates_zip" />
     </target>
 
