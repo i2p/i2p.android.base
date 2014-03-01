@@ -96,7 +96,7 @@ public class MainActivity extends I2PActivityBase {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/").build());
-                intent.setData(Uri.parse("http://www.i2p2.de/"));
+                intent.setData(Uri.parse("https://geti2p.net/"));
                 startActivity(intent);
             }
         });
@@ -107,7 +107,7 @@ public class MainActivity extends I2PActivityBase {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WebActivity.class);
                 //intent.setData((new Uri.Builder()).scheme("http").authority("www.i2p2.de").path("/faq").build());
-                intent.setData(Uri.parse("http://www.i2p2.de/faq"));
+                intent.setData(Uri.parse("https://geti2p.net/faq"));
                 startActivity(intent);
             }
         });

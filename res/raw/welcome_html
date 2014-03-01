@@ -74,11 +74,8 @@ intercept your conversation!
     <h3>I2P-Hosted Sites of Interest</h3>
     <ul class="links">
       <li class="tidylist"><b>Invisible Internet Project (I2P) Official 
-Website</b><br><a href="http://www.i2p2.i2p/" target="_blank">www.i2p2.i2p</a> 
-and 
-        its mirror <a href="http://i2p-projekt.i2p/" 
-target="_blank">i2p-projekt.i2p</a>: Secure and 
-        anonymous connections to <a href="http://www.i2p2.de/" 
+Website</b><br><a href="http://i2p-projekt.i2p/" target="_blank">i2p-projekt.i2p</a>:
+Secure and anonymous connections to <a href="http://www.i2p2.de/" 
 target="_blank">www.i2p2.de</a>. There's also an official mirror running on <a 
 href="http://geti2p.net/" target="_blank">geti2p.net</a>. If you want to know 
 more about how I2P works or how you can participate, this is your first port of 
@@ -91,7 +88,7 @@ and users alike discuss problems and ideas relating to I2P and associated
 topics, and <a href="http://zzz.i2p/" target="_blank">zzz's developer 
 forums</a> for both end users and developers.</li>
       <li class="tidylist"><b>I2P Anonymous Pastebin</b><br><a 
-href="http://paste.i2p2.i2p/" target="_blank">paste.i2p2.i2p</a>: Secure and 
+href="http://pastethis.i2p/" target="_blank">paste.i2p2.i2p</a>: Secure and 
         anonymous paste service allowing anonymous text and text-based code 
 sharing over I2P.</li>
       <li class="tidylist"><b>Echelon's I2P Resources</b><br><a 
@@ -141,12 +138,12 @@ than 5, there are several things you can do to check for problems:
 <li class="tidylist"><b>Check Your Logs</b><br>Logs may 
 help resolve a problem. You may wish to paste excerpts in a <a 
 href="http://forum.i2p/viewforum.php?f=10" target="_blank">forum</a> for help, 
-or perhaps <a href="http://paste.i2p2.i2p/" target="_blank">paste</a> it 
+or perhaps <a href="http://pastethis.i2p/" target="_blank">paste</a> it 
 instead and reference the link on IRC for help.
   </li> 
 
 <li class="tidylist"><b>Getting Support Online</b><br>You may also want 
-  to review the information on the <a href="http://www.i2p2.i2p/" 
+  to review the information on the <a href="http://i2p-projekt.i2p/" 
 target="_blank">I2P website</a>, 
   post messages to the <a href="http://forum.i2p/" target="_blank">I2P 
 discussion forum</a> (also reachable <a href="http://forum.i2p2.de/" 
@@ -170,24 +167,24 @@ href="http://stats.i2p/cgi-bin/viewmtn/" target="_blank">zzz's mtn repository
 viewer</a>, <a href="http://i2host.i2p/cgi-bin/view/branch/changes/i2p.i2p" 
 target="_blank">Sponge's instance</a>, or via <a 
 href="http://trac.i2p2.i2p/browser" target="_blank">trac.i2p2.i2p</a>. We 
-primarily use <a href="http://www.i2p2.i2p/monotone.html" 
+primarily use <a href="http://i2p-projekt.i2p/monotone.html" 
 target="_blank">monotone</a> to manage our source code.
   </li>
 
 <li class="tidylist"><b>Get Involved!</b><br>I2P is developed and maintained 
 mostly through unfunded, voluntary participation by community members. We're 
-happy to accept <a href="http://www.i2p2.i2p/donate.html" 
+happy to accept <a href="http://i2p-projekt.i2p/donate.html" 
 target="_blank">donations</a>, which go into essential hosting and 
-administrative costs. We have <a href="http://www.i2p2.i2p/bounties.html" 
+administrative costs. We have <a href="http://i2p-projekt.i2p/bounties.html" 
 target="_blank">cash bounties</a> for aspects of I2P for developers looking for 
 incentives to participate, and we're always looking for more <a 
-href="http://www.i2p2.i2p/newdevelopers.html" target="_blank">Java coders</a>, 
-<a href="http://www.i2p2.i2p/newtranslators.html" 
+href="http://i2p-projekt.i2p/newdevelopers.html" target="_blank">Java coders</a>, 
+<a href="http://i2p-projekt.i2p/newtranslators.html" 
 target="_blank">translators</a>, promoters and users to help I2P grow. The 
 bigger the I2P network, the more everyone benefits, so simply telling all your 
 friends about I2P (and lending a hand with the installation and setup where 
 needed) is a big help. For further info on how you can participate, visit the 
-<a href="http://www.i2p2.i2p/getinvolved.html" target="_blank">volunteers 
+<a href="http://i2p-projekt.i2p/getinvolved.html" target="_blank">volunteers 
 page</a> on the website.
   </li>
 
