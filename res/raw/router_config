@@ -26,7 +26,7 @@ i2cp.disableInterface=true
 # Todo: implement a NamingService using the android native SQLite
 #
 i2p.naming.impl=net.i2p.client.naming.HostsTxtNamingService
-i2p.hostsfilelist=hosts.txt
+i2p.hostsfilelist=privatehosts.txt,hosts.txt
 #
 ##### Tunnels
 #

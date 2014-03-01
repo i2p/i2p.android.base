@@ -66,12 +66,12 @@ echo "Android version: '$VERSIONSTRING' (${VERSIONINT})"
 echo "my.version.name=${VERSIONSTRING}" > version.properties
 echo "my.version.code=${VERSIONINT}" >> version.properties
 
-SUBST='s/android.versionCode="[0-9]*"/android.versionCode="'${VERSIONINT}'"/'
+SUBST='s/android:versionCode="[0-9]*"/android:versionCode="'${VERSIONINT}'"/'
 sed "$SUBST" < $MANIFEST > $TMP
-SUBST='s/android.versionName="[^"]*"/android.versionName="'${VERSIONSTRING}'"/'
+SUBST='s/android:versionName="[^"]*"/android:versionName="'${VERSIONSTRING}'"/'
 sed "$SUBST" < $TMP > $MANIFEST
-SUBST='s/android.versionCode="[0-9]*"/android.versionCode="'${VERSIONINT}'"/'
+SUBST='s/android:versionCode="[0-9]*"/android:versionCode="'${VERSIONINT}'"/'
 sed "$SUBST" < $MANIFESTROUTER > $TMP
-SUBST='s/android.versionName="[^"]*"/android.versionName="'${VERSIONSTRING}'"/'
+SUBST='s/android:versionName="[^"]*"/android:versionName="'${VERSIONSTRING}'"/'
 sed "$SUBST" < $TMP > $MANIFESTROUTER
 rm -f $TMP

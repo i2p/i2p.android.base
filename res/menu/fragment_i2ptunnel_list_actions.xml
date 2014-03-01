@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:i2pandroid="http://schemas.android.com/apk/res-auto" >
+    <item android:id="@+id/action_add_tunnel"
+          android:title="@string/action_add"
+          android:icon="@drawable/ic_content_new"
+          i2pandroid:showAsAction="ifRoom" />
+    <item android:id="@+id/action_start_all_tunnels"
+       	  android:title="@string/action_i2ptunnel_start_all"
+       	  i2pandroid:showAsAction="never" />
+    <item android:id="@+id/action_stop_all_tunnels"
+       	  android:title="@string/action_i2ptunnel_stop_all"
+       	  i2pandroid:showAsAction="never" />
+    <item android:id="@+id/action_restart_all_tunnels"
+       	  android:title="@string/action_i2ptunnel_restart_all"
+       	  i2pandroid:showAsAction="never" />
+    <item android:id="@+id/action_i2ptunnel_help"
+          android:title="@string/menu_help"
+          i2pandroid:showAsAction="never" />
+
+</menu>

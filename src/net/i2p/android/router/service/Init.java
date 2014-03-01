@@ -34,7 +34,7 @@ class Init {
         if (files != null) {
             for (int i = 0; i < files.length; i++) {
                 File f = files[i];
-                Util.i("Deleting old file/dir " + f);
+                Util.d("Deleting old file/dir " + f);
                 FileUtil.rmdir(f, false);
             }
         }

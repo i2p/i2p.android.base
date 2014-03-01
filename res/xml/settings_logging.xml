@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+	<ListPreference
+	    android:key="logger.defaultLevel"
+	    android:entries="@array/log_levels"
+	    android:entryValues="@array/log_levels"
+	    android:title="@string/settings_label_default_log_level"
+	    android:summary="%s"
+	    android:defaultValue="ERROR"
+	    />
+</PreferenceScreen>

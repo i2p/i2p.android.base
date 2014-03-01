@@ -9,7 +9,7 @@ import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
-import net.i2p.android.router.binder.RouterBinder;
+import net.i2p.android.router.service.RouterBinder;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
 

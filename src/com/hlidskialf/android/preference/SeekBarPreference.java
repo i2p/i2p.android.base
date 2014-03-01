@@ -49,8 +49,14 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
     public SeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-        mDialogMessage = attrs.getAttributeValue(androidns, "dialogMessage");
-        mSuffix = attrs.getAttributeValue(androidns, "text");
+        int dialogMessageR = attrs.getAttributeResourceValue(androidns, "dialogMessage", 0);
+        mDialogMessage = (dialogMessageR == 0)
+                ? attrs.getAttributeValue(androidns, "dialogMessage")
+                : context.getResources().getString(dialogMessageR);
+        int textR = attrs.getAttributeResourceValue(androidns, "text", 0);
+        mSuffix = (textR == 0)
+                ? attrs.getAttributeValue(androidns, "text")
+                : context.getResources().getString(textR);
         mDefault = attrs.getAttributeValue(androidns, "defaultValue");
         mMax = Integer.parseInt(attrs.getAttributeValue(androidns, "max"));
         if (attrs.getAttributeValue(androidns, "direction") != null) {
@@ -84,7 +90,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         mValueText.setGravity(Gravity.CENTER_HORIZONTAL);
         mValueText.setTextSize(32);
         params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         layout.addView(mValueText, params);
 
@@ -93,7 +99,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         // Move the bar away from the changing text, so you can see it, and
         // move it away from the edges to improve usability for the end-ranges.
         mSeekBar.setPadding(6, 30, 6, 6);
-        layout.addView(mSeekBar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        layout.addView(mSeekBar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
         if (shouldPersist()) {
             mValue = Integer.parseInt(getPersistedString(mDefault));
@@ -126,7 +132,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         if (shouldPersist()) {
             persistString(t);
         }
-        callChangeListener(new Integer(value));
+        callChangeListener(Integer.valueOf(value));
     }
 
     public void onStartTrackingTouch(SeekBar seek) {

@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteCallbackList;
+import android.os.RemoteException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,8 +17,10 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
-import net.i2p.android.router.binder.RouterBinder;
+
+import net.i2p.android.router.R;
 import net.i2p.android.router.receiver.I2PReceiver;
+import net.i2p.android.router.util.Notifications;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.router.Job;
@@ -30,7 +36,7 @@ public class RouterService extends Service {
 
     // These states persist even if we died... Yuck, it causes issues.
     public enum State {
-        INIT, WAITING, STARTING, RUNNING,
+        INIT, WAITING, STARTING, RUNNING, ACTIVE,
         // unplanned (router stopped itself), next: killSelf()
         STOPPING, STOPPED,
         // button, don't kill service when stopped, stay in MANUAL_STOPPED
@@ -46,21 +52,32 @@ public class RouterService extends Service {
     private State _state = State.INIT;
     private Thread _starterThread;
     private StatusBar _statusBar;
+    private Notifications _notif;
     private I2PReceiver _receiver;
     private IBinder _binder;
     private final Object _stateLock = new Object();
     private Handler _handler;
     private Runnable _updater;
+    private boolean mStartCalled;
     private static final String SHARED_PREFS = "net.i2p.android.router";
     private static final String LAST_STATE = "service.lastState";
     private static final String EXTRA_RESTART = "restart";
     private static final String MARKER = "**************************************  ";
 
+    /**
+     * This is a list of callbacks that have been registered with the
+     * service.  Note that this is package scoped (instead of private) so
+     * that it can be accessed more efficiently from inner classes.
+     */
+    final RemoteCallbackList<IRouterStateCallback> mStateCallbacks
+            = new RemoteCallbackList<IRouterStateCallback>();
+
     @Override
     public void onCreate() {
+        mStartCalled = false;
         State lastState = getSavedState();
         setState(State.INIT);
-        Util.i(this + " onCreate called"
+        Util.d(this + " onCreate called"
                 + " Saved state is: " + lastState
                 + " Current state is: " + _state);
 
@@ -73,10 +90,11 @@ public class RouterService extends Service {
         _statusBar = new StatusBar(this);
         // Remove stale notification icon.
         _statusBar.remove();
+        _notif = new Notifications(this);
         _binder = new RouterBinder(this);
         _handler = new Handler();
         _updater = new Updater();
-        if(lastState == State.RUNNING) {
+        if(lastState == State.RUNNING || lastState == State.ACTIVE) {
             Intent intent = new Intent(this, RouterService.class);
             intent.putExtra(EXTRA_RESTART, true);
             onStartCommand(intent, 12345, 67890);
@@ -93,14 +111,15 @@ public class RouterService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Util.i(this + " onStart called"
+        Util.d(this + " onStart called"
                 + " Intent is: " + intent
                 + " Flags is: " + flags
                 + " ID is: " + startId
                 + " Current state is: " + _state);
+        mStartCalled = true;
         boolean restart = intent != null && intent.getBooleanExtra(EXTRA_RESTART, false);
         if(restart) {
-            Util.i(this + " RESTARTING");
+            Util.d(this + " RESTARTING");
         }
         synchronized(_stateLock) {
             if(_state != State.INIT) //return START_STICKY;
@@ -110,15 +129,15 @@ public class RouterService extends Service {
             _receiver = new I2PReceiver(this);
             if(Util.isConnected(this)) {
                 if(restart) {
-                    _statusBar.replace(StatusBar.ICON1, "I2P is restarting");
+                    _statusBar.replace(StatusBar.ICON_STARTING, "I2P is restarting");
                 } else {
-                    _statusBar.replace(StatusBar.ICON1, "I2P is starting up");
+                    _statusBar.replace(StatusBar.ICON_STARTING, "I2P is starting up");
                 }
                 setState(State.STARTING);
                 _starterThread = new Thread(new Starter());
                 _starterThread.start();
             } else {
-                _statusBar.replace(StatusBar.ICON6, "I2P is waiting for a network connection");
+                _statusBar.replace(StatusBar.ICON_WAITING_NETWORK, "I2P is waiting for a network connection");
                 setState(State.WAITING);
                 _handler.postDelayed(new Waiter(), 10 * 1000);
             }
@@ -139,7 +158,7 @@ public class RouterService extends Service {
     private class Waiter implements Runnable {
 
         public void run() {
-            Util.i(MARKER + this + " waiter handler"
+            Util.d(MARKER + this + " waiter handler"
                     + " Current state is: " + _state);
             if(_state == State.WAITING) {
                 if(Util.isConnected(RouterService.this)) {
@@ -147,7 +166,7 @@ public class RouterService extends Service {
                         if(_state != State.WAITING) {
                             return;
                         }
-                        _statusBar.replace(StatusBar.ICON1, "Network connected, I2P is starting up");
+                        _statusBar.replace(StatusBar.ICON_STARTING, "Network connected, I2P is starting up");
                         setState(State.STARTING);
                         _starterThread = new Thread(new Starter());
                         _starterThread.start();
@@ -162,11 +181,11 @@ public class RouterService extends Service {
     private class Starter implements Runnable {
 
         public void run() {
-            Util.i(MARKER + this + " starter thread"
+            Util.d(MARKER + this + " starter thread"
                     + " Current state is: " + _state);
-            //Util.i(MARKER + this + " JBigI speed test started");
+            //Util.d(MARKER + this + " JBigI speed test started");
             //NativeBigInteger.main(null);
-            //Util.i(MARKER + this + " JBigI speed test finished, launching router");
+            //Util.d(MARKER + this + " JBigI speed test finished, launching router");
 
 
             // Before we launch, fix up any settings that need to be fixed here.
@@ -319,16 +338,16 @@ public class RouterService extends Service {
                 if((contexts == null) || (contexts.isEmpty())) {
                     throw new IllegalStateException("No contexts. This is usually because the router is either starting up or shutting down.");
                 }
-                _statusBar.replace(StatusBar.ICON2, "I2P is running");
+                _statusBar.replace(StatusBar.ICON_RUNNING, "I2P is running");
                 _context = (RouterContext) contexts.get(0);
                 _context.router().setKillVMOnEnd(false);
-                Job loadJob = new LoadClientsJob(_context);
+                Job loadJob = new LoadClientsJob(_context, _notif);
                 _context.jobQueue().addJob(loadJob);
                 _context.addShutdownTask(new ShutdownHook());
                 _context.addFinalShutdownTask(new FinalShutdownHook());
                 _starterThread = null;
             }
-            Util.i("Router.main finished");
+            Util.d("Router.main finished");
         }
     }
 
@@ -336,7 +355,7 @@ public class RouterService extends Service {
 
         public void run() {
             RouterContext ctx = _context;
-            if(ctx != null && _state == State.RUNNING) {
+            if(ctx != null && (_state == State.RUNNING || _state == State.ACTIVE)) {
                 Router router = ctx.router();
                 if(router.isAlive()) {
                     updateStatus(ctx);
@@ -345,6 +364,7 @@ public class RouterService extends Service {
             _handler.postDelayed(this, 15 * 1000);
         }
     }
+    private String _currTitle;
     private boolean _hadTunnels;
 
     private void updateStatus(RouterContext ctx) {
@@ -367,33 +387,80 @@ public class RouterService extends Service {
             fmt = new DecimalFormat("#0.00");
         }
 
-        String status =
-                "I2P "
-                + active + '/' + known + " peers connected";
+        String text =
+                getResources().getString(R.string.notification_status_bw,
+                        fmt.format(inBW), fmt.format(outBW)); 
 
-        String details =
-                fmt.format(inBW) + '/' + fmt.format(outBW) + " KBps"
-                + "; Expl " + inEx + '/' + outEx
-                + "; Client " + inCl + '/' + outCl;
+        String bigText =
+                getResources().getString(R.string.notification_status_bw,
+                        fmt.format(inBW), fmt.format(outBW)) + '\n'
+                + getResources().getString(R.string.notification_status_peers,
+                        active, known) + '\n'
+                + getResources().getString(R.string.notification_status_expl,
+                        inEx, outEx) + '\n'
+                + getResources().getString(R.string.notification_status_client,
+                        inCl, outCl);
 
         boolean haveTunnels = inCl > 0 && outCl > 0;
         if(haveTunnels != _hadTunnels) {
             if(haveTunnels) {
-                _statusBar.replace(StatusBar.ICON3, "Client tunnels are ready");
+                _currTitle = "Client tunnels are ready";
+                setState(State.ACTIVE);
+                _statusBar.replace(StatusBar.ICON_ACTIVE, _currTitle);
             } else {
-                _statusBar.replace(StatusBar.ICON2, "Client tunnels are down");
+                _currTitle = "Client tunnels are down";
+                setState(State.RUNNING);
+                _statusBar.replace(StatusBar.ICON_RUNNING, _currTitle);
             }
             _hadTunnels = haveTunnels;
-        }
-        _statusBar.update(status, details);
+        } else if (_currTitle == null || _currTitle.equals(""))
+            _currTitle = "I2P is running";
+        _statusBar.update(_currTitle, text, bigText);
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        Util.i(this + "onBind called"
+        Util.d(this + "onBind called"
                 + " Current state is: " + _state);
-        return _binder;
+        Util.d("Intent action: " + intent.getAction());
+        // Select the interface to return.
+        if (RouterBinder.class.getName().equals(intent.getAction())) {
+            // Local Activity wanting access to the RouterContext
+            Util.d("Returning RouterContext binder");
+            return _binder;
+        }
+        if (IRouterState.class.getName().equals(intent.getAction())) {
+            // Someone wants to monitor the router state.
+            Util.d("Returning state binder");
+            return mStatusBinder;
+        }
+        Util.d("Unknown binder request, returning null");
+        return null;
     }
+
+    /**
+     * IRouterState is defined through IDL
+     */
+    private final IRouterState.Stub mStatusBinder = new IRouterState.Stub() {
+
+        public void registerCallback(IRouterStateCallback cb)
+                throws RemoteException {
+            if (cb != null) mStateCallbacks.register(cb);
+        }
+
+        public void unregisterCallback(IRouterStateCallback cb)
+                throws RemoteException {
+            if (cb != null) mStateCallbacks.unregister(cb);
+        }
+
+        public boolean isStarted() throws RemoteException {
+            return mStartCalled;
+        }
+
+        public String getState() throws RemoteException {
+            return _state.name();
+        }
+    };
 
     @Override
     public boolean onUnbind(Intent intent) {
@@ -413,6 +480,7 @@ public class RouterService extends Service {
             return null;
         }
         if(_state != State.RUNNING
+                && _state != State.ACTIVE
                 && _state != State.STOPPING
                 && _state != State.MANUAL_STOPPING
                 && _state != State.MANUAL_QUITTING
@@ -430,14 +498,14 @@ public class RouterService extends Service {
     }
 
     public boolean canManualStop() {
-        return _state == State.WAITING || _state == State.STARTING || _state == State.RUNNING;
+        return _state == State.WAITING || _state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE;
     }
 
     /**
      * Stop and don't restart the router, but keep the service
      */
     public void manualStop() {
-        Util.i("manualStop called"
+        Util.d("manualStop called"
                 + " Current state is: " + _state);
         synchronized(_stateLock) {
             if(!canManualStop()) {
@@ -446,8 +514,8 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING) {
-                _statusBar.replace(StatusBar.ICON4, "Stopping I2P");
+            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
+                _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P");
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_STOPPING, State.MANUAL_STOPPED));
                 stopperThread.start();
             }
@@ -458,7 +526,7 @@ public class RouterService extends Service {
      * Stop the router and kill the service
      */
     public void manualQuit() {
-        Util.i("manualQuit called"
+        Util.d("manualQuit called"
                 + " Current state is: " + _state);
         synchronized(_stateLock) {
             if(!canManualStop()) {
@@ -467,8 +535,8 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING) {
-                _statusBar.replace(StatusBar.ICON4, "Stopping I2P");
+            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
+                _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P");
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_QUITTING, State.MANUAL_QUITTED));
                 stopperThread.start();
             } else if(_state == State.WAITING) {
@@ -482,14 +550,14 @@ public class RouterService extends Service {
      * Stop and then spin waiting for a network connection, then restart
      */
     public void networkStop() {
-        Util.i("networkStop called"
+        Util.d("networkStop called"
                 + " Current state is: " + _state);
         synchronized(_stateLock) {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING) {
-                _statusBar.replace(StatusBar.ICON4, "Network disconnected, stopping I2P");
+            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
+                _statusBar.replace(StatusBar.ICON_STOPPING, "Network disconnected, stopping I2P");
                 // don't change state, let the shutdown hook do it
                 Thread stopperThread = new Thread(new Stopper(State.NETWORK_STOPPING, State.NETWORK_STOPPING));
                 stopperThread.start();
@@ -503,13 +571,13 @@ public class RouterService extends Service {
     }
 
     public void manualStart() {
-        Util.i("restart called"
+        Util.d("restart called"
                 + " Current state is: " + _state);
         synchronized(_stateLock) {
             if(!canManualStart()) {
                 return;
             }
-            _statusBar.replace(StatusBar.ICON1, "I2P is starting up");
+            _statusBar.replace(StatusBar.ICON_STARTING, "I2P is starting up");
             setState(State.STARTING);
             _starterThread = new Thread(new Starter());
             _starterThread.start();
@@ -517,13 +585,43 @@ public class RouterService extends Service {
     }
 
     // ******** end methods accessed from Activities and Receivers ************
+
+    private static final int STATE_MSG = 1;
+
+    /**
+     * Our Handler used to execute operations on the main thread.
+     */
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+            case STATE_MSG:
+                String state = _state.name();
+                // Broadcast to all clients the new state.
+                final int N = mStateCallbacks.beginBroadcast();
+                for (int i = 0; i < N; i++) {
+                    try {
+                        mStateCallbacks.getBroadcastItem(i).stateChanged(state);
+                    } catch (RemoteException e) {
+                        // The RemoteCallbackList will take care of removing
+                        // the dead object for us.
+                    }
+                }
+                mStateCallbacks.finishBroadcast();
+                break;
+            default:
+                super.handleMessage(msg);
+            }
+        }
+    };
+
     /**
      * Turn off the status bar. Unregister the receiver. If we were running,
      * fire up the Stopper thread.
      */
     @Override
     public void onDestroy() {
-        Util.i("onDestroy called"
+        Util.d("onDestroy called"
                 + " Current state is: " + _state);
 
         _handler.removeCallbacks(_updater);
@@ -545,9 +643,9 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING) {
+            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
                 // should this be in a thread?
-                _statusBar.replace(StatusBar.ICON5, "I2P is shutting down");
+                _statusBar.replace(StatusBar.ICON_SHUTTING_DOWN, "I2P is shutting down");
                 Thread stopperThread = new Thread(new Stopper(State.STOPPING, State.STOPPED));
                 stopperThread.start();
             }
@@ -574,14 +672,14 @@ public class RouterService extends Service {
 
         public void run() {
             try {
-                Util.i(MARKER + this + " stopper thread"
+                Util.d(MARKER + this + " stopper thread"
                         + " Current state is: " + _state);
                 RouterContext ctx = _context;
                 if(ctx != null) {
                     ctx.router().shutdown(Router.EXIT_HARD);
                 }
                 _statusBar.remove();
-                Util.i("********** Router shutdown complete");
+                Util.d("********** Router shutdown complete");
                 synchronized(_stateLock) {
                     if(_state == nextState) {
                         setState(stopState);
@@ -600,9 +698,9 @@ public class RouterService extends Service {
     private class ShutdownHook implements Runnable {
 
         public void run() {
-            Util.i(this + " shutdown hook"
+            Util.d(this + " shutdown hook"
                     + " Current state is: " + _state);
-            _statusBar.replace(StatusBar.ICON5, "I2P is shutting down");
+            _statusBar.replace(StatusBar.ICON_SHUTTING_DOWN, "I2P is shutting down");
             I2PReceiver rcvr = _receiver;
             if(rcvr != null) {
                 synchronized(rcvr) {
@@ -622,7 +720,7 @@ public class RouterService extends Service {
                     _starterThread.interrupt();
                 }
                 if(_state == State.WAITING || _state == State.STARTING
-                        || _state == State.RUNNING) {
+                        || _state == State.RUNNING || _state == State.ACTIVE) {
                     setState(State.STOPPING);
                 }
             }
@@ -639,7 +737,7 @@ public class RouterService extends Service {
 
         public void run() {
             try {
-                Util.i(this + " final shutdown hook"
+                Util.d(this + " final shutdown hook"
                         + " Current state is: " + _state);
                 //I2PReceiver rcvr = _receiver;
 
@@ -657,13 +755,17 @@ public class RouterService extends Service {
                         setState(State.WAITING);
                         _handler.postDelayed(new Waiter(), 10 * 1000);
                     } else if(_state == State.STARTING || _state == State.RUNNING
-                            || _state == State.STOPPING) {
-                        Util.i(this + " died of unknown causes");
+                            || _state == State.ACTIVE || _state == State.STOPPING) {
+                        Util.w(this + " died of unknown causes");
                         setState(State.STOPPED);
+                        // Unregister all callbacks.
+                        mStateCallbacks.kill();
                         stopForeground(true);
                         stopSelf();
                     } else if(_state == State.MANUAL_QUITTING) {
                         setState(State.MANUAL_QUITTED);
+                        // Unregister all callbacks.
+                        mStateCallbacks.kill();
                         stopForeground(true);
                         stopSelf();
                     }
@@ -688,6 +790,7 @@ public class RouterService extends Service {
     private void setState(State s) {
         _state = s;
         saveState();
+        mHandler.sendEmptyMessage(STATE_MSG);
     }
 
     /**
