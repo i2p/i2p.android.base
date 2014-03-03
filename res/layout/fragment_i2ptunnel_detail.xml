@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tunnel_name"
-        android:text="Type:" />
+        android:text="@string/i2ptunnel_view_type" />
 
     <TextView
         android:id="@+id/textView1"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView2"
-        android:text="Description:" />
+        android:text="@string/i2ptunnel_view_desc" />
 
     <TextView
         android:id="@+id/tunnel_type"
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView1"
-        android:text="Target:" />
+        android:text="@string/i2ptunnel_view_target" />
 
     <TextView
         android:id="@+id/textView4"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView3"
-        android:text="Access point:" />
+        android:text="@string/i2ptunnel_view_access_point" />
 
     <TextView
         android:id="@+id/tunnel_access_interface_port"
@@ -87,6 +87,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:clickable="false"
-        android:text="Auto start" />
+        android:text="@string/i2ptunnel_view_autostart" />
 
 </RelativeLayout>
