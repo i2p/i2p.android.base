@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">I2P</string>
+  <string name="welcome_new_install">Bem vindo ao I2P! Este aplicativo está em estágio ALPHA e não provê anonimidade forte. Por favor leia as notas e informações de licença.</string>
   <string name="label_home">I2P - Página inicial</string>
   <string name="label_statistics">Estatísticas</string>
   <string name="label_main_controls">Principais controles</string>
