@@ -163,14 +163,14 @@ class InitActivities {
         }
     }
     /**
-     *  @param f relative to base dir
+     *  @param folder relative to base dir
      */
-    private void unzipResourceToDir(int resID, String f) {
+    private void unzipResourceToDir(int resID, String folder) {
         InputStream in = null;
         FileOutputStream out = null;
         ZipInputStream zis = null;
 
-        Util.d("Creating files in '" + myDir + "/" + f + "/' from resource");
+        Util.d("Creating files in '" + myDir + "/" + folder + "/' from resource");
         try {
             // Context methods
             in = ctx.getResources().openRawResource(resID);
@@ -185,11 +185,17 @@ class InitActivities {
                     while ((count = zis.read(buffer)) != -1) {
                         baos.write(buffer, 0, count);
                     }
-                    String filename = ze.getName();
-                    Util.d("Creating file " + myDir + "/" + f +"/" + filename + " from resource");
-                    byte[] bytes = baos.toByteArray();
-                    out = new FileOutputStream(new File(myDir + "/" + f +"/" + filename));
-                    out.write(bytes);
+                    String name = ze.getName();
+                    File f = new File(myDir + "/" + folder +"/" + name);
+                    if (ze.isDirectory()) {
+                        Util.d("Creating directory " + myDir + "/" + folder +"/" + name + " from resource");
+                        f.mkdir();
+                    } else {
+                        Util.d("Creating file " + myDir + "/" + folder +"/" + name + " from resource");
+                        byte[] bytes = baos.toByteArray();
+                        out = new FileOutputStream(f);
+                        out.write(bytes);
+                    }
                 } catch (IOException ioe) {
                 } finally {
                     if (out != null) { try { out.close(); } catch (IOException ioe) {} out = null; }
