@@ -44,13 +44,13 @@
                   android:label="I2P Web Browser"
                   android:configChanges="orientation|keyboardHidden" >
             <!-- Disabled, this browser is not very secure
+            Temporarily enabled until an alternative browser is ready -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:host="*.i2p" android:scheme="http" />
             </intent-filter>
-            -->
         </activity>
         <activity android:name=".SettingsActivity"
                   android:label="I2P Settings"
