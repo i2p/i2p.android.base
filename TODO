@@ -1,0 +1,44 @@
+# Required for release
+
+- Clean up res/ (remove unused files)
+- Clean up strings
+- Pull out any remaining hardcoded strings
+- Ensure all logging is conditional
+- Prevent accidental shutdown
+  - Add pop-up confirming router shutdown
+  - OR: make router button long-press
+- Display release notes directly on new router version
+- Text content
+  - Move help content from release notes to help page
+  - Rewrite release notes to be release-specific
+  - Fill out help page
+- Fix release notes UI, either make back button use clear or add buttons
+- I2PTunnel
+  - Fix bug with HTTP client tunnel wizard
+- NetDB tablet view fixes
+  - Refresh detail fragment when changing tab
+  - Move list to correct item when changing tab
+  - Create nav history when viewing RI from LS
+- Include GeoIP db for country info
+- Maybe change router-off mechanic for various pages? Enable as they become available?
+
+# Short-term
+
+- Expose log level overrides
+- Improve graphs
+  - Show time on bottom axis
+  - Show fixed x range, not only available data
+  - Think about pan/zoom
+  - How to persist data across restarts?
+- I2PTunnel
+  - Show all messages somewhere
+  - Improve detail page, expose advanced settings
+  - Add edit page
+
+# Long-term
+
+- Remote router support
+  - Implement a "router wrapper" that can represent a local or remote router
+  - Implement/use client APIs to talk to remote router
+    - I2CP
+    - I2PControl

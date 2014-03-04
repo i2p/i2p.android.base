@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about_version"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/about_version"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about_project"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/url_project"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/url_project" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about_bugs"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/url_android_bugs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/url_android_forum" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about_helpwanted"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about_volunteer" />
+
+        <TextView
+            android:id="@+id/url_android_volunteer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/url_android_forum" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about_donate" />
+
+        <TextView
+            android:id="@+id/url_donate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/url_donate" />
+
+    </LinearLayout>
+    
+
+</ScrollView>

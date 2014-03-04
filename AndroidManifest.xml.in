@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.i2p.android.router"
-      android.versionCode="0"
-      android.versionName="0.0.0-0_b0-API8"
+      android:versionCode="0"
+      android:versionName="0.0.0-0_b0-API8"
       android:installLocation="auto"
       >
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +19,7 @@
                   android:icon="@drawable/ic_launcher_itoopie" />
         <provider android:name=".provider.CacheProvider"
                   android:authorities="net.i2p.android.router" />
-        <activity android:name=".activity.MainActivity"
+        <activity android:name=".MainActivity"
                   android:label="@string/app_name"
                   android:icon="@drawable/ic_launcher_itoopie"
                   android:launchMode="singleTop" >
@@ -28,19 +28,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.NewsActivity"
+        <activity android:name=".NewsActivity"
                   android:label="I2P News"
                   android:configChanges="orientation|keyboardHidden" >
         </activity>
-        <activity android:name=".activity.TextResourceActivity"
-                  android:label="I2P Information" >
+        <activity android:name=".HelpActivity"
+                  android:label="Help"
+                  android:parentActivityName=".MainActivity" >
         </activity>
-        <activity android:name=".activity.LicenseActivity"
-                  android:label="I2P License Information" >
+        <activity android:name=".LicenseActivity"
+                  android:label="I2P License Information"
+                  android:parentActivityName=".HelpActivity" >
         </activity>
-        <activity android:name=".activity.WebActivity"
+        <activity android:name=".web.WebActivity"
                   android:label="I2P Web Browser"
                   android:configChanges="orientation|keyboardHidden" >
+            <!-- Disabled, this browser is not very secure
+            Temporarily enabled until an alternative browser is ready -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -48,25 +52,68 @@
                 <data android:host="*.i2p" android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SettingsActivity"
+        <activity android:name=".SettingsActivity"
                   android:label="I2P Settings"
-                  android:launchMode="singleTop" >
+                  android:parentActivityName=".MainActivity" >
         </activity>
-        <activity android:name=".activity.AddressbookSettingsActivity"
+        <activity android:name=".addressbook.AddressbookSettingsActivity"
                   android:label="I2P Addressbook Settings"
+                  android:parentActivityName=".addressbook.AddressbookActivity"
                   android:launchMode="singleTop" >
         </activity>
-        <activity android:name=".activity.AddressbookActivity"
+        <activity android:name=".addressbook.AddressbookActivity"
                   android:label="Addressbook"
                   android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable_addressbook"/>
         </activity>
-        <activity android:name=".activity.LogActivity"
-                  android:label="I2P Logs" >
+        <activity android:name=".addressbook.AddressbookAddWizardActivity"
+                  android:label="Add new Destination"
+                  android:parentActivityName=".addressbook.AddressbookActivity" >
         </activity>
-        <activity android:name=".activity.PeersActivity"
+        <activity android:name="net.i2p.android.i2ptunnel.TunnelListActivity"
+                  android:label="I2PTunnel"
+                  android:launchMode="singleTop" >
+        </activity>
+        <activity android:name="net.i2p.android.i2ptunnel.TunnelDetailActivity"
+                  android:label="I2PTunnel"
+                  android:parentActivityName="net.i2p.android.i2ptunnel.TunnelListActivity" >
+        </activity>
+        <activity android:name="net.i2p.android.i2ptunnel.TunnelWizardActivity"
+                  android:label="Tunnel Creation Wizard"
+                  android:parentActivityName="net.i2p.android.i2ptunnel.TunnelListActivity" >
+        </activity>
+        <activity android:name=".log.LogActivity"
+                  android:label="I2P Logs"
+                  android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity android:name=".log.LogDetailActivity"
+                  android:label="Log Entry"
+                  android:parentActivityName=".log.LogActivity" >
+        </activity>
+        <activity android:name=".stats.RateGraphActivity"
+                  android:label="Rate Graph"
+                  android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity android:name=".stats.PeersActivity"
                   android:label="I2P Peers and Transport Status"
                   android:configChanges="orientation|keyboardHidden"
                   android:launchMode="singleTop" >
+        </activity>
+        <activity android:name=".netdb.NetDbActivity"
+                  android:label="NetDB"
+                  android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity android:name=".netdb.NetDbDetailActivity"
+                  android:label="NetDB Detail"
+                  android:parentActivityName=".netdb.NetDbActivity" >
         </activity>
     </application>
 </manifest>

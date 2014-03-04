@@ -42,7 +42,7 @@
     <available property="have.router" file="${i2pbase}/build/router.jar" />
     <available property="have.bob" file="${i2pbase}/apps/BOB/dist/BOB.jar" />
     <available property="have.i2ptunnel" file="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" />
-    <available property="have.addressbook" file="${i2pbase}/apps/addressbook/build" />
+    <available property="have.addressbook" file="${i2pbase}/apps/addressbook/dist/addressbook.jar" />
 
     <target name="buildRouter" unless="have.router">
         <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildRouter" />
@@ -52,7 +52,7 @@
         <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildI2PTunnelJar" />
     </target>
     <target name="buildAddressbook" unless="have.addressbook">
-        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildAddressbook" />
+        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildAddressbookJar" />
     </target>
 
     <target name="buildBOB" unless="have.bob">
@@ -87,10 +87,8 @@
             </zipfileset>
         </jar>
 
-        <!-- addressbook - make a jar, it's a war in the i2p distro -->
-        <jar destfile="${jar.libs.dir}/addressbook.jar"
-             basedir="${i2pbase}/apps/addressbook/build"
-             excludes="net/i2p/addressbook/Servlet.class" />
+        <!-- addressbook -->
+        <copy file="${i2pbase}/apps/addressbook/dist/addressbook.jar" todir="${jar.libs.dir}" />
 
     </target>
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:i2pandroid="http://schemas.android.com/apk/res-auto" >
+    <item android:title="@string/action_reload"
+          android:id="@+id/menu_reload"
+          android:icon="@drawable/ic_navigation_refresh"
+          i2pandroid:showAsAction="ifRoom" >
+    </item>
+</menu>

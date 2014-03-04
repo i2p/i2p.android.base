@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:padding="10dp"
+    android:scrollbarStyle="outsideInset" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/dbentry_hash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Router hash" />
+
+        <TextView
+            android:id="@+id/label_ri_published"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/dbentry_hash"
+            android:text="Published:" />
+
+        <TextView
+            android:id="@+id/ri_published"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/label_ri_published"
+            android:layout_alignBottom="@+id/label_ri_published"
+            android:layout_alignParentRight="true"
+            android:text="X ago" />
+
+        <TextView
+            android:id="@+id/label_ri_addresses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/label_ri_published"
+            android:text="Address(es):" />
+
+        <LinearLayout
+            android:id="@+id/ri_addresses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/label_ri_addresses"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/label_ri_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ri_addresses"
+            android:text="Stats:" />
+
+        <TableLayout
+            android:id="@+id/ri_stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/label_ri_stats" />
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,8 +1,12 @@
 package net.i2p.android.router.service;
 
+import java.io.IOException;
+
+import net.i2p.I2PAppContext;
 import net.i2p.BOB.BOB;
 import net.i2p.addressbook.DaemonThread;
 import net.i2p.android.apps.NewsFetcher;
+import net.i2p.android.router.util.Notifications;
 import net.i2p.android.router.util.Util;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.router.Job;
@@ -31,16 +35,17 @@ import net.i2p.util.I2PAppThread;
  */
 class LoadClientsJob extends JobImpl {
 
-    private Thread _fetcherThread;
+    private Notifications _notif;
     private DaemonThread _addressbook;
-    private Thread _BOB;
+    private BOB _bob;
 
     /** this is the delay to load (and start) the clients. */
     private static final long LOAD_DELAY = 90*1000;
 
 
-    public LoadClientsJob(RouterContext ctx) {
+    public LoadClientsJob(RouterContext ctx, Notifications notif) {
         super(ctx);
+        _notif = notif;
         getTiming().setStartAfter(getContext().clock().now() + LOAD_DELAY);
     }
 
@@ -50,9 +55,13 @@ class LoadClientsJob extends JobImpl {
         Job j = new RunI2PTunnel(getContext());
         getContext().jobQueue().addJob(j);
 
-        NewsFetcher fetcher = NewsFetcher.getInstance(getContext());
-        _fetcherThread = new I2PAppThread(fetcher, "NewsFetcher", true);
-        _fetcherThread.start();
+        Thread t = new I2PAppThread(new StatSummarizer(), "StatSummarizer", true);
+        t.setPriority(Thread.NORM_PRIORITY - 1);
+        t.start();
+
+        NewsFetcher fetcher = NewsFetcher.getInstance(getContext(), _notif);
+        t = new I2PAppThread(fetcher, "NewsFetcher", true);
+        t.start();
 
         _addressbook = new DaemonThread(new String[] {"addressbook"});
         _addressbook.setName("Addressbook");
@@ -60,19 +69,12 @@ class LoadClientsJob extends JobImpl {
         _addressbook.start();
 
         // add other clients here
-        Run_BOB bob = new Run_BOB();
-        _BOB = new I2PAppThread(bob, "BOB", true);
-        _BOB.start();
-        getContext().addShutdownTask(new ClientShutdownHook());
-    }
+        _bob = new BOB(I2PAppContext.getGlobalContext(), null, new String[0]);
+        try {
+            _bob.startup();
+        } catch (IOException ioe) {}
 
-    private class Run_BOB implements Runnable {
-        public void run() {
-            Util.i("BOB starting...");
-            BOB.main(null);
-            Util.i("BOB Stopped.");
-            _BOB = null;
-        }
+        getContext().addShutdownTask(new ClientShutdownHook());
     }
 
     private class RunI2PTunnel extends JobImpl {
@@ -84,22 +86,22 @@ class LoadClientsJob extends JobImpl {
         public String getName() { return "Start I2P Tunnel"; };
 
         public void runJob() {
-            Util.i("Starting i2ptunnel");
+            Util.d("Starting i2ptunnel");
             TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
             int sz = tcg.getControllers().size();
-            Util.i("i2ptunnel started " + sz + " clients");
+            Util.d("i2ptunnel started " + sz + " clients");
 
         }
     }
 
     private class ClientShutdownHook implements Runnable {
         public void run() {
-            Util.i("client shutdown hook");
+            Util.d("client shutdown hook");
             // i2ptunnel registers its own hook
-            if (_BOB != null)
-                BOB.stop();
-            if (_fetcherThread != null)
-                _fetcherThread.interrupt();
+            // StatSummarizer registers its own hook
+            // NewsFetcher registers its own hook
+            if (_bob != null)
+                _bob.shutdown(null);
             if (_addressbook != null)
                 _addressbook.halt();
         }
