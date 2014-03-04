@@ -1,8 +1,5 @@
 # Required for release
 
-- Clean up res/ (remove unused files)
-- Clean up strings
-- Pull out any remaining hardcoded strings
 - Ensure all logging is conditional
 - Prevent accidental shutdown
   - Add pop-up confirming router shutdown
