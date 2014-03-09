@@ -298,4 +298,9 @@ public class SettingsActivity extends PreferenceActivity {
             }
         }
     }
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        return SettingsFragment.class.getName().equals(fragmentName);
+    }
 }
