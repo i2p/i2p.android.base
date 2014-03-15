@@ -23,6 +23,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.service.StatSummarizer;
 import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
 import net.i2p.stat.FrequencyStat;
@@ -76,7 +77,15 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     protected static void setupGraphSettings(Context context, PreferenceScreen ps, RouterContext ctx) {
-        if (ctx != null) {
+        if (ctx == null) {
+            PreferenceCategory noRouter = new PreferenceCategory(context);
+            noRouter.setTitle(R.string.router_not_running);
+            ps.addPreference(noRouter);
+        } else if (StatSummarizer.instance() == null) {
+            PreferenceCategory noStats = new PreferenceCategory(context);
+            noStats.setTitle(R.string.stats_not_ready);
+            ps.addPreference(noStats);
+        } else {
             StatManager mgr = ctx.statManager();
             Map<String, SortedSet<String>> all = mgr.getStatsByGroup();
             for (String group : all.keySet()) {
@@ -125,10 +134,6 @@ public class SettingsActivity extends PreferenceActivity {
                     groupPrefs.addPreference(statPref);
                 }
             }
-        } else {
-            PreferenceCategory noRouter = new PreferenceCategory(context);
-            noRouter.setTitle(R.string.router_not_running);
-            ps.addPreference(noRouter);
         }
     }
 

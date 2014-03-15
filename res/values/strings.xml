@@ -58,6 +58,7 @@
     <string name="action_reload_subscriptions">Reload subscriptions</string>
 
     <string name="router_not_running">The router is not running.</string>
+    <string name="stats_not_ready">The statistics manager is not ready yet. Try again later.</string>
 
     <string name="graphs_not_ready">Graphs are not ready, or the router is not running. Try again later.</string>
 
