@@ -51,9 +51,7 @@ public class SettingsActivity extends PreferenceActivity {
                 addPreferencesFromResource(R.xml.settings_net);
             } else if (ACTION_PREFS_GRAPHS.equals(action)){
                 addPreferencesFromResource(R.xml.settings_graphs);
-                RouterContext ctx = getRouterContext();
-                if (ctx != null)
-                    setupGraphSettings(this, getPreferenceScreen(), ctx);
+                setupGraphSettings(this, getPreferenceScreen(), getRouterContext());
             } else if (ACTION_PREFS_LOGGING.equals(action)) {
                 addPreferencesFromResource(R.xml.settings_logging);
                 RouterContext ctx = getRouterContext();
