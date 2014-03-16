@@ -11,7 +11,7 @@
   <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">Klienttunnel</string>
   <string name="label_i2ptunnel_server">Servertunnels</string>
-  <string name="label_logs">Protokolle</string>
+  <string name="label_logs">Statusberichte</string>
   <string name="label_error_logs">Fehler-Protokolle</string>
   <string name="label_info_and_pages">Informationen und Seiten</string>
   <string name="label_welcome_page">Willkommensseite</string>
@@ -58,11 +58,11 @@
   <string name="notification_status_client">Klienttunnels: %1$d/%2$d</string>
   <string name="menu_settings">Einstellungen</string>
   <string name="settings_enable">Erlauben</string>
-  <string name="settings_desc_subscriptions">abonnierte URLs</string>
+  <string name="settings_desc_subscriptions">Abonnements-URLs</string>
   <string name="settings_label_bandwidth_net">Bandbreite und Netzwerk</string>
   <string name="settings_label_bandwidth">Bandbreite</string>
-  <string name="settings_label_bw_inbound">eingehende Übertragungsgeschwindigkeit</string>
-  <string name="settings_desc_bw_inbound">maximale eingehende Übertragungsgeschwindigkeit</string>
+  <string name="settings_label_bw_inbound">maximal eingehend</string>
+  <string name="settings_desc_bw_inbound">maximal ausgehend</string>
   <string name="settings_label_bw_outbound">ausgehende Übertragungsgeschwindigkeit</string>
   <string name="settings_desc_bw_outbound">maximal ausgehende Übertragungsgeschwindigkeit</string>
   <string name="settings_label_network">Netzwerk</string>
