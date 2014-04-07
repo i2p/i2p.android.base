@@ -49,6 +49,7 @@
   <string name="hint_search_addressbook">アドレスブックを検索</string>
   <string name="action_reload_subscriptions">購読を再読込</string>
   <string name="router_not_running">ルーターが起動していません。</string>
+  <string name="stats_not_ready">統計マネージャーはまだ準備出来ていません。後でやり直してください。</string>
   <string name="graphs_not_ready">グラフが準備出来ていない、あるいはルーターが起動していません。後でもう一度やり直してください。</string>
   <string name="netdb_routers_empty">NetDB にルーターがありません。</string>
   <string name="netdb_leases_empty">NetDB にリースセットがありません。</string>

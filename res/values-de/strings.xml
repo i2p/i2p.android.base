@@ -49,6 +49,7 @@
   <string name="hint_search_addressbook">Durchsuche das Adressbuch</string>
   <string name="action_reload_subscriptions">Abonnements neu laden</string>
   <string name="router_not_running">Der Router läuft nicht.</string>
+  <string name="stats_not_ready">Der Statistikmanager ist noch nicht bereit. Versuchen Sie es später erneut.</string>
   <string name="graphs_not_ready">Die Graphen sind noch nicht bereit oder der Router läuft nicht. Probiere es später nochmal.</string>
   <string name="netdb_routers_empty">Keine Router in der NetDB.</string>
   <string name="netdb_leases_empty">Keine LeaseSets in deiner NetDB</string>
