@@ -187,11 +187,12 @@ public class TunnelListFragment extends ListFragment implements
         case R.id.action_restart_all_tunnels:
             msgs = mGroup.restartAllControllers();
             break;
-        case R.id.action_i2ptunnel_help:
-            Intent hi = new Intent(getActivity(), HelpActivity.class);
-            hi.putExtra(HelpActivity.REFERRER, "i2ptunnel");
-            startActivity(hi);
-            return true;
+        // TODO: Enable when Help page finished
+        //case R.id.action_i2ptunnel_help:
+        //    Intent hi = new Intent(getActivity(), HelpActivity.class);
+        //    hi.putExtra(HelpActivity.REFERRER, "i2ptunnel");
+        //    startActivity(hi);
+        //    return true;
         default:
             return super.onOptionsItemSelected(item);
         }

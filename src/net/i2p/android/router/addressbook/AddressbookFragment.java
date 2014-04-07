@@ -180,11 +180,12 @@ public class AddressbookFragment extends ListFragment implements
             Intent si = new Intent(getActivity(), AddressbookSettingsActivity.class);
             startActivity(si);
             return true;
-        case R.id.action_addressbook_help:
-            Intent hi = new Intent(getActivity(), HelpActivity.class);
-            hi.putExtra(HelpActivity.REFERRER, "addressbook");
-            startActivity(hi);
-            return true;
+        // TODO: Enable when Help page finished
+        //case R.id.action_addressbook_help:
+        //    Intent hi = new Intent(getActivity(), HelpActivity.class);
+        //    hi.putExtra(HelpActivity.REFERRER, "addressbook");
+        //    startActivity(hi);
+        //    return true;
         default:
             return super.onOptionsItemSelected(item);
         }

@@ -78,7 +78,8 @@ public class LogActivity extends I2PActivityBase implements
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_base_actions, menu);
         // Help menu not needed (yet), hide
-        menu.findItem(R.id.menu_help).setVisible(false);
+        // TODO: Unhide when Help finished
+        //menu.findItem(R.id.menu_help).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -13,7 +13,8 @@
     <item android:id="@+id/action_addressbook_settings"
           android:title="@string/menu_settings"
           i2pandroid:showAsAction="never" />
+    <!-- Hide for now
     <item android:id="@+id/action_addressbook_help"
           android:title="@string/menu_help"
-          i2pandroid:showAsAction="never" />
+          i2pandroid:showAsAction="never" /> -->
 </menu>

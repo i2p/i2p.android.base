@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import net.i2p.android.router.R;
 import net.i2p.android.router.dialog.AboutDialog;
+import net.i2p.android.router.dialog.TextResourceDialog;
 import net.i2p.android.router.service.IRouterState;
 import net.i2p.android.router.service.IRouterStateCallback;
 import net.i2p.android.router.service.RouterService;
@@ -91,10 +92,26 @@ public class MainActivity extends I2PActivityBase implements
             dialog.show(getSupportFragmentManager(), "about");
             return true;
 
-        case R.id.menu_help:
-            Intent hi = new Intent(MainActivity.this, HelpActivity.class);
-            hi.putExtra(HelpActivity.REFERRER, "main");
-            startActivity(hi);
+        // TODO: Unhide when Help page finished
+        //case R.id.menu_help:
+        //    Intent hi = new Intent(MainActivity.this, HelpActivity.class);
+        //    hi.putExtra(HelpActivity.REFERRER, "main");
+        //    startActivity(hi);
+        //    return true;
+
+        // TODO: Remove when help page finished
+        case R.id.menu_help_licenses:
+            Intent lic = new Intent(MainActivity.this, LicenseActivity.class);
+            startActivity(lic);
+            return true;
+        case R.id.menu_help_release_notes:
+            TextResourceDialog rDdialog = new TextResourceDialog();
+            Bundle args = new Bundle();
+            args.putString(TextResourceDialog.TEXT_DIALOG_TITLE,
+                    getResources().getString(R.string.label_release_notes));
+            args.putInt(TextResourceDialog.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+            rDdialog.setArguments(args);
+            rDdialog.show(getSupportFragmentManager(), "release_notes");
             return true;
 
         default:
