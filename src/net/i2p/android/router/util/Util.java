@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import net.i2p.I2PAppContext;
-import net.i2p.util.Log;
 
 public abstract class Util {
     private static final boolean _isEmulator = Build.MODEL.equals("sdk");
@@ -54,11 +53,13 @@ public abstract class Util {
     public static void e(String m, Throwable t) {
         I2PAppContext ctx = I2PAppContext.getCurrentContext();
         if (ctx != null)
-            ctx.logManager().getLog(Util.class).log(Log.ERROR, m, t);
-        else if (t != null)
-            android.util.Log.e(ANDROID_TAG, m + ' ' + t + ' ' + android.util.Log.getStackTraceString(t));
-        else
-            android.util.Log.e(ANDROID_TAG, m);
+            ctx.logManager().getLog(Util.class).error(m, t);
+        else if (android.util.Log.isLoggable(ANDROID_TAG, android.util.Log.ERROR)) {
+            if (t != null)
+                android.util.Log.e(ANDROID_TAG, m + ' ' + t + ' ' + android.util.Log.getStackTraceString(t));
+            else
+                android.util.Log.e(ANDROID_TAG, m);
+        }
     }
 
     public static void w(String m) {
@@ -68,11 +69,13 @@ public abstract class Util {
     public static void w(String m, Throwable t) {
         I2PAppContext ctx = I2PAppContext.getCurrentContext();
         if (ctx != null)
-            ctx.logManager().getLog(Util.class).log(Log.WARN, m, t);
-        else if (t != null)
-            android.util.Log.w(ANDROID_TAG, m + ' ' + t + ' ' + android.util.Log.getStackTraceString(t));
-        else
-            android.util.Log.w(ANDROID_TAG, m);
+            ctx.logManager().getLog(Util.class).warn(m, t);
+        else if (android.util.Log.isLoggable(ANDROID_TAG, android.util.Log.WARN)) {
+            if (t != null)
+                android.util.Log.w(ANDROID_TAG, m + ' ' + t + ' ' + android.util.Log.getStackTraceString(t));
+            else
+                android.util.Log.w(ANDROID_TAG, m);
+        }
     }
 
     public static void i(String m) {
@@ -82,11 +85,13 @@ public abstract class Util {
     public static void i(String m, Throwable t) {
         I2PAppContext ctx = I2PAppContext.getCurrentContext();
         if (ctx != null)
-            ctx.logManager().getLog(Util.class).log(Log.INFO, m, t);
-        else if (t != null)
-            android.util.Log.i(ANDROID_TAG, m + ' ' + t + ' ' + android.util.Log.getStackTraceString(t));
-        else
-            android.util.Log.i(ANDROID_TAG, m);
+            ctx.logManager().getLog(Util.class).info(m, t);
+        else if (android.util.Log.isLoggable(ANDROID_TAG, android.util.Log.INFO)) {
+            if (t != null)
+                android.util.Log.i(ANDROID_TAG, m + ' ' + t + ' ' + android.util.Log.getStackTraceString(t));
+            else
+                android.util.Log.i(ANDROID_TAG, m);
+        }
     }
     public static void d(String m) {
         d(m, null);
@@ -95,10 +100,12 @@ public abstract class Util {
     public static void d(String m, Throwable t) {
         I2PAppContext ctx = I2PAppContext.getCurrentContext();
         if (ctx != null)
-            ctx.logManager().getLog(Util.class).log(Log.DEBUG, m, t);
-        else if (t != null)
-            android.util.Log.d(ANDROID_TAG, m + ' ' + t + ' ' + android.util.Log.getStackTraceString(t));
-        else
-            android.util.Log.d(ANDROID_TAG, m);
+            ctx.logManager().getLog(Util.class).debug(m, t);
+        else if (android.util.Log.isLoggable(ANDROID_TAG, android.util.Log.DEBUG)) {
+            if (t != null)
+                android.util.Log.d(ANDROID_TAG, m + ' ' + t + ' ' + android.util.Log.getStackTraceString(t));
+            else
+                android.util.Log.d(ANDROID_TAG, m);
+        }
     }
 }

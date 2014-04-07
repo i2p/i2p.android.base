@@ -1,6 +1,5 @@
 # Required for release
 
-- Ensure all logging is conditional
 - Prevent accidental shutdown
   - Add pop-up confirming router shutdown
   - OR: make router button long-press
