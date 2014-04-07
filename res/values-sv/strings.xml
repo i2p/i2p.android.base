@@ -4,9 +4,6 @@
   <string name="welcome_new_install">Välkommen till I2P! Denhär appen är ALFA-mjukvara och erbjuder inte stark anonymitet.\nVar god läs release kommentarerna och licens-information.</string>
   <string name="welcome_new_version">Ny version installerad. Var god läs release kommentarerna. Version: </string>
   <string name="label_home">I2P Hem</string>
-  <string name="label_statistics">Statistik</string>
-  <string name="label_main_controls">Huvudinställningar</string>
-  <string name="label_tools">I2P Verktyg</string>
   <string name="label_addressbook">Adressbok</string>
   <string name="label_logs">Loggar</string>
   <string name="label_error_logs">Felloggar</string>
@@ -18,15 +15,12 @@
   <string name="label_release_notes">Releasekommentarer</string>
   <string name="label_licenses">Licenser</string>
   <string name="label_nonanon_info">Icke-anonym Information</string>
-  <string name="label_website_nonanon">Webb-sida (ej-anonym)</string>
-  <string name="label_faq_nonanon">FAQ (ej-anonym)</string>
   <string name="action_add">Lägg till</string>
   <string name="action_router_start">Starta Router</string>
   <string name="action_router_stop">Stanna Router</string>
   <string name="action_reload">Läs om</string>
   <string name="menu_settings">Inställningar</string>
   <string name="settings_enable">Aktivera</string>
-  <string name="settings_label_subscriptions">I2P Adressbok</string>
   <string name="settings_desc_subscriptions">Prenumerations URL</string>
   <string name="settings_label_bandwidth">Bandbredd och nätverk</string>
   <string name="settings_label_bw_inbound">Inåtgående hastighet</string>

@@ -2,9 +2,6 @@
 <resources>
   <string name="app_name">I2P</string>
   <string name="label_home">Inici I2P</string>
-  <string name="label_statistics">Estadístiques</string>
-  <string name="label_main_controls">Controls principals</string>
-  <string name="label_tools">Eines I2P</string>
   <string name="label_addressbook">Agenda d\'adreces</string>
   <string name="label_logs">Registres</string>
   <string name="label_error_logs">Registres d\'errors</string>
@@ -16,15 +13,12 @@
   <string name="label_release_notes">Notes de la versió</string>
   <string name="label_licenses">Llicències</string>
   <string name="label_nonanon_info">Informació no anònima</string>
-  <string name="label_website_nonanon">Lloc Web (no anònim)</string>
-  <string name="label_faq_nonanon">FAQ (no anònim)</string>
   <string name="action_add">Afegir</string>
   <string name="action_router_start">Iniciar rúter</string>
   <string name="action_router_stop">Aturar rúter</string>
   <string name="action_reload">Recarregar</string>
   <string name="menu_settings">Configuració</string>
   <string name="settings_enable">Habilitar</string>
-  <string name="settings_label_subscriptions">Llibreta d\'adreces I2P</string>
   <string name="settings_desc_subscriptions">URL subscripció</string>
   <string name="settings_label_bandwidth">Ample de banda i xarxa</string>
   <string name="settings_label_bw_inbound">Velocitat d\'entrada</string>

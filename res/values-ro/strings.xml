@@ -4,9 +4,6 @@
   <string name="welcome_new_install">Bine ati venit la I2P! Aceasta aplicatie este un software ALPHA și nu oferă anonimatul puternic. Vă rugăm să citiți notele de lansare și licență.</string>
   <string name="welcome_new_version">Noua versiune instalată. Vă rugăm să citiți notele de lansare. versiune:</string>
   <string name="label_home">I2P Acasă</string>
-  <string name="label_statistics">Statistici</string>
-  <string name="label_main_controls">Comenzile principale</string>
-  <string name="label_tools">Instrumente I2P</string>
   <string name="label_addressbook">Agendă</string>
   <string name="label_logs">Jurnale</string>
   <string name="label_error_logs">jurnalele de erori</string>
@@ -18,15 +15,12 @@
   <string name="label_release_notes">Note de publicare</string>
   <string name="label_licenses">Licențe</string>
   <string name="label_nonanon_info">Informații  non-anonim</string>
-  <string name="label_website_nonanon">Site-ul web (non-Anonim)</string>
-  <string name="label_faq_nonanon">FAQ (non-Anonim)</string>
   <string name="action_add">Adaugă</string>
   <string name="action_router_start">Pornirea router-ului</string>
   <string name="action_router_stop">Oprirea router-ului</string>
   <string name="action_reload">Reîncarcă</string>
   <string name="menu_settings">Configurări</string>
   <string name="settings_enable">Activează</string>
-  <string name="settings_label_subscriptions">I2P agendă</string>
   <string name="settings_desc_subscriptions">URLs de abonare:</string>
   <string name="settings_label_bandwidth">Lățime de bandă și rețea</string>
   <string name="settings_label_bw_inbound">viteza de intrare</string>

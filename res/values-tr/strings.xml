@@ -4,9 +4,6 @@
   <string name="welcome_new_install">I2P dünyasına hoş geldiniz. Bu uygulama henüz ALPHA geliştirme düzeyindedir ve yaygın olarak herkese açılmamıştır. Lütfen notları ve lisans bilgilerini okuyun.</string>
   <string name="welcome_new_version">Yeni sürüm yüklendi. Lütfen yayım notlarını okuyun. Sürüm:</string>
   <string name="label_home">I2P Anasayfası</string>
-  <string name="label_statistics">İstatistikler</string>
-  <string name="label_main_controls">Temel Denetimler</string>
-  <string name="label_tools">I2P Araçları</string>
   <string name="label_addressbook">Adres defteri</string>
   <string name="label_logs">Günlükler</string>
   <string name="label_error_logs">Hata Günlükleri</string>
@@ -18,15 +15,12 @@
   <string name="label_release_notes">Yayım Notları</string>
   <string name="label_licenses">Lisanslar</string>
   <string name="label_nonanon_info">Herkese Açık Olmayan Bilgiler</string>
-  <string name="label_website_nonanon">Web Sitesi (herkese açık değil)</string>
-  <string name="label_faq_nonanon">SSS (herkese açık değil)</string>
   <string name="action_add">Ekleyin</string>
   <string name="action_router_start">Yönelticiyi Başlatın</string>
   <string name="action_router_stop">Yönelticiyi Durdurun</string>
   <string name="action_reload">Yeniden Yükleyin</string>
   <string name="menu_settings">Ayarlar</string>
   <string name="settings_enable">Etkinleştirin</string>
-  <string name="settings_label_subscriptions">I2P Adres Defteri</string>
   <string name="settings_desc_subscriptions">Abonelik İnternet Adresleri</string>
   <string name="settings_label_bandwidth">Bant genişliği ve ağ</string>
   <string name="settings_label_bw_inbound">Geliş hızı</string>

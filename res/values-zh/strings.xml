@@ -4,9 +4,6 @@
   <string name="welcome_new_install">欢迎来到 I2P ! 此程序为 Alpha 版的测试程序，不提供很强的匿名性。请阅读版本发布说明和许可证信息。</string>
   <string name="welcome_new_version">新版本已安装，请阅读版本说明。版本：</string>
   <string name="label_home">I2P 主页</string>
-  <string name="label_statistics">统计</string>
-  <string name="label_main_controls">主要控制项</string>
-  <string name="label_tools">I2P 工具</string>
   <string name="label_addressbook">地址簿</string>
   <string name="label_logs">日志</string>
   <string name="label_error_logs">错误日志</string>
@@ -18,15 +15,12 @@
   <string name="label_release_notes">版本说明</string>
   <string name="label_licenses">许可证</string>
   <string name="label_nonanon_info">非匿名信息</string>
-  <string name="label_website_nonanon">网站(公网)</string>
-  <string name="label_faq_nonanon">FAQ(公网)</string>
   <string name="action_add">添加</string>
   <string name="action_router_start">启动路由器</string>
   <string name="action_router_stop">关闭路由器</string>
   <string name="action_reload">重新载入</string>
   <string name="menu_settings">设置</string>
   <string name="settings_enable">启用</string>
-  <string name="settings_label_subscriptions">I2P 地址簿</string>
   <string name="settings_desc_subscriptions">订阅链接</string>
   <string name="settings_label_bandwidth">带宽和网络</string>
   <string name="settings_label_bw_inbound">入站速度</string>

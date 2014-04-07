@@ -4,9 +4,6 @@
   <string name="welcome_new_install">I2P에 환영합니다! 이 앱은 알파 소프트웨어이며 강력한 익명성을 제공하지 않습니다. 릴리즈 노트나 라이센스 정보를 참조하세요.</string>
   <string name="welcome_new_version">새 버전이 설치되었습니다. 릴리즈 노트를 읽어주세요. 버전:</string>
   <string name="label_home">I2P 홈</string>
-  <string name="label_statistics">통계</string>
-  <string name="label_main_controls">메인 컨트롤</string>
-  <string name="label_tools">I2P 도구</string>
   <string name="label_addressbook">주소록</string>
   <string name="label_logs">로그</string>
   <string name="label_error_logs">오류 로그</string>
@@ -18,15 +15,12 @@
   <string name="label_release_notes">릴리즈 노트</string>
   <string name="label_licenses">라이센스</string>
   <string name="label_nonanon_info">비 익명 정보</string>
-  <string name="label_website_nonanon">웹 사이트 (비익명)</string>
-  <string name="label_faq_nonanon">FAQ (비익명)</string>
   <string name="action_add">추가</string>
   <string name="action_router_start">라우터 시작</string>
   <string name="action_router_stop">라우터 정지</string>
   <string name="action_reload">다시 읽기</string>
   <string name="menu_settings">설정</string>
   <string name="settings_enable">활성화</string>
-  <string name="settings_label_subscriptions">I2P 주소록</string>
   <string name="settings_desc_subscriptions">구독 URL들</string>
   <string name="settings_label_bandwidth">대역폭과 네트워크</string>
   <string name="settings_label_bw_inbound">수신 속도</string>

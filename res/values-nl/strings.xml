@@ -4,9 +4,6 @@
   <string name="welcome_new_install">Welkom op I2P! Deze app heeft de ALPHA status en het biedt geen sterke anonimiteit. Lees de releaseopmerkingen en licentie-informatie.</string>
   <string name="welcome_new_version">Nieuwe versie geïnstalleerd. Lees de releaseopmerkingen. Versie:</string>
   <string name="label_home">I2P-startpagina</string>
-  <string name="label_statistics">Statistieken</string>
-  <string name="label_main_controls">Belangrijkste functies</string>
-  <string name="label_tools">I2P-hulpmiddelen</string>
   <string name="label_addressbook">Adresboek</string>
   <string name="label_logs">Logboeken</string>
   <string name="label_error_logs">Foutenlogs</string>
@@ -18,15 +15,12 @@
   <string name="label_release_notes">Versieopmerkingen</string>
   <string name="label_licenses">Licenties</string>
   <string name="label_nonanon_info">Niet-anonieme informatie</string>
-  <string name="label_website_nonanon">Website (niet anoniem)</string>
-  <string name="label_faq_nonanon">Veelgestelde vragen (niet anoniem)</string>
   <string name="action_add">Toevoegen</string>
   <string name="action_router_start">Router starten</string>
   <string name="action_router_stop">Router stoppen</string>
   <string name="action_reload">Opnieuw laden</string>
   <string name="menu_settings">Instellingen</string>
   <string name="settings_enable">Inschakelen</string>
-  <string name="settings_label_subscriptions">I2P-adresboek</string>
   <string name="settings_desc_subscriptions">URL\'s van abbonementen</string>
   <string name="settings_label_bandwidth">Bandbreedte en netwerk</string>
   <string name="settings_label_bw_inbound">Binnenkomende snelheid</string>
