@@ -10,8 +10,6 @@
   - Rewrite release notes to be release-specific
   - Fill out help page
 - Fix release notes UI, either make back button use clear or add buttons
-- I2PTunnel
-  - Fix bug with HTTP client tunnel wizard
 - NetDB tablet view fixes
   - Refresh detail fragment when changing tab
   - Move list to correct item when changing tab
