@@ -26,6 +26,7 @@ import java.util.List;
 import net.i2p.android.router.R;
 import net.i2p.android.router.dialog.FirstStartDialog;
 import net.i2p.android.router.dialog.VersionDialog;
+import net.i2p.android.router.util.LongToggleButton;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.data.Destination;
@@ -101,10 +102,10 @@ public class MainFragment extends I2PFragmentBase {
         final ImageView lightImage = (ImageView) v.findViewById(R.id.main_lights);
         lightImage.setImageResource(R.drawable.routerlogo_0);
 
-        ToggleButton b = (ToggleButton) v.findViewById(R.id.router_onoff_button);
-        b.setOnClickListener(new View.OnClickListener() {
+        LongToggleButton b = (LongToggleButton) v.findViewById(R.id.router_onoff_button);
+        b.setOnLongClickListener(new View.OnLongClickListener() {
 
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 boolean on = ((ToggleButton) view).isChecked();
                 if (on) {
                     _startPressed = true;
@@ -116,6 +117,7 @@ public class MainFragment extends I2PFragmentBase {
                         updateOneShot();
                     }
                 }
+                return true;
             }
         });
 

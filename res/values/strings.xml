@@ -26,8 +26,8 @@
     <string name="label_browse">Browse</string>
     <string name="label_graphs">Graphs</string>
 
-    <string name="button_router_off">Press to start I2P</string>
-    <string name="button_router_on">I2P is running (press to stop)</string>
+    <string name="button_router_off">Long press to start I2P</string>
+    <string name="button_router_on">I2P is running (long press to stop)</string>
 
     <string name="first_start_title">Congratulations on getting I2P installed!</string>
     <string name="first_start_welcome"><b>Welcome to I2P!</b> Please <b>have patience</b> as I2P boots up and finds peers.</string>
