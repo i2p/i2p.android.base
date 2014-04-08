@@ -18,15 +18,30 @@ I2P's NTP is disabled for API 11 (Honeycomb) and above, as those versions includ
 
 The app will work best when you are not changing IPs. If you are moving around, changing WIFI nodes, or switching between mobile and WIFI networks, it won't work well.
 
-There is not yet any method to configure anything in the app.
+
+Using clients with the router
+-----------------------------
+
+The app starts an HTTP proxy at localhost port 4444 and IRC client tunnels at localhost ports 6668 - 6672. The IRC clients are "shared clients" on the same tunnels. Once you see the tunnel icon turn green on the main console (several minutes after startup), you should be able to connect.
+
+The HTTP proxy is tested with the "Orweb" app. It should also work with Firefox 4 Mobile and the ProxyMob Firefox plugin, if you have at least 512 MB of RAM.
+
+The IRC proxy is tested with the "Android IRC Free" app. The IRC proxy destinations are:
+  * Port 6668: IRC2P - irc.postman.i2p, irc.freshcoffee.i2p, and irc.echelon.i2p
+  * Port 6669: irc.welterde.i2p
+  * Port 6670: irc.telecomix.i2p (probably down)
+  * Port 6671: irc.killyourtv.i2p
+  * Port 6672: Nameless IRC - irc.stream.i2p
 
 
 Embedded web browser
 --------------------
 
+An embedded web browser is provided for convenience that will open .i2p addresses. However, it is not recommended for general use; users should download the Orweb browser, or Firefox Mobile and the ProxyMob Firefox plugin.
+
 The browser does not use the outproxy for regular web sites. Javascript is disabled.
 
-The following problems with eepsites are probably not fixable except on Android 3.0 (Honeycomb - i.e. tablets) and higher due to API limitations. I don't have a tablet to test on, so I haven't made any effort to work on it. The workaround is to use Firefox Mobile 4 and the ProxMob plugin (see below).
+The following problems with eepsites are probably not fixable except on Android 3.0 (Honeycomb - i.e. tablets) and higher due to API limitations. The workaround is to use Firefox Mobile 4 and the ProxMob plugin (see below).
   - Leaks .i2p DNS requests
   - Can't load cross-site images or CSS
   - No POSTs to forms
@@ -42,39 +57,13 @@ For eepsites and websites, problems include:
   - History and back issues
 
 
-Using clients with the router
------------------------------
-
-The app starts an HTTP proxy at localhost port 4444 and transparent IRC proxies at localhost ports 6668 - 6671. These are "shared clients" on the same tunnels. Once you see in and out client tunnels listed on the router status (several minutes after startup), you should be able to connect.
-
-The HTTP proxy should work with Firefox 4 Mobile and the ProxyMob Firefox plugin, if you have at least 512 MB of RAM. If it works it should avoid all the problems with the embedded web browser listed above. I can't test it as I have a 256 MB Droid.
-
-The IRC proxy is tested with the "Android IRC Free" app. The IRC proxy destinations are:
-  * Port 6668: IRC2P - irc.postman.i2p, irc.freshcoffee.i2p, and irc.echelon.i2p
-  * Port 6669: irc.welterde.i2p
-  * Port 6670: irc.telecomix.i2p (probably down)
-  * Port 6671: irc.killyourtv.i2p
-
-
 Further anonymity warnings
 --------------------------
 
 * Exploratory and Client Tunnels are 2 hops
-* Sharing IRC and HTTP proxies on same tunnels allows for linking
+* Sharing IRC clients on same tunnels allows for linking
 * Not well-tested
 * There are .i2p DNS leaks
 * Cell phones aren't exactly secure environments
 * This app does not attempt to "sanitize" your phone, make you safe from Google, or capture and route traffic from any other apps over I2P
 * The app does not require root or do anything with iptables, for example, to route or block traffic.
-
-
-Bugs and Support
-----------------
-
-Report results and bugs on the zzz.i2p Android forum (preferred) or on trac.i2p2.i2p. New versions will be announced on zzz.i2p.
-
-
-Help Wanted!
-------------
-
-Want to help make the app better? Volunteer on the zzz.i2p Android forum. Want to donate money or bitcoins to buy more Android devices, including tablets, for development and testing? Go to i2p-projekt.i2p/donate.
