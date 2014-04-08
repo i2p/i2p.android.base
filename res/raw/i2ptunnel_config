@@ -1,3 +1,6 @@
+# NOTE: This I2P config file must use UTF-8 encoding
+#
+
 # eepproxy
 tunnel.0.name=I2P HTTP Proxy
 tunnel.0.description=HTTP proxy for browsing eepsites and the web
@@ -19,6 +22,7 @@ tunnel.0.option.inbound.length=2
 tunnel.0.option.inbound.lengthVariance=0
 tunnel.0.option.outbound.length=2
 tunnel.0.option.outbound.lengthVariance=0
+tunnel.0.option.outbound.priority=10
 tunnel.0.startOnLoad=true
 
 # irc
@@ -38,10 +42,12 @@ tunnel.1.option.i2cp.reduceIdleTime=600000
 tunnel.1.option.i2cp.reduceOnIdle=true
 tunnel.1.option.i2cp.reduceQuantity=1
 tunnel.1.option.i2p.streaming.connectDelay=1000
+tunnel.1.option.i2p.streaming.maxWindowSize=16
 tunnel.1.option.inbound.length=2
 tunnel.1.option.inbound.lengthVariance=0
 tunnel.1.option.outbound.length=2
 tunnel.1.option.outbound.lengthVariance=0
+tunnel.1.option.outbound.priority=15
 tunnel.1.startOnLoad=true
 
 # irc
