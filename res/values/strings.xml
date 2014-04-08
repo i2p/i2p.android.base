@@ -120,7 +120,7 @@
     <string name="about_project">Project Home:</string>
     <string name="url_project" translatable="false">https://geti2p.net | http://i2p-projekt.i2p</string>
     <string name="about_bugs">Bugs and Support:</string>
-    <string name="url_android_forum" translatable="false">http://zzz.i2p</string>
+    <string name="url_android_forum" translatable="false">http://zzz.i2p/forums/17</string>
     <string name="about_helpwanted">Help Wanted!</string>
     <string name="about_volunteer">Want to help make the app better? Volunteer on the Android forum:</string>
     <string name="about_donate">Want to donate money or bitcoins to buy more Android devices for development and testing? Go to:</string>
