@@ -23,8 +23,8 @@
   <string name="label_nonanon_info">Information non anonyme</string>
   <string name="label_browse">Naviguer</string>
   <string name="label_graphs">Graphiques</string>
-  <string name="button_router_off">Appuyez pour démarrer I2P</string>
-  <string name="button_router_on">I2P est en cours d\'utilisation (appuyez pour arrêter)</string>
+  <string name="button_router_off">Presser longtemps pour démarrer I2P</string>
+  <string name="button_router_on">I2P est en marche (presser longtemps pour arrêter)</string>
   <string name="first_start_title">Félicitations pour avoir installé I2P !</string>
   <string name="first_start_welcome"><b>Bienvenue sur I2P !</b> Veuillez <b>patienter</b> pendant qu\'I2P démarre et trouve des pairs.</string>
   <string name="first_start_read">Pendant que vous patientez, vous pouvez lire les informations de mise à jour et la page d\'accueil.</string>
