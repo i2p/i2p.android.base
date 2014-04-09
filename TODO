@@ -12,7 +12,7 @@
   - Create nav history when viewing RI from LS
 - Include GeoIP db for country info
 - Maybe change router-off mechanic for various pages? Enable as they become available?
-- Check default configs in res/raw/ against upstream defaults
+- Add "copy (error) log" option
 
 # Short-term
 
