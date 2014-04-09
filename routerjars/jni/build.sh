@@ -28,34 +28,42 @@ cd $THISDIR
 LIBFILE=$PWD/libjbigi.so
 if [ -f $LIBFILE ]
 then
-	echo "$LIBFILE exists, nothing to do here"
-	echo "If you wish to force a recompile, delete it"
-	exit 0
+    echo "$LIBFILE exists, nothing to do here"
+    echo "If you wish to force a recompile, delete it"
+    exit 0
 fi
 
 I2PBASE=${1:-$THISDIR/../../../i2p.i2p}
+ROUTERJARS=$( dirname $THISDIR )
+
+## Check the local.properties file first
+export NDK="$( cat $ROUTERJARS/local.properties | grep 'ndk.dir' | sed 's/^ndk.dir\s*=\s*//' )"
+
+if [ "$NDK" == "" ]; then
+## Simple fix for osx development
+    if [ `uname -s` = "Darwin" ]; then
+        export NDK="/Developer/android/ndk/"
+    else
 #
 # We want to be able to not have to update this script
 # every time a new NDK comes out. We solve this by using readlink with
 # a wild card, deglobbing automatically sorts to get the highest revision.
 # the dot at the end ensures that it is a directory, and not a file.
 #
+        NDK_GLOB=$THISDIR/'../../../android-ndk-r*/.'
+        export NDK="`readlink -n -e $(for last in $NDK_GLOB; do true; done ; echo $last)`"
+    fi
 
-## Simple fix for osx development
-if [ `uname -s` = "Darwin" ]; then
-    export NDK="/Developer/android/ndk/"
-else
-    NDK_GLOB=$THISDIR/'../../../android-ndk-r*/.'
-    export NDK="`readlink -n -e $(for last in $NDK_GLOB; do true; done ; echo $last)`"
+    if [ "$NDK" == "" ]; then
+        echo "Cannot find NDK in $NDK_GLOB"
+        echo "Install it here, or set ndk.dir in $ROUTERJARS/local.properties, or adjust NDK_GLOB in script"
+        exit 1
+    fi
 fi
 
-if [ "$NDK" == "" ]; then
-	echo "Cannot find NDK in $NDK_GLOB, install it or adjust NDK_GLOB in script"
-	exit 1
-fi
 if [ ! -d "$NDK" ]; then
-	echo "Cannot find NDK in $NDK, install it"
-	exit 1
+    echo "Cannot find NDK in $NDK, install it"
+    exit 1
 fi
 
 #
@@ -65,8 +73,8 @@ LEVEL=8
 ARCH="arm"
 export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
 if [ ! -d "$SYSROOT" ]; then
-	echo "Cannot find $SYSROOT in NDK, check for support of level: $LEVEL arch: $ARCH or adjust LEVEL and ARCH in script"
-	exit 1
+    echo "Cannot find $SYSROOT in NDK, check for support of level: $LEVEL arch: $ARCH or adjust LEVEL and ARCH in script"
+    exit 1
 fi
 
 #
@@ -94,8 +102,8 @@ fi
 export BINPREFIX="arm-linux-androideabi-"
 COMPILER="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}gcc"
 if [ ! -f "$COMPILER" ]; then
-	echo "Cannot find compiler $COMPILER in NDK, check for support of system: $SYSTEM ABI: $AABI or adjust AABI and SYSTEM in script"
-	exit 1
+    echo "Cannot find compiler $COMPILER in NDK, check for support of system: $SYSTEM ABI: $AABI or adjust AABI and SYSTEM in script"
+    exit 1
 fi
 export CC="$COMPILER --sysroot=$SYSROOT"
 # worked without this on 4.3.2, but 5.0.2 couldn't find it
