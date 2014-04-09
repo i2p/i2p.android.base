@@ -67,9 +67,9 @@ if [ ! -d "$NDK" ]; then
 fi
 
 #
-# API level, must match that in ../AndroidManifest.xml
+# API level, pulled from ../AndroidManifest.xml.in
 #
-LEVEL=8
+LEVEL=$( cat $ROUTERJARS/AndroidManifest.xml.in | grep 'minSdkVersion' | sed 's/^.*minSdkVersion="\([0-9]\+\)".*$/\1/' )
 ARCH="arm"
 export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
 if [ ! -d "$SYSROOT" ]; then
