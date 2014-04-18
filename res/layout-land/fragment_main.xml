@@ -19,7 +19,7 @@
             android:scaleType="centerInside"
             android:contentDescription="@string/desc_i2p_logo" />
 
-        <ToggleButton
+        <net.i2p.android.router.util.LongToggleButton
             android:id="@+id/router_onoff_button"
             android:layout_width="match_parent"
             android:layout_height="68dp"
