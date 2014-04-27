@@ -292,18 +292,17 @@ public class MainFragment extends I2PFragmentBase {
                 String msgDelay = DataHelper.formatDuration(ctx.throttle().getMessageDelay());
                 String uptime = DataHelper.formatDuration(ctx.router().getUptime());
 
-                String netstatus = "Unknown";
-                if(reach == net.i2p.router.CommSystemFacade.STATUS_DIFFERENT) {
-                    netstatus = "Different";
-                }
-                if(reach == net.i2p.router.CommSystemFacade.STATUS_HOSED) {
-                    netstatus = "Hosed";
-                }
-                if(reach == net.i2p.router.CommSystemFacade.STATUS_OK) {
+                String netstatus;
+                if (reach == net.i2p.router.CommSystemFacade.STATUS_DIFFERENT) {
+                    netstatus = "Symmetric NAT";
+                } else if (reach == net.i2p.router.CommSystemFacade.STATUS_HOSED) {
+                    netstatus = "Port Failure";
+                } else if (reach == net.i2p.router.CommSystemFacade.STATUS_OK) {
                     netstatus = "OK";
-                }
-                if(reach == net.i2p.router.CommSystemFacade.STATUS_REJECT_UNSOLICITED) {
-                    netstatus = "Reject Unsolicited";
+                } else if (reach == net.i2p.router.CommSystemFacade.STATUS_REJECT_UNSOLICITED) {
+                    netstatus = "Firewalled";
+                } else {
+                    netstatus = "Unknown";
                 }
                 String tunnelStatus = ctx.throttle().getTunnelStatus();
                 //ctx.commSystem().getReachabilityStatus();
@@ -357,8 +356,9 @@ public class MainFragment extends I2PFragmentBase {
                 _savedStatus = status + participate + details;
                 vStatusText.setText(_savedStatus);
                 vStatus.setVisibility(View.VISIBLE);
-            } else
+            } else {
                 vStatus.setVisibility(View.INVISIBLE);
+            }
             sv.setVisibility(View.VISIBLE);
         } else {
             // network but no router context
