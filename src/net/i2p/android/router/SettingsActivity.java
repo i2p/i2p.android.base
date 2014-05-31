@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
@@ -22,6 +21,7 @@ import java.util.Properties;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.StatSummarizer;
 import net.i2p.android.router.util.Util;
@@ -190,15 +190,9 @@ public class SettingsActivity extends PreferenceActivity {
         // This loop avoids needing to convert each one, or even know it's type, or if it exists yet.
         while (iterator.hasNext()) {
             String x = iterator.next();
-            // special exception, we must invert the bool for this property only.
-            if(x.equals("router.hiddenMode")) {
-                String string = all.get(x).toString();
-                String what="true";
-                if(string.equals(what)) {
-                    what="false";
-                }
-                props.setProperty(x, what);
-            } else if ( x.startsWith("stat.summaries.")) {
+            if ( x.startsWith("i2pandroid.")) // Skip over UI-related I2P Android settings
+                continue;
+            else if ( x.startsWith("stat.summaries.")) {
                 String stat = x.substring("stat.summaries.".length());
                 String checked = all.get(x).toString();
                 if (checked.equals("true")) {
@@ -206,29 +200,19 @@ public class SettingsActivity extends PreferenceActivity {
                 }
             } else if ( x.startsWith("logger.")) {
                 logSettings.put(x, all.get(x).toString());
-            } else if ( x.startsWith("i2pandroid.")) {
-                // Don't save UI-related I2P Android settings in router.config
-                continue;
-            } else if(! x.startsWith("DO_NOT_SAVE")) {
-                // Disabled?
-                @SuppressWarnings("deprecation")
-                Preference findPreference = findPreference(x);
-                if (findPreference == null)
-                    continue;
-                if ( findPreference.isEnabled() ) {
-                    String string = all.get(x).toString();
-                    props.setProperty(x, string);
-                } else {
-                    String summary[] = findPreference.getSummary().toString().split("default=");
-                    String defaultval = summary[summary.length - 1].trim();
-                    if (defaultval.endsWith(")")) {
-                        // strip the ")" off the tail end, this is the default value!
-                        String string = defaultval.substring(0, defaultval.length() - 1);
-                        Util.d("Resetting property '" + x + "' to default '" + string +"'");
-                        props.setProperty(x, string);
-                    }
-
+            } else if (
+                    x.equals("router.hiddenMode") ||
+                    x.equals("i2cp.disableInterface")) {
+                // special exception, we must invert the bool for these properties only.
+                String string = all.get(x).toString();
+                String what="true";
+                if(string.equals(what)) {
+                    what="false";
                 }
+                props.setProperty(x, what);
+            } else {
+                String string = all.get(x).toString();
+                props.setProperty(x, string);
             }
         }
         if (statSummaries.isEmpty()) {
@@ -241,9 +225,6 @@ public class SettingsActivity extends PreferenceActivity {
             }
             props.setProperty("stat.summaries", buf.toString());
         }
-        // Merge in new config settings, write the file.
-        InitActivities init = new InitActivities(this);
-        init.mergeResourceToFile(R.raw.router_config, "router.config", props);
         // Apply new config if we are running.
         List<RouterContext> contexts = RouterContext.listContexts();
         if ( !((contexts == null) || (contexts.isEmpty())) ) {
@@ -252,13 +233,20 @@ public class SettingsActivity extends PreferenceActivity {
 
             // Merge in new log settings
             saveLoggingChanges(_context, logSettings);
+        } else {
+            // Merge in new config settings, write the file.
+            InitActivities init = new InitActivities(this);
+            init.mergeResourceToFile(R.raw.router_config, "router.config", props);
+
+            // Merge in new log settings
+            saveLoggingChanges(I2PAppContext.getGlobalContext(), logSettings);
         }
 
         // Store the settings in Android
         super.onPause();
     }
 
-    private void saveLoggingChanges(RouterContext ctx, Map<String, String> logSettings) {
+    private void saveLoggingChanges(I2PAppContext ctx, Map<String, String> logSettings) {
         boolean shouldSave = false;
 
         for (String key : logSettings.keySet()) {
