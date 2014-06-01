@@ -3,15 +3,18 @@ package net.i2p.android.router;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
@@ -61,19 +64,24 @@ class InitActivities {
     void initialize() {
 
         if (checkNewVersion()) {
-            Properties props = new Properties();
+            List<Properties> lProps = Util.getPropertiesFromPreferences(ctx);
+            Properties props = lProps.get(0);
+
             props.setProperty("i2p.dir.temp", myDir + "/tmp");
             props.setProperty("i2p.dir.pid", myDir + "/tmp");
             // Time disabled in default router.config
             // But lots of time problems on Android, not all carriers support NITZ
             // and there was no NTP before 3.0. Tablets should be fine?
             // Phones in airplane mode with wifi enabled still a problem.
-            // Deactivated phones in airplane mode definatly won't have correct time.
+            // Deactivated phones in airplane mode definitely won't have correct time.
             if (Build.VERSION.SDK_INT < 11)  // Honeycomb 3.0
                 props.setProperty("time.disabled", "false");
             mergeResourceToFile(R.raw.router_config, "router.config", props);
-            mergeResourceToFile(R.raw.logger_config, "logger.config", null);
-            mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config", null);
+            mergeResourceToFile(R.raw.logger_config, "logger.config", lProps.get(1));
+            // This is not needed for now, i2ptunnel.config only contains tunnel
+            // settings, which can now be configured manually. We don't want to
+            // overwrite the user's tunnels.
+            //mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config", null);
             // FIXME this is a memory hog to merge this way
             mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
             mergeResourceToFile(R.raw.more_hosts_txt, "hosts.txt", null);
@@ -212,10 +220,8 @@ class InitActivities {
 
     /**
      *  Load defaults from resource,
-     *  then add props from file,
+     *  then add props from settings,
      *  and write back
-     *  For now, do it backwards so we can override with new apks.
-     *  When we have user configurable stuff, switch it back.
      *
      *  @param f relative to base dir
      *  @param props local overrides or null
@@ -224,13 +230,9 @@ class InitActivities {
         InputStream in = null;
         InputStream fin = null;
 
-        byte buf[] = new byte[4096];
         try {
             in = ctx.getResources().openRawResource(resID);
             Properties props = new OrderedProperties();
-            // keep user settings
-            //DataHelper.loadProps(props,  in);
-
             try {
                 fin = new FileInputStream(new File(myDir, f));
                 DataHelper.loadProps(props,  fin);
@@ -239,9 +241,10 @@ class InitActivities {
                 Util.d("Creating file " + f + " from resource");
             }
 
-            // override user settings
+            // write in default settings
             DataHelper.loadProps(props,  in);
 
+            // override with user settings
             if (overrides != null)
                 props.putAll(overrides);
             File path = new File(myDir, f);

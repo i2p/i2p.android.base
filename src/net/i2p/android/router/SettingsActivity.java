@@ -172,59 +172,10 @@ public class SettingsActivity extends PreferenceActivity {
 
     @Override
     protected void onPause() {
-        // TODO: Rewrite this code to fix default setting
-        // Copy prefs
-        Properties props = new OrderedProperties();
+        List<Properties> lProps = Util.getPropertiesFromPreferences(this);
+        Properties props = lProps.get(0);
+        Properties logSettings = lProps.get(1);
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        // List to store stats for graphing
-        List<String> statSummaries = new ArrayList<String>();
-
-        // List to store Log settings
-        Map<String, String> logSettings = new HashMap<String, String>();
-
-        Map<String, ?> all = preferences.getAll();
-        Iterator<String> iterator = all.keySet().iterator();
-        // get values from the Map and make them strings.
-        // This loop avoids needing to convert each one, or even know it's type, or if it exists yet.
-        while (iterator.hasNext()) {
-            String x = iterator.next();
-            if ( x.startsWith("i2pandroid.")) // Skip over UI-related I2P Android settings
-                continue;
-            else if ( x.startsWith("stat.summaries.")) {
-                String stat = x.substring("stat.summaries.".length());
-                String checked = all.get(x).toString();
-                if (checked.equals("true")) {
-                    statSummaries.add(stat);
-                }
-            } else if ( x.startsWith("logger.")) {
-                logSettings.put(x, all.get(x).toString());
-            } else if (
-                    x.equals("router.hiddenMode") ||
-                    x.equals("i2cp.disableInterface")) {
-                // special exception, we must invert the bool for these properties only.
-                String string = all.get(x).toString();
-                String what="true";
-                if(string.equals(what)) {
-                    what="false";
-                }
-                props.setProperty(x, what);
-            } else {
-                String string = all.get(x).toString();
-                props.setProperty(x, string);
-            }
-        }
-        if (statSummaries.isEmpty()) {
-            props.setProperty("stat.summaries", "");
-        } else {
-            Iterator<String> iter = statSummaries.iterator();
-            StringBuilder buf = new StringBuilder(iter.next());
-            while (iter.hasNext()) {
-                buf.append(",").append(iter.next());
-            }
-            props.setProperty("stat.summaries", buf.toString());
-        }
         // Apply new config if we are running.
         List<RouterContext> contexts = RouterContext.listContexts();
         if ( !((contexts == null) || (contexts.isEmpty())) ) {
@@ -246,12 +197,12 @@ public class SettingsActivity extends PreferenceActivity {
         super.onPause();
     }
 
-    private void saveLoggingChanges(I2PAppContext ctx, Map<String, String> logSettings) {
+    private void saveLoggingChanges(I2PAppContext ctx, Properties logSettings) {
         boolean shouldSave = false;
 
-        for (String key : logSettings.keySet()) {
+        for (Object key : logSettings.keySet()) {
             if ("logger.defaultLevel".equals(key)) {
-                String defaultLevel = logSettings.get(key);
+                String defaultLevel = (String) logSettings.get(key);
                 String oldDefault = ctx.logManager().getDefaultLimit();
                 if (!defaultLevel.equals(oldDefault)) {
                     shouldSave = true;

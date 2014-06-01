@@ -1,12 +1,22 @@
 package net.i2p.android.router.util;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import net.i2p.I2PAppContext;
+import net.i2p.util.OrderedProperties;
 
 public abstract class Util {
     private static final boolean _isEmulator = Build.MODEL.equals("sdk");
@@ -107,5 +117,67 @@ public abstract class Util {
             else
                 android.util.Log.d(ANDROID_TAG, m);
         }
+    }
+
+    public static List<Properties> getPropertiesFromPreferences(Context context) {
+        List<Properties> pList = new ArrayList<Properties>();
+
+        // Copy prefs
+        Properties routerProps = new OrderedProperties();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        // List to store stats for graphing
+        List<String> statSummaries = new ArrayList<String>();
+
+        // List to store Log settings
+        Properties logSettings = new OrderedProperties();
+
+        Map<String, ?> all = preferences.getAll();
+        Iterator<String> iterator = all.keySet().iterator();
+        // get values from the Map and make them strings.
+        // This loop avoids needing to convert each one, or even know it's type, or if it exists yet.
+        while (iterator.hasNext()) {
+            String x = iterator.next();
+            if ( x.startsWith("i2pandroid.")) // Skip over UI-related I2P Android settings
+                continue;
+            else if ( x.startsWith("stat.summaries.")) {
+                String stat = x.substring("stat.summaries.".length());
+                String checked = all.get(x).toString();
+                if (checked.equals("true")) {
+                    statSummaries.add(stat);
+                }
+            } else if ( x.startsWith("logger.")) {
+                logSettings.put(x, all.get(x).toString());
+            } else if (
+                    x.equals("router.hiddenMode") ||
+                    x.equals("i2cp.disableInterface")) {
+                // special exception, we must invert the bool for these properties only.
+                String string = all.get(x).toString();
+                String what="true";
+                if(string.equals(what)) {
+                    what="false";
+                }
+                routerProps.setProperty(x, what);
+            } else {
+                String string = all.get(x).toString();
+                routerProps.setProperty(x, string);
+            }
+        }
+        if (statSummaries.isEmpty()) {
+            routerProps.setProperty("stat.summaries", "");
+        } else {
+            Iterator<String> iter = statSummaries.iterator();
+            StringBuilder buf = new StringBuilder(iter.next());
+            while (iter.hasNext()) {
+                buf.append(",").append(iter.next());
+            }
+            routerProps.setProperty("stat.summaries", buf.toString());
+        }
+
+        pList.add(routerProps);
+        pList.add(logSettings);
+
+        return pList;
     }
 }
