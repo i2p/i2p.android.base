@@ -16,7 +16,11 @@
                android:icon="@drawable/ic_launcher_itoopie" >
         <service android:name=".service.RouterService"
                   android:label="@string/app_name"
-                  android:icon="@drawable/ic_launcher_itoopie" />
+                  android:icon="@drawable/ic_launcher_itoopie" >
+            <intent-filter>
+                <action android:name="net.i2p.android.router.service.IRouterState" />
+            </intent-filter>
+        </service>
         <provider android:name=".provider.CacheProvider"
                   android:authorities="net.i2p.android.router" />
         <activity android:name=".MainActivity"
