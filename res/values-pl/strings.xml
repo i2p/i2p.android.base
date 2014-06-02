@@ -23,8 +23,8 @@
   <string name="label_nonanon_info">Nie Anonimowe Informacje</string>
   <string name="label_browse">Przeglądaj</string>
   <string name="label_graphs">Wykresy</string>
-  <string name="button_router_off">Naciśnij aby uruchomić I2P</string>
-  <string name="button_router_on">I2P jest włączone (naciśnij aby zatrzymać)</string>
+  <string name="button_router_off">Dotknij na dłużej aby uruchomić I2P</string>
+  <string name="button_router_on">I2P jest włączone (dotknij na dłużej aby zatrzymać)</string>
   <string name="first_start_title">Gratulacje w zainstalowaniu I2P!</string>
   <string name="first_start_welcome"><b>Witamy w I2P!</b> Proszę <b>bądz cierpliwy</b> bo I2P właśnie się uruchamia i szuka peerów.</string>
   <string name="first_start_read">W międzyczasie, prosimy o zapoznanie się z notatkami tego wydania oraz stroną powitalną.</string>
@@ -49,6 +49,7 @@
   <string name="hint_search_addressbook">Szukaj w książce adresowej</string>
   <string name="action_reload_subscriptions">Odśwież subskrypcje</string>
   <string name="router_not_running">Router nie jest włączony.</string>
+  <string name="stats_not_ready">Menadżer statystyk nie jest jeszcze gotowy. Spróbuj później.</string>
   <string name="graphs_not_ready">Wykresy nie są gotowe, lub router nie jest włączony. Spróbuj później.</string>
   <string name="netdb_routers_empty">Brak routerów w Twoim NetDB.</string>
   <string name="netdb_leases_empty">Brak LeaseSets w Twoim NetDB.</string>

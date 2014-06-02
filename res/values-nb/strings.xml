@@ -23,8 +23,6 @@
   <string name="label_nonanon_info">Ikke-anonym informasjon</string>
   <string name="label_browse">Naviger</string>
   <string name="label_graphs">Grafer</string>
-  <string name="button_router_off">Trykk for å starte I2P</string>
-  <string name="button_router_on">I2P kjører (trykk for å stoppe)</string>
   <string name="first_start_title">Til lykke med ny installasjon av I2P!</string>
   <string name="first_start_welcome"><b> Velkommen til I2P</b> Vennligst <b>ha tolmodighet</b> mens I2P starter opp og finner likemenn.</string>
   <string name="first_start_read">Mens du venter, vennligst les versjons-notatene og velkomstsiden.</string>
