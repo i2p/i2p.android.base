@@ -25,6 +25,7 @@ public class MainActivity extends I2PActivityBase implements
         MainFragment.RouterControlListener {
     IRouterState mStateService = null;
     MainFragment mMainFragment = null;
+    private boolean mAutoStartFromIntent = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,36 @@ public class MainActivity extends I2PActivityBase implements
         init.debugStuff();
         init.initialize();
         super.onPostCreate(savedInstanceState);
+        handleIntents();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntents();
+    }
+
+    private void handleIntents() {
+        if (getIntent() == null)
+            return;
+
+        Intent intent = getIntent();
+        String action = intent.getAction();
+
+        if (action == null)
+            return;
+
+        if (action.equals("net.i2p.android.router.START_I2P")) {
+            if (canStart()) {
+                if (Util.isConnected(this)) {
+                    mAutoStartFromIntent = true;
+                    onStartRouterClicked();
+                } else {
+                    // Not connected to a network
+                    // TODO: Notify user
+                }
+            }
+        }
     }
 
     @Override
@@ -214,6 +245,11 @@ public class MainActivity extends I2PActivityBase implements
                         mMainFragment.updateState(state);
                         lastRouterState = state;
                     }
+
+                    if ("RUNNING".equals(state) && mAutoStartFromIntent) {
+                        setResult(RESULT_OK);
+                        finish();
+                    }
                 }
                 break;
             default:
@@ -222,18 +258,26 @@ public class MainActivity extends I2PActivityBase implements
         }
     };
 
+    private boolean canStart() {
+        RouterService svc = _routerService;
+        return (svc == null) || (!_isBound) || svc.canManualStart();
+    }
+
+    private boolean canStop() {
+        RouterService svc = _routerService;
+        return svc != null && _isBound && svc.canManualStop();
+    }
+
     // MainFragment.RouterControlListener
 
     public boolean shouldShowOnOff() {
-        RouterService svc = _routerService;
-        return (((svc == null) || (!_isBound) || svc.canManualStart())
-                && Util.isConnected(this))
-                || (svc != null && _isBound && svc.canManualStop());
+        return (canStart() && Util.isConnected(this)) || canStop();
     }
 
     public boolean shouldBeOn() {
-        RouterService svc = _routerService;
-        return svc != null && _isBound && svc.canManualStop();
+        String action = getIntent().getAction();
+        return (canStop()) ||
+                (action != null && action.equals("net.i2p.android.router.START_I2P"));
     }
 
     public void onStartRouterClicked() {

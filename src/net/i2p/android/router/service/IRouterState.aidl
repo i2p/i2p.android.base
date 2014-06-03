@@ -21,8 +21,7 @@ interface IRouterState {
      * Determines whether the RouterService has been started. If it hasn't, no
      * state changes will ever occur from this RouterService instance, and the
      * client should unbind and inform the user that the I2P router is not
-     * running (and optionally send a ROUTER_START Intent to
-     * net.i2p.android.router.MainActivity).
+     * running (and optionally send a net.i2p.android.router.START_I2P Intent).
      */
     boolean isStarted();
 
