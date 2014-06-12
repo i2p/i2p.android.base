@@ -82,6 +82,7 @@ class InitActivities {
             // settings, which can now be configured manually. We don't want to
             // overwrite the user's tunnels.
             //mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config", null);
+            copyResourceToFileIfAbsent(R.raw.i2ptunnel_config, "i2ptunnel.config");
             // FIXME this is a memory hog to merge this way
             mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
             mergeResourceToFile(R.raw.more_hosts_txt, "hosts.txt", null);
@@ -143,6 +144,15 @@ class InitActivities {
         System.setProperty("i2p.dir.base", myDir);
         System.setProperty("i2p.dir.config", myDir);
         System.setProperty("wrapper.logfile", myDir + "/wrapper.log");
+    }
+
+    /**
+     *  @param f relative to base dir
+     */
+    private void copyResourceToFileIfAbsent(int resID, String f) {
+        File file = new File(myDir, f);
+        if (!file.exists())
+            copyResourceToFile(resID, f);
     }
 
     /**
