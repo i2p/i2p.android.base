@@ -39,6 +39,8 @@
     <string name="first_start_irc">Point your IRC client to <b>localhost:6668</b> and say hi to us on:</string>
     <string name="url_irc_i2p" translatable="false">irc://127.0.0.1:6668/i2p | irc://127.0.0.1:6668/i2p-dev</string>
 
+    <string name="enable_i2cp">Another app has requested to start I2P Android, but I2CP is disabled. I2CP is necessary for other apps to connect to I2P through I2P Android. Do you want to enable I2CP?</string>
+
     <string name="drawer_open">Open nav</string>
     <string name="drawer_close">Close nav</string>
     <string name="action_search">Search</string>
