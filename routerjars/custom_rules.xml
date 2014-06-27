@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="routerjars">
+    <property file="local.properties" />
+    <property name="jar.libs.dir" value="libs" />
 
     <!-- override with i2psrc=path/to/source in local.properties -->
     <property name="i2psrc" value="../../i2p.i2p" />
@@ -21,20 +23,6 @@
     <echo message="version.code '${version.code}', 'version.name '${version.name}', '${my.version.name}'" />
 
     <target name="-pre-compile" depends="jbigi, buildrouter" />
-
-    <!--
-         Creates the output directories if they don't exist yet.
-    -->
-    <target name="-dirs">
-        <echo>Creating output directories if needed...</echo>
-        <mkdir dir="${resource.absolute.dir}" />
-        <mkdir dir="${gen.absolute.dir}" />
-        <mkdir dir="${out.absolute.dir}" />
-        <mkdir dir="${out.classes.absolute.dir}" />
-    </target>
-
-    <target name="-pre-clean">
-    </target>
 
     <!-- new rules -->
 
@@ -59,7 +47,7 @@
         <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildBOB" />
     </target>
 
-    <target name="buildrouter" depends="-dirs, buildRouter, buildI2PTunnelJar, buildAddressbook, buildBOB">
+    <target name="buildrouter" depends="buildRouter, buildI2PTunnelJar, buildAddressbook, buildBOB">
 
         <!-- router -->
         <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
