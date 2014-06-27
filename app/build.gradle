@@ -2,14 +2,11 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.1.0"
-
+    buildToolsVersion '19.1.0'
     defaultConfig {
-        applicationId "net.i2p.android.router"
         minSdkVersion 9
         targetSdkVersion 19
     }
-
     signingConfigs {
         release
     }
@@ -20,9 +17,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-
     lintOptions {
         abortOnError false
+    }
+    productFlavors {
+        free {
+            applicationId 'net.i2p.android'
+        }
+        donate {
+            applicationId 'net.i2p.android.donate'
+        }
     }
 }
 
