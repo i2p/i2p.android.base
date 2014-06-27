@@ -88,11 +88,8 @@
         <copy file="jni/libjbigi.so" todir="${jar.libs.dir}/armeabi" />
     </target>
 
-    <target name="distclean" depends="clean">
-        <delete dir="${jar.libs.dir}" verbose="${verbose}" />
-        <delete dir="jni/build/" verbose="${verbose}" />
-        <delete file="AndroidManifest.xml" verbose="${verbose}" />
-        <ant dir="${i2pbase}" target="distclean" />
+    <target name="clean">
+        <ant dir="${i2pbase}" target="clean" />
     </target>
 
 </project>
