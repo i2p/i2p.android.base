@@ -17,3 +17,9 @@ artifacts.add('default', file('libs/addressbook.jar'))
 artifacts.add('default', file('libs/BOB.jar'))
 
 clean.dependsOn cleanBuildJars
+
+clean << {
+    exec {
+        commandLine 'ant', 'clean'
+    }
+}
