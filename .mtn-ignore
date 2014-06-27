@@ -24,14 +24,19 @@ _jsp\.java$
 /classes/
 
 # Android-specific ignores
-^bin
-^gen
-^routerjars/bin
-^routerjars/gen
-^routerjars/lib
-AndroidManifest.xml
-lint.xml
+^routerjars/libs
 local.properties
+signing.gradle
+
+#IntelliJ IDEA
+^.idea
+.*.iml
+.*.ipr
+.*.iws
+
+#Gradle
+^.gradle
+build
 
 # I2P-specific ignores
 ^res/raw/blocklist_txt
