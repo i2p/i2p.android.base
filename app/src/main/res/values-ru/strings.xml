@@ -23,8 +23,8 @@
   <string name="label_nonanon_info">Не анонимная информация</string>
   <string name="label_browse">Просмотр</string>
   <string name="label_graphs">Графики</string>
-  <string name="button_router_off">Нажмите для запуска I2P</string>
-  <string name="button_router_on">I2P работает (нажмите, чтобы остановить )</string>
+  <string name="button_router_off">Долгое нажатие для запуска I2P</string>
+  <string name="button_router_on">I2P работает (долгое нажатие для остановки)</string>
   <string name="first_start_title">Поздравляем с установкой I2P!</string>
   <string name="first_start_welcome"><b>Добро пожаловать в I2P!</b> Пожалуйста, <b>дождитесь</b> пока I2P загрузится и найдет узлы.</string>
   <string name="first_start_read">Пока вы ждете, пожалуйста, прочтите информацию о релизе и страницу приветствия.</string>
@@ -49,6 +49,7 @@
   <string name="hint_search_addressbook">Поиск в адресной книге</string>
   <string name="action_reload_subscriptions">Перегрузить подписки</string>
   <string name="router_not_running">Маршрутизатор не запущен.</string>
+  <string name="stats_not_ready">Менеджер статистики ещё не готов. Попробуйте позже.</string>
   <string name="graphs_not_ready">Графы не готовы или маршрутизатор не запущен. Повторите попытку позже.</string>
   <string name="netdb_routers_empty">Нет маршрутизаторов в вашем NetDB.</string>
   <string name="netdb_leases_empty">Нет LeaseSet-ов в вашем NetDB.</string>
@@ -60,7 +61,7 @@
   <string name="settings_enable">Включить</string>
   <string name="settings_desc_subscriptions">Подписки на URL</string>
   <string name="settings_label_bandwidth_net">Пропускная способность и сеть</string>
-  <string name="settings_label_bandwidth">Пропускная способность и сети</string>
+  <string name="settings_label_bandwidth">Пропускная способность</string>
   <string name="settings_label_bw_inbound">Входящая скорость</string>
   <string name="settings_desc_bw_inbound">Максимальная входящая скорость</string>
   <string name="settings_label_bw_outbound">Исходящая скорость</string>
