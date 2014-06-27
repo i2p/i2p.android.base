@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="net.i2p.android.router"
-      android:versionCode="0"
-      android:versionName="0.0.0-0_b0-API9"
-      android:installLocation="auto"
-      >
+    package="net.i2p.android.router"
+    android:installLocation="auto"
+    android:versionCode="0"
+    android:versionName="0.0.0-0_b0-API9">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <uses-sdk android:minSdkVersion="9"
-              android:targetSdkVersion="19" />
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="19" />
 
-    <application android:label="@string/app_name"
-               android:theme="@style/Theme.AppCompat"
-               android:icon="@drawable/ic_launcher_itoopie" >
-        <service android:name=".service.RouterService"
-                  android:label="@string/app_name"
-                  android:icon="@drawable/ic_launcher_itoopie" >
+    <application
+        android:icon="@drawable/ic_launcher_itoopie"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat">
+        <service
+            android:name=".service.RouterService"
+            android:icon="@drawable/ic_launcher_itoopie"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="net.i2p.android.router.service.IRouterState" />
             </intent-filter>
         </service>
-        <provider android:name=".provider.CacheProvider"
-                  android:authorities="net.i2p.android.router" />
-        <activity android:name=".MainActivity"
-                  android:label="@string/app_name"
-                  android:icon="@drawable/ic_launcher_itoopie"
-                  android:launchMode="singleTop" >
+        <provider
+            android:name=".provider.CacheProvider"
+            android:authorities="net.i2p.android.router" />
+
+        <activity
+            android:name=".MainActivity"
+            android:icon="@drawable/ic_launcher_itoopie"
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,42 +42,69 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewsActivity"
-                  android:label="I2P News"
-                  android:configChanges="orientation|keyboardHidden" >
+        <activity
+            android:name=".NewsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="I2P News"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.MainActivity" />
         </activity>
-        <activity android:name=".HelpActivity"
-                  android:label="Help"
-                  android:parentActivityName=".MainActivity" >
+        <activity
+            android:name=".HelpActivity"
+            android:label="Help"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.MainActivity" />
         </activity>
-        <activity android:name=".LicenseActivity"
-                  android:label="I2P License Information"
-                  android:parentActivityName=".HelpActivity" >
+        <activity
+            android:name=".LicenseActivity"
+            android:label="I2P License Information"
+            android:parentActivityName=".HelpActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.HelpActivity" />
         </activity>
-        <activity android:name=".web.WebActivity"
-                  android:label="I2P Web Browser"
-                  android:configChanges="orientation|keyboardHidden" >
+        <activity
+            android:name=".web.WebActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="I2P Web Browser">
             <!-- Disabled, this browser is not very secure
             Temporarily enabled until an alternative browser is ready -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host="*.i2p" android:scheme="http" />
+
+                <data
+                    android:host="*.i2p"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity"
-                  android:label="I2P Settings"
-                  android:parentActivityName=".MainActivity" >
+        <activity
+            android:name=".SettingsActivity"
+            android:label="I2P Settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.MainActivity" />
         </activity>
-        <activity android:name=".addressbook.AddressbookSettingsActivity"
-                  android:label="I2P Addressbook Settings"
-                  android:parentActivityName=".addressbook.AddressbookActivity"
-                  android:launchMode="singleTop" >
+        <activity
+            android:name=".addressbook.AddressbookSettingsActivity"
+            android:label="I2P Addressbook Settings"
+            android:launchMode="singleTop"
+            android:parentActivityName=".addressbook.AddressbookActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.addressbook.AddressbookActivity" />
         </activity>
-        <activity android:name=".addressbook.AddressbookActivity"
-                  android:label="Addressbook"
-                  android:launchMode="singleTop" >
+        <activity
+            android:name=".addressbook.AddressbookActivity"
+            android:label="Addressbook"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -79,49 +112,93 @@
                 <action android:name="android.intent.action.PICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                       android:resource="@xml/searchable_addressbook"/>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable_addressbook" />
         </activity>
-        <activity android:name=".addressbook.AddressbookAddWizardActivity"
-                  android:label="Add new Destination"
-                  android:parentActivityName=".addressbook.AddressbookActivity" >
+        <activity
+            android:name=".addressbook.AddressbookAddWizardActivity"
+            android:label="Add new Destination"
+            android:parentActivityName=".addressbook.AddressbookActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.addressbook.AddressbookActivity" />
         </activity>
-        <activity android:name="net.i2p.android.i2ptunnel.TunnelListActivity"
-                  android:label="I2PTunnel"
-                  android:launchMode="singleTop" >
+        <activity
+            android:name="net.i2p.android.i2ptunnel.TunnelListActivity"
+            android:label="I2PTunnel"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.MainActivity" />
         </activity>
-        <activity android:name="net.i2p.android.i2ptunnel.TunnelDetailActivity"
-                  android:label="I2PTunnel"
-                  android:parentActivityName="net.i2p.android.i2ptunnel.TunnelListActivity" >
+        <activity
+            android:name="net.i2p.android.i2ptunnel.TunnelDetailActivity"
+            android:label="I2PTunnel"
+            android:parentActivityName="net.i2p.android.i2ptunnel.TunnelListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.i2ptunnel.TunnelListActivity" />
         </activity>
-        <activity android:name="net.i2p.android.i2ptunnel.TunnelWizardActivity"
-                  android:label="Tunnel Creation Wizard"
-                  android:parentActivityName="net.i2p.android.i2ptunnel.TunnelListActivity" >
+        <activity
+            android:name="net.i2p.android.i2ptunnel.TunnelWizardActivity"
+            android:label="Tunnel Creation Wizard"
+            android:parentActivityName="net.i2p.android.i2ptunnel.TunnelListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.i2ptunnel.TunnelListActivity" />
         </activity>
-        <activity android:name=".log.LogActivity"
-                  android:label="I2P Logs"
-                  android:parentActivityName=".MainActivity" >
+        <activity
+            android:name=".log.LogActivity"
+            android:label="I2P Logs"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.MainActivity" />
         </activity>
-        <activity android:name=".log.LogDetailActivity"
-                  android:label="Log Entry"
-                  android:parentActivityName=".log.LogActivity" >
+        <activity
+            android:name=".log.LogDetailActivity"
+            android:label="Log Entry"
+            android:parentActivityName=".log.LogActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.log.LogActivity" />
         </activity>
-        <activity android:name=".stats.RateGraphActivity"
-                  android:label="Rate Graph"
-                  android:parentActivityName=".MainActivity" >
+        <activity
+            android:name=".stats.RateGraphActivity"
+            android:label="Rate Graph"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.MainActivity" />
         </activity>
-        <activity android:name=".stats.PeersActivity"
-                  android:label="I2P Peers and Transport Status"
-                  android:configChanges="orientation|keyboardHidden"
-                  android:launchMode="singleTop" >
+        <activity
+            android:name=".stats.PeersActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="I2P Peers and Transport Status"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.MainActivity" />
         </activity>
-        <activity android:name=".netdb.NetDbActivity"
-                  android:label="NetDB"
-                  android:parentActivityName=".MainActivity" >
+        <activity
+            android:name=".netdb.NetDbActivity"
+            android:label="NetDB"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.MainActivity" />
         </activity>
-        <activity android:name=".netdb.NetDbDetailActivity"
-                  android:label="NetDB Detail"
-                  android:parentActivityName=".netdb.NetDbActivity" >
+        <activity
+            android:name=".netdb.NetDbDetailActivity"
+            android:label="NetDB Detail"
+            android:parentActivityName=".netdb.NetDbActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.netdb.NetDbActivity" />
         </activity>
     </application>
 </manifest>
