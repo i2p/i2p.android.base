@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.i2p.android.router"
       android:versionCode="0"
-      android:versionName="0.0.0-0_b0-API8"
+      android:versionName="0.0.0-0_b0-API9"
       android:installLocation="auto"
       >
 
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="9" />
 
 </manifest>

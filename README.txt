@@ -34,7 +34,7 @@ Instructions:
 # target in project.properties from android-19 to andriod-x
 # where x is the API version.
 
-# I2P is configured to run on 2.2 (API 8) or higher using the
+# I2P is configured to run on 2.3 (API 9) or higher using the
 # Android Support Library, so download that as well
 # (it's under "Extras"). 
 
