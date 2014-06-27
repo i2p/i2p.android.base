@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "net.i2p.android.router"
-        minSdkVersion 8
+        minSdkVersion 9
         targetSdkVersion 19
     }
 
