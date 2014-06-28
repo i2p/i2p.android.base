@@ -49,9 +49,6 @@
         <jar destfile="${jar.libs.dir}/i2p.jar" >
             <zipfileset src="${i2pbase}/build/i2p.jar" >
                 <exclude name="net/i2p/util/LogWriter.class" />
-                <exclude name="net/i2p/util/SecureDirectory.class" />
-                <exclude name="net/i2p/util/SecureFile.class" />
-                <exclude name="net/i2p/util/SecureFileOutputStream.class" />
             </zipfileset>
         </jar>
 
