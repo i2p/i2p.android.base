@@ -37,8 +37,77 @@ dependencies {
     compile files('libs/androidplot-core-0.6.0.jar')
 }
 
+project.ext.i2pbase = ''
 def Properties props = new Properties()
-def propFile = new File('signing.properties')
+def propFile = new File(project(':routerjars').projectDir, 'local.properties')
+
+if (propFile.canRead()) {
+    props.load(new FileInputStream(propFile))
+
+    if (props != null &&
+            props.containsKey('i2psrc')) {
+        i2pbase = props['i2psrc']
+    } else {
+        println 'local.properties found but some entries are missing'
+    }
+} else {
+    println 'local.properties not found'
+}
+
+task certificatesZip(type: Zip) {
+    archiveName = 'certificates_zip'
+    from files('' + i2pbase + '/installer/resources/certificates')
+}
+task copyI2PResources(type: Copy) {
+    into 'src/main'
+    into('res/drawable') {
+        from file(i2pbase + '/installer/resources/themes/console/images/i2plogo.png')
+    }
+    into('res/raw') {
+        from(i2pbase + '/installer/resources/blocklist.txt') { rename {'blocklist_txt' } }
+        from(i2pbase + '/installer/resources/hosts.txt') { rename {'hosts_txt' } }
+        from('../LICENSE.txt') { rename {'license_app_txt' } }
+        from('../licenses/LICENSE-Apache2.0.txt') { rename {'license_apache20_txt' } }
+        from(i2pbase + '/licenses') {
+            include { elem ->
+                elem.name in [
+                        'LICENSE-ElGamalDSA.txt',
+                        'LICENSE-SHA256.txt',
+                        'LICENSE-BSD.txt',
+                        'LICENSE-SNTP.txt',
+                        'LICENSE-LGPLv2.1.txt',
+                        'LICENSE-InstallCert.txt',
+                        'LICENSE-BlockFile.txt',
+                        'LICENSE-GPLv2.txt',
+                        'LICENSE-GPLv3.txt',
+                        'LICENSE-LGPLv3.txt',
+                        'LICENSE-FatCowIcons.txt',
+                        'LICENSE-Addressbook.txt',
+                ]
+            }
+            rename { String name ->
+                String part = name.substring(8, name.lastIndexOf('.txt'))
+                String.format('license_%s_txt',
+                        part.toLowerCase(Locale.US).replace('.', '_'))
+            }
+        }
+        from certificatesZip
+    }
+}
+task cleanI2PResources(type: Delete) {
+    delete file('src/main/res/drawable/i2plogo.png')
+    delete fileTree('src/main/res/raw') {
+        include 'blocklist_txt'
+        include 'hosts_txt'
+        include 'license_*'
+        include 'certificates_zip'
+    }
+}
+preBuild.dependsOn copyI2PResources
+clean.dependsOn cleanI2PResources
+
+props = new Properties()
+propFile = new File(project.rootDir, 'signing.properties')
 
 if (propFile.canRead()) {
     props.load(new FileInputStream(propFile))
