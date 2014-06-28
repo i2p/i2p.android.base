@@ -49,6 +49,19 @@
 
 2. Build and run the app (`Shift+F10`).
 
+### Signing release builds
+
+1. Create a `signing.properties` file in `i2p.android.base` containing:
+
+    ```
+    STORE_FILE=/path/to/android.keystore
+    STORE_PASSWORD=store.password
+    KEY_ALIAS=key.alias
+    KEY_PASSWORD=key.password
+    ```
+
+2. `./gradlew assembleRelease`
+
 ### Commands from the old build instructions that might be useful
 
 ```
