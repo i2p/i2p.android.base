@@ -8,10 +8,13 @@
 - Apache Ant 1.8.0 or higher
 - I2P source in ../i2p.i2p
 - Android SDK (tested with Rev 22.6.4 and platform-tools version 19.1)
+- Android Support Repository
 
 ### Preparation
 
 1. Download the Android SDK. The simplest method is to download [Android Studio](https://developer.android.com/sdk/installing/studio.html).
+
+  * If you are using an existing Android SDK, install the Android Support Repository via the SDK Manager.
 
 2. Check out the [`i2p.i2p`](https://github.com/i2p/i2p.i2p) repository.
 
