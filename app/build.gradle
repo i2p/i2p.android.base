@@ -37,7 +37,7 @@ dependencies {
     compile files('libs/androidplot-core-0.6.0.jar')
 }
 
-project.ext.i2pbase = ''
+project.ext.i2pbase = '../i2p.i2p'
 def Properties props = new Properties()
 def propFile = new File(project(':routerjars').projectDir, 'local.properties')
 
