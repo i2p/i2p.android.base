@@ -25,7 +25,7 @@ else
 fi
 cd $THISDIR
 
-LIBFILE=$PWD/libjbigi.so
+LIBFILE=$PWD/armeabi/libjbigi.so
 if [ -f $LIBFILE ]
 then
     echo "$LIBFILE exists, nothing to do here"
@@ -33,8 +33,8 @@ then
     exit 0
 fi
 
-I2PBASE=${1:-$THISDIR/../../../i2p.i2p}
-ROUTERJARS=$( dirname $THISDIR )
+I2PBASE=${1:-$THISDIR/../../../../../i2p.i2p}
+ROUTERJARS=$THISDIR/../../../../routerjars
 
 ## Check the local.properties file first
 export NDK="$( cat $ROUTERJARS/local.properties | grep 'ndk.dir' | sed 's/^ndk.dir\s*=\s*//' )"
@@ -67,9 +67,9 @@ if [ ! -d "$NDK" ]; then
 fi
 
 #
-# API level, pulled from ../AndroidManifest.xml.in
+# API level, pulled from ../AndroidManifest.xml
 #
-LEVEL=$( cat $ROUTERJARS/AndroidManifest.xml.in | grep 'minSdkVersion' | sed 's/^.*minSdkVersion="\([0-9]\+\)".*$/\1/' )
+LEVEL=$( cat ../AndroidManifest.xml | grep 'minSdkVersion' | sed 's/^.*minSdkVersion="\([0-9]\+\)".*$/\1/' )
 ARCH="arm"
 export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
 if [ ! -d "$SYSROOT" ]; then
