@@ -8,15 +8,6 @@
 # uncomment to skip
 # exit 0
 
-#
-# No, no no, 'realpath' is not standard unix or coreutils.
-#
-# Use of 'which' is pretty bad too. Since 'which' would hit anything
-# with the same filename that is +x in the path, and we don't want to do that,
-# we use $0 as-is, because it contains _exactly_ what we are looking for.
-#
-#THISDIR=$(realpath $(dirname $(which $0)))
-
 ## works on linux and other unixes, but not osx.
 if [ "`uname -s`" != "Darwin" ]; then
     THISDIR=$(dirname $(readlink -ne $0))
@@ -37,7 +28,7 @@ I2PBASE=${1:-$THISDIR/../../../../../i2p.i2p}
 ROUTERJARS=$THISDIR/../../../../routerjars
 
 ## Check the local.properties file first
-export NDK="$( cat $ROUTERJARS/local.properties | grep 'ndk.dir' | sed 's/^ndk.dir\s*=\s*//' )"
+export NDK=$(awk -F= '/ndk\.dir/{print $2}' "$ROUTERJARS/local.properties")
 
 if [ "$NDK" == "" ]; then
 ## Simple fix for osx development
@@ -69,7 +60,7 @@ fi
 #
 # API level, pulled from ../AndroidManifest.xml
 #
-LEVEL=$( cat ../AndroidManifest.xml | grep 'minSdkVersion' | sed 's/^.*minSdkVersion="\([0-9]\+\)".*$/\1/' )
+LEVEL=$(awk -F\" '/minSdkVersion/{print $2}' ../AndroidManifest.xml)
 ARCH="arm"
 export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
 if [ ! -d "$SYSROOT" ]; then
