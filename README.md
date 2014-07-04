@@ -17,11 +17,20 @@ The build system is based on Gradle. There are several methods for setting Gradl
 
 * It can be downloaded from [the Gradle website](http://www.gradle.org/downloads).
 
-* Most distributions will have Gradle packages. Be careful to check the provided version; Debian and Ubuntu have old versions in their main repositories. There is a [PPA](https://launchpad.net/~cwchien/+archive/gradle) for Ubuntu with the latest version of Gradle.
+* Most distributions will have Gradle packages. Be careful to check the
+  provided version; Debian and Ubuntu have old versions in their main
+  repositories. There is a [PPA](https://launchpad.net/~cwchien/+archive/gradle)
+  for Ubuntu with the latest version of Gradle.
 
-* A Gradle wrapper is provided in the codebase. It takes all the same commands as the regular `gradle` command. The first time that any command is run, it will automatically download, cache and use the correct version of Gradle. This is the simplest way to get started with the codebase. To use it, replace `gradle` with `./gradlew` (or `./gradlew.bat` on Windows) in the commands below.
+* A Gradle wrapper is provided in the codebase. It takes all the same commands
+  as the regular `gradle` command. The first time that any command is run, it
+  will automatically download, cache and use the correct version of Gradle.
+  This is the simplest way to get started with the codebase. To use it, replace
+  `gradle` with `./gradlew` (or `./gradlew.bat` on Windows) in the commands
+  below.
 
-Gradle will pull dependencies over the clearnet by default. To use Tor, create a `gradle.properties` file in `i2p.android.base` containing:
+Gradle will pull dependencies over the clearnet by default. To use Tor, create
+a `gradle.properties` file in `i2p.android.base` containing:
 
     ```
     systemProp.socksProxyHost=localhost
@@ -32,7 +41,8 @@ Gradle will pull dependencies over the clearnet by default. To use Tor, create a
 
 1. Download the Android SDK. The simplest method is to download [Android Studio](https://developer.android.com/sdk/installing/studio.html).
 
-  * If you are using an existing Android SDK, install the Android Support Repository via the SDK Manager.
+  * If you are using an existing Android SDK, install the Android Support
+    Repository via the SDK Manager.
 
 2. Check out the [`i2p.i2p`](https://github.com/i2p/i2p.i2p) repository.
 
