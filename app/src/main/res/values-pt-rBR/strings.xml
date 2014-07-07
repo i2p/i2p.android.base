@@ -22,8 +22,6 @@
   <string name="label_nonanon_info">Informação não-anônima</string>
   <string name="label_browse">Navegador</string>
   <string name="label_graphs">Gráficos</string>
-  <string name="button_router_off">Pressione para iniciar o I2P </string>
-  <string name="button_router_on">I2P está ligado (pressione para parar)</string>
   <string name="first_start_title">Parabéns em instalar o I2P!</string>
   <string name="first_start_welcome"><b>Bem-Vindo ao I2P!</b> Por favor <b> tenha paciência </b> enquanto o I2P inicia e procura por peers.</string>
   <string name="first_start_read">Enquanto você está esperando, por favor leia as notas de lançamento e a página de boas vindas.</string>
@@ -46,6 +44,7 @@
   <string name="hint_search_addressbook">Procurar por livro de endereços</string>
   <string name="action_reload_subscriptions">Recarregar inscriçoes</string>
   <string name="router_not_running">O roteador não está funcionando</string>
+  <string name="stats_not_ready">O configurador de estatística não está pronto. Tente de novo mais tarde.</string>
   <string name="netdb_routers_empty">Sem roteadores em seu NetDB.</string>
   <string name="notification_status_bw">Largura de banda: %1$s KBps Down/ %2$s KBps up</string>
   <string name="notification_status_peers">Peers: %1$d ativos, %2$d conhecidos</string>
