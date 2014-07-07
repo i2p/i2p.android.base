@@ -45,7 +45,7 @@ public class CacheProvider extends ContentProvider {
     //private static final String NONCE = Integer.toString(Math.abs((new java.util.Random()).nextInt()));
     private static final String NONCE = "0";
     private static final String SCHEME = "content";
-    public static final String AUTHORITY = "net.i2p.android.router";
+    public static final String AUTHORITY = "net.i2p.android";
     /** includes the nonce */
     public static final Uri CONTENT_URI = Uri.parse(SCHEME + "://" + AUTHORITY + '/' + NONCE);
 

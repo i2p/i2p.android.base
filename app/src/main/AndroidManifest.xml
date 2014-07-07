@@ -26,7 +26,7 @@
         </service>
         <provider
             android:name=".provider.CacheProvider"
-            android:authorities="net.i2p.android.router" />
+            android:authorities="net.i2p.android" />
 
         <activity
             android:name=".MainActivity"
