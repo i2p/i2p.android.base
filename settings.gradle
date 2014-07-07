@@ -1,1 +1,4 @@
 include ':app', ':routerjars'
+
+//System.out.println("Do you want to access the network to download dependencies? (y/n)")
+//useNet = (System.console().readLine().toLowerCase() == 'y')
