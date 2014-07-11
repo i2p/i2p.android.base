@@ -6,15 +6,26 @@ task buildJars(type: Exec) {
 }
 compileJava.dependsOn buildJars
 
+configurations {
+    client
+}
+
+dependencies {
+    'default' configurations.client
+}
+
 // TODO an empty routerjars.jar is added to the classpath
 
-artifacts.add('default', file('libs/i2p.jar'))
-artifacts.add('default', file('libs/router.jar'))
-artifacts.add('default', file('libs/mstreaming.jar'))
-artifacts.add('default', file('libs/streaming.jar'))
-artifacts.add('default', file('libs/i2ptunnel.jar'))
-artifacts.add('default', file('libs/addressbook.jar'))
-artifacts.add('default', file('libs/BOB.jar'))
+artifacts {
+    client file('libs/i2p.jar')
+    client file('libs/mstreaming.jar')
+    client file('libs/streaming.jar')
+
+    'default' file('libs/router.jar')
+    'default' file('libs/i2ptunnel.jar')
+    'default' file('libs/addressbook.jar')
+    'default' file('libs/BOB.jar')
+}
 
 clean.dependsOn cleanBuildJars
 
