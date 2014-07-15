@@ -16,10 +16,16 @@
     </fail>
     <echo message="Using I2P source at ${i2pbase}" />
 
+    <available property="have.streaming" file="${i2pbase}/build/streaming.jar" />
     <available property="have.router" file="${i2pbase}/build/router.jar" />
     <available property="have.bob" file="${i2pbase}/apps/BOB/dist/BOB.jar" />
     <available property="have.i2ptunnel" file="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" />
     <available property="have.addressbook" file="${i2pbase}/apps/addressbook/dist/addressbook.jar" />
+
+    <!-- builds core, ministreaming and streaming -->
+    <target name="buildStreaming" unless="have.streaming">
+        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildStreaming" />
+    </target>
 
     <target name="buildRouter" unless="have.router">
         <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildRouter" />
@@ -36,15 +42,9 @@
         <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildBOB" />
     </target>
 
-    <target name="buildrouter" depends="buildRouter, buildI2PTunnelJar, buildAddressbook, buildBOB">
+    <target name="buildclient" depends="buildStreaming">
 
-        <!-- router -->
-        <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
-
-        <!-- bob -->
-        <copy file="${i2pbase}/apps/BOB/dist/BOB.jar" todir="${jar.libs.dir}" />
         <!-- core -->
-
         <!-- lots of unneeded stuff could be deleted here -->
         <jar destfile="${jar.libs.dir}/i2p.jar" >
             <zipfileset src="${i2pbase}/build/i2p.jar" >
@@ -52,9 +52,18 @@
             </zipfileset>
         </jar>
 
-        <!-- i2ptunnel -->
+        <!-- streaming -->
         <copy file="${i2pbase}/apps/ministreaming/java/build/mstreaming.jar" todir="${jar.libs.dir}" />
         <copy file="${i2pbase}/apps/streaming/java/build/streaming.jar" todir="${jar.libs.dir}" />
+
+    </target>
+
+    <target name="buildrouter" depends="buildRouter, buildI2PTunnelJar, buildAddressbook, buildBOB">
+
+        <!-- router -->
+        <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
+
+        <!-- i2ptunnel -->
         <jar destfile="${jar.libs.dir}/i2ptunnel.jar" >
             <zipfileset src="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" >
                 <exclude name="net/i2p/i2ptunnel/I2PTunnelGUI.class" />
@@ -63,6 +72,9 @@
 
         <!-- addressbook -->
         <copy file="${i2pbase}/apps/addressbook/dist/addressbook.jar" todir="${jar.libs.dir}" />
+
+        <!-- bob -->
+        <copy file="${i2pbase}/apps/BOB/dist/BOB.jar" todir="${jar.libs.dir}" />
 
     </target>
 
