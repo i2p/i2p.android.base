@@ -27,12 +27,15 @@ dependencies {
 }
 
 android.libraryVariants.all { variant ->
+    // Copy I2P client JARs into AAR
     def copyClientLibsTask = tasks.create(name: "copy${variant.name.capitalize()}ClientLibs", type: Copy) {
         from project(':routerjars').configurations.client.allArtifacts.collect { artifact ->
             artifact.file
         }
         destinationDir file("${buildDir}/intermediates/bundles/${variant.dirName}/libs")
     }
+
+    // Hook the copy task into the build
     variant.packageLibrary.dependsOn copyClientLibsTask
     copyClientLibsTask.mustRunAfter ':routerjars:buildClient'
 }
