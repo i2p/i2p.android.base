@@ -22,3 +22,14 @@ android {
 dependencies {
     compile project(path: ':routerjars', configuration: 'client')
 }
+
+android.libraryVariants.all { variant ->
+    def copyClientLibsTask = tasks.create(name: "copy${variant.name.capitalize()}ClientLibs", type: Copy) {
+        from project(':routerjars').configurations.client.allArtifacts.collect { artifact ->
+            artifact.file
+        }
+        destinationDir file("${buildDir}/intermediates/bundles/${variant.dirName}/libs")
+    }
+    variant.packageLibrary.dependsOn copyClientLibsTask
+    copyClientLibsTask.mustRunAfter ':routerjars:buildClient'
+}
