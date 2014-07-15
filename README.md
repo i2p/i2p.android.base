@@ -32,10 +32,10 @@ The build system is based on Gradle. There are several methods for setting Gradl
 Gradle will pull dependencies over the clearnet by default. To use Tor, create
 a `gradle.properties` file in `i2p.android.base` containing:
 
-    ```
-    systemProp.socksProxyHost=localhost
-    systemProp.socksProxyPort=9150
-    ```
+```
+systemProp.socksProxyHost=localhost
+systemProp.socksProxyPort=9150
+```
 
 ### Preparation
 
