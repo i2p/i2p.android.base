@@ -48,6 +48,7 @@
         <!-- lots of unneeded stuff could be deleted here -->
         <jar destfile="${jar.libs.dir}/i2p.jar" >
             <zipfileset src="${i2pbase}/build/i2p.jar" >
+                <exclude name="net/i2p/client/DomainSocketFactory.class" />
                 <exclude name="net/i2p/util/LogWriter.class" />
             </zipfileset>
         </jar>
