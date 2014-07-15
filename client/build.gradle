@@ -1,15 +1,17 @@
 apply plugin: 'com.android.library'
 
+version = "0.1"
+
 android {
     compileSdkVersion 19
     buildToolsVersion "19.1.0"
 
     defaultConfig {
-        applicationId "net.i2p.android.client"
+        applicationId "net.i2p.android"
         minSdkVersion 9
         targetSdkVersion 19
         versionCode 1
-        versionName "0.9.13"
+        versionName version
     }
     buildTypes {
         release {
