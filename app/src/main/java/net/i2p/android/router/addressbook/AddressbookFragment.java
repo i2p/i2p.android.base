@@ -34,14 +34,14 @@ public class AddressbookFragment extends ListFragment implements
     public static final String PRIVATE_BOOK = "privatehosts.txt";
     public static final String ADD_WIZARD_DATA = "add_wizard_data";
 
-    static final int ADD_WIZARD_REQUEST = 1;
+    private static final int ADD_WIZARD_REQUEST = 1;
 
     private static final int ROUTER_LOADER_ID = 1;
     private static final int PRIVATE_LOADER_ID = 2;
 
     private boolean mOnActivityCreated;
-    RouterContextProvider mRouterContextProvider;
-    OnAddressSelectedListener mCallback;
+    private RouterContextProvider mRouterContextProvider;
+    private OnAddressSelectedListener mCallback;
     private AddressEntryAdapter mAdapter;
     private String mBook;
     private String mCurFilter;

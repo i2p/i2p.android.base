@@ -168,7 +168,7 @@ public class LogFragment extends ListFragment implements
         if (loader.getId() == ("ERROR".equals(mLogLevel) ?
                 LEVEL_ERROR : LEVEL_ALL)) {
             mAdapter.setData(data);
-            String header = getHeader(data.size(), (mLogLevel == "ERROR"));
+            String header = getHeader(data.size(), ("ERROR".equals(mLogLevel)));
             mHeaderView.setText(header);
 
             if (isResumed()) {

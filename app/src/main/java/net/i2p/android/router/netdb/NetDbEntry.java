@@ -31,7 +31,7 @@ public class NetDbEntry {
     }
 
     public static NetDbEntry fromLeaseSet(RouterContext ctx, LeaseSet ls) {
-        String nick = "";
+        String nick;
         boolean local = false;
         boolean unpublished = false;
         Destination dest = ls.getDestination();
@@ -55,8 +55,8 @@ public class NetDbEntry {
         return new NetDbEntry(ls, nick, local, unpublished);
     }
 
-    public NetDbEntry(RouterInfo ri,
-            boolean isUs, String country) {
+    private NetDbEntry(RouterInfo ri,
+                       boolean isUs, String country) {
         mIsRI = true;
         mEntry = ri;
 
@@ -67,8 +67,8 @@ public class NetDbEntry {
         mLocal = mUnpublished = false;
     }
 
-    public NetDbEntry(LeaseSet ls,
-        String nick, boolean local, boolean unpublished) {
+    private NetDbEntry(LeaseSet ls,
+                       String nick, boolean local, boolean unpublished) {
         mIsRI = false;
         mEntry = ls;
 

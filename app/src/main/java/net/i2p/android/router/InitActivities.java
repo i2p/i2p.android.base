@@ -58,7 +58,7 @@ class InitActivities {
         Util.d("MODEL" + ": " + Build.MODEL);
         Util.d("DISPLAY" + ": " + Build.DISPLAY);
         Util.d("VERSION" + ": " + Build.VERSION.RELEASE);
-        Util.d("SDK" + ": " + Build.VERSION.SDK);
+        Util.d("SDK" + ": " + Build.VERSION.SDK_INT);
     }
 
     void initialize() {
@@ -234,7 +234,7 @@ class InitActivities {
      *  and write back
      *
      *  @param f relative to base dir
-     *  @param props local overrides or null
+     *  @param overrides local overrides or null
      */
     public void mergeResourceToFile(int resID, String f, Properties overrides) {
         InputStream in = null;

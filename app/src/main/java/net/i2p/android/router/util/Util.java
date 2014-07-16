@@ -1,12 +1,5 @@
 package net.i2p.android.router.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -15,8 +8,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.preference.PreferenceManager;
+
 import net.i2p.I2PAppContext;
 import net.i2p.util.OrderedProperties;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 public abstract class Util {
     private static final boolean _isEmulator = Build.MODEL.equals("sdk");

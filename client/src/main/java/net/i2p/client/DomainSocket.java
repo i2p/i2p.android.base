@@ -22,7 +22,7 @@ import java.nio.channels.SocketChannel;
  * @author str4d
  * @since 0.9.14
  */
-public class DomainSocket extends Socket {
+class DomainSocket extends Socket {
     private final LocalSocket mLocalSocket;
 
     /**

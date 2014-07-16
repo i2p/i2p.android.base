@@ -16,8 +16,8 @@ import net.i2p.util.FileUtil;
 
 public class AddressbookSettingsActivity extends Activity {
 
-    protected EditText text_content_subscriptions;
-    protected Button btn_save_subscriptions;
+    private EditText text_content_subscriptions;
+    private Button btn_save_subscriptions;
     private String filename = "/addressbook/subscriptions.txt";
     private File i2pDir;
 

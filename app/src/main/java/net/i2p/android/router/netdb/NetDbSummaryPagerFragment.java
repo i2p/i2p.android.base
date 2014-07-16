@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 
 public class NetDbSummaryPagerFragment extends I2PFragmentBase implements
         LoaderManager.LoaderCallbacks<List<ObjectCounter<String>>> {
-    NetDbPagerAdapter mNetDbPagerAdapter;
+    private NetDbPagerAdapter mNetDbPagerAdapter;
     ViewPager mViewPager;
 
     @Override

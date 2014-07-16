@@ -1,14 +1,5 @@
 package net.i2p.android.router.netdb;
 
-import java.util.List;
-
-import net.i2p.android.router.I2PFragmentBase;
-import net.i2p.android.router.R;
-import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
-import net.i2p.android.router.I2PFragmentBase.RouterContextUser;
-import net.i2p.data.Hash;
-import net.i2p.router.RouterContext;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -19,6 +10,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+
+import net.i2p.android.router.I2PFragmentBase;
+import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
+import net.i2p.android.router.R;
+import net.i2p.data.Hash;
+import net.i2p.router.RouterContext;
+
+import java.util.List;
 
 public class NetDbListFragment extends ListFragment implements 
         I2PFragmentBase.RouterContextUser,
@@ -34,8 +33,8 @@ public class NetDbListFragment extends ListFragment implements
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     private boolean mOnActivityCreated;
-    RouterContextProvider mRouterContextProvider;
-    OnEntrySelectedListener mEntrySelectedCallback;
+    private RouterContextProvider mRouterContextProvider;
+    private OnEntrySelectedListener mEntrySelectedCallback;
     private NetDbEntryAdapter mAdapter;
     private boolean mRouters;
     /**

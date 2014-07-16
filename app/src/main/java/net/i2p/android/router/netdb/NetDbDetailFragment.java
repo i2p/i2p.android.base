@@ -1,7 +1,16 @@
 package net.i2p.android.router.netdb;
 
-import java.util.Map;
-import java.util.Set;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.R;
@@ -14,17 +23,8 @@ import net.i2p.data.Lease;
 import net.i2p.data.LeaseSet;
 import net.i2p.data.RouterAddress;
 import net.i2p.data.RouterInfo;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
+
+import java.util.Map;
 
 public class NetDbDetailFragment extends I2PFragmentBase {
     public static final String IS_RI = "is_routerinfo";
@@ -131,7 +131,7 @@ public class NetDbDetailFragment extends I2PFragmentBase {
 
         TableLayout stats = (TableLayout) getView().findViewById(R.id.ri_stats);
         Map<Object, Object> p = ri.getOptionsMap();
-        for (Map.Entry<Object,Object> e : (Set<Map.Entry<Object,Object>>) p.entrySet()) {
+        for (Map.Entry<Object,Object> e : p.entrySet()) {
             String key = (String)e.getKey();
             String val = (String)e.getValue();
             addTableRow(stats, DataHelper.stripHTML(key), DataHelper.stripHTML(val));
@@ -149,7 +149,7 @@ public class NetDbDetailFragment extends I2PFragmentBase {
             addTableRow(table, "cost", ""+cost);
 
         Map<Object, Object> p = addr.getOptionsMap();
-        for (Map.Entry<Object,Object> e : (Set<Map.Entry<Object,Object>>) p.entrySet()) {
+        for (Map.Entry<Object,Object> e : p.entrySet()) {
             String key = (String)e.getKey();
             String val = (String)e.getValue();
             addTableRow(table, DataHelper.stripHTML(key), DataHelper.stripHTML(val));

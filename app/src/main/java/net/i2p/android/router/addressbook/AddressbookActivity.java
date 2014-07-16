@@ -99,7 +99,7 @@ public class AddressbookActivity extends I2PActivityBase
     // AddressbookFragment.OnAddressSelectedListener
 
     public void onAddressSelected(CharSequence host) {
-        if (getIntent().getAction() == Intent.ACTION_PICK) {
+        if (Intent.ACTION_PICK.equals(getIntent().getAction())) {
             Intent result = new Intent();
             result.setData(Uri.parse("http://" + host));
             setResult(Activity.RESULT_OK, result);

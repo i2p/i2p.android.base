@@ -49,7 +49,7 @@ class LoadClientsJob extends JobImpl {
         getTiming().setStartAfter(getContext().clock().now() + LOAD_DELAY);
     }
 
-    public String getName() { return "Start Clients"; };
+    public String getName() { return "Start Clients"; }
 
     public void runJob() {
         Job j = new RunI2PTunnel(getContext());
@@ -83,7 +83,7 @@ class LoadClientsJob extends JobImpl {
             super(ctx);
         }
 
-        public String getName() { return "Start I2P Tunnel"; };
+        public String getName() { return "Start I2P Tunnel"; }
 
         public void runJob() {
             Util.d("Starting i2ptunnel");

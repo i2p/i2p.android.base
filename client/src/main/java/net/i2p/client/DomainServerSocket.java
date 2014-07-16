@@ -22,7 +22,7 @@ import java.nio.channels.ServerSocketChannel;
  * @author str4d
  * @since 0.9.14
  */
-public class DomainServerSocket extends ServerSocket {
+class DomainServerSocket extends ServerSocket {
     private final LocalServerSocket mLocalServerSocket;
     private final DomainSocketFactory mDomainSocketFactory;
     private volatile boolean mClosed;
