@@ -766,7 +766,12 @@ public class RouterService extends Service {
 
     private int getSavedState() {
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, 0);
-        return prefs.getInt(LAST_STATE, State.INIT);
+        try {
+            return prefs.getInt(LAST_STATE, State.INIT);
+        } catch (ClassCastException e) {
+            // Only a problem for first run after upgrade from old Enum state
+            return State.INIT;
+        }
     }
 
     private void setState(int s) {
