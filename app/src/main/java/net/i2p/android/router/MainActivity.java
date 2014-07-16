@@ -82,58 +82,11 @@ public class MainActivity extends I2PActivityBase implements
             return;
 
         if (action.equals("net.i2p.android.router.START_I2P")) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            if (!prefs.getBoolean("i2cp.disableInterface", false)) {
-                // Inverted, see Util.getPropertiesFromPreferences()
-                // Ask user if we should enable I2CP
-                DialogFragment df = new DialogFragment() {
-                    @Override
-                    public Dialog onCreateDialog(Bundle savedInstanceState) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setMessage(R.string.enable_i2cp)
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                enableI2CP();
-                                // I2P must be restarted
-                                autoStart(true);
-                            }
-                        })
-                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                                setResult(RESULT_CANCELED);
-                                finish();
-                            }
-                        });
-                        return builder.create();
-                    }
-                };
-                df.show(getSupportFragmentManager(), "enablei2cp");
-            } else
-                autoStart(false);
+            autoStart();
         }
     }
 
-    private void enableI2CP() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.edit().putBoolean("i2cp.disableInterface", true).commit();
-
-        // Apply new config if we are running.
-        List<RouterContext> contexts = RouterContext.listContexts();
-        if ( !((contexts == null) || (contexts.isEmpty())) ) {
-            RouterContext _context = contexts.get(0);
-            _context.router().saveConfig("i2cp.disableInterface", "false");
-        } else {
-            // Merge in new config settings, write the file.
-            Properties props = new OrderedProperties();
-            props.setProperty("i2cp.disableInterface", "false");
-            InitActivities init = new InitActivities(this);
-            init.mergeResourceToFile(R.raw.router_config, "router.config", props);
-        }
-    }
-
-    private void autoStart(boolean restartIfStarted) {
+    private void autoStart() {
         if (canStart()) {
             if (Util.isConnected(this)) {
                 mAutoStartFromIntent = true;
@@ -142,8 +95,8 @@ public class MainActivity extends I2PActivityBase implements
                 // Not connected to a network
                 // TODO: Notify user
             }
-        } else if (restartIfStarted) {
-            // TODO: Stop and start
+        } else {
+            // TODO: Notify user
         }
     }
 
