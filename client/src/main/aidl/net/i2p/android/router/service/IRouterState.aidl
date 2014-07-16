@@ -28,6 +28,6 @@ interface IRouterState {
     /**
     * Get the state of the I2P router
     **/
-    String getState();
+    int getState();
 
 }

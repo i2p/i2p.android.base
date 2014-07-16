@@ -9,5 +9,5 @@ oneway interface IRouterStateCallback {
     /**
      * Called when the state of the I2P router changes
      */
-    void stateChanged(String newState);
+    void stateChanged(int newState);
 }

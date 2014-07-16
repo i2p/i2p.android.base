@@ -34,22 +34,10 @@ import net.i2p.util.OrderedProperties;
  */
 public class RouterService extends Service {
 
-    // These states persist even if we died... Yuck, it causes issues.
-    public enum State {
-        INIT, WAITING, STARTING, RUNNING, ACTIVE,
-        // unplanned (router stopped itself), next: killSelf()
-        STOPPING, STOPPED,
-        // button, don't kill service when stopped, stay in MANUAL_STOPPED
-        MANUAL_STOPPING, MANUAL_STOPPED,
-        // button, DO kill service when stopped, next: killSelf()
-        MANUAL_QUITTING, MANUAL_QUITTED,
-        // Stopped by listener (no network), next: WAITING (spin waiting for network)
-        NETWORK_STOPPING, NETWORK_STOPPED
-    }
     private RouterContext _context;
     private String _myDir;
     //private String _apkPath;
-    private State _state = State.INIT;
+    private int _state = State.INIT;
     private Thread _starterThread;
     private StatusBar _statusBar;
     private Notifications _notif;
@@ -75,7 +63,7 @@ public class RouterService extends Service {
     @Override
     public void onCreate() {
         mStartCalled = false;
-        State lastState = getSavedState();
+        int lastState = getSavedState();
         setState(State.INIT);
         Util.d(this + " onCreate called"
                 + " Saved state is: " + lastState
@@ -457,8 +445,8 @@ public class RouterService extends Service {
             return mStartCalled;
         }
 
-        public String getState() throws RemoteException {
-            return _state.name();
+        public int getState() throws RemoteException {
+            return _state;
         }
     };
 
@@ -493,8 +481,8 @@ public class RouterService extends Service {
     /**
      * debug
      */
-    public String getState() {
-        return _state.toString();
+    public int getState() {
+        return _state;
     }
 
     public boolean canManualStop() {
@@ -596,7 +584,7 @@ public class RouterService extends Service {
         public void handleMessage(Message msg) {
             switch (msg.what) {
             case STATE_MSG:
-                String state = _state.name();
+                final int state = _state;
                 // Broadcast to all clients the new state.
                 final int N = mStateCallbacks.beginBroadcast();
                 for (int i = 0; i < N; i++) {
@@ -658,13 +646,13 @@ public class RouterService extends Service {
      */
     private class Stopper implements Runnable {
 
-        private final State nextState;
-        private final State stopState;
+        private final int nextState;
+        private final int stopState;
 
         /**
          * call holding statelock
          */
-        public Stopper(State next, State stop) {
+        public Stopper(int next, int stop) {
             nextState = next;
             stopState = stop;
             setState(next);
@@ -776,18 +764,12 @@ public class RouterService extends Service {
         }
     }
 
-    private State getSavedState() {
+    private int getSavedState() {
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, 0);
-        String stateString = prefs.getString(LAST_STATE, State.INIT.toString());
-        for(State s : State.values()) {
-            if(s.toString().equals(stateString)) {
-                return s;
-            }
-        }
-        return State.INIT;
+        return prefs.getInt(LAST_STATE, State.INIT);
     }
 
-    private void setState(State s) {
+    private void setState(int s) {
         _state = s;
         saveState();
         mHandler.sendEmptyMessage(STATE_MSG);
@@ -799,7 +781,7 @@ public class RouterService extends Service {
     private boolean saveState() {
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, 0);
         SharedPreferences.Editor edit = prefs.edit();
-        edit.putString(LAST_STATE, _state.toString());
+        edit.putInt(LAST_STATE, _state);
         return edit.commit();
     }
 }

@@ -21,12 +21,13 @@ import android.support.v4.app.DialogFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import net.i2p.android.router.R;
+
 import net.i2p.android.router.dialog.AboutDialog;
 import net.i2p.android.router.dialog.TextResourceDialog;
 import net.i2p.android.router.service.IRouterState;
 import net.i2p.android.router.service.IRouterStateCallback;
 import net.i2p.android.router.service.RouterService;
+import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
 import net.i2p.util.OrderedProperties;
@@ -154,9 +155,9 @@ public class MainActivity extends I2PActivityBase implements
                 if (mStateService.isStarted()) {
                     // Update for the current state.
                     Util.d("Fetching state.");
-                    String curState = mStateService.getState();
+                    int curState = mStateService.getState();
                     Message msg = mHandler.obtainMessage(STATE_MSG);
-                    msg.getData().putString("state", curState);
+                    msg.getData().putInt(MSG_DATA, curState);
                     mHandler.sendMessage(msg);
                 } else {
                     Util.d("StateService not started yet");
@@ -252,9 +253,9 @@ public class MainActivity extends I2PActivityBase implements
                     mStateService.registerCallback(mStateCallback);
                     // Update for the current state.
                     Util.d("Fetching state.");
-                    String curState = mStateService.getState();
+                    int curState = mStateService.getState();
                     Message msg = mHandler.obtainMessage(STATE_MSG);
-                    msg.getData().putString("state", curState);
+                    msg.getData().putInt(MSG_DATA, curState);
                     mHandler.sendMessage(msg);
                 } else {
                     // Unbind
@@ -285,23 +286,24 @@ public class MainActivity extends I2PActivityBase implements
          * NOT be running in our main thread like most other things -- so,
          * to update the UI, we need to use a Handler to hop over there.
          */
-        public void stateChanged(String newState) throws RemoteException {
+        public void stateChanged(int newState) throws RemoteException {
             Message msg = mHandler.obtainMessage(STATE_MSG);
-            msg.getData().putString("state", newState);
+            msg.getData().putInt(MSG_DATA, newState);
             mHandler.sendMessage(msg);
         }
     };
 
     private static final int STATE_MSG = 1;
+    private static final String MSG_DATA = "state";
 
     private Handler mHandler = new Handler() {
-        private String lastRouterState = null;
+        private int lastRouterState = -1;
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
             case STATE_MSG:
-                String state = msg.getData().getString("state");
-                if (lastRouterState == null || !lastRouterState.equals(state)) {
+                int state = msg.getData().getInt(MSG_DATA);
+                if (lastRouterState == -1 || lastRouterState != state) {
                     if (mMainFragment == null)
                         mMainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment);
                     if (mMainFragment != null) {
@@ -309,7 +311,7 @@ public class MainActivity extends I2PActivityBase implements
                         lastRouterState = state;
                     }
 
-                    if ("RUNNING".equals(state) && mAutoStartFromIntent) {
+                    if (state == State.RUNNING && mAutoStartFromIntent) {
                         setResult(RESULT_OK);
                         finish();
                     }

@@ -8,24 +8,17 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.ToggleButton;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
-import java.text.Collator;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import net.i2p.android.router.R;
 import net.i2p.android.router.dialog.FirstStartDialog;
 import net.i2p.android.router.dialog.VersionDialog;
+import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.LongToggleButton;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
@@ -35,6 +28,13 @@ import net.i2p.data.LeaseSet;
 import net.i2p.router.RouterContext;
 import net.i2p.router.TunnelPoolSettings;
 import net.i2p.util.Translate;
+
+import java.text.Collator;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class MainFragment extends I2PFragmentBase {
 
@@ -198,7 +198,7 @@ public class MainFragment extends I2PFragmentBase {
             // is not received. Ensure that the state image is correct.
             // TODO: Fix the race between RouterService shutdown and
             // IRouterState unbinding.
-            updateState("INIT");
+            updateState(State.INIT);
         }
     }
 
@@ -235,25 +235,25 @@ public class MainFragment extends I2PFragmentBase {
         }
     }
 
-    public void updateState(String newState) {
+    public void updateState(int newState) {
         final ImageView lightImage = (ImageView) getView().findViewById(R.id.main_lights);
-        if ("INIT".equals(newState) ||
-                "STOPPED".equals(newState) ||
-                "MANUAL_STOPPED".equals(newState) ||
-                "MANUAL_QUITTED".equals(newState) ||
-                "NETWORK_STOPPED".equals(newState)) {
+        if (newState == State.INIT ||
+                newState == State.STOPPED ||
+                newState == State.MANUAL_STOPPED ||
+                newState == State.MANUAL_QUITTED ||
+                newState == State.NETWORK_STOPPED) {
             lightImage.setImageResource(R.drawable.routerlogo_0);
-        } else if ("STARTING".equals(newState) ||
-                "STOPPING".equals(newState) ||
-                "MANUAL_STOPPING".equals(newState) ||
-                "MANUAL_QUITTING".equals(newState) ||
-                "NETWORK_STOPPING".equals(newState)) {
+        } else if (newState == State.STARTING ||
+                newState == State.STOPPING ||
+                newState == State.MANUAL_STOPPING ||
+                newState == State.MANUAL_QUITTING ||
+                newState == State.NETWORK_STOPPING) {
             lightImage.setImageResource(R.drawable.routerlogo_1);
-        } else if ("RUNNING".equals(newState)) {
+        } else if (newState == State.RUNNING) {
             lightImage.setImageResource(R.drawable.routerlogo_2);
-        } else if ("ACTIVE".equals(newState)) {
+        } else if (newState == State.ACTIVE) {
             lightImage.setImageResource(R.drawable.routerlogo_3);
-        } else if ("WAITING".equals(newState)) {
+        } else if (newState == State.WAITING) {
             lightImage.setImageResource(R.drawable.routerlogo_4);
         } // Ignore unknown states.
     }
@@ -266,7 +266,7 @@ public class MainFragment extends I2PFragmentBase {
 
         if(!Util.isConnected(getActivity())) {
             // Manually set state, RouterService won't be running
-            updateState("WAITING");
+            updateState(State.WAITING);
             vStatusText.setText("No Internet connection is available");
             vStatus.setVisibility(View.VISIBLE);
             sv.setVisibility(View.VISIBLE);
