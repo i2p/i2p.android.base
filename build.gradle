@@ -9,14 +9,10 @@ buildscript {
 }
 
 allprojects {
-    version = VERSION
+    version = VERSION_NAME
     group = GROUP
 
     repositories {
-        flatDir {
-            name "fileRepo"
-            dirs file("${project.rootDir}/repo")
-        }
         mavenCentral()
     }
 }
