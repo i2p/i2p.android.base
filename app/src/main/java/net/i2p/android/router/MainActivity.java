@@ -108,9 +108,9 @@ public class MainActivity extends I2PActivityBase implements
                 if (mStateService.isStarted()) {
                     // Update for the current state.
                     Util.d("Fetching state.");
-                    int curState = mStateService.getState();
+                    State curState = mStateService.getState();
                     Message msg = mHandler.obtainMessage(STATE_MSG);
-                    msg.getData().putInt(MSG_DATA, curState);
+                    msg.getData().putParcelable(MSG_DATA, curState);
                     mHandler.sendMessage(msg);
                 } else {
                     Util.d("StateService not started yet");
@@ -206,9 +206,9 @@ public class MainActivity extends I2PActivityBase implements
                     mStateService.registerCallback(mStateCallback);
                     // Update for the current state.
                     Util.d("Fetching state.");
-                    int curState = mStateService.getState();
+                    State curState = mStateService.getState();
                     Message msg = mHandler.obtainMessage(STATE_MSG);
-                    msg.getData().putInt(MSG_DATA, curState);
+                    msg.getData().putParcelable(MSG_DATA, curState);
                     mHandler.sendMessage(msg);
                 } else {
                     // Unbind
@@ -239,9 +239,9 @@ public class MainActivity extends I2PActivityBase implements
          * NOT be running in our main thread like most other things -- so,
          * to update the UI, we need to use a Handler to hop over there.
          */
-        public void stateChanged(int newState) throws RemoteException {
+        public void stateChanged(State newState) throws RemoteException {
             Message msg = mHandler.obtainMessage(STATE_MSG);
-            msg.getData().putInt(MSG_DATA, newState);
+            msg.getData().putParcelable(MSG_DATA, newState);
             mHandler.sendMessage(msg);
         }
     };
@@ -250,13 +250,13 @@ public class MainActivity extends I2PActivityBase implements
     private static final String MSG_DATA = "state";
 
     private Handler mHandler = new Handler() {
-        private int lastRouterState = -1;
+        private State lastRouterState = null;
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
             case STATE_MSG:
-                int state = msg.getData().getInt(MSG_DATA);
-                if (lastRouterState == -1 || lastRouterState != state) {
+                State state = msg.getData().getParcelable(MSG_DATA);
+                if (lastRouterState == null || lastRouterState != state) {
                     if (mMainFragment == null)
                         mMainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment);
                     if (mMainFragment != null) {

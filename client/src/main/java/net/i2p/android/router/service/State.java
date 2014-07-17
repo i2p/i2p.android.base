@@ -1,30 +1,45 @@
 package net.i2p.android.router.service;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
- * Extracted from RouterService because Enums should be avoided on Android.
- * <p/>
- * https://developer.android.com/training/articles/memory.html#Overhead
+ * Extracted from RouterService.
  *
  * @author str4d
  * @since 0.9.14
  */
-public class State {
+public enum State implements Parcelable {
     // These states persist even if we died... Yuck, it causes issues.
-    public static final int INIT = 0;
-    public static final int WAITING = 1;
-    public static final int STARTING = 2;
-    public static final int RUNNING = 3;
-    public static final int ACTIVE = 4;
+    INIT, WAITING, STARTING, RUNNING, ACTIVE,
     // unplanned (router stopped itself), next: killSelf()
-    public static final int STOPPING = 5;
-    public static final int STOPPED = 6;
+    STOPPING, STOPPED,
     // button, don't kill service when stopped, stay in MANUAL_STOPPED
-    public static final int MANUAL_STOPPING = 7;
-    public static final int MANUAL_STOPPED = 8;
+    MANUAL_STOPPING, MANUAL_STOPPED,
     // button, DO kill service when stopped, next: killSelf()
-    public static final int MANUAL_QUITTING = 9;
-    public static final int MANUAL_QUITTED = 10;
+    MANUAL_QUITTING, MANUAL_QUITTED,
     // Stopped by listener (no network), next: WAITING (spin waiting for network)
-    public static final int NETWORK_STOPPING = 11;
-    public static final int NETWORK_STOPPED = 12;
+    NETWORK_STOPPING, NETWORK_STOPPED;
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(final Parcel dest, final int flags) {
+        dest.writeString(name());
+    }
+
+    public static final Creator<State> CREATOR = new Creator<State>() {
+        @Override
+        public State createFromParcel(final Parcel source) {
+            return State.valueOf(source.readString());
+        }
+
+        @Override
+        public State[] newArray(final int size) {
+            return new State[size];
+        }
+    };
 }

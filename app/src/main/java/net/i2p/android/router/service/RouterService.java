@@ -37,7 +37,7 @@ public class RouterService extends Service {
     private RouterContext _context;
     private String _myDir;
     //private String _apkPath;
-    private int _state = State.INIT;
+    private State _state = State.INIT;
     private Thread _starterThread;
     private StatusBar _statusBar;
     private Notifications _notif;
@@ -63,7 +63,7 @@ public class RouterService extends Service {
     @Override
     public void onCreate() {
         mStartCalled = false;
-        int lastState = getSavedState();
+        State lastState = getSavedState();
         setState(State.INIT);
         Util.d(this + " onCreate called"
                 + " Saved state is: " + lastState
@@ -445,7 +445,7 @@ public class RouterService extends Service {
             return mStartCalled;
         }
 
-        public int getState() throws RemoteException {
+        public State getState() throws RemoteException {
             return _state;
         }
     };
@@ -481,8 +481,8 @@ public class RouterService extends Service {
     /**
      * debug
      */
-    public int getState() {
-        return _state;
+    public String getState() {
+        return _state.toString();
     }
 
     public boolean canManualStop() {
@@ -584,7 +584,7 @@ public class RouterService extends Service {
         public void handleMessage(Message msg) {
             switch (msg.what) {
             case STATE_MSG:
-                final int state = _state;
+                final State state = _state;
                 // Broadcast to all clients the new state.
                 final int N = mStateCallbacks.beginBroadcast();
                 for (int i = 0; i < N; i++) {
@@ -646,13 +646,13 @@ public class RouterService extends Service {
      */
     private class Stopper implements Runnable {
 
-        private final int nextState;
-        private final int stopState;
+        private final State nextState;
+        private final State stopState;
 
         /**
          * call holding statelock
          */
-        public Stopper(int next, int stop) {
+        public Stopper(State next, State stop) {
             nextState = next;
             stopState = stop;
             setState(next);
@@ -764,17 +764,17 @@ public class RouterService extends Service {
         }
     }
 
-    private int getSavedState() {
+    private State getSavedState() {
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, 0);
+        String stateString = prefs.getString(LAST_STATE, State.INIT.toString());
         try {
-            return prefs.getInt(LAST_STATE, State.INIT);
-        } catch (ClassCastException e) {
-            // Only a problem for first run after upgrade from old Enum state
+            return State.valueOf(stateString);
+        } catch (IllegalArgumentException e) {
             return State.INIT;
         }
     }
 
-    private void setState(int s) {
+    private void setState(State s) {
         _state = s;
         saveState();
         mHandler.sendEmptyMessage(STATE_MSG);
@@ -786,7 +786,7 @@ public class RouterService extends Service {
     private boolean saveState() {
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, 0);
         SharedPreferences.Editor edit = prefs.edit();
-        edit.putInt(LAST_STATE, _state);
+        edit.putString(LAST_STATE, _state.toString());
         return edit.commit();
     }
 }

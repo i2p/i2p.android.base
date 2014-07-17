@@ -235,7 +235,7 @@ public class MainFragment extends I2PFragmentBase {
         }
     }
 
-    public void updateState(int newState) {
+    public void updateState(State newState) {
         final ImageView lightImage = (ImageView) getView().findViewById(R.id.main_lights);
         if (newState == State.INIT ||
                 newState == State.STOPPED ||

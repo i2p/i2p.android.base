@@ -1,5 +1,6 @@
 package net.i2p.android.router.service;
 
+import net.i2p.android.router.service.State;
 import net.i2p.android.router.service.IRouterStateCallback;
 
 /**
@@ -28,6 +29,6 @@ interface IRouterState {
     /**
     * Get the state of the I2P router
     **/
-    int getState();
+    State getState();
 
 }
