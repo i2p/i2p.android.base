@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 group = "net.i2p.android"
 version = "0.1"
@@ -38,4 +40,81 @@ android.libraryVariants.all { variant ->
     // Hook the copy task into the build
     variant.packageLibrary.dependsOn copyClientLibsTask
     copyClientLibsTask.mustRunAfter ':routerjars:buildClient'
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'I2P Android client library'
+                packaging 'aar'
+                description 'A client library enabling Android developers to easily add I2P Android support to their apps.'
+                url 'https://geti2p.net'
+                inceptionYear 2014
+
+                scm {
+                    connection 'https://github.com/i2p/i2p.android.base.git'
+                    url 'https://github.com/i2p/i2p.android.base'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                organization {
+                    name 'I2P'
+                    url 'https://geti2p.net'
+                }
+
+                developers {
+                    developer {
+                        id 'str4d'
+                        name 'str4d'
+                        email 'str4d@i2pmail.org'
+                        organization 'I2P'
+                        organizationUrl 'https://geti2p.net'
+                    }
+                }
+            }
+        }
+    }
+}
+
+def deployer = uploadArchives.repositories.mavenDeployer
+deployer*.pom*.whenConfigured {pom ->
+    pom.setDependencies(pom.dependencies.collect { dep ->
+        if (dep.groupId != 'i2p.android.base' && dep.artifactId != 'routerjars')
+            dep
+    })
 }
