@@ -29,8 +29,9 @@ The build system is based on Gradle. There are several methods for setting Gradl
   `gradle` with `./gradlew` (or `./gradlew.bat` on Windows) in the commands
   below.
 
-Gradle will pull dependencies over the clearnet by default. To use Tor, create
-a `gradle.properties` file in `i2p.android.base` containing:
+Gradle will pull dependencies over the clearnet by default. To send all Gradle
+connections from your user over Tor, create a `gradle.properties` file in
+`~/.gradle/` containing:
 
 ```
 systemProp.socksProxyHost=localhost
