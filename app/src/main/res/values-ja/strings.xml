@@ -23,8 +23,6 @@
   <string name="label_nonanon_info">非匿名の情報</string>
   <string name="label_browse">ブラウズ</string>
   <string name="label_graphs">グラフ</string>
-  <string name="button_router_off">押すと I2P を開始</string>
-  <string name="button_router_on">I2P が起動中 (押すと停止)</string>
   <string name="first_start_title">I2P のインストールおめでとうございます！</string>
   <string name="first_start_welcome"><b>I2P へようこそ！</b> I2P が立ち上がり、ピアを見つけるまで<b>我慢してください</b>。</string>
   <string name="first_start_read">待っている間、リリースノートとウェルカムページをお読みください。</string>

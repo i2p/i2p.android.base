@@ -31,6 +31,7 @@
   <string name="first_start_faq">一旦你有了客户端隧道,请 <b>看看</b> 我们的常见问题解答.</string>
   <string name="first_start_faq_nonanon">或使用此非匿名链接，如果你不想等待隧道:</string>
   <string name="first_start_irc"> 指向你的IRC 客户端到<b>localhost:6668</b>并和我们打召呼,在:</string>
+  <string name="enable_i2cp">另一个应用已请求启动 I2P Android，但是 I2CP 目前已禁用。I2CP 是其他应用通过 I2P Android 连接到 I2P 的必需品。您要启用 I2CP 吗？</string>
   <string name="drawer_open">打开导航</string>
   <string name="drawer_close">关闭导航</string>
   <string name="action_search">搜索</string>

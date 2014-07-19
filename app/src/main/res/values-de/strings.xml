@@ -31,6 +31,7 @@
   <string name="first_start_faq">Sobald du Kliententunnels hast, <b>lies</b> bitte unsere FAQs:</string>
   <string name="first_start_faq_nonanon">Oder benutze unsere nichtanonymen Links, wenn du nicht auf die Tunnel warten willst.</string>
   <string name="first_start_irc">Verbinde dich mit deinem IRC-Klienten zu <b>localhost:6668</b> und schau bei uns vorbei:</string>
+  <string name="enable_i2cp">Eine weitere App hat das Starten von I2P Android angefordert, aber I2CP ist deaktiviert. I2CP ist für andere Apps notwendig, um I2P durch I2P Android zu verbinden. Möchten Sie I2CP aktivieren?</string>
   <string name="drawer_open">Navigation öffnen</string>
   <string name="drawer_close">Navigation schließen</string>
   <string name="action_search">Suche</string>

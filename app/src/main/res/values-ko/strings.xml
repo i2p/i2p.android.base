@@ -105,8 +105,8 @@
   <string name="about_project">프로젝트 홈:</string>
   <string name="about_bugs">버그와 지원:</string>
   <string name="about_helpwanted">도움이 필요합니다!</string>
-  <string name="about_volunteer">이 앱을 개선시키고 싶나요? 안드로이트 포럼에서 기여하세요:</string>
-  <string name="about_donate">돈이나 비트코인 기부로 개발과 테스팅에 필요한 안드로이드 기기 구입을 돕고 싶아요? 참조하세요:</string>
+  <string name="about_volunteer">이 앱을 개선시키고 싶나요? 안드로이드 포럼에서 기여하세요:</string>
+  <string name="about_donate">돈이나 비트코인 기부로 개발과 테스팅에 필요한 안드로이드 기기 구입을 돕고 싶나요? 참조하세요:</string>
   <string name="menu_help">도움말</string>
   <string name="addressbook_search_header">%s 찾음</string>
   <string name="addressbook_add_wizard_k_name">이름</string>
