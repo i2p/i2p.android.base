@@ -31,7 +31,6 @@
   <string name="first_start_faq">Når du har klient-tunneler, vennligst <b>sjekk ut</b> Ofte Stilte Spørsmpål:</string>
   <string name="first_start_faq_nonanon">Eller bruk denne ikke-anonyme lenken hvis du ikke vil vente på tunneler:</string>
   <string name="first_start_irc">Sikt inn IRC klienten din på <b>localhost:6668</b> og si hei til oss på:</string>
-  <string name="enable_i2cp">En annen app har forespurt oppstart av IP2 for Android, men I2CP er avskrudd. I2CP er nødvendig for at andre app-er skal kunne koble til I2P gjennom I2P for Android. Vil du skru på I2CP?</string>
   <string name="drawer_open">Åpne navigering</string>
   <string name="drawer_close">Lukk navigasjon</string>
   <string name="action_search">Søk</string>

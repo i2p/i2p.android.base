@@ -31,7 +31,6 @@
   <string name="first_start_faq">Una vez tenga túneles de cliente, por favor <b>compruebe</b> nuestras preguntas frecuentes (FAQ):</string>
   <string name="first_start_faq_nonanon">O use este enlace no-anónimo si no quiere esperar a los túneles:</string>
   <string name="first_start_irc">Dirija su cliente IRC a <b>localhost:6668</b> y díganos hola en:</string>
-  <string name="enable_i2cp">Otra aplicación ha solicitado iniciar I2P Android, pero I2CP (protocolo cliente de I2P) está deshabilitado. I2CP es necesario para que otras aplicaciones conecten con I2P a través de I2P Android. ¿Quiere habilitar I2CP?</string>
   <string name="drawer_open">Abrir panel de navegación</string>
   <string name="drawer_close">Cerrar panel de navegación</string>
   <string name="action_search">Buscar</string>
