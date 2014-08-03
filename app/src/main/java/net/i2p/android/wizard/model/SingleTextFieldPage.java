@@ -30,6 +30,7 @@ public class SingleTextFieldPage extends Page {
     // The null is checked in SingleTextFieldFragment
     protected String mDef = null;
     protected String mDesc = "";
+    protected boolean mNumeric = false;
 
     public SingleTextFieldPage(ModelCallbacks callbacks, String title) {
         super(callbacks, title);
@@ -66,6 +67,15 @@ public class SingleTextFieldPage extends Page {
 
     public String getDesc() {
         return mDesc;
+    }
+
+    public SingleTextFieldPage setNumeric(boolean numeric) {
+        mNumeric = numeric;
+        return this;
+    }
+
+    public boolean getNumeric() {
+        return mNumeric;
     }
 
     // Override these in subclasses to add content verification.

@@ -25,6 +25,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,6 +72,8 @@ public class SingleTextFieldFragment extends Fragment {
 
         mFieldView = ((TextView) rootView.findViewById(R.id.wizard_text_field));
         mFieldView.setHint(mPage.getTitle());
+        if (mPage.getNumeric())
+            mFieldView.setInputType(InputType.TYPE_CLASS_NUMBER);
         if (mPage.getData().getString(Page.SIMPLE_DATA_KEY) != null)
             mFieldView.setText(mPage.getData().getString(Page.SIMPLE_DATA_KEY));
         else if (mPage.getDefault() != null) {

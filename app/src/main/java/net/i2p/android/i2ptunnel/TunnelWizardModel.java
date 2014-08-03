@@ -90,6 +90,7 @@ public class TunnelWizardModel extends AbstractWizardModel {
 
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_target_port))
                 .setDescription(res.getString(R.string.i2ptunnel_wizard_desc_target_port))
+                .setNumeric(true)
                 .setRequired(true)
                 .setEqualCondition(cTunnelType, res.getString(R.string.i2ptunnel_wizard_v_server)),
 
@@ -110,6 +111,7 @@ public class TunnelWizardModel extends AbstractWizardModel {
 
             new SingleTextFieldPage(this, res.getString(R.string.i2ptunnel_wizard_k_binding_port))
                 .setDescription(res.getString(R.string.i2ptunnel_wizard_k_binding_port))
+                .setNumeric(true)
                 .setRequired(true)
                 .setEqualCondition(cTunnelType, res.getString(R.string.i2ptunnel_wizard_v_client))
                 .setEqualCondition(cServerType, res.getString(R.string.i2ptunnel_type_httpbidirserver)),
