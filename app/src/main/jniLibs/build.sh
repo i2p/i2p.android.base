@@ -16,7 +16,14 @@ else
 fi
 cd $THISDIR
 
-LIBFILE=$PWD/armeabi/libjbigi.so
+# Arch-specific settings
+ARCH="arm"
+ABIDIR="armeabi"
+AABIPREFIX="arm-linux-androideabi-"
+export BINPREFIX="arm-linux-androideabi-"
+CONFIGUREHOST="armv5-eabi-linux"
+
+LIBFILE=$PWD/$ABIDIR/libjbigi.so
 if [ -f $LIBFILE ]
 then
     echo "$LIBFILE exists, nothing to do here"
@@ -41,7 +48,7 @@ if [ "$NDK" == "" ]; then
 # a wild card, deglobbing automatically sorts to get the highest revision.
 # the dot at the end ensures that it is a directory, and not a file.
 #
-        NDK_GLOB=$THISDIR/'../../../android-ndk-r*/.'
+        NDK_GLOB=$THISDIR/'../../../../../android-ndk-r*/.'
         export NDK="`readlink -n -e $(for last in $NDK_GLOB; do true; done ; echo $last)`"
     fi
 
@@ -61,7 +68,6 @@ fi
 # API level, pulled from ../AndroidManifest.xml
 #
 LEVEL=$(awk -F\" '/minSdkVersion/{print $2}' ../AndroidManifest.xml)
-ARCH="arm"
 export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
 if [ ! -d "$SYSROOT" ]; then
     echo "Cannot find $SYSROOT in NDK, check for support of level: $LEVEL arch: $ARCH or adjust LEVEL and ARCH in script"
@@ -70,18 +76,23 @@ fi
 
 #
 # 4.6 is the GCC version. GCC 4.4.3 support was removed in NDK r9b.
-# Available in r9b:
+# Available in r10:
 #	arm-linux-androideabi-4.6
 #	arm-linux-androideabi-4.8
 #	arm-linux-androideabi-clang3.3
+#	arm-linux-androideabi-clang3.4
 #	llvm-3.3
+#	llvm-3.4
 #	mipsel-linux-android-4.6
 #	mipsel-linux-android-4.8
 #	mipsel-linux-android-clang3.3
+#	mipsel-linux-android-clang3.4
 #	x86-4.6
 #	x86-4.8
 #	x86-clang3.3
-export AABI="arm-linux-androideabi-4.6"
+#	x86-clang3.4
+GCCVER=4.6
+export AABI="$AABIPREFIX$GCCVER"
 if [ `uname -s` = "Darwin" ]; then
     export SYSTEM="darwin-x86"
 elif [ `uname -m` = "x86_64" ]; then
@@ -90,7 +101,6 @@ else
     export SYSTEM="linux-x86"
 fi
 
-export BINPREFIX="arm-linux-androideabi-"
 COMPILER="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}gcc"
 if [ ! -f "$COMPILER" ]; then
     echo "Cannot find compiler $COMPILER in NDK, check for support of system: $SYSTEM ABI: $AABI or adjust AABI and SYSTEM in script"
@@ -132,9 +142,9 @@ cd build
 if [ ! -f config.status ]; then
     echo "Configuring GMP..."
     if [ `uname -s` = "Darwin" ]; then
-        $GMP/configure --with-pic --build=x86-darwin --host=armv5-eabi-linux || exit 1
+        $GMP/configure --with-pic --build=x86-darwin --host=$CONFIGUREHOST || exit 1
     else
-        $GMP/configure --with-pic --build=x86-none-linux --host=armv5-eabi-linux || exit 1
+        $GMP/configure --with-pic --build=x86-none-linux --host=$CONFIGUREHOST || exit 1
     fi
 fi
 
