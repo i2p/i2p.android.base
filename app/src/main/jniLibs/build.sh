@@ -69,6 +69,17 @@ if [ ! -d "$GMP" ]; then
     exit 1
 fi
 
+if [ `uname -s` = "Darwin" ]; then
+    export JAVA_HOME=$(/usr/libexec/java_home)
+else
+    [ -z $JAVA_HOME ] && . $I2PBASE/core/c/find-java-home
+fi
+if [ ! -f "$JAVA_HOME/include/jni.h" ]; then
+    echo "Cannot find jni.h! Looked in '$JAVA_HOME/include/jni.h'"
+    echo "Please set JAVA_HOME to a java home that has the JNI"
+    exit 1
+fi
+
 #
 # API level, pulled from ../AndroidManifest.xml
 #
@@ -152,17 +163,6 @@ fi
 
 echo "Building GMP..."
 make || exit 1
-
-if [ `uname -s` = "Darwin" ]; then
-    export JAVA_HOME=$(/usr/libexec/java_home)
-else
-    [ -z $JAVA_HOME ] && . $I2PBASE/core/c/find-java-home
-fi
-if [ ! -f "$JAVA_HOME/include/jni.h" ]; then
-    echo "Cannot find jni.h! Looked in '$JAVA_HOME/include/jni.h'"
-    echo "Please set JAVA_HOME to a java home that has the JNI"
-    exit 1
-fi
 
 COMPILEFLAGS="-fPIC -Wall"
 INCLUDES="-I. -I$JBIGI/jbigi/include -I$JAVA_HOME/include -I$JAVA_HOME/include/linux"
