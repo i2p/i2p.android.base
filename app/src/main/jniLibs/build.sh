@@ -16,21 +16,6 @@ else
 fi
 cd $THISDIR
 
-# Arch-specific settings
-ARCH="arm"
-ABIDIR="armeabi"
-AABIPREFIX="arm-linux-androideabi-"
-export BINPREFIX="arm-linux-androideabi-"
-CONFIGUREHOST="armv5-eabi-linux"
-
-LIBFILE=$PWD/$ABIDIR/libjbigi.so
-if [ -f $LIBFILE ]
-then
-    echo "$LIBFILE exists, nothing to do here"
-    echo "If you wish to force a recompile, delete it"
-    exit 0
-fi
-
 I2PBASE=${1:-$THISDIR/../../../../../i2p.i2p}
 ROUTERJARS=$THISDIR/../../../../routerjars
 
@@ -64,15 +49,30 @@ if [ ! -d "$NDK" ]; then
     exit 1
 fi
 
+JBIGI="$I2PBASE/core/c/jbigi"
+#
+# GMP Version
+#
+# prelim stats on a droid
+# java (libcrypto) 29 ms
+# 4.3.2 (jbigi) 34 ms
+# 5.0.2 (jbigi) 32 ms
+# libcrypto crashes on emulator, don't trust it
+# jbigi about 20-25% slower than java on emulator
+#
+GMPVER=4.3.2
+GMP="$JBIGI/gmp-$GMPVER"
+
+if [ ! -d "$GMP" ]; then
+    echo "Source dir for GMP version $GMPVER not found in $GMP"
+    echo "Install it there or change GMPVER and/or GMP in this script"
+    exit 1
+fi
+
 #
 # API level, pulled from ../AndroidManifest.xml
 #
 LEVEL=$(awk -F\" '/minSdkVersion/{print $2}' ../AndroidManifest.xml)
-export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
-if [ ! -d "$SYSROOT" ]; then
-    echo "Cannot find $SYSROOT in NDK, check for support of level: $LEVEL arch: $ARCH or adjust LEVEL and ARCH in script"
-    exit 1
-fi
 
 #
 # 4.6 is the GCC version. GCC 4.4.3 support was removed in NDK r9b.
@@ -92,6 +92,28 @@ fi
 #	x86-clang3.3
 #	x86-clang3.4
 GCCVER=4.6
+
+# Arch-specific settings
+ARCH="arm"
+ABIDIR="armeabi"
+AABIPREFIX="arm-linux-androideabi-"
+export BINPREFIX="arm-linux-androideabi-"
+CONFIGUREHOST="armv5-eabi-linux"
+
+LIBFILE=$PWD/$ABIDIR/libjbigi.so
+if [ -f $LIBFILE ]
+then
+    echo "$LIBFILE exists, nothing to do here"
+    echo "If you wish to force a recompile, delete it"
+    exit 0
+fi
+
+export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
+if [ ! -d "$SYSROOT" ]; then
+    echo "Cannot find $SYSROOT in NDK, check for support of level: $LEVEL arch: $ARCH or adjust LEVEL and ARCH in script"
+    exit 1
+fi
+
 export AABI="$AABIPREFIX$GCCVER"
 if [ `uname -s` = "Darwin" ]; then
     export SYSTEM="darwin-x86"
@@ -112,26 +134,6 @@ export NM="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}nm"
 STRIP="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}strip"
 
 #echo "CC is $CC"
-
-JBIGI="$I2PBASE/core/c/jbigi"
-#
-# GMP Version
-#
-# prelim stats on a droid
-# java (libcrypto) 29 ms
-# 4.3.2 (jbigi) 34 ms
-# 5.0.2 (jbigi) 32 ms
-# libcrypto crashes on emulator, don't trust it
-# jbigi about 20-25% slower than java on emulator
-#
-GMPVER=4.3.2
-GMP="$JBIGI/gmp-$GMPVER"
-
-if [ ! -d "$GMP" ]; then
-    echo "Source dir for GMP version $GMPVER not found in $GMP"
-    echo "Install it there or change GMPVER and/or GMP in this script"
-    exit 1
-fi
 
 mkdir -p build
 cd build
