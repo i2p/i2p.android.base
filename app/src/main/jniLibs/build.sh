@@ -104,12 +104,29 @@ LEVEL=$(awk -F\" '/minSdkVersion/{print $2}' ../AndroidManifest.xml)
 #	x86-clang3.4
 GCCVER=4.6
 
+for ARCH in "arm"; do # TODO add x86 and mips
+
 # Arch-specific settings
-ARCH="arm"
-ABIDIR="armeabi"
-AABIPREFIX="arm-linux-androideabi-"
-export BINPREFIX="arm-linux-androideabi-"
-CONFIGUREHOST="armv5-eabi-linux"
+case "$ARCH" in
+    "arm")
+        ABIDIR="armeabi"
+        AABIPREFIX="arm-linux-androideabi-"
+        export BINPREFIX=$AABIPREFIX
+        CONFIGUREHOST="armv5-eabi-linux"
+        ;;
+    "x86")
+        ABIDIR="x86"
+        AABIPREFIX="x86-"
+        export BINPREFIX="i686-linux-android-"
+        CONFIGUREHOST="" # TODO determine
+        ;;
+    "mips")
+        ABIDIR="mips"
+        AABIPREFIX="mipsel-linux-android-"
+        export BINPREFIX=$AABIPREFIX
+        CONFIGUREHOST="" # TODO determine
+        ;;
+esac
 
 LIBFILE=$PWD/$ABIDIR/libjbigi.so
 if [ -f $LIBFILE ]
@@ -182,5 +199,9 @@ $STRIP $LIBFILE || exit 1
 
 ls -l $LIBFILE || exit 1
 
+cd ..
+rm -r build
 
 echo 'Built successfully'
+
+done
