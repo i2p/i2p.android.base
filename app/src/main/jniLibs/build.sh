@@ -104,27 +104,32 @@ LEVEL=$(awk -F\" '/minSdkVersion/{print $2}' ../AndroidManifest.xml)
 #	x86-clang3.4
 GCCVER=4.6
 
-for ARCH in "arm"; do # TODO add x86 and mips
+COMMONLINKFLAGS="-shared -Wl,-soname,libjbigi.so"
+
+for ARCH in "arm" "x86" "mips"; do
 
 # Arch-specific settings
 case "$ARCH" in
     "arm")
         ABIDIR="armeabi"
         AABIPREFIX="arm-linux-androideabi-"
-        export BINPREFIX=$AABIPREFIX
+        export BINPREFIX="$AABIPREFIX"
         CONFIGUREHOST="armv5-eabi-linux"
+        LINKFLAGS="$COMMONLINKFLAGS,--fix-cortex-a8"
         ;;
     "x86")
         ABIDIR="x86"
         AABIPREFIX="x86-"
         export BINPREFIX="i686-linux-android-"
-        CONFIGUREHOST="" # TODO determine
+        CONFIGUREHOST="x86-linux-android"
+        LINKFLAGS="$COMMONLINKFLAGS,--fix-cortex-a8"
         ;;
     "mips")
         ABIDIR="mips"
         AABIPREFIX="mipsel-linux-android-"
-        export BINPREFIX=$AABIPREFIX
-        CONFIGUREHOST="" # TODO determine
+        export BINPREFIX="$AABIPREFIX"
+        CONFIGUREHOST="mipsel-linux-android"
+        LINKFLAGS="$COMMONLINKFLAGS"
         ;;
 esac
 
@@ -133,7 +138,7 @@ if [ -f $LIBFILE ]
 then
     echo "$LIBFILE exists, nothing to do here"
     echo "If you wish to force a recompile, delete it"
-    exit 0
+    continue
 fi
 
 export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
@@ -183,7 +188,6 @@ make || exit 1
 
 COMPILEFLAGS="-fPIC -Wall"
 INCLUDES="-I. -I$JBIGI/jbigi/include -I$JAVA_HOME/include -I$JAVA_HOME/include/linux"
-LINKFLAGS="-shared -Wl,-soname,libjbigi.so,--fix-cortex-a8"
 
 echo "Building jbigi lib that is statically linked to GMP"
 STATICLIBS=".libs/libgmp.a"
