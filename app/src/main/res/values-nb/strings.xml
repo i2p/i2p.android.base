@@ -26,7 +26,7 @@
   <string name="button_router_off">Hold inne kappen for å starte I2P</string>
   <string name="button_router_on">I2P kjører (hold inne knappen for å stoppe)</string>
   <string name="first_start_title">Til lykke med ny installasjon av I2P!</string>
-  <string name="first_start_welcome"><b> Velkommen til I2P</b> Vennligst <b>ha tolmodighet</b> mens I2P starter opp og finner likemenn.</string>
+  <string name="first_start_welcome"><b> Velkommen til I2P</b> Vennligst <b>ha tålmodighet</b> mens I2P starter opp og finner likemenn.</string>
   <string name="first_start_read">Mens du venter, vennligst les versjons-notatene og velkomstsiden.</string>
   <string name="first_start_faq">Når du har klient-tunneler, vennligst <b>sjekk ut</b> Ofte Stilte Spørsmpål:</string>
   <string name="first_start_faq_nonanon">Eller bruk denne ikke-anonyme lenken hvis du ikke vil vente på tunneler:</string>
