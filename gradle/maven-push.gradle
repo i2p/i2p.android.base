@@ -93,23 +93,33 @@ afterEvaluate { project ->
         sign configurations.archives
     }
 
-    task androidJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.java
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
+    android.libraryVariants.all { variant ->
+        def androidJavadocs = task("android${variant.name.capitalize()}Javadocs", type: Javadoc) {
+            source = variant.javaCompile.source
+            def androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
 
-    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-        classifier = 'javadoc'
-        from androidJavadocs.destinationDir
-    }
+            classpath = files(variant.javaCompile.classpath.files, androidJar)
+            options {
+                links 'http://docs.oracle.com/javase/6/docs/api/'
+                linksOffline 'http://d.android.com/reference',"${android.sdkDirectory}/docs/reference"
+            }
+            exclude '**/BuildConfig.java'
+            exclude '**/R.java'
+        }
 
-    task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java
-    }
+        def androidJavadocsJar = task("android${variant.name.capitalize()}JavadocsJar", type: Jar, dependsOn: androidJavadocs) {
+            classifier = 'javadoc'
+            from androidJavadocs.destinationDir
+        }
 
-    artifacts {
-        archives androidSourcesJar
-        archives androidJavadocsJar
+        def androidSourcesJar = task("android${variant.name.capitalize()}SourcesJar", type: Jar) {
+            classifier = 'sources'
+            from variant.javaCompile.source
+        }
+
+        artifacts {
+            archives androidSourcesJar
+            archives androidJavadocsJar
+        }
     }
 }
