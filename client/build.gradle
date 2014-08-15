@@ -34,15 +34,23 @@ android.libraryVariants.all { variant ->
     copyClientLibsTask.mustRunAfter ':routerjars:buildClient'
 }
 
-apply from: "${project.rootDir}/gradle/maven-push.gradle"
+if (hasProperty('localFileRepoDir')) {
+    uploadArchives {
+        repositories {
+            add project.repositories.fileRepo
+        }
+    }
+} else {
+    apply from: "${project.rootDir}/gradle/maven-push.gradle"
 
-// Remove routerjars from dependencies
-afterEvaluate { project ->
-    def deployer = uploadArchives.repositories.mavenDeployer
-    deployer*.pom*.whenConfigured { pom ->
-        pom.setDependencies(pom.dependencies.collect { dep ->
-            if (dep.groupId != 'i2p.android.base' && dep.artifactId != 'routerjars')
-                dep
-        })
+    // Remove routerjars from dependencies
+    afterEvaluate { project ->
+        def deployer = uploadArchives.repositories.mavenDeployer
+        deployer*.pom*.whenConfigured { pom ->
+            pom.setDependencies(pom.dependencies.collect { dep ->
+                if (dep.groupId != 'i2p.android.base' && dep.artifactId != 'routerjars')
+                    dep
+            })
+        }
     }
 }

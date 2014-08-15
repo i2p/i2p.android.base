@@ -84,6 +84,43 @@ systemProp.socksProxyPort=9150
 
 2. `gradle assembleRelease`
 
+## Client library
+
+### "Uploading" to a local file repository (to use a local build of the library in a project)
+
+1. Add the following line to your `~/.gradle/gradle.properties`:
+
+    ```
+    localFileRepoDir=/path/to/local/file/repo
+    ```
+
+2. `gradle :client:uploadArchives`
+
+3. Add the resulting directory to your project as a repository. For Gradle projects, add the following above any existing repositories (so it is checked first):
+
+    ```
+    repositories {
+        flatDir {
+            name 'fileRepo'
+            dirs file('/path/to/local/file/repo')
+        }
+    }
+    ```
+
+### Uploading to Maven Central via Sonatype OSSRH
+
+1. Add the following lines to your `~/.gradle/gradle.properties` (filling in the blanks):
+
+    ```
+    signing.keyId=
+    signing.password=
+    signing.secretKeyRingFile=/path/to/secring.gpg
+    ossrhUsername=
+    ossrhPassword=
+    ```
+
+2. `gradle :client:uploadArchives`
+
 ### Commands from the old build instructions that might be useful
 
 ```
