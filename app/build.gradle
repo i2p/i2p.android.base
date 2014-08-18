@@ -28,6 +28,9 @@ android {
         donate {
             applicationId 'net.i2p.android.donate'
         }
+        legacy {
+            applicationId 'net.i2p.android.router'
+        }
     }
 }
 
