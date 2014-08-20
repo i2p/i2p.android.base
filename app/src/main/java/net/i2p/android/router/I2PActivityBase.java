@@ -7,22 +7,23 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
 import net.i2p.android.i2ptunnel.TunnelListActivity;
-import net.i2p.android.router.R;
 import net.i2p.android.router.addressbook.AddressbookActivity;
 import net.i2p.android.router.log.LogActivity;
 import net.i2p.android.router.netdb.NetDbActivity;
@@ -46,7 +47,6 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private String[] mActivityTitles;
 
     /**
      * Router variables
@@ -103,7 +103,14 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
             setContentView(R.layout.activity_navdrawer_onepane);
 
         mTitle = mDrawerTitle = getTitle();
-        mActivityTitles = getResources().getStringArray(R.array.navdrawer_activity_titles);
+        String[] activityTitles = getResources().getStringArray(R.array.navdrawer_activity_titles);
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("i2pandroid.main.showStats", false)) {
+            String[] advActivityTitles = getResources().getStringArray(R.array.navdrawer_activity_titles_advanced);
+            String[] allTitles = new String[activityTitles.length + advActivityTitles.length];
+            System.arraycopy(activityTitles, 0, allTitles, 0, activityTitles.length);
+            System.arraycopy(advActivityTitles, 0, allTitles, activityTitles.length, advActivityTitles.length);
+            activityTitles = allTitles;
+        }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.drawer);
 
@@ -112,7 +119,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         mDrawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, mActivityTitles));
+                android.R.layout.simple_list_item_1, activityTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -161,37 +168,37 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     private void selectItem(int pos) {
         switch (pos) {
         case 1:
+            Intent news = new Intent(I2PActivityBase.this, NewsActivity.class);
+            startActivity(news);
+            break;
+        case 2:
             Intent ab = new Intent(I2PActivityBase.this, AddressbookActivity.class);
             startActivity(ab);
             break;
-        case 2:
+        case 3:
             Intent itb = new Intent(I2PActivityBase.this, TunnelListActivity.class);
             startActivity(itb);
             break;
-        case 3:
+        case 4:
             Intent log = new Intent(I2PActivityBase.this, LogActivity.class);
             startActivity(log);
             break;
-        case 4:
-            Intent active = new Intent(I2PActivityBase.this, RateGraphActivity.class);
-            startActivity(active);
-            break;
         case 5:
-            Intent peers = new Intent(I2PActivityBase.this, PeersActivity.class);
-            startActivity(peers);
-            break;
-        case 6:
-            Intent netdb = new Intent(I2PActivityBase.this, NetDbActivity.class);
-            startActivity(netdb);
-            break;
-        case 7:
             Intent wp = new Intent(I2PActivityBase.this, WebActivity.class);
             wp.putExtra(WebFragment.HTML_RESOURCE_ID, R.raw.welcome_html);
             startActivity(wp);
             break;
+        case 6:
+            Intent active = new Intent(I2PActivityBase.this, RateGraphActivity.class);
+            startActivity(active);
+            break;
+        case 7:
+            Intent peers = new Intent(I2PActivityBase.this, PeersActivity.class);
+            startActivity(peers);
+            break;
         case 8:
-            Intent news = new Intent(I2PActivityBase.this, NewsActivity.class);
-            startActivity(news);
+            Intent netdb = new Intent(I2PActivityBase.this, NetDbActivity.class);
+            startActivity(netdb);
             break;
         default:
             Intent main = new Intent(I2PActivityBase.this, MainActivity.class);
@@ -362,7 +369,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         Util.d(this + " calling startService");
         ComponentName name = startService(intent);
         if (name == null)
-            Util.d(this + " XXXXXXXXXXXXXXXXXXXX got from startService: " + name);
+            Util.d(this + " XXXXXXXXXXXXXXXXXXXX got null from startService!");
         Util.d(this + " got from startService: " + name);
         boolean success = bindRouter(true);
         if (!success)

@@ -357,7 +357,7 @@ public class MainFragment extends I2PFragmentBase {
                 vStatusText.setText(_savedStatus);
                 vStatus.setVisibility(View.VISIBLE);
             } else {
-                vStatus.setVisibility(View.INVISIBLE);
+                vStatus.setVisibility(View.GONE);
             }
             sv.setVisibility(View.VISIBLE);
         } else {
