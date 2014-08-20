@@ -159,7 +159,7 @@ public class MainFragment extends I2PFragmentBase {
     }
 
     private void updateOneShot() {
-        _handler.postDelayed(_oneShotUpdate, 100);
+        _handler.postDelayed(_oneShotUpdate, 10);
     }
 
     private class OneShotUpdate implements Runnable {
@@ -401,6 +401,7 @@ public class MainFragment extends I2PFragmentBase {
 
                 // Client or server
                 ImageView type = new ImageView(getActivity());
+                type.setPadding(6, 6, 6, 6);
                 if (ctx.clientManager().shouldPublishLeaseSet(h))
                     type.setImageDrawable(getActivity().getResources()
                             .getDrawable(R.drawable.server));
