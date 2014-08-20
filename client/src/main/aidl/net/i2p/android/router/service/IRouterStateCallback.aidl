@@ -9,7 +9,10 @@ import net.i2p.android.router.service.State;
  */
 oneway interface IRouterStateCallback {
     /**
-     * Called when the state of the I2P router changes
+     * Called when the state of the I2P router changes.
+     *
+     * @param newState may be null if the State is not known. See
+     * {@link net.i2p.android.router.service.IRouterState#getState()}.
      */
     void stateChanged(in State newState);
 }

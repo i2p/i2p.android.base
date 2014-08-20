@@ -34,7 +34,12 @@ public enum State implements Parcelable {
     public static final Creator<State> CREATOR = new Creator<State>() {
         @Override
         public State createFromParcel(final Parcel source) {
-            return State.valueOf(source.readString());
+            try {
+                return State.valueOf(source.readString());
+            } catch (IllegalArgumentException e) {
+                // Parcel is from a newer version of State with new states.
+                return null;
+            }
         }
 
         @Override

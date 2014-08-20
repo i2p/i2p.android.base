@@ -27,8 +27,13 @@ interface IRouterState {
     boolean isStarted();
 
     /**
-    * Get the state of the I2P router
-    **/
+     * Get the state of the I2P router.
+     *
+     * @return null if the State is not known, e.g. a new state has been added
+     * to State.aidl in I2P Android. Client app devs should update their client
+     * library, or their copy of State.aidl, if they are getting null States.
+     * Future State.aidl versions will be backwards-compatible.
+     */
     State getState();
 
 }
