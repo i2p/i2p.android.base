@@ -28,7 +28,7 @@
   <string name="first_start_title">Urime që arritët ta instaloni I2P\'në!</string>
   <string name="first_start_welcome">&lt;b&gt;Mirë se vini në I2P!&lt;b&gt; Ju lutem &lt;b&gt;duroni&lt;b&gt; deri sa I2P të boot dhe tåe gjejë peers, </string>
   <string name="first_start_read">Deri sa jeni duke pritur, ju lutem lexoni notat që janë lëshuar dhe vizitoni faqen e mirëseardhjes. </string>
-  <string name="first_start_faq">Kur ti keni tunelët për klientë, ju lutem &lt;b&gt;vështroni&lt;b&gt; FAQ'un tonë: </string>
+  <string name="first_start_faq">Kur ti keni tunelët për klientë, ju lutem &lt;b&gt;vështroni&lt;b&gt; FAQ\'un tonë: </string>
   <string name="first_start_faq_nonanon">Ose mund ta përdorni këtë link që nuk mund të ku sigurojë anonimitetin, nëse nuk keni durim të pritni për tunelët: </string>
   <string name="first_start_irc">Drejtoni IRC klientin tuaj te &lt;b&gt; localhost:66688&lt;b&gt; dhe na përshëndetni në: </string>
   <string name="drawer_open">Qele nav</string>
