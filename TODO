@@ -4,8 +4,6 @@
     <Meeh> If I goto settings->addressbook it crashes
     <str4d> I have an Intent specified in the settings XML
     <str4d> But I can't specify the package there, because the package depends on the flavor
-- Browser crash
-    <zzz> in the browser, hitting reload on a failed page does it. Or going back and then clicking the same addressbook entry
 - Display auto-start setting correctly in I2PTunnel
     <zzz> shared clients tunnel is starting. Can't remember if i had it enabled before. But I go to i2ptunnel config page, and all the auto start boxes are unchecked
 - Better addressbook column widths

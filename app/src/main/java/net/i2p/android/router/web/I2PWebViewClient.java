@@ -261,14 +261,14 @@ public class I2PWebViewClient extends WebViewClient {
             super(view, null);
         }
 
-        protected Integer doInBackground(String... urls) {
+        protected Integer doInBackground(final String... urls) {
             publishProgress(Integer.valueOf(-1));
-            try {
-                _view.loadUrl(urls[0]);
-            } catch (Exception e) {
-                // CalledFromWrongThreadException
-                cancel(false);
-            }
+            _view.post(new Runnable() {
+                @Override
+                public void run() {
+                    _view.loadUrl(urls[0]);
+                }
+            });
             return Integer.valueOf(0);
         }
 
@@ -301,20 +301,20 @@ public class I2PWebViewClient extends WebViewClient {
         }
 
         protected Integer doInBackground(String... urls) {
-            String url = urls[0];
+            final String url = urls[0];
             Uri uri = Uri.parse(url);
             File cacheFile = AppCache.getInstance(_view.getContext()).getCacheFile(uri);
             if (cacheFile.exists()) {
-                Uri resUri = AppCache.getInstance(_view.getContext()).getCacheUri(uri);
+                final Uri resUri = AppCache.getInstance(_view.getContext()).getCacheUri(uri);
                 Util.d("Loading " + url + " from resource cache " + resUri);
-                _view.getSettings().setLoadsImagesAutomatically(true);
-                _view.getSettings().setBlockNetworkLoads(false);
-                try {
-                    _view.loadUrl(resUri.toString());
-                } catch (Exception e) {
-                    // CalledFromWrongThreadException
-                    cancel(false);
-                }
+                _view.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        _view.getSettings().setLoadsImagesAutomatically(true);
+                        _view.getSettings().setBlockNetworkLoads(false);
+                        _view.loadUrl(resUri.toString());
+                    }
+                });
                 // 1 means show the cache toast message
                 return Integer.valueOf(1);
             }
@@ -336,7 +336,7 @@ public class I2PWebViewClient extends WebViewClient {
                 if (success) {
                     // store in cache, get content URL, and load that way
                     // Set as current base
-                    Uri content = AppCache.getInstance(_view.getContext()).addCacheFile(uri, true);
+                    final Uri content = AppCache.getInstance(_view.getContext()).addCacheFile(uri, true);
                     if (content != null) {
                         Util.d("Stored cache in " + content);
                     } else {
@@ -345,17 +345,17 @@ public class I2PWebViewClient extends WebViewClient {
                         return Integer.valueOf(0);
                     }
                     Util.d("loading data, base URL: " + uri + " content URL: " + content);
-                    try {
-                        _view.loadUrl(content.toString());
-                    } catch (Exception exc) {
-                        // CalledFromWrongThreadException
-                        cancel(false);
-                    }
+                    _view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            _view.loadUrl(content.toString());
+                        }
+                    });
                     Util.d("Fetch failed for " + url);
                 } else {
                     // Load the error message in as a string, delete the file
-                    String t = fetcher.getContentType();
-                    String e = fetcher.getEncoding();
+                    final String t = fetcher.getContentType();
+                    final String e = fetcher.getEncoding();
                     String msg;
                     int statusCode = fetcher.getStatusCode();
                     if (statusCode < 0) {
@@ -380,13 +380,14 @@ public class I2PWebViewClient extends WebViewClient {
                         }
                     }
                     AppCache.getInstance(_view.getContext()).removeCacheFile(uri);
-                    try {
-                         Util.d("loading error data URL: " + url);
-                        _view.loadDataWithBaseURL(url, msg, t, e, url);
-                    } catch (Exception exc) {
-                        // CalledFromWrongThreadException
-                        cancel(false);
-                    }
+                     Util.d("loading error data URL: " + url);
+                    final String finalMsg = msg;
+                    _view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            _view.loadDataWithBaseURL(url, finalMsg, t, e, url);
+                        }
+                    });
                 }
             } catch (IOException ioe) {
                     Util.d("IOE for " + url, ioe);
