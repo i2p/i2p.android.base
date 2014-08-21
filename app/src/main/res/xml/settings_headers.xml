@@ -24,7 +24,7 @@
     <header
         android:title="@string/label_addressbook">
         <intent
-            android:targetPackage="net.i2p.android.router"
+            android:targetPackage="net.i2p.android"
             android:targetClass="net.i2p.android.router.addressbook.AddressbookSettingsActivity" />
     </header>
     <header

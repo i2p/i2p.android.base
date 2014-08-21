@@ -1,5 +1,9 @@
 # Fixes
 
+- Replace AddressbookSettingsActivity, or open it with an implicit Intent from Settings
+    <Meeh> If I goto settings->addressbook it crashes
+    <str4d> I have an Intent specified in the settings XML
+    <str4d> But I can't specify the package there, because the package depends on the flavor
 - Browser crash
     <zzz> in the browser, hitting reload on a failed page does it. Or going back and then clicking the same addressbook entry
 - Display auto-start setting correctly in I2PTunnel
