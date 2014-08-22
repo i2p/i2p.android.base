@@ -412,6 +412,7 @@ public class MainFragment extends I2PFragmentBase {
 
                 // Name
                 TextView destName = new TextView(getActivity());
+                destName.setPadding(6, 0, 0, 0);
                 destName.setText(name);
                 //destName.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
                 dest.addView(destName);
