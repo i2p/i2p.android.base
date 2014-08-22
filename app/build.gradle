@@ -105,6 +105,18 @@ task copyI2PResources(type: Copy) {
         }
         from certificatesZip
     }
+    // For peers WebView
+    into('assets/themes/console/images') {
+        from file(i2pbase + '/installer/resources/themes/console/images/i2plogo.png')
+        from file(i2pbase + '/installer/resources/themes/console/images/inbound.png')
+        from file(i2pbase + '/installer/resources/themes/console/images/outbound.png')
+    }
+    into ('assets/themes/console/light') {
+        from file(i2pbase + '/installer/resources/themes/console/light/console.css')
+    }
+    into('assets/themes/console/light/images') {
+        from file(i2pbase + '/installer/resources/themes/console/light/images/header.png')
+    }
 }
 task cleanI2PResources(type: Delete) {
     delete file('src/main/res/drawable/i2plogo.png')
@@ -114,6 +126,9 @@ task cleanI2PResources(type: Delete) {
         include 'license_*'
         include 'certificates_zip'
     }
+    delete fileTree('src/main/assets/themes/console/images')
+    delete file('src/main/assets/themes/console/light/console.css')
+    delete file('src/main/assets/themes/console/light/images/header.png')
 }
 preBuild.dependsOn copyI2PResources
 clean.dependsOn cleanI2PResources
