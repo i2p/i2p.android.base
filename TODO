@@ -7,11 +7,6 @@
 - Better addressbook column widths
     <zzz> on the i2ptunnel and addressbook pages on the tablet, the columns are too skinny, they aren't as wide as the tab
     <zzz> only a few addressbook entries wrap but on i2ptunnel everything is wrapped and most of the screen is empty
-- Graph config issues
-    <zzz> all the graphs are disabled on the config page, but on the graphs page it shows a rate tab anyway
-    <zzz> and no clue that you have to enable the graphs
-    <zzz> not sure if they are enabled by default or not - I updated from old install
-    <zzz> but even after I enabled some graphs, it still shows this rate tab that does nothing on the tablet, but goes back to the other page on the phone
 
 # Short-term
 

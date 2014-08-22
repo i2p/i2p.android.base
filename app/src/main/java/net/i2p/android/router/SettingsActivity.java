@@ -36,7 +36,7 @@ import net.i2p.util.OrderedProperties;
 public class SettingsActivity extends PreferenceActivity {
     // Actions for legacy settings
     private static final String ACTION_PREFS_NET = "net.i2p.android.router.PREFS_NET";
-    private static final String ACTION_PREFS_GRAPHS = "net.i2p.android.router.PREFS_GRAPHS";
+    public static final String ACTION_PREFS_GRAPHS = "net.i2p.android.router.PREFS_GRAPHS";
     private static final String ACTION_PREFS_LOGGING = "net.i2p.android.router.PREFS_LOGGING";
     private static final String ACTION_PREFS_ADVANCED = "net.i2p.android.router.PREFS_ADVANCED";
 
