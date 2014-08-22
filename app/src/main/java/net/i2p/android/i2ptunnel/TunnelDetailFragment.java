@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -100,6 +101,9 @@ public class TunnelDetailFragment extends Fragment {
 
             TextView accessIfacePort = (TextView) v.findViewById(R.id.tunnel_access_interface_port);
             accessIfacePort.setText(mTunnel.getIfacePort());
+
+            CheckBox autoStart = (CheckBox) v.findViewById(R.id.tunnel_autostart);
+            autoStart.setChecked(mTunnel.startAutomatically());
         }
 
         return v;

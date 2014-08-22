@@ -4,8 +4,6 @@
     <Meeh> If I goto settings->addressbook it crashes
     <str4d> I have an Intent specified in the settings XML
     <str4d> But I can't specify the package there, because the package depends on the flavor
-- Display auto-start setting correctly in I2PTunnel
-    <zzz> shared clients tunnel is starting. Can't remember if i had it enabled before. But I go to i2ptunnel config page, and all the auto start boxes are unchecked
 - Better addressbook column widths
     <zzz> on the i2ptunnel and addressbook pages on the tablet, the columns are too skinny, they aren't as wide as the tab
     <zzz> only a few addressbook entries wrap but on i2ptunnel everything is wrapped and most of the screen is empty
