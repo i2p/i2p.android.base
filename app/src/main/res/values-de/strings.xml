@@ -50,6 +50,8 @@
   <string name="action_reload_subscriptions">Abonnements neu laden</string>
   <string name="router_not_running">Der Router läuft nicht.</string>
   <string name="stats_not_ready">Der Statistikmanager ist noch nicht bereit. Versuch es später erneut.</string>
+  <string name="no_graphs_configured">Keine Graphen konfiguriert. Sie können die Statistiken zum Erstellen der Graphen im Einstellungsmenu auswählen. Jede Änderung wird nach 60 Sekunden aktiv gesetzt.</string>
+  <string name="configure_graphs">Graphen konfigurieren</string>
   <string name="graphs_not_ready">Die Graphen sind noch nicht bereit oder der Router läuft nicht. Probiere es später nochmal.</string>
   <string name="netdb_routers_empty">Keine Router in deiner NetDB.</string>
   <string name="netdb_leases_empty">Keine LeaseSets in deiner NetDB</string>
