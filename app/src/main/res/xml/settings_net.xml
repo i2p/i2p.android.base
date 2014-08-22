@@ -38,7 +38,7 @@
         android:title="@string/settings_label_network">
     <CheckBoxPreference
         android:key="router.hiddenMode"
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:title="@string/settings_label_hiddenMode"
         android:summary="@string/settings_desc_hiddenMode"
         />
