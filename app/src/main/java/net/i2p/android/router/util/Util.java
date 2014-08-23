@@ -154,11 +154,8 @@ public abstract class Util {
                     x.equals("i2cp.disableInterface")) {
                 // special exception, we must invert the bool for these properties only.
                 String string = all.get(x).toString();
-                String what="true";
-                if(string.equals(what)) {
-                    what="false";
-                }
-                routerProps.setProperty(x, what);
+                String inverted = Boolean.toString(!Boolean.parseBoolean(string));
+                routerProps.setProperty(x, inverted);
             } else {
                 String string = all.get(x).toString();
                 routerProps.setProperty(x, string);
