@@ -50,7 +50,9 @@
   <string name="action_reload_subscriptions">Перегрузить подписки</string>
   <string name="router_not_running">Маршрутизатор не запущен.</string>
   <string name="stats_not_ready">Менеджер статистики ещё не готов. Попробуйте позже.</string>
-  <string name="graphs_not_ready">Графы не готовы или маршрутизатор не запущен. Повторите попытку позже.</string>
+  <string name="no_graphs_configured">Графики не настроены. Вы можете выбрать статистику для отображения на графике в настройках меню. Любые изменения начнут действовать через 60 секунд.</string>
+  <string name="configure_graphs">Настройки графиков</string>
+  <string name="graphs_not_ready">Графики не готовы или маршрутизатор не запущен. Повторите попытку позже.</string>
   <string name="netdb_routers_empty">Нет маршрутизаторов в вашем NetDB.</string>
   <string name="netdb_leases_empty">Нет LeaseSet-ов в вашем NetDB.</string>
   <string name="notification_status_bw">Пропускная способность: %1$s KBps прием / %2$s KBps отправка</string>

@@ -50,6 +50,8 @@
   <string name="action_reload_subscriptions">Volver a cargar suscripciones</string>
   <string name="router_not_running">El router I2P no está ejecutándose.</string>
   <string name="stats_not_ready">El administrador de estadísticas aún no está listo. Inténtelo de nuevo más tarde.</string>
+  <string name="no_graphs_configured">No se ha configurado ninguna gráfica. Puede escoger la estadísticas a graficar en el menú de configuración. Cualquier cambio tendrá efecto después de 60 segundos.</string>
+  <string name="configure_graphs">Configurar gráficas</string>
   <string name="graphs_not_ready">Las gráficas no están listas, o el router I2P no está ejecutándose. Inténtelo de nuevo más tarde.</string>
   <string name="netdb_routers_empty">No hay routers I2P en su NetDB.</string>
   <string name="netdb_leases_empty">No hay LeaseSets (conjuntos de túneles al mismo destino) en su NetDB.</string>
