@@ -50,6 +50,8 @@
   <string name="action_reload_subscriptions">Gjenninlast abonnenter</string>
   <string name="router_not_running">Ruteren kjører ikke</string>
   <string name="stats_not_ready">Statestikk-behandleren er ikke klar enda. Prøv igjen senere.</string>
+  <string name="no_graphs_configured">Ingen grafer har blitt konfigurert ennå. Du kan velge at statistikk programmet skal vise grafer under instillinger. Det vil tre i kraft ca 1minutt etter start.</string>
+  <string name="configure_graphs">Konfigurer grafer</string>
   <string name="graphs_not_ready">Grafer er ikke klare, eller ruteren kjører ikke. Prøv igjen senere.</string>
   <string name="netdb_routers_empty">Ingen rutere i din NetDB</string>
   <string name="netdb_leases_empty">Ingen LeaseSets i din NetDB.</string>
