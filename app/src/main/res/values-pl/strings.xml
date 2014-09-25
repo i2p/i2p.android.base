@@ -50,6 +50,8 @@
   <string name="action_reload_subscriptions">Odśwież subskrypcje</string>
   <string name="router_not_running">Router nie jest włączony.</string>
   <string name="stats_not_ready">Menadżer statystyk nie jest jeszcze gotowy. Spróbuj później.</string>
+  <string name="no_graphs_configured">Żadne wykresy nie zostały skonfigurowane. Możesz wybrać statystyki graficzne w menu ustawień. Wszelkie zmiany wejdą w życie po upływie 60 sekund.</string>
+  <string name="configure_graphs">Konfiguruj wykresy</string>
   <string name="graphs_not_ready">Wykresy nie są gotowe, lub router nie jest włączony. Spróbuj później.</string>
   <string name="netdb_routers_empty">Brak routerów w Twoim NetDB.</string>
   <string name="netdb_leases_empty">Brak LeaseSets w Twoim NetDB.</string>

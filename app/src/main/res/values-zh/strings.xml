@@ -50,6 +50,8 @@
   <string name="action_reload_subscriptions">重载订阅</string>
   <string name="router_not_running">路由器未运行.</string>
   <string name="stats_not_ready">统计管理器还没有准备好. 稍后再试.</string>
+  <string name="no_graphs_configured">没有已配置的图表。您可以在设置菜单中选择统计信息以获得图表。任何更改将在60秒后生效。</string>
+  <string name="configure_graphs">配置图表</string>
   <string name="graphs_not_ready">图还没有准备好,或路由器未运行. 稍后再试.</string>
   <string name="netdb_routers_empty">在你的NetDB内沒有路由器.</string>
   <string name="netdb_leases_empty">在你的NetDB内没有LeaseSets</string>

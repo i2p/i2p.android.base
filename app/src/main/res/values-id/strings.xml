@@ -50,6 +50,8 @@
   <string name="action_reload_subscriptions">Muat ulang langganan</string>
   <string name="router_not_running">Router tidak berjalan.</string>
   <string name="stats_not_ready">Pengelola statistik saat ini belum siap. Silahkan mencoba beberapa saat lagi.</string>
+  <string name="no_graphs_configured">Tidak ada grafik yang telah dikonfigurasikan. Anda dapat memilih statistik ke grafik pada menu pengaturan. Segala perubahan akan bekerja setelah 60 detik.</string>
+  <string name="configure_graphs">Konfigurasi grafik</string>
   <string name="graphs_not_ready">Grafik belum siap, atau router tidak berjalan. Silahkan mencoba beberapa saat lagi.</string>
   <string name="netdb_routers_empty">Tidak ada router dalam NetDB Anda.</string>
   <string name="netdb_leases_empty">Tidak ada LeaseSets dalam NetDB Anda.</string>

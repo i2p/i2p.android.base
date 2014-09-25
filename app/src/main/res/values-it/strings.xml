@@ -50,6 +50,8 @@
   <string name="action_reload_subscriptions">Ricarica sottoscrizioni</string>
   <string name="router_not_running">Il router non sta funzionando.</string>
   <string name="stats_not_ready">Il gestore delle statistiche non è ancora pronto. Riprova più tardi.</string>
+  <string name="no_graphs_configured">Nessun grafico configurato. Puoi scegliere le statistiche da graficare nel menu impostazioni. Ogni cambiamento entrerà in azione dopo 60 secondi.</string>
+  <string name="configure_graphs">Configura grafici</string>
   <string name="graphs_not_ready">I grafici non sono disponibili, oppure il router non è in funzione. Prova più tardi.</string>
   <string name="netdb_routers_empty">Nessun router nel tuo NetDB.</string>
   <string name="netdb_leases_empty">Nessun LeaseSet nel tuo NetDB.</string>
