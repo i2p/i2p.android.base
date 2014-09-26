@@ -9,3 +9,10 @@ source_lang = en
 type = ANDROID
 minimum_perc = 50
 
+[I2P.android_lib_client]
+file_filter = client/src/main/res/values-<lang>/strings.xml
+source_file = client/src/main/res/values/strings.xml
+source_lang = en
+type = ANDROID
+minimum_perc = 50
+
