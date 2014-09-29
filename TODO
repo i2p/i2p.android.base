@@ -1,9 +1,5 @@
 # Fixes
 
-- Replace AddressbookSettingsActivity, or open it with an implicit Intent from Settings
-    <Meeh> If I goto settings->addressbook it crashes
-    <str4d> I have an Intent specified in the settings XML
-    <str4d> But I can't specify the package there, because the package depends on the flavor
 - Better addressbook column widths
     <zzz> on the i2ptunnel and addressbook pages on the tablet, the columns are too skinny, they aren't as wide as the tab
     <zzz> only a few addressbook entries wrap but on i2ptunnel everything is wrapped and most of the screen is empty
