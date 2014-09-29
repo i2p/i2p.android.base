@@ -35,7 +35,8 @@ public class I2PAndroidHelper {
     }
 
     /**
-     * Try to bind to I2P Android. Call this in Activity.onStart()
+     * Try to bind to I2P Android. Call this method from
+     * {@link android.app.Activity#onStart()}.
      */
     public void bind() {
         Intent i2pIntent = new Intent(IRouterState.class.getName());
@@ -50,7 +51,8 @@ public class I2PAndroidHelper {
     }
 
     /**
-     * Unbind from I2P Android. Call this in Activity.onStop();
+     * Unbind from I2P Android. Call this method from
+     * {@link android.app.Activity#onStop()}.
      */
     public void unbind() {
         if (mTriedBindState)
@@ -94,8 +96,8 @@ public class I2PAndroidHelper {
     }
 
     /**
-     * Show dialog - install from market or F-Droid.
-     * @param activity
+     * Show dialog - install I2P Android from market or F-Droid.
+     * @param activity the Activity this method has been called from.
      */
     public void promptToInstall(final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -135,7 +137,7 @@ public class I2PAndroidHelper {
 
     /**
      * Show dialog - request that I2P Android be started.
-     * @param activity
+     * @param activity the Activity this method has been called from.
      */
     public void requestI2PAndroidStart(final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
