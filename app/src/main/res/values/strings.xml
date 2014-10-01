@@ -205,6 +205,8 @@
     <string name="i2ptunnel_view_autostart">Auto-start</string>
 
     <string name="copy_logs">Copy logs</string>
+    <string name="i2p_android_error_logs">I2P Android Error Logs</string>
+    <string name="i2p_android_logs">I2P Android Logs</string>
     <string name="error_logs_copied_to_clipboard">Error logs copied to clipboard</string>
     <string name="logs_copied_to_clipboard">Logs copied to clipboard</string>
 </resources>

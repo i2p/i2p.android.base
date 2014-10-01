@@ -158,7 +158,7 @@ public class LogFragment extends ListFragment implements
                 String logText = "";
                 synchronized (mLogEntries) {
                     for (String logEntry : mLogEntries) {
-                        logText += logText.isEmpty() ? logEntry : logEntry + "\n";
+                        logText += logEntry;
                     }
                 }
 
@@ -169,7 +169,7 @@ public class LogFragment extends ListFragment implements
                 } else {
                     android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                     android.content.ClipData clip = android.content.ClipData.newPlainText(
-                            isError ? "I2P Android Error Logs" : "I2P Android Logs",
+                            isError ? getString(R.string.i2p_android_error_logs) : getString(R.string.i2p_android_logs),
                             logText);
                     clipboard.setPrimaryClip(clip);
                 }
