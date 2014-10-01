@@ -3,17 +3,18 @@ package net.i2p.android.router.dialog;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import net.i2p.android.router.R;
-import net.i2p.android.router.util.Util;
 
 /**
  *  Display a raw text resource.
@@ -30,7 +31,6 @@ public class TextResourceDialog extends DialogFragment {
     {
         View v = inflater.inflate(R.layout.fragment_dialog_text_resource, container, false);
         TextView tv = (TextView) v.findViewById(R.id.text_resource_text);
-        tv.setMovementMethod(ScrollingMovementMethod.getInstance());
         String title = getArguments().getString(TEXT_DIALOG_TITLE);
         if (title != null)
             getDialog().setTitle(title);
