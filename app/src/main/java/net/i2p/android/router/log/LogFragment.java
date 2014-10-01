@@ -1,13 +1,21 @@
 package net.i2p.android.router.log;
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 import java.util.List;
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
@@ -25,6 +33,7 @@ public class LogFragment extends ListFragment implements
     private static final int LEVEL_ALL = 2;
 
     OnEntrySelectedListener mEntrySelectedCallback;
+    private final List<String> mLogEntries = new ArrayList<String>();
     private LogAdapter mAdapter;
     private TextView mHeaderView;
     private String mLogLevel;
@@ -33,6 +42,8 @@ public class LogFragment extends ListFragment implements
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
     private boolean mActivateOnItemClick = false;
+
+    private MenuItem mCopyLogs;
 
     // Container Activity must implement this interface
     public interface OnEntrySelectedListener {
@@ -60,6 +71,12 @@ public class LogFragment extends ListFragment implements
                     + " must implement OnEntrySelectedListener");
         }
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -122,6 +139,53 @@ public class LogFragment extends ListFragment implements
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_log_actions, menu);
+        mCopyLogs = menu.findItem(R.id.action_copy_logs);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        mCopyLogs.setVisible(I2PAppContext.getCurrentContext() != null);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_copy_logs:
+                String logText = "";
+                synchronized (mLogEntries) {
+                    for (String logEntry : mLogEntries) {
+                        logText += logText.isEmpty() ? logEntry : logEntry + "\n";
+                    }
+                }
+
+                boolean isError = "ERROR".equals(mLogLevel);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+                    android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                    clipboard.setText(logText);
+                } else {
+                    android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                    android.content.ClipData clip = android.content.ClipData.newPlainText(
+                            isError ? "I2P Android Error Logs" : "I2P Android Logs",
+                            logText);
+                    clipboard.setPrimaryClip(clip);
+                }
+
+                int textId;
+                if (isError)
+                    textId = R.string.error_logs_copied_to_clipboard;
+                else
+                    textId = R.string.logs_copied_to_clipboard;
+                Toast.makeText(getActivity(), textId, Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     /**
      * Turns on activate-on-click mode. When this mode is on, list items will be
      * given the 'activated' state when touched.
@@ -167,6 +231,10 @@ public class LogFragment extends ListFragment implements
             List<String> data) {
         if (loader.getId() == ("ERROR".equals(mLogLevel) ?
                 LEVEL_ERROR : LEVEL_ALL)) {
+            synchronized (mLogEntries) {
+                mLogEntries.clear();
+                mLogEntries.addAll(data);
+            }
             mAdapter.setData(data);
             String header = getHeader(data.size(), ("ERROR".equals(mLogLevel)));
             mHeaderView.setText(header);
