@@ -1,10 +1,13 @@
 package net.i2p.android.router.dialog;
 
+import net.i2p.android.router.LicenseActivity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.I2Patterns;
 import net.i2p.android.router.util.Util;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.util.Linkify;
@@ -33,7 +36,14 @@ public class AboutDialog extends DialogFragment {
 
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
         b.setTitle(R.string.menu_about)
-        .setView(view);
+                .setView(view)
+                .setNeutralButton(R.string.label_licenses, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent lic = new Intent(getActivity(), LicenseActivity.class);
+                        startActivity(lic);
+                    }
+                });
         return b.create();
     }
 }

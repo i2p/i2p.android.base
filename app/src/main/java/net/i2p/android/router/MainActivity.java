@@ -147,11 +147,6 @@ public class MainActivity extends I2PActivityBase implements
         //    startActivity(hi);
         //    return true;
 
-        // TODO: Remove when help page finished
-        case R.id.menu_help_licenses:
-            Intent lic = new Intent(MainActivity.this, LicenseActivity.class);
-            startActivity(lic);
-            return true;
         case R.id.menu_help_release_notes:
             TextResourceDialog rDdialog = new TextResourceDialog();
             Bundle args = new Bundle();

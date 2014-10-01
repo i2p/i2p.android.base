@@ -4,10 +4,6 @@
           android:id="@+id/menu_about"
           i2pandroid:showAsAction="never" >
     </item>
-    <!-- Show directly here for now -->
-    <item android:id="@+id/menu_help_licenses"
-        android:title="@string/label_licenses"
-        i2pandroid:showAsAction="never" />
     <item android:id="@+id/menu_help_release_notes"
         android:title="@string/label_release_notes"
         i2pandroid:showAsAction="never" />
