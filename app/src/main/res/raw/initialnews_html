@@ -12,14 +12,14 @@ While you are waiting, please read the release notes and welcome page.
 </p>
 <p>
 Once you have client tunnels,
-please <b>check out</b> our
+ please <b>check out</b> our
  <a href="http://i2p-projekt.i2p/faq">FAQ</a>.
-Or use the <a href="https://geti2p.net/faq">non-anonymous link</a>
+ Or use the <a href="https://geti2p.net/faq">non-anonymous link</a>
  if you don't want to wait for tunnels.
 </p>
 <p>
-Point your IRC client to <b>localhost:6668</b> and say hi to us on 
-<a href="irc://127.0.0.1:6668/i2p-dev">#i2p-dev</a> or <a href="irc://127.0.0.1:6668/i2p">#i2p</a>.
+Point your IRC client to <b>localhost:6668</b> and say hi to us on
+ <a href="irc://127.0.0.1:6668/i2p-dev">#i2p-dev</a> or <a href="irc://127.0.0.1:6668/i2p">#i2p</a>.
 </p>
 </div>
 </body>
