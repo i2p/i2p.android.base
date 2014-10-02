@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
 import net.i2p.stat.Rate;
 import net.i2p.stat.RateStat;
@@ -18,15 +19,20 @@ public class StatSummarizer implements Runnable {
     private Thread _thread;
 
     public StatSummarizer() {
-        _context = RouterContext.listContexts().get(0);
+        _context = Util.getRouterContext();
         _listeners = new CopyOnWriteArrayList<SummaryListener>();
         _instance = this;
-        _context.addShutdownTask(new Shutdown());
+        if (_context != null)
+            _context.addShutdownTask(new Shutdown());
     }
 
     public static StatSummarizer instance() { return _instance; }
 
     public void run() {
+        // We can't do anything without a RouterContext
+        if (_context == null)
+            return;
+
         _thread = Thread.currentThread();
         String specs = "";
         while (_isRunning && _context.router().isAlive()) {

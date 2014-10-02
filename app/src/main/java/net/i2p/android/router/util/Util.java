@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 
 import net.i2p.I2PAppContext;
+import net.i2p.router.RouterContext;
 import net.i2p.util.OrderedProperties;
 
 import java.util.ArrayList;
@@ -29,6 +30,19 @@ public abstract class Util {
                 return pi.versionName;
         } catch (Exception e) {}
         return "??";
+    }
+
+    /**
+     * Get the active RouterContext.
+     *
+     * @return the active RouterContext, or null
+     */
+    public static RouterContext getRouterContext() {
+        List<RouterContext> contexts = RouterContext.listContexts();
+        if ( !((contexts == null) || (contexts.isEmpty())) ) {
+            return contexts.get(0);
+        }
+        return null;
     }
 
     private static final String ANDROID_TAG = "I2P";

@@ -2,27 +2,15 @@ package net.i2p.android.router;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import net.i2p.I2PAppContext;
-import net.i2p.android.router.R;
 import net.i2p.android.router.service.StatSummarizer;
 import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
@@ -31,7 +19,11 @@ import net.i2p.stat.Rate;
 import net.i2p.stat.RateStat;
 import net.i2p.stat.StatManager;
 import net.i2p.util.LogManager;
-import net.i2p.util.OrderedProperties;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.SortedSet;
 
 public class SettingsActivity extends PreferenceActivity {
     // Actions for legacy settings
@@ -51,10 +43,10 @@ public class SettingsActivity extends PreferenceActivity {
                 addPreferencesFromResource(R.xml.settings_net);
             } else if (ACTION_PREFS_GRAPHS.equals(action)){
                 addPreferencesFromResource(R.xml.settings_graphs);
-                setupGraphSettings(this, getPreferenceScreen(), getRouterContext());
+                setupGraphSettings(this, getPreferenceScreen(), Util.getRouterContext());
             } else if (ACTION_PREFS_LOGGING.equals(action)) {
                 addPreferencesFromResource(R.xml.settings_logging);
-                RouterContext ctx = getRouterContext();
+                RouterContext ctx = Util.getRouterContext();
                 if (ctx != null)
                     setupLoggingSettings(this, getPreferenceScreen(), ctx);
             } else if (ACTION_PREFS_ADVANCED.equals(action)) {
@@ -64,14 +56,6 @@ public class SettingsActivity extends PreferenceActivity {
             // Load the legacy preferences headers
             addPreferencesFromResource(R.xml.settings_headers_legacy);
         }
-    }
-
-    protected static RouterContext getRouterContext() {
-        List<RouterContext> contexts = RouterContext.listContexts();
-        if ( !((contexts == null) || (contexts.isEmpty())) ) {
-            return contexts.get(0);
-        }
-        return null;
     }
 
     protected static void setupGraphSettings(Context context, PreferenceScreen ps, RouterContext ctx) {
@@ -177,13 +161,12 @@ public class SettingsActivity extends PreferenceActivity {
         Properties logSettings = lProps.get(1);
 
         // Apply new config if we are running.
-        List<RouterContext> contexts = RouterContext.listContexts();
-        if ( !((contexts == null) || (contexts.isEmpty())) ) {
-            RouterContext _context = contexts.get(0);
-            _context.router().saveConfig(props, null);
+        RouterContext rCtx = Util.getRouterContext();
+        if (rCtx != null) {
+            rCtx.router().saveConfig(props, null);
 
             // Merge in new log settings
-            saveLoggingChanges(_context, logSettings);
+            saveLoggingChanges(rCtx, logSettings);
         } else {
             // Merge in new config settings, write the file.
             InitActivities init = new InitActivities(this);
@@ -227,12 +210,12 @@ public class SettingsActivity extends PreferenceActivity {
                 addPreferencesFromResource(R.xml.settings_net);
             } else if ("graphs".equals(settings)) {
                 addPreferencesFromResource(R.xml.settings_graphs);
-                RouterContext ctx = getRouterContext();
+                RouterContext ctx = Util.getRouterContext();
                 if (ctx != null)
                     setupGraphSettings(getActivity(), getPreferenceScreen(), ctx);
             } else if ("logging".equals(settings)) {
                 addPreferencesFromResource(R.xml.settings_logging);
-                RouterContext ctx = getRouterContext();
+                RouterContext ctx = Util.getRouterContext();
                 if (ctx != null)
                     setupLoggingSettings(getActivity(), getPreferenceScreen(), ctx);
             } else if ("advanced".equals(settings)) {

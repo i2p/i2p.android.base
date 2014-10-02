@@ -323,12 +323,11 @@ public class RouterService extends Service {
                     return;
                 }
                 setState(State.RUNNING);
-                List<?> contexts = RouterContext.listContexts();
-                if((contexts == null) || (contexts.isEmpty())) {
+                _statusBar.replace(StatusBar.ICON_RUNNING, "I2P is running");
+                _context = Util.getRouterContext();
+                if (_context == null) {
                     throw new IllegalStateException("No contexts. This is usually because the router is either starting up or shutting down.");
                 }
-                _statusBar.replace(StatusBar.ICON_RUNNING, "I2P is running");
-                _context = (RouterContext) contexts.get(0);
                 _context.router().setKillVMOnEnd(false);
                 Job loadJob = new LoadClientsJob(_context, _notif);
                 _context.jobQueue().addJob(loadJob);
