@@ -1,4 +1,6 @@
-# initial router.config
+# Initial router.config
+# Settings here MUST match the defaults in res/xml/settings_*.xml
+#
 # temp directory now set in Init.java
 #i2p.dir.temp=/data/data/net.i2p.android.router/files/tmp
 #i2p.dir.pid=/data/data/net.i2p.android.router/files/tmp
