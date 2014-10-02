@@ -4,12 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import net.i2p.I2PAppContext;
+import net.i2p.data.DataHelper;
 import net.i2p.router.RouterContext;
 import net.i2p.util.OrderedProperties;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -171,5 +177,72 @@ public abstract class Util {
         pList.add(logSettings);
 
         return pList;
+    }
+
+    public static String getFileDir(Context context) {
+        // This needs to be changed so that we can have an alternative place
+        return context.getFilesDir().getAbsolutePath();
+    }
+
+    /**
+     *  Write properties to a file. If the file does not exist, it is created.
+     *  If the properties already exist in the file, they are updated.
+     *
+     *  @param dir the file directory
+     *  @param file relative to dir
+     *  @param props properties to set
+     */
+    public static void writePropertiesToFile(Context ctx, String dir, String file, Properties props) {
+        mergeResourceToFile(ctx, dir, file, 0, props);
+    }
+
+    /**
+     *  Load defaults from resource, then add props from settings, and write back.
+     *  If resID is 0, defaults are not written over the existing file content.
+     *
+     *  @param dir the file directory
+     *  @param file relative to dir
+     *  @param resID the ID of the default resource, or 0
+     *  @param userProps local properties or null
+     */
+    public static void mergeResourceToFile(Context ctx, String dir, String file, int resID, Properties userProps) {
+        InputStream fin = null;
+        InputStream in = null;
+
+        try {
+            Properties props = new OrderedProperties();
+            try {
+                fin = new FileInputStream(new File(dir, file));
+                DataHelper.loadProps(props, fin);
+                if (resID > 0)
+                    Util.d("Merging resource into file " + file);
+                else
+                    Util.d("Merging properties into file " + file);
+            } catch (IOException ioe) {
+                if (resID > 0)
+                    Util.d("Creating file " + file + " from resource");
+                else
+                    Util.d("Creating file " + file + " from properties");
+            }
+
+            // write in default settings
+            if (resID > 0)
+                in = ctx.getResources().openRawResource(resID);
+            if (in != null)
+                DataHelper.loadProps(props,  in);
+
+            // override with user settings
+            if (userProps != null)
+                props.putAll(userProps);
+
+            File path = new File(dir, file);
+            DataHelper.storeProps(props, path);
+            Util.d("Saved " + props.size() +" properties in " + file);
+        } catch (IOException ioe) {
+        } catch (Resources.NotFoundException nfe) {
+        } finally {
+            if (in != null) try { in.close(); } catch (IOException ioe) {}
+            if (fin != null) try { fin.close(); } catch (IOException ioe) {}
+        }
     }
 }

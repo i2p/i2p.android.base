@@ -169,8 +169,7 @@ public class SettingsActivity extends PreferenceActivity {
             saveLoggingChanges(rCtx, logSettings);
         } else {
             // Merge in new config settings, write the file.
-            InitActivities init = new InitActivities(this);
-            init.mergeResourceToFile(R.raw.router_config, "router.config", props);
+            Util.mergeResourceToFile(this, Util.getFileDir(this), "router.config", R.raw.router_config, props);
 
             // Merge in new log settings
             saveLoggingChanges(I2PAppContext.getGlobalContext(), logSettings);

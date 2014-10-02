@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
 
+import net.i2p.android.router.util.Util;
+import net.i2p.data.DataHelper;
+import net.i2p.util.FileUtil;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,12 +17,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import net.i2p.android.router.R;
-import net.i2p.android.router.util.Util;
-import net.i2p.data.DataHelper;
-import net.i2p.util.FileUtil;
-import net.i2p.util.OrderedProperties;
 
 //  Wouldn't this be better as a private class in MainActivity?
 
@@ -36,8 +33,7 @@ class InitActivities {
 
     public InitActivities(Context c) {
         ctx = c;
-        // This needs to be changed so that we can have an alternative place
-        myDir = c.getFilesDir().getAbsolutePath();
+        myDir = Util.getFileDir(c);
         _ourVersion = Util.getOurVersion(c);
     }
 
@@ -231,41 +227,13 @@ class InitActivities {
     /**
      *  Load defaults from resource,
      *  then add props from settings,
-     *  and write back
+     *  and write back.
      *
      *  @param f relative to base dir
      *  @param overrides local overrides or null
      */
-    public void mergeResourceToFile(int resID, String f, Properties overrides) {
-        InputStream in = null;
-        InputStream fin = null;
-
-        try {
-            in = ctx.getResources().openRawResource(resID);
-            Properties props = new OrderedProperties();
-            try {
-                fin = new FileInputStream(new File(myDir, f));
-                DataHelper.loadProps(props,  fin);
-                Util.d("Merging resource into file " + f);
-            } catch (IOException ioe) {
-                Util.d("Creating file " + f + " from resource");
-            }
-
-            // write in default settings
-            DataHelper.loadProps(props,  in);
-
-            // override with user settings
-            if (overrides != null)
-                props.putAll(overrides);
-            File path = new File(myDir, f);
-            DataHelper.storeProps(props, path);
-            Util.d("Saved " + props.size() +" properties in " + f);
-        } catch (IOException ioe) {
-        } catch (Resources.NotFoundException nfe) {
-        } finally {
-            if (in != null) try { in.close(); } catch (IOException ioe) {}
-            if (fin != null) try { fin.close(); } catch (IOException ioe) {}
-        }
+    private void mergeResourceToFile(int resID, String f, Properties overrides) {
+        Util.mergeResourceToFile(ctx, f, myDir, resID, overrides);
     }
 
     /**
