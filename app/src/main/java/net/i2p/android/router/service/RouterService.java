@@ -20,6 +20,7 @@ import java.util.Random;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.receiver.I2PReceiver;
+import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Notifications;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
@@ -115,7 +116,7 @@ public class RouterService extends Service {
                 return START_NOT_STICKY;
             }
             _receiver = new I2PReceiver(this);
-            if(Util.isConnected(this)) {
+            if(Connectivity.isConnected(this)) {
                 if(restart) {
                     _statusBar.replace(StatusBar.ICON_STARTING, "I2P is restarting");
                 } else {
@@ -149,7 +150,7 @@ public class RouterService extends Service {
             Util.d(MARKER + this + " waiter handler"
                     + " Current state is: " + _state);
             if(_state == State.WAITING) {
-                if(Util.isConnected(RouterService.this)) {
+                if(Connectivity.isConnected(RouterService.this)) {
                     synchronized(_stateLock) {
                         if(_state != State.WAITING) {
                             return;

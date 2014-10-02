@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.preference.PreferenceManager;
 
 import net.i2p.I2PAppContext;
@@ -19,8 +16,6 @@ import java.util.Map;
 import java.util.Properties;
 
 public abstract class Util {
-    private static final boolean _isEmulator = Build.MODEL.equals("sdk");
-
     public static String getOurVersion(Context ctx) {
         PackageManager pm = ctx.getPackageManager();
         String us = ctx.getPackageName();
@@ -34,20 +29,6 @@ public abstract class Util {
                 return pi.versionName;
         } catch (Exception e) {}
         return "??";
-    }
-
-    public static boolean isConnected(Context ctx) {
-        // emulator always returns null NetworkInfo
-        if (_isEmulator)
-            return true;
-        NetworkInfo current = getNetworkInfo(ctx);
-        return current != null && current.isConnected();
-    }
-
-    public static NetworkInfo getNetworkInfo(Context ctx) {
-        ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo current = cm.getActiveNetworkInfo();
-        return current;
     }
 
     private static final String ANDROID_TAG = "I2P";

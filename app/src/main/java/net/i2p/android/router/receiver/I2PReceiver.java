@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import android.os.IBinder;
 import net.i2p.android.router.service.RouterBinder;
 import net.i2p.android.router.service.RouterService;
+import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Util;
 
 public class I2PReceiver extends BroadcastReceiver {
@@ -33,7 +34,7 @@ public class I2PReceiver extends BroadcastReceiver {
         intents.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         @SuppressWarnings("LeakingThisInConstructor")
         Intent registerReceiver = context.registerReceiver(this, intents);
-        _wasConnected = Util.isConnected(context);
+        _wasConnected = Connectivity.isConnected(context);
     }
 
     public void onReceive(Context context, Intent intent) {
@@ -57,7 +58,7 @@ public class I2PReceiver extends BroadcastReceiver {
 
         if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION) ||
             action.equals(Intent.ACTION_TIME_TICK)) {
-            boolean connected = Util.isConnected(context);
+            boolean connected = Connectivity.isConnected(context);
             if (_wasConnected && !connected) {
                 // notify + 2 timer ticks
                 if (++_unconnectedCount >= 3) {

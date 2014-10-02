@@ -20,6 +20,7 @@ import java.io.OutputStream;
 import net.i2p.android.apps.EepGetFetcher;
 import net.i2p.android.router.provider.CacheProvider;
 import net.i2p.android.router.util.AppCache;
+import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.util.EepGet;
@@ -77,7 +78,7 @@ public class I2PWebViewClient extends WebViewClient {
                 return true;
             }
 
-            if (!Util.isConnected(view.getContext())) {
+            if (!Connectivity.isConnected(view.getContext())) {
                 fail(view, "No Internet connection is available");
                 return true;
             }

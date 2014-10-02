@@ -28,6 +28,7 @@ import net.i2p.android.router.service.IRouterState;
 import net.i2p.android.router.service.IRouterStateCallback;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
+import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
 import net.i2p.util.OrderedProperties;
@@ -88,7 +89,7 @@ public class MainActivity extends I2PActivityBase implements
 
     private void autoStart() {
         if (canStart()) {
-            if (Util.isConnected(this)) {
+            if (Connectivity.isConnected(this)) {
                 mAutoStartFromIntent = true;
                 onStartRouterClicked();
             } else {
@@ -284,7 +285,7 @@ public class MainActivity extends I2PActivityBase implements
     // MainFragment.RouterControlListener
 
     public boolean shouldShowOnOff() {
-        return (canStart() && Util.isConnected(this)) || canStop();
+        return (canStart() && Connectivity.isConnected(this)) || canStop();
     }
 
     public boolean shouldBeOn() {

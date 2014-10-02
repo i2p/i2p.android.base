@@ -19,6 +19,7 @@ import android.widget.ToggleButton;
 import net.i2p.android.router.dialog.FirstStartDialog;
 import net.i2p.android.router.dialog.VersionDialog;
 import net.i2p.android.router.service.State;
+import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.LongToggleButton;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
@@ -205,7 +206,7 @@ public class MainFragment extends I2PFragmentBase {
     public boolean onBackPressed() {
         RouterContext ctx = getRouterContext();
         // RouterService svc = _routerService; Which is better to use?!
-        _keep = Util.isConnected(getActivity()) && (ctx != null || _startPressed);
+        _keep = Connectivity.isConnected(getActivity()) && (ctx != null || _startPressed);
         Util.d("*********************************************************");
         Util.d("Back pressed, Keep? " + _keep);
         Util.d("*********************************************************");
@@ -264,7 +265,7 @@ public class MainFragment extends I2PFragmentBase {
         LinearLayout vStatus = (LinearLayout) getActivity().findViewById(R.id.main_status);
         TextView vStatusText = (TextView) getActivity().findViewById(R.id.main_status_text);
 
-        if(!Util.isConnected(getActivity())) {
+        if(!Connectivity.isConnected(getActivity())) {
             // Manually set state, RouterService won't be running
             updateState(State.WAITING);
             vStatusText.setText("No Internet connection is available");
