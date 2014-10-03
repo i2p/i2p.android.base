@@ -9,6 +9,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
+import android.widget.Toast;
 
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.service.StatSummarizer;
@@ -160,6 +161,8 @@ public class SettingsActivity extends PreferenceActivity {
         Properties props = lProps.get(0);
         Properties logSettings = lProps.get(1);
 
+        boolean restartRequired = Util.checkAndCorrectRouterConfig(this, props);
+
         // Apply new config if we are running.
         RouterContext rCtx = Util.getRouterContext();
         if (rCtx != null) {
@@ -177,6 +180,9 @@ public class SettingsActivity extends PreferenceActivity {
 
         // Store the settings in Android
         super.onPause();
+
+        if (restartRequired)
+            Toast.makeText(this, R.string.settings_router_restart_required, Toast.LENGTH_LONG).show();
     }
 
     private void saveLoggingChanges(I2PAppContext ctx, Properties logSettings) {

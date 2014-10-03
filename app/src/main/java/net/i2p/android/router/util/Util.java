@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import net.i2p.I2PAppContext;
 import net.i2p.data.DataHelper;
 import net.i2p.router.RouterContext;
+import net.i2p.router.transport.TransportManager;
 import net.i2p.util.OrderedProperties;
 
 import java.io.File;
@@ -177,6 +178,37 @@ public abstract class Util {
         pList.add(logSettings);
 
         return pList;
+    }
+
+    /**
+     * This function performs two tasks:
+     * <ul><li>
+     * The Properties object is modified to ensure that all options are valid
+     * for the current state of the Android device (e.g. what type of network
+     * the device is connected to).
+     * </li><li>
+     * The Properties object is checked to determine whether any options have
+     * changed that will require a router restart.
+     * </li></ul>
+     *
+     * @param props a Properties object containing the router.config
+     * @return true if the router needs to be restarted.
+     */
+    public static boolean checkAndCorrectRouterConfig(Context context, Properties props) {
+        // Disable UPnP on mobile networks, ignoring user's configuration
+        boolean upnpEnabled = Boolean.parseBoolean(props.getProperty(TransportManager.PROP_ENABLE_UPNP, Boolean.toString(true)));
+        if (Connectivity.isConnectedMobile(context)) {
+            upnpEnabled = false;
+            props.setProperty(TransportManager.PROP_ENABLE_UPNP, Boolean.toString(upnpEnabled));
+        }
+
+        // Now check if a restart is required
+        boolean restartRequired = false;
+        RouterContext rCtx = getRouterContext();
+        if (rCtx != null) {
+            restartRequired = upnpEnabled != rCtx.getBooleanPropertyDefaultTrue(TransportManager.PROP_ENABLE_UPNP);
+        }
+        return restartRequired;
     }
 
     public static String getFileDir(Context context) {

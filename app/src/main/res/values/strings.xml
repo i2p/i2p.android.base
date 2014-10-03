@@ -116,6 +116,8 @@
     <string name="settings_summ_expl_backupQuantity">%s tunnels</string>
     <string name="settings_desc_expl_backupQuantity">How many tunnel backups</string>
 
+    <string name="settings_router_restart_required">Please restart I2P to apply the changes</string>
+
     <string name="menu_about">About</string>
     <string name="about_version">Version:</string>
     <string name="about_project">Project Home:</string>
