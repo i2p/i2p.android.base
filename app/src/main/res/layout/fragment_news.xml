@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="10dp"
-    >
-<TextView
-    android:id="@+id/news_status"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/label_news_status"
-    />
-<WebView
-    android:id="@+id/news_webview"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    />
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/news_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/news_status"/>
+
+    <TextView
+        android:id="@+id/news_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+</RelativeLayout>
 

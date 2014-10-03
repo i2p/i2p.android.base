@@ -18,7 +18,6 @@
     <string name="label_info_and_pages">Information and pages</string>
     <string name="label_welcome_page">Welcome Page</string>
     <string name="label_news">News</string>
-    <string name="label_news_status">Latest I2P News</string>
     <string name="label_peers_status">Peers</string>
     <string name="label_release_notes">Release Notes</string>
     <string name="label_licenses">Licenses</string>

@@ -1,6 +1,3 @@
-<html>
-<head></head>
-<body>
 <div lang="en">
 <h3>Congratulations on getting I2P installed!</h3>
 <p>
@@ -22,5 +19,3 @@ Point your IRC client to <b>localhost:6668</b> and say hi to us on
  <a href="irc://127.0.0.1:6668/i2p-dev">#i2p-dev</a> or <a href="irc://127.0.0.1:6668/i2p">#i2p</a>.
 </p>
 </div>
-</body>
-</html>
