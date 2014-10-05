@@ -23,6 +23,10 @@
 
 # Medium-term
 
+- Network profiles
+  - User selects profile in settings
+  - Change network participation etc. based on profile
+  - Also look at connection type: Connectivity.isConnectionFast()
 - Expose log level overrides
 - Improve graphs
   - Show time on bottom axis

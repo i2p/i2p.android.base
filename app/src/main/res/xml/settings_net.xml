@@ -36,15 +36,22 @@
     <PreferenceCategory
         android:key="settings_network"
         android:title="@string/settings_label_network">
+        <!--
+        Temporarily hidden because of problems with changing defaults.
+        We don't want to cause network instability because we have thousands of
+        new unstable routers churning the network, and can't change their
+        default settings.
     <CheckBoxPreference
         android:key="router.hiddenMode"
         android:defaultValue="true"
         android:title="@string/settings_label_hiddenMode"
         android:summary="@string/settings_desc_hiddenMode"
         />
+        -->
     <!--
     router.maxParticipatingTunnels=0
     -->
+        <!--
     <com.hlidskialf.android.preference.SeekBarPreference
         android:key="router.maxParticipatingTunnels"
         android:defaultValue="20"
@@ -55,9 +62,11 @@
         android:text=" Tunnels"
         android:dependency="router.hiddenMode"
         />
+        -->
     <!--
     router.sharePercentage=10
     -->
+        <!--
     <com.hlidskialf.android.preference.SeekBarPreference
         android:key="router.sharePercentage"
         android:defaultValue="80"
@@ -69,6 +78,7 @@
         android:dependency="router.hiddenMode"
         android:shouldDisableView="true"
         />
+        -->
 
     <!--
     i2np.upnp.enable=false
