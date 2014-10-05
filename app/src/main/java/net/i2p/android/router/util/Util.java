@@ -213,9 +213,10 @@ public abstract class Util {
      */
     public static boolean checkAndCorrectRouterConfig(Context context, Properties props) {
         // Disable UPnP on mobile networks, ignoring user's configuration
-        if (Connectivity.isConnectedMobile(context)) {
-            props.setProperty(TransportManager.PROP_ENABLE_UPNP, Boolean.toString(false));
-        }
+        // TODO disabled until changes elsewhere are finished
+        //if (Connectivity.isConnectedMobile(context)) {
+        //    props.setProperty(TransportManager.PROP_ENABLE_UPNP, Boolean.toString(false));
+        //}
 
         // Now check if a restart is required
         boolean restartRequired = false;
