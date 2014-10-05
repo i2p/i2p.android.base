@@ -68,12 +68,14 @@
     <!--
     i2cp.disableInterface=true
     -->
+    <!-- Hidden because we have the client library now.
     <CheckBoxPreference
         android:key="i2cp.disableInterface"
         android:defaultValue="false"
         android:title="@string/settings_label_i2cp"
         android:summary="@string/settings_desc_i2cp"
         />
+        -->
 
     <PreferenceScreen
         android:key="settings_exploratory_pool"
