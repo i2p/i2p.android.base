@@ -496,13 +496,14 @@ public class MainFragment extends I2PFragmentBase {
             dialog.setArguments(args);
             dialog.show(getActivity().getSupportFragmentManager(), "newinstall");
         } else {
-            String currentVersion = Util.getOurVersion(getActivity());
-            if(!oldVersion.equals(currentVersion)) {
-                Bundle args = new Bundle();
-                args.putInt(VersionDialog.DIALOG_TYPE, VersionDialog.DIALOG_NEW_VERSION);
-                dialog.setArguments(args);
-                dialog.show(getActivity().getSupportFragmentManager(), "newversion");
-            }
+            // TODO Don't show dialog on new version until we have something new to tell them
+//            String currentVersion = Util.getOurVersion(getActivity());
+//            if(!oldVersion.equals(currentVersion)) {
+//                Bundle args = new Bundle();
+//                args.putInt(VersionDialog.DIALOG_TYPE, VersionDialog.DIALOG_NEW_VERSION);
+//                dialog.setArguments(args);
+//                dialog.show(getActivity().getSupportFragmentManager(), "newversion");
+//            }
         }
     }
 
