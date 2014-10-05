@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 
 import net.i2p.I2PAppContext;
 import net.i2p.data.DataHelper;
+import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.transport.TransportManager;
 import net.i2p.util.OrderedProperties;
@@ -18,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -180,6 +182,21 @@ public abstract class Util {
         return pList;
     }
 
+    // propName -> defaultValue
+    private static HashMap<String, Boolean> booleanOptionsRequiringRestart = new HashMap<String, Boolean>();
+    private static HashMap<String, String> stringOptionsRequiringRestart = new HashMap<String, String>();
+    static {
+        HashMap<String, Boolean> boolToAdd = new HashMap<String, Boolean>();
+        HashMap<String, String> strToAdd = new HashMap<String, String>();
+
+        boolToAdd.put(TransportManager.PROP_ENABLE_UPNP, true);
+        boolToAdd.put(TransportManager.PROP_ENABLE_NTCP, true);
+        boolToAdd.put(TransportManager.PROP_ENABLE_UDP, true);
+        boolToAdd.put(Router.PROP_HIDDEN, false);
+
+        booleanOptionsRequiringRestart.putAll(boolToAdd);
+        stringOptionsRequiringRestart.putAll(strToAdd);
+    }
     /**
      * This function performs two tasks:
      * <ul><li>
@@ -196,17 +213,30 @@ public abstract class Util {
      */
     public static boolean checkAndCorrectRouterConfig(Context context, Properties props) {
         // Disable UPnP on mobile networks, ignoring user's configuration
-        boolean upnpEnabled = Boolean.parseBoolean(props.getProperty(TransportManager.PROP_ENABLE_UPNP, Boolean.toString(true)));
         if (Connectivity.isConnectedMobile(context)) {
-            upnpEnabled = false;
-            props.setProperty(TransportManager.PROP_ENABLE_UPNP, Boolean.toString(upnpEnabled));
+            props.setProperty(TransportManager.PROP_ENABLE_UPNP, Boolean.toString(false));
         }
 
         // Now check if a restart is required
         boolean restartRequired = false;
         RouterContext rCtx = getRouterContext();
         if (rCtx != null) {
-            restartRequired = upnpEnabled != rCtx.getBooleanPropertyDefaultTrue(TransportManager.PROP_ENABLE_UPNP);
+            for (Map.Entry<String, Boolean> option : booleanOptionsRequiringRestart.entrySet()) {
+                String propName = option.getKey();
+                boolean defaultValue = option.getValue();
+                restartRequired |= (
+                        Boolean.parseBoolean(props.getProperty(propName, Boolean.toString(defaultValue))) !=
+                                (defaultValue ? rCtx.getBooleanPropertyDefaultTrue(propName) : rCtx.getBooleanProperty(propName))
+                );
+            }
+            if (!restartRequired) { // Cut out now if we already know the answer
+                for (Map.Entry<String, String> option : stringOptionsRequiringRestart.entrySet()) {
+                    String propName = option.getKey();
+                    String defaultValue = option.getValue();
+                    restartRequired |= props.getProperty(propName, defaultValue).equals(
+                            rCtx.getProperty(propName, defaultValue));
+                }
+            }
         }
         return restartRequired;
     }
