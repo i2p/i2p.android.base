@@ -47,9 +47,7 @@ public class SettingsActivity extends PreferenceActivity {
                 setupGraphSettings(this, getPreferenceScreen(), Util.getRouterContext());
             } else if (ACTION_PREFS_LOGGING.equals(action)) {
                 addPreferencesFromResource(R.xml.settings_logging);
-                RouterContext ctx = Util.getRouterContext();
-                if (ctx != null)
-                    setupLoggingSettings(this, getPreferenceScreen(), ctx);
+                setupLoggingSettings(this, getPreferenceScreen(), Util.getRouterContext());
             } else if (ACTION_PREFS_ADVANCED.equals(action)) {
                 addPreferencesFromResource(R.xml.settings_advanced);
             }
@@ -138,10 +136,12 @@ public class SettingsActivity extends PreferenceActivity {
                 buf.append(prefix).append('=').append(level).append('\n');
             }
             */
+            /* Don't show, there are no settings that require the router
         } else {
             PreferenceCategory noRouter = new PreferenceCategory(context);
             noRouter.setTitle(R.string.router_not_running);
             ps.addPreference(noRouter);
+            */
         }
     }
 
@@ -215,14 +215,10 @@ public class SettingsActivity extends PreferenceActivity {
                 addPreferencesFromResource(R.xml.settings_net);
             } else if ("graphs".equals(settings)) {
                 addPreferencesFromResource(R.xml.settings_graphs);
-                RouterContext ctx = Util.getRouterContext();
-                if (ctx != null)
-                    setupGraphSettings(getActivity(), getPreferenceScreen(), ctx);
+                setupGraphSettings(getActivity(), getPreferenceScreen(), Util.getRouterContext());
             } else if ("logging".equals(settings)) {
                 addPreferencesFromResource(R.xml.settings_logging);
-                RouterContext ctx = Util.getRouterContext();
-                if (ctx != null)
-                    setupLoggingSettings(getActivity(), getPreferenceScreen(), ctx);
+                setupLoggingSettings(getActivity(), getPreferenceScreen(), Util.getRouterContext());
             } else if ("advanced".equals(settings)) {
                 addPreferencesFromResource(R.xml.settings_advanced);
             }
