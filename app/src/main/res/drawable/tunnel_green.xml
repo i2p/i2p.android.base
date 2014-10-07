@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/indicator_green" />
+    <size android:height="@dimen/tunnel_indicator"
+        android:width="@dimen/tunnel_indicator" />
+</shape>

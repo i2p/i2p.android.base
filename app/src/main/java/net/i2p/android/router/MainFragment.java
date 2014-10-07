@@ -2,9 +2,11 @@ package net.i2p.android.router;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -398,24 +400,24 @@ public class MainFragment extends I2PFragmentBase {
                 String name = getName(ctx, client);
                 Hash h = client.calculateHash();
                 TableRow dest = new TableRow(getActivity());
-                //dest.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+                dest.setPadding(16, 4, 0, 4);
 
                 // Client or server
-                ImageView type = new ImageView(getActivity());
-                type.setPadding(6, 6, 6, 6);
+                TextView type = new TextView(getActivity());
+                type.setTextColor(getResources().getColor(android.R.color.primary_text_light));
+                type.setTypeface(Typeface.DEFAULT_BOLD);
+                type.setGravity(Gravity.CENTER);
                 if (ctx.clientManager().shouldPublishLeaseSet(h))
-                    type.setImageDrawable(getActivity().getResources()
-                            .getDrawable(R.drawable.server));
+                    type.setText(R.string.char_server_tunnel);
                 else
-                    type.setImageDrawable(getActivity().getResources()
-                            .getDrawable(R.drawable.client));
+                    type.setText(R.string.char_client_tunnel);
                 dest.addView(type);
 
                 // Name
                 TextView destName = new TextView(getActivity());
-                destName.setPadding(6, 0, 0, 0);
+                destName.setPadding(16, 0, 0, 0);
+                destName.setGravity(Gravity.CENTER_VERTICAL);
                 destName.setText(name);
-                //destName.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
                 dest.addView(destName);
 
                 // Status
@@ -424,14 +426,14 @@ public class MainFragment extends I2PFragmentBase {
                     long timeToExpire = ls.getEarliestLeaseDate() - ctx.clock().now();
                     if (timeToExpire < 0) {
                         // red or yellow light
-                        type.setBackgroundColor(Color.TRANSPARENT);
+                        type.setBackgroundResource(R.drawable.tunnel_yellow);
                     } else {
                         // green light
-                        type.setBackgroundColor(Color.GREEN);
+                        type.setBackgroundResource(R.drawable.tunnel_green);
                     }
                 } else {
                     // yellow light
-                    type.setBackgroundColor(Color.TRANSPARENT);
+                    type.setBackgroundResource(R.drawable.tunnel_yellow);
                 }
 
                 dests.addView(dest);
@@ -439,7 +441,7 @@ public class MainFragment extends I2PFragmentBase {
         } else {
             TableRow empty = new TableRow(getActivity());
             TextView emptyText = new TextView(getActivity());
-            emptyText.setText("No client tunnels are running yet.");
+            emptyText.setText(R.string.no_client_tunnels_running);
             empty.addView(emptyText);
             dests.addView(empty);
         }

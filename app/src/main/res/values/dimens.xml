@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="tunnel_indicator">20dp</dimen>
+
     <dimen name="step_pager_tab_width">32dp</dimen>
     <dimen name="step_pager_tab_height">3dp</dimen>
     <dimen name="step_pager_tab_spacing">4dp</dimen>
