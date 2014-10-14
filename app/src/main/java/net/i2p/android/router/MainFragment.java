@@ -18,6 +18,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import net.i2p.android.router.dialog.ConfigureBrowserDialog;
 import net.i2p.android.router.dialog.FirstStartDialog;
 import net.i2p.android.router.dialog.VersionDialog;
 import net.i2p.android.router.service.State;
@@ -47,6 +48,7 @@ public class MainFragment extends I2PFragmentBase {
     private String _savedStatus;
     private boolean _keep = true;
     private boolean _startPressed = false;
+    private static final String PREF_CONFIGURE_BROWSER = "app.dialog.configureBrowser";
     private static final String PREF_FIRST_START = "app.router.firstStart";
     private static final String PREF_SHOW_STATS = "i2pandroid.main.showStats";
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
@@ -490,23 +492,31 @@ public class MainFragment extends I2PFragmentBase {
     }
 
     private void checkDialog() {
-        VersionDialog dialog = new VersionDialog();
+        I2PActivityBase ab = (I2PActivityBase) getActivity();
+        boolean configureBrowser = ab.getPref(PREF_CONFIGURE_BROWSER, true);
+        if (configureBrowser) {
+            ConfigureBrowserDialog dialog = new ConfigureBrowserDialog();
+            dialog.show(getActivity().getSupportFragmentManager(), "configurebrowser");
+            ab.setPref(PREF_CONFIGURE_BROWSER, false);
+        }
+        /*VersionDialog dialog = new VersionDialog();
         String oldVersion = ((I2PActivityBase) getActivity()).getPref(PREF_INSTALLED_VERSION, "??");
         if(oldVersion.equals("??")) {
+            // TODO Don't show this dialog until it is reworked
             Bundle args = new Bundle();
             args.putInt(VersionDialog.DIALOG_TYPE, VersionDialog.DIALOG_NEW_INSTALL);
             dialog.setArguments(args);
             dialog.show(getActivity().getSupportFragmentManager(), "newinstall");
         } else {
             // TODO Don't show dialog on new version until we have something new to tell them
-//            String currentVersion = Util.getOurVersion(getActivity());
-//            if(!oldVersion.equals(currentVersion)) {
-//                Bundle args = new Bundle();
-//                args.putInt(VersionDialog.DIALOG_TYPE, VersionDialog.DIALOG_NEW_VERSION);
-//                dialog.setArguments(args);
-//                dialog.show(getActivity().getSupportFragmentManager(), "newversion");
-//            }
-        }
+            String currentVersion = Util.getOurVersion(getActivity());
+            if(!oldVersion.equals(currentVersion)) {
+                Bundle args = new Bundle();
+                args.putInt(VersionDialog.DIALOG_TYPE, VersionDialog.DIALOG_NEW_VERSION);
+                dialog.setArguments(args);
+                dialog.show(getActivity().getSupportFragmentManager(), "newversion");
+            }
+        }*/
     }
 
     private void checkFirstStart() {
