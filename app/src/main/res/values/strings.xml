@@ -216,4 +216,6 @@
     <string name="i2p_android_logs">I2P Android Logs</string>
     <string name="error_logs_copied_to_clipboard">Error logs copied to clipboard</string>
     <string name="logs_copied_to_clipboard">Logs copied to clipboard</string>
+
+    <string name="label_browser_configuration">Browser configuration</string>
 </resources>

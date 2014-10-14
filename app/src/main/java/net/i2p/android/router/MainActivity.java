@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import net.i2p.android.help.HelpActivity;
 import net.i2p.android.router.dialog.AboutDialog;
 import net.i2p.android.router.dialog.TextResourceDialog;
 import net.i2p.android.router.service.IRouterState;
@@ -141,12 +142,11 @@ public class MainActivity extends I2PActivityBase implements
             dialog.show(getSupportFragmentManager(), "about");
             return true;
 
-        // TODO: Unhide when Help page finished
-        //case R.id.menu_help:
-        //    Intent hi = new Intent(MainActivity.this, HelpActivity.class);
-        //    hi.putExtra(HelpActivity.REFERRER, "main");
-        //    startActivity(hi);
-        //    return true;
+        case R.id.menu_help:
+            Intent hi = new Intent(MainActivity.this, HelpActivity.class);
+            hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_MAIN);
+            startActivity(hi);
+            return true;
 
         case R.id.menu_help_release_notes:
             TextResourceDialog rDdialog = new TextResourceDialog();

@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import net.i2p.addressbook.Daemon;
-import net.i2p.android.router.HelpActivity;
+import net.i2p.android.help.HelpActivity;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.R;
 import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
@@ -180,12 +180,11 @@ public class AddressbookFragment extends ListFragment implements
             Intent si = new Intent(getActivity(), AddressbookSettingsActivity.class);
             startActivity(si);
             return true;
-        // TODO: Enable when Help page finished
-        //case R.id.action_addressbook_help:
-        //    Intent hi = new Intent(getActivity(), HelpActivity.class);
-        //    hi.putExtra(HelpActivity.REFERRER, "addressbook");
-        //    startActivity(hi);
-        //    return true;
+        case R.id.action_addressbook_help:
+            Intent hi = new Intent(getActivity(), HelpActivity.class);
+            hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_ADDRESSBOOK);
+            startActivity(hi);
+            return true;
         default:
             return super.onOptionsItemSelected(item);
         }

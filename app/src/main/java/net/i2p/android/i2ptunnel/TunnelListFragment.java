@@ -2,8 +2,8 @@ package net.i2p.android.i2ptunnel;
 
 import java.util.List;
 
+import net.i2p.android.help.HelpActivity;
 import net.i2p.android.i2ptunnel.util.TunnelConfig;
-import net.i2p.android.router.HelpActivity;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.R;
 import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
@@ -187,12 +187,11 @@ public class TunnelListFragment extends ListFragment implements
         case R.id.action_restart_all_tunnels:
             msgs = mGroup.restartAllControllers();
             break;
-        // TODO: Enable when Help page finished
-        //case R.id.action_i2ptunnel_help:
-        //    Intent hi = new Intent(getActivity(), HelpActivity.class);
-        //    hi.putExtra(HelpActivity.REFERRER, "i2ptunnel");
-        //    startActivity(hi);
-        //    return true;
+        case R.id.action_i2ptunnel_help:
+            Intent hi = new Intent(getActivity(), HelpActivity.class);
+            hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_I2PTUNNEL);
+            startActivity(hi);
+            return true;
         default:
             return super.onOptionsItemSelected(item);
         }

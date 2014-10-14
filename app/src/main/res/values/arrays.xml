@@ -37,4 +37,10 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+    <string-array name="help_categories">
+        <item>@string/app_name</item>
+        <item>@string/label_browser_configuration</item>
+        <item>@string/label_addressbook</item>
+        <item>@string/label_i2ptunnel</item>
+    </string-array>
 </resources>
