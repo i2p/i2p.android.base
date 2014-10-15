@@ -37,15 +37,15 @@ android {
 dependencies {
     compile project(':routerjars')
     compile project(':client')
-    compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.android.support:support-v4:20.0.0'
+    compile 'com.android.support:appcompat-v7:20.0.0'
     compile files('libs/androidplot-core-0.6.0.jar')
 }
 
 dependencyVerification {
     verify = [
-            'com.android.support:support-v4:3f40fa7b3a4ead01ce15dce9453b061646e7fe2e7c51cb75ca01ee1e77037f3f',
-            'com.android.support:appcompat-v7:9df7637c5219202ddbbbf0924c2d5a9e6d64379166795a89d8f75d1e3f3372df',
+            'com.android.support:support-v4:81f2b1c2c94efd5a4ec7fcd97b6cdcd00e87a933905c5c86103c7319eb024572',
+            'com.android.support:appcompat-v7:736f576ab0b68d27bdf18b1e7931566e6d8254b73965175313e87f8866b91547',
     ]
 }
 
