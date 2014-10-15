@@ -120,6 +120,9 @@ public class HelpActivity extends ActionBarActivity implements
             ScrollView scroller = new ScrollView(getActivity());
             HtmlTextView text = new HtmlTextView(getActivity());
             scroller.addView(text);
+            int padH = getResources().getDimensionPixelOffset(R.dimen.activity_horizontal_margin);
+            int padV = getResources().getDimensionPixelOffset(R.dimen.activity_vertical_margin);
+            text.setPadding(padH, padV, padH, padV);
             text.setHtmlFromRawResource(getActivity(), getArguments().getInt(ARG_HTML_FILE), true);
             return scroller;
         }
