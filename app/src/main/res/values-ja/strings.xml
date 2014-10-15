@@ -16,7 +16,6 @@
   <string name="label_info_and_pages">情報とページ</string>
   <string name="label_welcome_page">ウェルカムページ</string>
   <string name="label_news">ニュース</string>
-  <string name="label_news_status">最新の I2P のニュース</string>
   <string name="label_peers_status">ピア</string>
   <string name="label_release_notes">リリース・ノート</string>
   <string name="label_licenses">ライセンス</string>
@@ -25,6 +24,8 @@
   <string name="label_graphs">グラフ</string>
   <string name="button_router_off">長押しして I2P を起動</string>
   <string name="button_router_on">I2P を起動中 (長押しで中止)</string>
+  <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">I2P のインストールおめでとうございます！</string>
   <string name="first_start_welcome"><b>I2P へようこそ！</b> I2P が立ち上がり、ピアを見つけるまで<b>我慢してください</b>。</string>
   <string name="first_start_read">待っている間、リリースノートとウェルカムページをお読みください。</string>

@@ -16,7 +16,6 @@
   <string name="label_info_and_pages">Informasi dan halaman</string>
   <string name="label_welcome_page">Laman Sambutan</string>
   <string name="label_news">News</string>
-  <string name="label_news_status">Berita terbaru I2P</string>
   <string name="label_peers_status">Peers</string>
   <string name="label_release_notes">Catatan Rilis</string>
   <string name="label_licenses">Lisensi</string>
@@ -25,6 +24,8 @@
   <string name="label_graphs">Grafik</string>
   <string name="button_router_off">Tekan dan tahan untuk memulai I2P</string>
   <string name="button_router_on">I2P sedang berjalan (tekan dan tahan untuk menghentikan)</string>
+  <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">Selamat atas terpasangnya I2P!</string>
   <string name="first_start_welcome"><b>Selamat datang di I2P</b> Mohon <b>bersabar</b> karena I2P boot up dan menemukan peers.</string>
   <string name="first_start_read">Sementara Anda menunggu, silahkan baca catatn rilis dan laman sambutan.</string>

@@ -16,7 +16,6 @@
   <string name="label_info_and_pages">Informasjon og sider</string>
   <string name="label_welcome_page">Velkomstside</string>
   <string name="label_news">Nyheter</string>
-  <string name="label_news_status">Siste I2P-nytt</string>
   <string name="label_peers_status">Likemenn</string>
   <string name="label_release_notes">Versjonsnotater</string>
   <string name="label_licenses">Lisenser</string>
@@ -25,6 +24,8 @@
   <string name="label_graphs">Grafer</string>
   <string name="button_router_off">Hold inne kappen for å starte I2P</string>
   <string name="button_router_on">I2P kjører (hold inne knappen for å stoppe)</string>
+  <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">Til lykke med ny installasjon av I2P!</string>
   <string name="first_start_welcome"><b> Velkommen til I2P</b> Vennligst <b>ha tålmodighet</b> mens I2P starter opp og finner likemenn.</string>
   <string name="first_start_read">Mens du venter, vennligst les versjons-notatene og velkomstsiden.</string>

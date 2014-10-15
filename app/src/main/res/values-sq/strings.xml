@@ -16,7 +16,6 @@
   <string name="label_info_and_pages">Informacioni dhe faqet.</string>
   <string name="label_welcome_page">Faqja mirëseardhëse. </string>
   <string name="label_news">Lajmet. </string>
-  <string name="label_news_status">Lajmet më të fundit për I2P\'në. </string>
   <string name="label_peers_status">Të barabartit/shokët. </string>
   <string name="label_release_notes">Shënime lëshimi</string>
   <string name="label_licenses">Lisencat</string>
@@ -25,6 +24,8 @@
   <string name="label_graphs">Grafikët</string>
   <string name="button_router_off">Mbaje tastin për ta filluar I2P\'në</string>
   <string name="button_router_on">I2P është në funkcion (mbaje tastin gjatë për ta ndalur) </string>
+  <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">Urime që arritët ta instaloni I2P\'në!</string>
   <string name="first_start_welcome">&lt;b&gt;Mirë se vini në I2P!&lt;b&gt; Ju lutem &lt;b&gt;duroni&lt;b&gt; deri sa I2P të boot dhe tåe gjejë peers, </string>
   <string name="first_start_read">Deri sa jeni duke pritur, ju lutem lexoni notat që janë lëshuar dhe vizitoni faqen e mirëseardhjes. </string>

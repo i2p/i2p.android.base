@@ -16,7 +16,6 @@
   <string name="label_info_and_pages">Informácie a stránky</string>
   <string name="label_welcome_page">Uvítacia stránka</string>
   <string name="label_news">Novinky</string>
-  <string name="label_news_status">Najnovšie I2P správy</string>
   <string name="label_peers_status">Peerovia</string>
   <string name="label_release_notes">Poznámky k vydaniu</string>
   <string name="label_licenses">Licencie</string>
@@ -25,6 +24,8 @@
   <string name="label_graphs">Grafy</string>
   <string name="button_router_off">Dlhšie stlačte pre spustenie I2P</string>
   <string name="button_router_on">I2P je spustený (dlhšie stlačte pre zastavenie)</string>
+  <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">Gratulácia k nainštalovaniu I2P!</string>
   <string name="first_start_welcome"><b>Vitajte v I2P!</b> Prosím <b>majte trpezlivosť</b>, kým sa I2P nabootuje a nájde peerov.</string>
   <string name="first_start_read">Zatiaľ čo budete čakať, prosím prečítajte si poznámky k vydaniu a úvodnú stránku.</string>

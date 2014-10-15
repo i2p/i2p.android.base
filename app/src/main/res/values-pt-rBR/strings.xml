@@ -15,13 +15,14 @@
   <string name="label_info_and_pages">Informações e paginas</string>
   <string name="label_welcome_page">Página de boas-vindas</string>
   <string name="label_news">Novidades</string>
-  <string name="label_news_status">Últimas notícias sobre a I2P</string>
   <string name="label_peers_status">Nós</string>
   <string name="label_release_notes">Comunicados de lançamento</string>
   <string name="label_licenses">Licenças</string>
   <string name="label_nonanon_info">Informação não-anônima</string>
   <string name="label_browse">Navegador</string>
   <string name="label_graphs">Gráficos</string>
+  <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">Parabéns em instalar o I2P!</string>
   <string name="first_start_welcome"><b>Bem-Vindo ao I2P!</b> Por favor <b> tenha paciência </b> enquanto o I2P inicia e procura por peers.</string>
   <string name="first_start_read">Enquanto você está esperando, por favor leia as notas de lançamento e a página de boas vindas.</string>

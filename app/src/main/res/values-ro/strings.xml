@@ -16,7 +16,6 @@
   <string name="label_info_and_pages">Informații și pagini</string>
   <string name="label_welcome_page">Pagina de start</string>
   <string name="label_news">Noutăți</string>
-  <string name="label_news_status">Ultimele știri I2P</string>
   <string name="label_peers_status">Parteneri</string>
   <string name="label_release_notes">Note de publicare</string>
   <string name="label_licenses">Licențe</string>
@@ -25,6 +24,8 @@
   <string name="label_graphs">Grafice</string>
   <string name="button_router_off">Apasari lung pentru a porni I2P</string>
   <string name="button_router_on">I2P ruleaza (tineti apasat pentru a oprii)</string>
+  <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">Felicitari pentru instalarea I2P!</string>
   <string name="action_search">Cauta</string>
   <string name="action_add">Adaugă</string>

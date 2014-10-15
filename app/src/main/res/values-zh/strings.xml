@@ -16,7 +16,6 @@
   <string name="label_info_and_pages">信息及页面</string>
   <string name="label_welcome_page">欢迎页面</string>
   <string name="label_news">新闻</string>
-  <string name="label_news_status">I2P 最新消息</string>
   <string name="label_peers_status">节点</string>
   <string name="label_release_notes">版本说明</string>
   <string name="label_licenses">许可证</string>
@@ -25,6 +24,8 @@
   <string name="label_graphs">图</string>
   <string name="button_router_off">长按启动I2P</string>
   <string name="button_router_on">I2P 正在运行(长按停止)</string>
+  <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">恭喜I2P已安装</string>
   <string name="first_start_welcome"><b>欢迎来到I2P!</b> 当I2P 启动和找到同行时,请 <b>保持耐心</b>.</string>
   <string name="first_start_read">你在等候时，请阅读发布说明和欢迎页面.</string>

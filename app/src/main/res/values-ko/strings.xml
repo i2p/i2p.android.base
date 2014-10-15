@@ -16,7 +16,6 @@
   <string name="label_info_and_pages">정보와 페이지</string>
   <string name="label_welcome_page">환영 페이지</string>
   <string name="label_news">뉴스</string>
-  <string name="label_news_status">최신 I2P 뉴스</string>
   <string name="label_peers_status">피어</string>
   <string name="label_release_notes">릴리즈 노트</string>
   <string name="label_licenses">라이센스</string>
@@ -25,6 +24,8 @@
   <string name="label_graphs">그래프</string>
   <string name="button_router_off">길게 눌러 I2P 시작</string>
   <string name="button_router_on">I2P가 실행중입니다 (길게 눌러 정지)</string>
+  <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">I2P가 설치 된것을 환영합니다!</string>
   <string name="first_start_welcome"><b>I2P에 환영합니다!</b> I2P가 시작되고 피어들을 찾을때까지 <b>기다려주세요</b>.</string>
   <string name="first_start_read">기다리는 동안, 릴리즈 노트와 환영 페이지를 읽어보세요.</string>

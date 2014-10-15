@@ -16,7 +16,6 @@
   <string name="label_info_and_pages">Information et pages</string>
   <string name="label_welcome_page">Page d\'accueil</string>
   <string name="label_news">Nouvelles</string>
-  <string name="label_news_status">Dernières nouvelles de I2P</string>
   <string name="label_peers_status">Pairs</string>
   <string name="label_release_notes">Notes de version</string>
   <string name="label_licenses">Licences</string>
@@ -25,6 +24,8 @@
   <string name="label_graphs">Graphiques</string>
   <string name="button_router_off">Presser longtemps pour démarrer I2P</string>
   <string name="button_router_on">I2P est en marche (presser longtemps pour arrêter)</string>
+  <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">Félicitations pour avoir installé I2P !</string>
   <string name="first_start_welcome"><b>Bienvenue sur I2P !</b> Veuillez <b>patienter</b> pendant qu\'I2P démarre et trouve des pairs.</string>
   <string name="first_start_read">Pendant que vous patientez, vous pouvez lire les informations de mise à jour et la page d\'accueil.</string>
