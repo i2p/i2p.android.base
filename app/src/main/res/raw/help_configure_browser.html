@@ -1,0 +1,33 @@
+<html>
+<head></head>
+<body>
+<h2>Pre-configured HTTP proxy</h2>
+<p>The app starts an HTTP proxy at localhost port 4444. To use it, configure your browser's HTTP proxy setting to use localhost:4444.</p>
+<p>The HTTP proxy is tested with the "Orweb" app. It should also work with Firefox 4 Mobile and the ProxyMob Firefox plugin, if you have at least 512 MB of RAM.</p>
+
+<h2>Embedded web browser</h2>
+<p>An embedded web browser is provided for convenience that will open .i2p addresses. However, it is not recommended for general use; users should download the Orweb browser, or Firefox Mobile and the ProxyMob Firefox plugin.</p>
+<p>The browser does not use the outproxy for regular web sites. Javascript is disabled.</p>
+
+<p>The following problems with eepsites are probably not fixable except on Android 3.0 (Honeycomb - i.e. tablets) and higher due to API limitations. The workaround is to use Firefox Mobile 4 and the ProxMob plugin (see below).</p>
+<ol>
+    <li>Leaks .i2p DNS requests</li>
+    <li>Can't load cross-site images or CSS</li>
+    <li>No POSTs to forms</li>
+</ol>
+
+<p>For eepsites, there are several other things to note:</p>
+<ol>
+    <li>No way to type in addresses</li>
+    <li>Several issues with images and CSS fetches</li>
+    <li>Non-HTML links (pdf, text, images, torrent, etc.) probably don't work</li>
+    <li>Frame support is flaky</li>
+</ol>
+
+<p>For eepsites and websites, problems include:</p>
+<ol>
+    <li>No cookies</li>
+    <li>History and back issues</li>
+</ol>
+</body>
+</html>
