@@ -70,7 +70,7 @@
   <string name="settings_desc_bw_outbound">最大出站速度</string>
   <string name="settings_label_network">网络</string>
   <string name="settings_label_hiddenMode">参与</string>
-  <string name="settings_desc_hiddenMode">关闭隐藏模式</string>
+  <string name="settings_desc_hiddenMode">关闭隐身模式</string>
   <string name="settings_label_maxPartTunnels">最大参与隧道数</string>
   <string name="settings_desc_maxPartTunnels">参与贡献的最大隧道数量(默认=20)</string>
   <string name="settings_dialog_maxPartTunnels">参与的最大隧道数量</string>
