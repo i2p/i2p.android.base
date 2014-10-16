@@ -39,7 +39,7 @@ dependencies {
     compile project(':client')
     compile 'com.android.support:support-v4:20.0.0'
     compile 'com.android.support:appcompat-v7:20.0.0'
-    compile files('libs/androidplot-core-0.6.0.jar')
+    compile files('libs/androidplot-core-0.6.1.jar')
 }
 
 dependencyVerification {
