@@ -25,12 +25,16 @@
   <string name="button_router_off">Lange drücken, um I2P zu starten</string>
   <string name="button_router_on">I2P läuft (lange drücken, um zu stoppen)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">S</string>
+  <string name="no_client_tunnels_running">Keine Kliententunnel laufen noch.</string>
+  <string name="configure_browser_title">Browser konfigurieren?</string>
   <string name="first_start_title">Herzlichen Glückwunsch, du hast I2P installiert!</string>
   <string name="first_start_welcome"><b>Willkommen im I2P</b> Bitte <b>hab Geduld</b>, während I2P startet und Teilnehmer findet.</string>
   <string name="first_start_read">Während du wartest, lies bitte die Veröffentlichungshinweise und die Startseite.</string>
   <string name="first_start_faq">Sobald du Kliententunnels hast, <b>lies</b> bitte unsere FAQs:</string>
-  <string name="first_start_faq_nonanon">Oder benutze unsere nichtanonymen Links, wenn du nicht auf die Tunnel warten willst.</string>
+  <string name="first_start_faq_nonanon">Oder benutze unsere nicht-anonymen Links, wenn du nicht auf die Tunnel warten willst.</string>
   <string name="first_start_irc">Verbinde dich mit deinem IRC-Klienten zu <b>localhost:6668</b> und schau bei uns vorbei:</string>
   <string name="drawer_open">Navigation öffnen</string>
   <string name="drawer_close">Navigation schließen</string>
@@ -44,7 +48,7 @@
   <string name="action_i2ptunnel_stop">Stoppe den Tunnel</string>
   <string name="action_i2ptunnel_start_all">Alle Tunnel starten</string>
   <string name="action_i2ptunnel_stop_all">Alle Tunnel anhalten</string>
-  <string name="action_i2ptunnel_restart_all">Alle Tunnel neustarten</string>
+  <string name="action_i2ptunnel_restart_all">Alle Tunnel neu starten</string>
   <string name="action_reload">Neu laden</string>
   <string name="action_refresh">Auffrischen</string>
   <string name="hint_search_addressbook">Durchsuche das Adressbuch</string>
@@ -72,7 +76,7 @@
   <string name="settings_label_network">Netzwerk</string>
   <string name="settings_label_hiddenMode">Beteiligung</string>
   <string name="settings_desc_hiddenMode">Tarnmodus ausschalten</string>
-  <string name="settings_label_maxPartTunnels">maximale Anzahl an Tunneln</string>
+  <string name="settings_label_maxPartTunnels">Maximal beteiligte Tunnel</string>
   <string name="settings_desc_maxPartTunnels">Maximalanzahl an zu routenden Tunneln (Standard=20)</string>
   <string name="settings_dialog_maxPartTunnels">Maximalanzahl an zu routenden Tunneln</string>
   <string name="settings_label_sharePercent">Weiterleitungsanteil</string>
@@ -90,8 +94,8 @@
   <string name="settings_desc_i2cp">lausche auf Port 7654</string>
   <string name="settings_label_exploratory_pool">Satz an Erkundungstunneln</string>
   <string name="settings_desc_exploratory_pool">Tunnelparameter</string>
-  <string name="settings_label_expl_inbound">eingehende Tunnel</string>
-  <string name="settings_label_expl_outbound">ausgehende Tunnel</string>
+  <string name="settings_label_expl_inbound">Eingehende Tunnel</string>
+  <string name="settings_label_expl_outbound">Ausgehende Tunnel</string>
   <string name="settings_label_expl_length">Länge</string>
   <string name="settings_summ_expl_length">%s Sprünge</string>
   <string name="settings_desc_expl_length">Anzahl der Sprünge</string>
@@ -104,6 +108,7 @@
   <string name="settings_label_expl_backupQuantity">Anzahl der Reservetunnel</string>
   <string name="settings_summ_expl_backupQuantity">%s Tunnel</string>
   <string name="settings_desc_expl_backupQuantity">Wie viele Reservertunnel</string>
+  <string name="settings_router_restart_required">Bitte starten Sie I2P neu, um die Änderungen anzuwenden</string>
   <string name="menu_about">Über uns</string>
   <string name="about_version">Version:</string>
   <string name="about_project">Projektseite:</string>
@@ -143,8 +148,8 @@
   <string name="i2ptunnel_delete_confirm_message">Tunnel löschen?</string>
   <string name="i2ptunnel_delete_confirm_button">Tunnel löschen</string>
   <string name="i2ptunnel_wizard_k_client_server">Klient oder Server</string>
-  <string name="i2ptunnel_wizard_v_client">Klienten-Tunnel</string>
-  <string name="i2ptunnel_wizard_v_server">Server-Tunnel</string>
+  <string name="i2ptunnel_wizard_v_client">Kliententunnel</string>
+  <string name="i2ptunnel_wizard_v_server">Servertunnel</string>
   <string name="i2ptunnel_wizard_k_type">Tunneltyp</string>
   <string name="i2ptunnel_wizard_k_name">Name</string>
   <string name="i2ptunnel_wizard_k_desc">Beschreibung</string>
@@ -176,4 +181,10 @@
   <string name="i2ptunnel_view_target">Ziel:</string>
   <string name="i2ptunnel_view_access_point">Zugangspunkt:</string>
   <string name="i2ptunnel_view_autostart">Autostart</string>
+  <string name="copy_logs">Protokolle kopieren</string>
+  <string name="i2p_android_error_logs">I2P Android-Fehlerprotokolle</string>
+  <string name="i2p_android_logs">I2P Android-Protokolle</string>
+  <string name="error_logs_copied_to_clipboard">Fehlerprotokolle in die Zwischenablage kopiert</string>
+  <string name="logs_copied_to_clipboard">Protokolle in die Zwischenablage kopiert</string>
+  <string name="label_browser_configuration">Browserkonfiguration</string>
 </resources>

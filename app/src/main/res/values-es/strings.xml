@@ -25,7 +25,12 @@
   <string name="button_router_off">Mantenga pulsado para iniciar I2P</string>
   <string name="button_router_on">I2P está ejecutándose (mantenga pulsado para detenerlo)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">S</string>
+  <string name="no_client_tunnels_running">Ya no hay túneles de cliente ejecutándose.</string>
+  <string name="configure_browser_title">¿Configurar navegador?</string>
+  <string name="configure_browser_for_i2p">¿Le gustaría configurar un navegador para ver sitios I2P? (También puede hacer esto más tarde desde el menú de ayuda).</string>
   <string name="first_start_title">¡Felicidades por conseguir instalar I2P!</string>
   <string name="first_start_welcome"><b>¡Bienvenido a I2P!</b> Por favor <b>tenga paciencia</b> mientras I2P se inicia y busca pares (\'peers\').</string>
   <string name="first_start_read">Mientras esté esperando, por favor lea las notas de la versión y la página de bienvenida.</string>
@@ -104,6 +109,7 @@
   <string name="settings_label_expl_backupQuantity">Cantidad de respaldos</string>
   <string name="settings_summ_expl_backupQuantity">%s túneles</string>
   <string name="settings_desc_expl_backupQuantity">Cuantos túneles de respaldo</string>
+  <string name="settings_router_restart_required">Por favor reinicie I2P para aplicar los cambios</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_version">Versión:</string>
   <string name="about_project">Página principal del proyecto:</string>
@@ -176,4 +182,10 @@
   <string name="i2ptunnel_view_target">Objetivo:</string>
   <string name="i2ptunnel_view_access_point">Punto de acceso:</string>
   <string name="i2ptunnel_view_autostart">Auto-iniciar</string>
+  <string name="copy_logs">Copiar registros (logs)</string>
+  <string name="i2p_android_error_logs">Registros (logs) de errores de I2P Android</string>
+  <string name="i2p_android_logs">Registros (logs) de I2P Android</string>
+  <string name="error_logs_copied_to_clipboard">Los registros (logs) de errores se copiaron al portapapeles</string>
+  <string name="logs_copied_to_clipboard">Los registros (logs) se copiaron al portapapeles</string>
+  <string name="label_browser_configuration">Configuración del navegador</string>
 </resources>

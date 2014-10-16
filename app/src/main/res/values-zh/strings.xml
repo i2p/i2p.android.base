@@ -25,7 +25,12 @@
   <string name="button_router_off">长按启动I2P</string>
   <string name="button_router_on">I2P 正在运行(长按停止)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">S</string>
+  <string name="no_client_tunnels_running">还没有可信的客户端隧道正在运行。</string>
+  <string name="configure_browser_title">配置浏览器？</string>
+  <string name="configure_browser_for_i2p">您想配置一个浏览器来查看 I2P 站点吗？（您也可以以后再从帮助菜单设置这个）</string>
   <string name="first_start_title">恭喜I2P已安装</string>
   <string name="first_start_welcome"><b>欢迎来到I2P!</b> 当I2P 启动和找到同行时,请 <b>保持耐心</b>.</string>
   <string name="first_start_read">你在等候时，请阅读发布说明和欢迎页面.</string>
@@ -104,6 +109,7 @@
   <string name="settings_label_expl_backupQuantity">备用数量</string>
   <string name="settings_summ_expl_backupQuantity">%s 隧道</string>
   <string name="settings_desc_expl_backupQuantity">备用隧道数量</string>
+  <string name="settings_router_restart_required">请重新启动 I2P 以应用此更改</string>
   <string name="menu_about">关于</string>
   <string name="about_version">版本:</string>
   <string name="about_project">项目主页:</string>
@@ -176,4 +182,10 @@
   <string name="i2ptunnel_view_target">目标:</string>
   <string name="i2ptunnel_view_access_point">接入点:</string>
   <string name="i2ptunnel_view_autostart">自动启动</string>
+  <string name="copy_logs">复制日志</string>
+  <string name="i2p_android_error_logs">I2P Android 错误日志</string>
+  <string name="i2p_android_logs">I2P Android 日志</string>
+  <string name="error_logs_copied_to_clipboard">错误日志已复制到剪贴板</string>
+  <string name="logs_copied_to_clipboard">日志已复制到剪贴板</string>
+  <string name="label_browser_configuration">浏览器配置</string>
 </resources>
