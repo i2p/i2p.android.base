@@ -22,8 +22,7 @@ import net.i2p.android.router.dialog.TextResourceDialog;
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
-public class HelpActivity extends ActionBarActivity implements
-        BrowserConfigFragment.OnBrowserSelectedListener {
+public class HelpActivity extends ActionBarActivity {
     public static final String CATEGORY = "help_category";
     public static final int CAT_MAIN = 0;
     public static final int CAT_CONFIGURE_BROWSER = 1;
@@ -153,12 +152,5 @@ public class HelpActivity extends ActionBarActivity implements
         default:
             return super.onOptionsItemSelected(item);
         }
-    }
-
-    // BrowserConfigFragment.OnBrowserSelectedListener
-
-    @Override
-    public void onBrowserSelected(String browserPackage) {
-        // TODO
     }
 }
