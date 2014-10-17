@@ -35,7 +35,13 @@ public enum State implements Parcelable {
         @Override
         public State createFromParcel(final Parcel source) {
             try {
-                return State.valueOf(source.readString());
+                String stateVal = source.readString();
+                if (stateVal == null) {
+                    // Somehow we got a null from the Parcel. Fail gracefully.
+                    android.util.Log.e("I2P", "Received null from State Parcel.");
+                    return null;
+                }
+                return State.valueOf(stateVal);
             } catch (IllegalArgumentException e) {
                 // Parcel is from a newer version of State with new states.
                 return null;
