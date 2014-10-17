@@ -39,9 +39,13 @@ signing.properties
 build
 
 # I2P-specific ignores
-^res/raw/blocklist_txt
-^res/raw/certificates_zip
-^res/raw/hosts_txt
-^res/raw/license_
+^app/src/main/res/drawable/i2plogo.png
+^app/src/main/res/raw/blocklist_txt
+^app/src/main/res/raw/hosts_txt
+^app/src/main/res/raw/license_
+^app/src/main/res/raw/certificates_zip
+^app/src/main/assets/themes/console/images
+^app/src/main/assets/themes/console/light/console.css
+^app/src/main/assets/themes/console/light/images/header.png
 ^scripts/build.number
 ^scripts/version.properties
