@@ -15,7 +15,7 @@
     <application
         android:icon="@drawable/ic_launcher_itoopie"
         android:label="@string/app_name"
-        android:theme="@style/I2PAndroid">
+        android:theme="@style/Theme.I2P">
         <service
             android:name=".service.RouterService"
             android:icon="@drawable/ic_launcher_itoopie"

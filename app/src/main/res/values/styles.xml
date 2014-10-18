@@ -1,5 +1,5 @@
 <resources>
-    <style name="I2PAndroid" parent="Theme.AppCompat" />
+    <style name="Theme.I2P" parent="Theme.AppCompat" />
 
     <style name="WizardPageContainer">
         <item name="android:layout_width">match_parent</item>
