@@ -26,6 +26,9 @@
   <string name="button_router_on">I2P est en marche (presser longtemps pour arrêter)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="no_client_tunnels_running">Aucun tunnel de client n\'est encore en marche.</string>
+  <string name="configure_browser_title">Configurer le navigateur ?</string>
+  <string name="configure_browser_for_i2p">Voudriez-vous configurer un navigateur pour voir les sites d\'I2P ? (vous pouvez aussi faire cela plus tard depuis le menu d\'aide).</string>
   <string name="first_start_title">Félicitations pour avoir installé I2P !</string>
   <string name="first_start_welcome"><b>Bienvenue sur I2P !</b> Veuillez <b>patienter</b> pendant qu\'I2P démarre et trouve des pairs.</string>
   <string name="first_start_read">Pendant que vous patientez, vous pouvez lire les informations de mise à jour et la page d\'accueil.</string>
@@ -104,6 +107,7 @@
   <string name="settings_label_expl_backupQuantity">Quantité secours</string>
   <string name="settings_summ_expl_backupQuantity">%s tunnels</string>
   <string name="settings_desc_expl_backupQuantity">Combien de tunnels de secours</string>
+  <string name="settings_router_restart_required">Veuillez redémarrer I2P afin d\'appliquer les changements</string>
   <string name="menu_about">À propos</string>
   <string name="about_version">Version :</string>
   <string name="about_project">Page d\'accueil du projet :</string>
@@ -176,4 +180,10 @@
   <string name="i2ptunnel_view_target">Cible :</string>
   <string name="i2ptunnel_view_access_point">Point d\'accès :</string>
   <string name="i2ptunnel_view_autostart">Démarrage automatique</string>
+  <string name="copy_logs">Copier les historiques (logs)</string>
+  <string name="i2p_android_error_logs">Historiques des erreurs d\'I2P Android</string>
+  <string name="i2p_android_logs">Historiques d\'I2P Android</string>
+  <string name="error_logs_copied_to_clipboard">Les historiques des erreurs ont été copiés dans le presse-papier</string>
+  <string name="logs_copied_to_clipboard">Les historiques ont été copiés dans le presse-papier</string>
+  <string name="label_browser_configuration">Configuration du navigateur</string>
 </resources>

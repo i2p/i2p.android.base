@@ -25,7 +25,12 @@
   <string name="button_router_off">길게 눌러 I2P 시작</string>
   <string name="button_router_on">I2P가 실행중입니다 (길게 눌러 정지)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">클</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">서</string>
+  <string name="no_client_tunnels_running">동작중인 클라이언트 터널이 아직 없습니다.</string>
+  <string name="configure_browser_title">브라우저를 설정할까요?</string>
+  <string name="configure_browser_for_i2p">브라우저가 I2P 사이트들을 볼 수 있게 설정할까요? (추후 도움말 메뉴에서 할 수도 있습니다.)</string>
   <string name="first_start_title">I2P가 설치 된것을 환영합니다!</string>
   <string name="first_start_welcome"><b>I2P에 환영합니다!</b> I2P가 시작되고 피어들을 찾을때까지 <b>기다려주세요</b>.</string>
   <string name="first_start_read">기다리는 동안, 릴리즈 노트와 환영 페이지를 읽어보세요.</string>
@@ -104,6 +109,7 @@
   <string name="settings_label_expl_backupQuantity">백업된 수량</string>
   <string name="settings_summ_expl_backupQuantity">%s 터널들</string>
   <string name="settings_desc_expl_backupQuantity">터널 백업의 수</string>
+  <string name="settings_router_restart_required">변경사항을 적용하기 위해서 I2P를 다시 시작해주세요</string>
   <string name="menu_about">알아보기</string>
   <string name="about_version">버전:</string>
   <string name="about_project">프로젝트 홈:</string>
@@ -173,4 +179,10 @@
   <string name="i2ptunnel_view_target">목표:</string>
   <string name="i2ptunnel_view_access_point">엑세스 포인트:</string>
   <string name="i2ptunnel_view_autostart">자동 시작</string>
+  <string name="copy_logs">로그 복사</string>
+  <string name="i2p_android_error_logs">I2P 안드로이드 오류 로그</string>
+  <string name="i2p_android_logs">I2P 안드로이드 로그</string>
+  <string name="error_logs_copied_to_clipboard">클립보드에 오류 로그 복사됨</string>
+  <string name="logs_copied_to_clipboard">클립보드에 로그 복사됨</string>
+  <string name="label_browser_configuration">브라우저 설정</string>
 </resources>

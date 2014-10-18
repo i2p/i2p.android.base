@@ -30,6 +30,7 @@
   <string name="char_server_tunnel">S</string>
   <string name="no_client_tunnels_running">Keine Kliententunnel laufen noch.</string>
   <string name="configure_browser_title">Browser konfigurieren?</string>
+  <string name="configure_browser_for_i2p">Möchten Sie einen Browser zum Betrachten von I2P Seiten einrichten ? (Sie können dieses auch später noch im Hilfe Menu erledigen).</string>
   <string name="first_start_title">Herzlichen Glückwunsch, du hast I2P installiert!</string>
   <string name="first_start_welcome"><b>Willkommen im I2P</b> Bitte <b>hab Geduld</b>, während I2P startet und Teilnehmer findet.</string>
   <string name="first_start_read">Während du wartest, lies bitte die Veröffentlichungshinweise und die Startseite.</string>
