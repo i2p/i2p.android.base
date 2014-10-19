@@ -3,6 +3,6 @@
     xmlns:i2pandroid="http://schemas.android.com/apk/res-auto" >
     <item android:id="@+id/action_copy_logs"
         android:title="@string/copy_logs"
-        android:icon="@drawable/ic_content_copy"
+        android:icon="@drawable/ic_content_copy_white_24dp"
         i2pandroid:showAsAction="ifRoom" />
 </menu>

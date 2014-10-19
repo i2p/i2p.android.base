@@ -4,7 +4,7 @@
     <!-- Add, should appear as action buttons -->
     <item android:id="@+id/action_add_to_addressbook"
           android:title="@string/action_add"
-          android:icon="@drawable/ic_content_new"
+          android:icon="@drawable/ic_add_white_24dp"
           i2pandroid:showAsAction="ifRoom" />
     <!-- Settings, Help, should always be in the overflow -->
     <item android:id="@+id/action_reload_subscriptions"
