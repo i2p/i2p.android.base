@@ -119,7 +119,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         mDrawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, activityTitles));
+                R.layout.listitem_navdrawer, activityTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
