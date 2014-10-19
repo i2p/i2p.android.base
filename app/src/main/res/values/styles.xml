@@ -1,5 +1,23 @@
 <resources>
-    <style name="Theme.I2P" parent="Theme.AppCompat" />
+    <style name="Theme.I2P" parent="Theme.AppCompat">
+        <!-- Here we setting appcompat’s actionBarStyle -->
+        <!--<item name="actionBarStyle">@style/MyActionBarStyle</item>-->
+
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/primary</item>
+
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated
+         which is used to tint widgets -->
+        <item name="colorAccent">@color/accent</item>
+
+        <!-- You can also set colorControlNormal, colorControlActivated
+             colorControlHighlight & colorSwitchThumbNormal. -->
+
+        <!-- The rest of your attributes -->
+    </style>
 
     <style name="WizardPageContainer">
         <item name="android:layout_width">match_parent</item>

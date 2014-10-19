@@ -1,4 +1,8 @@
 <resources>
+    <color name="primary">#673ab7</color>
+    <color name="primary_dark">#512da8</color>
+    <color name="accent">#ff6e40</color>
+
     <color name="indicator_red">#ffff0000</color>
     <color name="indicator_yellow">#ffffff00</color>
     <color name="indicator_green">#ff00ff00</color>
