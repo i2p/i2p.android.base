@@ -4,7 +4,7 @@
   <string name="desc_i2p_logo">Логотип I2P</string>
   <string name="welcome_new_install">Добро пожаловать в I2P! Это приложение является альфа-версией и оно не обеспечивает сильной анонимности. Пожалуйста, прочтите примечания к выпуску и информацию о лицензии.</string>
   <string name="welcome_new_version">Новая версия установлена. Пожалуйста, прочтите примечания к выпуску. Версия:</string>
-  <string name="label_home">Управление и Статус</string>
+  <string name="label_home">Управление и cтатус</string>
   <string name="label_tunnels">Туннели</string>
   <string name="label_status">Статус</string>
   <string name="label_addressbook">Адресная книга</string>
@@ -25,7 +25,12 @@
   <string name="button_router_off">Долгое нажатие для запуска I2P</string>
   <string name="button_router_on">I2P работает (долгое нажатие для остановки)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">K</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">С</string>
+  <string name="no_client_tunnels_running">Ещё нет работающих клиентских туннелей.</string>
+  <string name="configure_browser_title">Настроить браузер?</string>
+  <string name="configure_browser_for_i2p">Настроить браузер для просмотра I2P сайтов? (Вы сможете сделать это позже из меню \"Справка\")</string>
   <string name="first_start_title">Поздравляем с установкой I2P!</string>
   <string name="first_start_welcome"><b>Добро пожаловать в I2P!</b> Пожалуйста, <b>дождитесь</b> пока I2P загрузится и найдет узлы.</string>
   <string name="first_start_read">Пока вы ждете, пожалуйста, прочтите информацию о релизе и страницу приветствия.</string>
@@ -104,6 +109,7 @@
   <string name="settings_label_expl_backupQuantity">Резервное количество</string>
   <string name="settings_summ_expl_backupQuantity">%s туннелей</string>
   <string name="settings_desc_expl_backupQuantity"> Сколько туннелей резервировать</string>
+  <string name="settings_router_restart_required">Пожалуйста, перезапустите I2P, чтобы изменения вступили в силу</string>
   <string name="menu_about">О приложении</string>
   <string name="about_version">Версия:</string>
   <string name="about_project">Сайт проекта:</string>
@@ -176,4 +182,10 @@
   <string name="i2ptunnel_view_target">Назначение:</string>
   <string name="i2ptunnel_view_access_point">Точка доступа:</string>
   <string name="i2ptunnel_view_autostart">Авто-запуск</string>
+  <string name="copy_logs">Копировать журналы</string>
+  <string name="i2p_android_error_logs">Журнал ошибок I2P Android</string>
+  <string name="i2p_android_logs">Журналы I2P Android</string>
+  <string name="error_logs_copied_to_clipboard">Журнал ошибок скопирован в буфер</string>
+  <string name="logs_copied_to_clipboard">Журналы скопированы в буфер</string>
+  <string name="label_browser_configuration">Настройки браузера</string>
 </resources>
