@@ -6,6 +6,7 @@
   <string name="welcome_new_version">Nova versão instalada. Por favor leia as notas de revisão. Versão:</string>
   <string name="label_home">Controle e status</string>
   <string name="label_tunnels">Tuneis</string>
+  <string name="label_status">Estado</string>
   <string name="label_addressbook">Livro de endereços</string>
   <string name="label_i2ptunnel">TunelI2P</string>
   <string name="label_i2ptunnel_client">Túneis clientes</string>
@@ -22,7 +23,12 @@
   <string name="label_browse">Navegador</string>
   <string name="label_graphs">Gráficos</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">S</string>
+  <string name="no_client_tunnels_running">Por enquanto, nenhum túnel de cliente em execução.</string>
+  <string name="configure_browser_title">Configurar o navegador?</string>
+  <string name="configure_browser_for_i2p">Gostaria de configurar um navegador para visualizar sites da I2P? (Você pode também fazer isso depois a partir do menu ajuda.)</string>
   <string name="first_start_title">Parabéns em instalar o I2P!</string>
   <string name="first_start_welcome"><b>Bem-Vindo ao I2P!</b> Por favor <b> tenha paciência </b> enquanto o I2P inicia e procura por peers.</string>
   <string name="first_start_read">Enquanto você está esperando, por favor leia as notas de lançamento e a página de boas vindas.</string>
@@ -82,11 +88,15 @@
   <string name="settings_label_expl_inbound">Túneis entrantes</string>
   <string name="settings_label_expl_outbound">Tuneis de saída</string>
   <string name="settings_label_expl_length">Comprimento</string>
+  <string name="settings_summ_expl_length">%s saltos</string>
+  <string name="settings_desc_expl_length">Quantos saltos usar</string>
+  <string name="settings_summ_expl_lengthVariance">%s</string>
   <string name="settings_label_expl_quantity">Quantidade</string>
   <string name="settings_summ_expl_quantity">%s tunéis</string>
   <string name="settings_desc_expl_quantity">Quantos túneis</string>
   <string name="settings_summ_expl_backupQuantity">%s tuneis</string>
   <string name="settings_desc_expl_backupQuantity">Quantos backups de túneis</string>
+  <string name="settings_router_restart_required">Por favor, reinicialize o software I2P para aplicar as alterações</string>
   <string name="menu_about">Sobre</string>
   <string name="about_version">Versão:</string>
   <string name="about_project">Lar do projeto:</string>
