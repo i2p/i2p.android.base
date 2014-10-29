@@ -8,7 +8,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +15,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,13 +61,16 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
 
     private static final String SHARED_PREFS = "net.i2p.android.router";
     protected static final String PREF_AUTO_START = "autoStart";
-    /** true leads to a poor install experience, very slow to paint the screen */
+    /**
+     * true leads to a poor install experience, very slow to paint the screen
+     */
     protected static final boolean DEFAULT_AUTO_START = false;
     protected static final String PREF_NAV_DRAWER_OPENED = "navDrawerOpened";
 
     /**
      * Override this in subclasses that need a ViewPager, such as a
      * category view.
+     *
      * @return whether this Activity needs a ViewPager.
      */
     protected boolean useViewPager() {
@@ -76,16 +80,18 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     /**
      * Override this in subclasses that can use two panes, such as a
      * list/detail class.
+     *
      * @return whether this Activity can use a two-pane layout.
      */
     protected boolean canUseTwoPanes() {
         return false;
     }
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         Util.d(this + " onCreate called");
         super.onCreate(savedInstanceState);
         _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
@@ -101,6 +107,10 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
             setContentView(R.layout.activity_navdrawer);
         else
             setContentView(R.layout.activity_navdrawer_onepane);
+
+        // Set the action bar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
 
         mTitle = mDrawerTitle = getTitle();
         String[] activityTitles = getResources().getStringArray(R.array.navdrawer_activity_titles);
@@ -123,12 +133,8 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        // Enable ActionBar app icon to behave as action to toggle nav drawer
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.ic_menu_white_24dp, R.string.drawer_open, R.string.drawer_close) {
+                R.string.drawer_open, R.string.drawer_close) {
             private boolean wasDragged = false;
 
             /** Called when a drawer has settled in a completely closed state. */
@@ -167,57 +173,55 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
 
     private void selectItem(int pos) {
         switch (pos) {
-        case 1:
-            Intent news = new Intent(I2PActivityBase.this, NewsActivity.class);
-            startActivity(news);
-            break;
-        case 2:
-            Intent ab = new Intent(I2PActivityBase.this, AddressbookActivity.class);
-            startActivity(ab);
-            break;
-        case 3:
-            Intent itb = new Intent(I2PActivityBase.this, TunnelListActivity.class);
-            startActivity(itb);
-            break;
-        case 4:
-            Intent log = new Intent(I2PActivityBase.this, LogActivity.class);
-            startActivity(log);
-            break;
-        case 5:
-            Intent wp = new Intent(I2PActivityBase.this, WebActivity.class);
-            wp.putExtra(WebFragment.HTML_RESOURCE_ID, R.raw.welcome_html);
-            startActivity(wp);
-            break;
-        case 6:
-            Intent active = new Intent(I2PActivityBase.this, RateGraphActivity.class);
-            startActivity(active);
-            break;
-        case 7:
-            Intent peers = new Intent(I2PActivityBase.this, PeersActivity.class);
-            startActivity(peers);
-            break;
-        case 8:
-            Intent netdb = new Intent(I2PActivityBase.this, NetDbActivity.class);
-            startActivity(netdb);
-            break;
-        default:
-            Intent main = new Intent(I2PActivityBase.this, MainActivity.class);
-            startActivity(main);
-            break;
+            case 1:
+                Intent news = new Intent(I2PActivityBase.this, NewsActivity.class);
+                startActivity(news);
+                break;
+            case 2:
+                Intent ab = new Intent(I2PActivityBase.this, AddressbookActivity.class);
+                startActivity(ab);
+                break;
+            case 3:
+                Intent itb = new Intent(I2PActivityBase.this, TunnelListActivity.class);
+                startActivity(itb);
+                break;
+            case 4:
+                Intent log = new Intent(I2PActivityBase.this, LogActivity.class);
+                startActivity(log);
+                break;
+            case 5:
+                Intent wp = new Intent(I2PActivityBase.this, WebActivity.class);
+                wp.putExtra(WebFragment.HTML_RESOURCE_ID, R.raw.welcome_html);
+                startActivity(wp);
+                break;
+            case 6:
+                Intent active = new Intent(I2PActivityBase.this, RateGraphActivity.class);
+                startActivity(active);
+                break;
+            case 7:
+                Intent peers = new Intent(I2PActivityBase.this, PeersActivity.class);
+                startActivity(peers);
+                break;
+            case 8:
+                Intent netdb = new Intent(I2PActivityBase.this, NetDbActivity.class);
+                startActivity(netdb);
+                break;
+            default:
+                Intent main = new Intent(I2PActivityBase.this, MainActivity.class);
+                startActivity(main);
+                break;
         }
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
     @Override
-    public void onRestart()
-    {
+    public void onRestart() {
         Util.d(this + " onRestart called");
         super.onRestart();
     }
 
     @Override
-    public void onStart()
-    {
+    public void onStart() {
         Util.d(this + " onStart called");
         super.onStart();
         if (_sharedPrefs.getBoolean(PREF_AUTO_START, DEFAULT_AUTO_START))
@@ -226,24 +230,32 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
             bindRouter(false);
     }
 
-    /** @param def default */
+    /**
+     * @param def default
+     */
     public boolean getPref(String pref, boolean def) {
         return _sharedPrefs.getBoolean(pref, def);
     }
 
-    /** @param def default */
+    /**
+     * @param def default
+     */
     public String getPref(String pref, String def) {
         return _sharedPrefs.getString(pref, def);
     }
 
-    /** @return success */
+    /**
+     * @return success
+     */
     public boolean setPref(String pref, boolean val) {
         SharedPreferences.Editor edit = _sharedPrefs.edit();
         edit.putBoolean(pref, val);
         return edit.commit();
     }
 
-    /** @return success */
+    /**
+     * @return success
+     */
     public boolean setPref(String pref, String val) {
         SharedPreferences.Editor edit = _sharedPrefs.edit();
         edit.putString(pref, val);
@@ -251,37 +263,32 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         Util.d(this + " onResume called");
         super.onResume();
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         Util.d(this + " onPause called");
         super.onPause();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
+    public void onSaveInstanceState(Bundle outState) {
         Util.d(this + " onSaveInstanceState called");
         super.onSaveInstanceState(outState);
     }
 
     @Override
-    public void onStop()
-    {
+    public void onStop() {
         Util.d(this + " onStop called");
         unbindRouter();
         super.onStop();
     }
 
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         Util.d(this + " onDestroy called");
         super.onDestroy();
     }
@@ -301,6 +308,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     /**
      * Override in subclass with e.g.
      * menu.findItem(R.id.action_add_to_addressbook).setVisible(!drawerOpen);
+     *
      * @param drawerOpen true if the drawer is open
      */
     protected void onDrawerChange(boolean drawerOpen) {
@@ -310,7 +318,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         // The action bar home/up action should open or close the drawer.
         // ActionBarDrawerToggle will take care of this.
-        if(mDrawerToggle.onOptionsItemSelected(item)) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
@@ -361,7 +369,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     ////// Service stuff
 
     /**
-     *  Start the service and bind to it
+     * Start the service and bind to it
      */
     protected boolean startRouter() {
         Intent intent = new Intent();
@@ -378,7 +386,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     }
 
     /**
-     *  Bind only
+     * Bind only
      */
     protected boolean bindRouter(boolean autoCreate) {
         Intent intent = new Intent(RouterBinder.class.getName());
@@ -393,7 +401,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     protected void unbindRouter() {
         Util.d(this + " unbindRouter called with _isBound:" + _isBound + " _connection:" + _connection + " _triedBind:" + _triedBind);
         if (_triedBind && _connection != null)
-                unbindService(_connection);
+            unbindService(_connection);
 
         _triedBind = false;
         _connection = null;
@@ -424,7 +432,9 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         }
     }
 
-    /** callback from ServiceConnection, override as necessary */
+    /**
+     * callback from ServiceConnection, override as necessary
+     */
     protected void onRouterBind(RouterService svc) {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.main_fragment);
         if (f instanceof I2PFragmentBase)
@@ -441,8 +451,11 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         }
     }
 
-    /** callback from ServiceConnection, override as necessary */
-    protected void onRouterUnbind() {}
+    /**
+     * callback from ServiceConnection, override as necessary
+     */
+    protected void onRouterUnbind() {
+    }
 
     // I2PFragmentBase.RouterContextProvider
 

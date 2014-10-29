@@ -1,17 +1,19 @@
 package net.i2p.android.router.log;
 
-import net.i2p.android.router.I2PActivityBase;
-import net.i2p.android.router.R;
-import net.i2p.android.router.SettingsActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
+import android.widget.Spinner;
+
+import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.router.R;
+import net.i2p.android.router.SettingsActivity;
 
 public class LogActivity extends I2PActivityBase implements
         LogFragment.OnEntrySelectedListener {
@@ -23,6 +25,9 @@ public class LogActivity extends I2PActivityBase implements
 
     private static final String SELECTED_LEVEL = "selected_level";
 
+    private String[] mLevels;
+    private Spinner mSpinner;
+
     @Override
     protected boolean canUseTwoPanes() {
         return true;
@@ -32,9 +37,10 @@ public class LogActivity extends I2PActivityBase implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set up action bar for drop-down list
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        mLevels = getResources().getStringArray(R.array.log_level_list);
+
+        mSpinner = (Spinner) findViewById(R.id.main_spinner);
+        mSpinner.setVisibility(View.VISIBLE);
 
         mDrawerToggle.setDrawerIndicatorEnabled(false);
 
@@ -46,31 +52,36 @@ public class LogActivity extends I2PActivityBase implements
             mTwoPane = true;
         }
 
-        SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.log_level_list, android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(ArrayAdapter.createFromResource(this,
+                R.array.log_level_list, android.R.layout.simple_spinner_dropdown_item));
 
-        ActionBar.OnNavigationListener mNavigationListener = new ActionBar.OnNavigationListener() {
-            String[] levels = getResources().getStringArray(R.array.log_level_list);
-            
-            public boolean onNavigationItemSelected(int position, long itemId) {
-                String level = levels[position];
-                LogFragment f = LogFragment.newInstance(level);
-                // In two-pane mode, list items should be given the
-                // 'activated' state when touched.
-                if (mTwoPane)
-                    f.setActivateOnItemClick(true);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_fragment, f, levels[position]).commit();
-                return true;
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectLevel(i);
             }
-        };
 
-        actionBar.setListNavigationCallbacks(mSpinnerAdapter, mNavigationListener);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         if (savedInstanceState != null) {
             int selected = savedInstanceState.getInt(SELECTED_LEVEL);
-            actionBar.setSelectedNavigationItem(selected);
-        }
+            mSpinner.setSelection(selected);
+        } else
+            selectLevel(0);
+    }
+
+    private void selectLevel(int i) {
+        String level = mLevels[i];
+        LogFragment f = LogFragment.newInstance(level);
+        // In two-pane mode, list items should be given the
+        // 'activated' state when touched.
+        if (mTwoPane)
+            f.setActivateOnItemClick(true);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment, f, level).commit();
     }
 
     @Override
@@ -106,8 +117,7 @@ public class LogActivity extends I2PActivityBase implements
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(SELECTED_LEVEL,
-                getSupportActionBar().getSelectedNavigationIndex());
+        outState.putInt(SELECTED_LEVEL, mSpinner.getSelectedItemPosition());
     }
 
     // LogFragment.OnEntrySelectedListener

@@ -1,15 +1,5 @@
 package net.i2p.android.router.stats;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeSet;
-
-import net.i2p.android.router.I2PActivityBase;
-import net.i2p.android.router.R;
-import net.i2p.android.router.SettingsActivity;
-import net.i2p.android.router.service.StatSummarizer;
-import net.i2p.android.router.service.SummaryListener;
-import net.i2p.stat.Rate;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -17,13 +7,28 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBar;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
+import android.widget.Spinner;
+
+import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.router.R;
+import net.i2p.android.router.SettingsActivity;
+import net.i2p.android.router.service.StatSummarizer;
+import net.i2p.android.router.service.SummaryListener;
+import net.i2p.stat.Rate;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeSet;
 
 public class RateGraphActivity extends I2PActivityBase {
     private static final String SELECTED_RATE = "selected_rate";
 
+    private String[] mRates;
+    private long[] mPeriods;
+    private Spinner mSpinner;
     private boolean mFinishOnResume;
 
     @Override
@@ -40,8 +45,8 @@ public class RateGraphActivity extends I2PActivityBase {
 
             if (ordered.size() > 0) {
                 // Extract the rates and periods
-                final String[] mRates = new String[ordered.size()];
-                final long[] mPeriods = new long[ordered.size()];
+                mRates = new String[ordered.size()];
+                mPeriods = new long[ordered.size()];
                 int i = 0;
                 for (SummaryListener listener : ordered) {
                     Rate r = listener.getRate();
@@ -50,33 +55,28 @@ public class RateGraphActivity extends I2PActivityBase {
                     i++;
                 }
 
-                // Set up action bar for drop-down list
-                ActionBar actionBar = getSupportActionBar();
-                actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+                mSpinner = (Spinner) findViewById(R.id.main_spinner);
+                mSpinner.setVisibility(View.VISIBLE);
 
-                SpinnerAdapter mSpinnerAdapter = new ArrayAdapter<String>(this,
-                        android.R.layout.simple_spinner_dropdown_item, mRates);
+                mSpinner.setAdapter(new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_dropdown_item, mRates));
 
-                ActionBar.OnNavigationListener mNavigationListener = new ActionBar.OnNavigationListener() {
-                    String[] rates = mRates;
-                    long[] periods = mPeriods;
-
-                    public boolean onNavigationItemSelected(int position, long itemId) {
-                        String rateName = rates[position];
-                        long period = periods[position];
-                        RateGraphFragment f = RateGraphFragment.newInstance(rateName, period);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.main_fragment, f, rates[position]).commit();
-                        return true;
+                mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        selectRate(i);
                     }
-                };
 
-                actionBar.setListNavigationCallbacks(mSpinnerAdapter, mNavigationListener);
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
+                });
 
                 if (savedInstanceState != null) {
                     int selected = savedInstanceState.getInt(SELECTED_RATE);
-                    actionBar.setSelectedNavigationItem(selected);
-                }
+                    mSpinner.setSelection(selected);
+                } else
+                    selectRate(0);
             } else {
                 DialogFragment df = new DialogFragment() {
                     @Override
@@ -130,6 +130,14 @@ public class RateGraphActivity extends I2PActivityBase {
         }
     }
 
+    private void selectRate(int position) {
+        String rateName = mRates[position];
+        long period = mPeriods[position];
+        RateGraphFragment f = RateGraphFragment.newInstance(rateName, period);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment, f, rateName).commit();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -142,8 +150,8 @@ public class RateGraphActivity extends I2PActivityBase {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(SELECTED_RATE,
-                getSupportActionBar().getSelectedNavigationIndex());
+        if (mSpinner != null)
+            outState.putInt(SELECTED_RATE, mSpinner.getSelectedItemPosition());
     }
 
     private static class AlphaComparator implements Comparator<SummaryListener> {

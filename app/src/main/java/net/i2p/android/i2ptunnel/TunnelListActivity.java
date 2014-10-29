@@ -1,11 +1,14 @@
 package net.i2p.android.i2ptunnel;
 
-import net.i2p.android.router.I2PActivityBase;
-import net.i2p.android.router.R;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.Tab;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.router.R;
 
 public class TunnelListActivity extends I2PActivityBase implements
         TunnelListFragment.OnTunnelSelectedListener,
@@ -16,7 +19,10 @@ public class TunnelListActivity extends I2PActivityBase implements
      */
     private boolean mTwoPane;
 
-    private static final String SELECTED_TAB = "selected_tab";
+    private static final String SELECTED_PAGE = "selected_page";
+    private static final int PAGE_CLIENT = 0;
+
+    private Spinner mSpinner;
 
     @Override
     protected boolean canUseTwoPanes() {
@@ -27,34 +33,22 @@ public class TunnelListActivity extends I2PActivityBase implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set up action bar for tabs
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        mSpinner = (Spinner) findViewById(R.id.main_spinner);
+        mSpinner.setVisibility(View.VISIBLE);
 
-        // Client tunnels tab
-        TunnelListFragment cf = new TunnelListFragment();
-        Bundle args = new Bundle();
-        args.putBoolean(TunnelListFragment.SHOW_CLIENT_TUNNELS, true);
-        cf.setArguments(args);
-        Tab tab = actionBar.newTab()
-                .setText(R.string.label_i2ptunnel_client)
-                .setTabListener(new TabListener(cf));
-        actionBar.addTab(tab);
+        mSpinner.setAdapter(ArrayAdapter.createFromResource(this,
+                R.array.i2ptunnel_pages, android.R.layout.simple_spinner_dropdown_item));
 
-        // Server tunnels tab
-        TunnelListFragment sf = new TunnelListFragment();
-        args = new Bundle();
-        args.putBoolean(TunnelListFragment.SHOW_CLIENT_TUNNELS, false);
-        sf.setArguments(args);
-        tab = actionBar.newTab()
-                .setText(R.string.label_i2ptunnel_server)
-                .setTabListener(new TabListener(sf));
-        actionBar.addTab(tab);
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectPage(i);
+            }
 
-        if (savedInstanceState != null) {
-            int selected = savedInstanceState.getInt(SELECTED_TAB);
-            actionBar.setSelectedNavigationItem(selected);
-        }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         if (findViewById(R.id.detail_fragment) != null) {
             // The detail container view will be present only in the
@@ -62,19 +56,34 @@ public class TunnelListActivity extends I2PActivityBase implements
             // res/values-sw600dp). If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
-
-            // In two-pane mode, list items should be given the
-            // 'activated' state when touched.
-            cf.setActivateOnItemClick(true);
-            sf.setActivateOnItemClick(true);
         }
+
+        if (savedInstanceState != null) {
+            int selected = savedInstanceState.getInt(SELECTED_PAGE);
+            mSpinner.setSelection(selected);
+        } else
+            selectPage(PAGE_CLIENT);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(SELECTED_TAB,
-                getSupportActionBar().getSelectedNavigationIndex());
+        outState.putInt(SELECTED_PAGE, mSpinner.getSelectedItemPosition());
+    }
+
+    private void selectPage(int page) {
+        TunnelListFragment f = new TunnelListFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(TunnelListFragment.SHOW_CLIENT_TUNNELS, page == PAGE_CLIENT);
+        f.setArguments(args);
+
+        // In two-pane mode, list items should be given the
+        // 'activated' state when touched.
+        if (mTwoPane)
+            f.setActivateOnItemClick(true);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment, f).commit();
     }
 
     // TunnelListFragment.OnTunnelSelectedListener
@@ -86,7 +95,7 @@ public class TunnelListActivity extends I2PActivityBase implements
             // fragment transaction.
             TunnelDetailFragment detailFrag = TunnelDetailFragment.newInstance(tunnelId);
             getSupportFragmentManager().beginTransaction()
-                .replace(R.id.detail_fragment, detailFrag).commit();
+                    .replace(R.id.detail_fragment, detailFrag).commit();
         } else {
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
@@ -105,11 +114,11 @@ public class TunnelListActivity extends I2PActivityBase implements
                 TunnelDetailFragment detailFrag = TunnelDetailFragment.newInstance(
                         (tunnelId > 0 ? tunnelId - 1 : 0));
                 getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.detail_fragment, detailFrag).commit();
+                        .replace(R.id.detail_fragment, detailFrag).commit();
             } else {
                 TunnelDetailFragment detailFrag = (TunnelDetailFragment) getSupportFragmentManager().findFragmentById(R.id.detail_fragment);
                 getSupportFragmentManager().beginTransaction()
-                    .remove(detailFrag).commit();
+                        .remove(detailFrag).commit();
             }
         }
     }

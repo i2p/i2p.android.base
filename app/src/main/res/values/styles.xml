@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.I2P" parent="Theme.AppCompat">
+    <style name="Theme.I2P" parent="Theme.AppCompat.NoActionBar">
         <!-- Here we setting appcompat’s actionBarStyle -->
         <!--<item name="actionBarStyle">@style/MyActionBarStyle</item>-->
 

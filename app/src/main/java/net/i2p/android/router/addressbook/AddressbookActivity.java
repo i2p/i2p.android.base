@@ -1,9 +1,5 @@
 package net.i2p.android.router.addressbook;
 
-import net.i2p.android.router.I2PActivityBase;
-import net.i2p.android.router.R;
-import net.i2p.android.router.web.WebActivity;
-import net.i2p.android.router.web.WebFragment;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
@@ -12,11 +8,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.router.R;
+import net.i2p.android.router.web.WebActivity;
+import net.i2p.android.router.web.WebFragment;
 
 public class AddressbookActivity extends I2PActivityBase
         implements AddressbookFragment.OnAddressSelectedListener,
@@ -27,7 +30,10 @@ public class AddressbookActivity extends I2PActivityBase
      */
     private boolean mTwoPane;
 
-    private static final String SELECTED_TAB = "selected_tab";
+    private static final String SELECTED_PAGE = "selected_page";
+    private static final int PAGE_ROUTER = 0;
+
+    private Spinner mSpinner;
 
     @Override
     protected boolean canUseTwoPanes() {
@@ -38,36 +44,22 @@ public class AddressbookActivity extends I2PActivityBase
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set up action bar for tabs
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        mSpinner = (Spinner) findViewById(R.id.main_spinner);
+        mSpinner.setVisibility(View.VISIBLE);
 
-        // Router book tab
-        AddressbookFragment rf = new AddressbookFragment();
-        Bundle args = new Bundle();
-        args.putString(AddressbookFragment.BOOK_NAME,
-                AddressbookFragment.ROUTER_BOOK);
-        rf.setArguments(args);
-        Tab tab = actionBar.newTab()
-                .setText("Router")
-                .setTabListener(new TabListener(rf));
-        actionBar.addTab(tab);
+        mSpinner.setAdapter(ArrayAdapter.createFromResource(this,
+                R.array.addressbook_pages, android.R.layout.simple_spinner_dropdown_item));
 
-        // Private book tab
-        AddressbookFragment pf = new AddressbookFragment();
-        args = new Bundle();
-        args.putString(AddressbookFragment.BOOK_NAME,
-                AddressbookFragment.PRIVATE_BOOK);
-        pf.setArguments(args);
-        tab = actionBar.newTab()
-                .setText("Private")
-                .setTabListener(new TabListener(pf));
-        actionBar.addTab(tab);
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectPage(i);
+            }
 
-        if (savedInstanceState != null) {
-            int selected = savedInstanceState.getInt(SELECTED_TAB);
-            actionBar.setSelectedNavigationItem(selected);
-        }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         if (findViewById(R.id.detail_fragment) != null) {
             // The detail container view will be present only in the
@@ -76,13 +68,30 @@ public class AddressbookActivity extends I2PActivityBase
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
+
+        if (savedInstanceState != null) {
+            int selected = savedInstanceState.getInt(SELECTED_PAGE);
+            mSpinner.setSelection(selected);
+        } else
+            selectPage(PAGE_ROUTER);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(SELECTED_TAB,
-                getSupportActionBar().getSelectedNavigationIndex());
+        outState.putInt(SELECTED_PAGE, mSpinner.getSelectedItemPosition());
+    }
+
+    private void selectPage(int page) {
+        AddressbookFragment f = new AddressbookFragment();
+        Bundle args = new Bundle();
+        args.putString(AddressbookFragment.BOOK_NAME,
+                page == PAGE_ROUTER ?
+                        AddressbookFragment.ROUTER_BOOK :
+                        AddressbookFragment.PRIVATE_BOOK);
+        f.setArguments(args);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment, f).commit();
     }
 
     @Override
