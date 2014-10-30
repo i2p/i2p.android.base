@@ -70,58 +70,72 @@ if (propFile.canRead()) {
     println 'local.properties not found'
 }
 
+task copyDrawableResources(type: Copy) {
+    from file(i2pbase + '/installer/resources/themes/console/images/i2plogo.png')
+    into 'src/main/res/drawable'
+}
 task certificatesZip(type: Zip) {
     archiveName = 'certificates_zip'
     from files('' + i2pbase + '/installer/resources/certificates')
 }
-task copyI2PResources(type: Copy) {
-    into 'src/main'
-    into('res/drawable') {
-        from file(i2pbase + '/installer/resources/themes/console/images/i2plogo.png')
-    }
-    into('res/raw') {
-        from(i2pbase + '/installer/resources/blocklist.txt') { rename {'blocklist_txt' } }
-        from(i2pbase + '/installer/resources/hosts.txt') { rename {'hosts_txt' } }
-        from('../LICENSE.txt') { rename {'license_app_txt' } }
-        from('../licenses/LICENSE-Apache2.0.txt') { rename {'license_apache20_txt' } }
-        from(i2pbase + '/licenses') {
-            include { elem ->
-                elem.name in [
-                        'LICENSE-ElGamalDSA.txt',
-                        'LICENSE-SHA256.txt',
-                        'LICENSE-BSD.txt',
-                        'LICENSE-SNTP.txt',
-                        'LICENSE-LGPLv2.1.txt',
-                        'LICENSE-InstallCert.txt',
-                        'LICENSE-BlockFile.txt',
-                        'LICENSE-GPLv2.txt',
-                        'LICENSE-GPLv3.txt',
-                        'LICENSE-LGPLv3.txt',
-                        'LICENSE-FatCowIcons.txt',
-                        'LICENSE-Addressbook.txt',
-                ]
-            }
-            rename { String name ->
-                String part = name.substring(8, name.lastIndexOf('.txt'))
-                String.format('license_%s_txt',
-                        part.toLowerCase(Locale.US).replace('.', '_'))
-            }
+task copyRawResources(type:Copy) {
+    from(i2pbase + '/installer/resources/blocklist.txt') { rename { 'blocklist_txt' } }
+    from(i2pbase + '/installer/resources/hosts.txt') { rename { 'hosts_txt' } }
+    from('../LICENSE.txt') { rename { 'license_app_txt' } }
+    from('../licenses/LICENSE-Apache2.0.txt') { rename { 'license_apache20_txt' } }
+    from(i2pbase + '/licenses') {
+        include { elem ->
+            elem.name in [
+                    'LICENSE-ElGamalDSA.txt',
+                    'LICENSE-SHA256.txt',
+                    'LICENSE-BSD.txt',
+                    'LICENSE-SNTP.txt',
+                    'LICENSE-LGPLv2.1.txt',
+                    'LICENSE-InstallCert.txt',
+                    'LICENSE-BlockFile.txt',
+                    'LICENSE-GPLv2.txt',
+                    'LICENSE-GPLv3.txt',
+                    'LICENSE-LGPLv3.txt',
+                    'LICENSE-FatCowIcons.txt',
+                    'LICENSE-Addressbook.txt',
+            ]
         }
-        from certificatesZip
+        rename { String name ->
+            String part = name.substring(8, name.lastIndexOf('.txt'))
+            String.format('license_%s_txt',
+                    part.toLowerCase(Locale.US).replace('.', '_'))
+        }
     }
-    // For peers WebView
-    into('assets/themes/console/images') {
-        from file(i2pbase + '/installer/resources/themes/console/images/i2plogo.png')
-        from file(i2pbase + '/installer/resources/themes/console/images/inbound.png')
-        from file(i2pbase + '/installer/resources/themes/console/images/outbound.png')
-    }
-    into ('assets/themes/console/light') {
-        from file(i2pbase + '/installer/resources/themes/console/light/console.css')
-    }
-    into('assets/themes/console/light/images') {
-        from file(i2pbase + '/installer/resources/themes/console/light/images/header.png')
-    }
+    from certificatesZip
+    into 'src/main/res/raw'
 }
+task copyI2PResources
+copyI2PResources.dependsOn copyDrawableResources
+copyI2PResources.dependsOn copyRawResources
+
+// For peers WebView
+task copyConsoleImagesAssets(type: Copy) {
+    from file(i2pbase + '/installer/resources/themes/console/images/i2plogo.png')
+    from file(i2pbase + '/installer/resources/themes/console/images/inbound.png')
+    from file(i2pbase + '/installer/resources/themes/console/images/outbound.png')
+    into 'src/main/assets/themes/console/images'
+}
+task copyConsoleLightAssets(type: Copy) {
+    from file(i2pbase + '/installer/resources/themes/console/light/console.css')
+    into 'src/main/assets/themes/console/light'
+}
+task copyConsoleLightImagesAssets(type: Copy) {
+    from file(i2pbase + '/installer/resources/themes/console/light/images/header.png')
+    into 'src/main/assets/themes/console/light/images'
+}
+task copyI2PAssets
+copyI2PAssets.dependsOn copyConsoleImagesAssets
+copyI2PAssets.dependsOn copyConsoleLightAssets
+copyI2PAssets.dependsOn copyConsoleLightImagesAssets
+
+preBuild.dependsOn copyI2PResources
+preBuild.dependsOn copyI2PAssets
+
 task cleanI2PResources(type: Delete) {
     delete file('src/main/res/drawable/i2plogo.png')
     delete fileTree('src/main/res/raw') {
@@ -130,12 +144,15 @@ task cleanI2PResources(type: Delete) {
         include 'license_*'
         include 'certificates_zip'
     }
+}
+task cleanI2PAssets(type: Delete) {
     delete fileTree('src/main/assets/themes/console/images')
     delete file('src/main/assets/themes/console/light/console.css')
     delete file('src/main/assets/themes/console/light/images/header.png')
 }
-preBuild.dependsOn copyI2PResources
+
 clean.dependsOn cleanI2PResources
+clean.dependsOn cleanI2PAssets
 
 props = new Properties()
 propFile = new File(project.rootDir, 'signing.properties')
