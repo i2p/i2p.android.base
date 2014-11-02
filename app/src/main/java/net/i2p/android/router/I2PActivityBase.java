@@ -318,8 +318,11 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         // The action bar home/up action should open or close the drawer.
         // ActionBarDrawerToggle will take care of this.
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
+        if (mDrawerToggle.onOptionsItemSelected(item))
             return true;
+        else if (item.getItemId() == android.R.id.home) {
+            // This happens when mDrawerToggle.setDrawerIndicatorEnabled(false)
+            onBackPressed();
         }
 
         // Handle action buttons and overflow
