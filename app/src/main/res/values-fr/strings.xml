@@ -25,7 +25,9 @@
   <string name="button_router_off">Presser longtemps pour démarrer I2P</string>
   <string name="button_router_on">I2P est en marche (presser longtemps pour arrêter)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">S</string>
   <string name="no_client_tunnels_running">Aucun tunnel de client n\'est encore en marche.</string>
   <string name="configure_browser_title">Configurer le navigateur ?</string>
   <string name="configure_browser_for_i2p">Voudriez-vous configurer un navigateur pour voir les sites d\'I2P ? (vous pouvez aussi faire cela plus tard depuis le menu d\'aide).</string>
