@@ -7,9 +7,10 @@
 - Java SDK (preferably Oracle/Sun or OpenJDK) 1.6.0 or higher
 - Apache Ant 1.8.0 or higher
 - I2P source
-- Android SDK (tested with Rev 22.6.4 and platform-tools version 19.1)
+- Android SDK for API 21
+- Android Build Tools 21.0.2
 - Android Support Repository
-- Gradle 1.12
+- Gradle 2.1
 
 ### Gradle
 
