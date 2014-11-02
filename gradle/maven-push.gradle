@@ -88,38 +88,42 @@ afterEvaluate { project ->
         }
     }
 
+    task installArchives(type: Upload) {
+        description "Installs the artifacts to the local Maven repository."
+        configuration = configurations['archives']
+        repositories {
+            mavenDeployer {
+                pom.groupId = GROUP
+                pom.artifactId = POM_ARTIFACT_ID
+                pom.version = VERSION_NAME
+
+                repository url: "file://${System.properties['user.home']}/.m2/repository"
+            }
+        }
+    }
+
     signing {
         required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
         sign configurations.archives
     }
 
-    android.libraryVariants.all { variant ->
-        def androidJavadocs = task("android${variant.name.capitalize()}Javadocs", type: Javadoc) {
-            source = variant.javaCompile.source
-            def androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    task androidJavadocs(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
 
-            classpath = files(variant.javaCompile.classpath.files, androidJar)
-            options {
-                links 'http://docs.oracle.com/javase/6/docs/api/'
-                linksOffline 'http://d.android.com/reference',"${android.sdkDirectory}/docs/reference"
-            }
-            exclude '**/BuildConfig.java'
-            exclude '**/R.java'
-        }
+    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }
 
-        def androidJavadocsJar = task("android${variant.name.capitalize()}JavadocsJar", type: Jar, dependsOn: androidJavadocs) {
-            classifier = 'javadoc'
-            from androidJavadocs.destinationDir
-        }
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.sourceFiles
+    }
 
-        def androidSourcesJar = task("android${variant.name.capitalize()}SourcesJar", type: Jar) {
-            classifier = 'sources'
-            from variant.javaCompile.source
-        }
-
-        artifacts {
-            archives androidSourcesJar
-            archives androidJavadocsJar
-        }
+    artifacts {
+        archives androidSourcesJar
+        archives androidJavadocsJar
     }
 }

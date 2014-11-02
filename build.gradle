@@ -8,17 +8,6 @@ buildscript {
     }
 }
 
-if (hasProperty('localFileRepoDir')) {
-    allprojects {
-        repositories {
-            flatDir {
-                name "fileRepo"
-                dirs file(localFileRepoDir)
-            }
-        }
-    }
-}
-
 allprojects {
     version = VERSION_NAME
     group = GROUP

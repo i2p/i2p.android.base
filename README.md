@@ -86,24 +86,15 @@ systemProp.socksProxyPort=9150
 
 ## Client library
 
-### "Uploading" to a local file repository (to use a local build of the library in a project)
+### "Uploading" to the local Maven repository (to use a local build of the library in a project)
 
-1. Add the following line to your `~/.gradle/gradle.properties`:
+1. `gradle :client:installArchives`
 
-    ```
-    localFileRepoDir=/path/to/local/file/repo
-    ```
-
-2. `gradle :client:uploadArchives`
-
-3. Add the resulting directory to your project as a repository. For Gradle projects, add the following above any existing repositories (so it is checked first):
+2. Add the local Maven repository to your project. For Gradle projects, add the following above any existing repositories (so it is checked first):
 
     ```
     repositories {
-        flatDir {
-            name 'fileRepo'
-            dirs file('/path/to/local/file/repo')
-        }
+        mavenLocal()
     }
     ```
 
