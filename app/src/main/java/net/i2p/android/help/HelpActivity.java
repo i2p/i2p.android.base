@@ -4,17 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ScrollView;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
+import android.widget.Spinner;
 
 import net.i2p.android.router.LicenseActivity;
 import net.i2p.android.router.R;
@@ -29,6 +29,8 @@ public class HelpActivity extends ActionBarActivity {
     public static final int CAT_ADDRESSBOOK = 2;
     public static final int CAT_I2PTUNNEL = 3;
 
+    private Spinner mSpinner;
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -40,30 +42,25 @@ public class HelpActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        // Set the action bar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
 
-        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.help_categories, android.R.layout.simple_spinner_dropdown_item);
+        mSpinner = (Spinner) findViewById(R.id.main_spinner);
 
-        ActionBar.OnNavigationListener navigationListener = new ActionBar.OnNavigationListener() {
+        mSpinner.setAdapter(ArrayAdapter.createFromResource(this,
+                R.array.help_categories, android.R.layout.simple_spinner_dropdown_item));
+
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(int i, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 showCategory(i);
-                return true;
             }
-        };
 
-        actionBar.setListNavigationCallbacks(spinnerAdapter, navigationListener);
-
-        if (savedInstanceState == null) {
-            int category = getIntent().getIntExtra(CATEGORY, CAT_MAIN);
-            // TODO remove when addressbook and I2PTunnel help added
-            if (category > CAT_CONFIGURE_BROWSER)
-                category = CAT_MAIN;
-            actionBar.setSelectedNavigationItem(category);
-            showCategory(category);
-        }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         if (findViewById(R.id.detail_fragment) != null) {
             // The detail container view will be present only in the
@@ -71,6 +68,19 @@ public class HelpActivity extends ActionBarActivity {
             // res/values-sw600dp). If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
+        }
+
+        int category;
+        if (savedInstanceState != null) {
+            int selected = savedInstanceState.getInt(CATEGORY);
+            mSpinner.setSelection(selected);
+        } else {
+            category = getIntent().getIntExtra(CATEGORY, CAT_MAIN);
+            // TODO remove when addressbook and I2PTunnel help added
+            if (category > CAT_CONFIGURE_BROWSER)
+                category = CAT_MAIN;
+            mSpinner.setSelection(category);
+            showCategory(category);
         }
     }
 
@@ -152,5 +162,11 @@ public class HelpActivity extends ActionBarActivity {
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(CATEGORY, mSpinner.getSelectedItemPosition());
     }
 }
