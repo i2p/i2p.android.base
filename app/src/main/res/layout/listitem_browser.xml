@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/listitem_height_one_line">
+
+    <ImageView
+        android:id="@+id/browser_icon"
+        android:layout_width="@dimen/listitem_picture_size"
+        android:layout_height="@dimen/listitem_picture_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/listitem_horizontal_margin"
+        android:layout_marginStart="@dimen/listitem_horizontal_margin"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/browser_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/listitem_text_left_margin"
+        android:layout_marginStart="@dimen/listitem_text_left_margin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+</RelativeLayout>

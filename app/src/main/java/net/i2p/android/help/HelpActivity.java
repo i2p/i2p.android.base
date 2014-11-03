@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import net.i2p.android.router.LicenseActivity;
 import net.i2p.android.router.R;
@@ -22,7 +23,8 @@ import net.i2p.android.router.dialog.TextResourceDialog;
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
-public class HelpActivity extends ActionBarActivity {
+public class HelpActivity extends ActionBarActivity implements
+        BrowserAdapter.OnBrowserSelectedListener {
     public static final String CATEGORY = "help_category";
     public static final int CAT_MAIN = 0;
     public static final int CAT_CONFIGURE_BROWSER = 1;
@@ -88,8 +90,7 @@ public class HelpActivity extends ActionBarActivity {
         Fragment f;
         switch (category) {
             case CAT_CONFIGURE_BROWSER:
-                //f = new BrowserConfigFragment();
-                f = HelpHtmlFragment.newInstance(R.raw.help_configure_browser);
+                f = new BrowserListFragment();
                 break;
 
             case CAT_ADDRESSBOOK:
@@ -168,5 +169,13 @@ public class HelpActivity extends ActionBarActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(CATEGORY, mSpinner.getSelectedItemPosition());
+    }
+
+    // BrowserAdapter.OnBrowserSelected
+
+    @Override
+    public void onBrowserSelected(String packageName, boolean known, boolean supported) {
+        // TODO Implement
+        Toast.makeText(this, packageName, Toast.LENGTH_SHORT).show();
     }
 }

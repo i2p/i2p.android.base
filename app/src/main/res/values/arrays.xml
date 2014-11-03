@@ -56,4 +56,11 @@
         <item>@string/label_addressbook</item>
         <item>@string/label_i2ptunnel</item>
     </string-array>
+    <string-array name="supported_browsers">
+        <item>net.i2p.android</item>
+        <item>info.guardianproject.browser</item>
+    </string-array>
+    <string-array name="unsupported_browsers">
+        <item>com.android.chrome</item>
+    </string-array>
 </resources>
