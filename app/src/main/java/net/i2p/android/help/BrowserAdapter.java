@@ -31,7 +31,7 @@ public class BrowserAdapter extends RecyclerView.Adapter<BrowserAdapter.ViewHold
     }
 
     public static interface OnBrowserSelectedListener {
-        public void onBrowserSelected(String packageName, boolean known, boolean supported);
+        public void onBrowserSelected(Browser browser);
     }
 
     public BrowserAdapter(Context ctx, OnBrowserSelectedListener listener) {
@@ -55,8 +55,7 @@ public class BrowserAdapter extends RecyclerView.Adapter<BrowserAdapter.ViewHold
                                                         int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.listitem_browser, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -76,7 +75,7 @@ public class BrowserAdapter extends RecyclerView.Adapter<BrowserAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onBrowserSelected(browser.packageName, browser.isKnown, browser.isSupported);
+                mListener.onBrowserSelected(browser);
             }
         });
     }

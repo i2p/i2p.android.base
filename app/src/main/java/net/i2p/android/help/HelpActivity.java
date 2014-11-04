@@ -15,13 +15,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import net.i2p.android.router.LicenseActivity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.dialog.TextResourceDialog;
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
+
+import java.lang.reflect.Field;
 
 public class HelpActivity extends ActionBarActivity implements
         BrowserAdapter.OnBrowserSelectedListener {
@@ -147,21 +148,21 @@ public class HelpActivity extends ActionBarActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.menu_help_licenses:
-            Intent lic = new Intent(HelpActivity.this, LicenseActivity.class);
-            startActivity(lic);
-            return true;
-        case R.id.menu_help_release_notes:
-            TextResourceDialog dialog = new TextResourceDialog();
-            Bundle args = new Bundle();
-            args.putString(TextResourceDialog.TEXT_DIALOG_TITLE,
-                    getResources().getString(R.string.label_release_notes));
-            args.putInt(TextResourceDialog.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-            dialog.setArguments(args);
-            dialog.show(getSupportFragmentManager(), "release_notes");
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+            case R.id.menu_help_licenses:
+                Intent lic = new Intent(HelpActivity.this, LicenseActivity.class);
+                startActivity(lic);
+                return true;
+            case R.id.menu_help_release_notes:
+                TextResourceDialog dialog = new TextResourceDialog();
+                Bundle args = new Bundle();
+                args.putString(TextResourceDialog.TEXT_DIALOG_TITLE,
+                        getResources().getString(R.string.label_release_notes));
+                args.putInt(TextResourceDialog.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
+                dialog.setArguments(args);
+                dialog.show(getSupportFragmentManager(), "release_notes");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -174,8 +175,38 @@ public class HelpActivity extends ActionBarActivity implements
     // BrowserAdapter.OnBrowserSelected
 
     @Override
-    public void onBrowserSelected(String packageName, boolean known, boolean supported) {
-        // TODO Implement
-        Toast.makeText(this, packageName, Toast.LENGTH_SHORT).show();
+    public void onBrowserSelected(Browser browser) {
+        int file;
+        if (browser.isKnown) {
+            if (browser.isSupported) {
+                // Check for embedded browser
+                if (browser.packageName.startsWith("net.i2p.android"))
+                    file = R.raw.help_embedded_browser;
+                else {
+                    // Load the configuration guide for this browser
+                    try {
+                        String name = "help_" + browser.packageName.replace('.', '_');
+                        Class res = R.raw.class;
+                        Field field = res.getField(name);
+                        file = field.getInt(null);
+                    } catch (Exception e) {
+                        file = R.raw.help_unknown_browser;
+                    }
+                }
+            } else
+                file = R.raw.help_unsupported_browser;
+        } else
+            file = R.raw.help_unknown_browser;
+        HelpHtmlFragment configFrag = HelpHtmlFragment.newInstance(file);
+        if (mTwoPane) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.detail_fragment, configFrag)
+                    .commit();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_fragment, configFrag)
+                    .addToBackStack("config" + browser.packageName)
+                    .commit();
+        }
     }
 }
