@@ -63,10 +63,10 @@
         <item>Orweb</item>
     </string-array>
     <string-array name="supported_browsers">
-        <item>info.guardianproject.orfox</item>
+        <item>org.mozilla.firefox</item>
     </string-array>
     <string-array name="supported_browser_labels">
-        <item>Orfox</item>
+        <item>Firefox</item>
     </string-array>
     <string-array name="unsupported_browsers">
         <item>com.android.chrome</item>
