@@ -10,7 +10,6 @@
     <zzz> spewing UPnP out into cell networks is a waste of time at best and a security risk at worst, but you really want it for wifi
 - Display release notes directly on new router version
 - Fill out help pages
-  - Proper browser configuration page
 - Rewrite release notes to be release-specific
 - Fix release notes UI, either make back button use clear or add buttons
 - NetDB tablet view fixes
