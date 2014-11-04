@@ -110,8 +110,11 @@ public class HelpActivity extends ActionBarActivity implements
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_fragment, f);
-        if (mTwoPane)
-            ft.remove(getSupportFragmentManager().findFragmentById(R.id.detail_fragment));
+        if (mTwoPane) {
+            Fragment df = getSupportFragmentManager().findFragmentById(R.id.detail_fragment);
+            if (df != null)
+                ft.remove(df);
+        }
         ft.commit();
     }
 
