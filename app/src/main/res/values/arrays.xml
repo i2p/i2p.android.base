@@ -56,11 +56,24 @@
         <item>@string/label_addressbook</item>
         <item>@string/label_i2ptunnel</item>
     </string-array>
-    <string-array name="supported_browsers">
-        <item>net.i2p.android</item>
+    <string-array name="recommended_browsers">
         <item>info.guardianproject.browser</item>
+    </string-array>
+    <string-array name="recommended_browser_labels">
+        <item>Orweb</item>
+    </string-array>
+    <string-array name="supported_browsers">
+        <item>info.guardianproject.orfox</item>
+    </string-array>
+    <string-array name="supported_browser_labels">
+        <item>Orfox</item>
     </string-array>
     <string-array name="unsupported_browsers">
         <item>com.android.chrome</item>
+        <item>com.android.browser</item>
+        <item>com.sec.android.app.sbrowser</item>
+        <item>acr.browser.lightning</item>
+        <item>mobi.mgeek.TunnyBrowser</item>
+        <item>com.lastpass.lpandroid</item>
     </string-array>
 </resources>

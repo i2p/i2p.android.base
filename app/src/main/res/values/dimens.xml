@@ -11,6 +11,7 @@
     <dimen name="listitem_horizontal_margin">16dp</dimen>
     <dimen name="listitem_picture_size">40dp</dimen>
     <dimen name="listitem_text_left_margin">72dp</dimen>
+    <dimen name="listitem_icon_left_margin">8dp</dimen>
 
     <dimen name="tunnel_indicator">20dp</dimen>
 

@@ -22,7 +22,9 @@ import net.i2p.android.router.util.BetterAsyncTaskLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BrowserListFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<List<Browser>> {
@@ -76,34 +78,67 @@ public class BrowserListFragment extends Fragment implements
     }
 
     public static class BrowserLoader extends BetterAsyncTaskLoader<List<Browser>> {
+        private List<String> recommended;
+        private List<String> recommendedLabels;
         private List<String> supported;
+        private List<String> supportedLabels;
         private List<String> unsupported;
 
         public BrowserLoader(Context context) {
             super(context);
+            recommended = Arrays.asList(
+                    getContext().getResources().getStringArray(R.array.recommended_browsers));
+            recommendedLabels = Arrays.asList(
+                    getContext().getResources().getStringArray(R.array.recommended_browser_labels));
             supported = Arrays.asList(
-                    context.getResources().getStringArray(R.array.supported_browsers));
+                    getContext().getResources().getStringArray(R.array.supported_browsers));
+            supportedLabels = Arrays.asList(
+                    getContext().getResources().getStringArray(R.array.supported_browser_labels));
             unsupported = Arrays.asList(
                     context.getResources().getStringArray(R.array.unsupported_browsers));
         }
 
         @Override
         public List<Browser> loadInBackground() {
+            List<Browser> browsers = new ArrayList<Browser>();
+            Map<String, String> recommendedMap = new HashMap<String, String>();
+            for (int i = 0; i < recommended.size(); i++) {
+                recommendedMap.put(recommended.get(i), recommendedLabels.get(i));
+            }
+            Map<String, String> supportedMap = new HashMap<String, String>();
+            for (int i = 0; i < supported.size(); i++) {
+                supportedMap.put(supported.get(i), supportedLabels.get(i));
+            }
+
+            // Find all installed browsers that listen for ".i2p"
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("http://stats.i2p"));
 
             final PackageManager pm = getContext().getPackageManager();
             List<ResolveInfo> installedBrowsers = pm.queryIntentActivities(intent, 0);
 
-            List<Browser> browsers = new ArrayList<Browser>();
             for (ResolveInfo browser : installedBrowsers) {
-                if (supported.contains(browser.activityInfo.packageName))
-                    browsers.add(new Browser(pm, browser, true));
-                else if (unsupported.contains(browser.activityInfo.packageName))
-                    browsers.add(new Browser(pm, browser, false));
+                if (recommended.contains(browser.activityInfo.packageName)) {
+                    browsers.add(new Browser(pm, browser, true, true));
+                    recommendedMap.remove(browser.activityInfo.packageName);
+                } else if (supported.contains(browser.activityInfo.packageName) ||
+                        browser.activityInfo.packageName.startsWith("net.i2p.android")) {
+                    browsers.add(new Browser(pm, browser, true, false));
+                    supportedMap.remove(browser.activityInfo.packageName);
+                } else if (unsupported.contains(browser.activityInfo.packageName))
+                    browsers.add(new Browser(pm, browser, false, false));
                 else
                     browsers.add(new Browser(pm, browser));
             }
+
+            // Now add the remaining recommended and supported browsers
+            for (Map.Entry<String, String> browser : recommendedMap.entrySet()) {
+                browsers.add(new Browser(browser.getKey(), browser.getValue(), null, false, true, true, true));
+            }
+            for (Map.Entry<String, String> browser : supportedMap.entrySet()) {
+                browsers.add(new Browser(browser.getKey(), browser.getValue(), null, false, true, true, false));
+            }
+
             Collections.sort(browsers);
             return browsers;
         }

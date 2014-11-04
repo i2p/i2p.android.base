@@ -1,8 +1,12 @@
 package net.i2p.android.help;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +27,13 @@ public class BrowserAdapter extends RecyclerView.Adapter<BrowserAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView mIcon;
         public TextView mLabel;
+        public ImageView mStatus;
+
         public ViewHolder(View v) {
             super(v);
             mIcon = (ImageView) v.findViewById(R.id.browser_icon);
             mLabel = (TextView) v.findViewById(R.id.browser_label);
+            mStatus = (ImageView) v.findViewById(R.id.browser_status_icon);
         }
     }
 
@@ -64,12 +71,41 @@ public class BrowserAdapter extends RecyclerView.Adapter<BrowserAdapter.ViewHold
         final Browser browser = mBrowsers[position];
         holder.mIcon.setImageDrawable(browser.icon);
         holder.mLabel.setText(browser.label);
-        if (browser.isKnown && !browser.isSupported) {
-            ColorMatrix matrix = new ColorMatrix();
-            matrix.setSaturation(0);
-            ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-            holder.mIcon.setColorFilter(filter);
-            holder.mLabel.setTextColor(mCtx.getResources().getColor(R.color.primary_text_disabled_material_dark));
+
+        if (browser.isKnown) {
+            if (browser.isSupported) {
+                if (browser.isInstalled)
+                    holder.mStatus.setImageDrawable(
+                            mCtx.getResources().getDrawable(R.drawable.ic_stars_white_24dp));
+                else {
+                    holder.mStatus.setImageDrawable(
+                            mCtx.getResources().getDrawable(R.drawable.ic_shop_white_24dp));
+                    holder.mStatus.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String uriMarket = "market://search?q=pname:" + browser.packageName;
+                            Uri uri = Uri.parse(uriMarket);
+                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            mCtx.startActivity(intent);
+                        }
+                    });
+                }
+                if (browser.isRecommended) {
+                    PorterDuffColorFilter filter = new PorterDuffColorFilter(
+                            mCtx.getResources().getColor(R.color.accent),
+                            PorterDuff.Mode.SRC_IN);
+                    holder.mStatus.setColorFilter(filter);
+                }
+                holder.mStatus.setVisibility(View.VISIBLE);
+            } else {
+                // Make the icon gray-scale to show it is unsupported
+                ColorMatrix matrix = new ColorMatrix();
+                matrix.setSaturation(0);
+                ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+                holder.mIcon.setColorFilter(filter);
+                holder.mLabel.setTextColor(
+                        mCtx.getResources().getColor(R.color.primary_text_disabled_material_dark));
+            }
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

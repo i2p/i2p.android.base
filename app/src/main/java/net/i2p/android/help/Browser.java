@@ -11,6 +11,7 @@ public class Browser implements Comparable<Browser> {
     public final boolean isInstalled;
     public final boolean isKnown;
     public final boolean isSupported;
+    public final boolean isRecommended;
 
     /**
      * A browser that we don't know about.
@@ -23,7 +24,7 @@ public class Browser implements Comparable<Browser> {
                 browser.activityInfo.packageName,
                 browser.loadLabel(pm),
                 browser.loadIcon(pm),
-                true, false, false
+                true, false, false, false
         );
     }
 
@@ -34,22 +35,23 @@ public class Browser implements Comparable<Browser> {
      * @param browser   the browser
      * @param supported can this browser be used with I2P?
      */
-    public Browser(PackageManager pm, ResolveInfo browser, boolean supported) {
+    public Browser(PackageManager pm, ResolveInfo browser, boolean supported, boolean recommended) {
         this(
                 browser.activityInfo.packageName,
                 browser.loadLabel(pm),
                 browser.loadIcon(pm),
-                true, true, supported
+                true, true, supported, recommended
         );
     }
 
-    public Browser(String pn, CharSequence l, Drawable ic, boolean i, boolean k, boolean s) {
+    public Browser(String pn, CharSequence l, Drawable ic, boolean i, boolean k, boolean s, boolean r) {
         packageName = pn;
         label = l;
         icon = ic;
         isInstalled = i;
         isKnown = k;
         isSupported = s;
+        isRecommended = r;
     }
 
     @Override
@@ -68,7 +70,9 @@ public class Browser implements Comparable<Browser> {
 
     private static int getOrder(Browser browser) {
         if (browser.isKnown) {
-            if (browser.isSupported)
+            if (browser.isRecommended)
+                return 0;
+            else if (browser.isSupported)
                 return 1;
             else
                 return 3;
