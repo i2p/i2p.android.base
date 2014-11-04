@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.BetterAsyncTaskLoader;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -133,14 +135,29 @@ public class BrowserListFragment extends Fragment implements
 
             // Now add the remaining recommended and supported browsers
             for (Map.Entry<String, String> browser : recommendedMap.entrySet()) {
-                browsers.add(new Browser(browser.getKey(), browser.getValue(), null, false, true, true, true));
+                browsers.add(new Browser(browser.getKey(), browser.getValue(),
+                        getDrawableForPackage(browser.getKey()),
+                        false, true, true, true));
             }
             for (Map.Entry<String, String> browser : supportedMap.entrySet()) {
-                browsers.add(new Browser(browser.getKey(), browser.getValue(), null, false, true, true, false));
+                browsers.add(new Browser(browser.getKey(), browser.getValue(),
+                        getDrawableForPackage(browser.getKey()),
+                        false, true, true, false));
             }
 
             Collections.sort(browsers);
             return browsers;
+        }
+        private Drawable getDrawableForPackage(String packageName) {
+            try {
+                String name = "icon_" + packageName.replace('.', '_');
+                Class res = R.drawable.class;
+                Field field = res.getField(name);
+                int drawable = field.getInt(null);
+                return getContext().getResources().getDrawable(drawable);
+            } catch (Exception e) {
+                return null;
+            }
         }
 
         @Override
