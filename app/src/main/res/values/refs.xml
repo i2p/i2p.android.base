@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="activity_navdrawer" type="layout">@layout/activity_navdrawer_onepane</item>
+    <item name="activity_help" type="layout">@layout/activity_help_onepane</item>
 </resources>
