@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -73,31 +71,24 @@ public class BrowserAdapter extends RecyclerView.Adapter<BrowserAdapter.ViewHold
         holder.mLabel.setText(browser.label);
 
         if (browser.isKnown) {
-            if (browser.isSupported) {
-                if (browser.isInstalled)
-                    holder.mStatus.setImageDrawable(
-                            mCtx.getResources().getDrawable(R.drawable.ic_stars_white_24dp));
-                else {
-                    holder.mStatus.setImageDrawable(
-                            mCtx.getResources().getDrawable(R.drawable.ic_shop_white_24dp));
-                    holder.mStatus.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            String uriMarket = "market://search?q=pname:" + browser.packageName;
-                            Uri uri = Uri.parse(uriMarket);
-                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                            mCtx.startActivity(intent);
-                        }
-                    });
-                }
-                if (browser.isRecommended) {
-                    PorterDuffColorFilter filter = new PorterDuffColorFilter(
-                            mCtx.getResources().getColor(R.color.accent),
-                            PorterDuff.Mode.SRC_IN);
-                    holder.mStatus.setColorFilter(filter);
-                }
+            if (browser.isRecommended && browser.isInstalled) {
+                holder.mStatus.setImageDrawable(
+                        mCtx.getResources().getDrawable(R.drawable.ic_stars_white_24dp));
                 holder.mStatus.setVisibility(View.VISIBLE);
-            } else {
+            } else if (browser.isSupported && !browser.isInstalled) {
+                holder.mStatus.setImageDrawable(
+                        mCtx.getResources().getDrawable(R.drawable.ic_shop_white_24dp));
+                holder.mStatus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String uriMarket = "market://search?q=pname:" + browser.packageName;
+                        Uri uri = Uri.parse(uriMarket);
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        mCtx.startActivity(intent);
+                    }
+                });
+                holder.mStatus.setVisibility(View.VISIBLE);
+            } else if (!browser.isSupported) {
                 // Make the icon gray-scale to show it is unsupported
                 ColorMatrix matrix = new ColorMatrix();
                 matrix.setSaturation(0);
