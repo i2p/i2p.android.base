@@ -1,6 +1,6 @@
 # Fixes
 
-- Better addressbook column widths
+- Better twopane column widths
     <zzz> on the i2ptunnel and addressbook pages on the tablet, the columns are too skinny, they aren't as wide as the tab
     <zzz> only a few addressbook entries wrap but on i2ptunnel everything is wrapped and most of the screen is empty
 

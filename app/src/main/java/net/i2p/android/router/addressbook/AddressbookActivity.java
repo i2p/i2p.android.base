@@ -37,7 +37,7 @@ public class AddressbookActivity extends I2PActivityBase
 
     @Override
     protected boolean canUseTwoPanes() {
-        return true;
+        return false;
     }
 
     @Override
