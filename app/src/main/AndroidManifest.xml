@@ -60,6 +60,14 @@
                 android:value="net.i2p.android.router.MainActivity" />
         </activity>
         <activity
+            android:name="net.i2p.android.help.BrowserConfigActivity"
+            android:label="Browser Configuration"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.router.MainActivity" />
+        </activity>
+        <activity
             android:name=".LicenseActivity"
             android:label="I2P License Information"
             android:parentActivityName="net.i2p.android.help.HelpActivity">

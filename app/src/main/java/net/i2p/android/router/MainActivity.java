@@ -144,7 +144,6 @@ public class MainActivity extends I2PActivityBase implements
 
         case R.id.menu_help:
             Intent hi = new Intent(MainActivity.this, HelpActivity.class);
-            hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_MAIN);
             startActivity(hi);
             return true;
 
