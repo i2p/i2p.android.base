@@ -24,6 +24,7 @@ public class HelpActivity extends ActionBarActivity implements
      * device.
      */
     private boolean mTwoPane;
+    private boolean mDetailShowing;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,9 @@ public class HelpActivity extends ActionBarActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             case R.id.menu_help_licenses:
                 Intent lic = new Intent(HelpActivity.this, LicenseActivity.class);
                 startActivity(lic);
@@ -78,6 +82,15 @@ public class HelpActivity extends ActionBarActivity implements
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDetailShowing) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            mDetailShowing = false;
+        }
+        super.onBackPressed();
     }
 
     // HelpListFragment.OnEntrySelectedListener
@@ -114,8 +127,10 @@ public class HelpActivity extends ActionBarActivity implements
         } else {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_fragment, f)
-                    .addToBackStack("help"+category)
+                    .addToBackStack("help" + category)
                     .commit();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            mDetailShowing = true;
         }
     }
 }
