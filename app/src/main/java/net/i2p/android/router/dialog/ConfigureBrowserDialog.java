@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import net.i2p.android.help.BrowserConfigActivity;
 import net.i2p.android.help.HelpActivity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.I2Patterns;
@@ -26,8 +27,7 @@ public class ConfigureBrowserDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        Intent hi = new Intent(getActivity(), HelpActivity.class);
-                        hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_CONFIGURE_BROWSER);
+                        Intent hi = new Intent(getActivity(), BrowserConfigActivity.class);
                         startActivity(hi);
                     }
                 })
