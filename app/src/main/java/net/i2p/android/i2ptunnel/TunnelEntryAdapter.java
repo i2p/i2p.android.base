@@ -33,20 +33,18 @@ public class TunnelEntryAdapter extends ArrayAdapter<TunnelEntry> {
         View v = mInflater.inflate(R.layout.listitem_i2ptunnel, parent, false);
         TunnelEntry tunnel = getItem(position);
 
+        ImageView status = (ImageView) v.findViewById(R.id.tunnel_status);
+        status.setImageDrawable(tunnel.getStatusIcon());
+        status.setBackground(tunnel.getStatusBackground());
+
         TextView name = (TextView) v.findViewById(R.id.tunnel_name);
         name.setText(tunnel.getName());
 
-        TextView type = (TextView) v.findViewById(R.id.tunnel_type);
-        type.setText(tunnel.getType());
+        TextView type = (TextView) v.findViewById(R.id.tunnel_description);
+        type.setText(tunnel.getDescription());
 
         TextView ifacePort = (TextView) v.findViewById(R.id.tunnel_interface_port);
         ifacePort.setText(tunnel.getIfacePort());
-
-        TextView details = (TextView) v.findViewById(R.id.tunnel_details);
-        details.setText(tunnel.getDetails());
-
-        ImageView status = (ImageView) v.findViewById(R.id.tunnel_status);
-        status.setImageDrawable(tunnel.getStatusIcon());
 
         return v;
     }

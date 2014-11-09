@@ -1,49 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:padding="5dp" >
+    android:layout_height="@dimen/listitem_height_two_lines"
+    android:paddingEnd="@dimen/listitem_horizontal_margin"
+    android:paddingRight="@dimen/listitem_horizontal_margin">
+
+    <!-- Tunnel status -->
+    <ImageView
+        android:id="@+id/tunnel_status"
+        android:layout_width="@dimen/listitem_icon_size"
+        android:layout_height="@dimen/listitem_icon_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/listitem_horizontal_margin"
+        android:layout_marginStart="@dimen/listitem_horizontal_margin"
+        android:contentDescription="Status" />
 
     <!-- The name of the tunnel -->
-    <TextView android:id="@+id/tunnel_name"
+    <TextView
+        android:id="@+id/tunnel_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:textSize="16sp"
         android:layout_alignParentLeft="true"
-        android:layout_marginRight="5dp"
-        android:text="Tunnel name" />
-
-    <!-- The type of tunnel -->
-    <TextView android:id="@+id/tunnel_type"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tunnel_name"
-        android:text="Tunnel type" />
-
-    <!-- Additional tunnel details -->
-    <TextView android:id="@+id/tunnel_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tunnel_type"
-        android:text="Tunnel details" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/listitem_text_left_margin"
+        android:layout_marginStart="@dimen/listitem_text_left_margin"
+        android:layout_marginTop="@dimen/listitem_text_top_margin_two_lines"
+        android:text="Tunnel name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Primary" />
 
     <!-- Interface:port the tunnel listens on or points to -->
-    <TextView android:id="@+id/tunnel_interface_port"
+    <TextView
+        android:id="@+id/tunnel_interface_port"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tunnel_name"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/tunnel_name"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@id/tunnel_name"
+        android:layout_toRightOf="@id/tunnel_name"
+        android:ellipsize="start"
         android:gravity="right"
-        android:text="Interface:port" />
+        android:maxLines="1"
+        android:text="Interface:port"
+        android:textAppearance="@style/TextAppearance.AppCompat.Secondary" />
 
-    <!-- Status star -->
-    <ImageView android:id="@+id/tunnel_status"
+    <!-- The tunnel description -->
+    <TextView
+        android:id="@+id/tunnel_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="Status" />
+        android:layout_alignLeft="@+id/tunnel_name"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/tunnel_name"
+        android:layout_marginBottom="@dimen/listitem_text_bottom_margin_two_lines"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Tunnel description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Secondary" />
 
 </RelativeLayout>

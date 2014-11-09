@@ -209,16 +209,29 @@ public class TunnelEntry {
     public Drawable getStatusIcon() {
         switch (getStatus()) {
         case STANDBY:
+            return mContext.getResources()
+                    .getDrawable(R.drawable.ic_schedule_black_24dp);
         case STARTING:
-            return mContext.getResources()
-                    .getDrawable(R.drawable.local_inprogress);
         case RUNNING:
-            return mContext.getResources()
-                    .getDrawable(R.drawable.local_up);
         case NOT_RUNNING:
         default:
-            return mContext.getResources()
-                    .getDrawable(R.drawable.local_down);
+            return null;
+        }
+    }
+
+    public Drawable getStatusBackground() {
+        switch (getStatus()) {
+            case STANDBY:
+            case STARTING:
+                return mContext.getResources()
+                        .getDrawable(R.drawable.tunnel_yellow);
+            case RUNNING:
+                return mContext.getResources()
+                        .getDrawable(R.drawable.tunnel_green);
+            case NOT_RUNNING:
+            default:
+                return mContext.getResources()
+                        .getDrawable(R.drawable.tunnel_red);
         }
     }
 }

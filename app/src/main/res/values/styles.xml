@@ -19,6 +19,16 @@
         <!-- The rest of your attributes -->
     </style>
 
+    <style name="TextAppearance.AppCompat.Primary" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/primary_text_default_material_dark</item>
+        <item name="android:textSize">@dimen/text_size_primary</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Secondary" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/secondary_text_default_material_dark</item>
+        <item name="android:textSize">@dimen/text_size_secondary</item>
+    </style>
+
     <style name="WizardPageContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
