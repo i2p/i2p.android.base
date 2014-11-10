@@ -168,11 +168,13 @@ public class SettingsActivity extends PreferenceActivity {
         ViewGroup contentView = (ViewGroup) LayoutInflater.from(this).inflate(
                 R.layout.activity_settings,
                 (ViewGroup) getWindow().getDecorView().getRootView(), false);
+
         mToolbar = (Toolbar) contentView.findViewById(R.id.main_toolbar);
+        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp));
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
 

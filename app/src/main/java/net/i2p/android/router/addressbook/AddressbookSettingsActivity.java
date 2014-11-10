@@ -31,6 +31,7 @@ public class AddressbookSettingsActivity extends ActionBarActivity {
         // Set the action bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         text_content_subscriptions = (EditText) findViewById(R.id.subscriptions_content);
         btn_save_subscriptions = (Button) findViewById(R.id.button_save_subscriptions);
