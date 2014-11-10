@@ -36,7 +36,7 @@ public class HelpListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setListAdapter(ArrayAdapter.createFromResource(getActivity(),
-                R.array.help_categories, android.R.layout.simple_list_item_1));
+                R.array.help_categories, R.layout.listitem_text));
     }
 
     @Override

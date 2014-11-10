@@ -14,7 +14,7 @@ public class AddressEntryAdapter extends ArrayAdapter<AddressEntry> {
     private final LayoutInflater mInflater;
 
     public AddressEntryAdapter(Context context) {
-        super(context, R.layout.addressbook_list_item);
+        super(context, R.layout.listitem_text);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -29,7 +29,7 @@ public class AddressEntryAdapter extends ArrayAdapter<AddressEntry> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = mInflater.inflate(R.layout.addressbook_list_item, parent, false);
+        View v = mInflater.inflate(R.layout.listitem_text, parent, false);
         AddressEntry address = getItem(position);
 
         TextView text = (TextView) v.findViewById(R.id.text);

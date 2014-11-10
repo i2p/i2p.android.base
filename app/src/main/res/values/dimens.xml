@@ -16,7 +16,8 @@
     <dimen name="listitem_text_left_margin">72dp</dimen>
     <dimen name="listitem_icon_left_margin">8dp</dimen>
 
-    <dimen name="listitem_height_one_line">56dp</dimen>
+    <dimen name="listitem_height_one_line">48dp</dimen>
+    <dimen name="listitem_height_one_line_avatar">56dp</dimen>
 
     <dimen name="listitem_height_two_lines">72dp</dimen>
     <dimen name="listitem_text_top_margin_two_lines">16dp</dimen>
