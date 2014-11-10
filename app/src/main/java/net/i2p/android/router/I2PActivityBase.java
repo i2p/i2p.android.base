@@ -174,8 +174,10 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     private void selectItem(int pos) {
         switch (pos) {
             case 1:
-                Intent news = new Intent(I2PActivityBase.this, NewsActivity.class);
-                startActivity(news);
+                if (!(this instanceof NewsActivity)) {
+                    Intent news = new Intent(I2PActivityBase.this, NewsActivity.class);
+                    startActivity(news);
+                }
                 break;
             case 2:
                 Intent ab = new Intent(I2PActivityBase.this, AddressbookActivity.class);
@@ -186,8 +188,10 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
                 startActivity(itb);
                 break;
             case 4:
-                Intent log = new Intent(I2PActivityBase.this, LogActivity.class);
-                startActivity(log);
+                if (!(this instanceof LogActivity)) {
+                    Intent log = new Intent(I2PActivityBase.this, LogActivity.class);
+                    startActivity(log);
+                }
                 break;
             case 5:
                 Intent wp = new Intent(I2PActivityBase.this, WebActivity.class);
@@ -195,16 +199,20 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
                 startActivity(wp);
                 break;
             case 6:
-                Intent active = new Intent(I2PActivityBase.this, RateGraphActivity.class);
-                startActivity(active);
+                if (!(this instanceof RateGraphActivity)) {
+                    Intent active = new Intent(I2PActivityBase.this, RateGraphActivity.class);
+                    startActivity(active);
+                }
                 break;
             case 7:
                 Intent peers = new Intent(I2PActivityBase.this, PeersActivity.class);
                 startActivity(peers);
                 break;
             case 8:
-                Intent netdb = new Intent(I2PActivityBase.this, NetDbActivity.class);
-                startActivity(netdb);
+                if (!(this instanceof NetDbActivity)) {
+                    Intent netdb = new Intent(I2PActivityBase.this, NetDbActivity.class);
+                    startActivity(netdb);
+                }
                 break;
             default:
                 Intent main = new Intent(I2PActivityBase.this, MainActivity.class);
