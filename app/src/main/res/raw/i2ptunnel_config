@@ -27,7 +27,7 @@ tunnel.0.startOnLoad=true
 
 # irc
 tunnel.1.name=Irc2P
-tunnel.1.description=IRC tunnel to access the Irc2P network
+tunnel.1.description=IRC tunnel to the Irc2P network
 tunnel.1.type=ircclient
 tunnel.1.sharedClient=true
 tunnel.1.interface=127.0.0.1
@@ -52,7 +52,7 @@ tunnel.1.startOnLoad=true
 
 # irc
 tunnel.2.name=IRC welterde
-tunnel.2.description=IRC tunnel to access welterde's network
+tunnel.2.description=IRC tunnel to welterde's network
 tunnel.2.type=ircclient
 tunnel.2.sharedClient=true
 tunnel.2.interface=127.0.0.1
@@ -73,14 +73,14 @@ tunnel.2.option.outbound.length=2
 tunnel.2.option.outbound.lengthVariance=0
 tunnel.2.startOnLoad=true
 
-# irc
-tunnel.3.name=Telecomix IRC
-tunnel.3.description=IRC tunnel to access the Telecomix network
+# irc irc.killyourtv.i2p
+tunnel.3.name=KYTV IRC
+tunnel.3.description=IRC tunnel to KillYourTV's network
 tunnel.3.type=ircclient
 tunnel.3.sharedClient=true
 tunnel.3.interface=127.0.0.1
 tunnel.3.listenPort=6670
-tunnel.3.targetDestination=irc.telecomix.i2p
+tunnel.3.targetDestination=irc.killyourtv.i2p
 tunnel.3.i2cpHost=127.0.0.1
 tunnel.3.i2cpPort=7654
 tunnel.3.option.inbound.nickname=shared clients
@@ -95,49 +95,3 @@ tunnel.3.option.inbound.lengthVariance=0
 tunnel.3.option.outbound.length=2
 tunnel.3.option.outbound.lengthVariance=0
 tunnel.3.startOnLoad=true
-
-# irc irc.killyourtv.i2p
-tunnel.4.name=KYTV IRC
-tunnel.4.description=IRC tunnel to access KillYourTV's network
-tunnel.4.type=ircclient
-tunnel.4.sharedClient=true
-tunnel.4.interface=127.0.0.1
-tunnel.4.listenPort=6671
-tunnel.4.targetDestination=irc.killyourtv.i2p
-tunnel.4.i2cpHost=127.0.0.1
-tunnel.4.i2cpPort=7654
-tunnel.4.option.inbound.nickname=shared clients
-tunnel.4.option.outbound.nickname=shared clients
-tunnel.4.option.i2cp.delayOpen=true
-tunnel.4.option.i2cp.reduceIdleTime=600000
-tunnel.4.option.i2cp.reduceOnIdle=true
-tunnel.4.option.i2cp.reduceQuantity=1
-tunnel.4.option.i2p.streaming.connectDelay=1000
-tunnel.4.option.inbound.length=2
-tunnel.4.option.inbound.lengthVariance=0
-tunnel.4.option.outbound.length=2
-tunnel.4.option.outbound.lengthVariance=0
-tunnel.4.startOnLoad=true
-
-# irc irc.stream.i2p
-tunnel.5.name=Nameless IRC
-tunnel.5.description=IRC tunnel to access the Nameless network
-tunnel.5.type=ircclient
-tunnel.5.sharedClient=true
-tunnel.5.interface=127.0.0.1
-tunnel.5.listenPort=6672
-tunnel.5.targetDestination=irc.stream.i2p
-tunnel.5.i2cpHost=127.0.0.1
-tunnel.5.i2cpPort=7654
-tunnel.5.option.inbound.nickname=shared clients
-tunnel.5.option.outbound.nickname=shared clients
-tunnel.5.option.i2cp.delayOpen=true
-tunnel.5.option.i2cp.reduceIdleTime=600000
-tunnel.5.option.i2cp.reduceOnIdle=true
-tunnel.5.option.i2cp.reduceQuantity=1
-tunnel.5.option.i2p.streaming.connectDelay=1000
-tunnel.5.option.inbound.length=2
-tunnel.5.option.inbound.lengthVariance=0
-tunnel.5.option.outbound.length=2
-tunnel.5.option.outbound.lengthVariance=0
-tunnel.5.startOnLoad=true
