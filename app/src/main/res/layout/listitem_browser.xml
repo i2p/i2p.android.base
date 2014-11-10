@@ -27,7 +27,7 @@
         android:layout_marginStart="@dimen/listitem_text_left_margin"
         android:layout_toLeftOf="@+id/browser_status_icon"
         android:layout_toStartOf="@+id/browser_status_icon"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Primary" />
 
     <ImageView
         android:id="@+id/browser_status_icon"

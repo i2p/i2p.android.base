@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:padding="5dp" >
-
-    <!-- The hash of the RouterInfo -->
-    <TextView android:id="@+id/dbentry_hash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:textSize="16sp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="5dp"
-        android:text="RouterInfo hash" />
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/listitem_height_one_line"
+    android:layout_marginEnd="@dimen/listitem_horizontal_margin"
+    android:layout_marginRight="@dimen/listitem_horizontal_margin">
 
     <!-- Country flag -->
-    <ImageView android:id="@+id/ri_country"
+    <ImageView
+        android:id="@+id/ri_country"
+        android:layout_width="@dimen/listitem_icon_size"
+        android:layout_height="@dimen/listitem_icon_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/listitem_horizontal_margin"
+        android:layout_marginStart="@dimen/listitem_horizontal_margin"
+        android:contentDescription="Country"
+        android:visibility="gone" />
+
+    <!-- The hash of the RouterInfo -->
+    <TextView
+        android:id="@+id/dbentry_hash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:contentDescription="Country" />
+        android:layout_marginLeft="@dimen/listitem_horizontal_margin"
+        android:layout_marginStart="@dimen/listitem_horizontal_margin"
+        android:ellipsize="marquee"
+        android:maxLines="1"
+        android:text="RouterInfo hash"
+        android:textAppearance="@style/TextAppearance.AppCompat.Primary" />
 
 </RelativeLayout>

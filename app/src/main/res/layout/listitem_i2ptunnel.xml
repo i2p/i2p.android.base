@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/listitem_height_two_lines"
     android:paddingEnd="@dimen/listitem_horizontal_margin"
     android:paddingRight="@dimen/listitem_horizontal_margin">
