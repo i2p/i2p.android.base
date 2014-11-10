@@ -90,6 +90,16 @@ public class TunnelEntry {
         else return NOT_RUNNING;
     }
 
+    public boolean isRunning() {
+        switch (getStatus()) {
+            case STANDBY:
+            case RUNNING:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     public boolean isClient() {
         return TunnelUtil.isClient(mController.getType());
     }
@@ -100,18 +110,42 @@ public class TunnelEntry {
         return Boolean.parseBoolean(mController.getSharedClient());
     }
 
+    /**
+     * Call this to see if it is okay to linkify getClientLink()
+     * @return true if getClientLink() can be linkified, false otherwise.
+     */
+    public boolean isClientLinkValid() {
+        return ("ircclient".equals(mController.getType())) &&
+                mController.getListenOnInterface() != null &&
+                mController.getListenPort() != null;
+    }
+
+    /**
+     * @return valid host:port only if isClientLinkValid() is true
+     */
+    public String getClientLink(boolean linkify) {
+        String host = getClientInterface();
+        String port = getClientPort();
+        String link =  host + ":" + port;
+        if (linkify) {
+            if ("ircclient".equals(mController.getType()))
+                link = "irc://" + link;
+        }
+        return link;
+    }
+
     public String getClientInterface() {
+        String rv;
         if ("streamrclient".equals(mController.getType()))
-            return mController.getTargetHost();
+            rv = mController.getTargetHost();
         else
-            return mController.getListenOnInterface();
+            rv = mController.getListenOnInterface();
+        return rv != null ? rv : "";
     }
 
     public String getClientPort() {
         String rv = mController.getListenPort();
-        if (rv != null)
-            return rv;
-        return "";
+        return rv != null ? rv : "";
     }
 
     public String getClientDestination() {
@@ -128,10 +162,10 @@ public class TunnelEntry {
     /* Server tunnel data */
 
     /**
-     * Call this to see if it is okay to linkify getServerTarget()
-     * @return true if getServerTarget() can be linkified, false otherwise.
+     * Call this to see if it is okay to linkify getServerLink()
+     * @return true if getServerLink() can be linkified, false otherwise.
      */
-    public boolean isServerTargetLinkValid() {
+    public boolean isServerLinkValid() {
         return ("httpserver".equals(mController.getType()) ||
                 "httpbidirserver".equals(mController.getType())) &&
                 mController.getTargetHost() != null &&
@@ -139,9 +173,9 @@ public class TunnelEntry {
     }
 
     /**
-     * @return valid host:port only if isServerTargetLinkValid() is true
+     * @return valid host:port only if isServerLinkValid() is true
      */
-    public String getServerTarget() {
+    public String getServerLink(boolean linkify) {
         String host;
         if ("streamrserver".equals(getInternalType()))
             host = mController.getListenOnInterface();
@@ -152,7 +186,13 @@ public class TunnelEntry {
         if (port == null) port = "";
         if (host.indexOf(':') >= 0)
             host = '[' + host + ']';
-        return host + ":" + port;
+        String link =  host + ":" + port;
+        if (linkify) {
+            if ("httpserver".equals(mController.getType()) ||
+                    "httpbidirserver".equals(mController.getType()))
+                link = "http://" + link;
+        }
+        return link;
     }
 
     public String getDestinationBase64() {
@@ -183,18 +223,14 @@ public class TunnelEntry {
 
     /* Other output formats */
 
-    public String getIfacePort() {
-        if (isClient()) {
-            String host;
-            if ("streamrclient".equals(getInternalType()))
-                host = mController.getTargetHost();
-            else
-                host = mController.getListenOnInterface();
-            String port = mController.getListenPort();
-            if (host == null) host = "";
-            if (port == null) port = "";
-            return host + ":" + port;
-        } else return getServerTarget();
+    public boolean isTunnelLinkValid() {
+        if (isClient()) return isClientLinkValid();
+        else return isServerLinkValid();
+    }
+
+    public String getTunnelLink(boolean linkify) {
+        if (isClient()) return getClientLink(linkify);
+        else return getServerLink(linkify);
     }
 
     public String getDetails() {

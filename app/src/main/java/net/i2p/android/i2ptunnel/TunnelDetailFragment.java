@@ -97,10 +97,10 @@ public class TunnelDetailFragment extends Fragment {
             description.setText(mTunnel.getDescription());
 
             TextView targetIfacePort = (TextView) v.findViewById(R.id.tunnel_target_interface_port);
-            targetIfacePort.setText(mTunnel.getIfacePort());
+            targetIfacePort.setText(mTunnel.getTunnelLink(false));
 
             TextView accessIfacePort = (TextView) v.findViewById(R.id.tunnel_access_interface_port);
-            accessIfacePort.setText(mTunnel.getIfacePort());
+            accessIfacePort.setText(mTunnel.getTunnelLink(false));
 
             CheckBox autoStart = (CheckBox) v.findViewById(R.id.tunnel_autostart);
             autoStart.setChecked(mTunnel.startAutomatically());
