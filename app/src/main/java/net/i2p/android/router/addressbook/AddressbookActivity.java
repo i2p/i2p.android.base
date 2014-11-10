@@ -18,8 +18,6 @@ import android.widget.Spinner;
 
 import net.i2p.android.router.I2PActivityBase;
 import net.i2p.android.router.R;
-import net.i2p.android.router.web.WebActivity;
-import net.i2p.android.router.web.WebFragment;
 
 public class AddressbookActivity extends I2PActivityBase
         implements AddressbookFragment.OnAddressSelectedListener,
@@ -114,12 +112,8 @@ public class AddressbookActivity extends I2PActivityBase
             setResult(Activity.RESULT_OK, result);
             finish();
         } else {
-            //Intent i = new Intent(Intent.ACTION_VIEW);
-            //i.setData(Uri.parse("http://" + host));
-            // XXX: Temporarily reverting to inbuilt browser
-            // until an alternative browser is ready.
-            Intent i = new Intent(this, WebActivity.class);
-            i.putExtra(WebFragment.HTML_URI, "http://" + host + '/');
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("http://" + host));
             startActivity(i);
         }
     }
