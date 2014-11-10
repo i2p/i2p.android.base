@@ -1,20 +1,22 @@
 package net.i2p.android.router.addressbook;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.Menu;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
 import net.i2p.android.router.R;
 import net.i2p.util.FileUtil;
 
-public class AddressbookSettingsActivity extends Activity {
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class AddressbookSettingsActivity extends ActionBarActivity {
 
     private EditText text_content_subscriptions;
     private Button btn_save_subscriptions;
@@ -25,17 +27,16 @@ public class AddressbookSettingsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addressbook_settings);
+
+        // Set the action bar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
+
         text_content_subscriptions = (EditText) findViewById(R.id.subscriptions_content);
         btn_save_subscriptions = (Button) findViewById(R.id.button_save_subscriptions);
         init_actions();
         i2pDir = new File(getFilesDir(), filename);
         load();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_addressbook_settings, menu);
-        return true;
     }
 
     private void init_actions() {

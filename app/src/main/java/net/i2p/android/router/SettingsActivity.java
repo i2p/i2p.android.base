@@ -9,6 +9,10 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import net.i2p.I2PAppContext;
@@ -33,6 +37,8 @@ public class SettingsActivity extends PreferenceActivity {
     private static final String ACTION_PREFS_LOGGING = "net.i2p.android.router.PREFS_LOGGING";
     private static final String ACTION_PREFS_ADVANCED = "net.i2p.android.router.PREFS_ADVANCED";
 
+    private Toolbar mToolbar;
+
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,8 @@ public class SettingsActivity extends PreferenceActivity {
             // Load the legacy preferences headers
             addPreferencesFromResource(R.xml.settings_headers_legacy);
         }
+
+        mToolbar.setTitle(getTitle());
     }
 
     protected static void setupGraphSettings(Context context, PreferenceScreen ps, RouterContext ctx) {
@@ -153,6 +161,25 @@ public class SettingsActivity extends PreferenceActivity {
         // be true for -sw720dp devices, false otherwise. For your curiosity, in
         // Nexus 7 it is false.
         loadHeadersFromResource(R.xml.settings_headers, target);
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        ViewGroup contentView = (ViewGroup) LayoutInflater.from(this).inflate(
+                R.layout.activity_settings,
+                (ViewGroup) getWindow().getDecorView().getRootView(), false);
+        mToolbar = (Toolbar) contentView.findViewById(R.id.main_toolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        ViewGroup contentWrapper = (ViewGroup) contentView.findViewById(R.id.content_wrapper);
+        LayoutInflater.from(this).inflate(layoutResID, contentWrapper, true);
+
+        getWindow().setContentView(contentView);
     }
 
     @Override
