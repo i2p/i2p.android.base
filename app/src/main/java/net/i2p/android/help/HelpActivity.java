@@ -24,7 +24,6 @@ public class HelpActivity extends ActionBarActivity implements
      * device.
      */
     private boolean mTwoPane;
-    private boolean mDetailShowing;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +33,7 @@ public class HelpActivity extends ActionBarActivity implements
         // Set the action bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (findViewById(R.id.detail_fragment) != null) {
             // The detail container view will be present only in the
@@ -84,15 +84,6 @@ public class HelpActivity extends ActionBarActivity implements
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (mDetailShowing) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            mDetailShowing = false;
-        }
-        super.onBackPressed();
-    }
-
     // HelpListFragment.OnEntrySelectedListener
 
     @Override
@@ -129,8 +120,6 @@ public class HelpActivity extends ActionBarActivity implements
                     .replace(R.id.main_fragment, f)
                     .addToBackStack("help" + category)
                     .commit();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            mDetailShowing = true;
         }
     }
 }

@@ -17,7 +17,6 @@ public class BrowserConfigActivity extends ActionBarActivity implements
      * device.
      */
     private boolean mTwoPane;
-    private boolean mDetailShowing;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +26,7 @@ public class BrowserConfigActivity extends ActionBarActivity implements
         // Set the action bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (findViewById(R.id.detail_fragment) != null) {
             // The detail container view will be present only in the
@@ -52,15 +52,6 @@ public class BrowserConfigActivity extends ActionBarActivity implements
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mDetailShowing) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            mDetailShowing = false;
-        }
-        super.onBackPressed();
     }
 
     // BrowserAdapter.OnBrowserSelected
@@ -98,8 +89,6 @@ public class BrowserConfigActivity extends ActionBarActivity implements
                     .replace(R.id.main_fragment, configFrag)
                     .addToBackStack("config" + browser.packageName)
                     .commit();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            mDetailShowing = true;
         }
     }
 }
