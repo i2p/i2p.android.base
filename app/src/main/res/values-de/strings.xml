@@ -118,6 +118,7 @@
   <string name="about_volunteer">Du willst mithelfen, die App besser zu machen? Dann schau in das Android forum:</string>
   <string name="about_donate">Wenn du Geld oder Bitcoins spenden wilst, damit wir mehr Android-Geräte zum Testen kaufen können, dann schau auf:</string>
   <string name="menu_help">Hilfe</string>
+  <string name="general">Allgemein</string>
   <string name="addressbook_search_header">%s gefunden</string>
   <string name="addressbook_add_wizard_k_name">Name</string>
   <string name="addressbook_add_wizard_k_destination">Ziel</string>

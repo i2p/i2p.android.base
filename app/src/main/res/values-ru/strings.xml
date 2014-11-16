@@ -118,6 +118,7 @@
   <string name="about_volunteer">Хотите помочь улучшить приложение? Добровольцы на Android форуме:</string>
   <string name="about_donate">Хотите пожертвовать деньги или bitcoins на покупку дополнительных Android устройств для разработчиков и тестировщиков? Зайдите:</string>
   <string name="menu_help">Справка</string>
+  <string name="general">Общие</string>
   <string name="addressbook_search_header">%s найдено</string>
   <string name="addressbook_add_wizard_k_name">Имя</string>
   <string name="addressbook_add_wizard_k_destination">Пункт назначения</string>

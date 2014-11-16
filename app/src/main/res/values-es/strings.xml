@@ -118,6 +118,7 @@
   <string name="about_volunteer">¿Quiere ayudar a hacer mejor la aplicación? Haga de voluntario en el foro de Android:</string>
   <string name="about_donate">¿Quiere donar dinero o bitcoins para la compra de más dispositivos Android para el desarrollo y testeo? Vaya a:</string>
   <string name="menu_help">Ayuda</string>
+  <string name="general">General</string>
   <string name="addressbook_search_header">%s encontrados</string>
   <string name="addressbook_add_wizard_k_name">Nombre</string>
   <string name="addressbook_add_wizard_k_destination">Destino</string>

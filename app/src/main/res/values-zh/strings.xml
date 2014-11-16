@@ -118,6 +118,7 @@
   <string name="about_volunteer">想帮助让应用程序变得更好吗？成为Android 论坛志愿者:</string>
   <string name="about_donate">想捐钱或比特币来为开发和测试购买更多Android 设备吗?转到:</string>
   <string name="menu_help">帮助</string>
+  <string name="general">常规</string>
   <string name="addressbook_search_header">%s 找到</string>
   <string name="addressbook_add_wizard_k_name">名称</string>
   <string name="addressbook_add_wizard_k_destination">目的地</string>
