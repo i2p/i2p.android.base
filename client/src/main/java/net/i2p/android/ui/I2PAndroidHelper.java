@@ -39,15 +39,31 @@ public class I2PAndroidHelper {
      * {@link android.app.Activity#onStart()}.
      */
     public void bind() {
-        Intent i2pIntent = new Intent(IRouterState.class.getName());
-        try {
-            mTriedBindState = mContext.bindService(
-                    i2pIntent, mStateConnection, Context.BIND_AUTO_CREATE);
-        } catch (SecurityException e) {
-            // Old version of I2P Android (pre-0.9.13), cannot use
-            mStateService = null;
-            mTriedBindState = false;
+        Intent i2pIntent = getI2PAndroidIntent();
+        if (i2pIntent != null) {
+            try {
+                mTriedBindState = mContext.bindService(
+                        i2pIntent, mStateConnection, Context.BIND_AUTO_CREATE);
+            } catch (SecurityException e) {
+                // Old version of I2P Android (pre-0.9.13), cannot use
+                mStateService = null;
+                mTriedBindState = false;
+            }
         }
+    }
+
+    private Intent getI2PAndroidIntent() {
+        String routerStateClass = IRouterState.class.getName();
+        Intent intent = new Intent();
+        if (isAppInstalled(URI_I2P_ANDROID))
+            intent.setClassName(URI_I2P_ANDROID, routerStateClass);
+        else if (isAppInstalled(URI_I2P_ANDROID_DONATE))
+            intent.setClassName(URI_I2P_ANDROID_DONATE, routerStateClass);
+        else if (isAppInstalled(URI_I2P_ANDROID_LEGACY))
+            intent.setClassName(URI_I2P_ANDROID_LEGACY, routerStateClass);
+        else
+            intent = null;
+        return intent;
     }
 
     /**
@@ -75,6 +91,7 @@ public class I2PAndroidHelper {
 
     /**
      * Check if I2P Android is installed.
+     *
      * @return true if I2P Android is installed, false otherwise.
      */
     public boolean isI2PAndroidInstalled() {
@@ -97,6 +114,7 @@ public class I2PAndroidHelper {
 
     /**
      * Show dialog - install I2P Android from market or F-Droid.
+     *
      * @param activity the Activity this method has been called from.
      */
     public void promptToInstall(final Activity activity) {
@@ -121,6 +139,7 @@ public class I2PAndroidHelper {
     /**
      * Check if I2P Android is running. If {@link net.i2p.android.ui.I2PAndroidHelper#bind()}
      * has not been called previously, this will always return false.
+     *
      * @return true if I2P Android is running, false otherwise.
      */
     public boolean isI2PAndroidRunning() {
@@ -137,6 +156,7 @@ public class I2PAndroidHelper {
 
     /**
      * Show dialog - request that I2P Android be started.
+     *
      * @param activity the Activity this method has been called from.
      */
     public void requestI2PAndroidStart(final Activity activity) {
