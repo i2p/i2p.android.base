@@ -118,6 +118,7 @@
   <string name="about_volunteer">이 앱을 개선시키고 싶나요? 안드로이드 포럼에서 기여하세요:</string>
   <string name="about_donate">돈이나 비트코인 기부로 개발과 테스팅에 필요한 안드로이드 기기 구입을 돕고 싶나요? 참조하세요:</string>
   <string name="menu_help">도움말</string>
+  <string name="general">일반</string>
   <string name="addressbook_search_header">%s 찾음</string>
   <string name="addressbook_add_wizard_k_name">이름</string>
   <string name="addressbook_add_wizard_k_destination">목적지</string>
@@ -158,6 +159,8 @@
   <string name="i2ptunnel_wizard_k_outproxies">나가는 프록시</string>
   <string name="i2ptunnel_wizard_k_target_host">목표 호스트</string>
   <string name="i2ptunnel_wizard_k_target_port">목표 포트</string>
+  <string name="i2ptunnel_wizard_k_reachable_on">접근가능</string>
+  <string name="i2ptunnel_wizard_k_binding_port">바인드 포트</string>
   <string name="i2ptunnel_wizard_k_auto_start">자동 시작</string>
   <string name="next">다음</string>
   <string name="prev">이전</string>
@@ -171,6 +174,7 @@
   <string name="i2ptunnel_wizard_desc_target_host">서비스가 작동중인 IP, 대부분의 경우 같은 기기이기 때문에 127.0.0.1이 자동 입력됨.</string>
   <string name="i2ptunnel_wizard_desc_target_port">서비스가 접속을 받아들일 포트.</string>
   <string name="i2ptunnel_wizard_desc_reachable_on">이 터널을 접근할 수 있는 컴퓨터 혹은 스마트폰 제한.</string>
+  <string name="i2ptunnel_wizard_desc_binding_port">이 포트는 로컬에서 접근될 클라이언트 터널입니다. 또한 bidir 서버 터널의 클라이언트 포트이기도 합니다.</string>
   <string name="i2ptunnel_wizard_desc_auto_start">라우터가 시작할때 터널도 같이 실행?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">터널을 만들까요?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">터널 </string>
