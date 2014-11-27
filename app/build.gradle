@@ -37,19 +37,19 @@ android {
 dependencies {
     compile project(':routerjars')
     compile project(':client')
-    compile 'com.android.support:support-v4:21.0.0'
-    compile 'com.android.support:appcompat-v7:21.0.0'
-    compile 'com.android.support:recyclerview-v7:21.0.0'
-    compile 'com.android.support:cardview-v7:21.0.0'
+    compile 'com.android.support:support-v4:21.0.2'
+    compile 'com.android.support:appcompat-v7:21.0.2'
+    compile 'com.android.support:recyclerview-v7:21.0.2'
+    compile 'com.android.support:cardview-v7:21.0.2'
     compile files('libs/androidplot-core-0.6.1.jar')
 }
 
 dependencyVerification {
     verify = [
-            'com.android.support:support-v4:199ef7bb169386c80b4836354df6747ce2ae3d24434db923c22439e47106a1e2',
-            'com.android.support:appcompat-v7:45e999dda55fe81d9cc1c7342b7b70480ff3f307baa8da0df767f92fc5c52cd1',
-            'com.android.support:recyclerview-v7:ab2390d688601b65e2f3a0718b3d25487e61546c4e20f81eb0b033f30ca15b31',
-            'com.android.support:cardview-v7:7b724eb46efc98eee70c333cd0e9c34ca89b1a4456c3e40cfcc33501c43570bf',
+            'com.android.support:support-v4:126a4c291f41f75f3fff4968e9d397bc8454cdff4d8f994cbe0524e3bad76e72',
+            'com.android.support:appcompat-v7:b760fd3d0b0b0547a1bcef9031b40939f31049ba955f04c8fdc5aa09a25d19e9',
+            'com.android.support:recyclerview-v7:71ef0f5659b3019dc33c5ffb346ea01df1f66735506f38d43fd783fbcb0370ce',
+            'com.android.support:cardview-v7:cb4d7ee9ebb6edffa7203eff0d207b4e88425599a8ed37d94b650bc84390c4eb',
     ]
 }
 
