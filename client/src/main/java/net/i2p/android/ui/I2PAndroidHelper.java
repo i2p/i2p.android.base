@@ -63,6 +63,33 @@ public class I2PAndroidHelper {
             Log.w(LOG_TAG, "Could not bind: I2P Android not installed");
     }
 
+    /**
+     * Try to bind to I2P Android, using the provided ServiceConnection and
+     * flags. Call this method from
+     * {@link android.app.Service#onStartCommand(android.content.Intent, int, int)}.
+     */
+    public boolean bind(ServiceConnection serviceConnection, int flags) {
+        Log.i(LOG_TAG, "Binding to I2P Android with provided ServiceConnection");
+        Intent i2pIntent = getI2PAndroidIntent();
+        if (i2pIntent != null) {
+            Log.i(LOG_TAG, i2pIntent.toString());
+            try {
+                boolean rv = mContext.bindService(
+                        i2pIntent, serviceConnection, flags);
+                if (!rv)
+                    Log.w(LOG_TAG, "Could not bind: bindService failed");
+                return rv;
+            } catch (SecurityException e) {
+                // Old version of I2P Android (pre-0.9.13), cannot use
+                Log.w(LOG_TAG, "Could not bind: I2P Android version is too old");
+                return false;
+            }
+        } else {
+            Log.w(LOG_TAG, "Could not bind: I2P Android not installed");
+            return false;
+        }
+    }
+
     private Intent getI2PAndroidIntent() {
         Intent intent = new Intent(IRouterState.class.getName());
         if (isAppInstalled(URI_I2P_ANDROID))
