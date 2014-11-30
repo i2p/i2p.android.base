@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 import net.i2p.android.lib.client.R;
 import net.i2p.android.router.service.IRouterState;
@@ -26,6 +27,10 @@ public class I2PAndroidHelper {
 
     public static final int REQUEST_START_I2P = 9857;
 
+    private static final String ROUTER_SERVICE_CLASS = "net.i2p.android.router.service.RouterService";
+
+    private static final String LOG_TAG = "I2PClientLib";
+
     private Context mContext;
     private boolean mTriedBindState;
     private IRouterState mStateService;
@@ -39,28 +44,33 @@ public class I2PAndroidHelper {
      * {@link android.app.Activity#onStart()}.
      */
     public void bind() {
+        Log.i(LOG_TAG, "Binding to I2P Android");
         Intent i2pIntent = getI2PAndroidIntent();
         if (i2pIntent != null) {
+            Log.i(LOG_TAG, i2pIntent.toString());
             try {
                 mTriedBindState = mContext.bindService(
                         i2pIntent, mStateConnection, Context.BIND_AUTO_CREATE);
+                if (!mTriedBindState)
+                    Log.w(LOG_TAG, "Could not bind: bindService failed");
             } catch (SecurityException e) {
                 // Old version of I2P Android (pre-0.9.13), cannot use
                 mStateService = null;
                 mTriedBindState = false;
+                Log.w(LOG_TAG, "Could not bind: I2P Android version is too old");
             }
-        }
+        } else
+            Log.w(LOG_TAG, "Could not bind: I2P Android not installed");
     }
 
     private Intent getI2PAndroidIntent() {
-        String routerStateClass = IRouterState.class.getName();
-        Intent intent = new Intent();
+        Intent intent = new Intent(IRouterState.class.getName());
         if (isAppInstalled(URI_I2P_ANDROID))
-            intent.setClassName(URI_I2P_ANDROID, routerStateClass);
+            intent.setClassName(URI_I2P_ANDROID, ROUTER_SERVICE_CLASS);
         else if (isAppInstalled(URI_I2P_ANDROID_DONATE))
-            intent.setClassName(URI_I2P_ANDROID_DONATE, routerStateClass);
+            intent.setClassName(URI_I2P_ANDROID_DONATE, ROUTER_SERVICE_CLASS);
         else if (isAppInstalled(URI_I2P_ANDROID_LEGACY))
-            intent.setClassName(URI_I2P_ANDROID_LEGACY, routerStateClass);
+            intent.setClassName(URI_I2P_ANDROID_LEGACY, ROUTER_SERVICE_CLASS);
         else
             intent = null;
         return intent;
