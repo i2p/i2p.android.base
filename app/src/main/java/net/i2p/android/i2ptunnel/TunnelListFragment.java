@@ -1,26 +1,31 @@
 package net.i2p.android.i2ptunnel;
 
-import java.util.List;
-
-import net.i2p.android.help.HelpActivity;
-import net.i2p.android.i2ptunnel.util.TunnelConfig;
-import net.i2p.android.router.I2PFragmentBase;
-import net.i2p.android.router.R;
-import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
-import net.i2p.i2ptunnel.TunnelControllerGroup;
-import net.i2p.router.RouterContext;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import net.i2p.android.help.HelpActivity;
+import net.i2p.android.i2ptunnel.util.TunnelConfig;
+import net.i2p.android.router.I2PFragmentBase;
+import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
+import net.i2p.android.router.R;
+import net.i2p.i2ptunnel.TunnelControllerGroup;
+import net.i2p.router.RouterContext;
+
+import java.util.List;
 
 public class TunnelListFragment extends ListFragment implements
         I2PFragmentBase.RouterContextUser,
@@ -49,6 +54,8 @@ public class TunnelListFragment extends ListFragment implements
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
     private boolean mActivateOnItemClick = false;
+
+    private ImageButton mNewTunnel;
 
     // Container Activity must implement this interface
     public interface OnTunnelSelectedListener {
@@ -83,6 +90,27 @@ public class TunnelListFragment extends ListFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Create the list fragment's content view by calling the super method
+        final View listFragmentView = super.onCreateView(inflater, container, savedInstanceState);
+
+        View v = inflater.inflate(R.layout.fragment_list_with_add, container, false);
+        FrameLayout listContainer = (FrameLayout) v.findViewById(R.id.list_container);
+        listContainer.addView(listFragmentView);
+
+        mNewTunnel = (ImageButton) v.findViewById(R.id.promoted_action);
+        mNewTunnel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent wi = new Intent(getActivity(), TunnelWizardActivity.class);
+                startActivityForResult(wi, TUNNEL_WIZARD_REQUEST);
+            }
+        });
+
+        return v;
     }
 
     @Override
@@ -162,7 +190,7 @@ public class TunnelListFragment extends ListFragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_i2ptunnel_list_actions, menu);
         if (getRouterContext() == null) {
-            menu.findItem(R.id.action_add_tunnel).setVisible(false);
+            mNewTunnel.setVisibility(View.GONE);
             menu.findItem(R.id.action_start_all_tunnels).setVisible(false);
             menu.findItem(R.id.action_stop_all_tunnels).setVisible(false);
             menu.findItem(R.id.action_restart_all_tunnels).setVisible(false);
@@ -174,26 +202,22 @@ public class TunnelListFragment extends ListFragment implements
         // Handle presses on the action bar items
         List<String> msgs;
         switch (item.getItemId()) {
-        case R.id.action_add_tunnel:
-            Intent wi = new Intent(getActivity(), TunnelWizardActivity.class);
-            startActivityForResult(wi, TUNNEL_WIZARD_REQUEST);
-            return true;
-        case R.id.action_start_all_tunnels:
-            msgs = mGroup.startAllControllers();
-            break;
-        case R.id.action_stop_all_tunnels:
-            msgs = mGroup.stopAllControllers();
-            break;
-        case R.id.action_restart_all_tunnels:
-            msgs = mGroup.restartAllControllers();
-            break;
-        case R.id.action_i2ptunnel_help:
-            Intent hi = new Intent(getActivity(), HelpActivity.class);
-            hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_I2PTUNNEL);
-            startActivity(hi);
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+            case R.id.action_start_all_tunnels:
+                msgs = mGroup.startAllControllers();
+                break;
+            case R.id.action_stop_all_tunnels:
+                msgs = mGroup.stopAllControllers();
+                break;
+            case R.id.action_restart_all_tunnels:
+                msgs = mGroup.restartAllControllers();
+                break;
+            case R.id.action_i2ptunnel_help:
+                Intent hi = new Intent(getActivity(), HelpActivity.class);
+                hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_I2PTUNNEL);
+                startActivity(hi);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
         // TODO: Do something with the other messages
         if (msgs.size() > 0)
@@ -251,7 +275,7 @@ public class TunnelListFragment extends ListFragment implements
     }
 
     public void onLoadFinished(Loader<List<TunnelEntry>> loader,
-            List<TunnelEntry> data) {
+                               List<TunnelEntry> data) {
         if (loader.getId() == (mClientTunnels ?
                 CLIENT_LOADER_ID : SERVER_LOADER_ID)) {
             mAdapter.setData(data);

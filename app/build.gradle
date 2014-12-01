@@ -43,6 +43,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.2'
     compile 'com.android.support:recyclerview-v7:21.0.2'
     compile 'com.android.support:cardview-v7:21.0.2'
+    compile 'net.i2p.android.ext:floatingactionbutton:1.1.0'
     compile files('libs/androidplot-core-0.6.1.jar')
 }
 
@@ -52,6 +53,7 @@ dependencyVerification {
             'com.android.support:appcompat-v7:b760fd3d0b0b0547a1bcef9031b40939f31049ba955f04c8fdc5aa09a25d19e9',
             'com.android.support:recyclerview-v7:71ef0f5659b3019dc33c5ffb346ea01df1f66735506f38d43fd783fbcb0370ce',
             'com.android.support:cardview-v7:cb4d7ee9ebb6edffa7203eff0d207b4e88425599a8ed37d94b650bc84390c4eb',
+            'net.i2p.android.ext:floatingactionbutton:84cf5b67a66337bef59b46f57468c730387ca766b5a5f06ca852ba46cabbc0fb',
     ]
 }
 
