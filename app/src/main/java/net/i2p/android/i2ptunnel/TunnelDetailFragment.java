@@ -96,6 +96,9 @@ public class TunnelDetailFragment extends Fragment {
             TextView description = (TextView) v.findViewById(R.id.tunnel_description);
             description.setText(mTunnel.getDescription());
 
+            TextView details = (TextView) v.findViewById(R.id.tunnel_details);
+            details.setText(mTunnel.getDetails());
+
             TextView targetIfacePort = (TextView) v.findViewById(R.id.tunnel_target_interface_port);
             targetIfacePort.setText(mTunnel.getTunnelLink(false));
 
