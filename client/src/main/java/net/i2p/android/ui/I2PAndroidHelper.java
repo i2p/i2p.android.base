@@ -67,6 +67,10 @@ public class I2PAndroidHelper {
      * Try to bind to I2P Android, using the provided ServiceConnection and
      * flags. Call this method from
      * {@link android.app.Service#onStartCommand(android.content.Intent, int, int)}.
+     * The ServiceConnection will be provided with an {@link android.os.IBinder}
+     * that can be converted to an
+     * {@link net.i2p.android.router.service.IRouterState} with
+     * <code>IRouterState.Stub.asInterface(IBinder)</code>.
      */
     public boolean bind(ServiceConnection serviceConnection, int flags) {
         Log.i(LOG_TAG, "Binding to I2P Android with provided ServiceConnection");
