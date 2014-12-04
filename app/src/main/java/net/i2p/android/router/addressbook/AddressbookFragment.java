@@ -173,15 +173,19 @@ public class AddressbookFragment extends ListFragment implements
         inflater.inflate(R.menu.fragment_addressbook_actions, menu);
 
         mSearchAddressbook = menu.findItem(R.id.action_search_addressbook);
+    }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
         // Hide until needed
         if (getRouterContext() == null) {
             mSearchAddressbook.setVisible(false);
-            mAddToAddressbook.setVisibility(View.GONE);
+            if (mAddToAddressbook != null)
+                mAddToAddressbook.setVisibility(View.GONE);
         }
 
         // Only allow adding to private book 
-        if (!PRIVATE_BOOK.equals(mBook)) {
+        if (!PRIVATE_BOOK.equals(mBook) && mAddToAddressbook != null) {
             mAddToAddressbook.setVisibility(View.GONE);
             mAddToAddressbook = null;
         }
