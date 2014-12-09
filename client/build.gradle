@@ -11,7 +11,7 @@ android {
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
@@ -41,7 +41,7 @@ android.libraryVariants.all { variant ->
     }
 
     // Hook the copy task into the build
-    variant.packageLibrary.dependsOn copyClientLibsTask
+    variant.processJavaResources.dependsOn copyClientLibsTask
     copyClientLibsTask.mustRunAfter ':routerjars:buildClient'
 }
 
