@@ -37,7 +37,7 @@ public class NetDbStatsLoader extends AsyncTaskLoader<List<ObjectCounter<String>
         ObjectCounter<String> countries = new ObjectCounter<String>();
         ObjectCounter<String> transports = new ObjectCounter<String>();
 
-        if (mRContext.netDb().isInitialized()) {
+        if (mRContext != null && mRContext.netDb() != null && mRContext.netDb().isInitialized()) {
             Hash us = mRContext.routerHash();
 
             Set<RouterInfo> routers = new TreeSet<RouterInfo>(new RouterInfoComparator());
