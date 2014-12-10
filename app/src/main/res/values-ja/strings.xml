@@ -26,6 +26,9 @@
   <string name="button_router_on">I2P を起動中 (長押しで中止)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="no_client_tunnels_running">まだクライアントトンネルは起動していません。</string>
+  <string name="configure_browser_title">ブラウザの設定をしますか？</string>
+  <string name="configure_browser_for_i2p">I2Pサイトを見るためにブラウザを設定しますか？(あとでヘルプメニューからも設定できます)</string>
   <string name="first_start_title">I2P のインストールおめでとうございます！</string>
   <string name="first_start_welcome"><b>I2P へようこそ！</b> I2P が立ち上がり、ピアを見つけるまで<b>我慢してください</b>。</string>
   <string name="first_start_read">待っている間、リリースノートとウェルカムページをお読みください。</string>
@@ -51,6 +54,7 @@
   <string name="action_reload_subscriptions">購読を再読込</string>
   <string name="router_not_running">ルーターが起動していません。</string>
   <string name="stats_not_ready">統計マネージャーはまだ準備出来ていません。後でやり直してください。</string>
+  <string name="configure_graphs">グラフ設定</string>
   <string name="graphs_not_ready">グラフが準備出来ていない、あるいはルーターが起動していません。後でもう一度やり直してください。</string>
   <string name="netdb_routers_empty">NetDB にルーターがありません。</string>
   <string name="netdb_leases_empty">NetDB にリースセットがありません。</string>
@@ -102,6 +106,7 @@
   <string name="settings_label_expl_backupQuantity">バックアップの数量</string>
   <string name="settings_summ_expl_backupQuantity">%s トンネル</string>
   <string name="settings_desc_expl_backupQuantity">トンネルバックアップの数</string>
+  <string name="settings_router_restart_required">設定を適用するためにI2Pを再起動してください</string>
   <string name="menu_about">アバウト</string>
   <string name="about_version">バージョン:</string>
   <string name="about_project">プロジェクトホーム:</string>
@@ -174,4 +179,10 @@
   <string name="i2ptunnel_view_target">ターゲット:</string>
   <string name="i2ptunnel_view_access_point">アクセスポイント:</string>
   <string name="i2ptunnel_view_autostart">自動開始</string>
+  <string name="copy_logs">ログをコピー</string>
+  <string name="i2p_android_error_logs">I2PAndroidエラーログ</string>
+  <string name="i2p_android_logs">I2PAndroidログ</string>
+  <string name="error_logs_copied_to_clipboard">エラーログはクリップボードにコピーされました</string>
+  <string name="logs_copied_to_clipboard">ログはクリップボードにコピーされました</string>
+  <string name="label_browser_configuration">ブラウザ設定</string>
 </resources>
