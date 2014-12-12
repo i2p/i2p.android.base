@@ -167,6 +167,10 @@
     <string name="i2ptunnel_type_streamrserver">Streamr server</string>
     <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
 
+    <string name="market_irc" translatable="false">market://search?q=pname:com.androirc</string>
+    <string name="install_recommended_app">Install recommended app?</string>
+    <string name="app_needed_for_this_tunnel_type">You need to install an app to use this tunnel. Would you like to install the recommended app?</string>
+
     <string name="i2ptunnel_not_initialized">Tunnels are not initialized yet, please reload in two minutes.</string>
     <string name="i2ptunnel_new_tunnel">New Tunnel</string>
     <string name="i2ptunnel_msg_config_saved">Configuration changes saved</string>

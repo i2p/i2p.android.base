@@ -1,6 +1,9 @@
 package net.i2p.android.i2ptunnel;
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -61,7 +64,27 @@ public class TunnelEntryAdapter extends ArrayAdapter<TunnelEntry> {
                 public void onClick(View view) {
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(tunnel.getTunnelLink(true)));
-                    getContext().startActivity(i);
+                    try {
+                        getContext().startActivity(i);
+                    } catch (ActivityNotFoundException e) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle(R.string.install_recommended_app)
+                                .setMessage(R.string.app_needed_for_this_tunnel_type)
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Uri uri = tunnel.getRecommendedAppForTunnel();
+                                        if (uri != null) {
+                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                            getContext().startActivity(intent);
+                                        }
+                                    }
+                                })
+                                .setNegativeButton(net.i2p.android.lib.client.R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                });
+                        builder.show();
+                    }
                 }
             });
         }

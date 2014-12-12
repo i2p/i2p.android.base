@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.widget.Toast;
 import net.i2p.android.i2ptunnel.util.TunnelConfig;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
@@ -231,6 +232,17 @@ public class TunnelEntry {
     public String getTunnelLink(boolean linkify) {
         if (isClient()) return getClientLink(linkify);
         else return getServerLink(linkify);
+    }
+
+    public Uri getRecommendedAppForTunnel() {
+        int resId = 0;
+        if ("ircclient".equals(mController.getType()))
+            resId = R.string.market_irc;
+
+        if (resId > 0)
+            return Uri.parse(mContext.getString(resId));
+        else
+            return null;
     }
 
     public String getDetails() {

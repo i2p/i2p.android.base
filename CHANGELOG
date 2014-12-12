@@ -1,5 +1,6 @@
 0.9.17.1
  * Fixed crashes in addressbook and netDb status page
+ * Fixed crash when opening an IRC client tunnel
  * Updated translations
 
 0.9.17 / 2014-12-01 / bcf947f433876f643e0f6dff81aac88848b797d3
