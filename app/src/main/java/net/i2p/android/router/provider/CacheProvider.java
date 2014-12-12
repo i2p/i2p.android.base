@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import net.i2p.android.apps.EepGetFetcher;
+import net.i2p.android.router.BuildConfig;
 import net.i2p.android.router.util.AppCache;
 import net.i2p.android.router.util.Util;
 
@@ -45,7 +46,7 @@ public class CacheProvider extends ContentProvider {
     //private static final String NONCE = Integer.toString(Math.abs((new java.util.Random()).nextInt()));
     private static final String NONCE = "0";
     private static final String SCHEME = "content";
-    public static final String AUTHORITY = "net.i2p.android";
+    public static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".provider";
     /** includes the nonce */
     public static final Uri CONTENT_URI = Uri.parse(SCHEME + "://" + AUTHORITY + '/' + NONCE);
 

@@ -20,7 +20,7 @@
         </service>
         <provider
             android:name=".provider.CacheProvider"
-            android:authorities="net.i2p.android" />
+            android:authorities="${applicationId}.provider" />
 
         <activity
             android:name=".MainActivity"
