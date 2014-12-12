@@ -1,0 +1,19 @@
+0.9.17.1
+ * Fixed crashes in addressbook and netDb status page
+ * Updated translations
+
+0.9.17 / 2014-12-01 / bcf947f433876f643e0f6dff81aac88848b797d3
+ * Migrated to the new Material design from Android Lollipop
+ * Added a browser configuration guide
+ * Improved the help screen
+ * Upgraded the I2P router to 0.9.17
+ * Various bug fixes and translation updates
+
+0.9.15.1 / 2014-10-16 / 9cc4e80134cf9becb3838ed3cc78e0bed1363165
+ * Fixed a configuration bug
+
+0.9.15 / 2014-10-16 / 9b51f78b791c28a580d57f1a5019c94493de6231
+ * Upgraded the I2P router to 0.9.15
+ * Added a help screen with some basic information
+ * Logs can now be copied to the clipboard
+ * Various user interface improvements and fixes
