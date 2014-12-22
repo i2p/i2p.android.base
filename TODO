@@ -3,6 +3,15 @@
 - Better twopane column widths
     <zzz> on the i2ptunnel and addressbook pages on the tablet, the columns are too skinny, they aren't as wide as the tab
     <zzz> only a few addressbook entries wrap but on i2ptunnel everything is wrapped and most of the screen is empty
+- Create tunnel wizard
+    <zzz> in the tunnel create wizard:
+    <zzz> 'this could be the full base 64 destination key, or an i2p url from your address book"
+    <zzz> 'host name' better than 'URL'. Technically speaking, a host name is not a URL
+    <zzz> hmm would be nice if they could be shared-client or have an option
+    <zzz> was setting up email tunnels
+- I2PTunnel details
+    <zzz> on the i2ptunnel details, it lists both a 'target' and 'access point' for clients, with the same info
+    <zzz> generally we use 'target' for servers and 'access point' for clients, never both
 
 # Short-term
 
