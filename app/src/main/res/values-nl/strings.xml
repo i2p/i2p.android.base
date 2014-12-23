@@ -4,6 +4,7 @@
   <string name="desc_i2p_logo">I2P logo</string>
   <string name="welcome_new_install">Welkom op I2P! Deze app heeft de ALPHA status en het biedt geen sterke anonimiteit. Lees de releaseopmerkingen en licentie-informatie.</string>
   <string name="welcome_new_version">Nieuwe versie geïnstalleerd. Lees de releaseopmerkingen. Versie:</string>
+  <string name="label_home">Instellingen en Status</string>
   <string name="label_tunnels">Tunnels</string>
   <string name="label_status">Status</string>
   <string name="label_addressbook">Adresboek</string>
@@ -24,7 +25,10 @@
   <string name="button_router_off">Lang drukken om I2P te starten</string>
   <string name="button_router_on">I2P is actief (lang drukken om te stoppen)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">S</string>
+  <string name="no_client_tunnels_running">Er draaien nog geen client tunnels.</string>
   <string name="configure_browser_title">Browser instellen?</string>
   <string name="first_start_title">Gefeliciteerd met de installatie van I2P!</string>
   <string name="first_start_welcome"><b>Welkom bij I2P! Heb geduld alstublieft</b> terwijl I2P opstart en peers zoekt.</string>
@@ -56,6 +60,7 @@
   <string name="netdb_leases_empty">Geen LeaseSets in je NetDB.</string>
   <string name="notification_status_bw">Bandbreedte: %1$s KBps down / %2$s KBps up</string>
   <string name="notification_status_peers">Peers: %1$d actief, %2$d bekend</string>
+  <string name="notification_status_client">Cliënt tunnels: %1$d/%2$d</string>
   <string name="menu_settings">Instellingen</string>
   <string name="settings_enable">Inschakelen</string>
   <string name="settings_desc_subscriptions">URL\'s van abbonementen</string>
