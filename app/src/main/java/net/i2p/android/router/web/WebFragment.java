@@ -22,6 +22,7 @@ import net.i2p.android.router.R;
 public class WebFragment extends I2PFragmentBase {
 
     private I2PWebViewClient _wvClient;
+    private String _uriStr;
 
     public final static String HTML_URI = "html_url";
     public final static String HTML_RESOURCE_ID = "html_resource_id";
@@ -48,9 +49,9 @@ public class WebFragment extends I2PFragmentBase {
         wv.getSettings().setBuiltInZoomControls(true);
         // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855
         wv.getSettings().setUseWideViewPort(true);
-        String uriStr =  getArguments().getString(HTML_URI);
-        if (uriStr != null) {
-            Uri uri = Uri.parse(uriStr);
+        _uriStr =  getArguments().getString(HTML_URI);
+        if (_uriStr != null) {
+            Uri uri = Uri.parse(_uriStr);
             //wv.getSettings().setLoadsImagesAutomatically(true);
             //wv.loadUrl(uri.toString());
             // go thru the client so .i2p will work too
@@ -115,14 +116,18 @@ public class WebFragment extends I2PFragmentBase {
             _wvClient.cancelAll();
             wv.stopLoading();
             String url = wv.getUrl();
-            Uri uri = Uri.parse(url);
+            // If a resource, _uriStr == null but url != null (resource loads don't fail)
+            // If a URL, _uriStr != null and url might be null (if pageload failed)
+            if (url != null && (!url.equals(_uriStr)))
+                _uriStr = url;
+            Uri uri = Uri.parse(_uriStr);
             if ("data".equals(uri.getScheme())) {
                 // welcome page... or just do nothing ?
                 wv.reload();
             } else {
                 // wv.reload() doesn't call shouldOverrideUrlLoading(), so do it this way
-                _wvClient.deleteCurrentPageCache(wv);
-                _wvClient.shouldOverrideUrlLoading(wv, url);
+                _wvClient.deleteCurrentPageCache(wv, _uriStr);
+                _wvClient.shouldOverrideUrlLoading(wv, _uriStr);
             }
             return true;
 

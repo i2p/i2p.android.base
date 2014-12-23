@@ -194,8 +194,7 @@ public class I2PWebViewClient extends WebViewClient {
     /**
      *  This should always be a content url
      */
-    void deleteCurrentPageCache(WebView view) {
-        String url = view.getUrl();
+    void deleteCurrentPageCache(WebView view, String url) {
         Uri uri = Uri.parse(url);
         if (CONTENT.equals(uri.getScheme())) {
             try {
