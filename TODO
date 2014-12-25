@@ -12,9 +12,18 @@
 - I2PTunnel details
     <zzz> on the i2ptunnel details, it lists both a 'target' and 'access point' for clients, with the same info
     <zzz> generally we use 'target' for servers and 'access point' for clients, never both
+- Browser
+    <zzzccc> Bug report: i2p browser treats 302 as an error
+    <zzzccc> Bug 2: rotate screen in i2p browser seems to go back one page
 
 # Short-term
 
+- Graceful shutdown option
+    <zzzccc> Request: graceful shutdown
+- I2PTunnel additions
+    <zzzccc> Req: postman email tunnels by default
+    <zzzccc> Shared, delay open, etc like irc
+    <zzzccc> B/c manually added ones are not
 - Disable uPnP when on cell networks
     <zzz> spewing UPnP out into cell networks is a waste of time at best and a security risk at worst, but you really want it for wifi
 - Display release notes directly on new router version
