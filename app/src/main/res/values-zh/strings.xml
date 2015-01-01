@@ -141,6 +141,8 @@
   <string name="i2ptunnel_type_streamrclient">Streamr 客戶端</string>
   <string name="i2ptunnel_type_streamrserver">Streamr 服务器</string>
   <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
+  <string name="install_recommended_app">安装推荐的应用？</string>
+  <string name="app_needed_for_this_tunnel_type">您需要安装一个应用以使用此隧道。您想安装推荐的应用吗？</string>
   <string name="i2ptunnel_not_initialized">隧道未初始化完成, 请在两分钟后重新加载.</string>
   <string name="i2ptunnel_new_tunnel">新隧道</string>
   <string name="i2ptunnel_msg_config_saved">配置更改已保存</string>

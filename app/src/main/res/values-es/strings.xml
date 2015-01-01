@@ -141,6 +141,8 @@
   <string name="i2ptunnel_type_streamrclient">Cliente Streamr</string>
   <string name="i2ptunnel_type_streamrserver">Servidor Streamr</string>
   <string name="i2ptunnel_type_httpbidirserver">HTTP bidireccional</string>
+  <string name="install_recommended_app">¿Instalar aplicación recomendada?</string>
+  <string name="app_needed_for_this_tunnel_type">Tiene que instalar una aplicación para usar este túnel. ¿Desea instalar la aplicación recomendada?</string>
   <string name="i2ptunnel_not_initialized">Los túneles no están inicializados aún, por favor vuelva a cargar en dos minutos.</string>
   <string name="i2ptunnel_new_tunnel">Nuevo túnel</string>
   <string name="i2ptunnel_msg_config_saved">Se guardaron los cambios en la configuración </string>
