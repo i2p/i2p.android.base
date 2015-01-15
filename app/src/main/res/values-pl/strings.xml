@@ -2,7 +2,7 @@
 <resources>
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">Logo I2P</string>
-  <string name="welcome_new_install">Witamy w I2P! Ta aplikacja jest w fazie ALPHA i nie zapewnia mocnej anonimowości. Zalecamy zapoznanie się z listą zmian i licencją. </string>
+  <string name="welcome_new_install">Witamy w I2P! Aplikacja jest w fazie ALPHA i nie zapewnia mocnej anonimowości. Zalecamy zapoznanie się z listą zmian i licencją. </string>
   <string name="welcome_new_version">Nowa wersja zainstalowana. Przeczytaj listę zmian. Wersja:</string>
   <string name="label_home">Kontrola i Status</string>
   <string name="label_tunnels">Tunele</string>
@@ -12,7 +12,7 @@
   <string name="label_i2ptunnel_client">Tunele klienta</string>
   <string name="label_i2ptunnel_server">Tunele serwerów</string>
   <string name="label_logs">Logi</string>
-  <string name="label_error_logs">Rejestr błędów</string>
+  <string name="label_error_logs">Logi błędów</string>
   <string name="label_info_and_pages">Informacje i strony</string>
   <string name="label_welcome_page">Strona Powitalna</string>
   <string name="label_news">Wiadomości</string>
@@ -22,15 +22,20 @@
   <string name="label_nonanon_info">Nie Anonimowe Informacje</string>
   <string name="label_browse">Przeglądaj</string>
   <string name="label_graphs">Wykresy</string>
-  <string name="button_router_off">Dotknij na dłużej aby uruchomić I2P</string>
+  <string name="button_router_off">Przytrzymaj dłużej, aby uruchomić I2P</string>
   <string name="button_router_on">I2P jest włączone (dotknij na dłużej aby zatrzymać)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
-  <string name="first_start_title">Gratulacje w zainstalowaniu I2P!</string>
+  <string name="char_server_tunnel">S</string>
+  <string name="no_client_tunnels_running">Jeszcze żadne tunele klienta nie są uruchomione.</string>
+  <string name="configure_browser_title">Konfigurować przeglądarkę?</string>
+  <string name="configure_browser_for_i2p">Czy chciałbyś skonfigurować przeglądarkę, aby przeglądać strony I2P? (Możesz to zrobić później w wybierająć pomoc z menu.)</string>
+  <string name="first_start_title">Gratulacje, zainstalowałeś I2P!</string>
   <string name="first_start_welcome"><b>Witamy w I2P!</b> Proszę <b>bądz cierpliwy</b> bo I2P właśnie się uruchamia i szuka peerów.</string>
   <string name="first_start_read">W międzyczasie, prosimy o zapoznanie się z notatkami tego wydania oraz stroną powitalną.</string>
-  <string name="first_start_faq">Kiedy będziesz miał tunele klienta proszę <b>sprawdź</b> nasze FAQ:</string>
-  <string name="first_start_faq_nonanon">Also użyj tych nie-anonimowych linków jeśli nie chcesz czekać na tunele:</string>
+  <string name="first_start_faq">Kiedy już będziesz miał tunele klienta proszę <b>sprawdź</b> nasze FAQ:</string>
+  <string name="first_start_faq_nonanon">Also użyj tego nie-anonimowego linka jeśli nie chcesz czekać na tunele:</string>
   <string name="first_start_irc">Skieruj swojego klienta IRC do <b>localhost:6668</b> i przywitaj się z nami na.</string>
   <string name="drawer_open">Otwórz nawigację</string>
   <string name="drawer_close">Zamknij nawigację</string>
@@ -40,8 +45,8 @@
   <string name="action_delete">Usuń</string>
   <string name="action_router_start">Uruchom Router</string>
   <string name="action_router_stop">Zatrzymaj Router</string>
-  <string name="action_i2ptunnel_start">Włącz tunel</string>
-  <string name="action_i2ptunnel_stop">Wyłącz tunel</string>
+  <string name="action_i2ptunnel_start">Uruchom tunel</string>
+  <string name="action_i2ptunnel_stop">Zatrzymaj tunel</string>
   <string name="action_i2ptunnel_start_all">Uruchom wszystkie tunele</string>
   <string name="action_i2ptunnel_stop_all">Zatrzymaj wszystkie tunele</string>
   <string name="action_i2ptunnel_restart_all">Zrestartuj wszystkie tunele</string>
@@ -73,10 +78,10 @@
   <string name="settings_label_hiddenMode">Uczestnictwo</string>
   <string name="settings_desc_hiddenMode">Wyłącz tryp ukryty</string>
   <string name="settings_label_maxPartTunnels">Maksymalna liczba uczestniczących tuneli</string>
-  <string name="settings_desc_maxPartTunnels">Maksaymalna liczba tuneli uczestniczących w (domyślne=20)</string>
-  <string name="settings_dialog_maxPartTunnels">Maksymalna liczba tuneli uczestniczących w</string>
-  <string name="settings_label_sharePercent">Udział procentowy</string>
-  <string name="settings_desc_sharePercent">Udział procentowy przepustowości do podziału (domyślne=80)</string>
+  <string name="settings_desc_maxPartTunnels">Maksaymalna liczba tuneli uczestniczących (domyślnie=20)</string>
+  <string name="settings_dialog_maxPartTunnels">Maksymalna liczba tuneli uczestniczących</string>
+  <string name="settings_label_sharePercent">Procent podziału</string>
+  <string name="settings_desc_sharePercent">Procent przepustowości do podziału (domyślnie=80)</string>
   <string name="settings_dialog_sharePercent">Procent przepustowości do podziału</string>
   <string name="settings_desc_upnp">Otwórz porty firewall\'a automatycznie</string>
   <string name="settings_label_logging">Logowanie</string>
@@ -97,29 +102,31 @@
   <string name="settings_desc_expl_length">Ile użyć skoków</string>
   <string name="settings_label_expl_lengthVariance">Wariancje skoków</string>
   <string name="settings_summ_expl_lengthVariance">%s</string>
-  <string name="settings_desc_expl_lengthVariance">Ile skoków losowych dodać</string>
+  <string name="settings_desc_expl_lengthVariance">Ile dodać losowych skoków</string>
   <string name="settings_label_expl_quantity">Ilość</string>
   <string name="settings_summ_expl_quantity">%s tunelów</string>
   <string name="settings_desc_expl_quantity">Ile tunelów</string>
   <string name="settings_label_expl_backupQuantity">Ilość kopii zapasowych</string>
   <string name="settings_summ_expl_backupQuantity">%s tunelów</string>
   <string name="settings_desc_expl_backupQuantity">Ilość kopii zapasowych tuneli</string>
+  <string name="settings_router_restart_required">Proszę zrestartuj I2P, aby zmiany weszły w życie.</string>
   <string name="menu_about">O programie</string>
   <string name="about_version">Wersja:</string>
   <string name="about_project">Strona Projektu:</string>
   <string name="about_bugs">Błędy i wsparcie:</string>
   <string name="about_helpwanted">Potrzebna pomoc!</string>
   <string name="about_volunteer">Chcesz pomóc w ulepszeniu tej aplikacji? Zgłoś się na ochotnika na forum Android:</string>
-  <string name="about_donate">Chcesz przesłać pieniądze lub bitcoiny aby zakupić więcej Androidów dla rozwoju i testowania? Idź do:</string>
+  <string name="about_donate">Chcesz przesłać pieniądze lub bitcoiny, aby zakupić więcej Androidów dla rozwoju i testowania? Idź do:</string>
   <string name="menu_help">Pomoc</string>
+  <string name="general">Ogólne</string>
   <string name="addressbook_search_header">%s znaleziono</string>
   <string name="addressbook_add_wizard_k_name">Nazwa</string>
-  <string name="addressbook_add_wizard_k_destination">Miejsce przeznaczenia</string>
+  <string name="addressbook_add_wizard_k_destination">Przeznaczenie</string>
   <string name="addressbook_add_wizard_desc_name">Nazwa</string>
-  <string name="addressbook_add_wizard_desc_destination">Wklej B64 miejsca przeznaczenia tutaj. Jeśli masz menadżer plików zainstalowany, to możesz przegladać pliki tekstowe zawierające B64.</string>
+  <string name="addressbook_add_wizard_desc_destination">Wklej B64 przeznaczenia tutaj. Jeśli masz zainstalowany menadżer plików to możesz przegladać pliki tekstowe zawierające B64.</string>
   <string name="nsu_iae_illegal_char">Nazwa hosta \"%1$s\" zawiera niedozwolony znak %2$s</string>
   <string name="nsu_iae_cannot_start_with">Nazwa hosta nie może zaczynać się od \"%s\"</string>
-  <string name="nsu_iae_cannot_end_with">Nazwa hosta nie może kończyć się \"%s\"</string>
+  <string name="nsu_iae_cannot_end_with">Nazwa hosta nie może kończyć się na \"%s\"</string>
   <string name="nsu_iae_cannot_contain">Nazwa hosta nie może zawierać \"%s\"</string>
   <string name="nsu_iae_requires_conversion">Nazwa hosta \"%s\" wymaga konwersji do ASCII, ale biblioteka konwersji jest niedostępna w tej wersji Android. </string>
   <string name="i2ptunnel_type_client">Standardowy klient</string>
@@ -134,9 +141,11 @@
   <string name="i2ptunnel_type_streamrclient">Klient Streamr</string>
   <string name="i2ptunnel_type_streamrserver">Serwer Streamr</string>
   <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
+  <string name="install_recommended_app">Zainstalować polecone aplikacje?</string>
+  <string name="app_needed_for_this_tunnel_type">Musisz zainstalować aplikację, aby użyć tego tunelu. Czy chcesz zainstalować tą aplikację?</string>
   <string name="i2ptunnel_not_initialized">Tunele nie są jeszcze zainicjowane, proszę odświeżyć za dwie minuty.</string>
   <string name="i2ptunnel_new_tunnel">Nowy tunel</string>
-  <string name="i2ptunnel_msg_config_saved">Zapisano zmiany konfiguracji</string>
+  <string name="i2ptunnel_msg_config_saved">Zmiany konfiguracji zostały zapisane</string>
   <string name="i2ptunnel_msg_config_save_failed">Nie udało zapisać się konfiguracji</string>
   <string name="i2ptunnel_msg_tunnel_starting">Uruchamianie tunelu</string>
   <string name="i2ptunnel_msg_tunnel_stopping">Zatrzymanie tunelu</string>
@@ -161,14 +170,14 @@
   <string name="review">Przegląd</string>
   <string name="enabled">Włączony</string>
   <string name="i2ptunnel_wizard_desc_name">Nazwa tunelu dla identyfikacji w liście tuneli.</string>
-  <string name="i2ptunnel_wizard_desc_desc">Opis tunelu. Ta opcja jest nieobowiązkowa i wyłącznie służąca do celów informacyjnych.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Wpisz przeznaczenie serwisu I2P z którym klient tunelu ma się połączyć. To może być pełna baza 64 przeznaczenia klucza, lub URL I2P z Twojej książki adresowej.</string>
-  <string name="i2ptunnel_wizard_desc_outproxies">Jeśli znasz jakieś wychodzące proxy dla tego typu tunelów (HTTP lub SOCKS), to wpisz je. Oddziel proxy przecinkami.</string>
-  <string name="i2ptunnel_wizard_desc_target_host">To jest IP z którego Twój serwis jest uruchomiony, zazwyczaj jest to te same urządzenie więc 127.0.0.1 jest wpisane automatycznie.</string>
+  <string name="i2ptunnel_wizard_desc_desc">Opis tunelu. Ta opcja jest nieobowiązkowa i służąca wyłącznie do celów informacyjnych.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Wpisz przeznaczenie serwisu I2P z którym klient tunelu ma się połączyć. To może być pełny klucz base 64 przeznaczenia, lub URL I2P z Twojej książki adresowej.</string>
+  <string name="i2ptunnel_wizard_desc_outproxies">Jeśli znasz jakieś wychodzące proxy dla tego typu tunelów (HTTP lub SOCKS), to je wpisz. Serwery proxy oddziel przecinkami.</string>
+  <string name="i2ptunnel_wizard_desc_target_host">To jest IP na którym Twój serwis jest uruchomiony, zazwyczaj jest to te same urządzenie więc 127.0.0.1 jest wpisane automatycznie.</string>
   <string name="i2ptunnel_wizard_desc_target_port">To jest port na którym Twój serwis akceptuje połączenia.</string>
-  <string name="i2ptunnel_wizard_desc_reachable_on">To limituje do czego komputery lub telefony mogą mięć dostęp w tunelu.</string>
-  <string name="i2ptunnel_wizard_desc_binding_port">To jest port z którego klient tunelu będzie miał dostęp lokalny. To jest także port klienta dla HTTP bidir serwera tunelu.</string>
-  <string name="i2ptunnel_wizard_desc_auto_start">Czy tunel powinien włączyć się automatycznie kiedy włączy się router?</string>
+  <string name="i2ptunnel_wizard_desc_reachable_on">To limituje do czego komputery lub telefony mogą mięć dostęp w tym tunelu.</string>
+  <string name="i2ptunnel_wizard_desc_binding_port">To jest port z którego klient tunelu będzie miał dostęp lokalnie. To jest także port klienta dla HTTP bidir serwera tunelu.</string>
+  <string name="i2ptunnel_wizard_desc_auto_start">Czy chcesz, aby tunel włączył się automatycznie kiedy uruchomi się router?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Utworzyć tunel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Utwórz tunel</string>
   <string name="i2ptunnel_view_type">Typ:</string>
@@ -176,4 +185,10 @@
   <string name="i2ptunnel_view_target">Cel:</string>
   <string name="i2ptunnel_view_access_point">Punkt dostępu:</string>
   <string name="i2ptunnel_view_autostart">Auto-start</string>
+  <string name="copy_logs">Kopiuj logi</string>
+  <string name="i2p_android_error_logs">Logi Błędów I2P Android</string>
+  <string name="i2p_android_logs">Logi Błędów I2P Android</string>
+  <string name="error_logs_copied_to_clipboard">Logi błędów zostały skopiowane do schowka</string>
+  <string name="logs_copied_to_clipboard">Logi zostały skopiowane do schowka</string>
+  <string name="label_browser_configuration">Konfiguracja przeglądarki</string>
 </resources>

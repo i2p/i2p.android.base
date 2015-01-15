@@ -25,7 +25,9 @@
   <string name="button_router_off">長押しして I2P を起動</string>
   <string name="button_router_on">I2P を起動中 (長押しで中止)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">S</string>
   <string name="no_client_tunnels_running">まだクライアントトンネルは起動していません。</string>
   <string name="configure_browser_title">ブラウザの設定をしますか？</string>
   <string name="configure_browser_for_i2p">I2Pサイトを見るためにブラウザを設定しますか？(あとでヘルプメニューからも設定できます)</string>
@@ -54,6 +56,7 @@
   <string name="action_reload_subscriptions">購読を再読込</string>
   <string name="router_not_running">ルーターが起動していません。</string>
   <string name="stats_not_ready">統計マネージャーはまだ準備出来ていません。後でやり直してください。</string>
+  <string name="no_graphs_configured">グラフは設定されていません。設定でどの統計をグラフにするか選択できます。すべての変更は60秒後に有効になります</string>
   <string name="configure_graphs">グラフ設定</string>
   <string name="graphs_not_ready">グラフが準備出来ていない、あるいはルーターが起動していません。後でもう一度やり直してください。</string>
   <string name="netdb_routers_empty">NetDB にルーターがありません。</string>
@@ -115,6 +118,7 @@
   <string name="about_volunteer">アプリの改善を手伝いたいですか？ Android フォーラム上でボランティア:</string>
   <string name="about_donate">開発や試験用にさらに Android デバイスを購入するために、お金や Bitcoin を寄付していただけますか？ こちらです:</string>
   <string name="menu_help">ヘルプ</string>
+  <string name="general">一般</string>
   <string name="addressbook_search_header">%s 検出</string>
   <string name="addressbook_add_wizard_k_name">名前</string>
   <string name="addressbook_add_wizard_k_destination">宛先</string>
@@ -137,6 +141,8 @@
   <string name="i2ptunnel_type_streamrclient">Streamr クライアント</string>
   <string name="i2ptunnel_type_streamrserver">Streamr サーバー</string>
   <string name="i2ptunnel_type_httpbidirserver">HTTP 双方向</string>
+  <string name="install_recommended_app">推奨アプリをインストールしますか？</string>
+  <string name="app_needed_for_this_tunnel_type">このトンネルを使用するには推奨アプリをインストールする必要があります。インストールしますか？</string>
   <string name="i2ptunnel_not_initialized">トンネルはまだ初期化されていません、2分後に再読み込みしてください。</string>
   <string name="i2ptunnel_new_tunnel">新規トンネル</string>
   <string name="i2ptunnel_msg_config_saved">構成の変更が保存されました</string>
