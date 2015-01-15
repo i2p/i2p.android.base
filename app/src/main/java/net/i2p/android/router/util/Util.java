@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import net.i2p.I2PAppContext;
+import net.i2p.android.router.I2PConstants;
 import net.i2p.data.DataHelper;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
@@ -25,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-public abstract class Util {
+public abstract class Util implements I2PConstants {
     public static String getOurVersion(Context ctx) {
         PackageManager pm = ctx.getPackageManager();
         String us = ctx.getPackageName();
@@ -143,9 +144,7 @@ public abstract class Util {
         // This loop avoids needing to convert each one, or even know it's type, or if it exists yet.
         while (iterator.hasNext()) {
             String x = iterator.next();
-            if ( x.startsWith("i2pandroid.")) // Skip over UI-related I2P Android settings
-                continue;
-            else if ( x.startsWith("stat.summaries.")) {
+            if ( x.startsWith("stat.summaries.")) {
                 String stat = x.substring("stat.summaries.".length());
                 String checked = all.get(x).toString();
                 if (checked.equals("true")) {
@@ -160,7 +159,7 @@ public abstract class Util {
                 String string = all.get(x).toString();
                 String inverted = Boolean.toString(!Boolean.parseBoolean(string));
                 routerProps.setProperty(x, inverted);
-            } else {
+            } else if ( !x.startsWith(ANDROID_PREF_PREFIX)) { // Skip over UI-related I2P Android settings
                 String string = all.get(x).toString();
                 routerProps.setProperty(x, string);
             }

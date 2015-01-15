@@ -83,6 +83,8 @@
     <string name="settings_enable">Enable</string>
     <string name="settings_desc_subscriptions">Subscription URLs</string>
     <string name="settings_label_bandwidth_net">Bandwidth and network</string>
+    <string name="settings_label_startOnBoot">Start I2P on Boot</string>
+    <string name="settings_desc_startOnBoot">Automatically connect to I2P when your Android device starts up</string>
     <string name="settings_label_bandwidth">Bandwidth</string>
     <string name="settings_label_bw_inbound">Inbound speed</string>
     <string name="settings_desc_bw_inbound">Maximum inbound speed</string>

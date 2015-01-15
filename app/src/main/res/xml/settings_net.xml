@@ -3,6 +3,12 @@
     <!--
     Keys and the default values from current installation:
     -->
+    <CheckBoxPreference
+        android:key="i2pandroid.startOnBoot"
+        android:defaultValue="false"
+        android:title="@string/settings_label_startOnBoot"
+        android:summary="@string/settings_desc_startOnBoot"
+        />
 
     <PreferenceCategory
         android:key="settings_bandwidth"
