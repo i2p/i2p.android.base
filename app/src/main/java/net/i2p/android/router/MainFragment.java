@@ -61,6 +61,12 @@ public class MainFragment extends I2PFragmentBase {
         public boolean shouldBeOn();
         public void onStartRouterClicked();
         public boolean onStopRouterClicked();
+        /** @since 0.9.18 */
+        public boolean isGracefulShutdownInProgress();
+        /** @since 0.9.18 */
+        public boolean onGracefulShutdownClicked();
+        /** @since 0.9.18 */
+        public boolean onCancelGracefulShutdownClicked();
     }
 
     @Override
@@ -118,8 +124,14 @@ public class MainFragment extends I2PFragmentBase {
                     updateOneShot();
                     checkFirstStart();
                 } else {
-                    if(mCallback.onStopRouterClicked()) {
-                        updateOneShot();
+                    if (mCallback.isGracefulShutdownInProgress()) {
+                        if(mCallback.onStopRouterClicked()) {
+                            updateOneShot();
+                        }
+                    } else {
+                        if(mCallback.onGracefulShutdownClicked()) {
+                            updateOneShot();
+                        }
                     }
                 }
                 return true;
@@ -197,6 +209,21 @@ public class MainFragment extends I2PFragmentBase {
 
         boolean isOn = mCallback.shouldBeOn();
         b.setChecked(isOn);
+        if (isOn && mCallback.isGracefulShutdownInProgress()) {
+            RouterContext ctx = getRouterContext();
+            if (ctx != null) {
+                // TODO
+                // Don't change text on this button... hide it,
+                // and add two more buttons, one for cancel and one for shutdown immediately.
+                long ms = ctx.router().getShutdownTimeRemaining();
+                if (ms > 1000) {
+                    b.setTextOn(getActivity().getResources().getString(R.string.button_router_graceful,
+                                                                       DataHelper.formatDuration(ms)));
+                } else {
+                    b.setTextOn("Stopping I2P");
+                }
+            }
+        }
 
         if (showOnOff && !isOn) {
             // Sometimes the final state message from the RouterService
@@ -249,6 +276,7 @@ public class MainFragment extends I2PFragmentBase {
                 newState == State.NETWORK_STOPPED) {
             lightImage.setImageResource(R.drawable.routerlogo_0);
         } else if (newState == State.STARTING ||
+                newState == State.GRACEFUL_SHUTDOWN ||
                 newState == State.STOPPING ||
                 newState == State.MANUAL_STOPPING ||
                 newState == State.MANUAL_QUITTING ||
