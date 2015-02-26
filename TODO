@@ -18,7 +18,6 @@
 
 # Short-term
 
-- "Start on Boot" option
 - Graceful shutdown option
     <zzzccc> Request: graceful shutdown
 - Disable uPnP when on cell networks
