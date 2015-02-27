@@ -13,6 +13,7 @@ import net.i2p.data.DataHelper;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.transport.TransportManager;
+import net.i2p.router.transport.udp.UDPTransport;
 import net.i2p.util.OrderedProperties;
 
 import java.io.File;
@@ -125,6 +126,10 @@ public abstract class Util implements I2PConstants {
         }
     }
 
+    /** copied from various private components */
+    final static String PROP_I2NP_NTCP_PORT = "i2np.ntcp.port";
+    final static String PROP_I2NP_NTCP_AUTO_PORT = "i2np.ntcp.autoport";
+
     public static List<Properties> getPropertiesFromPreferences(Context context) {
         List<Properties> pList = new ArrayList<Properties>();
 
@@ -178,6 +183,14 @@ public abstract class Util implements I2PConstants {
             routerProps.setProperty("stat.summaries", buf.toString());
         }
 
+        String ntcpPort = routerProps.getProperty(PROP_I2NP_NTCP_PORT, "");
+        boolean ntcpAutoPort = Boolean.parseBoolean(
+                routerProps.getProperty(PROP_I2NP_NTCP_AUTO_PORT, "true"));
+        if (ntcpPort.length() == 0 || ntcpAutoPort) {
+            routerProps.remove(PROP_I2NP_NTCP_PORT);
+            toRemove.setProperty(PROP_I2NP_NTCP_PORT, "");
+        }
+
         pList.add(routerProps);
         pList.add(toRemove);
         pList.add(logSettings);
@@ -195,7 +208,11 @@ public abstract class Util implements I2PConstants {
         boolToAdd.put(TransportManager.PROP_ENABLE_UPNP, true);
         boolToAdd.put(TransportManager.PROP_ENABLE_NTCP, true);
         boolToAdd.put(TransportManager.PROP_ENABLE_UDP, true);
+        boolToAdd.put(PROP_I2NP_NTCP_AUTO_PORT, true);
         boolToAdd.put(Router.PROP_HIDDEN, false);
+
+        strToAdd.put(UDPTransport.PROP_INTERNAL_PORT, "unset");
+        strToAdd.put(PROP_I2NP_NTCP_PORT, "");
 
         booleanOptionsRequiringRestart.putAll(boolToAdd);
         stringOptionsRequiringRestart.putAll(strToAdd);
@@ -229,17 +246,17 @@ public abstract class Util implements I2PConstants {
             for (Map.Entry<String, Boolean> option : booleanOptionsRequiringRestart.entrySet()) {
                 String propName = option.getKey();
                 boolean defaultValue = option.getValue();
-                restartRequired |= (
-                        Boolean.parseBoolean(props.getProperty(propName, Boolean.toString(defaultValue))) !=
-                                (defaultValue ? rCtx.getBooleanPropertyDefaultTrue(propName) : rCtx.getBooleanProperty(propName))
-                );
+                boolean currentValue = defaultValue ? rCtx.getBooleanPropertyDefaultTrue(propName) : rCtx.getBooleanProperty(propName);
+                boolean newValue = Boolean.parseBoolean(props.getProperty(propName, Boolean.toString(defaultValue)));
+                restartRequired |= (currentValue != newValue);
             }
             if (!restartRequired) { // Cut out now if we already know the answer
                 for (Map.Entry<String, String> option : stringOptionsRequiringRestart.entrySet()) {
                     String propName = option.getKey();
                     String defaultValue = option.getValue();
-                    restartRequired |= props.getProperty(propName, defaultValue).equals(
-                            rCtx.getProperty(propName, defaultValue));
+                    String currentValue = rCtx.getProperty(propName, defaultValue);
+                    String newValue = props.getProperty(propName, defaultValue);
+                    restartRequired |= !currentValue.equals(newValue);
                 }
             }
         }
