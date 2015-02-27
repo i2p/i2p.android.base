@@ -1,23 +1,13 @@
 package net.i2p.android.router;
 
-import java.io.File;
-import java.util.List;
-import java.util.Properties;
-
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
-import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,8 +21,9 @@ import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Util;
-import net.i2p.router.RouterContext;
-import net.i2p.util.OrderedProperties;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
 
 public class MainActivity extends I2PActivityBase implements
         MainFragment.RouterControlListener {
@@ -244,24 +235,35 @@ public class MainActivity extends I2PActivityBase implements
     private static final int STATE_MSG = 1;
     private static final String MSG_DATA = "state";
 
-    private Handler mHandler = new Handler() {
+    private Handler mHandler = new StateHandler(new WeakReference<>(this));
+    private static class StateHandler extends Handler {
+        WeakReference<MainActivity> mReference;
+
+        public StateHandler(WeakReference<MainActivity> reference) {
+            mReference = reference;
+        }
+
         private State lastRouterState = null;
         @Override
         public void handleMessage(Message msg) {
+            MainActivity parent = mReference.get();
+            if (parent == null)
+                return;
+
             switch (msg.what) {
             case STATE_MSG:
                 State state = msg.getData().getParcelable(MSG_DATA);
                 if (lastRouterState == null || lastRouterState != state) {
-                    if (mMainFragment == null)
-                        mMainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment);
-                    if (mMainFragment != null) {
-                        mMainFragment.updateState(state);
+                    if (parent.mMainFragment == null)
+                        parent.mMainFragment = (MainFragment) parent.getSupportFragmentManager().findFragmentById(R.id.main_fragment);
+                    if (parent.mMainFragment != null) {
+                        parent.mMainFragment.updateState(state);
                         lastRouterState = state;
                     }
 
-                    if (state == State.RUNNING && mAutoStartFromIntent) {
-                        setResult(RESULT_OK);
-                        finish();
+                    if (state == State.RUNNING && parent.mAutoStartFromIntent) {
+                        parent.setResult(RESULT_OK);
+                        parent.finish();
                     }
                 }
                 break;
@@ -269,7 +271,7 @@ public class MainActivity extends I2PActivityBase implements
                 super.handleMessage(msg);
             }
         }
-    };
+    }
 
     private boolean canStart() {
         RouterService svc = _routerService;
