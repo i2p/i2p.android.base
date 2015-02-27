@@ -87,7 +87,7 @@ public class RouterService extends Service {
             Intent intent = new Intent(this, RouterService.class);
             intent.putExtra(EXTRA_RESTART, true);
             onStartCommand(intent, 12345, 67890);
-        } else if(lastState == State.MANUAL_QUITTING) {
+        } else if(lastState == State.MANUAL_QUITTING || lastState == State.GRACEFUL_SHUTDOWN) {
             synchronized(_stateLock) {
                 setState(State.MANUAL_QUITTED);
                 stopSelf(); // Die.
@@ -343,7 +343,7 @@ public class RouterService extends Service {
 
         public void run() {
             RouterContext ctx = _context;
-            if(ctx != null && (_state == State.RUNNING || _state == State.ACTIVE)) {
+            if(ctx != null && (_state == State.RUNNING || _state == State.ACTIVE || _state == State.GRACEFUL_SHUTDOWN)) {
                 Router router = ctx.router();
                 if(router.isAlive()) {
                     updateStatus(ctx);
@@ -472,7 +472,8 @@ public class RouterService extends Service {
                 && _state != State.STOPPING
                 && _state != State.MANUAL_STOPPING
                 && _state != State.MANUAL_QUITTING
-                && _state != State.NETWORK_STOPPING) {
+                && _state != State.NETWORK_STOPPING
+                && _state != State.GRACEFUL_SHUTDOWN) {
             return null;
         }
         return rv;
@@ -486,11 +487,15 @@ public class RouterService extends Service {
     }
 
     public boolean canManualStop() {
-        return _state == State.WAITING || _state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE;
+        return _state == State.WAITING || _state == State.STARTING ||
+               _state == State.RUNNING || _state == State.ACTIVE ||
+               _state == State.GRACEFUL_SHUTDOWN;
     }
 
     /**
      * Stop and don't restart the router, but keep the service
+     *
+     * Apparently unused - see manualQuit()
      */
     public void manualStop() {
         Util.d("manualStop called"
@@ -502,7 +507,8 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
+            if(_state == State.STARTING || _state == State.RUNNING ||
+               _state == State.ACTIVE || _state == State.GRACEFUL_SHUTDOWN) {
                 _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P");
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_STOPPING, State.MANUAL_STOPPED));
                 stopperThread.start();
@@ -523,7 +529,8 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
+            if(_state == State.STARTING || _state == State.RUNNING ||
+               _state == State.ACTIVE || _state == State.GRACEFUL_SHUTDOWN) {
                 _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P");
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_QUITTING, State.MANUAL_QUITTED));
                 stopperThread.start();
@@ -544,7 +551,8 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
+            if(_state == State.STARTING || _state == State.RUNNING ||
+               _state == State.ACTIVE || _state == State.GRACEFUL_SHUTDOWN) {
                 _statusBar.replace(StatusBar.ICON_STOPPING, "Network disconnected, stopping I2P");
                 // don't change state, let the shutdown hook do it
                 Thread stopperThread = new Thread(new Stopper(State.NETWORK_STOPPING, State.NETWORK_STOPPING));
@@ -571,6 +579,79 @@ public class RouterService extends Service {
             _starterThread.start();
         }
     }
+
+    /**
+     * Graceful Shutdown
+     *
+     * @since 0.9.18
+     */
+    public boolean isGracefulShutdownInProgress() {
+        if (_state == State.GRACEFUL_SHUTDOWN) {
+            RouterContext ctx = _context;
+            return ctx != null && ctx.router().gracefulShutdownInProgress();
+        }
+        return false;
+    }
+
+    /**
+     * Graceful Shutdown
+     *
+     * @since 0.9.18
+     */
+    public void gracefulShutdown() {
+        Util.d("gracefulShutdown called"
+                + " Current state is: " + _state);
+        synchronized(_stateLock) {
+            if(!canManualStop()) {
+                return;
+            }
+            if(_state == State.STARTING || _state == State.WAITING) {
+                manualQuit();
+                return;
+            }
+            if(_state == State.RUNNING || _state == State.ACTIVE) {
+                RouterContext ctx = _context;
+                if(ctx != null && ctx.router().isAlive()) {
+                    int part = ctx.tunnelManager().getParticipatingCount();
+                    if(part <= 0) {
+                        manualQuit();
+                    } else {
+                        ctx.router().shutdownGracefully();
+                        long ms = ctx.router().getShutdownTimeRemaining();
+                        if (ms > 1000) {
+                            _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P in " + DataHelper.formatDuration(ms));
+                        } else {
+                            _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P");
+                        }
+                        setState(State.GRACEFUL_SHUTDOWN);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Cancel Graceful Shutdown
+     *
+     * @since 0.9.18
+     */
+    public void cancelGracefulShutdown() {
+        Util.d("cancelGracefulShutdown called"
+                + " Current state is: " + _state);
+        synchronized(_stateLock) {
+            if(_state != State.GRACEFUL_SHUTDOWN) {
+                return;
+            }
+            RouterContext ctx = _context;
+            if(ctx != null && ctx.router().isAlive()) {
+               ctx.router().cancelGracefulShutdown();
+                _statusBar.replace(StatusBar.ICON_RUNNING, "Shutdown cancelled");
+                setState(State.RUNNING);
+            }
+        }
+    }
+
+
 
     // ******** end methods accessed from Activities and Receivers ************
 
@@ -631,7 +712,8 @@ public class RouterService extends Service {
             if(_state == State.STARTING) {
                 _starterThread.interrupt();
             }
-            if(_state == State.STARTING || _state == State.RUNNING || _state == State.ACTIVE) {
+            if(_state == State.STARTING || _state == State.RUNNING ||
+               _state == State.ACTIVE || _state == State.GRACEFUL_SHUTDOWN) {
                 // should this be in a thread?
                 _statusBar.replace(StatusBar.ICON_SHUTTING_DOWN, "I2P is shutting down");
                 Thread stopperThread = new Thread(new Stopper(State.STOPPING, State.STOPPED));
@@ -708,7 +790,8 @@ public class RouterService extends Service {
                     _starterThread.interrupt();
                 }
                 if(_state == State.WAITING || _state == State.STARTING
-                        || _state == State.RUNNING || _state == State.ACTIVE) {
+                        || _state == State.RUNNING || _state == State.ACTIVE
+                        || _state == State.GRACEFUL_SHUTDOWN) {
                     setState(State.STOPPING);
                 }
             }
@@ -750,7 +833,7 @@ public class RouterService extends Service {
                         mStateCallbacks.kill();
                         stopForeground(true);
                         stopSelf();
-                    } else if(_state == State.MANUAL_QUITTING) {
+                    } else if(_state == State.MANUAL_QUITTING || _state == State.GRACEFUL_SHUTDOWN) {
                         setState(State.MANUAL_QUITTED);
                         // Unregister all callbacks.
                         mStateCallbacks.kill();
