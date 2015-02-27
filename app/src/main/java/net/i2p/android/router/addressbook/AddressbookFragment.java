@@ -249,27 +249,32 @@ public class AddressbookFragment extends ListFragment implements
 
     public Loader<List<AddressEntry>> onCreateLoader(int id, Bundle args) {
         return new AddressEntryLoader(getActivity(),
-                getRouterContext(), mBook, mCurFilter);
+                mRouterContextProvider, mBook, mCurFilter);
     }
 
     public void onLoadFinished(Loader<List<AddressEntry>> loader,
                                List<AddressEntry> data) {
         if (loader.getId() == (PRIVATE_BOOK.equals(mBook) ?
                 PRIVATE_LOADER_ID : ROUTER_LOADER_ID)) {
-            mAdapter.setData(data);
+            if (data == null)
+                setEmptyText(getResources().getString(
+                        R.string.router_not_running));
+            else {
+                mAdapter.setData(data);
 
-            TextView v = (TextView) getListView().findViewWithTag("addressbook_header");
-            if (mCurFilter != null)
-                v.setText(getActivity().getResources().getString(
-                        R.string.addressbook_search_header,
-                        data.size()));
-            else
-                v.setText("");
+                TextView v = (TextView) getListView().findViewWithTag("addressbook_header");
+                if (mCurFilter != null)
+                    v.setText(getActivity().getResources().getString(
+                            R.string.addressbook_search_header,
+                            data.size()));
+                else
+                    v.setText("");
 
-            if (isResumed()) {
-                setListShown(true);
-            } else {
-                setListShownNoAnimation(true);
+                if (isResumed()) {
+                    setListShown(true);
+                } else {
+                    setListShownNoAnimation(true);
+                }
             }
         }
     }

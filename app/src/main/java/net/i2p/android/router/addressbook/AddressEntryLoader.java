@@ -1,38 +1,43 @@
 package net.i2p.android.router.addressbook;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.TreeMap;
+import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 
+import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.android.router.util.Util;
 import net.i2p.client.naming.NamingService;
 import net.i2p.data.Destination;
 import net.i2p.router.RouterContext;
 
-import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TreeMap;
 
 public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
-    private RouterContext mRContext;
+    private I2PFragmentBase.RouterContextProvider mRContextProvider;
     private String mBook;
     private String mFilter;
     private List<AddressEntry> mData;
 
-    public AddressEntryLoader(Context context, RouterContext rContext,
+    public AddressEntryLoader(Context context, I2PFragmentBase.RouterContextProvider rContextProvider,
             String book, String filter) {
         super(context);
-        mRContext = rContext;
+        mRContextProvider = rContextProvider;
         mBook = book;
         mFilter = filter;
     }
 
     @Override
     public List<AddressEntry> loadInBackground() {
+        RouterContext routerContext = mRContextProvider.getRouterContext();
+        if (routerContext == null)
+            return null;
+
         // get the names
-        NamingService ns = NamingServiceUtil.getNamingService(mRContext, mBook);
+        NamingService ns = NamingServiceUtil.getNamingService(routerContext, mBook);
         Util.d("NamingService: " + ns.getName());
         // After router shutdown we get nothing... why?
         List<AddressEntry> ret = new ArrayList<AddressEntry>();
