@@ -233,7 +233,7 @@ class InitActivities {
      *  @param overrides local overrides or null
      */
     private void mergeResourceToFile(int resID, String f, Properties overrides) {
-        Util.mergeResourceToFile(ctx, myDir, f, resID, overrides);
+        Util.mergeResourceToFile(ctx, myDir, f, resID, overrides, null);
     }
 
     /**

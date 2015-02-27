@@ -28,6 +28,7 @@ import net.i2p.util.LogManager;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.SortedSet;
 
 public class SettingsActivity extends PreferenceActivity {
@@ -188,20 +189,23 @@ public class SettingsActivity extends PreferenceActivity {
     protected void onPause() {
         List<Properties> lProps = Util.getPropertiesFromPreferences(this);
         Properties props = lProps.get(0);
-        Properties logSettings = lProps.get(1);
+        Properties propsToRemove = lProps.get(1);
+        Properties logSettings = lProps.get(2);
 
-        boolean restartRequired = Util.checkAndCorrectRouterConfig(this, props);
+        Set toRemove = propsToRemove.keySet();
+
+        boolean restartRequired = Util.checkAndCorrectRouterConfig(this, props, toRemove);
 
         // Apply new config if we are running.
         RouterContext rCtx = Util.getRouterContext();
         if (rCtx != null) {
-            rCtx.router().saveConfig(props, null);
+            rCtx.router().saveConfig(props, toRemove);
 
             // Merge in new log settings
             saveLoggingChanges(rCtx, logSettings);
         } else {
             // Merge in new config settings, write the file.
-            Util.mergeResourceToFile(this, Util.getFileDir(this), "router.config", R.raw.router_config, props);
+            Util.mergeResourceToFile(this, Util.getFileDir(this), "router.config", R.raw.router_config, props, toRemove);
 
             // Merge in new log settings
             saveLoggingChanges(I2PAppContext.getGlobalContext(), logSettings);

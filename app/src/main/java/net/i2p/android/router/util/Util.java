@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -130,14 +131,16 @@ public abstract class Util implements I2PConstants {
         // Copy prefs
         Properties routerProps = new OrderedProperties();
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-
         // List to store stats for graphing
         List<String> statSummaries = new ArrayList<String>();
+
+        // Properties to remove
+        Properties toRemove = new OrderedProperties();
 
         // List to store Log settings
         Properties logSettings = new OrderedProperties();
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         Map<String, ?> all = preferences.getAll();
         Iterator<String> iterator = all.keySet().iterator();
         // get values from the Map and make them strings.
@@ -176,6 +179,7 @@ public abstract class Util implements I2PConstants {
         }
 
         pList.add(routerProps);
+        pList.add(toRemove);
         pList.add(logSettings);
 
         return pList;
@@ -208,9 +212,10 @@ public abstract class Util implements I2PConstants {
      * </li></ul>
      *
      * @param props a Properties object containing the router.config
+     * @param toRemove a Collection of properties that will be removed
      * @return true if the router needs to be restarted.
      */
-    public static boolean checkAndCorrectRouterConfig(Context context, Properties props) {
+    public static boolean checkAndCorrectRouterConfig(Context context, Properties props, Collection<String> toRemove) {
         // Disable UPnP on mobile networks, ignoring user's configuration
         // TODO disabled until changes elsewhere are finished
         //if (Connectivity.isConnectedMobile(context)) {
@@ -255,7 +260,7 @@ public abstract class Util implements I2PConstants {
      *  @param props properties to set
      */
     public static void writePropertiesToFile(Context ctx, String dir, String file, Properties props) {
-        mergeResourceToFile(ctx, dir, file, 0, props);
+        mergeResourceToFile(ctx, dir, file, 0, props, null);
     }
 
     /**
@@ -266,8 +271,10 @@ public abstract class Util implements I2PConstants {
      *  @param file relative to dir
      *  @param resID the ID of the default resource, or 0
      *  @param userProps local properties or null
+     *  @param toRemove properties to remove, or null
      */
-    public static void mergeResourceToFile(Context ctx, String dir, String file, int resID, Properties userProps) {
+    public static void mergeResourceToFile(Context ctx, String dir, String file, int resID,
+                                           Properties userProps, Collection<String> toRemove) {
         InputStream fin = null;
         InputStream in = null;
 
@@ -296,6 +303,11 @@ public abstract class Util implements I2PConstants {
             // override with user settings
             if (userProps != null)
                 props.putAll(userProps);
+            if (toRemove != null) {
+                for (String key : toRemove) {
+                    props.remove(key);
+                }
+            }
 
             File path = new File(dir, file);
             DataHelper.storeProps(props, path);
