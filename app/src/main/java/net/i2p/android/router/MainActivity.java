@@ -315,4 +315,32 @@ public class MainActivity extends I2PActivityBase implements
         }
         return false;
     }
+
+    /** @since 0.9.18 */
+    public boolean isGracefulShutdownInProgress() {
+        RouterService svc = _routerService;
+        return svc != null && svc.isGracefulShutdownInProgress();
+    }
+
+    /** @since 0.9.18 */
+    public boolean onGracefulShutdownClicked() {
+        RouterService svc = _routerService;
+        if(svc != null && _isBound) {
+            setPref(PREF_AUTO_START, false);
+            svc.gracefulShutdown();
+            return true;
+        }
+        return false;
+    }
+
+    /** @since 0.9.18 */
+    public boolean onCancelGracefulShutdownClicked() {
+        RouterService svc = _routerService;
+        if(svc != null && _isBound) {
+            setPref(PREF_AUTO_START, false);
+            svc.cancelGracefulShutdown();
+            return true;
+        }
+        return false;
+    }
 }

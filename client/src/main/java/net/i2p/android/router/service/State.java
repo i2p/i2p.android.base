@@ -19,7 +19,9 @@ public enum State implements Parcelable {
     // button, DO kill service when stopped, next: killSelf()
     MANUAL_QUITTING, MANUAL_QUITTED,
     // Stopped by listener (no network), next: WAITING (spin waiting for network)
-    NETWORK_STOPPING, NETWORK_STOPPED;
+    NETWORK_STOPPING, NETWORK_STOPPED,
+    /** @since 0.9.18 */
+    GRACEFUL_SHUTDOWN;
 
     @Override
     public int describeContents() {
