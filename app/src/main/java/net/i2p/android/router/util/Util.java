@@ -183,6 +183,8 @@ public abstract class Util implements I2PConstants {
             routerProps.setProperty("stat.summaries", buf.toString());
         }
 
+        String udpPort = routerProps.getProperty(UDPTransport.PROP_INTERNAL_PORT);
+
         String ntcpPort = routerProps.getProperty(PROP_I2NP_NTCP_PORT, "");
         boolean ntcpAutoPort = Boolean.parseBoolean(
                 routerProps.getProperty(PROP_I2NP_NTCP_AUTO_PORT, "true"));

@@ -17,8 +17,10 @@ import android.widget.Toast;
 
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.service.StatSummarizer;
+import net.i2p.android.router.util.IntEditTextPreference;
 import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
+import net.i2p.router.transport.udp.UDPTransport;
 import net.i2p.stat.FrequencyStat;
 import net.i2p.stat.Rate;
 import net.i2p.stat.RateStat;
@@ -57,6 +59,7 @@ public class SettingsActivity extends PreferenceActivity {
                 setupLoggingSettings(this, getPreferenceScreen(), Util.getRouterContext());
             } else if (ACTION_PREFS_ADVANCED.equals(action)) {
                 addPreferencesFromResource(R.xml.settings_advanced);
+                setupAdvancedSettings(this, getPreferenceScreen(), Util.getRouterContext());
             }
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             // Load the legacy preferences headers
@@ -151,6 +154,21 @@ public class SettingsActivity extends PreferenceActivity {
             noRouter.setTitle(R.string.router_not_running);
             ps.addPreference(noRouter);
             */
+        }
+    }
+
+    protected static void setupAdvancedSettings(Context context, PreferenceScreen ps, RouterContext ctx) {
+        if (ctx != null) {
+            IntEditTextPreference udpPort = (IntEditTextPreference) ps.findPreference(UDPTransport.PROP_INTERNAL_PORT);
+            IntEditTextPreference ntcpPort = (IntEditTextPreference) ps.findPreference("i2np.ntcp.port");
+
+            String udpCurrentPort = ctx.getProperty(UDPTransport.PROP_INTERNAL_PORT, "0");
+            udpPort.setText(udpCurrentPort);
+            String ntcpCurrentPort = ctx.getProperty("i2np.ntcp.port");
+            if (ntcpCurrentPort != null && ntcpCurrentPort.length() > 0)
+                ntcpPort.setText(ntcpCurrentPort);
+            else
+                ntcpPort.setText(udpCurrentPort);
         }
     }
 
@@ -254,6 +272,7 @@ public class SettingsActivity extends PreferenceActivity {
                 setupLoggingSettings(getActivity(), getPreferenceScreen(), Util.getRouterContext());
             } else if ("advanced".equals(settings)) {
                 addPreferencesFromResource(R.xml.settings_advanced);
+                setupAdvancedSettings(getActivity(), getPreferenceScreen(), Util.getRouterContext());
             }
         }
     }
