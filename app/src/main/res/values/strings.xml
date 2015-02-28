@@ -227,4 +227,6 @@
     <string name="logs_copied_to_clipboard">Logs copied to clipboard</string>
 
     <string name="label_browser_configuration">Browser configuration</string>
+
+    <string name="unset">Unset</string>
 </resources>

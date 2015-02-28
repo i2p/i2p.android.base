@@ -22,7 +22,6 @@
     <zzzccc> Request: graceful shutdown
 - Disable uPnP when on cell networks
     <zzz> spewing UPnP out into cell networks is a waste of time at best and a security risk at worst, but you really want it for wifi
-- Setting for TCP and UDP ports
 - I2PTunnel
   - Show all messages somewhere
   - Improve detail page, expose advanced settings

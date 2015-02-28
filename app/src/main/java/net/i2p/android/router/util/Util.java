@@ -183,12 +183,16 @@ public abstract class Util implements I2PConstants {
             routerProps.setProperty("stat.summaries", buf.toString());
         }
 
-        String udpPort = routerProps.getProperty(UDPTransport.PROP_INTERNAL_PORT);
-
-        String ntcpPort = routerProps.getProperty(PROP_I2NP_NTCP_PORT, "");
+        // See net.i2p.router.web.ConfigNetHandler.saveChanges()
+        int udpPort = Integer.parseInt(routerProps.getProperty(UDPTransport.PROP_INTERNAL_PORT, "-1"));
+        System.out.println("UDP port: " + udpPort);
+        if (udpPort <= 0)
+            routerProps.remove(UDPTransport.PROP_INTERNAL_PORT);
+        int ntcpPort = Integer.parseInt(routerProps.getProperty(PROP_I2NP_NTCP_PORT, "-1"));
+        System.out.println("NTCP port: " + ntcpPort);
         boolean ntcpAutoPort = Boolean.parseBoolean(
                 routerProps.getProperty(PROP_I2NP_NTCP_AUTO_PORT, "true"));
-        if (ntcpPort.length() == 0 || ntcpAutoPort) {
+        if (ntcpPort <= 0 || ntcpAutoPort) {
             routerProps.remove(PROP_I2NP_NTCP_PORT);
             toRemove.setProperty(PROP_I2NP_NTCP_PORT, "");
         }
@@ -213,8 +217,8 @@ public abstract class Util implements I2PConstants {
         boolToAdd.put(PROP_I2NP_NTCP_AUTO_PORT, true);
         boolToAdd.put(Router.PROP_HIDDEN, false);
 
-        strToAdd.put(UDPTransport.PROP_INTERNAL_PORT, "unset");
-        strToAdd.put(PROP_I2NP_NTCP_PORT, "");
+        strToAdd.put(UDPTransport.PROP_INTERNAL_PORT, "-1");
+        strToAdd.put(PROP_I2NP_NTCP_PORT, "-1");
 
         booleanOptionsRequiringRestart.putAll(boolToAdd);
         stringOptionsRequiringRestart.putAll(strToAdd);

@@ -24,11 +24,9 @@
                 android:summary="DO NOT DISABLE THIS"
                 />
 
-            <net.i2p.android.router.util.IntEditTextPreference
-                android:defaultValue="0"
+            <net.i2p.android.router.util.PortPreference
                 android:dependency="@string/PROP_ENABLE_UDP"
                 android:key="@string/PROP_UDP_INTERNAL_PORT"
-                android:summary="%s"
                 android:title="UDP port"/>
 
             <!--
@@ -65,11 +63,9 @@
             android:title="Auto-set port"
             />
 
-        <net.i2p.android.router.util.IntEditTextPreference
-            android:defaultValue="0"
+        <net.i2p.android.router.util.PortPreference
             android:dependency="@string/PROP_I2NP_NTCP_AUTO_PORT"
             android:key="@string/PROP_I2NP_NTCP_PORT"
-            android:summary="%s"
             android:title="NTCP port"/>
     <!--
     i2np.ntcp.maxConnections=24
