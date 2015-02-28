@@ -20,7 +20,6 @@ import net.i2p.android.router.service.StatSummarizer;
 import net.i2p.android.router.util.IntEditTextPreference;
 import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
-import net.i2p.router.transport.udp.UDPTransport;
 import net.i2p.stat.FrequencyStat;
 import net.i2p.stat.Rate;
 import net.i2p.stat.RateStat;
@@ -159,12 +158,15 @@ public class SettingsActivity extends PreferenceActivity {
 
     protected static void setupAdvancedSettings(Context context, PreferenceScreen ps, RouterContext ctx) {
         if (ctx != null) {
-            IntEditTextPreference udpPort = (IntEditTextPreference) ps.findPreference(UDPTransport.PROP_INTERNAL_PORT);
-            IntEditTextPreference ntcpPort = (IntEditTextPreference) ps.findPreference("i2np.ntcp.port");
+            final String udpPortKey = context.getString(R.string.PROP_UDP_INTERNAL_PORT);
+            final String ntcpPortKey = context.getString(R.string.PROP_I2NP_NTCP_PORT);
 
-            String udpCurrentPort = ctx.getProperty(UDPTransport.PROP_INTERNAL_PORT, "0");
+            IntEditTextPreference udpPort = (IntEditTextPreference) ps.findPreference(udpPortKey);
+            IntEditTextPreference ntcpPort = (IntEditTextPreference) ps.findPreference(ntcpPortKey);
+
+            String udpCurrentPort = ctx.getProperty(udpPortKey, "0");
             udpPort.setText(udpCurrentPort);
-            String ntcpCurrentPort = ctx.getProperty("i2np.ntcp.port");
+            String ntcpCurrentPort = ctx.getProperty(ntcpPortKey);
             if (ntcpCurrentPort != null && ntcpCurrentPort.length() > 0)
                 ntcpPort.setText(ntcpCurrentPort);
             else

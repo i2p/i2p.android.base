@@ -18,7 +18,7 @@
             I might hide this one...
             -->
             <CheckBoxPreference
-                android:key="i2np.udp.enable"
+                android:key="@string/PROP_ENABLE_UDP"
                 android:defaultValue="true"
                 android:title="@string/settings_enable"
                 android:summary="DO NOT DISABLE THIS"
@@ -26,8 +26,8 @@
 
             <net.i2p.android.router.util.IntEditTextPreference
                 android:defaultValue="0"
-                android:dependency="i2np.udp.enable"
-                android:key="i2np.udp.internalPort"
+                android:dependency="@string/PROP_ENABLE_UDP"
+                android:key="@string/PROP_UDP_INTERNAL_PORT"
                 android:summary="%s"
                 android:title="UDP port"/>
 
@@ -35,14 +35,14 @@
             i2np.udp.maxConnections=12
             -->
             <com.hlidskialf.android.preference.SeekBarPreference
-                android:key="i2np.udp.maxConnections"
+                android:key="@string/PROP_UDP_MAX_CONNECTIONS"
                 android:defaultValue="32"
                 android:max="500"
                 android:title="@string/settings_label_maxConns"
                 android:summary="Maximum UDP connections allowed"
                 android:dialogMessage="Maximum UDP connections"
                 android:text=" connections"
-                android:dependency="i2np.udp.enable"
+                android:dependency="@string/PROP_ENABLE_UDP"
                 android:shouldDisableView="true"
                 />
         </PreferenceCategory>
@@ -51,31 +51,31 @@
         android:key="settings_ntcp"
         android:title="NTCP">
     <CheckBoxPreference
-        android:key="i2np.ntcp.enable"
+        android:key="@string/PROP_ENABLE_NTCP"
         android:defaultValue="true"
         android:title="@string/settings_enable"
         />
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:dependency="i2np.ntcp.enable"
+            android:dependency="@string/PROP_ENABLE_NTCP"
             android:disableDependentsState="true"
-            android:key="i2np.ntcp.autoport"
+            android:key="@string/PROP_I2NP_NTCP_AUTO_PORT"
             android:summary="Use same port as UDP"
             android:title="Auto-set port"
             />
 
         <net.i2p.android.router.util.IntEditTextPreference
             android:defaultValue="0"
-            android:dependency="i2np.ntcp.autoport"
-            android:key="i2np.ntcp.port"
+            android:dependency="@string/PROP_I2NP_NTCP_AUTO_PORT"
+            android:key="@string/PROP_I2NP_NTCP_PORT"
             android:summary="%s"
             android:title="NTCP port"/>
     <!--
     i2np.ntcp.maxConnections=24
     -->
     <com.hlidskialf.android.preference.SeekBarPreference
-        android:key="i2np.ntcp.maxConnections"
+        android:key="@string/PROP_NTCP_MAX_CONNECTIONS"
         android:defaultValue="32"
         android:max="250"
         android:title="@string/settings_label_maxConns"
@@ -112,7 +112,7 @@
     router.inboundPool.length=1
     -->
     <ListPreference
-        android:key="router.inboundPool.length"
+        android:key="@string/PROP_INBOUND_EXPLORATORY_LENGTH"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_length"
@@ -125,7 +125,7 @@
     router.inboundPool.lengthVariance=1
     -->
     <ListPreference
-        android:key="router.inboundPool.lengthVariance"
+        android:key="@string/PROP_INBOUND_EXPLORATORY_LENGTH_VARIANCE"
         android:entries="@array/setting2to2"
         android:entryValues="@array/setting2to2"
         android:title="@string/settings_label_expl_lengthVariance"
@@ -139,7 +139,7 @@
     router.inboundPool.quantity=2
     -->
     <ListPreference
-        android:key="router.inboundPool.quantity"
+        android:key="@string/PROP_INBOUND_EXPLORATORY_QUANTITY"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_quantity"
@@ -152,7 +152,7 @@
     router.inboundPool.backupQuantity=0
     -->
     <ListPreference
-        android:key="router.inboundPool.backupQuantity"
+        android:key="@string/PROP_INBOUND_EXPLORATORY_BACKUP_QUANTITY"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_backupQuantity"
@@ -169,7 +169,7 @@
     router.outboundPool.length=1
     -->
     <ListPreference
-        android:key="router.outboundPool.length"
+        android:key="@string/PROP_OUTBOUND_EXPLORATORY_LENGTH"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_length"
@@ -182,7 +182,7 @@
     router.outboundPool.lengthVariance=1
     -->
     <ListPreference
-        android:key="router.outboundPool.lengthVariance"
+        android:key="@string/PROP_OUTBOUND_EXPLORATORY_LENGTH_VARIANCE"
         android:entries="@array/setting2to2"
         android:entryValues="@array/setting2to2"
         android:title="@string/settings_label_expl_lengthVariance"
@@ -195,7 +195,7 @@
     router.outboundPool.quantity=2
     -->
     <ListPreference
-        android:key="router.outboundPool.quantity"
+        android:key="@string/PROP_OUTBOUND_EXPLORATORY_QUANTITY"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_quantity"
@@ -208,7 +208,7 @@
     router.outboundPool.backupQuantity=0
     -->
     <ListPreference
-        android:key="router.outboundPool.backupQuantity"
+        android:key="@string/PROP_OUTBOUND_EXPLORATORY_BACKUP_QUANTITY"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
         android:title="@string/settings_label_expl_backupQuantity"
