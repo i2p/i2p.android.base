@@ -141,6 +141,8 @@
   <string name="i2ptunnel_type_streamrclient">Streamr-klient</string>
   <string name="i2ptunnel_type_streamrserver">Streamr-tjener</string>
   <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
+  <string name="install_recommended_app">Installere anbefalt app?</string>
+  <string name="app_needed_for_this_tunnel_type">Du trenger å installere en app for å bruke denne tunnelen.  Vil du installere den anbefalte appen?</string>
   <string name="i2ptunnel_not_initialized">Tunneler er ikke klargjort enda, vennligst last inn på nytt om to minutter.</string>
   <string name="i2ptunnel_new_tunnel">Ny Tunnel</string>
   <string name="i2ptunnel_msg_config_saved">Konfigurasjonsendringer lagret</string>
