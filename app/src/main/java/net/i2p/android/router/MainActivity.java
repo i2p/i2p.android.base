@@ -301,7 +301,7 @@ public class MainActivity extends I2PActivityBase implements
             setPref(PREF_AUTO_START, true);
             svc.manualStart();
         } else {
-            (new File(_myDir, "wrapper.log")).delete();
+            (new File(Util.getFileDir(this), "wrapper.log")).delete();
             startRouter();
         }
     }
