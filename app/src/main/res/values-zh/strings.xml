@@ -69,6 +69,8 @@
   <string name="settings_enable">启用</string>
   <string name="settings_desc_subscriptions">订阅链接</string>
   <string name="settings_label_bandwidth_net">带宽和网络</string>
+  <string name="settings_label_startOnBoot">启动时启动 I2P</string>
+  <string name="settings_desc_startOnBoot">在您的 Android 设备启动时自动连接到 I2P</string>
   <string name="settings_label_bandwidth">带宽</string>
   <string name="settings_label_bw_inbound">入站速度</string>
   <string name="settings_desc_bw_inbound">最大入站速度</string>
