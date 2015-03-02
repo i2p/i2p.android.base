@@ -2,6 +2,8 @@ package net.i2p.android.help;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -24,6 +26,7 @@ public class HelpActivity extends ActionBarActivity implements
      * device.
      */
     private boolean mTwoPane;
+    private int mCategory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,9 +52,10 @@ public class HelpActivity extends ActionBarActivity implements
                     .commit();
         }
 
-        int category = getIntent().getIntExtra(CATEGORY, -1);
-        if (category >= 0)
-            showCategory(category);
+        mCategory = getIntent().getIntExtra(CATEGORY, -1);
+        if (mCategory >= 0) {
+            showCategory(mCategory);
+        }
     }
 
     @Override
@@ -64,7 +68,24 @@ public class HelpActivity extends ActionBarActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                if (mCategory >= 0) {
+                    onBackPressed();
+                } else {
+                    Intent upIntent = NavUtils.getParentActivityIntent(this);
+                    if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+                        // This activity is NOT part of this app's task, so create a new task
+                        // when navigating up, with a synthesized back stack.
+                        TaskStackBuilder.create(this)
+                                // Add all of this activity's parents to the back stack
+                                .addNextIntentWithParentStack(upIntent)
+                                        // Navigate up to the closest parent
+                                .startActivities();
+                    } else {
+                        // This activity is part of this app's task, so simply
+                        // navigate up to the logical parent activity.
+                        NavUtils.navigateUpTo(this, upIntent);
+                    }
+                }
                 return true;
             case R.id.menu_help_licenses:
                 Intent lic = new Intent(HelpActivity.this, LicenseActivity.class);
@@ -84,6 +105,13 @@ public class HelpActivity extends ActionBarActivity implements
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (mCategory >= 0)
+            mCategory = -1;
+    }
+
     // HelpListFragment.OnEntrySelectedListener
 
     @Override
@@ -91,8 +119,10 @@ public class HelpActivity extends ActionBarActivity implements
         if (entry == CAT_CONFIGURE_BROWSER) {
             Intent i = new Intent(this, BrowserConfigActivity.class);
             startActivity(i);
-        } else
+        } else {
+            mCategory = entry;
             showCategory(entry);
+        }
     }
 
     private void showCategory(int category) {
