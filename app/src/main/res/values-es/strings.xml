@@ -193,4 +193,5 @@
   <string name="error_logs_copied_to_clipboard">Los registros (logs) de errores se copiaron al portapapeles</string>
   <string name="logs_copied_to_clipboard">Los registros (logs) se copiaron al portapapeles</string>
   <string name="label_browser_configuration">Configuración del navegador</string>
+  <string name="unset">No configurado</string>
 </resources>

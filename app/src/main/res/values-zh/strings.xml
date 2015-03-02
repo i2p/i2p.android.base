@@ -193,4 +193,5 @@
   <string name="error_logs_copied_to_clipboard">错误日志已复制到剪贴板</string>
   <string name="logs_copied_to_clipboard">日志已复制到剪贴板</string>
   <string name="label_browser_configuration">浏览器配置</string>
+  <string name="unset">未设置</string>
 </resources>

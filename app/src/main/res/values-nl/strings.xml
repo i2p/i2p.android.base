@@ -69,6 +69,8 @@
   <string name="settings_enable">Inschakelen</string>
   <string name="settings_desc_subscriptions">URL\'s van abbonementen</string>
   <string name="settings_label_bandwidth_net">Bandbreedte en netwerk</string>
+  <string name="settings_label_startOnBoot">I2P starten bij opstarten van toestel</string>
+  <string name="settings_desc_startOnBoot">Automatisch verbinden met I2P wanneer je Android-toestel opstart</string>
   <string name="settings_label_bandwidth">Bandbreedte</string>
   <string name="settings_label_bw_inbound">Binnenkomende snelheid</string>
   <string name="settings_desc_bw_inbound">Maximale binnenkomende snelheid</string>
@@ -191,4 +193,5 @@
   <string name="error_logs_copied_to_clipboard">Error logs naar het klembord gekopieerd</string>
   <string name="logs_copied_to_clipboard">Logs naar het klembord gekopieerd</string>
   <string name="label_browser_configuration">Browserconfiguratie</string>
+  <string name="unset">Niet ingesteld</string>
 </resources>
