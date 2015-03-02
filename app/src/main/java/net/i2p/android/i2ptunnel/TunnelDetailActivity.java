@@ -1,8 +1,9 @@
 package net.i2p.android.i2ptunnel;
 
+import android.os.Bundle;
+
 import net.i2p.android.router.I2PActivityBase;
 import net.i2p.android.router.R;
-import android.os.Bundle;
 
 public class TunnelDetailActivity extends I2PActivityBase implements
         TunnelDetailFragment.OnTunnelDeletedListener {
@@ -10,6 +11,8 @@ public class TunnelDetailActivity extends I2PActivityBase implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDrawerToggle.setDrawerIndicatorEnabled(false);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         if (savedInstanceState == null) {
             int tunnelId = getIntent().getIntExtra(TunnelDetailFragment.TUNNEL_ID, 0);
