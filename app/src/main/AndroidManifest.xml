@@ -135,7 +135,7 @@
         </activity>
         <activity
             android:name="net.i2p.android.i2ptunnel.TunnelListActivity"
-            android:label="I2PTunnel"
+            android:label="@string/label_i2ptunnel"
             android:launchMode="singleTop"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -148,7 +148,7 @@
             android:parentActivityName="net.i2p.android.i2ptunnel.TunnelListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.i2p.android.router.i2ptunnel.TunnelListActivity" />
+                android:value="net.i2p.android.i2ptunnel.TunnelListActivity" />
         </activity>
         <activity
             android:name="net.i2p.android.i2ptunnel.TunnelWizardActivity"
