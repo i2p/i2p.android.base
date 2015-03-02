@@ -69,6 +69,8 @@
   <string name="settings_enable">활성화</string>
   <string name="settings_desc_subscriptions">구독 URL들</string>
   <string name="settings_label_bandwidth_net">대역폭과 네트워크</string>
+  <string name="settings_label_startOnBoot">부트시 I2P 실행</string>
+  <string name="settings_desc_startOnBoot">안드로이드 기기가 시작될 때 I2P에 자동으로 연결</string>
   <string name="settings_label_bandwidth">대역폭</string>
   <string name="settings_label_bw_inbound">수신 속도</string>
   <string name="settings_desc_bw_inbound">최대 수신 속도</string>
@@ -141,6 +143,8 @@
   <string name="i2ptunnel_type_streamrclient">Streamr 클라이언트</string>
   <string name="i2ptunnel_type_streamrserver">Streamr 서버</string>
   <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
+  <string name="install_recommended_app">권장 앱을 설치할까요?</string>
+  <string name="app_needed_for_this_tunnel_type">이 터널을 이용하기 위해서는 앱을 설치해야 합니다. 권장 앱을 설치할까요?</string>
   <string name="i2ptunnel_not_initialized">터널이 아직 시작되지 않았습니다. 2분 후에 다시 로드하세요.</string>
   <string name="i2ptunnel_new_tunnel">새 터널</string>
   <string name="i2ptunnel_msg_config_saved">설정 변경 저장됨</string>
@@ -189,4 +193,5 @@
   <string name="error_logs_copied_to_clipboard">클립보드에 오류 로그 복사됨</string>
   <string name="logs_copied_to_clipboard">클립보드에 로그 복사됨</string>
   <string name="label_browser_configuration">브라우저 설정</string>
+  <string name="unset">미설정</string>
 </resources>

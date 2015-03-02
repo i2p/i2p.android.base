@@ -8,7 +8,6 @@
   <string name="label_tunnels">Tunnel</string>
   <string name="label_status">Stato</string>
   <string name="label_addressbook">Rubrica</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">I tunnel del client</string>
   <string name="label_i2ptunnel_server">I tunnel del server</string>
   <string name="label_logs">Logs</string>

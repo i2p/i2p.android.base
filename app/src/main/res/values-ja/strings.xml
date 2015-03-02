@@ -8,7 +8,6 @@
   <string name="label_tunnels">トンネル</string>
   <string name="label_status">ステータス</string>
   <string name="label_addressbook">アドレス帳</string>
-  <string name="label_i2ptunnel">I2P トンネル</string>
   <string name="label_i2ptunnel_client">クライアントトンネル</string>
   <string name="label_i2ptunnel_server">サーバートンネル</string>
   <string name="label_logs">ログ</string>

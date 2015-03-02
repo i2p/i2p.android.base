@@ -7,7 +7,6 @@
   <string name="label_tunnels">Tunnelit</string>
   <string name="label_status">Tila</string>
   <string name="label_addressbook">Osoitekirja</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">Asiakastunnelit</string>
   <string name="label_i2ptunnel_server">Palvelintunnelit</string>
   <string name="label_logs">Lokitiedostot</string>
