@@ -126,6 +126,7 @@
     <string name="settings_summ_expl_backupQuantity">%s tunnels</string>
     <string name="settings_desc_expl_backupQuantity">How many tunnel backups</string>
 
+    <string name="settings_need_transport_enabled">You must have at least one transport enabled</string>
     <string name="settings_router_restart_required">Please restart I2P to apply the changes</string>
 
     <string name="menu_about">About</string>

@@ -63,18 +63,21 @@ public class SettingsActivity extends PreferenceActivity {
                 addPreferencesFromResource(R.xml.settings_advanced);
                 setupAdvancedSettings(this, getPreferenceScreen());
             }
-        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            // Load the legacy preferences headers
-            addPreferencesFromResource(R.xml.settings_headers_legacy);
+        } else {
             // Load any properties that the router might have changed on us.
-            setupPreferences(this, getPreferenceManager(), Util.getRouterContext());
+            setupPreferences(this, Util.getRouterContext());
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+                // Load the legacy preferences headers
+                addPreferencesFromResource(R.xml.settings_headers_legacy);
+            }
         }
 
         mToolbar.setTitle(getTitle());
     }
 
-    protected static void setupPreferences(Context context, PreferenceManager mgr, RouterContext ctx) {
-        if (mgr != null && ctx != null) {
+    protected static void setupPreferences(Context context, RouterContext ctx) {
+        if (ctx != null) {
             final String udpPortKey = context.getString(R.string.PROP_UDP_INTERNAL_PORT);
             final String ntcpPortKey = context.getString(R.string.PROP_I2NP_NTCP_PORT);
             final String ntcpAutoPortKey = context.getString(R.string.PROP_I2NP_NTCP_AUTO_PORT);
@@ -85,10 +88,16 @@ public class SettingsActivity extends PreferenceActivity {
             if (ntcpPort < 0 && ntcpAutoPort)
                 ntcpPort = udpPort;
 
-            SharedPreferences.Editor prefs = mgr.getSharedPreferences().edit();
-            prefs.putInt(udpPortKey, udpPort);
-            prefs.putInt(ntcpPortKey, ntcpPort);
-            prefs.apply();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            if (prefs.getInt(udpPortKey, -1) != udpPort ||
+                    prefs.getInt(ntcpPortKey, -1) != ntcpPort) {
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt(udpPortKey, udpPort);
+                editor.putInt(ntcpPortKey, ntcpPort);
+                // commit() instead of apply() because this needs to happen
+                // before SettingsActivity loads its Preferences.
+                editor.commit();
+            }
         }
     }
 
@@ -180,22 +189,42 @@ public class SettingsActivity extends PreferenceActivity {
         }
     }
 
-    protected static void setupAdvancedSettings(Context context, PreferenceScreen ps) {
+    protected static void setupAdvancedSettings(final Context context, PreferenceScreen ps) {
+        final String udpEnableKey = context.getString(R.string.PROP_ENABLE_UDP);
+        final String ntcpEnableKey = context.getString(R.string.PROP_ENABLE_NTCP);
         final String udpPortKey = context.getString(R.string.PROP_UDP_INTERNAL_PORT);
         final String ntcpPortKey = context.getString(R.string.PROP_I2NP_NTCP_PORT);
         final String ntcpAutoPortKey = context.getString(R.string.PROP_I2NP_NTCP_AUTO_PORT);
 
+        final CheckBoxPreference udpEnable = (CheckBoxPreference) ps.findPreference(udpEnableKey);
+        final CheckBoxPreference ntcpEnable = (CheckBoxPreference) ps.findPreference(ntcpEnableKey);
         final PortPreference udpPort = (PortPreference) ps.findPreference(udpPortKey);
         final PortPreference ntcpPort = (PortPreference) ps.findPreference(ntcpPortKey);
         final CheckBoxPreference ntcpAutoPort = (CheckBoxPreference) ps.findPreference(ntcpAutoPortKey);
 
-        ntcpAutoPort.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        udpEnable.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final Boolean checked = (Boolean) newValue;
-                if (checked)
-                    ntcpPort.setText(udpPort.getText());
-                return true;
+                if (checked || ntcpEnable.isChecked())
+                    return true;
+                else {
+                    Toast.makeText(context, R.string.settings_need_transport_enabled, Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            }
+        });
+
+        ntcpEnable.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final Boolean checked = (Boolean) newValue;
+                if (checked || udpEnable.isChecked())
+                    return true;
+                else {
+                    Toast.makeText(context, R.string.settings_need_transport_enabled, Toast.LENGTH_LONG).show();
+                    return false;
+                }
             }
         });
 
@@ -204,6 +233,16 @@ public class SettingsActivity extends PreferenceActivity {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (ntcpAutoPort.isChecked())
                     ntcpPort.setText((String) newValue);
+                return true;
+            }
+        });
+
+        ntcpAutoPort.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final Boolean checked = (Boolean) newValue;
+                if (checked)
+                    ntcpPort.setText(udpPort.getText());
                 return true;
             }
         });
@@ -217,8 +256,6 @@ public class SettingsActivity extends PreferenceActivity {
         // be true for -sw720dp devices, false otherwise. For your curiosity, in
         // Nexus 7 it is false.
         loadHeadersFromResource(R.xml.settings_headers, target);
-        // Load any properties that the router might have changed on us.
-        setupPreferences(this, getPreferenceManager(), Util.getRouterContext());
     }
 
     @Override

@@ -19,15 +19,8 @@ import net.i2p.router.Job;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.RouterLaunch;
-import net.i2p.util.OrderedProperties;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.Properties;
-import java.util.Random;
 
 /**
  * Runs the router
@@ -175,147 +168,7 @@ public class RouterService extends Service {
             //NativeBigInteger.main(null);
             //Util.d(MARKER + this + " JBigI speed test finished, launching router");
 
-
-            // Before we launch, fix up any settings that need to be fixed here.
-            // This should be done in the core, but as of this writing it isn't!
-
-            // Step one. Load the propertites.
-            Properties props = new OrderedProperties();
-            Properties oldprops = new OrderedProperties();
-            String wrapName = _myDir + "/router.config";
-            try {
-                InputStream fin = new FileInputStream(new File(wrapName));
-                DataHelper.loadProps(props, fin);
-            } catch(IOException ioe) {
-                // shouldn't happen...
-            }
-            oldprops.putAll(props);
-            // Step two, check for any port settings, and copy for those that are missing.
-            int UDPinbound;
-            int UDPinlocal;
-            int TCPinbound;
-            int TCPinlocal;
-            UDPinbound = Integer.parseInt(props.getProperty("i2np.udp.port", "-1"));
-            UDPinlocal = Integer.parseInt(props.getProperty("i2np.udp.internalPort", "-1"));
-            TCPinbound = Integer.parseInt(props.getProperty("i2np.ntcp.port", "-1"));
-            TCPinlocal = Integer.parseInt(props.getProperty("i2np.ntcp.internalPort", "-1"));
-            boolean hasUDPinbound = UDPinbound != -1;
-            boolean hasUDPinlocal = UDPinlocal != -1;
-            boolean hasTCPinbound = TCPinbound != -1;
-            boolean hasTCPinlocal = TCPinlocal != -1;
-
-            // check and clear values based on these:
-            boolean udp = Boolean.parseBoolean(props.getProperty("i2np.udp.enable", "false"));
-            boolean tcp = Boolean.parseBoolean(props.getProperty("i2np.ntcp.enable", "false"));
-
-            // Fix if both are false.
-            if(!(udp || tcp)) {
-                // If both are not on, turn them both on.
-                props.setProperty("i2np.udp.enable", "true");
-                props.setProperty("i2np.ntcp.enable", "true");
-            }
-
-            // Fix if we have local but no inbound
-            if(!hasUDPinbound && hasUDPinlocal) {
-                // if we got a local port and no external port, set it
-                hasUDPinbound = true;
-                UDPinbound = UDPinlocal;
-            }
-            if(!hasTCPinbound && hasTCPinlocal) {
-                // if we got a local port and no external port, set it
-                hasTCPinbound = true;
-                TCPinbound = TCPinlocal;
-            }
-
-            boolean anyUDP = hasUDPinbound || hasUDPinlocal;
-            boolean anyTCP = hasTCPinbound || hasTCPinlocal;
-            boolean anyport = anyUDP || anyTCP;
-
-            if(!anyport) {
-                // generate one for UDPinbound, and fall thru.
-                // FIX ME: Possibly not the best but should be OK.
-                Random generator = new Random(System.currentTimeMillis());
-                UDPinbound = generator.nextInt(55500) + 10000;
-                anyUDP = true;
-            }
-
-            // Copy missing port numbers
-            if(anyUDP && !anyTCP) {
-                TCPinbound = UDPinbound;
-                TCPinlocal = UDPinlocal;
-            }
-            if(anyTCP && !anyUDP) {
-                UDPinbound = TCPinbound;
-                UDPinlocal = TCPinlocal;
-            }
-            // reset for a retest.
-            hasUDPinbound = UDPinbound != -1;
-            hasUDPinlocal = UDPinlocal != -1;
-            hasTCPinbound = TCPinbound != -1;
-            hasTCPinlocal = TCPinlocal != -1;
-            anyUDP = hasUDPinbound || hasUDPinlocal;
-            anyTCP = hasTCPinbound || hasTCPinlocal;
-            boolean checkAnyUDP = anyUDP && udp;
-            boolean checkAnyTCP = anyTCP && tcp;
-
-            // Enable things that need to be enabled.
-            // Disable anything that needs to be disabled.
-            if(!checkAnyUDP && !checkAnyTCP) {
-                // enable the one(s) with values.
-                if(anyUDP) {
-                    udp = true;
-                }
-                if(anyTCP) {
-                    tcp = true;
-                }
-            }
-
-            if(!udp) {
-                props.setProperty("i2np.udp.enable", "false");
-                props.remove("i2np.udp.port");
-                props.remove("i2np.udp.internalPort");
-            } else {
-                props.setProperty("i2np.udp.enable", "true");
-                if(hasUDPinbound) {
-                    props.setProperty("i2np.udp.port", Integer.toString(UDPinbound));
-                } else {
-                    props.remove("i2np.udp.port");
-                }
-                if(hasUDPinlocal) {
-                    props.setProperty("i2np.udp.internalPort", Integer.toString(UDPinlocal));
-                } else {
-                    props.remove("i2np.udp.internalPort");
-                }
-            }
-
-            if(!tcp) {
-                props.setProperty("i2np.ntcp.enable", "false");
-                props.remove("i2np.ntcp.port");
-                props.remove("i2np.ntcp.internalPort");
-            } else {
-                props.setProperty("i2np.ntcp.enable", "true");
-                if(hasTCPinbound) {
-                    props.setProperty("i2np.ntcp.port", Integer.toString(TCPinbound));
-                } else {
-                    props.remove("i2np.ntcp.port");
-                }
-                if(hasTCPinlocal) {
-                    props.setProperty("i2np.ntcp.internalPort", Integer.toString(TCPinlocal));
-                } else {
-                    props.remove("i2np.ntcp.internalPort");
-                }
-            }
-            // WHEW! Now test for any changes.
-            if(!props.equals(oldprops)) {
-                // save fixed properties.
-                try {
-                    DataHelper.storeProps(props, new File(wrapName));
-                } catch(IOException ioe) {
-                    // shouldn't happen...
-                }
-            }
-
-            // _NOW_ launch the router!
+            // Launch the router!
             RouterLaunch.main(null);
             synchronized(_stateLock) {
                 if(_state != State.STARTING) {
