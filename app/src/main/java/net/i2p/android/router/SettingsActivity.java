@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.service.StatSummarizer;
-import net.i2p.android.router.util.IntEditTextPreference;
+import net.i2p.android.router.util.PortPreference;
 import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
 import net.i2p.stat.FrequencyStat;
@@ -161,10 +161,10 @@ public class SettingsActivity extends PreferenceActivity {
             final String udpPortKey = context.getString(R.string.PROP_UDP_INTERNAL_PORT);
             final String ntcpPortKey = context.getString(R.string.PROP_I2NP_NTCP_PORT);
 
-            IntEditTextPreference udpPort = (IntEditTextPreference) ps.findPreference(udpPortKey);
-            IntEditTextPreference ntcpPort = (IntEditTextPreference) ps.findPreference(ntcpPortKey);
+            PortPreference udpPort = (PortPreference) ps.findPreference(udpPortKey);
+            PortPreference ntcpPort = (PortPreference) ps.findPreference(ntcpPortKey);
 
-            String udpCurrentPort = ctx.getProperty(udpPortKey, "0");
+            String udpCurrentPort = ctx.getProperty(udpPortKey, "-1");
             udpPort.setText(udpCurrentPort);
             String ntcpCurrentPort = ctx.getProperty(ntcpPortKey);
             if (ntcpCurrentPort != null && ntcpCurrentPort.length() > 0)
