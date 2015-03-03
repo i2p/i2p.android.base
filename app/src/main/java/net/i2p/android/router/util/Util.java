@@ -185,11 +185,9 @@ public abstract class Util implements I2PConstants {
 
         // See net.i2p.router.web.ConfigNetHandler.saveChanges()
         int udpPort = Integer.parseInt(routerProps.getProperty(UDPTransport.PROP_INTERNAL_PORT, "-1"));
-        System.out.println("UDP port: " + udpPort);
         if (udpPort <= 0)
             routerProps.remove(UDPTransport.PROP_INTERNAL_PORT);
         int ntcpPort = Integer.parseInt(routerProps.getProperty(PROP_I2NP_NTCP_PORT, "-1"));
-        System.out.println("NTCP port: " + ntcpPort);
         boolean ntcpAutoPort = Boolean.parseBoolean(
                 routerProps.getProperty(PROP_I2NP_NTCP_AUTO_PORT, "true"));
         if (ntcpPort <= 0 || ntcpAutoPort) {

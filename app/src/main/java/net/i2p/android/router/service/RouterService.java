@@ -9,15 +9,6 @@ import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.DecimalFormat;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
-
 import net.i2p.android.router.R;
 import net.i2p.android.router.receiver.I2PReceiver;
 import net.i2p.android.router.util.Connectivity;
@@ -29,6 +20,14 @@ import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.RouterLaunch;
 import net.i2p.util.OrderedProperties;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.util.Properties;
+import java.util.Random;
 
 /**
  * Runs the router
