@@ -15,10 +15,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LogFragment extends ListFragment implements
         LoaderManager.LoaderCallbacks<List<String>> {
@@ -33,7 +34,7 @@ public class LogFragment extends ListFragment implements
     private static final int LEVEL_ALL = 2;
 
     OnEntrySelectedListener mEntrySelectedCallback;
-    private final List<String> mLogEntries = new ArrayList<String>();
+    private final List<String> mLogEntries = new ArrayList<>();
     private LogAdapter mAdapter;
     private TextView mHeaderView;
     private String mLogLevel;

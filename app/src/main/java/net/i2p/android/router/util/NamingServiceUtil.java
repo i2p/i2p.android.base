@@ -1,9 +1,5 @@
 package net.i2p.android.router.util;
 
-import java.net.IDN;
-import java.util.List;
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -17,6 +13,10 @@ import net.i2p.client.naming.NamingService;
 import net.i2p.data.DataFormatException;
 import net.i2p.data.Destination;
 import net.i2p.router.RouterContext;
+
+import java.net.IDN;
+import java.util.List;
+import java.util.Locale;
 
 public class NamingServiceUtil {
     private static final String DEFAULT_NS = "BlockfileNamingService";
@@ -106,7 +106,7 @@ public class NamingServiceUtil {
      * Ref: java.net.IDN and RFC 3940
      * @param host will be converted to lower case
      * @return name converted to lower case and punycoded if necessary
-     * @throws IAE on various errors or if IDN is needed but not available
+     * @throws java.lang.IllegalArgumentException on various errors or if IDN is needed but not available
      * @since 0.8.7
      */
     @SuppressLint("NewApi")

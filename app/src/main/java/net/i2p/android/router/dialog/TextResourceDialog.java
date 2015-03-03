@@ -54,10 +54,8 @@ public class TextResourceDialog extends DialogFragment {
             while ( (read = in.read(buf)) != -1)
                 out.write(buf, 0, read);
             
-        } catch (IOException ioe) {
-            System.err.println("resource error " + ioe);
-        } catch (Resources.NotFoundException nfe) {
-            System.err.println("resource error " + nfe);
+        } catch (IOException | Resources.NotFoundException re) {
+            System.err.println("resource error " + re);
         } finally {
             if (in != null) try { in.close(); } catch (IOException ioe) {}
         }

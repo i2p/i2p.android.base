@@ -1,15 +1,17 @@
 package net.i2p.android.i2ptunnel;
 
-import net.i2p.android.router.R;
-import net.i2p.android.wizard.model.AbstractWizardModel;
-import net.i2p.android.wizard.ui.AbstractWizardActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+
+import net.i2p.android.router.R;
+import net.i2p.android.wizard.model.AbstractWizardModel;
+import net.i2p.android.wizard.ui.AbstractWizardActivity;
 
 public class TunnelWizardActivity extends AbstractWizardActivity {
     @Override
@@ -20,6 +22,7 @@ public class TunnelWizardActivity extends AbstractWizardActivity {
     @Override
     protected DialogFragment onGetFinishWizardDialog() {
         return new DialogFragment() {
+            @NonNull
             @Override
             public Dialog onCreateDialog(Bundle savedInstanceState) {
                 return new AlertDialog.Builder(getActivity())

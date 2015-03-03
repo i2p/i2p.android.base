@@ -1,11 +1,13 @@
 package net.i2p.android.router.stats;
 
-import java.text.DecimalFormat;
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.ParsePosition;
-import java.util.Observable;
-import java.util.Observer;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.androidplot.Plot;
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
@@ -18,12 +20,13 @@ import net.i2p.android.router.R;
 import net.i2p.android.router.service.StatSummarizer;
 import net.i2p.android.router.service.SummaryListener;
 import net.i2p.android.router.util.Util;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
+import java.text.DecimalFormat;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
+import java.util.Observable;
+import java.util.Observer;
 
 public class RateGraphFragment extends I2PFragmentBase {
     // redraws a plot whenever an update is received:
@@ -131,8 +134,8 @@ public class RateGraphFragment extends I2PFragmentBase {
             _ratePlot.setRangeValueFormat(new Format() {
 
                 @Override
-                public StringBuffer format(Object obj, StringBuffer toAppendTo,
-                        FieldPosition pos) {
+                public StringBuffer format(Object obj, @NonNull StringBuffer toAppendTo,
+                        @NonNull FieldPosition pos) {
                     double val = ((Number) obj).doubleValue();
                     if (val >= 10 * 1000 * 1000)
                         return new DecimalFormat("0 M").format(val / (1000 * 1000), toAppendTo, pos);
@@ -147,7 +150,7 @@ public class RateGraphFragment extends I2PFragmentBase {
                 }
 
                 @Override
-                public Object parseObject(String source, ParsePosition pos) {
+                public Object parseObject(String source, @NonNull ParsePosition pos) {
                     return null;
                 }
 

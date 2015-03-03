@@ -1,11 +1,5 @@
 package net.i2p.android.i2ptunnel.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
 import android.content.Context;
 import android.content.res.Resources;
 
@@ -16,6 +10,12 @@ import net.i2p.i2ptunnel.TunnelController;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.util.FileUtil;
 import net.i2p.util.SecureFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 public abstract class TunnelUtil {
     public static TunnelController getController(TunnelControllerGroup tcg, int tunnel) {
@@ -36,7 +36,7 @@ public abstract class TunnelUtil {
         TunnelController cur = getController(tcg, tunnelId);
 
         if (config == null) {
-            List<String> ret = new ArrayList<String>();
+            List<String> ret = new ArrayList<>();
             ret.add("Invalid params");
             return ret;
         }
@@ -101,7 +101,7 @@ public abstract class TunnelUtil {
         List<String> msgs;        
         TunnelController cur = getController(tcg, tunnelId);
         if (cur == null) {
-            msgs = new ArrayList<String>();
+            msgs = new ArrayList<>();
             msgs.add("Invalid tunnel number");
             return msgs;
         }
@@ -192,32 +192,34 @@ public abstract class TunnelUtil {
 
     public static String getTypeName(String type, Context context) {
         Resources res = context.getResources();
-        if ("client".equals(type))
-            return res.getString(R.string.i2ptunnel_type_client);
-        else if ("httpclient".equals(type))
-            return res.getString(R.string.i2ptunnel_type_httpclient);
-        else if ("ircclient".equals(type))
-            return res.getString(R.string.i2ptunnel_type_ircclient);
-        else if ("server".equals(type))
-            return res.getString(R.string.i2ptunnel_type_server);
-        else if ("httpserver".equals(type))
-            return res.getString(R.string.i2ptunnel_type_httpserver);
-        else if ("sockstunnel".equals(type))
-            return res.getString(R.string.i2ptunnel_type_sockstunnel);
-        else if ("socksirctunnel".equals(type))
-            return res.getString(R.string.i2ptunnel_type_socksirctunnel);
-        else if ("connectclient".equals(type))
-            return res.getString(R.string.i2ptunnel_type_connectclient);
-        else if ("ircserver".equals(type))
-            return res.getString(R.string.i2ptunnel_type_ircserver);
-        else if ("streamrclient".equals(type))
-            return res.getString(R.string.i2ptunnel_type_streamrclient);
-        else if ("streamrserver".equals(type))
-            return res.getString(R.string.i2ptunnel_type_streamrserver);
-        else if ("httpbidirserver".equals(type))
-            return res.getString(R.string.i2ptunnel_type_httpbidirserver);
-        else
-            return type;
+        switch (type) {
+            case "client":
+                return res.getString(R.string.i2ptunnel_type_client);
+            case "httpclient":
+                return res.getString(R.string.i2ptunnel_type_httpclient);
+            case "ircclient":
+                return res.getString(R.string.i2ptunnel_type_ircclient);
+            case "server":
+                return res.getString(R.string.i2ptunnel_type_server);
+            case "httpserver":
+                return res.getString(R.string.i2ptunnel_type_httpserver);
+            case "sockstunnel":
+                return res.getString(R.string.i2ptunnel_type_sockstunnel);
+            case "socksirctunnel":
+                return res.getString(R.string.i2ptunnel_type_socksirctunnel);
+            case "connectclient":
+                return res.getString(R.string.i2ptunnel_type_connectclient);
+            case "ircserver":
+                return res.getString(R.string.i2ptunnel_type_ircserver);
+            case "streamrclient":
+                return res.getString(R.string.i2ptunnel_type_streamrclient);
+            case "streamrserver":
+                return res.getString(R.string.i2ptunnel_type_streamrserver);
+            case "httpbidirserver":
+                return res.getString(R.string.i2ptunnel_type_httpbidirserver);
+            default:
+                return type;
+        }
     }
 
     public static boolean isClient(String type) {

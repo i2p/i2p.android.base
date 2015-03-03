@@ -1,21 +1,24 @@
 package net.i2p.android.router.dialog;
 
-import net.i2p.android.router.LicenseActivity;
-import net.i2p.android.router.R;
-import net.i2p.android.router.util.I2Patterns;
-import net.i2p.android.router.util.Util;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import net.i2p.android.router.LicenseActivity;
+import net.i2p.android.router.R;
+import net.i2p.android.router.util.I2Patterns;
+import net.i2p.android.router.util.Util;
+
 public class AboutDialog extends DialogFragment {
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle SavedInstanceState) {
         LayoutInflater li = LayoutInflater.from(getActivity());

@@ -51,17 +51,22 @@ public class SettingsActivity extends PreferenceActivity {
 
         String action = getIntent().getAction();
         if (action != null) {
-            if (ACTION_PREFS_NET.equals(action)) {
-                addPreferencesFromResource(R.xml.settings_net);
-            } else if (ACTION_PREFS_GRAPHS.equals(action)){
-                addPreferencesFromResource(R.xml.settings_graphs);
-                setupGraphSettings(this, getPreferenceScreen(), Util.getRouterContext());
-            } else if (ACTION_PREFS_LOGGING.equals(action)) {
-                addPreferencesFromResource(R.xml.settings_logging);
-                setupLoggingSettings(this, getPreferenceScreen(), Util.getRouterContext());
-            } else if (ACTION_PREFS_ADVANCED.equals(action)) {
-                addPreferencesFromResource(R.xml.settings_advanced);
-                setupAdvancedSettings(this, getPreferenceScreen());
+            switch (action) {
+                case ACTION_PREFS_NET:
+                    addPreferencesFromResource(R.xml.settings_net);
+                    break;
+                case ACTION_PREFS_GRAPHS:
+                    addPreferencesFromResource(R.xml.settings_graphs);
+                    setupGraphSettings(this, getPreferenceScreen(), Util.getRouterContext());
+                    break;
+                case ACTION_PREFS_LOGGING:
+                    addPreferencesFromResource(R.xml.settings_logging);
+                    setupLoggingSettings(this, getPreferenceScreen(), Util.getRouterContext());
+                    break;
+                case ACTION_PREFS_ADVANCED:
+                    addPreferencesFromResource(R.xml.settings_advanced);
+                    setupAdvancedSettings(this, getPreferenceScreen());
+                    break;
             }
         } else {
             // Load any properties that the router might have changed on us.
@@ -338,17 +343,22 @@ public class SettingsActivity extends PreferenceActivity {
             super.onCreate(savedInstanceState);
 
             String settings = getArguments().getString("settings");
-            if ("net".equals(settings)) {
-                addPreferencesFromResource(R.xml.settings_net);
-            } else if ("graphs".equals(settings)) {
-                addPreferencesFromResource(R.xml.settings_graphs);
-                setupGraphSettings(getActivity(), getPreferenceScreen(), Util.getRouterContext());
-            } else if ("logging".equals(settings)) {
-                addPreferencesFromResource(R.xml.settings_logging);
-                setupLoggingSettings(getActivity(), getPreferenceScreen(), Util.getRouterContext());
-            } else if ("advanced".equals(settings)) {
-                addPreferencesFromResource(R.xml.settings_advanced);
-                setupAdvancedSettings(getActivity(), getPreferenceScreen());
+            switch (settings) {
+                case "net":
+                    addPreferencesFromResource(R.xml.settings_net);
+                    break;
+                case "graphs":
+                    addPreferencesFromResource(R.xml.settings_graphs);
+                    setupGraphSettings(getActivity(), getPreferenceScreen(), Util.getRouterContext());
+                    break;
+                case "logging":
+                    addPreferencesFromResource(R.xml.settings_logging);
+                    setupLoggingSettings(getActivity(), getPreferenceScreen(), Util.getRouterContext());
+                    break;
+                case "advanced":
+                    addPreferencesFromResource(R.xml.settings_advanced);
+                    setupAdvancedSettings(getActivity(), getPreferenceScreen());
+                    break;
             }
         }
     }

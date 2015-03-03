@@ -131,13 +131,13 @@ public abstract class Util implements I2PConstants {
     final static String PROP_I2NP_NTCP_AUTO_PORT = "i2np.ntcp.autoport";
 
     public static List<Properties> getPropertiesFromPreferences(Context context) {
-        List<Properties> pList = new ArrayList<Properties>();
+        List<Properties> pList = new ArrayList<>();
 
         // Copy prefs
         Properties routerProps = new OrderedProperties();
 
         // List to store stats for graphing
-        List<String> statSummaries = new ArrayList<String>();
+        List<String> statSummaries = new ArrayList<>();
 
         // Properties to remove
         Properties toRemove = new OrderedProperties();
@@ -147,27 +147,25 @@ public abstract class Util implements I2PConstants {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         Map<String, ?> all = preferences.getAll();
-        Iterator<String> iterator = all.keySet().iterator();
         // get values from the Map and make them strings.
         // This loop avoids needing to convert each one, or even know it's type, or if it exists yet.
-        while (iterator.hasNext()) {
-            String x = iterator.next();
-            if ( x.startsWith("stat.summaries.")) {
+        for (String x : all.keySet()) {
+            if (x.startsWith("stat.summaries.")) {
                 String stat = x.substring("stat.summaries.".length());
                 String checked = all.get(x).toString();
                 if (checked.equals("true")) {
                     statSummaries.add(stat);
                 }
-            } else if ( x.startsWith("logger.")) {
+            } else if (x.startsWith("logger.")) {
                 logSettings.put(x, all.get(x).toString());
             } else if (
                     x.equals("router.hiddenMode") ||
-                    x.equals("i2cp.disableInterface")) {
+                            x.equals("i2cp.disableInterface")) {
                 // special exception, we must invert the bool for these properties only.
                 String string = all.get(x).toString();
                 String inverted = Boolean.toString(!Boolean.parseBoolean(string));
                 routerProps.setProperty(x, inverted);
-            } else if ( !x.startsWith(ANDROID_PREF_PREFIX)) { // Skip over UI-related I2P Android settings
+            } else if (!x.startsWith(ANDROID_PREF_PREFIX)) { // Skip over UI-related I2P Android settings
                 String string = all.get(x).toString();
                 routerProps.setProperty(x, string);
             }
@@ -203,11 +201,11 @@ public abstract class Util implements I2PConstants {
     }
 
     // propName -> defaultValue
-    private static HashMap<String, Boolean> booleanOptionsRequiringRestart = new HashMap<String, Boolean>();
-    private static HashMap<String, String> stringOptionsRequiringRestart = new HashMap<String, String>();
+    private static HashMap<String, Boolean> booleanOptionsRequiringRestart = new HashMap<>();
+    private static HashMap<String, String> stringOptionsRequiringRestart = new HashMap<>();
     static {
-        HashMap<String, Boolean> boolToAdd = new HashMap<String, Boolean>();
-        HashMap<String, String> strToAdd = new HashMap<String, String>();
+        HashMap<String, Boolean> boolToAdd = new HashMap<>();
+        HashMap<String, String> strToAdd = new HashMap<>();
 
         boolToAdd.put(TransportManager.PROP_ENABLE_UPNP, true);
         boolToAdd.put(TransportManager.PROP_ENABLE_NTCP, true);

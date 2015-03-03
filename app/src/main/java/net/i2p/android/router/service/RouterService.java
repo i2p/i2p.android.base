@@ -51,7 +51,7 @@ public class RouterService extends Service {
      * that it can be accessed more efficiently from inner classes.
      */
     final RemoteCallbackList<IRouterStateCallback> mStateCallbacks
-            = new RemoteCallbackList<IRouterStateCallback>();
+            = new RemoteCallbackList<>();
 
     @Override
     public void onCreate() {
@@ -309,7 +309,7 @@ public class RouterService extends Service {
 
     // ******** following methods may be accessed from Activities and Receivers ************
     /**
-     * @returns null if router is not running
+     * @return null if router is not running
      */
     public RouterContext getRouterContext() {
         RouterContext rv = _context;

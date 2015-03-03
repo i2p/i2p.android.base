@@ -1,14 +1,14 @@
 package net.i2p.android.i2ptunnel;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Context;
+import android.os.Handler;
+import android.support.v4.content.AsyncTaskLoader;
 
 import net.i2p.i2ptunnel.TunnelController;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 
-import android.content.Context;
-import android.os.Handler;
-import android.support.v4.content.AsyncTaskLoader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TunnelEntryLoader extends AsyncTaskLoader<List<TunnelEntry>> {
     private TunnelControllerGroup mGroup;
@@ -26,7 +26,7 @@ public class TunnelEntryLoader extends AsyncTaskLoader<List<TunnelEntry>> {
 
     @Override
     public List<TunnelEntry> loadInBackground() {
-        List<TunnelEntry> ret = new ArrayList<TunnelEntry>();
+        List<TunnelEntry> ret = new ArrayList<>();
         List<TunnelController> controllers = mGroup.getControllers();
         for (int i = 0; i < controllers.size(); i++) {
             TunnelEntry tunnel = new TunnelEntry(getContext(), controllers.get(i), i);

@@ -126,7 +126,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         mDrawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+        mDrawerList.setAdapter(new ArrayAdapter<>(this,
                 R.layout.listitem_navdrawer, activityTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());

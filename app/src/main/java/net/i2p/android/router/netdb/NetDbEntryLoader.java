@@ -1,17 +1,18 @@
 package net.i2p.android.router.netdb;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 
 import net.i2p.data.Destination;
 import net.i2p.data.LeaseSet;
 import net.i2p.data.router.RouterInfo;
 import net.i2p.router.RouterContext;
-import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
     private RouterContext mRContext;
@@ -44,17 +45,17 @@ public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
 
     @Override
     public List<NetDbEntry> loadInBackground() {
-        List<NetDbEntry> ret = new ArrayList<NetDbEntry>();
+        List<NetDbEntry> ret = new ArrayList<>();
         if (mRContext.netDb().isInitialized()) {
             if (mRouters) {
-                Set<RouterInfo> routers = new TreeSet<RouterInfo>(new RouterInfoComparator());
+                Set<RouterInfo> routers = new TreeSet<>(new RouterInfoComparator());
                 routers.addAll(mRContext.netDb().getRouters());
                 for (RouterInfo ri : routers) {
                     NetDbEntry entry = NetDbEntry.fromRouterInfo(mRContext, ri);
                     ret.add(entry);
                 }
             } else {
-                Set<LeaseSet> leases = new TreeSet<LeaseSet>(new LeaseSetComparator());
+                Set<LeaseSet> leases = new TreeSet<>(new LeaseSetComparator());
                 leases.addAll(mRContext.netDb().getLeases());
                 for (LeaseSet ls : leases) {
                     NetDbEntry entry = NetDbEntry.fromLeaseSet(mRContext, ls);

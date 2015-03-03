@@ -1,9 +1,11 @@
 package net.i2p.android.router.service;
 
 import android.content.Context;
-import java.io.File;
+
 import net.i2p.android.router.util.Util;
 import net.i2p.util.FileUtil;
+
+import java.io.File;
 
 class Init {
 
@@ -32,8 +34,7 @@ class Init {
         File tmp = new File(myDir, "tmp");
         File[] files = tmp.listFiles();
         if (files != null) {
-            for (int i = 0; i < files.length; i++) {
-                File f = files[i];
+            for (File f : files) {
                 Util.d("Deleting old file/dir " + f);
                 FileUtil.rmdir(f, false);
             }

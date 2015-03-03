@@ -102,12 +102,12 @@ public class BrowserListFragment extends Fragment implements
 
         @Override
         public List<Browser> loadInBackground() {
-            List<Browser> browsers = new ArrayList<Browser>();
-            Map<String, String> recommendedMap = new HashMap<String, String>();
+            List<Browser> browsers = new ArrayList<>();
+            Map<String, String> recommendedMap = new HashMap<>();
             for (int i = 0; i < recommended.size(); i++) {
                 recommendedMap.put(recommended.get(i), recommendedLabels.get(i));
             }
-            Map<String, String> supportedMap = new HashMap<String, String>();
+            Map<String, String> supportedMap = new HashMap<>();
             for (int i = 0; i < supported.size(); i++) {
                 supportedMap.put(supported.get(i), supportedLabels.get(i));
             }
