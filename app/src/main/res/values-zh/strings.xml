@@ -8,7 +8,6 @@
   <string name="label_tunnels">隧道</string>
   <string name="label_status">状态</string>
   <string name="label_addressbook">地址簿</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">客户隧道</string>
   <string name="label_i2ptunnel_server">服务隧道</string>
   <string name="label_logs">日志</string>

@@ -8,7 +8,6 @@
   <string name="label_tunnels">Tunely</string>
   <string name="label_status">Stav</string>
   <string name="label_addressbook">Adresár</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">Klientské tunely</string>
   <string name="label_i2ptunnel_server">Serverové tunely</string>
   <string name="label_logs">Logy</string>

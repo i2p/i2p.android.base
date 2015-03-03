@@ -8,7 +8,6 @@
   <string name="label_tunnels">터널들</string>
   <string name="label_status">상태</string>
   <string name="label_addressbook">주소록</string>
-  <string name="label_i2ptunnel">I2P터널</string>
   <string name="label_i2ptunnel_client">클라이언트 터널들</string>
   <string name="label_i2ptunnel_server">서버 터널들</string>
   <string name="label_logs">로그</string>

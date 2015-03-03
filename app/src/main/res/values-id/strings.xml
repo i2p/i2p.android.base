@@ -8,7 +8,6 @@
   <string name="label_tunnels">Saluran</string>
   <string name="label_status">Status</string>
   <string name="label_addressbook">Buku alamat</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">Saluran klien</string>
   <string name="label_i2ptunnel_server">Saluran server</string>
   <string name="label_logs">Log</string>

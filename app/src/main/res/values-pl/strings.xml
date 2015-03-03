@@ -8,7 +8,6 @@
   <string name="label_tunnels">Tunele</string>
   <string name="label_status">Status</string>
   <string name="label_addressbook">Książka adresowa</string>
-  <string name="label_i2ptunnel">Tunel I2P</string>
   <string name="label_i2ptunnel_client">Tunele klienta</string>
   <string name="label_i2ptunnel_server">Tunele serwerów</string>
   <string name="label_logs">Logi</string>

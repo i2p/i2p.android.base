@@ -8,7 +8,6 @@
   <string name="label_tunnels">Túneles</string>
   <string name="label_status">Estado</string>
   <string name="label_addressbook">Libreta de direcciones</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">Túneles de cliente</string>
   <string name="label_i2ptunnel_server">Túneles de servidor</string>
   <string name="label_logs">Registros</string>
