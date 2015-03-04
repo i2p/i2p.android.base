@@ -10,7 +10,7 @@
     <string name="label_tunnels">Tunnels</string>
     <string name="label_status">Status</string>
     <string name="label_addressbook">Addressbook</string>
-    <string name="label_i2ptunnel">@string/label_tunnels</string>
+    <string name="label_i2ptunnel" translatable="false">@string/label_tunnels</string>
     <string name="label_i2ptunnel_client">Client tunnels</string>
     <string name="label_i2ptunnel_server">Server tunnels</string>
     <string name="label_logs">Logs</string>
