@@ -28,8 +28,8 @@ class LogWriter extends LogWriterBase {
     }
 
     @Override
-    protected void writeRecord(String s) {
-        android.util.Log.i(ANDROID_LOG_TAG, s);
+    protected void writeRecord(int priority, String s) {
+        android.util.Log.println(toAndroidLevel(priority), ANDROID_LOG_TAG, s);
     }
 
     @Override
