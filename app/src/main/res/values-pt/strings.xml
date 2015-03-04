@@ -1,8 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">I2P</string>
+  <string name="desc_i2p_logo">Logótipo I2P</string>
   <string name="welcome_new_install">Bem-vindo à I2P! Esta app é um programa ALPHA e não proporciona um anonimato forte. Por favor, leia as notas de lançamento e a informação da licença.</string>
   <string name="welcome_new_version">Nova versão instalada. Por favor, leias as notas de lançamento. Versão:</string>
+  <string name="label_home">Controlos e Estado</string>
   <string name="label_status">Estado</string>
   <string name="label_addressbook">Livro de Endereços</string>
   <string name="label_logs">Registos</string>
