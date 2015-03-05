@@ -1,11 +1,14 @@
-0.9.18
+0.9.19
+ * Improved logging
+
+0.9.18 / 2015-03-04 / c2f4831a1617f4ce716a08640446fdd992c751ff
  * I2P can start automatically when phone boots (configure in Setting)
  * Updated browser configuration guides for Orfox and Firefox
  * Tunnels for postman's mail server added to defaults (for new installs)
  * Settings options for configuring UDP and TCP ports
  * Bug fixes and translation updates
 
-0.9.17.1 /2014-12-14 / cd8bb5e3ac4238efac12179c78c4fa517fcaabec
+0.9.17.1 / 2014-12-14 / cd8bb5e3ac4238efac12179c78c4fa517fcaabec
  * Fixed crashes in addressbook and netDb status page
  * Fixed crash when opening an IRC client tunnel
  * Updated translations
