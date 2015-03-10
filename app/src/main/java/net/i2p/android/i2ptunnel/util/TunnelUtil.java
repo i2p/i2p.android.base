@@ -2,10 +2,15 @@ package net.i2p.android.i2ptunnel.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Bundle;
 
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
+import net.i2p.android.wizard.model.Page;
+import net.i2p.i2ptunnel.I2PTunnelHTTPServer;
+import net.i2p.i2ptunnel.I2PTunnelServer;
+import net.i2p.i2ptunnel.TunnelConfig;
 import net.i2p.i2ptunnel.TunnelController;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.util.FileUtil;
@@ -82,8 +87,8 @@ public abstract class TunnelUtil {
                         cOpt.setProperty("option.inbound.backupQuantity", config.getProperty("option.inbound.backupQuantity"));
                     if (config.getProperty("option.outbound.backupQuantity") != null)
                         cOpt.setProperty("option.outbound.backupQuantity", config.getProperty("option.outbound.backupQuantity"));
-                    cOpt.setProperty("option.inbound.nickname", TunnelConfig.CLIENT_NICKNAME);
-                    cOpt.setProperty("option.outbound.nickname", TunnelConfig.CLIENT_NICKNAME);
+                    cOpt.setProperty("option.inbound.nickname", TunnelConfig.SHARED_CLIENT_NICKNAME);
+                    cOpt.setProperty("option.outbound.nickname", TunnelConfig.SHARED_CLIENT_NICKNAME);
                     
                     c.setConfig(cOpt, "");
                 }
@@ -223,13 +228,7 @@ public abstract class TunnelUtil {
     }
 
     public static boolean isClient(String type) {
-        return ( ("client".equals(type)) ||
-                 ("httpclient".equals(type)) ||
-                 ("sockstunnel".equals(type)) ||
-                 ("socksirctunnel".equals(type)) ||
-                 ("connectclient".equals(type)) ||
-                 ("streamrclient".equals(type)) ||
-                 ("ircclient".equals(type)));
+        return TunnelController.isClient(type);
     }
 
     public static String getPrivateKeyFile(TunnelControllerGroup tcg, int tunnel) {
@@ -239,5 +238,138 @@ public abstract class TunnelUtil {
         if (tunnel < 0)
             tunnel = tcg == null ? 999 : tcg.getControllers().size();
         return "i2ptunnel" + tunnel + "-privKeys.dat";
+    }
+
+    /** @since 0.9.9 */
+    public boolean isSSLEnabled(TunnelControllerGroup tcg, int tunnel) {
+        TunnelController tun = getController(tcg, tunnel);
+        if (tun != null) {
+            Properties opts = tun.getClientOptionProps();
+            return Boolean.parseBoolean(opts.getProperty(I2PTunnelServer.PROP_USE_SSL));
+        }
+        return false;
+    }
+
+    /** @since 0.9.12 */
+    public boolean isRejectInproxy(TunnelControllerGroup tcg, int tunnel) {
+        TunnelController tun = getController(tcg, tunnel);
+        if (tun != null) {
+            Properties opts = tun.getClientOptionProps();
+            return Boolean.parseBoolean(opts.getProperty(I2PTunnelHTTPServer.OPT_REJECT_INPROXY));
+        }
+        return false;
+    }
+
+    public static TunnelConfig createConfigFromWizard(
+            Context ctx, TunnelControllerGroup tcg, Bundle data) {
+        // Get the Bundle keys
+        Resources res = ctx.getResources();
+
+        String kClientServer = res.getString(R.string.i2ptunnel_wizard_k_client_server);
+        String kType = res.getString(R.string.i2ptunnel_wizard_k_type);
+
+        String kName = res.getString(R.string.i2ptunnel_wizard_k_name);
+        String kDesc = res.getString(R.string.i2ptunnel_wizard_k_desc);
+        String kDest = res.getString(R.string.i2ptunnel_wizard_k_dest);
+        String kOutproxies = res.getString(R.string.i2ptunnel_wizard_k_outproxies);
+        String kTargetHost = res.getString(R.string.i2ptunnel_wizard_k_target_host);
+        String kTargetPort = res.getString(R.string.i2ptunnel_wizard_k_target_port);
+        String kReachableOn = res.getString(R.string.i2ptunnel_wizard_k_reachable_on);
+        String kBindingPort = res.getString(R.string.i2ptunnel_wizard_k_binding_port);
+        String kAutoStart = res.getString(R.string.i2ptunnel_wizard_k_auto_start);
+
+        // Create the TunnelConfig
+        TunnelConfig cfg = new TunnelConfig();
+
+        // Get/set the tunnel wizard settings
+        String clientServer = data.getBundle(kClientServer).getString(Page.SIMPLE_DATA_KEY);
+        String typeName = data.getBundle(clientServer + ":" + kType).getString(Page.SIMPLE_DATA_KEY);
+        String type = getTypeFromName(typeName, ctx);
+        cfg.setType(type);
+
+        String name = data.getBundle(kName).getString(Page.SIMPLE_DATA_KEY);
+        cfg.setName(name);
+
+        String desc = data.getBundle(kDesc).getString(Page.SIMPLE_DATA_KEY);
+        cfg.setDescription(desc);
+
+        String dest = null;
+        Bundle pageData = data.getBundle(kDest);
+        if (pageData != null) dest = pageData.getString(Page.SIMPLE_DATA_KEY);
+        cfg.setTargetDestination(dest);
+
+        String outproxies = null;
+        pageData = data.getBundle(kOutproxies);
+        if (pageData != null) outproxies = pageData.getString(Page.SIMPLE_DATA_KEY);
+        cfg.setProxyList(outproxies);
+
+        String targetHost = null;
+        pageData = data.getBundle(kTargetHost);
+        if (pageData != null) targetHost = pageData.getString(Page.SIMPLE_DATA_KEY);
+        cfg.setTargetHost(targetHost);
+
+        int targetPort = -1;
+        pageData = data.getBundle(kTargetPort);
+        if (pageData != null) targetPort = pageData.getInt(Page.SIMPLE_DATA_KEY);
+        cfg.setTargetPort(targetPort);
+
+        String reachableOn = null;
+        pageData = data.getBundle(kReachableOn);
+        if (pageData != null) reachableOn = pageData.getString(Page.SIMPLE_DATA_KEY);
+        cfg.setReachableBy(reachableOn);
+
+        int bindingPort = -1;
+        pageData = data.getBundle(kBindingPort);
+        if (pageData != null) bindingPort = pageData.getInt(Page.SIMPLE_DATA_KEY);
+        cfg.setPort(bindingPort);
+
+        boolean autoStart = data.getBundle(kAutoStart).getBoolean(Page.SIMPLE_DATA_KEY);
+        cfg.setStartOnLoad(autoStart);
+
+        // Set sensible defaults for a new tunnel
+        cfg.setTunnelDepth(3);
+        cfg.setTunnelVariance(0);
+        cfg.setTunnelQuantity(2);
+        cfg.setTunnelBackupQuantity(0);
+        cfg.setClientHost("internal");
+        cfg.setClientPort("internal");
+        cfg.setCustomOptions("");
+        if (!"streamrclient".equals(type)) {
+            cfg.setProfile("bulk");
+            cfg.setReduceCount(1);
+            cfg.setReduceTime(20);
+        }
+        if (TunnelUtil.isClient(type)) { /* Client-only defaults */
+            if (!"streamrclient".equals(type)) {
+                cfg.setNewDest("0");
+                cfg.setCloseTime(30);
+            }
+            if ("httpclient".equals(type) ||
+                    "connectclient".equals(type) ||
+                    "sockstunnel".equals(type) |
+                            "socksirctunnel".equals(type)) {
+                cfg.setProxyUsername("");
+                cfg.setProxyPassword("");
+                cfg.setOutproxyUsername("");
+                cfg.setOutproxyPassword("");
+            }
+            if ("httpclient".equals(type))
+                cfg.setJumpList("http://i2host.i2p/cgi-bin/i2hostjump?\nhttp://stats.i2p/cgi-bin/jump.cgi?a=");
+        } else { /* Server-only defaults */
+            cfg.setPrivKeyFile(TunnelUtil.getPrivateKeyFile(tcg, -1));
+            cfg.setEncrypt();
+            cfg.setEncryptKey("");
+            cfg.setAccessMode("0");
+            cfg.setAccessList("");
+            cfg.setLimitMinute(0);
+            cfg.setLimitHour(0);
+            cfg.setLimitDay(0);
+            cfg.setTotalMinute(0);
+            cfg.setTotalHour(0);
+            cfg.setTotalDay(0);
+            cfg.setMaxStreams(0);
+        }
+
+        return cfg;
     }
 }

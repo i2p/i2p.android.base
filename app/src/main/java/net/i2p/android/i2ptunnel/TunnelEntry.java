@@ -1,18 +1,19 @@
 package net.i2p.android.i2ptunnel;
 
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.Toast;
-import net.i2p.android.i2ptunnel.util.TunnelConfig;
+
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 import net.i2p.data.Destination;
 import net.i2p.data.PrivateKeyFile;
+import net.i2p.i2ptunnel.TunnelConfig;
 import net.i2p.i2ptunnel.TunnelController;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
+
+import java.util.List;
 
 public class TunnelEntry {
     public static final int RUNNING = 1;
