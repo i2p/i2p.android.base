@@ -22,8 +22,8 @@ import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.R;
-import net.i2p.i2ptunnel.TunnelConfig;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
+import net.i2p.i2ptunnel.ui.TunnelConfig;
 import net.i2p.router.RouterContext;
 
 import java.util.List;

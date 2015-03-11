@@ -9,9 +9,9 @@ import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 import net.i2p.data.Destination;
 import net.i2p.data.PrivateKeyFile;
-import net.i2p.i2ptunnel.TunnelConfig;
 import net.i2p.i2ptunnel.TunnelController;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
+import net.i2p.i2ptunnel.ui.TunnelConfig;
 
 import java.util.List;
 
