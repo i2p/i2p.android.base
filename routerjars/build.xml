@@ -65,11 +65,7 @@
         <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
 
         <!-- i2ptunnel -->
-        <jar destfile="${jar.libs.dir}/i2ptunnel.jar" >
-            <zipfileset src="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" >
-                <exclude name="net/i2p/i2ptunnel/I2PTunnelGUI.class" />
-            </zipfileset>
-        </jar>
+        <copy file="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" todir="${jar.libs.dir}" />
 
         <!-- addressbook -->
         <copy file="${i2pbase}/apps/addressbook/dist/addressbook.jar" todir="${jar.libs.dir}" />
