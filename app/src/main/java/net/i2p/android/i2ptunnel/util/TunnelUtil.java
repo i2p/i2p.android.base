@@ -327,10 +327,10 @@ public abstract class TunnelUtil {
         cfg.setStartOnLoad(autoStart);
 
         // Set sensible defaults for a new tunnel
-        cfg.setTunnelDepth(3);
-        cfg.setTunnelVariance(0);
-        cfg.setTunnelQuantity(2);
-        cfg.setTunnelBackupQuantity(0);
+        cfg.setTunnelDepth(res.getInteger(R.integer.DEFAULT_TUNNEL_LENGTH));
+        cfg.setTunnelVariance(res.getInteger(R.integer.DEFAULT_TUNNEL_VARIANCE));
+        cfg.setTunnelQuantity(res.getInteger(R.integer.DEFAULT_TUNNEL_QUANTITY));
+        cfg.setTunnelBackupQuantity(res.getInteger(R.integer.DEFAULT_TUNNEL_BACKUP_QUANTITY));
         cfg.setClientHost("internal");
         cfg.setClientPort("internal");
         cfg.setCustomOptions("");
@@ -339,28 +339,28 @@ public abstract class TunnelUtil {
             cfg.setReduceCount(1);
             cfg.setReduceTime(20);
         }
-        if (TunnelUtil.isClient(type)) { /* Client-only defaults */
+        if (isClient(type)) { /* Client-only defaults */
             if (!"streamrclient".equals(type)) {
-                cfg.setNewDest("0");
+                cfg.setNewDest(0);
                 cfg.setCloseTime(30);
             }
             if ("httpclient".equals(type) ||
                     "connectclient".equals(type) ||
                     "sockstunnel".equals(type) |
                             "socksirctunnel".equals(type)) {
+                cfg.setProxyAuth("false");
                 cfg.setProxyUsername("");
                 cfg.setProxyPassword("");
+                cfg.setOutproxyAuth("false");
                 cfg.setOutproxyUsername("");
                 cfg.setOutproxyPassword("");
             }
             if ("httpclient".equals(type))
-                cfg.setJumpList("http://i2host.i2p/cgi-bin/i2hostjump?\nhttp://stats.i2p/cgi-bin/jump.cgi?a=");
+                cfg.setJumpList(res.getString(R.string.DEFAULT_JUMP_LIST));
         } else { /* Server-only defaults */
-            cfg.setPrivKeyFile(TunnelUtil.getPrivateKeyFile(tcg, -1));
-            cfg.setEncrypt();
-            cfg.setEncryptKey("");
-            cfg.setAccessMode("0");
-            cfg.setAccessList("");
+            cfg.setPrivKeyFile(getPrivateKeyFile(tcg, -1));
+            cfg.setEncrypt(false);
+            cfg.setAccessMode(0);
             cfg.setLimitMinute(0);
             cfg.setLimitHour(0);
             cfg.setLimitDay(0);
