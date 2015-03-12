@@ -24,12 +24,16 @@ public class IntEditTextPreference extends EditTextPreference {
 
     @Override
     public CharSequence getSummary() {
-        return String.format((String) super.getSummary(), getText());
+        String summary = (String) super.getSummary();
+        if (summary == null)
+            summary = "%s";
+        return String.format(summary, getText());
     }
 
     @Override
     protected String getPersistedString(String defaultReturnValue) {
-        return String.valueOf(getPersistedInt(-1));
+        int defaultVal = Integer.valueOf(defaultReturnValue);
+        return String.valueOf(getPersistedInt(defaultVal));
     }
 
     @Override
