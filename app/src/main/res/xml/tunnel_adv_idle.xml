@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="@string/TUNNEL_CAT_IDLE"
+        android:title="">
+
+        <!-- Client-only (but not Streamr client) -->
+        <CheckBoxPreference
+            android:key="@string/TUNNEL_OPT_DELAY_OPEN"
+            android:summary="@string/tunnel_summ_delay_open"
+            android:title="@string/delay_open" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/DEFAULT_REDUCE_ON_IDLE"
+            android:key="@string/TUNNEL_OPT_REDUCE_IDLE"
+            android:summary="@string/tunnel_summ_reduce_quantity"
+            android:title="@string/reduce_quantity" />
+
+        <net.i2p.android.router.util.IntEditTextPreference
+            android:defaultValue="@integer/DEFAULT_REDUCE_TIME"
+            android:dependency="@string/TUNNEL_OPT_REDUCE_IDLE"
+            android:key="@string/TUNNEL_OPT_REDUCE_TIME"
+            android:summary="@string/num_minutes"
+            android:title="@string/idle_time" />
+
+        <net.i2p.android.router.util.IntEditTextPreference
+            android:defaultValue="@integer/DEFAULT_REDUCE_COUNT"
+            android:dependency="@string/TUNNEL_OPT_REDUCE_IDLE"
+            android:key="@string/TUNNEL_OPT_REDUCE_QUANTITY"
+            android:title="@string/reduced_tunnel_quantity" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

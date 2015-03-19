@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/proxy_auth">
+
+        <CheckBoxPreference
+            android:key="@string/TUNNEL_OPT_LOCAL_AUTH"
+            android:summary="@string/tunnel_summ_proxy_auth"
+            android:title="@string/settings_enable" />
+
+        <net.i2p.android.router.util.SummaryEditTextPreference
+            android:dependency="@string/TUNNEL_OPT_LOCAL_AUTH"
+            android:key="@string/TUNNEL_OPT_LOCAL_USERNAME"
+            android:title="@string/username" />
+
+        <EditTextPreference
+            android:dependency="@string/TUNNEL_OPT_LOCAL_AUTH"
+            android:inputType="textPassword"
+            android:key="@string/TUNNEL_OPT_LOCAL_PASSWORD"
+            android:title="@string/password" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/outproxy_auth">
+
+        <CheckBoxPreference
+            android:key="@string/TUNNEL_OPT_OUTPROXY_AUTH"
+            android:summary="@string/tunnel_summ_outproxy_auth"
+            android:title="@string/settings_enable" />
+
+        <net.i2p.android.router.util.SummaryEditTextPreference
+            android:dependency="@string/TUNNEL_OPT_OUTPROXY_AUTH"
+            android:key="@string/TUNNEL_OPT_OUTPROXY_USERNAME"
+            android:title="@string/username" />
+
+        <EditTextPreference
+            android:dependency="@string/TUNNEL_OPT_OUTPROXY_AUTH"
+            android:inputType="textPassword"
+            android:key="@string/TUNNEL_OPT_OUTPROXY_PASSWORD"
+            android:title="@string/password" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

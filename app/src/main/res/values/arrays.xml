@@ -37,19 +37,19 @@
         <item>Routers</item>
         <item>LeaseSets</item>
     </string-array>
-    <string-array name="setting0to3">
+    <integer-array name="setting0to3">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
-    </string-array>
-    <string-array name="setting2to2">
+    </integer-array>
+    <integer-array name="setting2to2">
         <item>-2</item>
         <item>-1</item>
         <item>0</item>
         <item>1</item>
         <item>2</item>
-    </string-array>
+    </integer-array>
     <string-array name="help_categories">
         <item>@string/general</item>
         <item>@string/label_browser_configuration</item>
@@ -75,5 +75,37 @@
         <item>acr.browser.lightning</item>
         <item>mobi.mgeek.TunnyBrowser</item>
         <item>com.lastpass.lpandroid</item>
+    </string-array>
+    <string-array name="tunnel_profiles">
+        <item>bulk</item>
+        <item>interactive</item>
+    </string-array>
+    <string-array name="tunnel_profile_names">
+        <item>Bulk connection (downloads/websites/BT)</item>
+        <item>Interactive connection</item>
+    </string-array>
+    <integer-array name="access_modes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
+    <string-array name="access_mode_names">
+        <item>Disabled</item>
+        <item>Whitelist</item>
+        <item>Blacklist</item>
+    </string-array>
+    <integer-array name="sigtypes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>7</item>
+    </integer-array>
+    <string-array name="sigtype_names">
+        <item>DSA-SHA1</item>
+        <item>ECDSA-P256</item>
+        <item>ECDSA-P384</item>
+        <item>ECDSA-P521</item>
+        <item>Ed25519-SHA-512</item>
     </string-array>
 </resources>

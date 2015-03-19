@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="@string/TUNNEL_INTERFACE"
+        android:title="@string/reachable_on" />
+
+    <net.i2p.android.router.util.PortPreference
+        android:key="@string/TUNNEL_LISTEN_PORT"
+        android:title="@string/listen_port" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/TUNNEL_USE_SSL"
+        android:summary="@string/tunnel_summ_client_ssl"
+        android:title="@string/client_ssl" />
+
+</PreferenceScreen>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="@string/TUNNEL_CAT_ACCESS_CONTROL"
+        android:title="@string/access_control">
+
+        <ListPreference
+            android:entries="@array/access_mode_names"
+            android:entryValues="@array/access_modes"
+            android:key="@string/TUNNEL_OPT_ACCESS_MODE"
+            android:title="@string/restricted_access" />
+
+        <EditTextPreference
+            android:inputType="textMultiLine"
+            android:key="@string/TUNNEL_OPT_ACCESS_LIST"
+            android:title="@string/access_list" />
+
+        <CheckBoxPreference
+            android:key="@string/TUNNEL_OPT_REJECT_INPROXY"
+            android:summary="@string/tunnel_summ_reject_inproxies"
+            android:title="@string/reject_inproxies" />
+
+        <CheckBoxPreference
+            android:key="@string/TUNNEL_OPT_UNIQUE_LOCAL"
+            android:summary="@string/tunnel_summ_unique_local"
+            android:title="@string/unique_local" />
+
+        <CheckBoxPreference
+            android:key="@string/TUNNEL_OPT_MULTIHOME"
+            android:summary="@string/tunnel_summ_multihome"
+            android:title="@string/multihome" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/client_connection_limits">
+
+        <net.i2p.android.router.util.TitleIntEditTextPreference
+            android:key="@string/TUNNEL_OPT_LIMIT_MINUTE"
+            android:title="@string/num_per_minute" />
+
+        <net.i2p.android.router.util.TitleIntEditTextPreference
+            android:key="@string/TUNNEL_OPT_LIMIT_HOUR"
+            android:title="@string/num_per_hour" />
+
+        <net.i2p.android.router.util.TitleIntEditTextPreference
+            android:key="@string/TUNNEL_OPT_LIMIT_DAY"
+            android:title="@string/num_per_day" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/total_connection_limits">
+
+        <net.i2p.android.router.util.TitleIntEditTextPreference
+            android:key="@string/TUNNEL_OPT_TOTAL_MINUTE"
+            android:title="@string/num_per_minute" />
+
+        <net.i2p.android.router.util.TitleIntEditTextPreference
+            android:key="@string/TUNNEL_OPT_TOTAL_HOUR"
+            android:title="@string/num_per_hour" />
+
+        <net.i2p.android.router.util.TitleIntEditTextPreference
+            android:key="@string/TUNNEL_OPT_TOTAL_DAY"
+            android:title="@string/num_per_day" />
+
+        <net.i2p.android.router.util.IntEditTextPreference
+            android:key="@string/TUNNEL_OPT_MAX_STREAMS"
+            android:title="@string/max_active_connections" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

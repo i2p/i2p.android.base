@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="DEFAULT_SHARED_CLIENTS">true</bool>
+    <!-- General -->
     <bool name="DEFAULT_START_ON_LOAD">true</bool>
 
+    <!-- Client -->
+    <bool name="DEFAULT_SHARED_CLIENTS">true</bool>
+    <bool name="DEFAULT_PERSISTENT_KEY">false</bool>
+
+    <!-- General advanced -->
     <integer name="DEFAULT_TUNNEL_LENGTH">3</integer>
     <integer name="DEFAULT_TUNNEL_VARIANCE">0</integer>
     <integer name="DEFAULT_TUNNEL_QUANTITY">2</integer>
     <integer name="DEFAULT_TUNNEL_BACKUP_QUANTITY">0</integer>
+    <bool name="DEFAULT_REDUCE_ON_IDLE">true</bool>
+    <integer name="DEFAULT_REDUCE_COUNT">1</integer>
+    <integer name="DEFAULT_REDUCE_TIME">20</integer>
+    <!-- We bundle SpongyCastle, so this is guaranteed to be available. -->
+    <integer name="DEFAULT_SIGTYPE">1</integer>
 
+    <!-- Client advanced -->
+    <bool name="DEFAULT_CLOSE_ON_IDLE">true</bool>
+    <integer name="DEFAULT_CLOSE_TIME">30</integer>
+    <bool name="DEFAULT_NEW_KEYS">false</bool>
     <string name="DEFAULT_JUMP_LIST">http://i2host.i2p/cgi-bin/i2hostjump?
 http://stats.i2p/cgi-bin/jump.cgi?a=</string>
 </resources>
