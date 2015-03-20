@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.i2p.I2PAppContext;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
@@ -27,7 +28,7 @@ import java.util.List;
 public class TunnelDetailFragment extends Fragment {
     public static final String TUNNEL_ID = "tunnel_id";
 
-    OnTunnelDeletedListener mCallback;
+    TunnelDetailListener mCallback;
     private TunnelControllerGroup mGroup;
     private TunnelEntry mTunnel;
 
@@ -40,7 +41,8 @@ public class TunnelDetailFragment extends Fragment {
     }
 
     // Container Activity must implement this interface
-    public interface OnTunnelDeletedListener {
+    public interface TunnelDetailListener {
+        public void onEditTunnel(int tunnelId);
         public void onTunnelDeleted(int tunnelId, int numTunnelsLeft);
     }
 
@@ -51,7 +53,7 @@ public class TunnelDetailFragment extends Fragment {
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
-            mCallback = (OnTunnelDeletedListener) activity;
+            mCallback = (TunnelDetailListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnTunnelDeletedListener");
@@ -117,8 +119,6 @@ public class TunnelDetailFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_i2ptunnel_detail_actions, menu);
-        // Hide the edit action until we have an edit UI
-        menu.findItem(R.id.action_edit_tunnel).setVisible(false);
     }
 
     @Override
@@ -164,6 +164,7 @@ public class TunnelDetailFragment extends Fragment {
             getActivity().supportInvalidateOptionsMenu();
             return true;
         case R.id.action_edit_tunnel:
+            mCallback.onEditTunnel(mTunnel.getId());
             return true;
         case R.id.action_delete_tunnel:
             DialogFragment dg = new DialogFragment() {
@@ -177,7 +178,8 @@ public class TunnelDetailFragment extends Fragment {
 
                                     public void onClick(DialogInterface dialog, int which) {
                                         List<String> msgs = TunnelUtil.deleteTunnel(
-                                                getActivity(), mGroup, mTunnel.getId());
+                                                I2PAppContext.getGlobalContext(),
+                                                mGroup, mTunnel.getId(), null);
                                         dialog.dismiss();
                                         Toast.makeText(getActivity().getApplicationContext(),
                                                 msgs.get(0), Toast.LENGTH_LONG).show();

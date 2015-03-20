@@ -221,6 +221,7 @@
     <string name="i2ptunnel_view_access_point">Access point:</string>
     <string name="i2ptunnel_view_autostart">Auto-start</string>
 
+    <string name="edit_tunnel">Edit tunnel</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="auto_start">Auto-start</string>

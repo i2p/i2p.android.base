@@ -7,6 +7,7 @@
 
         <!-- Client-only (but not Streamr client) -->
         <CheckBoxPreference
+            android:defaultValue="@bool/DEFAULT_DELAY_OPEN"
             android:key="@string/TUNNEL_OPT_DELAY_OPEN"
             android:summary="@string/tunnel_summ_delay_open"
             android:title="@string/delay_open" />

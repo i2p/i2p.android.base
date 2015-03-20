@@ -19,6 +19,7 @@
     <integer name="DEFAULT_SIGTYPE">1</integer>
 
     <!-- Client advanced -->
+    <bool name="DEFAULT_DELAY_OPEN">true</bool>
     <bool name="DEFAULT_CLOSE_ON_IDLE">true</bool>
     <integer name="DEFAULT_CLOSE_TIME">30</integer>
     <bool name="DEFAULT_NEW_KEYS">false</bool>

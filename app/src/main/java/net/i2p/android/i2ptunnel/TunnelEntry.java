@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.Toast;
 
+import net.i2p.I2PAppContext;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 import net.i2p.data.Destination;
@@ -31,7 +32,7 @@ public class TunnelEntry {
             TunnelConfig cfg) {
         int tunnelId = tcg.getControllers().size();
         List<String> msgs = TunnelUtil.saveTunnel(
-                ctx, tcg, -1, cfg.getConfig());
+                I2PAppContext.getGlobalContext(), tcg, -1, cfg);
         // TODO: Do something else with the other messages.
         Toast.makeText(ctx.getApplicationContext(),
                 msgs.get(0), Toast.LENGTH_LONG).show();
