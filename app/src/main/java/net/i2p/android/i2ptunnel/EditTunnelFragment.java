@@ -78,12 +78,12 @@ public class EditTunnelFragment extends PreferenceFragment {
 
         public TunnelPreferences(String type) {
             super(type);
-            ps = getPreferenceScreen();
         }
 
         @Override
         protected void general() {
             addPreferencesFromResource(R.xml.tunnel_gen);
+            ps = getPreferenceScreen();
             generalCategory = (PreferenceCategory) ps.findPreference(
                     getString(R.string.TUNNEL_CAT_GENERAL));
             portCategory = (PreferenceCategory) ps.findPreference(
@@ -246,13 +246,13 @@ public class EditTunnelFragment extends PreferenceFragment {
      * @param newParent the parent PreferenceGroup to add the new Preferences to.
      */
     private void addPreferencesFromResource (int id, PreferenceGroup newParent) {
-        PreferenceScreen screen = getPreferenceScreen ();
-        int last = screen.getPreferenceCount ();
-        addPreferencesFromResource (id);
+        PreferenceScreen screen = getPreferenceScreen();
+        int last = screen.getPreferenceCount();
+        addPreferencesFromResource(id);
         while (screen.getPreferenceCount () > last) {
             Preference p = screen.getPreference (last);
-            screen.removePreference (p); // decreases the preference count
-            newParent.addPreference (p);
+            screen.removePreference(p); // decreases the preference count
+            newParent.addPreference(p);
         }
     }
 }

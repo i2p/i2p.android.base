@@ -32,12 +32,16 @@ public class IntEditTextPreference extends EditTextPreference {
 
     @Override
     protected String getPersistedString(String defaultReturnValue) {
-        int defaultVal = Integer.valueOf(defaultReturnValue);
-        return String.valueOf(getPersistedInt(defaultVal));
+        if(getSharedPreferences().contains(getKey())) {
+            int intValue = getPersistedInt(0);
+            return String.valueOf(intValue);
+        } else {
+            return defaultReturnValue;
+        }
     }
 
     @Override
     protected boolean persistString(String value) {
-        return persistInt(Integer.valueOf(value));
+        return value != null && persistInt(Integer.valueOf(value));
     }
 }

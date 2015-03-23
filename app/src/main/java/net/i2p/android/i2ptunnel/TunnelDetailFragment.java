@@ -145,6 +145,9 @@ public class TunnelDetailFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (mTunnel == null)
+            return false;
+
         // Handle presses on the action bar items
         switch (item.getItemId()) {
         case R.id.action_start_tunnel:
