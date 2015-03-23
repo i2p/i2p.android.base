@@ -107,7 +107,7 @@
     <!--
     router.inboundPool.length=1
     -->
-    <ListPreference
+    <net.i2p.android.router.util.IntListPreference
         android:key="@string/PROP_INBOUND_EXPLORATORY_LENGTH"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
@@ -120,7 +120,7 @@
     <!--
     router.inboundPool.lengthVariance=1
     -->
-    <ListPreference
+    <net.i2p.android.router.util.IntListPreference
         android:key="@string/PROP_INBOUND_EXPLORATORY_LENGTH_VARIANCE"
         android:entries="@array/setting2to2"
         android:entryValues="@array/setting2to2"
@@ -134,7 +134,7 @@
     <!--
     router.inboundPool.quantity=2
     -->
-    <ListPreference
+    <net.i2p.android.router.util.IntListPreference
         android:key="@string/PROP_INBOUND_EXPLORATORY_QUANTITY"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
@@ -147,7 +147,7 @@
     <!--
     router.inboundPool.backupQuantity=0
     -->
-    <ListPreference
+    <net.i2p.android.router.util.IntListPreference
         android:key="@string/PROP_INBOUND_EXPLORATORY_BACKUP_QUANTITY"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
@@ -164,7 +164,7 @@
     <!--
     router.outboundPool.length=1
     -->
-    <ListPreference
+    <net.i2p.android.router.util.IntListPreference
         android:key="@string/PROP_OUTBOUND_EXPLORATORY_LENGTH"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
@@ -177,7 +177,7 @@
     <!--
     router.outboundPool.lengthVariance=1
     -->
-    <ListPreference
+    <net.i2p.android.router.util.IntListPreference
         android:key="@string/PROP_OUTBOUND_EXPLORATORY_LENGTH_VARIANCE"
         android:entries="@array/setting2to2"
         android:entryValues="@array/setting2to2"
@@ -190,7 +190,7 @@
     <!--
     router.outboundPool.quantity=2
     -->
-    <ListPreference
+    <net.i2p.android.router.util.IntListPreference
         android:key="@string/PROP_OUTBOUND_EXPLORATORY_QUANTITY"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"
@@ -203,7 +203,7 @@
     <!--
     router.outboundPool.backupQuantity=0
     -->
-    <ListPreference
+    <net.i2p.android.router.util.IntListPreference
         android:key="@string/PROP_OUTBOUND_EXPLORATORY_BACKUP_QUANTITY"
         android:entries="@array/setting0to3"
         android:entryValues="@array/setting0to3"

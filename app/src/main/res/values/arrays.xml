@@ -37,19 +37,19 @@
         <item>Routers</item>
         <item>LeaseSets</item>
     </string-array>
-    <integer-array name="setting0to3">
+    <string-array name="setting0to3">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
-    </integer-array>
-    <integer-array name="setting2to2">
+    </string-array>
+    <string-array name="setting2to2">
         <item>-2</item>
         <item>-1</item>
         <item>0</item>
         <item>1</item>
         <item>2</item>
-    </integer-array>
+    </string-array>
     <string-array name="help_categories">
         <item>@string/general</item>
         <item>@string/label_browser_configuration</item>
@@ -84,23 +84,23 @@
         <item>Bulk connection (downloads/websites/BT)</item>
         <item>Interactive connection</item>
     </string-array>
-    <integer-array name="access_modes">
+    <string-array name="access_modes">
         <item>0</item>
         <item>1</item>
         <item>2</item>
-    </integer-array>
+    </string-array>
     <string-array name="access_mode_names">
         <item>Disabled</item>
         <item>Whitelist</item>
         <item>Blacklist</item>
     </string-array>
-    <integer-array name="sigtypes">
+    <string-array name="sigtypes">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>7</item>
-    </integer-array>
+    </string-array>
     <string-array name="sigtype_names">
         <item>DSA-SHA1</item>
         <item>ECDSA-P256</item>

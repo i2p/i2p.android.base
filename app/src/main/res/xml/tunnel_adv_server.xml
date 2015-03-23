@@ -5,7 +5,7 @@
         android:key="@string/TUNNEL_CAT_ACCESS_CONTROL"
         android:title="@string/access_control">
 
-        <ListPreference
+        <net.i2p.android.router.util.IntListPreference
             android:entries="@array/access_mode_names"
             android:entryValues="@array/access_modes"
             android:key="@string/TUNNEL_OPT_ACCESS_MODE"
