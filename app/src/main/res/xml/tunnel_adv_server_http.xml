@@ -5,9 +5,10 @@
 
         <net.i2p.android.router.util.IntEditTextPreference
             android:key="@string/TUNNEL_OPT_POST_CHECK_TIME"
+            android:summary="%s minutes"
             android:title="@string/limit_period" />
 
-        <net.i2p.android.router.util.IntEditTextPreference
+        <net.i2p.android.router.util.ConnectionLimitPreference
             android:key="@string/TUNNEL_OPT_POST_MAX"
             android:title="@string/client_posts_per_period" />
 
@@ -16,7 +17,7 @@
             android:summary="%s minutes"
             android:title="@string/client_ban_length" />
 
-        <net.i2p.android.router.util.IntEditTextPreference
+        <net.i2p.android.router.util.ConnectionLimitPreference
             android:key="@string/TUNNEL_OPT_POST_TOTAL_MAX"
             android:title="@string/total_posts_per_period" />
 

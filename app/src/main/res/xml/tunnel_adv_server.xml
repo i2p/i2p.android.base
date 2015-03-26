@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         android:key="@string/TUNNEL_CAT_ACCESS_CONTROL"
@@ -34,34 +35,53 @@
 
     <PreferenceCategory android:title="@string/client_connection_limits">
 
-        <net.i2p.android.router.util.TitleIntEditTextPreference
+        <net.i2p.android.router.util.ConnectionLimitPreference
+            android:dialogMessage="@string/set_zero_for_unlimited"
+            android:dialogTitle="@string/connections_per_minute"
             android:key="@string/TUNNEL_OPT_LIMIT_MINUTE"
-            android:title="@string/num_per_minute" />
+            android:title="@string/num_per_minute"
+            app:clp_valueInTitle="true" />
 
-        <net.i2p.android.router.util.TitleIntEditTextPreference
+        <net.i2p.android.router.util.ConnectionLimitPreference
+            android:dialogMessage="@string/set_zero_for_unlimited"
+            android:dialogTitle="@string/connections_per_hour"
             android:key="@string/TUNNEL_OPT_LIMIT_HOUR"
-            android:title="@string/num_per_hour" />
+            android:title="@string/num_per_hour"
+            app:clp_valueInTitle="true" />
 
-        <net.i2p.android.router.util.TitleIntEditTextPreference
+        <net.i2p.android.router.util.ConnectionLimitPreference
+            android:dialogMessage="@string/set_zero_for_unlimited"
+            android:dialogTitle="@string/connections_per_day"
             android:key="@string/TUNNEL_OPT_LIMIT_DAY"
-            android:title="@string/num_per_day" />
+            android:title="@string/num_per_day"
+            app:clp_valueInTitle="true" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/total_connection_limits">
 
-        <net.i2p.android.router.util.TitleIntEditTextPreference
+        <net.i2p.android.router.util.ConnectionLimitPreference
+            android:dialogMessage="@string/set_zero_for_unlimited"
+            android:dialogTitle="@string/total_connections_per_minute"
             android:key="@string/TUNNEL_OPT_TOTAL_MINUTE"
-            android:title="@string/num_per_minute" />
+            android:title="@string/num_per_minute"
+            app:clp_valueInTitle="true" />
 
-        <net.i2p.android.router.util.TitleIntEditTextPreference
+        <net.i2p.android.router.util.ConnectionLimitPreference
+            android:dialogMessage="@string/set_zero_for_unlimited"
+            android:dialogTitle="@string/total_connections_per_hour"
             android:key="@string/TUNNEL_OPT_TOTAL_HOUR"
-            android:title="@string/num_per_hour" />
+            android:title="@string/num_per_hour"
+            app:clp_valueInTitle="true" />
 
-        <net.i2p.android.router.util.TitleIntEditTextPreference
+        <net.i2p.android.router.util.ConnectionLimitPreference
+            android:dialogMessage="@string/set_zero_for_unlimited"
+            android:dialogTitle="@string/total_connections_per_day"
             android:key="@string/TUNNEL_OPT_TOTAL_DAY"
-            android:title="@string/num_per_day" />
+            android:title="@string/num_per_day"
+            app:clp_valueInTitle="true" />
 
-        <net.i2p.android.router.util.IntEditTextPreference
+        <net.i2p.android.router.util.ConnectionLimitPreference
+            android:dialogMessage="@string/set_zero_for_unlimited"
             android:key="@string/TUNNEL_OPT_MAX_STREAMS"
             android:title="@string/max_active_connections" />
 
