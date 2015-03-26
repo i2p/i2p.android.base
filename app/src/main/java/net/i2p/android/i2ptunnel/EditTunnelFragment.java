@@ -1,5 +1,6 @@
 package net.i2p.android.i2ptunnel;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
@@ -55,9 +56,22 @@ public class EditTunnelFragment extends PreferenceFragment {
     @Override
     public void onPause() {
         super.onPause();
-        // TODO do this here, or only when explicitly exiting the Activity?
-        // We kinda need to do it here, because this is the only method that is
-        // guaranteed to be called
+
+        // Pre-Honeycomb: onPause() is the last method guaranteed to be called.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+            saveTunnel();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // Honeycomb and above: onStop() is the last method guaranteed to be called.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            saveTunnel();
+    }
+
+    private void saveTunnel() {
         if (mGroup != null) {
             TunnelConfig cfg = TunnelUtil.createConfigFromPreferences(getActivity(), mGroup, mTunnelId);
             TunnelUtil.saveTunnel(I2PAppContext.getGlobalContext(), mGroup, mTunnelId, cfg);
