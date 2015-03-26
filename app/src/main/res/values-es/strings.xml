@@ -110,6 +110,7 @@
   <string name="settings_label_expl_backupQuantity">Cantidad de respaldos</string>
   <string name="settings_summ_expl_backupQuantity">%s túneles</string>
   <string name="settings_desc_expl_backupQuantity">Cuantos túneles de respaldo</string>
+  <string name="settings_need_transport_enabled">Debe tener al menos un transporte habilitado</string>
   <string name="settings_router_restart_required">Por favor reinicie I2P para aplicar los cambios</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_version">Versión:</string>

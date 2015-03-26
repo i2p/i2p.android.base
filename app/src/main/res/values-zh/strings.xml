@@ -110,6 +110,7 @@
   <string name="settings_label_expl_backupQuantity">备用数量</string>
   <string name="settings_summ_expl_backupQuantity">%s 隧道</string>
   <string name="settings_desc_expl_backupQuantity">备用隧道数量</string>
+  <string name="settings_need_transport_enabled">您必须启用至少一个传输</string>
   <string name="settings_router_restart_required">请重新启动 I2P 以应用此更改</string>
   <string name="menu_about">关于</string>
   <string name="about_version">版本:</string>

@@ -68,6 +68,8 @@
   <string name="settings_enable">Włącz</string>
   <string name="settings_desc_subscriptions">Adresy URL subskrypcji</string>
   <string name="settings_label_bandwidth_net">Przepustowość i sieć</string>
+  <string name="settings_label_startOnBoot">Uruchom I2P przy starcie systemu</string>
+  <string name="settings_desc_startOnBoot">Automatycznie połącz z I2P kiedy Twój Android włączy się.</string>
   <string name="settings_label_bandwidth">Przepustowość</string>
   <string name="settings_label_bw_inbound">Prędkość przychodząca</string>
   <string name="settings_desc_bw_inbound">Maksymalna prędkość przychodząca</string>
@@ -108,6 +110,7 @@
   <string name="settings_label_expl_backupQuantity">Ilość kopii zapasowych</string>
   <string name="settings_summ_expl_backupQuantity">%s tunelów</string>
   <string name="settings_desc_expl_backupQuantity">Ilość kopii zapasowych tuneli</string>
+  <string name="settings_need_transport_enabled">Musisz mieć przynajmniej jeden transport włączony</string>
   <string name="settings_router_restart_required">Proszę zrestartuj I2P, aby zmiany weszły w życie.</string>
   <string name="menu_about">O programie</string>
   <string name="about_version">Wersja:</string>
@@ -190,4 +193,5 @@
   <string name="error_logs_copied_to_clipboard">Logi błędów zostały skopiowane do schowka</string>
   <string name="logs_copied_to_clipboard">Logi zostały skopiowane do schowka</string>
   <string name="label_browser_configuration">Konfiguracja przeglądarki</string>
+  <string name="unset">Odpisz</string>
 </resources>

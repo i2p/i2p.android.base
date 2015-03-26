@@ -68,6 +68,8 @@
   <string name="settings_enable">Slå på</string>
   <string name="settings_desc_subscriptions">Abonnements-URL-er </string>
   <string name="settings_label_bandwidth_net">Båndbredde og nettverk</string>
+  <string name="settings_label_startOnBoot">Start I2P ved oppstart</string>
+  <string name="settings_desc_startOnBoot">Automatisk tilkobling til I2P etter at din Android-enhet har startet opp</string>
   <string name="settings_label_bandwidth">Båndbredde</string>
   <string name="settings_label_bw_inbound">Nedlastingshastighet</string>
   <string name="settings_desc_bw_inbound">Maksimal nedlastingshastighet</string>
@@ -108,6 +110,7 @@
   <string name="settings_label_expl_backupQuantity">Sikkerhetskopi-mengde</string>
   <string name="settings_summ_expl_backupQuantity">%s tunneler</string>
   <string name="settings_desc_expl_backupQuantity">Hvor mange reservetunneler</string>
+  <string name="settings_need_transport_enabled">Du må ha ihvertfall én overføring påskrudd</string>
   <string name="settings_router_restart_required">Gjør en omstart av I2P for å utføre endringer</string>
   <string name="menu_about">Om</string>
   <string name="about_version">Versjon:</string>
@@ -190,4 +193,5 @@
   <string name="error_logs_copied_to_clipboard">Utklippstavle for feil-logg</string>
   <string name="logs_copied_to_clipboard">Utklippstavle for loggføringer</string>
   <string name="label_browser_configuration">Oppsett av nettleser</string>
+  <string name="unset">Fravelg</string>
 </resources>

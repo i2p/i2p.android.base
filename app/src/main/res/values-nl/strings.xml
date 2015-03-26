@@ -110,6 +110,7 @@
   <string name="settings_label_expl_backupQuantity">Back-up hoeveelheid</string>
   <string name="settings_summ_expl_backupQuantity">%s tunnels</string>
   <string name="settings_desc_expl_backupQuantity">Hoeveel tunnel back-ups</string>
+  <string name="settings_need_transport_enabled">Er moet minstens een transport aangezet zijn</string>
   <string name="settings_router_restart_required">Herstart I2P om de instellingen toe te passen</string>
   <string name="menu_about">Over</string>
   <string name="about_version">Versie:</string>
