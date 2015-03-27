@@ -27,6 +27,7 @@ import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Util;
+import net.i2p.android.widget.SlidingTabLayout;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -58,6 +59,19 @@ public class I2PActivity extends I2PActivityBase implements
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
+
+        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        // Center the tabs in the layout
+        slidingTabLayout.setDistributeEvenly(true);
+        // Customize tab color
+        slidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.accent);
+            }
+        });
+        // Give the SlidingTabLayout the ViewPager
+        slidingTabLayout.setViewPager(mViewPager);
     }
 
     public static class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -99,7 +113,7 @@ public class I2PActivity extends I2PActivityBase implements
                 case 0:
                     return mContext.getString(R.string.label_console);
                 case 1:
-                    return mContext.getString(R.string.label_addressbook);
+                    return mContext.getString(R.string.label_addresses);
                 case 2:
                     return mContext.getString(R.string.label_tunnels);
                 default:
