@@ -25,6 +25,7 @@ import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.NamingServiceUtil;
+import net.i2p.android.util.FragmentUtils;
 import net.i2p.client.naming.NamingService;
 import net.i2p.router.RouterContext;
 
@@ -60,6 +61,14 @@ public class AddressbookFragment extends ListFragment implements
         public void onAddressSelected(CharSequence host);
     }
 
+    public static AddressbookFragment newInstance(String book) {
+        AddressbookFragment f = new AddressbookFragment();
+        Bundle args = new Bundle();
+        args.putString(AddressbookFragment.BOOK_NAME, book);
+        f.setArguments(args);
+        return f;
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -73,14 +82,9 @@ public class AddressbookFragment extends ListFragment implements
                     + " must implement RouterContextProvider");
         }
 
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            mCallback = (OnAddressSelectedListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnAddressSelectedListener");
-        }
+        mCallback = FragmentUtils.getParent(this, OnAddressSelectedListener.class);
+        if (mCallback == null)
+            throw new ClassCastException("Parent must implement OnAddressSelectedListener");
 
     }
 

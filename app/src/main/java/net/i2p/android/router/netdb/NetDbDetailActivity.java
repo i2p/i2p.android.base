@@ -1,12 +1,13 @@
 package net.i2p.android.router.netdb;
 
-import net.i2p.android.router.I2PActivityBase;
+import android.content.Intent;
+import android.os.Bundle;
+
+import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataFormatException;
 import net.i2p.data.Hash;
-import android.content.Intent;
-import android.os.Bundle;
 
 public class NetDbDetailActivity extends I2PActivityBase implements
         NetDbListFragment.OnEntrySelectedListener {
@@ -15,7 +16,7 @@ public class NetDbDetailActivity extends I2PActivityBase implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDrawerToggle.setDrawerIndicatorEnabled(false);
+        setContentView(R.layout.activity_onepane);
 
         if (savedInstanceState == null) {
             boolean isRI = getIntent().getBooleanExtra(NetDbDetailFragment.IS_RI, true);

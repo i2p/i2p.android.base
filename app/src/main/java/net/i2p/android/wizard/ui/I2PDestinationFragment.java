@@ -16,11 +16,6 @@
 
 package net.i2p.android.wizard.ui;
 
-import net.i2p.android.router.R;
-import net.i2p.android.router.addressbook.AddressbookActivity;
-import net.i2p.android.wizard.model.Page;
-import net.i2p.android.wizard.model.SingleTextFieldPage;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +30,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import net.i2p.android.I2PActivity;
+import net.i2p.android.router.R;
+import net.i2p.android.wizard.model.Page;
+import net.i2p.android.wizard.model.SingleTextFieldPage;
 
 public class I2PDestinationFragment extends Fragment {
     static final int REQUEST_ADDRESSBOOK_DOMAIN = 1;
@@ -79,7 +79,7 @@ public class I2PDestinationFragment extends Fragment {
         b.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent ai = new Intent(getActivity(), AddressbookActivity.class);
+                Intent ai = new Intent(getActivity(), I2PActivity.class);
                 ai.setAction(Intent.ACTION_PICK);
                 ai.setData(Uri.parse("content://net.i2p.addressbook/domains"));
                 startActivityForResult(ai, REQUEST_ADDRESSBOOK_DOMAIN);

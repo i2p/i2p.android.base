@@ -22,6 +22,7 @@ import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.R;
+import net.i2p.android.util.FragmentUtils;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
 import net.i2p.router.RouterContext;
@@ -63,6 +64,14 @@ public class TunnelListFragment extends ListFragment implements
         public void onTunnelSelected(int tunnelId);
     }
 
+    public static TunnelListFragment newInstance(boolean showClientTunnels) {
+        TunnelListFragment f = new TunnelListFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(TunnelListFragment.SHOW_CLIENT_TUNNELS, showClientTunnels);
+        f.setArguments(args);
+        return f;
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -76,14 +85,9 @@ public class TunnelListFragment extends ListFragment implements
                     + " must implement RouterContextProvider");
         }
 
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            mCallback = (OnTunnelSelectedListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnTunnelSelectedListener");
-        }
+        mCallback = FragmentUtils.getParent(this, OnTunnelSelectedListener.class);
+        if (mCallback == null)
+            throw new ClassCastException("Parent must implement OnTunnelSelectedListener");
 
     }
 

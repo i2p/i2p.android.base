@@ -13,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;
 import net.i2p.android.router.service.StatSummarizer;
@@ -36,7 +36,7 @@ public class RateGraphActivity extends I2PActivityBase {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDrawerToggle.setDrawerIndicatorEnabled(false);
+        setContentView(R.layout.activity_onepane);
 
         if (StatSummarizer.instance() != null) {
             // Get the rates currently being graphed

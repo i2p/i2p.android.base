@@ -1,6 +1,8 @@
-package net.i2p.android.router;
+package net.i2p.android;
 
+import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -8,13 +10,17 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.ViewGroup;
 
-import net.i2p.android.help.HelpActivity;
-import net.i2p.android.router.dialog.AboutDialog;
-import net.i2p.android.router.dialog.TextResourceDialog;
+import net.i2p.android.i2ptunnel.TunnelsContainer;
+import net.i2p.android.router.ConsoleContainer;
+import net.i2p.android.router.MainFragment;
+import net.i2p.android.router.R;
+import net.i2p.android.router.addressbook.AddressbookContainer;
 import net.i2p.android.router.service.IRouterState;
 import net.i2p.android.router.service.IRouterStateCallback;
 import net.i2p.android.router.service.RouterService;
@@ -24,28 +30,101 @@ import net.i2p.android.router.util.Util;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 
-public class MainActivity extends I2PActivityBase implements
+/**
+ * The main activity of the app. Contains a ViewPager that holds the three main
+ * views:
+ * <ul>
+ * <li>The console</li>
+ * <li>The addressbook</li>
+ * <li>The tunnel manager</li>
+ * </ul>
+ */
+public class I2PActivity extends I2PActivityBase implements
         MainFragment.RouterControlListener {
+    ViewPager mViewPager;
+    ViewPagerAdapter mViewPagerAdapter;
+
     IRouterState mStateService = null;
-    MainFragment mMainFragment = null;
     private boolean mAutoStartFromIntent = false;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_viewpager);
 
-        // Start with the home view
-        if (savedInstanceState == null) {
-            mMainFragment = new MainFragment();
-            mMainFragment.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.main_fragment, mMainFragment).commit();
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager());
+        mViewPager.setAdapter(mViewPagerAdapter);
+    }
+
+    public static class ViewPagerAdapter extends FragmentPagerAdapter {
+        private static final int NUM_ITEMS = 3;
+
+        private Context mContext;
+        private FragmentManager mFragmentManager;
+        private Map<Integer, String> mFragmentTags;
+
+        public ViewPagerAdapter(Context context, FragmentManager fm) {
+            super(fm);
+            mContext = context;
+            mFragmentManager = fm;
+            mFragmentTags = new HashMap<>();
         }
 
-        // Open nav drawer if the user has never opened it themselves
-        if (!getPref(PREF_NAV_DRAWER_OPENED, false))
-            mDrawerLayout.openDrawer(mDrawerList);
+        @Override
+        public int getCount() {
+            return NUM_ITEMS;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new ConsoleContainer();
+                case 1:
+                    return new AddressbookContainer();
+                case 2:
+                    return new TunnelsContainer();
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return mContext.getString(R.string.label_console);
+                case 1:
+                    return mContext.getString(R.string.label_addressbook);
+                case 2:
+                    return mContext.getString(R.string.label_tunnels);
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            Object obj = super.instantiateItem(container, position);
+            if (obj instanceof Fragment) {
+                // record the fragment tag here.
+                Fragment f = (Fragment) obj;
+                String tag = f.getTag();
+                mFragmentTags.put(position, tag);
+            }
+            return obj;
+        }
+
+        public Fragment getFragment(int position) {
+            String tag = mFragmentTags.get(position);
+            if (tag == null)
+                return null;
+            return mFragmentManager.findFragmentByTag(tag);
+        }
     }
 
     @Override
@@ -75,6 +154,8 @@ public class MainActivity extends I2PActivityBase implements
             return;
 
         if (action.equals("net.i2p.android.router.START_I2P")) {
+            if (mViewPager.getCurrentItem() != 0)
+                mViewPager.setCurrentItem(0, false);
             autoStart();
         }
     }
@@ -108,48 +189,8 @@ public class MainActivity extends I2PActivityBase implements
                 } else {
                     Util.d("StateService not started yet");
                 }
-            } catch (RemoteException e) {}
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main_actions, menu);
-        inflater.inflate(R.menu.activity_base_actions, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.menu_settings:
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-
-        case R.id.menu_about:
-            AboutDialog dialog = new AboutDialog();
-            dialog.show(getSupportFragmentManager(), "about");
-            return true;
-
-        case R.id.menu_help:
-            Intent hi = new Intent(MainActivity.this, HelpActivity.class);
-            startActivity(hi);
-            return true;
-
-        case R.id.menu_help_release_notes:
-            TextResourceDialog rDdialog = new TextResourceDialog();
-            Bundle args = new Bundle();
-            args.putString(TextResourceDialog.TEXT_DIALOG_TITLE,
-                    getResources().getString(R.string.label_release_notes));
-            args.putInt(TextResourceDialog.TEXT_RESOURCE_ID, R.raw.releasenotes_txt);
-            rDdialog.setArguments(args);
-            rDdialog.show(getSupportFragmentManager(), "release_notes");
-            return true;
-
-        default:
-            return super.onOptionsItemSelected(item);
+            } catch (RemoteException e) {
+            }
         }
     }
 
@@ -158,7 +199,8 @@ public class MainActivity extends I2PActivityBase implements
         if (mStateService != null) {
             try {
                 mStateService.unregisterCallback(mStateCallback);
-            } catch (RemoteException e) {}
+            } catch (RemoteException e) {
+            }
         }
         if (mTriedBindState)
             unbindService(mStateConnection);
@@ -177,14 +219,12 @@ public class MainActivity extends I2PActivityBase implements
                     mStateConnection, 0);
             Util.d("Bind to IRouterState successful: " + mTriedBindState);
         }
-
-        super.onRouterBind(svc);
     }
 
     private boolean mTriedBindState;
     private ServiceConnection mStateConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className,
-                IBinder service) {
+                                       IBinder service) {
             mStateService = IRouterState.Stub.asInterface(service);
             Util.d("StateService bound");
             try {
@@ -236,39 +276,39 @@ public class MainActivity extends I2PActivityBase implements
     private static final String MSG_DATA = "state";
 
     private Handler mHandler = new StateHandler(new WeakReference<>(this));
-    private static class StateHandler extends Handler {
-        WeakReference<MainActivity> mReference;
 
-        public StateHandler(WeakReference<MainActivity> reference) {
+    private static class StateHandler extends Handler {
+        WeakReference<I2PActivity> mReference;
+
+        public StateHandler(WeakReference<I2PActivity> reference) {
             mReference = reference;
         }
 
         private State lastRouterState = null;
+
         @Override
         public void handleMessage(Message msg) {
-            MainActivity parent = mReference.get();
+            I2PActivity parent = mReference.get();
             if (parent == null)
                 return;
 
             switch (msg.what) {
-            case STATE_MSG:
-                State state = msg.getData().getParcelable(MSG_DATA);
-                if (lastRouterState == null || lastRouterState != state) {
-                    if (parent.mMainFragment == null)
-                        parent.mMainFragment = (MainFragment) parent.getSupportFragmentManager().findFragmentById(R.id.main_fragment);
-                    if (parent.mMainFragment != null) {
-                        parent.mMainFragment.updateState(state);
-                        lastRouterState = state;
-                    }
+                case STATE_MSG:
+                    State state = msg.getData().getParcelable(MSG_DATA);
+                    if (lastRouterState == null || lastRouterState != state) {
+                        if (parent.mViewPagerAdapter != null) {
+                            ((ConsoleContainer) parent.mViewPagerAdapter.getFragment(0)).updateState(state);
+                            lastRouterState = state;
+                        }
 
-                    if (state == State.RUNNING && parent.mAutoStartFromIntent) {
-                        parent.setResult(RESULT_OK);
-                        parent.finish();
+                        if (state == State.RUNNING && parent.mAutoStartFromIntent) {
+                            parent.setResult(Activity.RESULT_OK);
+                            parent.finish();
+                        }
                     }
-                }
-                break;
-            default:
-                super.handleMessage(msg);
+                    break;
+                default:
+                    super.handleMessage(msg);
             }
         }
     }
@@ -297,7 +337,7 @@ public class MainActivity extends I2PActivityBase implements
 
     public void onStartRouterClicked() {
         RouterService svc = _routerService;
-        if(svc != null && _isBound) {
+        if (svc != null && _isBound) {
             setPref(PREF_AUTO_START, true);
             svc.manualStart();
         } else {
@@ -308,7 +348,7 @@ public class MainActivity extends I2PActivityBase implements
 
     public boolean onStopRouterClicked() {
         RouterService svc = _routerService;
-        if(svc != null && _isBound) {
+        if (svc != null && _isBound) {
             setPref(PREF_AUTO_START, false);
             svc.manualQuit();
             return true;

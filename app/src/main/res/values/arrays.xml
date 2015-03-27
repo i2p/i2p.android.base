@@ -13,14 +13,6 @@
         <item>@string/label_peers_status</item>
         <item>NetDB</item>
     </string-array>
-    <string-array name="addressbook_pages">
-        <item>Router</item>
-        <item>Private</item>
-    </string-array>
-    <string-array name="i2ptunnel_pages">
-        <item>@string/label_i2ptunnel_client</item>
-        <item>@string/label_i2ptunnel_server</item>
-    </string-array>
     <string-array name="log_level_list">
         <item>ERROR</item>
         <item>All</item>

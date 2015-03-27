@@ -6,7 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import net.i2p.android.router.MainActivity;
+
+import net.i2p.android.I2PActivity;
 import net.i2p.android.router.R;
 
 class StatusBar {
@@ -42,7 +43,7 @@ class StatusBar {
             .setOngoing(true)
             .setOnlyAlertOnce(true);
 
-        Intent intent = new Intent(ctx, MainActivity.class);
+        Intent intent = new Intent(ctx, I2PActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mNotifyBuilder.setContentIntent(pi);

@@ -1,7 +1,6 @@
 package net.i2p.android.router;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,9 +17,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.dialog.ConfigureBrowserDialog;
 import net.i2p.android.router.dialog.FirstStartDialog;
-import net.i2p.android.router.dialog.VersionDialog;
 import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.LongToggleButton;

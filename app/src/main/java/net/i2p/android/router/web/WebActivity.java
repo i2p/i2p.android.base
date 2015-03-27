@@ -1,6 +1,6 @@
 package net.i2p.android.router.web;
 
-import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.R;
 import android.os.Bundle;
 

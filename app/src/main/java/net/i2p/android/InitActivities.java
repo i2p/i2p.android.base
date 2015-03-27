@@ -1,9 +1,10 @@
-package net.i2p.android.router;
+package net.i2p.android;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
 
+import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.util.FileUtil;
