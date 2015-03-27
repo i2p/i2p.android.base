@@ -27,7 +27,7 @@ public class ConsoleContainer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.container_console, container, false);
         // Start with the home view
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && getChildFragmentManager().findFragmentById(R.id.main_fragment) == null) {
             mMainFragment = new MainFragment();
             mMainFragment.setArguments(getActivity().getIntent().getExtras());
             getChildFragmentManager().beginTransaction()

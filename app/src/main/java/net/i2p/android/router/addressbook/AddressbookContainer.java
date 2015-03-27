@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -50,10 +51,12 @@ public class AddressbookContainer extends Fragment
             mTwoPane = true;
 
             // Set up the two pages
-            getChildFragmentManager().beginTransaction()
-                    .add(R.id.left_fragment, AddressbookFragment.newInstance(AddressbookFragment.ROUTER_BOOK))
-                    .add(R.id.right_fragment, AddressbookFragment.newInstance(AddressbookFragment.PRIVATE_BOOK))
-                    .commit();
+            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+            if (getChildFragmentManager().findFragmentById(R.id.left_fragment) == null)
+                ft.add(R.id.left_fragment, AddressbookFragment.newInstance(AddressbookFragment.ROUTER_BOOK));
+            if (getChildFragmentManager().findFragmentById(R.id.right_fragment) == null)
+                ft.add(R.id.right_fragment, AddressbookFragment.newInstance(AddressbookFragment.PRIVATE_BOOK));
+            ft.commit();
         } else {
             ViewPager viewPager = (ViewPager) v.findViewById(R.id.pager);
             mFragPagerAdapter = new AddressbookPagerAdapter(getActivity(), getChildFragmentManager());
