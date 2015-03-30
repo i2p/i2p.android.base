@@ -12,9 +12,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.ViewGroup;
 
 import net.i2p.android.i2ptunnel.TunnelsContainer;
 import net.i2p.android.router.ConsoleContainer;
@@ -27,12 +25,11 @@ import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Util;
+import net.i2p.android.util.MemoryFragmentPagerAdapter;
 import net.i2p.android.widget.SlidingTabLayout;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The main activity of the app. Contains a ViewPager that holds the three main
@@ -74,18 +71,14 @@ public class I2PActivity extends I2PActivityBase implements
         slidingTabLayout.setViewPager(mViewPager);
     }
 
-    public static class ViewPagerAdapter extends FragmentPagerAdapter {
+    public static class ViewPagerAdapter extends MemoryFragmentPagerAdapter {
         private static final int NUM_ITEMS = 3;
 
         private Context mContext;
-        private FragmentManager mFragmentManager;
-        private Map<Integer, String> mFragmentTags;
 
         public ViewPagerAdapter(Context context, FragmentManager fm) {
             super(fm);
             mContext = context;
-            mFragmentManager = fm;
-            mFragmentTags = new HashMap<>();
         }
 
         @Override
@@ -119,25 +112,6 @@ public class I2PActivity extends I2PActivityBase implements
                 default:
                     return null;
             }
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            Object obj = super.instantiateItem(container, position);
-            if (obj instanceof Fragment) {
-                // record the fragment tag here.
-                Fragment f = (Fragment) obj;
-                String tag = f.getTag();
-                mFragmentTags.put(position, tag);
-            }
-            return obj;
-        }
-
-        public Fragment getFragment(int position) {
-            String tag = mFragmentTags.get(position);
-            if (tag == null)
-                return null;
-            return mFragmentManager.findFragmentByTag(tag);
         }
     }
 
