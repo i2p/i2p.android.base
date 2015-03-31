@@ -108,7 +108,7 @@ public class AddressbookContainer extends Fragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.activity_addressbook_actions, menu);
+        inflater.inflate(R.menu.container_addressbook_actions, menu);
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchItem = menu.findItem(R.id.action_search_addressbook);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);

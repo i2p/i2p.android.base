@@ -1,12 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:i2pandroid="http://schemas.android.com/apk/res-auto">
-    <item android:title="@string/menu_settings"
-          android:id="@+id/menu_settings"
-          android:icon="@android:drawable/ic_menu_preferences"
-          i2pandroid:showAsAction="never" >
-    </item>
-    <item android:title="@string/menu_help"
-          android:id="@+id/menu_help"
-          i2pandroid:showAsAction="never" >
-    </item>
+    xmlns:i2pandroid="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:menuCategory="secondary"
+        android:title="@string/menu_settings"
+        i2pandroid:showAsAction="never" />
+    <item
+        android:id="@+id/menu_help"
+        android:menuCategory="secondary"
+        android:title="@string/menu_help"
+        i2pandroid:showAsAction="never" />
 </menu>

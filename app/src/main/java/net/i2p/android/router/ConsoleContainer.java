@@ -1,6 +1,5 @@
 package net.i2p.android.router;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.i2p.android.help.HelpActivity;
 import net.i2p.android.router.dialog.AboutDialog;
 import net.i2p.android.router.dialog.TextResourceDialog;
 import net.i2p.android.router.service.State;
@@ -39,25 +37,14 @@ public class ConsoleContainer extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_main_actions, menu);
-        inflater.inflate(R.menu.activity_base_actions, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.menu_settings:
-            Intent intent = new Intent(getActivity(), SettingsActivity.class);
-            startActivity(intent);
-            return true;
-
         case R.id.menu_about:
             AboutDialog dialog = new AboutDialog();
             dialog.show(getFragmentManager(), "about");
-            return true;
-
-        case R.id.menu_help:
-            Intent hi = new Intent(getActivity(), HelpActivity.class);
-            startActivity(hi);
             return true;
 
         case R.id.menu_help_release_notes:

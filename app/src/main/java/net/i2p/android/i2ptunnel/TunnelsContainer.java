@@ -128,7 +128,8 @@ public class TunnelsContainer extends Fragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.fragment_i2ptunnel_list_actions, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
         if (Util.getRouterContext() == null) {
             mNewTunnel.setVisibility(View.GONE);
         }

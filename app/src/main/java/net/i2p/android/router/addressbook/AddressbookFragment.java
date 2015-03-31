@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.i2p.addressbook.Daemon;
-import net.i2p.android.help.HelpActivity;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.R;
@@ -189,6 +188,8 @@ public class AddressbookFragment extends ListFragment implements
                 mAddToAddressbook.setVisibility(View.GONE);
         }
 
+        menu.findItem(R.id.action_reload_subscriptions).setVisible(getRouterContext() != null);
+
         // Only allow adding to private book 
         if (!PRIVATE_BOOK.equals(mBook) && mAddToAddressbook != null) {
             mAddToAddressbook.setVisibility(View.GONE);
@@ -205,15 +206,6 @@ public class AddressbookFragment extends ListFragment implements
                 Daemon.wakeup();
                 Toast.makeText(getActivity(), "Reloading subscriptions...",
                         Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.action_addressbook_settings:
-                Intent si = new Intent(getActivity(), AddressbookSettingsActivity.class);
-                startActivity(si);
-                return true;
-            case R.id.action_addressbook_help:
-                Intent hi = new Intent(getActivity(), HelpActivity.class);
-                hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_ADDRESSBOOK);
-                startActivity(hi);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,7 +1,6 @@
 package net.i2p.android.i2ptunnel;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import net.i2p.android.help.HelpActivity;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.R;
@@ -183,11 +181,6 @@ public class TunnelListFragment extends ListFragment implements
             case R.id.action_restart_all_tunnels:
                 msgs = mGroup.restartAllControllers();
                 break;
-            case R.id.action_i2ptunnel_help:
-                Intent hi = new Intent(getActivity(), HelpActivity.class);
-                hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_I2PTUNNEL);
-                startActivity(hi);
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

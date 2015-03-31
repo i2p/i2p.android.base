@@ -13,11 +13,15 @@ import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import net.i2p.android.help.HelpActivity;
 import net.i2p.android.i2ptunnel.TunnelsContainer;
 import net.i2p.android.router.ConsoleContainer;
 import net.i2p.android.router.MainFragment;
 import net.i2p.android.router.R;
+import net.i2p.android.router.SettingsActivity;
 import net.i2p.android.router.addressbook.AddressbookContainer;
 import net.i2p.android.router.service.IRouterState;
 import net.i2p.android.router.service.IRouterStateCallback;
@@ -159,6 +163,38 @@ public class I2PActivity extends I2PActivityBase implements
             }
         } else {
             // TODO: Notify user
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_base_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.menu_help:
+                Intent hi = new Intent(this, HelpActivity.class);
+                switch (mViewPager.getCurrentItem()) {
+                    case 1:
+                        hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_ADDRESSBOOK);
+                        break;
+                    case 2:
+                        hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_I2PTUNNEL);
+                        break;
+                }
+                startActivity(hi);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
