@@ -183,7 +183,8 @@ public class AddressbookFragment extends ListFragment implements
     public void onPrepareOptionsMenu(Menu menu) {
         // Hide until needed
         if (getRouterContext() == null) {
-            mSearchAddressbook.setVisible(false);
+            if (mSearchAddressbook != null)
+                mSearchAddressbook.setVisible(false);
             if (mAddToAddressbook != null)
                 mAddToAddressbook.setVisibility(View.GONE);
         }
