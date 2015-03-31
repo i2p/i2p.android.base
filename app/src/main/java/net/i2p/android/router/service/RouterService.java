@@ -1,13 +1,17 @@
 package net.i2p.android.router.service;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
+import android.support.v4.content.LocalBroadcastManager;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.receiver.I2PReceiver;
@@ -27,6 +31,22 @@ import java.text.DecimalFormat;
  * Runs the router
  */
 public class RouterService extends Service {
+
+    /**
+     * A request to this service for the current router state. Broadcasting
+     * this will trigger a state notification.
+     */
+    public static final String LOCAL_BROADCAST_REQUEST_STATE = "net.i2p.android.LOCAL_BROADCAST_REQUEST_STATE";
+    /**
+     * A notification of the current state. This is informational; the state
+     * has not changed.
+     */
+    public static final String LOCAL_BROADCAST_STATE_NOTIFICATION = "net.i2p.android.LOCAL_BROADCAST_STATE_NOTIFICATION";
+    /**
+     * The state has just changed.
+     */
+    public static final String LOCAL_BROADCAST_STATE_CHANGED = "net.i2p.android.LOCAL_BROADCAST_STATE_CHANGED";
+    public static final String LOCAL_BROADCAST_EXTRA_STATE = "net.i2p.android.STATE";
 
     private RouterContext _context;
     private String _myDir;
@@ -76,6 +96,8 @@ public class RouterService extends Service {
         _binder = new RouterBinder(this);
         _handler = new Handler();
         _updater = new Updater();
+        LocalBroadcastManager.getInstance(this).registerReceiver(onStateRequested,
+                new IntentFilter(LOCAL_BROADCAST_REQUEST_STATE));
         if(lastState == State.RUNNING || lastState == State.ACTIVE) {
             Intent intent = new Intent(this, RouterService.class);
             intent.putExtra(EXTRA_RESTART, true);
@@ -87,6 +109,16 @@ public class RouterService extends Service {
             }
         }
     }
+
+    private BroadcastReceiver onStateRequested = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Broadcast the current state within this app.
+            Intent ni = new Intent(LOCAL_BROADCAST_STATE_NOTIFICATION);
+            ni.putExtra(LOCAL_BROADCAST_EXTRA_STATE, (android.os.Parcelable) _state);
+            LocalBroadcastManager.getInstance(RouterService.this).sendBroadcast(ni);
+        }
+    };
 
     /**
      * NOT called by system if it restarts us after a crash
@@ -479,6 +511,8 @@ public class RouterService extends Service {
         _handler.removeCallbacks(_updater);
         _statusBar.remove();
 
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onStateRequested);
+
         I2PReceiver rcvr = _receiver;
         if(rcvr != null) {
             synchronized(rcvr) {
@@ -641,6 +675,13 @@ public class RouterService extends Service {
     private void setState(State s) {
         _state = s;
         saveState();
+
+        // Broadcast the new state within this app.
+        Intent intent = new Intent(LOCAL_BROADCAST_STATE_CHANGED);
+        intent.putExtra(LOCAL_BROADCAST_EXTRA_STATE, (android.os.Parcelable) _state);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+        // Notify other apps that the state has changed
         mHandler.sendEmptyMessage(STATE_MSG);
     }
 
