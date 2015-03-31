@@ -3,7 +3,6 @@ package net.i2p.android.router.addressbook;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
-import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.android.router.util.Util;
 import net.i2p.client.naming.NamingService;
@@ -23,8 +22,7 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> impl
     private String mFilter;
     private List<AddressEntry> mData;
 
-    public AddressEntryLoader(Context context, I2PFragmentBase.RouterContextProvider rContextProvider,
-            String book, String filter) {
+    public AddressEntryLoader(Context context, String book, String filter) {
         super(context);
         mBook = book;
         mFilter = filter;
