@@ -145,7 +145,9 @@ public class AddressbookFragment extends ListFragment implements
         if (mAddToAddressbook != null)
             mAddToAddressbook.setVisibility(rCtx == null ? View.GONE : View.VISIBLE);
 
-        menu.findItem(R.id.action_reload_subscriptions).setVisible(rCtx != null);
+        // Only show "Reload subscriptions" for router addressbook
+        menu.findItem(R.id.action_reload_subscriptions).setVisible(
+                rCtx != null && !PRIVATE_BOOK.equals(mBook));
 
         // Only allow adding to private book 
         if (!PRIVATE_BOOK.equals(mBook) && mAddToAddressbook != null) {
