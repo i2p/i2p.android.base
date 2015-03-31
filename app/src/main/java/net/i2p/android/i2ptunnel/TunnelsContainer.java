@@ -130,9 +130,9 @@ public class TunnelsContainer extends Fragment implements
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
-                case 0:
+                case FRAGMENT_ID_CLIENT:
                     return mContext.getString(R.string.label_i2ptunnel_client);
-                case 1:
+                case FRAGMENT_ID_SERVER:
                     return mContext.getString(R.string.label_i2ptunnel_server);
                 default:
                     return null;

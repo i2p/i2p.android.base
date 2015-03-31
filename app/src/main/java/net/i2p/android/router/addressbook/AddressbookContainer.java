@@ -116,9 +116,9 @@ public class AddressbookContainer extends Fragment
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
-                case 0:
+                case FRAGMENT_ID_ROUTER:
                     return mContext.getString(R.string.label_router);
-                case 1:
+                case FRAGMENT_ID_PRIVATE:
                     return mContext.getString(R.string.label_private);
                 default:
                     return null;
