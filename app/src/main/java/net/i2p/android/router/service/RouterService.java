@@ -20,6 +20,7 @@ import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.RouterLaunch;
 
+import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 
 /**
@@ -431,29 +432,40 @@ public class RouterService extends Service {
     /**
      * Our Handler used to execute operations on the main thread.
      */
-    private final Handler mHandler = new Handler() {
+    private final Handler mHandler = new StateHandler(new WeakReference<>(this));
+    private static class StateHandler extends Handler {
+        WeakReference<RouterService> mReference;
+
+        public StateHandler(WeakReference<RouterService> reference) {
+            mReference = reference;
+        }
+
         @Override
         public void handleMessage(Message msg) {
+            RouterService parent = mReference.get();
+            if (parent == null)
+                return;
+
             switch (msg.what) {
             case STATE_MSG:
-                final State state = _state;
+                final State state = parent._state;
                 // Broadcast to all clients the new state.
-                final int N = mStateCallbacks.beginBroadcast();
+                final int N = parent.mStateCallbacks.beginBroadcast();
                 for (int i = 0; i < N; i++) {
                     try {
-                        mStateCallbacks.getBroadcastItem(i).stateChanged(state);
+                        parent.mStateCallbacks.getBroadcastItem(i).stateChanged(state);
                     } catch (RemoteException e) {
                         // The RemoteCallbackList will take care of removing
                         // the dead object for us.
                     }
                 }
-                mStateCallbacks.finishBroadcast();
+                parent.mStateCallbacks.finishBroadcast();
                 break;
             default:
                 super.handleMessage(msg);
             }
         }
-    };
+    }
 
     /**
      * Turn off the status bar. Unregister the receiver. If we were running,
