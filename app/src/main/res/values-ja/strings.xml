@@ -68,6 +68,8 @@
   <string name="settings_enable">有効</string>
   <string name="settings_desc_subscriptions">URL を登録</string>
   <string name="settings_label_bandwidth_net">帯域幅とネットワーク</string>
+  <string name="settings_label_startOnBoot">デバイスの起動時ににI2Pも起動</string>
+  <string name="settings_desc_startOnBoot">デバイスの起動時に自動でI2Pに接続</string>
   <string name="settings_label_bandwidth">帯域幅</string>
   <string name="settings_label_bw_inbound">受信速度</string>
   <string name="settings_desc_bw_inbound">最大受信速度</string>
@@ -108,6 +110,7 @@
   <string name="settings_label_expl_backupQuantity">バックアップの数量</string>
   <string name="settings_summ_expl_backupQuantity">%s トンネル</string>
   <string name="settings_desc_expl_backupQuantity">トンネルバックアップの数</string>
+  <string name="settings_need_transport_enabled">あなたは少なくともひとつの転送を有効にする必要があります</string>
   <string name="settings_router_restart_required">設定を適用するためにI2Pを再起動してください</string>
   <string name="menu_about">アバウト</string>
   <string name="about_version">バージョン:</string>
@@ -190,4 +193,5 @@
   <string name="error_logs_copied_to_clipboard">エラーログはクリップボードにコピーされました</string>
   <string name="logs_copied_to_clipboard">ログはクリップボードにコピーされました</string>
   <string name="label_browser_configuration">ブラウザ設定</string>
+  <string name="unset">解除</string>
 </resources>
