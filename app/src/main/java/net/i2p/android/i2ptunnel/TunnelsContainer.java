@@ -1,28 +1,42 @@
 package net.i2p.android.i2ptunnel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
+import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
+import net.i2p.android.util.MemoryFragmentPagerAdapter;
+import net.i2p.i2ptunnel.TunnelControllerGroup;
+import net.i2p.i2ptunnel.ui.TunnelConfig;
 
 public class TunnelsContainer extends Fragment implements
         TunnelListFragment.OnTunnelSelectedListener,
         TunnelDetailFragment.TunnelDetailListener {
+    static final int TUNNEL_WIZARD_REQUEST = 1;
+    public static final String TUNNEL_WIZARD_DATA = "tunnel_wizard_data";
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     private boolean mTwoPane;
 
-    FragmentPagerAdapter mFragPagerAdapter;
+    ViewPager mViewPager;
+    MemoryFragmentPagerAdapter mFragPagerAdapter;
+
+    private ImageButton mNewTunnel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +48,9 @@ public class TunnelsContainer extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.container_tunnels, container, false);
 
+        mViewPager = (ViewPager) v.findViewById(R.id.pager);
+        mNewTunnel = (ImageButton) v.findViewById(R.id.promoted_action);
+
         if (v.findViewById(R.id.detail_fragment) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -42,14 +59,26 @@ public class TunnelsContainer extends Fragment implements
             mTwoPane = true;
         }
 
-        ViewPager viewPager = (ViewPager) v.findViewById(R.id.container_pager);
-        mFragPagerAdapter = new TunnelsPagerAdapter(getActivity(), getChildFragmentManager(), mTwoPane);
-        viewPager.setAdapter(mFragPagerAdapter);
-
         return v;
     }
 
-    public static class TunnelsPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mFragPagerAdapter = new TunnelsPagerAdapter(getActivity(), getChildFragmentManager(), mTwoPane);
+        mViewPager.setAdapter(mFragPagerAdapter);
+
+        mNewTunnel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent wi = new Intent(getActivity(), TunnelWizardActivity.class);
+                startActivityForResult(wi, TUNNEL_WIZARD_REQUEST);
+            }
+        });
+    }
+
+    public static class TunnelsPagerAdapter extends MemoryFragmentPagerAdapter {
         private static final int NUM_ITEMS = 2;
 
         private Context mContext;
@@ -93,6 +122,30 @@ public class TunnelsContainer extends Fragment implements
                     return mContext.getString(R.string.label_i2ptunnel_server);
                 default:
                     return null;
+            }
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_i2ptunnel_list_actions, menu);
+        if (Util.getRouterContext() == null) {
+            mNewTunnel.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == TUNNEL_WIZARD_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bundle tunnelData = data.getExtras().getBundle(TUNNEL_WIZARD_DATA);
+                // TODO fetch earlier
+                TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
+                TunnelConfig cfg = TunnelUtil.createConfigFromWizard(getActivity(), tcg, tunnelData);
+                TunnelEntry tunnel = TunnelEntry.createNewTunnel(getActivity(), tcg, cfg);
+
+                TunnelListFragment f = (TunnelListFragment) mFragPagerAdapter.getFragment(tunnel.isClient() ? 0 : 1);
+                f.addTunnel(tunnel);
             }
         }
     }

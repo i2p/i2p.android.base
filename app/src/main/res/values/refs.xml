@@ -2,6 +2,6 @@
 <resources>
     <item name="activity_multipane" type="layout">@layout/activity_onepane</item>
     <item name="container_addressbook" type="layout">@layout/container_addressbook_onepane</item>
-    <item name="container_tunnels" type="layout">@layout/container_tunnels_onepane</item>
+    <item name="container_tunnels" type="layout">@layout/container_with_add_onepane</item>
     <item name="activity_help" type="layout">@layout/activity_help_onepane</item>
 </resources>

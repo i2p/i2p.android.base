@@ -32,7 +32,7 @@ public class TunnelWizardActivity extends AbstractWizardActivity {
 
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent result = new Intent();
-                                        result.putExtra(TunnelListFragment.TUNNEL_WIZARD_DATA, mWizardModel.save());
+                                        result.putExtra(TunnelsContainer.TUNNEL_WIZARD_DATA, mWizardModel.save());
                                         setResult(Activity.RESULT_OK, result);
                                         dialog.dismiss();
                                         finish();

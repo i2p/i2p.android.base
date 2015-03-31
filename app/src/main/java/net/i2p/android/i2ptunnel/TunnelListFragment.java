@@ -6,25 +6,19 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import net.i2p.android.help.HelpActivity;
-import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.R;
 import net.i2p.android.util.FragmentUtils;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
-import net.i2p.i2ptunnel.ui.TunnelConfig;
 import net.i2p.router.RouterContext;
 
 import java.util.List;
@@ -33,9 +27,6 @@ public class TunnelListFragment extends ListFragment implements
         I2PFragmentBase.RouterContextUser,
         LoaderManager.LoaderCallbacks<List<TunnelEntry>> {
     public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";
-    public static final String TUNNEL_WIZARD_DATA = "tunnel_wizard_data";
-
-    static final int TUNNEL_WIZARD_REQUEST = 1;
 
     private static final int CLIENT_LOADER_ID = 1;
     private static final int SERVER_LOADER_ID = 2;
@@ -56,8 +47,6 @@ public class TunnelListFragment extends ListFragment implements
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
     private boolean mActivateOnItemClick = false;
-
-    private ImageButton mNewTunnel;
 
     // Container Activity must implement this interface
     public interface OnTunnelSelectedListener {
@@ -95,27 +84,6 @@ public class TunnelListFragment extends ListFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Create the list fragment's content view by calling the super method
-        final View listFragmentView = super.onCreateView(inflater, container, savedInstanceState);
-
-        View v = inflater.inflate(R.layout.fragment_list_with_add, container, false);
-        FrameLayout listContainer = (FrameLayout) v.findViewById(R.id.list_container);
-        listContainer.addView(listFragmentView);
-
-        mNewTunnel = (ImageButton) v.findViewById(R.id.promoted_action);
-        mNewTunnel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent wi = new Intent(getActivity(), TunnelWizardActivity.class);
-                startActivityForResult(wi, TUNNEL_WIZARD_REQUEST);
-            }
-        });
-
-        return v;
     }
 
     @Override
@@ -195,7 +163,6 @@ public class TunnelListFragment extends ListFragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_i2ptunnel_list_actions, menu);
         if (getRouterContext() == null) {
-            mNewTunnel.setVisibility(View.GONE);
             menu.findItem(R.id.action_start_all_tunnels).setVisible(false);
             menu.findItem(R.id.action_stop_all_tunnels).setVisible(false);
             menu.findItem(R.id.action_restart_all_tunnels).setVisible(false);
@@ -231,18 +198,6 @@ public class TunnelListFragment extends ListFragment implements
         return true;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == TUNNEL_WIZARD_REQUEST) {
-            if (resultCode == Activity.RESULT_OK) {
-                Bundle tunnelData = data.getExtras().getBundle(TUNNEL_WIZARD_DATA);
-                TunnelConfig cfg = TunnelUtil.createConfigFromWizard(getActivity(), mGroup, tunnelData);
-                TunnelEntry tunnel = TunnelEntry.createNewTunnel(getActivity(), mGroup, cfg);
-                mAdapter.add(tunnel);
-            }
-        }
-    }
-
     /**
      * Turns on activate-on-click mode. When this mode is on, list items will be
      * given the 'activated' state when touched.
@@ -259,6 +214,10 @@ public class TunnelListFragment extends ListFragment implements
         }
 
         mActivatedPosition = position;
+    }
+
+    public void addTunnel(TunnelEntry tunnelEntry) {
+        mAdapter.add(tunnelEntry);
     }
 
     // Duplicated from I2PFragmentBase because this extends ListFragment
