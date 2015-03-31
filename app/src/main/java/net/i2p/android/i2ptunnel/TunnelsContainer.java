@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,7 +18,6 @@ import android.widget.ImageButton;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
-import net.i2p.android.util.MemoryFragmentPagerAdapter;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
 
@@ -34,7 +34,14 @@ public class TunnelsContainer extends Fragment implements
     private boolean mTwoPane;
 
     ViewPager mViewPager;
-    MemoryFragmentPagerAdapter mFragPagerAdapter;
+    FragmentPagerAdapter mFragPagerAdapter;
+
+    private static final String FRAGMENT_CLIENT = "client_fragment";
+    private static final String FRAGMENT_SERVER = "server_fragment";
+    private static final int FRAGMENT_ID_CLIENT = 0;
+    private static final int FRAGMENT_ID_SERVER = 1;
+    TunnelListFragment mClientFrag;
+    TunnelListFragment mServerFrag;
 
     private ImageButton mNewTunnel;
 
@@ -59,6 +66,13 @@ public class TunnelsContainer extends Fragment implements
             mTwoPane = true;
         }
 
+        if (savedInstanceState != null) {
+            mClientFrag = (TunnelListFragment) getChildFragmentManager().getFragment(
+                    savedInstanceState, FRAGMENT_CLIENT);
+            mServerFrag = (TunnelListFragment) getChildFragmentManager().getFragment(
+                    savedInstanceState, FRAGMENT_SERVER);
+        }
+
         return v;
     }
 
@@ -78,7 +92,7 @@ public class TunnelsContainer extends Fragment implements
         });
     }
 
-    public static class TunnelsPagerAdapter extends MemoryFragmentPagerAdapter {
+    public class TunnelsPagerAdapter extends FragmentPagerAdapter {
         private static final int NUM_ITEMS = 2;
 
         private Context mContext;
@@ -98,16 +112,16 @@ public class TunnelsContainer extends Fragment implements
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 0:
-                    TunnelListFragment cf = TunnelListFragment.newInstance(true);
+                case FRAGMENT_ID_CLIENT:
+                    mClientFrag = TunnelListFragment.newInstance(true);
                     if (mTwoPane)
-                        cf.setActivateOnItemClick(true);
-                    return cf;
-                case 1:
-                    TunnelListFragment sf = TunnelListFragment.newInstance(false);
+                        mClientFrag.setActivateOnItemClick(true);
+                    return mClientFrag;
+                case FRAGMENT_ID_SERVER:
+                    mServerFrag = TunnelListFragment.newInstance(false);
                     if (mTwoPane)
-                        sf.setActivateOnItemClick(true);
-                    return sf;
+                        mServerFrag.setActivateOnItemClick(true);
+                    return mServerFrag;
                 default:
                     return null;
             }
@@ -145,10 +159,60 @@ public class TunnelsContainer extends Fragment implements
                 TunnelConfig cfg = TunnelUtil.createConfigFromWizard(getActivity(), tcg, tunnelData);
                 TunnelEntry tunnel = TunnelEntry.createNewTunnel(getActivity(), tcg, cfg);
 
-                TunnelListFragment f = (TunnelListFragment) mFragPagerAdapter.getFragment(tunnel.isClient() ? 0 : 1);
-                f.addTunnel(tunnel);
+                if (tunnel.isClient() && mClientFrag != null)
+                    mClientFrag.addTunnel(tunnel);
+                else if (mServerFrag != null)
+                    mServerFrag.addTunnel(tunnel);
             }
         }
+    }
+
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        super.setMenuVisibility(menuVisible);
+
+        setChildMenuVisibility(mClientFrag, FRAGMENT_ID_CLIENT, menuVisible);
+        setChildMenuVisibility(mServerFrag, FRAGMENT_ID_SERVER, menuVisible);
+    }
+
+    private void setChildMenuVisibility(Fragment fragment, int itemNumber, boolean menuVisible) {
+        if (fragment != null) {
+            menuVisible = menuVisible && mViewPager.getCurrentItem() == itemNumber;
+            fragment.setMenuVisibility(menuVisible);
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        setChildUserVisibleHint(mClientFrag, FRAGMENT_ID_CLIENT, isVisibleToUser);
+        setChildUserVisibleHint(mServerFrag, FRAGMENT_ID_SERVER, isVisibleToUser);
+    }
+
+    private void setChildUserVisibleHint(Fragment fragment, int itemNumber, boolean isVisibleToUser) {
+        if (fragment != null) {
+            isVisibleToUser = isVisibleToUser && mViewPager.getCurrentItem() == itemNumber;
+            fragment.setUserVisibleHint(isVisibleToUser);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Since the pager fragments don't have known tags or IDs, the only way to persist the
+        // reference is to use putFragment/getFragment. Remember, we're not persisting the exact
+        // Fragment instance. This mechanism simply gives us a way to persist access to the
+        // 'current' fragment instance for the given fragment (which changes across orientation
+        // changes).
+        //
+        // The outcome of all this is that the "Refresh" menu button refreshes the stream across
+        // orientation changes.
+        if (mClientFrag != null)
+            getChildFragmentManager().putFragment(outState, FRAGMENT_CLIENT, mClientFrag);
+        if (mServerFrag != null)
+            getChildFragmentManager().putFragment(outState, FRAGMENT_SERVER, mServerFrag);
     }
 
     // TunnelListFragment.OnTunnelSelectedListener
