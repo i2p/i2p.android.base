@@ -325,7 +325,9 @@ public class I2PActivity extends I2PActivityBase implements
                     State state = msg.getData().getParcelable(MSG_DATA);
                     if (lastRouterState == null || lastRouterState != state) {
                         if (parent.mViewPagerAdapter != null) {
-                            ((ConsoleContainer) parent.mViewPagerAdapter.getFragment(0)).updateState(state);
+                            ConsoleContainer cc = (ConsoleContainer) parent.mViewPagerAdapter.getFragment(0);
+                            if (cc != null)
+                                cc.updateState(state);
                             lastRouterState = state;
                         }
 
