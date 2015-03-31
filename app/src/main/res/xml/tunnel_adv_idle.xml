@@ -3,7 +3,7 @@
 
     <PreferenceCategory
         android:key="@string/TUNNEL_CAT_IDLE"
-        android:title="">
+        android:title="@string/power_saving">
 
         <!-- Client-only (but not Streamr client) -->
         <CheckBoxPreference

@@ -225,13 +225,13 @@
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="auto_start">Auto-start</string>
-    <string name="tunnel_summ_auto_start"></string>
-    <string name="tunnel_cat_ports"></string>
+    <string name="tunnel_summ_auto_start">Start the tunnel when the router starts.</string>
+    <string name="tunnel_cat_ports">Local ports</string>
     <string name="shared_client">Shared client</string>
-    <string name="tunnel_summ_shared_client"></string>
+    <string name="tunnel_summ_shared_client">Use the same Destination and tunnels as other shared clients</string>
     <string name="target_destination">Target destination</string>
     <string name="persistent_key">Persistent key</string>
-    <string name="tunnel_summ_persistent_key"></string>
+    <string name="tunnel_summ_persistent_key">Keep this tunnel\'s Destination when it restarts</string>
     <string name="reachable_on">Reachable on</string>
     <string name="listen_port">Listen port</string>
     <string name="client_ssl">Client SSL</string>
@@ -240,7 +240,7 @@
     <string name="ssl_outproxies">SSL outproxies</string>
     <string name="irc">IRC</string>
     <string name="enable_dcc">Enable DCC</string>
-    <string name="tunnel_summ_enable_dcc"></string>
+    <string name="tunnel_summ_enable_dcc">Allow IRC clients to use DCC</string>
     <string name="website_domain_name">Website domain name</string>
     <string name="target_host">Target host</string>
     <string name="target_port">Target port</string>
@@ -256,7 +256,7 @@
     <string name="reject_inproxies">Reject inproxies</string>
     <string name="tunnel_summ_reject_inproxies">Only allow I2P users to connect</string>
     <string name="unique_local">Unique local</string>
-    <string name="tunnel_summ_unique_local"></string>
+    <string name="tunnel_summ_unique_local">Use unique localhost IPs for each client</string>
     <string name="multihome">Multihome</string>
     <string name="tunnel_summ_multihome">Enable multihoming optimizations</string>
     <string name="client_connection_limits">Client connection limits</string>
