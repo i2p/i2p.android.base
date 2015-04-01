@@ -1,10 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:i2pandroid="http://schemas.android.com/apk/res-auto">
-    <item android:title="@string/menu_about"
-          android:id="@+id/menu_about"
-          i2pandroid:showAsAction="never" >
-    </item>
-    <item android:id="@+id/menu_help_release_notes"
+    xmlns:i2pandroid="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_about"
+        android:title="@string/menu_about"
+        i2pandroid:showAsAction="never" />
+    <item
+        android:id="@+id/menu_help_release_notes"
         android:title="@string/label_release_notes"
         i2pandroid:showAsAction="never" />
 </menu>
