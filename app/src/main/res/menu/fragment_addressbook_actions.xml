@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:i2pandroid="http://schemas.android.com/apk/res-auto" >
-    <!-- Settings, Help, should always be in the overflow -->
-    <item android:id="@+id/action_reload_subscriptions"
-          android:title="@string/action_reload_subscriptions"
-          i2pandroid:showAsAction="never" />
-    <item android:id="@+id/action_addressbook_settings"
-          android:title="@string/menu_settings"
-          i2pandroid:showAsAction="never" />
-    <item android:id="@+id/action_addressbook_help"
-          android:title="@string/menu_help"
-          i2pandroid:showAsAction="never" />
+    xmlns:i2pandroid="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_reload_subscriptions"
+        android:title="@string/action_reload_subscriptions"
+        i2pandroid:showAsAction="never" />
 </menu>

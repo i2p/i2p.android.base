@@ -3,10 +3,10 @@ package net.i2p.android.router.addressbook;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
-import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.android.router.util.Util;
 import net.i2p.client.naming.NamingService;
+import net.i2p.client.naming.NamingServiceListener;
 import net.i2p.data.Destination;
 import net.i2p.router.RouterContext;
 
@@ -16,23 +16,21 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
-public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
-    private I2PFragmentBase.RouterContextProvider mRContextProvider;
+public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> implements
+        NamingServiceListener {
     private String mBook;
     private String mFilter;
     private List<AddressEntry> mData;
 
-    public AddressEntryLoader(Context context, I2PFragmentBase.RouterContextProvider rContextProvider,
-            String book, String filter) {
+    public AddressEntryLoader(Context context, String book, String filter) {
         super(context);
-        mRContextProvider = rContextProvider;
         mBook = book;
         mFilter = filter;
     }
 
     @Override
     public List<AddressEntry> loadInBackground() {
-        RouterContext routerContext = mRContextProvider.getRouterContext();
+        RouterContext routerContext = Util.getRouterContext();
         if (routerContext == null)
             return null;
 
@@ -89,6 +87,13 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
             deliverResult(mData);
         }
 
+        // Begin monitoring the underlying data source.
+        RouterContext routerContext = Util.getRouterContext();
+        if (routerContext != null) {
+            NamingService ns = NamingServiceUtil.getNamingService(routerContext, mBook);
+            ns.registerListener(this);
+        }
+
         if (takeContentChanged() || mData == null) {
             // When the observer detects a change, it should call onContentChanged()
             // on the Loader, which will cause the next call to takeContentChanged()
@@ -119,6 +124,13 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
             releaseResources(mData);
             mData = null;
         }
+
+        // The Loader is being reset, so we should stop monitoring for changes.
+        RouterContext routerContext = Util.getRouterContext();
+        if (routerContext != null) {
+            NamingService ns = NamingServiceUtil.getNamingService(routerContext, mBook);
+            ns.unregisterListener(this);
+        }
     }
 
     @Override
@@ -135,5 +147,27 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
         // For a simple List, there is nothing to do. For something like a Cursor, we 
         // would close it in this method. All resources associated with the Loader
         // should be released here.
+    }
+
+    // NamingServiceListener
+
+    @Override
+    public void configurationChanged(NamingService ns) {
+        onContentChanged();
+    }
+
+    @Override
+    public void entryAdded(NamingService ns, String hostname, Destination dest, Properties options) {
+        onContentChanged();
+    }
+
+    @Override
+    public void entryChanged(NamingService ns, String hostname, Destination dest, Properties options) {
+        onContentChanged();
+    }
+
+    @Override
+    public void entryRemoved(NamingService ns, String hostname) {
+        onContentChanged();
     }
 }

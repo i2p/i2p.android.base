@@ -1,15 +1,16 @@
 package net.i2p.android.router.stats;
 
-import net.i2p.android.router.I2PActivityBase;
+import android.os.Bundle;
+
+import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
-import android.os.Bundle;
 
 public class PeersActivity extends I2PActivityBase {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDrawerToggle.setDrawerIndicatorEnabled(false);
+        setContentView(R.layout.activity_onepane);
         // Start with the base view
         if (savedInstanceState == null) {
             PeersFragment f = new PeersFragment();

@@ -9,6 +9,8 @@
     <string name="label_home">Controls and Status</string>
     <string name="label_tunnels">Tunnels</string>
     <string name="label_status">Status</string>
+    <string name="label_console">Console</string>
+    <string name="label_addresses">Addresses</string>
     <string name="label_addressbook">Addressbook</string>
     <string name="label_i2ptunnel" translatable="false">@string/label_tunnels</string>
     <string name="label_i2ptunnel_client">Client tunnels</string>
@@ -143,6 +145,8 @@
     <string name="menu_help">Help</string>
     <string name="general">General</string>
 
+    <string name="label_router">Router</string>
+    <string name="label_private">Private</string>
     <string name="addressbook_search_header">%s found</string>
 
     <string name="addressbook_add_wizard_k_name">Name</string>

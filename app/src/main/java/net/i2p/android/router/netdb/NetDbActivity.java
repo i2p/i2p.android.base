@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.R;
 import net.i2p.data.Hash;
 
@@ -27,13 +27,9 @@ public class NetDbActivity extends I2PActivityBase implements
     private Spinner mSpinner;
 
     @Override
-    protected boolean canUseTwoPanes() {
-        return true;
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_multipane);
 
         mSpinner = (Spinner) findViewById(R.id.main_spinner);
         mSpinner.setVisibility(View.VISIBLE);

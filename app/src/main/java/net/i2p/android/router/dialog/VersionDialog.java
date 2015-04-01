@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
-import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.MainFragment;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;

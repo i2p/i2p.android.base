@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;
 
@@ -29,20 +29,15 @@ public class LogActivity extends I2PActivityBase implements
     private Spinner mSpinner;
 
     @Override
-    protected boolean canUseTwoPanes() {
-        return true;
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_multipane);
 
         mLevels = getResources().getStringArray(R.array.log_level_list);
 
         mSpinner = (Spinner) findViewById(R.id.main_spinner);
         mSpinner.setVisibility(View.VISIBLE);
 
-        mDrawerToggle.setDrawerIndicatorEnabled(false);
 
         if (findViewById(R.id.detail_fragment) != null) {
             // The detail container view will be present only in the
