@@ -1,5 +1,9 @@
 package net.i2p.android.router;
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+
+import net.i2p.android.router.util.Util;
 import net.i2p.router.CommSystemFacade;
 import net.i2p.router.NetworkDatabaseFacade;
 import net.i2p.router.Router;
@@ -8,39 +12,11 @@ import net.i2p.router.TunnelManagerFacade;
 import net.i2p.router.peermanager.ProfileOrganizer;
 import net.i2p.router.transport.FIFOBandwidthLimiter;
 import net.i2p.stat.StatManager;
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 public class I2PFragmentBase extends Fragment {
     private boolean mOnActivityCreated;
-    RouterContextProvider mCallback;
 
     public static final String PREF_INSTALLED_VERSION = "app.version";
-
-    public interface RouterContextUser {
-        public void onRouterBind();
-    }
-
-    // Container Activity must implement this interface
-    public interface RouterContextProvider {
-        public RouterContext getRouterContext();
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            mCallback = (RouterContextProvider) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement RouterContextProvider");
-        }
-
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -64,7 +40,7 @@ public class I2PFragmentBase extends Fragment {
     public void onRouterConnectionNotReady() {}
 
     protected RouterContext getRouterContext() {
-        return mCallback.getRouterContext();
+        return Util.getRouterContext();
     }
 
     protected Router getRouter() {

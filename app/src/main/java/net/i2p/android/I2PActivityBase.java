@@ -6,18 +6,13 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 
-import net.i2p.android.router.I2PFragmentBase;
-import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterBinder;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
-import net.i2p.router.RouterContext;
 
-public abstract class I2PActivityBase extends ActionBarActivity implements
-        I2PFragmentBase.RouterContextProvider {
+public abstract class I2PActivityBase extends ActionBarActivity {
     /**
      * Router variables
      */
@@ -193,25 +188,11 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
      * callback from ServiceConnection, override as necessary
      */
     protected void onRouterBind(RouterService svc) {
-        Fragment f = getSupportFragmentManager().findFragmentById(R.id.main_fragment);
-        if (f instanceof I2PFragmentBase)
-            ((I2PFragmentBase) f).onRouterBind();
-        else if (f instanceof I2PFragmentBase.RouterContextUser)
-            ((I2PFragmentBase.RouterContextUser) f).onRouterBind();
     }
 
     /**
      * callback from ServiceConnection, override as necessary
      */
     protected void onRouterUnbind() {
-    }
-
-    // I2PFragmentBase.RouterContextProvider
-
-    public RouterContext getRouterContext() {
-        RouterService svc = _routerService;
-        if (svc == null || !_isBound)
-            return null;
-        return svc.getRouterContext();
     }
 }
