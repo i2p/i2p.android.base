@@ -11,16 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import net.i2p.android.router.I2PFragmentBase;
-import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
 import net.i2p.data.Hash;
-import net.i2p.router.RouterContext;
 
 import java.util.List;
 
-public class NetDbListFragment extends ListFragment implements 
-        I2PFragmentBase.RouterContextUser,
+public class NetDbListFragment extends ListFragment implements
         LoaderManager.LoaderCallbacks<List<NetDbEntry>> {
     public static final String SHOW_ROUTERS = "show_routers";
 
@@ -32,8 +29,6 @@ public class NetDbListFragment extends ListFragment implements
      */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
-    private boolean mOnActivityCreated;
-    private RouterContextProvider mRouterContextProvider;
     private OnEntrySelectedListener mEntrySelectedCallback;
     private NetDbEntryAdapter mAdapter;
     private boolean mRouters;
@@ -51,15 +46,6 @@ public class NetDbListFragment extends ListFragment implements
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            mRouterContextProvider = (RouterContextProvider) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement RouterContextProvider");
-        }
 
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
@@ -104,22 +90,18 @@ public class NetDbListFragment extends ListFragment implements
 
         setListAdapter(mAdapter);
 
-        mOnActivityCreated = true;
-        if (getRouterContext() != null)
-            onRouterConnectionReady();
-        else
+        if (Util.getRouterContext() == null)
             setEmptyText(getResources().getString(
                     R.string.router_not_running));
-    }
-
-    public void onRouterConnectionReady() {
-        setEmptyText(getResources().getString((mRouters ?
-                R.string.netdb_routers_empty :
+        else {
+            setEmptyText(getResources().getString((mRouters ?
+                    R.string.netdb_routers_empty :
                     R.string.netdb_leases_empty)));
 
-        setListShown(false);
-        getLoaderManager().initLoader(mRouters ? ROUTER_LOADER_ID
-                : LEASESET_LOADER_ID, null, this);
+            setListShown(false);
+            getLoaderManager().initLoader(mRouters ? ROUTER_LOADER_ID
+                    : LEASESET_LOADER_ID, null, this);
+        }
     }
 
     @Override
@@ -149,7 +131,7 @@ public class NetDbListFragment extends ListFragment implements
         // Handle presses on the action bar items
         switch (item.getItemId()) {
         case R.id.action_refresh:
-            if (getRouterContext() != null) {
+            if (Util.getRouterContext() != null) {
                 setListShown(false);
                 getLoaderManager().restartLoader(mRouters ? ROUTER_LOADER_ID
                         : LEASESET_LOADER_ID, null, this);
@@ -178,23 +160,10 @@ public class NetDbListFragment extends ListFragment implements
         mActivatedPosition = position;
     }
 
-    // Duplicated from I2PFragmentBase because this extends ListFragment
-    private RouterContext getRouterContext() {
-        return mRouterContextProvider.getRouterContext();
-    }
-
-    // I2PFragmentBase.RouterContextUser
-
-    public void onRouterBind() {
-        if (mOnActivityCreated)
-            onRouterConnectionReady();
-    }
-
     // LoaderManager.LoaderCallbacks<List<NetDbEntry>>
 
     public Loader<List<NetDbEntry>> onCreateLoader(int id, Bundle args) {
-        return new NetDbEntryLoader(getActivity(),
-                getRouterContext(), mRouters);
+        return new NetDbEntryLoader(getActivity(), mRouters);
     }
 
     public void onLoadFinished(Loader<List<NetDbEntry>> loader,
