@@ -12,9 +12,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import net.i2p.android.router.I2PFragmentBase;
-import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
 import net.i2p.android.util.FragmentUtils;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.router.RouterContext;
@@ -22,7 +21,6 @@ import net.i2p.router.RouterContext;
 import java.util.List;
 
 public class TunnelListFragment extends ListFragment implements
-        I2PFragmentBase.RouterContextUser,
         LoaderManager.LoaderCallbacks<List<TunnelEntry>> {
     public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";
 
@@ -34,8 +32,6 @@ public class TunnelListFragment extends ListFragment implements
      */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
-    private boolean mOnActivityCreated;
-    RouterContextProvider mRouterContextProvider;
     OnTunnelSelectedListener mCallback;
     private TunnelControllerGroup mGroup;
     private TunnelEntryAdapter mAdapter;
@@ -65,13 +61,6 @@ public class TunnelListFragment extends ListFragment implements
 
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
-        try {
-            mRouterContextProvider = (RouterContextProvider) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement RouterContextProvider");
-        }
-
         mCallback = FragmentUtils.getParent(this, OnTunnelSelectedListener.class);
         if (mCallback == null)
             throw new ClassCastException("Parent must implement OnTunnelSelectedListener");
@@ -110,35 +99,31 @@ public class TunnelListFragment extends ListFragment implements
 
         setListAdapter(mAdapter);
 
-        mOnActivityCreated = true;
-        if (getRouterContext() != null)
-            onRouterConnectionReady();
-        else
+        if (Util.getRouterContext() == null)
             setEmptyText(getResources().getString(
                     R.string.router_not_running));
-    }
+        else {
+            String error;
+            try {
+                mGroup = TunnelControllerGroup.getInstance();
+                error = mGroup == null ? getResources().getString(R.string.i2ptunnel_not_initialized) : null;
+            } catch (IllegalArgumentException iae) {
+                mGroup = null;
+                error = iae.toString();
+            }
 
-    public void onRouterConnectionReady() {
-        String error;
-        try {
-            mGroup = TunnelControllerGroup.getInstance();
-            error = mGroup == null ? getResources().getString(R.string.i2ptunnel_not_initialized) : null;
-        } catch (IllegalArgumentException iae) {
-            mGroup = null;
-            error = iae.toString();
-        }
+            if (mGroup == null) {
+                setEmptyText(error);
+            } else {
+                if (mClientTunnels)
+                    setEmptyText("No configured client tunnels.");
+                else
+                    setEmptyText("No configured server tunnels.");
 
-        if (mGroup == null) {
-            setEmptyText(error);
-        } else {
-            if (mClientTunnels)
-                setEmptyText("No configured client tunnels.");
-            else
-                setEmptyText("No configured server tunnels.");
-
-            setListShown(false);
-            getLoaderManager().initLoader(mClientTunnels ? CLIENT_LOADER_ID
-                    : SERVER_LOADER_ID, null, this);
+                setListShown(false);
+                getLoaderManager().initLoader(mClientTunnels ? CLIENT_LOADER_ID
+                        : SERVER_LOADER_ID, null, this);
+            }
         }
     }
 
@@ -160,11 +145,15 @@ public class TunnelListFragment extends ListFragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_i2ptunnel_list_actions, menu);
-        if (getRouterContext() == null) {
-            menu.findItem(R.id.action_start_all_tunnels).setVisible(false);
-            menu.findItem(R.id.action_stop_all_tunnels).setVisible(false);
-            menu.findItem(R.id.action_restart_all_tunnels).setVisible(false);
-        }
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        RouterContext rCtx = Util.getRouterContext();
+
+        menu.findItem(R.id.action_start_all_tunnels).setVisible(rCtx != null);
+        menu.findItem(R.id.action_stop_all_tunnels).setVisible(rCtx != null);
+        menu.findItem(R.id.action_restart_all_tunnels).setVisible(rCtx != null);
     }
 
     @Override
@@ -211,18 +200,6 @@ public class TunnelListFragment extends ListFragment implements
 
     public void addTunnel(TunnelEntry tunnelEntry) {
         mAdapter.add(tunnelEntry);
-    }
-
-    // Duplicated from I2PFragmentBase because this extends ListFragment
-    private RouterContext getRouterContext() {
-        return mRouterContextProvider.getRouterContext();
-    }
-
-    // I2PFragmentBase.RouterContextUser
-
-    public void onRouterBind() {
-        if (mOnActivityCreated)
-            onRouterConnectionReady();
     }
 
     // LoaderManager.LoaderCallbacks<List<TunnelEntry>>
