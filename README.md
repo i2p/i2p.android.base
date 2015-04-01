@@ -8,9 +8,9 @@
 - Apache Ant 1.8.0 or higher
 - I2P source
 - Android SDK for API 21
-- Android Build Tools 21.0.2
+- Android Build Tools 21.1.2
 - Android Support Repository
-- Gradle 2.1
+- Gradle 2.2.1
 
 ### Gradle
 
