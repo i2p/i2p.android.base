@@ -2,6 +2,7 @@ package net.i2p.android.router.netdb;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.R;
@@ -17,6 +18,9 @@ public class NetDbDetailActivity extends I2PActivityBase implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onepane);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
             boolean isRI = getIntent().getBooleanExtra(NetDbDetailFragment.IS_RI, true);

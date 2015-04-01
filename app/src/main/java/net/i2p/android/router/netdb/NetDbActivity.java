@@ -3,6 +3,7 @@ package net.i2p.android.router.netdb;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +31,9 @@ public class NetDbActivity extends I2PActivityBase implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multipane);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
 
         mSpinner = (Spinner) findViewById(R.id.main_spinner);
         mSpinner.setVisibility(View.VISIBLE);

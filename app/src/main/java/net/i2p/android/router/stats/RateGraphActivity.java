@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,6 +38,9 @@ public class RateGraphActivity extends I2PActivityBase {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_onepane);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
 
         if (StatSummarizer.instance() != null) {
             // Get the rates currently being graphed
