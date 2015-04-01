@@ -3,6 +3,7 @@ package net.i2p.android.router.netdb;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
+import net.i2p.android.router.util.Util;
 import net.i2p.data.Destination;
 import net.i2p.data.LeaseSet;
 import net.i2p.data.router.RouterInfo;
@@ -15,13 +16,11 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
-    private RouterContext mRContext;
     private boolean mRouters;
     private List<NetDbEntry> mData;
 
-    public NetDbEntryLoader(Context context, RouterContext rContext, boolean routers) {
+    public NetDbEntryLoader(Context context, boolean routers) {
         super(context);
-        mRContext = rContext;
         mRouters = routers;
     }
 
@@ -32,6 +31,13 @@ public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
     }
 
     private class LeaseSetComparator implements Comparator<LeaseSet> {
+        private RouterContext mRContext;
+
+        public LeaseSetComparator(RouterContext rContext) {
+            super();
+            mRContext = rContext;
+        }
+
         public int compare(LeaseSet l, LeaseSet r) {
             Destination dl = l.getDestination();
             Destination dr = r.getDestination();
@@ -46,19 +52,20 @@ public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
     @Override
     public List<NetDbEntry> loadInBackground() {
         List<NetDbEntry> ret = new ArrayList<>();
-        if (mRContext.netDb().isInitialized()) {
+        RouterContext routerContext = Util.getRouterContext();
+        if (routerContext != null && routerContext.netDb().isInitialized()) {
             if (mRouters) {
                 Set<RouterInfo> routers = new TreeSet<>(new RouterInfoComparator());
-                routers.addAll(mRContext.netDb().getRouters());
+                routers.addAll(routerContext.netDb().getRouters());
                 for (RouterInfo ri : routers) {
-                    NetDbEntry entry = NetDbEntry.fromRouterInfo(mRContext, ri);
+                    NetDbEntry entry = NetDbEntry.fromRouterInfo(routerContext, ri);
                     ret.add(entry);
                 }
             } else {
-                Set<LeaseSet> leases = new TreeSet<>(new LeaseSetComparator());
-                leases.addAll(mRContext.netDb().getLeases());
+                Set<LeaseSet> leases = new TreeSet<>(new LeaseSetComparator(routerContext));
+                leases.addAll(routerContext.netDb().getLeases());
                 for (LeaseSet ls : leases) {
-                    NetDbEntry entry = NetDbEntry.fromLeaseSet(mRContext, ls);
+                    NetDbEntry entry = NetDbEntry.fromLeaseSet(routerContext, ls);
                     ret.add(entry);
                 }
             }
