@@ -9,6 +9,9 @@ android {
         versionName '0.9.18'
         minSdkVersion 9
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+
+        // For Espresso
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
         release
@@ -31,6 +34,9 @@ android {
     lintOptions {
         abortOnError false
     }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
     productFlavors {
         free {
             applicationId 'net.i2p.android'
@@ -45,17 +51,26 @@ android {
 }
 
 dependencies {
+    // Local dependencies
     compile project(':routerjars')
     compile project(':client')
+
+    // Android Support Repository dependencies
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:recyclerview-v7:21.0.3'
+
+    // Remote dependencies
     compile 'net.i2p.android.ext:floatingactionbutton:1.8.0'
     compile files('libs/androidplot-core-0.6.1.jar')
 
     compile ('com.android.support:support-v4-preferencefragment:1.0.0@aar'){
         exclude module: 'support-v4'
     }
+
+    // Testing-only dependencies
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
 }
 
 dependencyVerification {
