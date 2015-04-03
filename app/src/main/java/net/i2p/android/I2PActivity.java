@@ -184,7 +184,7 @@ public class I2PActivity extends I2PActivityBase implements
             if (lastRouterState == null || lastRouterState != state) {
                 if (mViewPagerAdapter != null) {
                     ConsoleContainer cc = (ConsoleContainer) mViewPagerAdapter.getFragment(0);
-                    if (cc != null)
+                    if (cc != null && cc.isVisible())
                         cc.updateState(state);
                     lastRouterState = state;
                 }
