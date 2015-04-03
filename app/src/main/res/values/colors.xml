@@ -8,6 +8,9 @@
     <color name="indicator_yellow">#ffffff00</color>
     <color name="indicator_green">#ff00ff00</color>
 
+    <color name="menu_label_background">#b2000000</color>
+    <color name="menu_label_text">#fafafa</color>
+
     <color name="step_pager_previous_tab_color">#4433b5e5</color>
     <color name="step_pager_selected_tab_color">#ff0099cc</color>
     <color name="step_pager_selected_last_tab_color">#ff669900</color>

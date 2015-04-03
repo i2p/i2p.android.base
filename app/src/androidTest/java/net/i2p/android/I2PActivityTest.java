@@ -5,7 +5,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import net.i2p.android.router.R;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
@@ -65,21 +64,5 @@ public class I2PActivityTest extends ActivityInstrumentationTestCase2<I2PActivit
         onView(withText(R.string.label_router)).check(matches(not(isDisplayed())));
         onView(withText(R.string.label_i2ptunnel_client)).check(matches(isDisplayed()));
         // TODO: test addressbook ViewPager
-    }
-
-    public void testConsoleSubToolbar() {
-        onView(withText(R.string.label_news)).perform(click());
-        onView(withText(R.string.label_news)).check(matches(isDisplayed()));
-        onView(withId(R.id.router_onoff_button)).check(doesNotExist());
-
-        pressBack();
-        onView(withId(R.id.router_onoff_button)).check(matches(isDisplayed()));
-
-        onView(withText(R.string.label_logs)).perform(click());
-        onView(withId(R.id.router_onoff_button)).check(doesNotExist());
-
-        pressBack();
-        onView(withText(R.string.label_error_logs)).check(doesNotExist());
-        onView(withId(R.id.router_onoff_button)).check(matches(isDisplayed()));
     }
 }

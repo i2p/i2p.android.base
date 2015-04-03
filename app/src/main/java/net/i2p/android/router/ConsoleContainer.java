@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
 import net.i2p.android.router.dialog.AboutDialog;
 import net.i2p.android.router.dialog.TextResourceDialog;
 import net.i2p.android.router.log.LogActivity;
@@ -22,7 +22,7 @@ import net.i2p.android.router.stats.RateGraphActivity;
 
 public class ConsoleContainer extends Fragment {
     MainFragment mMainFragment = null;
-    Toolbar mSubToolbar;
+    FloatingActionsMenu mConsoleMenu;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,38 +41,43 @@ public class ConsoleContainer extends Fragment {
                     .add(R.id.main_fragment, mMainFragment).commit();
         }
 
-        mSubToolbar = (Toolbar) v.findViewById(R.id.sub_toolbar);
-        mSubToolbar.inflateMenu(R.menu.container_console_sub_actions);
-        setAdvancedVisibility();
-        mSubToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        mConsoleMenu = (FloatingActionsMenu) v.findViewById(R.id.console_action_menu);
+        mConsoleMenu.findViewById(R.id.action_news).setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.action_news:
-                        Intent news = new Intent(getActivity(), NewsActivity.class);
-                        startActivity(news);
-                        return true;
-                    case R.id.action_logs:
-                        Intent log = new Intent(getActivity(), LogActivity.class);
-                        startActivity(log);
-                        return true;
-                    case R.id.action_graphs:
-                        Intent graphs = new Intent(getActivity(), RateGraphActivity.class);
-                        startActivity(graphs);
-                        return true;
-                    case R.id.action_peers:
-                        Intent peers = new Intent(getActivity(), PeersActivity.class);
-                        startActivity(peers);
-                        return true;
-                    case R.id.action_netdb:
-                        Intent netdb = new Intent(getActivity(), NetDbActivity.class);
-                        startActivity(netdb);
-                        return true;
-                    default:
-                        return false;
-                }
+            public void onClick(View view) {
+                Intent news = new Intent(getActivity(), NewsActivity.class);
+                startActivity(news);
             }
         });
+        mConsoleMenu.findViewById(R.id.action_logs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent log = new Intent(getActivity(), LogActivity.class);
+                startActivity(log);
+            }
+        });
+        mConsoleMenu.findViewById(R.id.action_graphs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent graphs = new Intent(getActivity(), RateGraphActivity.class);
+                startActivity(graphs);
+            }
+        });
+        mConsoleMenu.findViewById(R.id.action_peers).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent peers = new Intent(getActivity(), PeersActivity.class);
+                startActivity(peers);
+            }
+        });
+        mConsoleMenu.findViewById(R.id.action_netdb).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent netdb = new Intent(getActivity(), NetDbActivity.class);
+                startActivity(netdb);
+            }
+        });
+        setAdvancedVisibility();
 
         return v;
     }
@@ -91,9 +96,9 @@ public class ConsoleContainer extends Fragment {
         boolean advanced = PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean(
                 "i2pandroid.main.showStats", false);
 
-        mSubToolbar.getMenu().findItem(R.id.action_graphs).setVisible(advanced);
-        mSubToolbar.getMenu().findItem(R.id.action_peers).setVisible(advanced);
-        mSubToolbar.getMenu().findItem(R.id.action_netdb).setVisible(advanced);
+        mConsoleMenu.findViewById(R.id.action_graphs).setVisibility(advanced ? View.VISIBLE : View.GONE);
+        mConsoleMenu.findViewById(R.id.action_peers).setVisibility(advanced ? View.VISIBLE : View.GONE);
+        mConsoleMenu.findViewById(R.id.action_netdb).setVisibility(advanced ? View.VISIBLE : View.GONE);
     }
 
     @Override

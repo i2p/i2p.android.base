@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ConsoleMenu" parent="Base.ConsoleMenu">
+        <item name="fab_expandDirection">left</item>
+    </style>
+</resources>

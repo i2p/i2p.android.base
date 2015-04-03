@@ -1,4 +1,7 @@
 <resources>
+
+    <style name="Base" />
+
     <style name="Theme.I2P" parent="Theme.AppCompat.NoActionBar">
         <!-- Here we setting appcompat’s actionBarStyle -->
         <!--<item name="actionBarStyle">@style/MyActionBarStyle</item>-->
@@ -29,6 +32,33 @@
         <item name="android:textSize">@dimen/text_size_secondary</item>
     </style>
 
+    <style name="Base.ConsoleMenu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fab_addButtonColorNormal">@color/accent</item>
+        <item name="fab_addButtonColorPressed">@color/accent_dark</item>
+    </style>
+
+    <style name="ConsoleMenu" parent="Base.ConsoleMenu">
+        <item name="fab_labelStyle">@style/menu_labels_style</item>
+    </style>
+
+    <style name="ConsoleMenu.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fab_colorNormal">@color/accent</item>
+        <item name="fab_colorPressed">@color/accent_dark</item>
+    </style>
+
+    <style name="ConsoleMenu.Button.Mini" parent="ConsoleMenu.Button">
+        <item name="fab_size">mini</item>
+    </style>
+
+    <style name="menu_labels_style">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/menu_label_text</item>
+    </style>
+
     <style name="WizardPageContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -46,7 +76,7 @@
         <item name="android:textColor">#ff0099cc</item>
     </style>
 
-    <style name="WizardPageTitle" parent="WizardPageTitleBase"/>
+    <style name="WizardPageTitle" parent="WizardPageTitleBase" />
 
     <style name="WizardFormLabel">
         <item name="android:layout_width">match_parent</item>
