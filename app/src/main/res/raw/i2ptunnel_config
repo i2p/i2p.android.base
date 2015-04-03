@@ -52,7 +52,7 @@ tunnel.1.startOnLoad=true
 
 # postman's SMTP server - see hq.postman.i2p
 tunnel.2.name=smtp.postman.i2p
-tunnel.2.description=smtp server
+tunnel.2.description=postman's SMTP server
 tunnel.2.type=client
 tunnel.2.sharedClient=true
 tunnel.2.interface=127.0.0.1
@@ -77,7 +77,7 @@ tunnel.2.startOnLoad=true
 
 # postman's POP3 server - see hq.postman.i2p
 tunnel.3.name=pop3.postman.i2p
-tunnel.3.description=pop3 server
+tunnel.3.description=postman's POP3 server
 tunnel.3.type=client
 tunnel.3.sharedClient=true
 tunnel.3.interface=127.0.0.1
