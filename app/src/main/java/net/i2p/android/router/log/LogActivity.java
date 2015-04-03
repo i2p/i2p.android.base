@@ -36,6 +36,7 @@ public class LogActivity extends I2PActivityBase implements
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mLevels = getResources().getStringArray(R.array.log_level_list);
 

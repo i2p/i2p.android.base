@@ -34,6 +34,7 @@ public class NetDbActivity extends I2PActivityBase implements
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mSpinner = (Spinner) findViewById(R.id.main_spinner);
         mSpinner.setVisibility(View.VISIBLE);

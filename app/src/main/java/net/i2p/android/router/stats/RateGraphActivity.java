@@ -41,6 +41,7 @@ public class RateGraphActivity extends I2PActivityBase {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (StatSummarizer.instance() != null) {
             // Get the rates currently being graphed
