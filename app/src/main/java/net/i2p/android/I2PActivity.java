@@ -92,9 +92,9 @@ public class I2PActivity extends I2PActivityBase implements
                 case 0:
                     return new ConsoleContainer();
                 case 1:
-                    return new AddressbookContainer();
-                case 2:
                     return new TunnelsContainer();
+                case 2:
+                    return new AddressbookContainer();
                 default:
                     return null;
             }
@@ -106,9 +106,9 @@ public class I2PActivity extends I2PActivityBase implements
                 case 0:
                     return mContext.getString(R.string.label_console);
                 case 1:
-                    return mContext.getString(R.string.label_addresses);
-                case 2:
                     return mContext.getString(R.string.label_tunnels);
+                case 2:
+                    return mContext.getString(R.string.label_addresses);
                 default:
                     return null;
             }
