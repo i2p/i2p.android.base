@@ -214,10 +214,9 @@ public class AddressbookContainer extends Fragment
     }
 
     private void filterAddresses(String query) {
-        Fragment f = getChildFragmentManager().findFragmentById(R.id.main_fragment);
-        if (f instanceof AddressbookFragment) {
-            AddressbookFragment af = (AddressbookFragment) f;
-            af.filterAddresses(query);
-        }
+        if (mRouterFrag != null)
+            mRouterFrag.filterAddresses(query);
+        if (mPrivateFrag != null)
+            mPrivateFrag.filterAddresses(query);
     }
 }
