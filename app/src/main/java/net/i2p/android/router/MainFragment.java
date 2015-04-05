@@ -51,6 +51,7 @@ public class MainFragment extends I2PFragmentBase {
     private Runnable _updater;
     private Runnable _oneShotUpdate;
     private String _savedStatus;
+    private ImageView _lightImage;
     private boolean _keep = true;
     private boolean _startPressed = false;
     private static final String PREF_CONFIGURE_BROWSER = "app.dialog.configureBrowser";
@@ -109,8 +110,8 @@ public class MainFragment extends I2PFragmentBase {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
-        final ImageView lightImage = (ImageView) v.findViewById(R.id.main_lights);
-        lightImage.setImageResource(R.drawable.routerlogo_0);
+        _lightImage = (ImageView) v.findViewById(R.id.main_lights);
+        _lightImage.setImageResource(R.drawable.routerlogo_0);
 
         LongToggleButton b = (LongToggleButton) v.findViewById(R.id.router_onoff_button);
         b.setOnLongClickListener(new View.OnLongClickListener() {
@@ -269,25 +270,24 @@ public class MainFragment extends I2PFragmentBase {
     }
 
     public void updateState(State newState) {
-        final ImageView lightImage = (ImageView) getView().findViewById(R.id.main_lights);
         if (newState == State.INIT ||
                 newState == State.STOPPED ||
                 newState == State.MANUAL_STOPPED ||
                 newState == State.MANUAL_QUITTED ||
                 newState == State.NETWORK_STOPPED) {
-            lightImage.setImageResource(R.drawable.routerlogo_0);
+            _lightImage.setImageResource(R.drawable.routerlogo_0);
         } else if (newState == State.STARTING ||
                 newState == State.STOPPING ||
                 newState == State.MANUAL_STOPPING ||
                 newState == State.MANUAL_QUITTING ||
                 newState == State.NETWORK_STOPPING) {
-            lightImage.setImageResource(R.drawable.routerlogo_1);
+            _lightImage.setImageResource(R.drawable.routerlogo_1);
         } else if (newState == State.RUNNING) {
-            lightImage.setImageResource(R.drawable.routerlogo_2);
+            _lightImage.setImageResource(R.drawable.routerlogo_2);
         } else if (newState == State.ACTIVE) {
-            lightImage.setImageResource(R.drawable.routerlogo_3);
+            _lightImage.setImageResource(R.drawable.routerlogo_3);
         } else if (newState == State.WAITING) {
-            lightImage.setImageResource(R.drawable.routerlogo_4);
+            _lightImage.setImageResource(R.drawable.routerlogo_4);
         } // Ignore unknown states.
     }
 
