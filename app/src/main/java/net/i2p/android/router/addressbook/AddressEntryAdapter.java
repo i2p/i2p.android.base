@@ -1,40 +1,105 @@
 package net.i2p.android.router.addressbook;
 
-import java.util.List;
-
-import net.i2p.android.router.R;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class AddressEntryAdapter extends ArrayAdapter<AddressEntry> {
-    private final LayoutInflater mInflater;
+import net.i2p.android.router.R;
 
-    public AddressEntryAdapter(Context context) {
-        super(context, R.layout.listitem_text);
-        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
+import java.util.List;
 
-    public void setData(List<AddressEntry> addresses) {
-        clear();
-        if (addresses != null) {
-            for (AddressEntry address : addresses) {
-                add(address);
-            }
+public class AddressEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private Context mCtx;
+    private AddressbookFragment.OnAddressSelectedListener mListener;
+    private List<AddressEntry> mAddresses;
+
+    public static class SimpleViewHolder extends RecyclerView.ViewHolder {
+        public SimpleViewHolder(View itemView) {
+            super(itemView);
         }
     }
 
+    public AddressEntryAdapter(Context context,
+                               AddressbookFragment.OnAddressSelectedListener listener) {
+        super();
+        mCtx = context;
+        mListener = listener;
+    }
+
+    public void setAddresses(List<AddressEntry> addresses) {
+        mAddresses = addresses;
+        notifyDataSetChanged();
+    }
+
+    public AddressEntry getAddress(int position) {
+        if (position < 0)
+            return null;
+
+        return mAddresses.get(position);
+    }
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = mInflater.inflate(R.layout.listitem_text, parent, false);
-        AddressEntry address = getItem(position);
+    public int getItemViewType(int position) {
+        if (mAddresses == null)
+            return R.string.router_not_running;
+        else if (mAddresses.isEmpty())
+            return R.layout.listitem_empty;
+        else
+            return R.layout.listitem_text;
+    }
 
-        TextView text = (TextView) v.findViewById(R.id.text);
-        text.setText(address.getHostName());
+    // Create new views (invoked by the layout manager)
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        int vt = viewType;
+        if (viewType == R.string.router_not_running)
+            vt = R.layout.listitem_empty;
 
-        return v;
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(vt, parent, false);
+        return new SimpleViewHolder(v);
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()) {
+            case R.string.router_not_running:
+                ((TextView) holder.itemView).setText(
+                        mCtx.getString(R.string.router_not_running));
+                break;
+
+            case R.layout.listitem_empty:
+                ((TextView) holder.itemView).setText(
+                        mCtx.getString(R.string.addressbook_is_empty));
+                break;
+
+            case R.layout.listitem_text:
+                final AddressEntry address = getAddress(position);
+                ((TextView) holder.itemView).setText(address.getHostName());
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mListener.onAddressSelected(address.getHostName());
+                    }
+                });
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    // Return the size of the dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        if (mAddresses == null || mAddresses.isEmpty())
+            return 1;
+
+        return mAddresses.size();
     }
 }

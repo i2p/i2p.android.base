@@ -5,9 +5,32 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/list_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <net.i2p.android.widget.LoadingRecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/list_vertical_padding"
+            android:paddingTop="@dimen/list_vertical_padding"
+            android:scrollbars="vertical" />
+
+        <RelativeLayout
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.pnikosis.materialishprogress.ProgressWheel
+                android:id="@+id/loading"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                app:matProg_barColor="@color/accent"
+                app:matProg_progressIndeterminate="true" />
+        </RelativeLayout>
+    </FrameLayout>
 
     <net.i2p.android.ext.floatingactionbutton.AddFloatingActionButton
         android:id="@+id/promoted_action"

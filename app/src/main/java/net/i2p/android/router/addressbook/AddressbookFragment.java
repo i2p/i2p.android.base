@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,11 +19,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import net.i2p.addressbook.Daemon;
 import net.i2p.android.router.R;
@@ -30,12 +31,14 @@ import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.android.router.util.Util;
 import net.i2p.android.util.FragmentUtils;
+import net.i2p.android.widget.LoadingRecyclerView;
 import net.i2p.client.naming.NamingService;
 import net.i2p.router.RouterContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AddressbookFragment extends ListFragment implements
+public class AddressbookFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<List<AddressEntry>> {
     public static final String BOOK_NAME = "book_name";
     public static final String ROUTER_BOOK = "hosts.txt";
@@ -48,6 +51,8 @@ public class AddressbookFragment extends ListFragment implements
     private static final int PRIVATE_LOADER_ID = 2;
 
     private OnAddressSelectedListener mCallback;
+
+    private LoadingRecyclerView mRecyclerView;
     private AddressEntryAdapter mAdapter;
     private String mBook;
     private String mCurFilter;
@@ -87,12 +92,12 @@ public class AddressbookFragment extends ListFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Create the list fragment's content view by calling the super method
-        final View listFragmentView = super.onCreateView(inflater, container, savedInstanceState);
-
         View v = inflater.inflate(R.layout.fragment_list_with_add, container, false);
-        FrameLayout listContainer = (FrameLayout) v.findViewById(R.id.list_container);
-        listContainer.addView(listFragmentView);
+
+        mRecyclerView = (LoadingRecyclerView) v.findViewById(R.id.list);
+        View empty = v.findViewById(R.id.empty);
+        ProgressWheel loading = (ProgressWheel) v.findViewById(R.id.loading);
+        mRecyclerView.setLoadingView(empty, loading);
 
         mAddToAddressbook = (ImageButton) v.findViewById(R.id.promoted_action);
         mAddToAddressbook.setOnClickListener(new View.OnClickListener() {
@@ -109,28 +114,17 @@ public class AddressbookFragment extends ListFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mAdapter = new AddressEntryAdapter(getActivity());
         mBook = getArguments().getString(BOOK_NAME);
 
-        // Set adapter to null before setting the header
-        setListAdapter(null);
+        mRecyclerView.setHasFixedSize(true);
 
-        TextView v = new TextView(getActivity());
-        v.setTag("addressbook_header");
-        getListView().addHeaderView(v);
+        // use a linear layout manager
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
-        setListAdapter(mAdapter);
-
-        if (Util.getRouterContext() == null)
-            setEmptyText(getResources().getString(
-                    R.string.router_not_running));
-        else {
-            setEmptyText("No hosts in address book " + mBook);
-
-            setListShown(false);
-            getLoaderManager().initLoader(PRIVATE_BOOK.equals(mBook) ?
-                    PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
-        }
+        // Set the adapter for the list view
+        mAdapter = new AddressEntryAdapter(getActivity(), mCallback);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -143,8 +137,6 @@ public class AddressbookFragment extends ListFragment implements
         filter.addAction(RouterService.LOCAL_BROADCAST_STATE_NOTIFICATION);
         filter.addAction(RouterService.LOCAL_BROADCAST_STATE_CHANGED);
         lbm.registerReceiver(onStateChange, filter);
-
-        lbm.sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
     }
 
     private State lastRouterState = null;
@@ -160,26 +152,26 @@ public class AddressbookFragment extends ListFragment implements
     };
 
     public void updateState(State state) {
+        int loaderId = PRIVATE_BOOK.equals(mBook) ?
+                PRIVATE_LOADER_ID : ROUTER_LOADER_ID;
+
         if (state == State.STOPPING || state == State.STOPPED ||
                 state == State.MANUAL_STOPPING ||
                 state == State.MANUAL_STOPPED ||
                 state == State.MANUAL_QUITTING ||
                 state == State.MANUAL_QUITTED)
-            setEmptyText(getResources().getString(
-                    R.string.router_not_running));
+            getLoaderManager().destroyLoader(loaderId);
         else {
-            setEmptyText("No hosts in address book " + mBook);
-
-            setListShown(false);
-            getLoaderManager().initLoader(PRIVATE_BOOK.equals(mBook) ?
-                    PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
+            getLoaderManager().initLoader(loaderId, null, this);
         }
     }
 
     @Override
-    public void onListItemClick(ListView parent, View view, int pos, long id) {
-        CharSequence host = ((TextView) view).getText();
-        mCallback.onAddressSelected(host);
+    public void onResume() {
+        super.onResume();
+
+        getLoaderManager().initLoader(PRIVATE_BOOK.equals(mBook) ?
+                PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
     }
 
     @Override
@@ -238,7 +230,7 @@ public class AddressbookFragment extends ListFragment implements
             boolean success = NamingServiceUtil.addFromWizard(getActivity(), ns, entryData, false);
             if (success) {
                 // Reload the list
-                setListShown(false);
+                mRecyclerView.setLoading(true);
                 getLoaderManager().restartLoader(PRIVATE_LOADER_ID, null, this);
             }
         }
@@ -247,7 +239,7 @@ public class AddressbookFragment extends ListFragment implements
     public void filterAddresses(String query) {
         mCurFilter = !TextUtils.isEmpty(query) ? query : null;
         if (Util.getRouterContext() != null && mAdapter != null) {
-            setListShown(false);
+            mRecyclerView.setLoading(true);
             getLoaderManager().restartLoader(PRIVATE_BOOK.equals(mBook) ?
                     PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
         }
@@ -263,33 +255,17 @@ public class AddressbookFragment extends ListFragment implements
                                List<AddressEntry> data) {
         if (loader.getId() == (PRIVATE_BOOK.equals(mBook) ?
                 PRIVATE_LOADER_ID : ROUTER_LOADER_ID)) {
-            if (data == null)
-                setEmptyText(getResources().getString(
-                        R.string.router_not_running));
-            else {
-                mAdapter.setData(data);
-
-                TextView v = (TextView) getListView().findViewWithTag("addressbook_header");
-                if (mCurFilter != null)
-                    v.setText(getActivity().getResources().getString(
-                            R.string.addressbook_search_header,
-                            data.size()));
-                else
-                    v.setText("");
-
-                if (isResumed()) {
-                    setListShown(true);
-                } else {
-                    setListShownNoAnimation(true);
-                }
-            }
+            mAdapter.setAddresses(data);
         }
     }
 
     public void onLoaderReset(Loader<List<AddressEntry>> loader) {
         if (loader.getId() == (PRIVATE_BOOK.equals(mBook) ?
                 PRIVATE_LOADER_ID : ROUTER_LOADER_ID)) {
-            mAdapter.setData(null);
+            if (Util.getRouterContext() == null)
+                mAdapter.setAddresses(null);
+            else
+                mAdapter.setAddresses(new ArrayList<AddressEntry>());
         }
     }
 }

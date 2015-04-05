@@ -63,10 +63,10 @@ dependencies {
     // Remote dependencies
     compile 'net.i2p.android.ext:floatingactionbutton:1.8.0'
     compile files('libs/androidplot-core-0.6.1.jar')
-
     compile ('com.android.support:support-v4-preferencefragment:1.0.0@aar'){
         exclude module: 'support-v4'
     }
+    compile 'com.pnikosis:materialish-progress:1.4'
 
     // Testing-only dependencies
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
@@ -80,6 +80,7 @@ dependencyVerification {
             'com.android.support:recyclerview-v7:e525ad3f33c84bb12b73d2dc975b55364a53f0f2d0697e043efba59ba73e22d2',
             'net.i2p.android.ext:floatingactionbutton:a20d1f0cae15f8965b81486ba31245937968ae6ee5fa6e8a3ea21d7f6c6243ab',
             'com.android.support:support-v4-preferencefragment:5470f5872514a6226fa1fc6f4e000991f38805691c534cf0bd2778911fc773ad',
+            'com.pnikosis:materialish-progress:5dd770a78047d8dbf2690deb686675fe2b242a6d06bb52ef425c829454ca54b8',
     ]
 }
 
