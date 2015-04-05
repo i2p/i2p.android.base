@@ -1,10 +1,15 @@
 package net.i2p.android.router;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +25,7 @@ import android.widget.ToggleButton;
 import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.dialog.ConfigureBrowserDialog;
 import net.i2p.android.router.dialog.FirstStartDialog;
+import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.LongToggleButton;
@@ -139,13 +145,36 @@ public class MainFragment extends I2PFragmentBase {
         }
         checkDialog();
         _handler.postDelayed(_updater, 100);
+
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(getActivity());
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(RouterService.LOCAL_BROADCAST_STATE_NOTIFICATION);
+        filter.addAction(RouterService.LOCAL_BROADCAST_STATE_CHANGED);
+        lbm.registerReceiver(onStateChange, filter);
+
+        lbm.sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
     }
+
+    private State lastRouterState;
+    private BroadcastReceiver onStateChange = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            State state = intent.getParcelableExtra(RouterService.LOCAL_BROADCAST_EXTRA_STATE);
+            if (lastRouterState == null || lastRouterState != state) {
+                updateState(state);
+                lastRouterState = state;
+            }
+        }
+    };
 
     @Override
     public void onStop() {
         super.onStop();
         _handler.removeCallbacks(_updater);
         _handler.removeCallbacks(_oneShotUpdate);
+
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(onStateChange);
     }
 
     @Override

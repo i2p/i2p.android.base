@@ -167,32 +167,18 @@ public class I2PActivity extends I2PActivityBase implements
         super.onStart();
 
         LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
-
         IntentFilter filter = new IntentFilter();
-        filter.addAction(RouterService.LOCAL_BROADCAST_STATE_NOTIFICATION);
         filter.addAction(RouterService.LOCAL_BROADCAST_STATE_CHANGED);
         lbm.registerReceiver(onStateChange, filter);
-
-        lbm.sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
     }
 
-    private State lastRouterState = null;
     private BroadcastReceiver onStateChange = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             State state = intent.getParcelableExtra(RouterService.LOCAL_BROADCAST_EXTRA_STATE);
-            if (lastRouterState == null || lastRouterState != state) {
-                if (mViewPagerAdapter != null) {
-                    ConsoleContainer cc = (ConsoleContainer) mViewPagerAdapter.getFragment(0);
-                    if (cc != null && cc.isVisible())
-                        cc.updateState(state);
-                    lastRouterState = state;
-                }
-
-                if (state == State.RUNNING && mAutoStartFromIntent) {
-                    I2PActivity.this.setResult(RESULT_OK);
-                    finish();
-                }
+            if (state == State.RUNNING && mAutoStartFromIntent) {
+                I2PActivity.this.setResult(RESULT_OK);
+                finish();
             }
         }
     };

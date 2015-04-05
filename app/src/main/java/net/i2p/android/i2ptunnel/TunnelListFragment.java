@@ -1,10 +1,15 @@
 package net.i2p.android.i2ptunnel;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,6 +18,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.service.RouterService;
+import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Util;
 import net.i2p.android.util.FragmentUtils;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
@@ -103,27 +110,71 @@ public class TunnelListFragment extends ListFragment implements
             setEmptyText(getResources().getString(
                     R.string.router_not_running));
         else {
-            String error;
+            initTunnels();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(getActivity());
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(RouterService.LOCAL_BROADCAST_STATE_NOTIFICATION);
+        filter.addAction(RouterService.LOCAL_BROADCAST_STATE_CHANGED);
+        lbm.registerReceiver(onStateChange, filter);
+
+        lbm.sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
+    }
+
+    private State lastRouterState = null;
+    private BroadcastReceiver onStateChange = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            State state = intent.getParcelableExtra(RouterService.LOCAL_BROADCAST_EXTRA_STATE);
+            if (lastRouterState == null || lastRouterState != state) {
+                updateState(state);
+                lastRouterState = state;
+            }
+        }
+    };
+
+    public void updateState(State state) {
+        if (state == State.STOPPING || state == State.STOPPED ||
+                state == State.MANUAL_STOPPING ||
+                state == State.MANUAL_STOPPED ||
+                state == State.MANUAL_QUITTING ||
+                state == State.MANUAL_QUITTED)
+            setEmptyText(getResources().getString(
+                    R.string.router_not_running));
+        else
+            initTunnels();
+    }
+
+    private void initTunnels() {
+        if (mGroup == null) {
+            String error = null;
             try {
                 mGroup = TunnelControllerGroup.getInstance();
-                error = mGroup == null ? getResources().getString(R.string.i2ptunnel_not_initialized) : null;
             } catch (IllegalArgumentException iae) {
                 mGroup = null;
                 error = iae.toString();
             }
 
-            if (mGroup == null) {
+            if (mGroup == null)
                 setEmptyText(error);
-            } else {
-                if (mClientTunnels)
-                    setEmptyText("No configured client tunnels.");
-                else
-                    setEmptyText("No configured server tunnels.");
+        }
 
-                setListShown(false);
-                getLoaderManager().initLoader(mClientTunnels ? CLIENT_LOADER_ID
-                        : SERVER_LOADER_ID, null, this);
-            }
+        if (mGroup != null) {
+            if (mClientTunnels)
+                setEmptyText("No configured client tunnels.");
+            else
+                setEmptyText("No configured server tunnels.");
+
+            setListShown(false);
+            getLoaderManager().initLoader(mClientTunnels ? CLIENT_LOADER_ID
+                    : SERVER_LOADER_ID, null, this);
         }
     }
 
@@ -140,6 +191,13 @@ public class TunnelListFragment extends ListFragment implements
             // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(onStateChange);
     }
 
     @Override

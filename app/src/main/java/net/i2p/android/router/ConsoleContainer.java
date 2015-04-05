@@ -16,7 +16,6 @@ import net.i2p.android.router.dialog.AboutDialog;
 import net.i2p.android.router.dialog.TextResourceDialog;
 import net.i2p.android.router.log.LogActivity;
 import net.i2p.android.router.netdb.NetDbActivity;
-import net.i2p.android.router.service.State;
 import net.i2p.android.router.stats.PeersActivity;
 import net.i2p.android.router.stats.RateGraphActivity;
 
@@ -122,11 +121,5 @@ public class ConsoleContainer extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void updateState(State state) {
-        MainFragment f = (MainFragment) getChildFragmentManager().findFragmentById(R.id.main_fragment);
-        if (f != null)
-            f.updateState(state);
     }
 }

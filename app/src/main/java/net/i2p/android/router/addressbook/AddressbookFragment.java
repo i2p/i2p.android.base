@@ -1,11 +1,15 @@
 package net.i2p.android.router.addressbook;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +25,8 @@ import android.widget.Toast;
 
 import net.i2p.addressbook.Daemon;
 import net.i2p.android.router.R;
+import net.i2p.android.router.service.RouterService;
+import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.android.router.util.Util;
 import net.i2p.android.util.FragmentUtils;
@@ -128,9 +134,59 @@ public class AddressbookFragment extends ListFragment implements
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(getActivity());
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(RouterService.LOCAL_BROADCAST_STATE_NOTIFICATION);
+        filter.addAction(RouterService.LOCAL_BROADCAST_STATE_CHANGED);
+        lbm.registerReceiver(onStateChange, filter);
+
+        lbm.sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
+    }
+
+    private State lastRouterState = null;
+    private BroadcastReceiver onStateChange = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            State state = intent.getParcelableExtra(RouterService.LOCAL_BROADCAST_EXTRA_STATE);
+            if (lastRouterState == null || lastRouterState != state) {
+                updateState(state);
+                lastRouterState = state;
+            }
+        }
+    };
+
+    public void updateState(State state) {
+        if (state == State.STOPPING || state == State.STOPPED ||
+                state == State.MANUAL_STOPPING ||
+                state == State.MANUAL_STOPPED ||
+                state == State.MANUAL_QUITTING ||
+                state == State.MANUAL_QUITTED)
+            setEmptyText(getResources().getString(
+                    R.string.router_not_running));
+        else {
+            setEmptyText("No hosts in address book " + mBook);
+
+            setListShown(false);
+            getLoaderManager().initLoader(PRIVATE_BOOK.equals(mBook) ?
+                    PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
+        }
+    }
+
+    @Override
     public void onListItemClick(ListView parent, View view, int pos, long id) {
         CharSequence host = ((TextView) view).getText();
         mCallback.onAddressSelected(host);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(onStateChange);
     }
 
     @Override
