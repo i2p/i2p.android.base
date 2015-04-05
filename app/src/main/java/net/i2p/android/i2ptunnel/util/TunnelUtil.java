@@ -632,7 +632,8 @@ public class TunnelUtil extends GeneralHelper {
 
         @Override
         protected void generalClientPort() {
-            cfg.setPort(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_binding_port)).getInt(Page.SIMPLE_DATA_KEY));
+            cfg.setPort(Integer.parseInt(data.getBundle(
+                    res.getString(R.string.i2ptunnel_wizard_k_binding_port)).getString(Page.SIMPLE_DATA_KEY)));
         }
 
         @Override
@@ -675,12 +676,14 @@ public class TunnelUtil extends GeneralHelper {
         protected void generalServerHttpBidirOrStreamr(boolean isStreamr) {
             cfg.setReachableBy(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_reachable_on)).getString(Page.SIMPLE_DATA_KEY));
             if (!isStreamr)
-                cfg.setPort(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_binding_port)).getInt(Page.SIMPLE_DATA_KEY));
+                cfg.setPort(Integer.parseInt(data.getBundle(
+                        res.getString(R.string.i2ptunnel_wizard_k_binding_port)).getString(Page.SIMPLE_DATA_KEY)));
         }
 
         @Override
         protected void generalServerPort() {
-            cfg.setTargetPort(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_target_port)).getInt(Page.SIMPLE_DATA_KEY));
+            cfg.setTargetPort(Integer.parseInt(data.getBundle(
+                    res.getString(R.string.i2ptunnel_wizard_k_target_port)).getString(Page.SIMPLE_DATA_KEY)));
         }
 
         @Override
