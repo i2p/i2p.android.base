@@ -475,7 +475,7 @@ public class RouterService extends Service {
     /**
      * Graceful Shutdown
      *
-     * @since 0.9.18
+     * @since 0.9.19
      */
     public boolean isGracefulShutdownInProgress() {
         if (_state == State.GRACEFUL_SHUTDOWN) {
@@ -489,7 +489,7 @@ public class RouterService extends Service {
     /**
      * Graceful Shutdown
      *
-     * @since 0.9.18
+     * @since 0.9.19
      */
     public void gracefulShutdown() {
         Util.d("gracefulShutdown called"
@@ -527,7 +527,7 @@ public class RouterService extends Service {
     /**
      * Cancel Graceful Shutdown
      *
-     * @since 0.9.18
+     * @since 0.9.19
      */
     public void cancelGracefulShutdown() {
         Util.d("cancelGracefulShutdown called"

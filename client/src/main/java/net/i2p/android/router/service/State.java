@@ -20,7 +20,7 @@ public enum State implements Parcelable {
     MANUAL_QUITTING, MANUAL_QUITTED,
     // Stopped by listener (no network), next: WAITING (spin waiting for network)
     NETWORK_STOPPING, NETWORK_STOPPED,
-    /** @since 0.9.18 */
+    /** @since 0.9.19 */
     GRACEFUL_SHUTDOWN;
 
     @Override

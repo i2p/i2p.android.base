@@ -60,11 +60,11 @@ public class MainFragment extends I2PFragmentBase {
         public boolean shouldBeOn();
         public void onStartRouterClicked();
         public boolean onStopRouterClicked();
-        /** @since 0.9.18 */
+        /** @since 0.9.19 */
         public boolean isGracefulShutdownInProgress();
-        /** @since 0.9.18 */
+        /** @since 0.9.19 */
         public boolean onGracefulShutdownClicked();
-        /** @since 0.9.18 */
+        /** @since 0.9.19 */
         public boolean onCancelGracefulShutdownClicked();
     }
 

@@ -213,13 +213,13 @@ public class MainActivity extends I2PActivityBase implements
         return false;
     }
 
-    /** @since 0.9.18 */
+    /** @since 0.9.19 */
     public boolean isGracefulShutdownInProgress() {
         RouterService svc = _routerService;
         return svc != null && svc.isGracefulShutdownInProgress();
     }
 
-    /** @since 0.9.18 */
+    /** @since 0.9.19 */
     public boolean onGracefulShutdownClicked() {
         RouterService svc = _routerService;
         if(svc != null && _isBound) {
@@ -230,7 +230,7 @@ public class MainActivity extends I2PActivityBase implements
         return false;
     }
 
-    /** @since 0.9.18 */
+    /** @since 0.9.19 */
     public boolean onCancelGracefulShutdownClicked() {
         RouterService svc = _routerService;
         if(svc != null && _isBound) {
