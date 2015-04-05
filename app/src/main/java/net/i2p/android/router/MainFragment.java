@@ -1,7 +1,6 @@
 package net.i2p.android.router;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -20,7 +20,6 @@ import android.widget.ToggleButton;
 
 import net.i2p.android.router.dialog.ConfigureBrowserDialog;
 import net.i2p.android.router.dialog.FirstStartDialog;
-import net.i2p.android.router.dialog.VersionDialog;
 import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.LongToggleButton;
@@ -123,17 +122,29 @@ public class MainFragment extends I2PFragmentBase {
                     mCallback.onStartRouterClicked();
                     updateOneShot();
                     checkFirstStart();
-                } else {
-                    if (mCallback.isGracefulShutdownInProgress()) {
-                        if(mCallback.onStopRouterClicked()) {
-                            updateOneShot();
-                        }
-                    } else {
-                        if(mCallback.onGracefulShutdownClicked()) {
-                            updateOneShot();
-                        }
-                    }
-                }
+                } else if(mCallback.onGracefulShutdownClicked())
+                    updateOneShot();
+                return true;
+            }
+        });
+
+        Button gb = (Button) v.findViewById(R.id.button_shutdown_now);
+        gb.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (mCallback.isGracefulShutdownInProgress())
+                    if(mCallback.onStopRouterClicked())
+                        updateOneShot();
+                return true;
+            }
+        });
+        gb = (Button) v.findViewById(R.id.button_cancel_graceful);
+        gb.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (mCallback.isGracefulShutdownInProgress())
+                    if(mCallback.onCancelGracefulShutdownClicked())
+                        updateOneShot();
                 return true;
             }
         });
@@ -205,22 +216,24 @@ public class MainFragment extends I2PFragmentBase {
     private void updateVisibility() {
         boolean showOnOff = mCallback.shouldShowOnOff();
         ToggleButton b = (ToggleButton) getActivity().findViewById(R.id.router_onoff_button);
-        b.setVisibility(showOnOff ? View.VISIBLE : View.INVISIBLE);
+        b.setVisibility(showOnOff ? View.VISIBLE : View.GONE);
 
         boolean isOn = mCallback.shouldBeOn();
         b.setChecked(isOn);
-        if (isOn && mCallback.isGracefulShutdownInProgress()) {
+
+        boolean isGraceful = mCallback.isGracefulShutdownInProgress();
+        LinearLayout gv = (LinearLayout) getActivity().findViewById(R.id.router_graceful_buttons);
+        gv.setVisibility(isGraceful ? View.VISIBLE : View.GONE);
+        if (isOn && isGraceful) {
             RouterContext ctx = getRouterContext();
             if (ctx != null) {
-                // TODO
-                // Don't change text on this button... hide it,
-                // and add two more buttons, one for cancel and one for shutdown immediately.
+                TextView tv = (TextView) gv.findViewById(R.id.router_graceful_status);
                 long ms = ctx.router().getShutdownTimeRemaining();
                 if (ms > 1000) {
-                    b.setTextOn(getActivity().getResources().getString(R.string.button_router_graceful,
-                                                                       DataHelper.formatDuration(ms)));
+                    tv.setText(getActivity().getResources().getString(R.string.button_router_graceful,
+                            DataHelper.formatDuration(ms)));
                 } else {
-                    b.setTextOn("Stopping I2P");
+                    tv.setText("Stopping I2P");
                 }
             }
         }

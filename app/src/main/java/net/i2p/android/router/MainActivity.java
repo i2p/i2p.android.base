@@ -183,7 +183,7 @@ public class MainActivity extends I2PActivityBase implements
     // MainFragment.RouterControlListener
 
     public boolean shouldShowOnOff() {
-        return (canStart() && Connectivity.isConnected(this)) || canStop();
+        return (canStart() && Connectivity.isConnected(this)) || (canStop() && !isGracefulShutdownInProgress());
     }
 
     public boolean shouldBeOn() {

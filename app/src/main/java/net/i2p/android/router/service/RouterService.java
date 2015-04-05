@@ -275,7 +275,14 @@ public class RouterService extends Service {
                         inCl, outCl);
 
         boolean haveTunnels = inCl > 0 && outCl > 0;
-        if(haveTunnels != _hadTunnels) {
+        if (isGracefulShutdownInProgress()) {
+            long ms = ctx.router().getShutdownTimeRemaining();
+            if (ms > 1000) {
+                _currTitle = "Stopping I2P in " + DataHelper.formatDuration(ms);
+            } else {
+                _currTitle = "Stopping I2P";
+            }
+        } else if (haveTunnels != _hadTunnels) {
             if(haveTunnels) {
                 _currTitle = "Client tunnels are ready";
                 setState(State.ACTIVE);
@@ -478,6 +485,7 @@ public class RouterService extends Service {
         return false;
     }
 
+    private String _oldTitle;
     /**
      * Graceful Shutdown
      *
@@ -502,6 +510,7 @@ public class RouterService extends Service {
                         manualQuit();
                     } else {
                         ctx.router().shutdownGracefully();
+                        _oldTitle = _currTitle;
                         long ms = ctx.router().getShutdownTimeRemaining();
                         if (ms > 1000) {
                             _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P in " + DataHelper.formatDuration(ms));
@@ -529,9 +538,15 @@ public class RouterService extends Service {
             }
             RouterContext ctx = _context;
             if(ctx != null && ctx.router().isAlive()) {
-               ctx.router().cancelGracefulShutdown();
-                _statusBar.replace(StatusBar.ICON_RUNNING, "Shutdown cancelled");
-                setState(State.RUNNING);
+                ctx.router().cancelGracefulShutdown();
+                _currTitle = _oldTitle;
+                if (_hadTunnels) {
+                    setState(State.ACTIVE);
+                    _statusBar.replace(StatusBar.ICON_ACTIVE, "Shutdown cancelled");
+                } else {
+                    setState(State.RUNNING);
+                    _statusBar.replace(StatusBar.ICON_RUNNING, "Shutdown cancelled");
+                }
             }
         }
     }
