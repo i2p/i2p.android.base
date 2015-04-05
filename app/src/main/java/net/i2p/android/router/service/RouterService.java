@@ -1,22 +1,17 @@
 package net.i2p.android.router.service;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.DecimalFormat;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import android.support.v4.content.LocalBroadcastManager;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.receiver.I2PReceiver;
@@ -28,12 +23,30 @@ import net.i2p.router.Job;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.RouterLaunch;
-import net.i2p.util.OrderedProperties;
+
+import java.lang.ref.WeakReference;
+import java.text.DecimalFormat;
 
 /**
  * Runs the router
  */
 public class RouterService extends Service {
+
+    /**
+     * A request to this service for the current router state. Broadcasting
+     * this will trigger a state notification.
+     */
+    public static final String LOCAL_BROADCAST_REQUEST_STATE = "net.i2p.android.LOCAL_BROADCAST_REQUEST_STATE";
+    /**
+     * A notification of the current state. This is informational; the state
+     * has not changed.
+     */
+    public static final String LOCAL_BROADCAST_STATE_NOTIFICATION = "net.i2p.android.LOCAL_BROADCAST_STATE_NOTIFICATION";
+    /**
+     * The state has just changed.
+     */
+    public static final String LOCAL_BROADCAST_STATE_CHANGED = "net.i2p.android.LOCAL_BROADCAST_STATE_CHANGED";
+    public static final String LOCAL_BROADCAST_EXTRA_STATE = "net.i2p.android.STATE";
 
     private RouterContext _context;
     private String _myDir;
@@ -59,7 +72,7 @@ public class RouterService extends Service {
      * that it can be accessed more efficiently from inner classes.
      */
     final RemoteCallbackList<IRouterStateCallback> mStateCallbacks
-            = new RemoteCallbackList<IRouterStateCallback>();
+            = new RemoteCallbackList<>();
 
     @Override
     public void onCreate() {
@@ -83,6 +96,8 @@ public class RouterService extends Service {
         _binder = new RouterBinder(this);
         _handler = new Handler();
         _updater = new Updater();
+        LocalBroadcastManager.getInstance(this).registerReceiver(onStateRequested,
+                new IntentFilter(LOCAL_BROADCAST_REQUEST_STATE));
         if(lastState == State.RUNNING || lastState == State.ACTIVE) {
             Intent intent = new Intent(this, RouterService.class);
             intent.putExtra(EXTRA_RESTART, true);
@@ -94,6 +109,16 @@ public class RouterService extends Service {
             }
         }
     }
+
+    private BroadcastReceiver onStateRequested = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Broadcast the current state within this app.
+            Intent ni = new Intent(LOCAL_BROADCAST_STATE_NOTIFICATION);
+            ni.putExtra(LOCAL_BROADCAST_EXTRA_STATE, (android.os.Parcelable) _state);
+            LocalBroadcastManager.getInstance(RouterService.this).sendBroadcast(ni);
+        }
+    };
 
     /**
      * NOT called by system if it restarts us after a crash
@@ -176,147 +201,7 @@ public class RouterService extends Service {
             //NativeBigInteger.main(null);
             //Util.d(MARKER + this + " JBigI speed test finished, launching router");
 
-
-            // Before we launch, fix up any settings that need to be fixed here.
-            // This should be done in the core, but as of this writing it isn't!
-
-            // Step one. Load the propertites.
-            Properties props = new OrderedProperties();
-            Properties oldprops = new OrderedProperties();
-            String wrapName = _myDir + "/router.config";
-            try {
-                InputStream fin = new FileInputStream(new File(wrapName));
-                DataHelper.loadProps(props, fin);
-            } catch(IOException ioe) {
-                // shouldn't happen...
-            }
-            oldprops.putAll(props);
-            // Step two, check for any port settings, and copy for those that are missing.
-            int UDPinbound;
-            int UDPinlocal;
-            int TCPinbound;
-            int TCPinlocal;
-            UDPinbound = Integer.parseInt(props.getProperty("i2np.udp.port", "-1"));
-            UDPinlocal = Integer.parseInt(props.getProperty("i2np.udp.internalPort", "-1"));
-            TCPinbound = Integer.parseInt(props.getProperty("i2np.ntcp.port", "-1"));
-            TCPinlocal = Integer.parseInt(props.getProperty("i2np.ntcp.internalPort", "-1"));
-            boolean hasUDPinbound = UDPinbound != -1;
-            boolean hasUDPinlocal = UDPinlocal != -1;
-            boolean hasTCPinbound = TCPinbound != -1;
-            boolean hasTCPinlocal = TCPinlocal != -1;
-
-            // check and clear values based on these:
-            boolean udp = Boolean.parseBoolean(props.getProperty("i2np.udp.enable", "false"));
-            boolean tcp = Boolean.parseBoolean(props.getProperty("i2np.ntcp.enable", "false"));
-
-            // Fix if both are false.
-            if(!(udp || tcp)) {
-                // If both are not on, turn them both on.
-                props.setProperty("i2np.udp.enable", "true");
-                props.setProperty("i2np.ntcp.enable", "true");
-            }
-
-            // Fix if we have local but no inbound
-            if(!hasUDPinbound && hasUDPinlocal) {
-                // if we got a local port and no external port, set it
-                hasUDPinbound = true;
-                UDPinbound = UDPinlocal;
-            }
-            if(!hasTCPinbound && hasTCPinlocal) {
-                // if we got a local port and no external port, set it
-                hasTCPinbound = true;
-                TCPinbound = TCPinlocal;
-            }
-
-            boolean anyUDP = hasUDPinbound || hasUDPinlocal;
-            boolean anyTCP = hasTCPinbound || hasTCPinlocal;
-            boolean anyport = anyUDP || anyTCP;
-
-            if(!anyport) {
-                // generate one for UDPinbound, and fall thru.
-                // FIX ME: Possibly not the best but should be OK.
-                Random generator = new Random(System.currentTimeMillis());
-                UDPinbound = generator.nextInt(55500) + 10000;
-                anyUDP = true;
-            }
-
-            // Copy missing port numbers
-            if(anyUDP && !anyTCP) {
-                TCPinbound = UDPinbound;
-                TCPinlocal = UDPinlocal;
-            }
-            if(anyTCP && !anyUDP) {
-                UDPinbound = TCPinbound;
-                UDPinlocal = TCPinlocal;
-            }
-            // reset for a retest.
-            hasUDPinbound = UDPinbound != -1;
-            hasUDPinlocal = UDPinlocal != -1;
-            hasTCPinbound = TCPinbound != -1;
-            hasTCPinlocal = TCPinlocal != -1;
-            anyUDP = hasUDPinbound || hasUDPinlocal;
-            anyTCP = hasTCPinbound || hasTCPinlocal;
-            boolean checkAnyUDP = anyUDP && udp;
-            boolean checkAnyTCP = anyTCP && tcp;
-
-            // Enable things that need to be enabled.
-            // Disable anything that needs to be disabled.
-            if(!checkAnyUDP && !checkAnyTCP) {
-                // enable the one(s) with values.
-                if(anyUDP) {
-                    udp = true;
-                }
-                if(anyTCP) {
-                    tcp = true;
-                }
-            }
-
-            if(!udp) {
-                props.setProperty("i2np.udp.enable", "false");
-                props.remove("i2np.udp.port");
-                props.remove("i2np.udp.internalPort");
-            } else {
-                props.setProperty("i2np.udp.enable", "true");
-                if(hasUDPinbound) {
-                    props.setProperty("i2np.udp.port", Integer.toString(UDPinbound));
-                } else {
-                    props.remove("i2np.udp.port");
-                }
-                if(hasUDPinlocal) {
-                    props.setProperty("i2np.udp.internalPort", Integer.toString(UDPinlocal));
-                } else {
-                    props.remove("i2np.udp.internalPort");
-                }
-            }
-
-            if(!tcp) {
-                props.setProperty("i2np.ntcp.enable", "false");
-                props.remove("i2np.ntcp.port");
-                props.remove("i2np.ntcp.internalPort");
-            } else {
-                props.setProperty("i2np.ntcp.enable", "true");
-                if(hasTCPinbound) {
-                    props.setProperty("i2np.ntcp.port", Integer.toString(TCPinbound));
-                } else {
-                    props.remove("i2np.ntcp.port");
-                }
-                if(hasTCPinlocal) {
-                    props.setProperty("i2np.ntcp.internalPort", Integer.toString(TCPinlocal));
-                } else {
-                    props.remove("i2np.ntcp.internalPort");
-                }
-            }
-            // WHEW! Now test for any changes.
-            if(!props.equals(oldprops)) {
-                // save fixed properties.
-                try {
-                    DataHelper.storeProps(props, new File(wrapName));
-                } catch(IOException ioe) {
-                    // shouldn't happen...
-                }
-            }
-
-            // _NOW_ launch the router!
+            // Launch the router!
             RouterLaunch.main(null);
             synchronized(_stateLock) {
                 if(_state != State.STARTING) {
@@ -457,7 +342,7 @@ public class RouterService extends Service {
 
     // ******** following methods may be accessed from Activities and Receivers ************
     /**
-     * @returns null if router is not running
+     * @return null if router is not running
      */
     public RouterContext getRouterContext() {
         RouterContext rv = _context;
@@ -660,29 +545,40 @@ public class RouterService extends Service {
     /**
      * Our Handler used to execute operations on the main thread.
      */
-    private final Handler mHandler = new Handler() {
+    private final Handler mHandler = new StateHandler(new WeakReference<>(this));
+    private static class StateHandler extends Handler {
+        WeakReference<RouterService> mReference;
+
+        public StateHandler(WeakReference<RouterService> reference) {
+            mReference = reference;
+        }
+
         @Override
         public void handleMessage(Message msg) {
+            RouterService parent = mReference.get();
+            if (parent == null)
+                return;
+
             switch (msg.what) {
             case STATE_MSG:
-                final State state = _state;
+                final State state = parent._state;
                 // Broadcast to all clients the new state.
-                final int N = mStateCallbacks.beginBroadcast();
+                final int N = parent.mStateCallbacks.beginBroadcast();
                 for (int i = 0; i < N; i++) {
                     try {
-                        mStateCallbacks.getBroadcastItem(i).stateChanged(state);
+                        parent.mStateCallbacks.getBroadcastItem(i).stateChanged(state);
                     } catch (RemoteException e) {
                         // The RemoteCallbackList will take care of removing
                         // the dead object for us.
                     }
                 }
-                mStateCallbacks.finishBroadcast();
+                parent.mStateCallbacks.finishBroadcast();
                 break;
             default:
                 super.handleMessage(msg);
             }
         }
-    };
+    }
 
     /**
      * Turn off the status bar. Unregister the receiver. If we were running,
@@ -695,6 +591,8 @@ public class RouterService extends Service {
 
         _handler.removeCallbacks(_updater);
         _statusBar.remove();
+
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onStateRequested);
 
         I2PReceiver rcvr = _receiver;
         if(rcvr != null) {
@@ -860,6 +758,13 @@ public class RouterService extends Service {
     private void setState(State s) {
         _state = s;
         saveState();
+
+        // Broadcast the new state within this app.
+        Intent intent = new Intent(LOCAL_BROADCAST_STATE_CHANGED);
+        intent.putExtra(LOCAL_BROADCAST_EXTRA_STATE, (android.os.Parcelable) _state);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+        // Notify other apps that the state has changed
         mHandler.sendEmptyMessage(STATE_MSG);
     }
 

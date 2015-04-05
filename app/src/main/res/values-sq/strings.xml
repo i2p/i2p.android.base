@@ -8,7 +8,6 @@
   <string name="label_tunnels">Tunelet</string>
   <string name="label_status">Statusi</string>
   <string name="label_addressbook">Libri i adresave. </string>
-  <string name="label_i2ptunnel">Tuneli i I2P\'së</string>
   <string name="label_i2ptunnel_client">Tunelet e klientëve</string>
   <string name="label_i2ptunnel_server">Tunelet e Serverave. </string>
   <string name="label_logs">Logot</string>

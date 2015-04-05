@@ -1,12 +1,5 @@
 package net.i2p.android.router.netdb;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import net.i2p.android.router.R;
-import net.i2p.util.ObjectCounter;
-import net.i2p.util.VersionComparator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +8,14 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import net.i2p.android.router.R;
+import net.i2p.util.ObjectCounter;
+import net.i2p.util.VersionComparator;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class NetDbSummaryTableFragment extends Fragment {
     private static final String CATEGORY = "category";
@@ -44,7 +45,7 @@ public class NetDbSummaryTableFragment extends Fragment {
 
         mTable = (TableLayout) v.findViewById(R.id.table);
 
-        List<String> objects = new ArrayList<String>(mCounts.objects());
+        List<String> objects = new ArrayList<>(mCounts.objects());
         if (!objects.isEmpty()) {
             createTableTitle();
 

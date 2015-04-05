@@ -6,6 +6,12 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
+
+import net.i2p.android.apps.EepGetFetcher;
+import net.i2p.android.router.BuildConfig;
+import net.i2p.android.router.util.AppCache;
+import net.i2p.android.router.util.Util;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,10 +19,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import net.i2p.android.apps.EepGetFetcher;
-import net.i2p.android.router.BuildConfig;
-import net.i2p.android.router.util.AppCache;
-import net.i2p.android.router.util.Util;
 
 /**
  *  Usage:  content://net.i2p.android.router/NONCE/ENCODED-SCHEME/ENCODED-AUTHORITY/ENCODED_PATH + QUERY_MARKER + ENCODED-QUERY
@@ -141,7 +143,7 @@ public class CacheProvider extends ContentProvider {
      *
      *  @param uri must contain a scheme, authority and path with nonce etc. as defined above
      *  @return non-null
-     *  @throws FNFE on error
+     *  @throws java.io.FileNotFoundException on error
      */
     public static Uri getI2PUri(Uri uri) throws FileNotFoundException {
         String resPath = uri.getEncodedPath();
@@ -243,8 +245,7 @@ public class CacheProvider extends ContentProvider {
             if (file.length() > 0) {
                 // this call will insert it back to us (don't set as current base)
                 Uri content = cache.addCacheFile(uri, false);
-                ParcelFileDescriptor parcel = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
-                return parcel;
+                return ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
             } else {
                  Util.d("CacheProvider Sucess but no data " + uri);
             }
@@ -276,7 +277,7 @@ public class CacheProvider extends ContentProvider {
             put(uri, fileURI);
         }
         Boolean setAsCurrentBase = values.getAsBoolean(CURRENT_BASE);
-        if (setAsCurrentBase != null && setAsCurrentBase.booleanValue()) {
+        if (setAsCurrentBase != null && setAsCurrentBase) {
             Util.d("CacheProvider set current base " + uri);
             setCurrentBase(uri);
         }
@@ -303,7 +304,7 @@ public class CacheProvider extends ContentProvider {
 
     private void cleanup() {
         String pfx = CONTENT_URI.toString();
-        List<String> toDelete = new ArrayList<String>();
+        List<String> toDelete = new ArrayList<>();
         Map<String, ?> map = _sharedPrefs.getAll();
         for (Map.Entry<String, ?> e : map.entrySet()) {
             String path = (String) e.getValue();

@@ -1,6 +1,5 @@
 package net.i2p.android.router;
 
-import net.i2p.android.router.R;
 import android.os.Bundle;
 
 public class NewsActivity extends I2PActivityBase {

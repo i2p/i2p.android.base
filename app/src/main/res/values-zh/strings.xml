@@ -8,7 +8,6 @@
   <string name="label_tunnels">隧道</string>
   <string name="label_status">状态</string>
   <string name="label_addressbook">地址簿</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">客户隧道</string>
   <string name="label_i2ptunnel_server">服务隧道</string>
   <string name="label_logs">日志</string>
@@ -69,6 +68,8 @@
   <string name="settings_enable">启用</string>
   <string name="settings_desc_subscriptions">订阅链接</string>
   <string name="settings_label_bandwidth_net">带宽和网络</string>
+  <string name="settings_label_startOnBoot">启动时启动 I2P</string>
+  <string name="settings_desc_startOnBoot">在您的 Android 设备启动时自动连接到 I2P</string>
   <string name="settings_label_bandwidth">带宽</string>
   <string name="settings_label_bw_inbound">入站速度</string>
   <string name="settings_desc_bw_inbound">最大入站速度</string>
@@ -109,6 +110,7 @@
   <string name="settings_label_expl_backupQuantity">备用数量</string>
   <string name="settings_summ_expl_backupQuantity">%s 隧道</string>
   <string name="settings_desc_expl_backupQuantity">备用隧道数量</string>
+  <string name="settings_need_transport_enabled">您必须启用至少一个传输</string>
   <string name="settings_router_restart_required">请重新启动 I2P 以应用此更改</string>
   <string name="menu_about">关于</string>
   <string name="about_version">版本:</string>
@@ -191,4 +193,5 @@
   <string name="error_logs_copied_to_clipboard">错误日志已复制到剪贴板</string>
   <string name="logs_copied_to_clipboard">日志已复制到剪贴板</string>
   <string name="label_browser_configuration">浏览器配置</string>
+  <string name="unset">未设置</string>
 </resources>

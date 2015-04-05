@@ -52,7 +52,6 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
     /**
      * Router variables
      */
-    protected String _myDir;
     protected boolean _isBound;
     protected boolean _triedBind;
     protected ServiceConnection _connection;
@@ -95,7 +94,6 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         Util.d(this + " onCreate called");
         super.onCreate(savedInstanceState);
         _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
-        _myDir = getFilesDir().getAbsolutePath();
 
         // If the Activity wants to use a ViewPager, provide it.
         // If the Activity can make use of two panes (if available),
@@ -128,7 +126,7 @@ public abstract class I2PActivityBase extends ActionBarActivity implements
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         mDrawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+        mDrawerList.setAdapter(new ArrayAdapter<>(this,
                 R.layout.listitem_navdrawer, activityTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());

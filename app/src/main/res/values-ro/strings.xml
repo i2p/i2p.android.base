@@ -8,7 +8,6 @@
   <string name="label_tunnels">Tuneluri</string>
   <string name="label_status">Stare</string>
   <string name="label_addressbook">Agendă</string>
-  <string name="label_i2ptunnel">Tunel I2P</string>
   <string name="label_i2ptunnel_client">Tuneluri clienti</string>
   <string name="label_i2ptunnel_server">Tuneluri server</string>
   <string name="label_logs">Jurnale</string>

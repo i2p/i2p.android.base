@@ -76,4 +76,36 @@
         <item>mobi.mgeek.TunnyBrowser</item>
         <item>com.lastpass.lpandroid</item>
     </string-array>
+    <string-array name="tunnel_profiles">
+        <item>bulk</item>
+        <item>interactive</item>
+    </string-array>
+    <string-array name="tunnel_profile_names">
+        <item>Bulk connection (downloads/websites/BT)</item>
+        <item>Interactive connection</item>
+    </string-array>
+    <string-array name="access_modes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="access_mode_names">
+        <item>Disabled</item>
+        <item>Whitelist</item>
+        <item>Blacklist</item>
+    </string-array>
+    <string-array name="sigtypes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="sigtype_names">
+        <item>DSA-SHA1</item>
+        <item>ECDSA-P256</item>
+        <item>ECDSA-P384</item>
+        <item>ECDSA-P521</item>
+        <item>Ed25519-SHA-512</item>
+    </string-array>
 </resources>

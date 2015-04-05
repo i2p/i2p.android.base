@@ -8,7 +8,6 @@
   <string name="label_tunnels">Tunnel</string>
   <string name="label_status">Status</string>
   <string name="label_addressbook">Adressbuch</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">Kliententunnel</string>
   <string name="label_i2ptunnel_server">Servertunnel</string>
   <string name="label_logs">Statusberichte</string>
@@ -69,6 +68,8 @@
   <string name="settings_enable">Erlauben</string>
   <string name="settings_desc_subscriptions">Abonnements-URLs</string>
   <string name="settings_label_bandwidth_net">Bandbreite und Netzwerk</string>
+  <string name="settings_label_startOnBoot">Beim booten I2P starten</string>
+  <string name="settings_desc_startOnBoot">Automatisch zu I2P verbinden wenn dieses Android Gerät startet</string>
   <string name="settings_label_bandwidth">Bandbreite</string>
   <string name="settings_label_bw_inbound">Eingehende Übertragungsgeschwindigkeit</string>
   <string name="settings_desc_bw_inbound">Maximale eingehende Übertragungsgeschwindigkeit</string>
@@ -109,6 +110,7 @@
   <string name="settings_label_expl_backupQuantity">Anzahl der Reservetunnel</string>
   <string name="settings_summ_expl_backupQuantity">%s Tunnel</string>
   <string name="settings_desc_expl_backupQuantity">Wie viele Reservertunnel</string>
+  <string name="settings_need_transport_enabled">Sie müssen mindestens einen Transport aktivieren</string>
   <string name="settings_router_restart_required">Bitte starten Sie I2P neu, um die Änderungen anzuwenden</string>
   <string name="menu_about">Über uns</string>
   <string name="about_version">Version:</string>
@@ -191,4 +193,5 @@
   <string name="error_logs_copied_to_clipboard">Fehlerprotokolle in die Zwischenablage kopiert</string>
   <string name="logs_copied_to_clipboard">Protokolle in die Zwischenablage kopiert</string>
   <string name="label_browser_configuration">Browserkonfiguration</string>
+  <string name="unset">Deaktivieren</string>
 </resources>

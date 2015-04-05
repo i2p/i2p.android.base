@@ -40,8 +40,8 @@ public class AddressEntryLoader extends AsyncTaskLoader<List<AddressEntry>> {
         NamingService ns = NamingServiceUtil.getNamingService(routerContext, mBook);
         Util.d("NamingService: " + ns.getName());
         // After router shutdown we get nothing... why?
-        List<AddressEntry> ret = new ArrayList<AddressEntry>();
-        Map<String, Destination> names = new TreeMap<String, Destination>();
+        List<AddressEntry> ret = new ArrayList<>();
+        Map<String, Destination> names = new TreeMap<>();
 
         Properties searchProps = new Properties();
         // Needed for HostsTxtNamingService

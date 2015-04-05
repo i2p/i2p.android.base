@@ -12,7 +12,7 @@ import net.i2p.android.router.R;
 
 public class TunnelListActivity extends I2PActivityBase implements
         TunnelListFragment.OnTunnelSelectedListener,
-        TunnelDetailFragment.OnTunnelDeletedListener {
+        TunnelDetailFragment.TunnelDetailListener {
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -105,7 +105,16 @@ public class TunnelListActivity extends I2PActivityBase implements
         }
     }
 
-    // TunnelDetailFragment.OnTunnelDeletedListener
+    // TunnelDetailFragment.TunnelDetailListener
+
+    @Override
+    public void onEditTunnel(int tunnelId) {
+        EditTunnelFragment editFrag = EditTunnelFragment.newInstance(tunnelId);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.detail_fragment, editFrag)
+                .addToBackStack("")
+                .commit();
+    }
 
     public void onTunnelDeleted(int tunnelId, int numTunnelsLeft) {
         // Should only get here in two-pane mode, but just to be safe:

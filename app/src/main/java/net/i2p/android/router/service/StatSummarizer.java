@@ -1,14 +1,14 @@
 package net.i2p.android.router.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
 import net.i2p.stat.Rate;
 import net.i2p.stat.RateStat;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class StatSummarizer implements Runnable {
     private final RouterContext _context;
@@ -20,7 +20,7 @@ public class StatSummarizer implements Runnable {
 
     public StatSummarizer() {
         _context = Util.getRouterContext();
-        _listeners = new CopyOnWriteArrayList<SummaryListener>();
+        _listeners = new CopyOnWriteArrayList<>();
         _instance = this;
         if (_context != null)
             _context.addShutdownTask(new Shutdown());
@@ -109,7 +109,7 @@ public class StatSummarizer implements Runnable {
      */
     List<Rate> parseSpecs(String specs) {
         StringTokenizer tok = new StringTokenizer(specs, ",");
-        List<Rate> rv = new ArrayList<Rate>();
+        List<Rate> rv = new ArrayList<>();
         while (tok.hasMoreTokens()) {
             String spec = tok.nextToken();
             int split = spec.lastIndexOf('.');
@@ -117,7 +117,7 @@ public class StatSummarizer implements Runnable {
                 continue;
             String name = spec.substring(0, split);
             String per = spec.substring(split+1);
-            long period = -1;
+            long period;
             try {
                 period = Long.parseLong(per);
                 RateStat rs = _context.statManager().getRate(name);

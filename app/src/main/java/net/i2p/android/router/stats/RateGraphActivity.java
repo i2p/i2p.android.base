@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,7 +41,7 @@ public class RateGraphActivity extends I2PActivityBase {
         if (StatSummarizer.instance() != null) {
             // Get the rates currently being graphed
             List<SummaryListener> listeners = StatSummarizer.instance().getListeners();
-            TreeSet<SummaryListener> ordered = new TreeSet<SummaryListener>(new AlphaComparator());
+            TreeSet<SummaryListener> ordered = new TreeSet<>(new AlphaComparator());
             ordered.addAll(listeners);
 
             if (ordered.size() > 0) {
@@ -58,7 +59,7 @@ public class RateGraphActivity extends I2PActivityBase {
                 mSpinner = (Spinner) findViewById(R.id.main_spinner);
                 mSpinner.setVisibility(View.VISIBLE);
 
-                mSpinner.setAdapter(new ArrayAdapter<String>(this,
+                mSpinner.setAdapter(new ArrayAdapter<>(this,
                         android.R.layout.simple_spinner_dropdown_item, mRates));
 
                 mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -79,6 +80,7 @@ public class RateGraphActivity extends I2PActivityBase {
                     selectRate(0);
             } else {
                 DialogFragment df = new DialogFragment() {
+                    @NonNull
                     @Override
                     public Dialog onCreateDialog(Bundle savedInstanceState) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -112,6 +114,7 @@ public class RateGraphActivity extends I2PActivityBase {
             }
         } else {
             DialogFragment df = new DialogFragment() {
+                @NonNull
                 @Override
                 public Dialog onCreateDialog(Bundle savedInstanceState) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

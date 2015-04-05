@@ -18,11 +18,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import net.i2p.android.help.HelpActivity;
-import net.i2p.android.i2ptunnel.util.TunnelConfig;
+import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.I2PFragmentBase.RouterContextProvider;
 import net.i2p.android.router.R;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
+import net.i2p.i2ptunnel.ui.TunnelConfig;
 import net.i2p.router.RouterContext;
 
 import java.util.List;
@@ -231,7 +232,7 @@ public class TunnelListFragment extends ListFragment implements
         if (requestCode == TUNNEL_WIZARD_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Bundle tunnelData = data.getExtras().getBundle(TUNNEL_WIZARD_DATA);
-                TunnelConfig cfg = TunnelConfig.createFromWizard(getActivity(), mGroup, tunnelData);
+                TunnelConfig cfg = TunnelUtil.createConfigFromWizard(getActivity(), mGroup, tunnelData);
                 TunnelEntry tunnel = TunnelEntry.createNewTunnel(getActivity(), mGroup, cfg);
                 mAdapter.add(tunnel);
             }

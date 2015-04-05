@@ -5,10 +5,13 @@ android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
     buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
     defaultConfig {
-        versionCode 4745225
-        versionName '0.9.17.1'
+        versionCode 4745226
+        versionName '0.9.18'
         minSdkVersion 9
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+
+        // For Espresso
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
         release
@@ -24,8 +27,15 @@ android {
             versionNameSuffix '-DEBUG'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
     lintOptions {
         abortOnError false
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
     }
     productFlavors {
         free {
@@ -41,13 +51,26 @@ android {
 }
 
 dependencies {
+    // Local dependencies
     compile project(':routerjars')
     compile project(':client')
+
+    // Android Support Repository dependencies
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:recyclerview-v7:21.0.3'
+
+    // Remote dependencies
     compile 'net.i2p.android.ext:floatingactionbutton:1.8.0'
     compile files('libs/androidplot-core-0.6.1.jar')
+
+    compile ('com.android.support:support-v4-preferencefragment:1.0.0@aar'){
+        exclude module: 'support-v4'
+    }
+
+    // Testing-only dependencies
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
 }
 
 dependencyVerification {
@@ -56,6 +79,7 @@ dependencyVerification {
             'com.android.support:appcompat-v7:5dbeb5316d0a6027d646ae552804c3baa5e3bd53f7f33db50904d51505c8a0e5',
             'com.android.support:recyclerview-v7:e525ad3f33c84bb12b73d2dc975b55364a53f0f2d0697e043efba59ba73e22d2',
             'net.i2p.android.ext:floatingactionbutton:a20d1f0cae15f8965b81486ba31245937968ae6ee5fa6e8a3ea21d7f6c6243ab',
+            'com.android.support:support-v4-preferencefragment:5470f5872514a6226fa1fc6f4e000991f38805691c534cf0bd2778911fc773ad',
     ]
 }
 

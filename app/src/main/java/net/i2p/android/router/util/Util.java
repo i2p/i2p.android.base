@@ -13,6 +13,7 @@ import net.i2p.data.DataHelper;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.transport.TransportManager;
+import net.i2p.router.transport.udp.UDPTransport;
 import net.i2p.util.OrderedProperties;
 
 import java.io.File;
@@ -20,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -124,42 +126,46 @@ public abstract class Util implements I2PConstants {
         }
     }
 
+    /** copied from various private components */
+    final static String PROP_I2NP_NTCP_PORT = "i2np.ntcp.port";
+    final static String PROP_I2NP_NTCP_AUTO_PORT = "i2np.ntcp.autoport";
+
     public static List<Properties> getPropertiesFromPreferences(Context context) {
-        List<Properties> pList = new ArrayList<Properties>();
+        List<Properties> pList = new ArrayList<>();
 
         // Copy prefs
         Properties routerProps = new OrderedProperties();
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-
         // List to store stats for graphing
-        List<String> statSummaries = new ArrayList<String>();
+        List<String> statSummaries = new ArrayList<>();
+
+        // Properties to remove
+        Properties toRemove = new OrderedProperties();
 
         // List to store Log settings
         Properties logSettings = new OrderedProperties();
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         Map<String, ?> all = preferences.getAll();
-        Iterator<String> iterator = all.keySet().iterator();
         // get values from the Map and make them strings.
         // This loop avoids needing to convert each one, or even know it's type, or if it exists yet.
-        while (iterator.hasNext()) {
-            String x = iterator.next();
-            if ( x.startsWith("stat.summaries.")) {
+        for (String x : all.keySet()) {
+            if (x.startsWith("stat.summaries.")) {
                 String stat = x.substring("stat.summaries.".length());
                 String checked = all.get(x).toString();
                 if (checked.equals("true")) {
                     statSummaries.add(stat);
                 }
-            } else if ( x.startsWith("logger.")) {
+            } else if (x.startsWith("logger.")) {
                 logSettings.put(x, all.get(x).toString());
             } else if (
                     x.equals("router.hiddenMode") ||
-                    x.equals("i2cp.disableInterface")) {
+                            x.equals("i2cp.disableInterface")) {
                 // special exception, we must invert the bool for these properties only.
                 String string = all.get(x).toString();
                 String inverted = Boolean.toString(!Boolean.parseBoolean(string));
                 routerProps.setProperty(x, inverted);
-            } else if ( !x.startsWith(ANDROID_PREF_PREFIX)) { // Skip over UI-related I2P Android settings
+            } else if (!x.startsWith(ANDROID_PREF_PREFIX)) { // Skip over UI-related I2P Android settings
                 String string = all.get(x).toString();
                 routerProps.setProperty(x, string);
             }
@@ -175,23 +181,40 @@ public abstract class Util implements I2PConstants {
             routerProps.setProperty("stat.summaries", buf.toString());
         }
 
+        // See net.i2p.router.web.ConfigNetHandler.saveChanges()
+        int udpPort = Integer.parseInt(routerProps.getProperty(UDPTransport.PROP_INTERNAL_PORT, "-1"));
+        if (udpPort <= 0)
+            routerProps.remove(UDPTransport.PROP_INTERNAL_PORT);
+        int ntcpPort = Integer.parseInt(routerProps.getProperty(PROP_I2NP_NTCP_PORT, "-1"));
+        boolean ntcpAutoPort = Boolean.parseBoolean(
+                routerProps.getProperty(PROP_I2NP_NTCP_AUTO_PORT, "true"));
+        if (ntcpPort <= 0 || ntcpAutoPort) {
+            routerProps.remove(PROP_I2NP_NTCP_PORT);
+            toRemove.setProperty(PROP_I2NP_NTCP_PORT, "");
+        }
+
         pList.add(routerProps);
+        pList.add(toRemove);
         pList.add(logSettings);
 
         return pList;
     }
 
     // propName -> defaultValue
-    private static HashMap<String, Boolean> booleanOptionsRequiringRestart = new HashMap<String, Boolean>();
-    private static HashMap<String, String> stringOptionsRequiringRestart = new HashMap<String, String>();
+    private static HashMap<String, Boolean> booleanOptionsRequiringRestart = new HashMap<>();
+    private static HashMap<String, String> stringOptionsRequiringRestart = new HashMap<>();
     static {
-        HashMap<String, Boolean> boolToAdd = new HashMap<String, Boolean>();
-        HashMap<String, String> strToAdd = new HashMap<String, String>();
+        HashMap<String, Boolean> boolToAdd = new HashMap<>();
+        HashMap<String, String> strToAdd = new HashMap<>();
 
         boolToAdd.put(TransportManager.PROP_ENABLE_UPNP, true);
         boolToAdd.put(TransportManager.PROP_ENABLE_NTCP, true);
         boolToAdd.put(TransportManager.PROP_ENABLE_UDP, true);
+        boolToAdd.put(PROP_I2NP_NTCP_AUTO_PORT, true);
         boolToAdd.put(Router.PROP_HIDDEN, false);
+
+        strToAdd.put(UDPTransport.PROP_INTERNAL_PORT, "-1");
+        strToAdd.put(PROP_I2NP_NTCP_PORT, "-1");
 
         booleanOptionsRequiringRestart.putAll(boolToAdd);
         stringOptionsRequiringRestart.putAll(strToAdd);
@@ -208,9 +231,10 @@ public abstract class Util implements I2PConstants {
      * </li></ul>
      *
      * @param props a Properties object containing the router.config
+     * @param toRemove a Collection of properties that will be removed
      * @return true if the router needs to be restarted.
      */
-    public static boolean checkAndCorrectRouterConfig(Context context, Properties props) {
+    public static boolean checkAndCorrectRouterConfig(Context context, Properties props, Collection<String> toRemove) {
         // Disable UPnP on mobile networks, ignoring user's configuration
         // TODO disabled until changes elsewhere are finished
         //if (Connectivity.isConnectedMobile(context)) {
@@ -224,17 +248,17 @@ public abstract class Util implements I2PConstants {
             for (Map.Entry<String, Boolean> option : booleanOptionsRequiringRestart.entrySet()) {
                 String propName = option.getKey();
                 boolean defaultValue = option.getValue();
-                restartRequired |= (
-                        Boolean.parseBoolean(props.getProperty(propName, Boolean.toString(defaultValue))) !=
-                                (defaultValue ? rCtx.getBooleanPropertyDefaultTrue(propName) : rCtx.getBooleanProperty(propName))
-                );
+                boolean currentValue = defaultValue ? rCtx.getBooleanPropertyDefaultTrue(propName) : rCtx.getBooleanProperty(propName);
+                boolean newValue = Boolean.parseBoolean(props.getProperty(propName, Boolean.toString(defaultValue)));
+                restartRequired |= (currentValue != newValue);
             }
             if (!restartRequired) { // Cut out now if we already know the answer
                 for (Map.Entry<String, String> option : stringOptionsRequiringRestart.entrySet()) {
                     String propName = option.getKey();
                     String defaultValue = option.getValue();
-                    restartRequired |= props.getProperty(propName, defaultValue).equals(
-                            rCtx.getProperty(propName, defaultValue));
+                    String currentValue = rCtx.getProperty(propName, defaultValue);
+                    String newValue = props.getProperty(propName, defaultValue);
+                    restartRequired |= !currentValue.equals(newValue);
                 }
             }
         }
@@ -255,7 +279,7 @@ public abstract class Util implements I2PConstants {
      *  @param props properties to set
      */
     public static void writePropertiesToFile(Context ctx, String dir, String file, Properties props) {
-        mergeResourceToFile(ctx, dir, file, 0, props);
+        mergeResourceToFile(ctx, dir, file, 0, props, null);
     }
 
     /**
@@ -266,8 +290,10 @@ public abstract class Util implements I2PConstants {
      *  @param file relative to dir
      *  @param resID the ID of the default resource, or 0
      *  @param userProps local properties or null
+     *  @param toRemove properties to remove, or null
      */
-    public static void mergeResourceToFile(Context ctx, String dir, String file, int resID, Properties userProps) {
+    public static void mergeResourceToFile(Context ctx, String dir, String file, int resID,
+                                           Properties userProps, Collection<String> toRemove) {
         InputStream fin = null;
         InputStream in = null;
 
@@ -296,6 +322,11 @@ public abstract class Util implements I2PConstants {
             // override with user settings
             if (userProps != null)
                 props.putAll(userProps);
+            if (toRemove != null) {
+                for (String key : toRemove) {
+                    props.remove(key);
+                }
+            }
 
             File path = new File(dir, file);
             DataHelper.storeProps(props, path);

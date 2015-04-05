@@ -3,6 +3,7 @@ package net.i2p.android.help;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 public class Browser implements Comparable<Browser> {
     public final String packageName;
@@ -55,7 +56,7 @@ public class Browser implements Comparable<Browser> {
     }
 
     @Override
-    public int compareTo(Browser browser) {
+    public int compareTo(@NonNull Browser browser) {
         // Sort order: supported -> unknown -> unsupported
         int a = getOrder(this);
         int b = getOrder(browser);

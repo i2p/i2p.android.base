@@ -8,7 +8,6 @@
   <string name="label_tunnels">Túneles</string>
   <string name="label_status">Estado</string>
   <string name="label_addressbook">Libreta de direcciones</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">Túneles de cliente</string>
   <string name="label_i2ptunnel_server">Túneles de servidor</string>
   <string name="label_logs">Registros</string>
@@ -69,6 +68,8 @@
   <string name="settings_enable">Activar</string>
   <string name="settings_desc_subscriptions">URLs de subscripción</string>
   <string name="settings_label_bandwidth_net">Ancho de banda y red</string>
+  <string name="settings_label_startOnBoot">Iniciar I2P al arrancar</string>
+  <string name="settings_desc_startOnBoot">Conectar automáticamente a I2P cuando arranque su dispositivo Android</string>
   <string name="settings_label_bandwidth">Ancho de banda</string>
   <string name="settings_label_bw_inbound">Velocidad de descarga</string>
   <string name="settings_desc_bw_inbound">Velocidad máxima de descarga</string>
@@ -109,6 +110,7 @@
   <string name="settings_label_expl_backupQuantity">Cantidad de respaldos</string>
   <string name="settings_summ_expl_backupQuantity">%s túneles</string>
   <string name="settings_desc_expl_backupQuantity">Cuantos túneles de respaldo</string>
+  <string name="settings_need_transport_enabled">Debe tener al menos un transporte habilitado</string>
   <string name="settings_router_restart_required">Por favor reinicie I2P para aplicar los cambios</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_version">Versión:</string>
@@ -191,4 +193,5 @@
   <string name="error_logs_copied_to_clipboard">Los registros (logs) de errores se copiaron al portapapeles</string>
   <string name="logs_copied_to_clipboard">Los registros (logs) se copiaron al portapapeles</string>
   <string name="label_browser_configuration">Configuración del navegador</string>
+  <string name="unset">No configurado</string>
 </resources>

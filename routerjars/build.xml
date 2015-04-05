@@ -15,12 +15,13 @@
         </condition>
     </fail>
     <echo message="Using I2P source at ${i2pbase}" />
+    <property name="i2plib" location="${i2pbase}/build" />
 
-    <available property="have.streaming" file="${i2pbase}/build/streaming.jar" />
-    <available property="have.router" file="${i2pbase}/build/router.jar" />
-    <available property="have.bob" file="${i2pbase}/apps/BOB/dist/BOB.jar" />
-    <available property="have.i2ptunnel" file="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" />
-    <available property="have.addressbook" file="${i2pbase}/apps/addressbook/dist/addressbook.jar" />
+    <available property="have.streaming" file="${i2plib}/streaming.jar" />
+    <available property="have.router" file="${i2plib}/router.jar" />
+    <available property="have.bob" file="${i2plib}/BOB.jar" />
+    <available property="have.i2ptunnel" file="${i2plib}/i2ptunnel-ui.jar" />
+    <available property="have.addressbook" file="${i2plib}/addressbook.jar" />
 
     <!-- builds core, ministreaming and streaming -->
     <target name="buildStreaming" unless="have.streaming">
@@ -32,7 +33,7 @@
     </target>
 
     <target name="buildI2PTunnelJar" unless="have.i2ptunnel">
-        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildI2PTunnelJar" />
+        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildI2PTunnelJars" />
     </target>
     <target name="buildAddressbook" unless="have.addressbook">
         <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildAddressbookJar" />
@@ -43,44 +44,44 @@
     </target>
 
     <target name="buildclient" depends="buildStreaming">
+        <mkdir dir="${jar.libs.dir}" />
 
         <!-- core -->
         <!-- lots of unneeded stuff could be deleted here -->
         <jar destfile="${jar.libs.dir}/i2p.jar" >
-            <zipfileset src="${i2pbase}/build/i2p.jar" >
+            <zipfileset src="${i2plib}/i2p.jar" >
                 <exclude name="net/i2p/client/DomainSocketFactory.class" />
                 <exclude name="net/i2p/util/LogWriter.class" />
             </zipfileset>
         </jar>
 
         <!-- streaming -->
-        <copy file="${i2pbase}/apps/ministreaming/java/build/mstreaming.jar" todir="${jar.libs.dir}" />
-        <copy file="${i2pbase}/apps/streaming/java/build/streaming.jar" todir="${jar.libs.dir}" />
+        <copy file="${i2plib}/mstreaming.jar" todir="${jar.libs.dir}" />
+        <copy file="${i2plib}/streaming.jar" todir="${jar.libs.dir}" />
 
     </target>
 
     <target name="buildrouter" depends="buildRouter, buildI2PTunnelJar, buildAddressbook, buildBOB">
+        <mkdir dir="${jar.libs.dir}" />
 
         <!-- router -->
-        <copy file="${i2pbase}/build/router.jar" todir="${jar.libs.dir}" />
+        <copy file="${i2plib}/router.jar" todir="${jar.libs.dir}" />
 
         <!-- i2ptunnel -->
-        <jar destfile="${jar.libs.dir}/i2ptunnel.jar" >
-            <zipfileset src="${i2pbase}/apps/i2ptunnel/java/build/i2ptunnel.jar" >
-                <exclude name="net/i2p/i2ptunnel/I2PTunnelGUI.class" />
-            </zipfileset>
-        </jar>
+        <copy file="${i2plib}/i2ptunnel.jar" todir="${jar.libs.dir}" />
+        <copy file="${i2plib}/i2ptunnel-ui.jar" todir="${jar.libs.dir}" />
 
         <!-- addressbook -->
-        <copy file="${i2pbase}/apps/addressbook/dist/addressbook.jar" todir="${jar.libs.dir}" />
+        <copy file="${i2plib}/addressbook.jar" todir="${jar.libs.dir}" />
 
         <!-- bob -->
-        <copy file="${i2pbase}/apps/BOB/dist/BOB.jar" todir="${jar.libs.dir}" />
+        <copy file="${i2plib}/BOB.jar" todir="${jar.libs.dir}" />
 
     </target>
 
     <target name="clean">
         <ant dir="${i2pbase}" target="clean" />
+        <delete dir="${jar.libs.dir}" />
     </target>
 
 </project>

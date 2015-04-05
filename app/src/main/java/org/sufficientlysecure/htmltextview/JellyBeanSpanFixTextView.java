@@ -17,15 +17,15 @@
 
 package org.sufficientlysecure.htmltextview;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p/>
@@ -157,10 +157,7 @@ public class JellyBeanSpanFixTextView extends TextView {
     }
 
     private boolean isNotSpace(CharSequence text, int where) {
-        if (where < 0) {
-            return true;
-        }
-        return text.charAt(where) != ' ';
+        return where < 0 || text.charAt(where) != ' ';
     }
 
     private void setTextAndMeasure(CharSequence text, int widthMeasureSpec, int heightMeasureSpec) {

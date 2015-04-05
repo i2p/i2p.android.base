@@ -1,24 +1,27 @@
 package net.i2p.android.router.dialog;
 
-import net.i2p.android.router.I2PActivityBase;
-import net.i2p.android.router.MainFragment;
-import net.i2p.android.router.R;
-import net.i2p.android.router.util.Util;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+
+import net.i2p.android.router.I2PActivityBase;
+import net.i2p.android.router.MainFragment;
+import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
 
 public class VersionDialog extends DialogFragment {
     public static final String DIALOG_TYPE = "dialog_type";
     public static final int DIALOG_NEW_INSTALL = 0;
     public static final int DIALOG_NEW_VERSION = 1;
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle SavedInstanceState) {
         final String currentVersion = Util.getOurVersion(getActivity());
-        Dialog rv = null;
+        Dialog rv;
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
         int id = getArguments().getInt(DIALOG_TYPE);
         switch(id) {
@@ -53,6 +56,7 @@ public class VersionDialog extends DialogFragment {
                 break;
 
             case DIALOG_NEW_VERSION:
+            default:
                 b.setMessage(getResources().getString(R.string.welcome_new_version) +
                              " " + currentVersion)
                  .setCancelable(true)

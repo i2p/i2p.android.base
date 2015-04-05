@@ -4,6 +4,9 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
+
+import net.i2p.android.router.provider.CacheProvider;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,7 +17,6 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import net.i2p.android.router.provider.CacheProvider;
 
 /**
  *  A least recently used cache with a max number of entries
@@ -32,7 +34,7 @@ public class AppCache {
     /** the LRU cache */
     private final Map<Integer, Object> _cache;
 
-    private static final Integer DUMMY = Integer.valueOf(0);
+    private static final Integer DUMMY = 0;
     private static final String DIR_NAME = "appCache";
     /** fragment into this many subdirectories */
     private static final int NUM_DIRS = 32;
@@ -89,7 +91,7 @@ public class AppCache {
     public Uri addCacheFile(Uri key, boolean setAsCurrentBase) {
         int hash = toHash(key);
         synchronized(_cache) {
-            _cache.put(Integer.valueOf(hash), DUMMY);
+            _cache.put(hash, DUMMY);
         }
         // file:/// uri
         //return Uri.fromFile(toFile(hash)).toString();
@@ -104,7 +106,7 @@ public class AppCache {
     public void removeCacheFile(Uri key) {
         int hash = toHash(key);
         synchronized(_cache) {
-            _cache.remove(Integer.valueOf(hash));
+            _cache.remove(hash);
         }
         deleteContent(key);
     }
@@ -121,7 +123,7 @@ public class AppCache {
         // poke the LRU
         Object present;
         synchronized(_cache) {
-            present = _cache.get(Integer.valueOf(hash));
+            present = _cache.get(hash);
         }
         if (present != null)
             setAsCurrentBase(key);
@@ -173,17 +175,16 @@ public class AppCache {
         File[] files = dir.listFiles();
         if (files == null)
             return 0;
-        for (int i = 0; i < files.length; i++) {
-             File f = files[i];
-             if (f.isDirectory()) {
-                 rv += enumerate(f, fileList);
-             } else {
-                 long len = f.length();
-                 if (len > 0) {
-                     fileList.add(f);
-                     rv += len;
+        for (File f : files) {
+            if (f.isDirectory()) {
+                rv += enumerate(f, fileList);
+            } else {
+                long len = f.length();
+                if (len > 0) {
+                    fileList.add(f);
+                    rv += len;
                 } else {
-                     f.delete();
+                    f.delete();
                 }
             }
         }
@@ -195,7 +196,7 @@ public class AppCache {
         try {
             int hash = toHash(f);
             synchronized(_cache) {
-                _cache.put(Integer.valueOf(hash), DUMMY);
+                _cache.put(hash, DUMMY);
             }
         } catch (IllegalArgumentException iae) {
             Util.d("Huh bad file?" + iae);
@@ -294,7 +295,7 @@ public class AppCache {
         @Override
         public Object put(Integer key, Object value) {
             Object rv = super.put(key, value);
-            File f = toFile(key.intValue());
+            File f = toFile(key);
             if (f.exists()) {
                 _totalSize += f.length();
             }
@@ -306,7 +307,7 @@ public class AppCache {
         public Object remove(Object key) {
             Object rv = super.remove(key);
             if ( /* rv != null && */ key instanceof Integer) {
-                File f = toFile(((Integer)key).intValue());
+                File f = toFile((Integer) key);
                 if (f.exists()) {
                     _totalSize -= f.length();
                     f.delete();

@@ -45,7 +45,7 @@
         <activity
             android:name=".NewsActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:label="I2P News"
+            android:label="@string/label_news"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -53,7 +53,7 @@
         </activity>
         <activity
             android:name="net.i2p.android.help.HelpActivity"
-            android:label="Help"
+            android:label="@string/menu_help"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -61,7 +61,7 @@
         </activity>
         <activity
             android:name="net.i2p.android.help.BrowserConfigActivity"
-            android:label="Browser Configuration"
+            android:label="@string/label_browser_configuration"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -69,7 +69,7 @@
         </activity>
         <activity
             android:name=".LicenseActivity"
-            android:label="I2P License Information"
+            android:label="@string/label_licenses"
             android:parentActivityName="net.i2p.android.help.HelpActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -94,7 +94,7 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="I2P Settings"
+            android:label="@string/menu_settings"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -111,7 +111,7 @@
         </activity>
         <activity
             android:name=".addressbook.AddressbookActivity"
-            android:label="Addressbook"
+            android:label="@string/label_addressbook"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -135,7 +135,7 @@
         </activity>
         <activity
             android:name="net.i2p.android.i2ptunnel.TunnelListActivity"
-            android:label="I2PTunnel"
+            android:label="@string/label_i2ptunnel"
             android:launchMode="singleTop"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -148,7 +148,15 @@
             android:parentActivityName="net.i2p.android.i2ptunnel.TunnelListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.i2p.android.router.i2ptunnel.TunnelListActivity" />
+                android:value="net.i2p.android.i2ptunnel.TunnelListActivity" />
+        </activity>
+        <activity
+            android:name="net.i2p.android.i2ptunnel.EditTunnelActivity"
+            android:label="@string/edit_tunnel"
+            android:parentActivityName="net.i2p.android.i2ptunnel.TunnelDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.i2p.android.i2ptunnel.TunnelDetailActivity" />
         </activity>
         <activity
             android:name="net.i2p.android.i2ptunnel.TunnelWizardActivity"

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceScreen
+        android:key="@string/TUNNEL_CAT_ADVANCED"
+        android:title="@string/settings_label_advanced">
+
+        <PreferenceCategory
+            android:key="@string/TUNNEL_CAT_TUNNEL_PARAMS"
+            android:title="@string/tunnel_parameters">
+
+            <net.i2p.android.router.util.IntListPreference
+                android:defaultValue="@integer/DEFAULT_TUNNEL_LENGTH"
+                android:dialogTitle="@string/settings_desc_expl_length"
+                android:entries="@array/setting0to3"
+                android:entryValues="@array/setting0to3"
+                android:key="@string/TUNNEL_OPT_LENGTH"
+                android:summary="@string/settings_summ_expl_length"
+                android:title="@string/settings_label_expl_length" />
+
+            <net.i2p.android.router.util.IntListPreference
+                android:defaultValue="@integer/DEFAULT_TUNNEL_VARIANCE"
+                android:dialogTitle="@string/settings_desc_expl_lengthVariance"
+                android:entries="@array/setting2to2"
+                android:entryValues="@array/setting2to2"
+                android:key="@string/TUNNEL_OPT_VARIANCE"
+                android:summary="@string/settings_summ_expl_lengthVariance"
+                android:title="@string/settings_label_expl_lengthVariance" />
+
+            <net.i2p.android.router.util.IntListPreference
+                android:defaultValue="@integer/DEFAULT_TUNNEL_QUANTITY"
+                android:dialogTitle="@string/settings_desc_expl_quantity"
+                android:entries="@array/setting0to3"
+                android:entryValues="@array/setting0to3"
+                android:key="@string/TUNNEL_OPT_QUANTITY"
+                android:summary="@string/settings_summ_expl_quantity"
+                android:title="@string/settings_label_expl_quantity" />
+
+            <net.i2p.android.router.util.IntListPreference
+                android:defaultValue="@integer/DEFAULT_TUNNEL_BACKUP_QUANTITY"
+                android:dialogTitle="@string/settings_desc_expl_backupQuantity"
+                android:entries="@array/setting0to3"
+                android:entryValues="@array/setting0to3"
+                android:key="@string/TUNNEL_OPT_BACKUP_QUANTITY"
+                android:summary="@string/settings_summ_expl_backupQuantity"
+                android:title="@string/settings_label_expl_backupQuantity" />
+
+            <ListPreference
+                android:entries="@array/tunnel_profile_names"
+                android:entryValues="@array/tunnel_profiles"
+                android:key="@string/TUNNEL_OPT_PROFILE"
+                android:title="@string/profile" />
+
+            <CheckBoxPreference
+                android:key="@string/TUNNEL_OPT_DELAY_CONNECT"
+                android:summary="@string/tunnel_summ_delay_connect"
+                android:title="@string/delay_connect" />
+
+        </PreferenceCategory>
+
+    </PreferenceScreen>
+
+</PreferenceScreen>

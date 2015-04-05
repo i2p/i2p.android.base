@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- net.i2p.router.transport.FIFOBandwidthRefiller -->
+    <string name="PROP_INBOUND_BANDWIDTH">i2np.bandwidth.inboundKBytesPerSecond</string>
+    <string name="PROP_OUTBOUND_BANDWIDTH">i2np.bandwidth.outboundKBytesPerSecond</string>
+
+    <!-- net.i2p.router.transport.TransportManager -->
+    <string name="PROP_ENABLE_UPNP">i2np.upnp.enable</string>
+    <string name="PROP_ENABLE_UDP">i2np.udp.enable</string>
+    <string name="PROP_ENABLE_NTCP">i2np.ntcp.enable</string>
+    <!-- net.i2p.router.transport.udp.UDPTransport -->
+    <string name="PROP_UDP_INTERNAL_PORT">i2np.udp.internalPort</string>
+    <!-- net.i2p.router.transport.ntcp.NTCPTransport -->
+    <string name="PROP_I2NP_NTCP_AUTO_PORT">i2np.ntcp.autoport</string>
+    <string name="PROP_I2NP_NTCP_PORT">i2np.ntcp.port</string>
+    <!-- net.i2p.router.transport.TransportImpl.getMaxConnections() -->
+    <string name="PROP_UDP_MAX_CONNECTIONS">i2np.udp.maxConnections</string>
+    <string name="PROP_NTCP_MAX_CONNECTIONS">i2np.ntcp.maxConnections</string>
+
+    <!-- net.i2p.router.TunnelPoolSettings -->
+    <!-- Inbound exploratory tunnels -->
+    <string name="PROP_INBOUND_EXPLORATORY_LENGTH">router.inboundPool.length</string>
+    <string name="PROP_INBOUND_EXPLORATORY_LENGTH_VARIANCE">router.inboundPool.lengthVariance</string>
+    <string name="PROP_INBOUND_EXPLORATORY_QUANTITY">router.inboundPool.quantity</string>
+    <string name="PROP_INBOUND_EXPLORATORY_BACKUP_QUANTITY">router.inboundPool.backupQuantity</string>
+    <!-- Outbound exploratory tunnels -->
+    <string name="PROP_OUTBOUND_EXPLORATORY_LENGTH">router.outboundPool.length</string>
+    <string name="PROP_OUTBOUND_EXPLORATORY_LENGTH_VARIANCE">router.outboundPool.lengthVariance</string>
+    <string name="PROP_OUTBOUND_EXPLORATORY_QUANTITY">router.outboundPool.quantity</string>
+    <string name="PROP_OUTBOUND_EXPLORATORY_BACKUP_QUANTITY">router.outboundPool.backupQuantity</string>
+
+    <!-- net.i2p.util.LogManager -->
+    <string name="PROP_DEFAULTLEVEL">logger.defaultLevel</string>
+</resources>

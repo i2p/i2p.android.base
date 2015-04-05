@@ -5,7 +5,7 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import net.i2p.android.router.R;
+
 import net.i2p.android.router.dialog.TextResourceDialog;
 
 public class LicenseFragment extends ListFragment {
@@ -28,7 +28,7 @@ public class LicenseFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, names));
+        setListAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, names));
     }
 
     @Override

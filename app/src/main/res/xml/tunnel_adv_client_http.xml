@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/http_client">
+
+        <CheckBoxPreference
+            android:key="@string/TUNNEL_OPT_HTTPCLIENT_PASS_UA"
+            android:summary="@string/tunnel_summ_user_agent"
+            android:title="User-Agent" />
+
+        <CheckBoxPreference
+            android:key="@string/TUNNEL_OPT_HTTPCLIENT_PASS_REFERER"
+            android:summary="@string/tunnel_summ_referer"
+            android:title="Referer" />
+
+        <CheckBoxPreference
+            android:key="@string/TUNNEL_OPT_HTTPCLIENT_PASS_ACCEPT"
+            android:summary="@string/tunnel_summ_accept"
+            android:title="Accept" />
+
+        <CheckBoxPreference
+            android:key="@string/TUNNEL_OPT_HTTPCLIENT_ALLOW_SSL"
+            android:summary="@string/tunnel_summ_allow_ssl"
+            android:title="SSL" />
+
+        <EditTextPreference
+            android:defaultValue="@string/DEFAULT_JUMP_LIST"
+            android:inputType="textMultiLine"
+            android:key="@string/TUNNEL_OPT_JUMP_LIST"
+            android:title="@string/jump_url_list" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

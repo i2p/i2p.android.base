@@ -60,7 +60,7 @@ JBIGI="$I2PBASE/core/c/jbigi"
 # libcrypto crashes on emulator, don't trust it
 # jbigi about 20-25% slower than java on emulator
 #
-GMPVER=6.0.0
+GMPVER=4.3.2
 GMP="$JBIGI/gmp-$GMPVER"
 
 if [ ! -d "$GMP" ]; then

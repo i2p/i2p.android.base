@@ -7,7 +7,6 @@
   <string name="label_tunnels">Тунелі</string>
   <string name="label_status">Статус</string>
   <string name="label_addressbook">Адресна книга</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">Клієнтські тунелі</string>
   <string name="label_i2ptunnel_server">Серверні тунелі</string>
   <string name="label_logs">Журнали</string>

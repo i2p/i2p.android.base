@@ -1,18 +1,19 @@
 package net.i2p.android.router.netdb;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 
 import net.i2p.data.Hash;
 import net.i2p.data.router.RouterAddress;
 import net.i2p.data.router.RouterInfo;
 import net.i2p.router.RouterContext;
 import net.i2p.util.ObjectCounter;
-import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class NetDbStatsLoader extends AsyncTaskLoader<List<ObjectCounter<String>>> {
     private RouterContext mRContext;
@@ -31,16 +32,16 @@ public class NetDbStatsLoader extends AsyncTaskLoader<List<ObjectCounter<String>
 
     @Override
     public List<ObjectCounter<String>> loadInBackground() {
-        List<ObjectCounter<String>> ret = new ArrayList<ObjectCounter<String>>();
+        List<ObjectCounter<String>> ret = new ArrayList<>();
 
-        ObjectCounter<String> versions = new ObjectCounter<String>();
-        ObjectCounter<String> countries = new ObjectCounter<String>();
-        ObjectCounter<String> transports = new ObjectCounter<String>();
+        ObjectCounter<String> versions = new ObjectCounter<>();
+        ObjectCounter<String> countries = new ObjectCounter<>();
+        ObjectCounter<String> transports = new ObjectCounter<>();
 
         if (mRContext != null && mRContext.netDb() != null && mRContext.netDb().isInitialized()) {
             Hash us = mRContext.routerHash();
 
-            Set<RouterInfo> routers = new TreeSet<RouterInfo>(new RouterInfoComparator());
+            Set<RouterInfo> routers = new TreeSet<>(new RouterInfoComparator());
             routers.addAll(mRContext.netDb().getRouters());
             for (RouterInfo ri : routers) {
                 Hash key = ri.getHash();

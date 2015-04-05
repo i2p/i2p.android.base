@@ -24,6 +24,7 @@ artifacts {
 
     'default' file: file('libs/router.jar'), builtBy: buildRouter
     'default' file: file('libs/i2ptunnel.jar'), builtBy: buildRouter
+    'default' file: file('libs/i2ptunnel-ui.jar'), builtBy: buildRouter
     'default' file: file('libs/addressbook.jar'), builtBy: buildRouter
     'default' file: file('libs/BOB.jar'), builtBy: buildRouter
 }

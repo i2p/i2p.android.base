@@ -8,7 +8,6 @@
   <string name="label_tunnels">Tunnel</string>
   <string name="label_status">Stato</string>
   <string name="label_addressbook">Rubrica</string>
-  <string name="label_i2ptunnel">I2PTunnel</string>
   <string name="label_i2ptunnel_client">I tunnel del client</string>
   <string name="label_i2ptunnel_server">I tunnel del server</string>
   <string name="label_logs">Logs</string>
@@ -25,7 +24,11 @@
   <string name="button_router_off">Tieni premuto per avviare I2P</string>
   <string name="button_router_on">I2P è in funzione (tieni premuto per fermare)</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">S</string>
+  <string name="configure_browser_title">Configurare il browser?</string>
+  <string name="configure_browser_for_i2p">Vuoi configurare il tuo browser per visualizzare siti I2P? (Puoi anche farlo in seguito dal menù di aiuto)</string>
   <string name="first_start_title">Congratulazioni per aver installato I2P!</string>
   <string name="first_start_welcome"><b>Benvenuto su I2P!</b> <b>Sii paziente</b> mentre I2P si avvia e trova i peer.</string>
   <string name="first_start_read">Mentre aspetti, puoi leggere le note di rilascio e la pagina di benvenuto.</string>
@@ -64,6 +67,8 @@
   <string name="settings_enable">Attiva</string>
   <string name="settings_desc_subscriptions">URL sottoscrizioni</string>
   <string name="settings_label_bandwidth_net">Ampiezza di banda e rete.</string>
+  <string name="settings_label_startOnBoot">Fai partire I2P all\'avvio</string>
+  <string name="settings_desc_startOnBoot">Connettiti automaticamente ad I2P all\'accensione del dispositivo</string>
   <string name="settings_label_bandwidth">Larghezza di banda</string>
   <string name="settings_label_bw_inbound">Velocità in entrata</string>
   <string name="settings_desc_bw_inbound">Velocità massima in entrata</string>
@@ -104,6 +109,7 @@
   <string name="settings_label_expl_backupQuantity">Quantità di backup</string>
   <string name="settings_summ_expl_backupQuantity">%s tunnel</string>
   <string name="settings_desc_expl_backupQuantity">Quantità di backup di tunnel</string>
+  <string name="settings_router_restart_required">Per favore, riavvia I2P per applicare le modifiche</string>
   <string name="menu_about">Informazioni su</string>
   <string name="about_version">Versione:</string>
   <string name="about_project">Pagina principale del progetto:</string>
@@ -134,6 +140,8 @@
   <string name="i2ptunnel_type_streamrclient">Client di Streamr</string>
   <string name="i2ptunnel_type_streamrserver">Server streamr </string>
   <string name="i2ptunnel_type_httpbidirserver">HTTP bidirezionale</string>
+  <string name="install_recommended_app">Vuoi installare l\'applicazione raccomandata?</string>
+  <string name="app_needed_for_this_tunnel_type">Hai bisogno di installare una applicazione per utilizzare questo tunnel. Vuoi installare l\'applicazione raccomandata?</string>
   <string name="i2ptunnel_not_initialized">I tunnel non sono ancora stati inizializzati, prova a ricaricare tra un paio di minuti.</string>
   <string name="i2ptunnel_new_tunnel">Nuovo tunnel</string>
   <string name="i2ptunnel_msg_config_saved">Modifiche alla configurazione salvate.</string>
@@ -176,4 +184,5 @@
   <string name="i2ptunnel_view_target">Destinazione:</string>
   <string name="i2ptunnel_view_access_point">Punto di accesso:</string>
   <string name="i2ptunnel_view_autostart">Avvio automatico</string>
+  <string name="label_browser_configuration">Configurazione del browser</string>
 </resources>

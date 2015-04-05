@@ -124,8 +124,7 @@ class InitActivities {
             File certificates = new File(myDir, "certificates");
             File[] allcertificates = certificates.listFiles();
             if ( allcertificates != null) {
-                for (int i = 0; i < allcertificates.length; i++) {
-                    File f = allcertificates[i];
+                for (File f : allcertificates) {
                     Util.d("Deleting old certificate file/dir " + f);
                     FileUtil.rmdir(f, false);
                 }
@@ -233,7 +232,7 @@ class InitActivities {
      *  @param overrides local overrides or null
      */
     private void mergeResourceToFile(int resID, String f, Properties overrides) {
-        Util.mergeResourceToFile(ctx, myDir, f, resID, overrides);
+        Util.mergeResourceToFile(ctx, myDir, f, resID, overrides, null);
     }
 
     /**
