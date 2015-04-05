@@ -423,8 +423,11 @@ public class MainFragment extends I2PFragmentBase {
         TableLayout dests = (TableLayout) getView().findViewById(R.id.main_tunnels);
         dests.removeAllViews();
 
-        List<Destination> clients = new ArrayList<Destination>(ctx.clientManager().listClients());
-        if (!clients.isEmpty()) {
+        List<Destination> clients = null;
+        if (ctx.clientManager() != null)
+            clients = new ArrayList<Destination>(ctx.clientManager().listClients());
+
+        if (clients != null && !clients.isEmpty()) {
             Collections.sort(clients, new AlphaComparator(ctx));
             for (Destination client : clients) {
                 String name = getName(ctx, client);
