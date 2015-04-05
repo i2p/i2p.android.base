@@ -1,5 +1,8 @@
 0.9.19
+ * Made internal state handling more stable
+ * Added graceful shutdown support
  * Improved logging
+ * Bug fixes and translation updates
 
 0.9.18 / 2015-03-04 / c2f4831a1617f4ce716a08640446fdd992c751ff
  * I2P can start automatically when phone boots (configure in Setting)
