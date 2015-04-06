@@ -125,6 +125,10 @@ public class AddressbookFragment extends Fragment implements
         // Set the adapter for the list view
         mAdapter = new AddressEntryAdapter(getActivity(), mCallback);
         mRecyclerView.setAdapter(mAdapter);
+
+        // Initialize the adapter in case the RouterService has not been created
+        if (Util.getRouterContext() == null)
+            mAdapter.setAddresses(null);
     }
 
     @Override
@@ -162,6 +166,7 @@ public class AddressbookFragment extends Fragment implements
                 state == State.MANUAL_QUITTED)
             getLoaderManager().destroyLoader(loaderId);
         else {
+            mRecyclerView.setLoading(true);
             getLoaderManager().initLoader(loaderId, null, this);
         }
     }
@@ -170,8 +175,8 @@ public class AddressbookFragment extends Fragment implements
     public void onResume() {
         super.onResume();
 
-        getLoaderManager().initLoader(PRIVATE_BOOK.equals(mBook) ?
-                PRIVATE_LOADER_ID : ROUTER_LOADER_ID, null, this);
+        // Triggers loader init via updateState() if the router is running
+        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
     }
 
     @Override
