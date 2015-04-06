@@ -15,6 +15,9 @@
 - Browser
     <zzzccc> Bug report: i2p browser treats 302 as an error
     <zzzccc> Bug 2: rotate screen in i2p browser seems to go back one page
+- Console lights go out when navigating from addresses tab (tab or swipe)
+- Better handling of FABs obscuring content
+    <psi> str4d: the + button on the tunnels screen gets in the way of opening kytv's irc tunnel
 
 # Short-term
 
