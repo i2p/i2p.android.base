@@ -1,6 +1,7 @@
 package net.i2p.android.router.addressbook;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.i2p.android.router.R;
+import net.i2p.android.util.AlphanumericHeaderAdapter;
 
 import java.util.List;
 
-public class AddressEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AddressEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements
+        AlphanumericHeaderAdapter.SortedAdapter {
     private Context mCtx;
     private AddressbookFragment.OnAddressSelectedListener mListener;
     private List<AddressEntry> mAddresses;
@@ -27,6 +30,7 @@ public class AddressEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         super();
         mCtx = context;
         mListener = listener;
+        setHasStableIds(true);
     }
 
     public void setAddresses(List<AddressEntry> addresses) {
@@ -35,10 +39,21 @@ public class AddressEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public AddressEntry getAddress(int position) {
-        if (position < 0)
+        if (mAddresses == null || mAddresses.isEmpty() ||
+                position < 0 || position >= mAddresses.size())
             return null;
 
         return mAddresses.get(position);
+    }
+
+    @NonNull
+    @Override
+    public String getSortString(int position) {
+        AddressEntry address = getAddress(position);
+        if (address == null)
+            return "";
+
+        return address.getHostName();
     }
 
     @Override
@@ -101,5 +116,13 @@ public class AddressEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return 1;
 
         return mAddresses.size();
+    }
+
+    public long getItemId(int position) {
+        AddressEntry address = getAddress(position);
+        if (address == null)
+            return Integer.MAX_VALUE;
+
+        return address.hashCode();
     }
 }

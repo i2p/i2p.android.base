@@ -18,4 +18,14 @@ public class AddressEntry {
     public Destination getDestination() {
         return mDest;
     }
+
+    /**
+     * See item 8 from Josh Bloch's "Effective Java".
+     *
+     * @return the hashcode of this AddressEntry
+     */
+    @Override
+    public int hashCode() {
+        return 37 * mHostName.hashCode() + mDest.hashCode();
+    }
 }

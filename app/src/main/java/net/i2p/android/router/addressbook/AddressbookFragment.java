@@ -22,6 +22,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
+import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import net.i2p.addressbook.Daemon;
@@ -30,6 +32,7 @@ import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.android.router.util.Util;
+import net.i2p.android.util.AlphanumericHeaderAdapter;
 import net.i2p.android.util.FragmentUtils;
 import net.i2p.android.widget.LoadingRecyclerView;
 import net.i2p.client.naming.NamingService;
@@ -125,6 +128,14 @@ public class AddressbookFragment extends Fragment implements
         // Set the adapter for the list view
         mAdapter = new AddressEntryAdapter(getActivity(), mCallback);
         mRecyclerView.setAdapter(mAdapter);
+
+        // Build item decoration and add it to the RecyclerView
+        StickyHeadersItemDecoration decoration = new StickyHeadersBuilder()
+                .setAdapter(mAdapter)
+                .setRecyclerView(mRecyclerView)
+                .setStickyHeadersAdapter(new AlphanumericHeaderAdapter(mAdapter))
+                .build();
+        mRecyclerView.addItemDecoration(decoration);
 
         // Initialize the adapter in case the RouterService has not been created
         if (Util.getRouterContext() == null)
