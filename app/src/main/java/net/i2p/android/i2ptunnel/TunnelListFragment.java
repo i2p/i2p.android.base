@@ -6,30 +6,38 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
+import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Util;
 import net.i2p.android.util.FragmentUtils;
+import net.i2p.android.widget.LoadingRecyclerView;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.router.RouterContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TunnelListFragment extends ListFragment implements
+public class TunnelListFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<List<TunnelEntry>> {
     public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";
+    public static final String IS_TWO_PANE = "is_two_pane";
 
     private static final int CLIENT_LOADER_ID = 1;
     private static final int SERVER_LOADER_ID = 2;
@@ -41,23 +49,21 @@ public class TunnelListFragment extends ListFragment implements
 
     OnTunnelSelectedListener mCallback;
     private TunnelControllerGroup mGroup;
+
+    private LoadingRecyclerView mRecyclerView;
     private TunnelEntryAdapter mAdapter;
     private boolean mClientTunnels;
-    /**
-     * The current activated item position. Only used on tablets.
-     */
-    private int mActivatedPosition = ListView.INVALID_POSITION;
-    private boolean mActivateOnItemClick = false;
 
     // Container Activity must implement this interface
     public interface OnTunnelSelectedListener {
         public void onTunnelSelected(int tunnelId);
     }
 
-    public static TunnelListFragment newInstance(boolean showClientTunnels) {
+    public static TunnelListFragment newInstance(boolean showClientTunnels, boolean isTwoPane) {
         TunnelListFragment f = new TunnelListFragment();
         Bundle args = new Bundle();
         args.putBoolean(TunnelListFragment.SHOW_CLIENT_TUNNELS, showClientTunnels);
+        args.putBoolean(TunnelListFragment.IS_TWO_PANE, isTwoPane);
         f.setArguments(args);
         return f;
     }
@@ -81,37 +87,49 @@ public class TunnelListFragment extends ListFragment implements
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_list, container, false);
+
+        mRecyclerView = (LoadingRecyclerView) v.findViewById(R.id.list);
+        View empty = v.findViewById(R.id.empty);
+        ProgressWheel loading = (ProgressWheel) v.findViewById(R.id.loading);
+        mRecyclerView.setLoadingView(empty, loading);
+
+        return v;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // Restore the previously serialized activated item position.
-        if (savedInstanceState != null
-                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-            setActivatedPosition(savedInstanceState
-                    .getInt(STATE_ACTIVATED_POSITION));
-        }
-
-        // When setting CHOICE_MODE_SINGLE, ListView will automatically
-        // give items the 'activated' state when touched.
-        getListView().setChoiceMode(
-                mActivateOnItemClick ? ListView.CHOICE_MODE_SINGLE
-                        : ListView.CHOICE_MODE_NONE);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mAdapter = new TunnelEntryAdapter(getActivity());
         mClientTunnels = getArguments().getBoolean(SHOW_CLIENT_TUNNELS);
+        boolean isTwoPane = getArguments().getBoolean(IS_TWO_PANE);
 
-        setListAdapter(mAdapter);
+        mRecyclerView.setHasFixedSize(true);
 
+        // use a linear layout manager
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // Set the adapter for the list view
+        mAdapter = new TunnelEntryAdapter(getActivity(), mClientTunnels, mCallback, isTwoPane);
+        mRecyclerView.setAdapter(mAdapter);
+
+        // Restore the previously serialized activated item position.
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION))
+            mAdapter.setActivatedPosition(savedInstanceState
+                    .getInt(STATE_ACTIVATED_POSITION));
+        else
+            mAdapter.clearActivatedPosition();
+
+        // Initialize the adapter in case the RouterService has not been created
         if (Util.getRouterContext() == null)
-            setEmptyText(getResources().getString(
-                    R.string.router_not_running));
-        else {
-            initTunnels();
-        }
+            mAdapter.setTunnels(null);
     }
 
     @Override
@@ -144,33 +162,23 @@ public class TunnelListFragment extends ListFragment implements
                 state == State.MANUAL_STOPPED ||
                 state == State.MANUAL_QUITTING ||
                 state == State.MANUAL_QUITTED)
-            setEmptyText(getResources().getString(
-                    R.string.router_not_running));
+            getLoaderManager().destroyLoader(mClientTunnels ? CLIENT_LOADER_ID : SERVER_LOADER_ID);
         else
             initTunnels();
     }
 
     private void initTunnels() {
         if (mGroup == null) {
-            String error = null;
             try {
                 mGroup = TunnelControllerGroup.getInstance();
             } catch (IllegalArgumentException iae) {
+                Util.e("Could not load tunnels", iae);
                 mGroup = null;
-                error = iae.toString();
             }
-
-            if (mGroup == null)
-                setEmptyText(error);
         }
 
         if (mGroup != null) {
-            if (mClientTunnels)
-                setEmptyText("No configured client tunnels.");
-            else
-                setEmptyText("No configured server tunnels.");
-
-            setListShown(false);
+            mRecyclerView.setLoading(true);
             getLoaderManager().initLoader(mClientTunnels ? CLIENT_LOADER_ID
                     : SERVER_LOADER_ID, null, this);
         }
@@ -185,17 +193,12 @@ public class TunnelListFragment extends ListFragment implements
     }
 
     @Override
-    public void onListItemClick(ListView parent, View view, int pos, long id) {
-        super.onListItemClick(parent, view, pos, id);
-        mCallback.onTunnelSelected(mAdapter.getItem(pos).getId());
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (mActivatedPosition != ListView.INVALID_POSITION) {
+        int activatedPosition = mAdapter.getActivatedPosition();
+        if (activatedPosition >= 0) {
             // Serialize and persist the activated item position.
-            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
+            outState.putInt(STATE_ACTIVATED_POSITION, activatedPosition);
         }
     }
 
@@ -244,26 +247,8 @@ public class TunnelListFragment extends ListFragment implements
         return true;
     }
 
-    /**
-     * Turns on activate-on-click mode. When this mode is on, list items will be
-     * given the 'activated' state when touched.
-     */
-    public void setActivateOnItemClick(boolean activateOnItemClick) {
-        mActivateOnItemClick = activateOnItemClick;
-    }
-
-    private void setActivatedPosition(int position) {
-        if (position == ListView.INVALID_POSITION) {
-            getListView().setItemChecked(mActivatedPosition, false);
-        } else {
-            getListView().setItemChecked(position, true);
-        }
-
-        mActivatedPosition = position;
-    }
-
     public void addTunnel(TunnelEntry tunnelEntry) {
-        mAdapter.add(tunnelEntry);
+        mAdapter.addTunnel(tunnelEntry);
     }
 
     // LoaderManager.LoaderCallbacks<List<TunnelEntry>>
@@ -276,20 +261,17 @@ public class TunnelListFragment extends ListFragment implements
                                List<TunnelEntry> data) {
         if (loader.getId() == (mClientTunnels ?
                 CLIENT_LOADER_ID : SERVER_LOADER_ID)) {
-            mAdapter.setData(data);
-
-            if (isResumed()) {
-                setListShown(true);
-            } else {
-                setListShownNoAnimation(true);
-            }
+            mAdapter.setTunnels(data);
         }
     }
 
     public void onLoaderReset(Loader<List<TunnelEntry>> loader) {
         if (loader.getId() == (mClientTunnels ?
                 CLIENT_LOADER_ID : SERVER_LOADER_ID)) {
-            mAdapter.setData(null);
+            if (Util.getRouterContext() == null)
+                mAdapter.setTunnels(null);
+            else
+                mAdapter.setTunnels(new ArrayList<TunnelEntry>());
         }
     }
 }

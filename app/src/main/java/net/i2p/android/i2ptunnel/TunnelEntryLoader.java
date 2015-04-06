@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.content.AsyncTaskLoader;
 
+import net.i2p.android.router.util.Util;
 import net.i2p.i2ptunnel.TunnelController;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
+import net.i2p.router.RouterContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,12 @@ public class TunnelEntryLoader extends AsyncTaskLoader<List<TunnelEntry>> {
 
     @Override
     public List<TunnelEntry> loadInBackground() {
+        // Don't load tunnels if the router is not running
+        // TODO: in future we might be able to view and edit tunnels while router is not running
+        RouterContext routerContext = Util.getRouterContext();
+        if (routerContext == null)
+            return null;
+
         List<TunnelEntry> ret = new ArrayList<>();
         List<TunnelController> controllers = mGroup.getControllers();
         for (int i = 0; i < controllers.size(); i++) {

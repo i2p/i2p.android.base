@@ -113,15 +113,9 @@ public class TunnelsContainer extends Fragment implements
         public Fragment getItem(int position) {
             switch (position) {
                 case FRAGMENT_ID_CLIENT:
-                    mClientFrag = TunnelListFragment.newInstance(true);
-                    if (mTwoPane)
-                        mClientFrag.setActivateOnItemClick(true);
-                    return mClientFrag;
+                    return (mClientFrag = TunnelListFragment.newInstance(true, mTwoPane));
                 case FRAGMENT_ID_SERVER:
-                    mServerFrag = TunnelListFragment.newInstance(false);
-                    if (mTwoPane)
-                        mServerFrag.setActivateOnItemClick(true);
-                    return mServerFrag;
+                    return (mServerFrag = TunnelListFragment.newInstance(false, mTwoPane));
                 default:
                     return null;
             }
