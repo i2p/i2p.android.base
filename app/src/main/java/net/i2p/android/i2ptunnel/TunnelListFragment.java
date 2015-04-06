@@ -124,8 +124,6 @@ public class TunnelListFragment extends ListFragment implements
         filter.addAction(RouterService.LOCAL_BROADCAST_STATE_NOTIFICATION);
         filter.addAction(RouterService.LOCAL_BROADCAST_STATE_CHANGED);
         lbm.registerReceiver(onStateChange, filter);
-
-        lbm.sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
     }
 
     private State lastRouterState = null;
@@ -176,6 +174,14 @@ public class TunnelListFragment extends ListFragment implements
             getLoaderManager().initLoader(mClientTunnels ? CLIENT_LOADER_ID
                     : SERVER_LOADER_ID, null, this);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Triggers loader init via updateState() if the router is running
+        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
     }
 
     @Override
