@@ -235,7 +235,7 @@ public class I2PActivity extends I2PActivityBase implements
     // MainFragment.RouterControlListener
 
     public boolean shouldShowOnOff() {
-        return (canStart() && Connectivity.isConnected(this)) || canStop();
+        return (canStart() && Connectivity.isConnected(this)) || (canStop() && !isGracefulShutdownInProgress());
     }
 
     public boolean shouldBeOn() {
@@ -260,6 +260,34 @@ public class I2PActivity extends I2PActivityBase implements
         if (svc != null && _isBound) {
             setPref(PREF_AUTO_START, false);
             svc.manualQuit();
+            return true;
+        }
+        return false;
+    }
+
+    /** @since 0.9.19 */
+    public boolean isGracefulShutdownInProgress() {
+        RouterService svc = _routerService;
+        return svc != null && svc.isGracefulShutdownInProgress();
+    }
+
+    /** @since 0.9.19 */
+    public boolean onGracefulShutdownClicked() {
+        RouterService svc = _routerService;
+        if(svc != null && _isBound) {
+            setPref(PREF_AUTO_START, false);
+            svc.gracefulShutdown();
+            return true;
+        }
+        return false;
+    }
+
+    /** @since 0.9.19 */
+    public boolean onCancelGracefulShutdownClicked() {
+        RouterService svc = _routerService;
+        if(svc != null && _isBound) {
+            setPref(PREF_AUTO_START, false);
+            svc.cancelGracefulShutdown();
             return true;
         }
         return false;
