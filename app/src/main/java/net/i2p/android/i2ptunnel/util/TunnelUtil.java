@@ -562,105 +562,161 @@ public class TunnelUtil extends GeneralHelper {
 
     public static TunnelConfig createConfigFromWizard(
             Context ctx, TunnelControllerGroup tcg, Bundle data) {
+        return new TunnelUtil(tcg).createConfigFromWizard(ctx, data);
+    }
+    public TunnelConfig createConfigFromWizard(Context ctx, Bundle data) {
         // Get the Bundle keys
         Resources res = ctx.getResources();
-
-        String kClientServer = res.getString(R.string.i2ptunnel_wizard_k_client_server);
-        String kType = res.getString(R.string.i2ptunnel_wizard_k_type);
-
-        String kName = res.getString(R.string.i2ptunnel_wizard_k_name);
-        String kDesc = res.getString(R.string.i2ptunnel_wizard_k_desc);
-        String kDest = res.getString(R.string.i2ptunnel_wizard_k_dest);
-        String kOutproxies = res.getString(R.string.i2ptunnel_wizard_k_outproxies);
-        String kTargetHost = res.getString(R.string.i2ptunnel_wizard_k_target_host);
-        String kTargetPort = res.getString(R.string.i2ptunnel_wizard_k_target_port);
-        String kReachableOn = res.getString(R.string.i2ptunnel_wizard_k_reachable_on);
-        String kBindingPort = res.getString(R.string.i2ptunnel_wizard_k_binding_port);
-        String kAutoStart = res.getString(R.string.i2ptunnel_wizard_k_auto_start);
 
         // Create the TunnelConfig
         TunnelConfig cfg = new TunnelConfig();
 
-        // Get/set the tunnel wizard settings
+        // Update the TunnelConfig from the tunnel wizard settings
+        String kClientServer = res.getString(R.string.i2ptunnel_wizard_k_client_server);
+        String kType = res.getString(R.string.i2ptunnel_wizard_k_type);
         String clientServer = data.getBundle(kClientServer).getString(Page.SIMPLE_DATA_KEY);
         String typeName = data.getBundle(clientServer + ":" + kType).getString(Page.SIMPLE_DATA_KEY);
         String type = getTypeFromName(typeName, ctx);
         cfg.setType(type);
 
-        String name = data.getBundle(kName).getString(Page.SIMPLE_DATA_KEY);
-        cfg.setName(name);
+        new TunnelConfigFromWizard(cfg, data, res, _group, type).runLogic();
 
-        String desc = data.getBundle(kDesc).getString(Page.SIMPLE_DATA_KEY);
-        cfg.setDescription(desc);
+        return cfg;
+    }
 
-        String dest = null;
-        Bundle pageData = data.getBundle(kDest);
-        if (pageData != null) dest = pageData.getString(Page.SIMPLE_DATA_KEY);
-        cfg.setTargetDestination(dest);
+    class TunnelConfigFromWizard extends TunnelLogic {
+        TunnelConfig cfg;
+        Bundle data;
+        Resources res;
+        TunnelControllerGroup tcg;
 
-        String outproxies = null;
-        pageData = data.getBundle(kOutproxies);
-        if (pageData != null) outproxies = pageData.getString(Page.SIMPLE_DATA_KEY);
-        cfg.setProxyList(outproxies);
-
-        String targetHost = null;
-        pageData = data.getBundle(kTargetHost);
-        if (pageData != null) targetHost = pageData.getString(Page.SIMPLE_DATA_KEY);
-        cfg.setTargetHost(targetHost);
-
-        int targetPort = -1;
-        pageData = data.getBundle(kTargetPort);
-        if (pageData != null) targetPort = pageData.getInt(Page.SIMPLE_DATA_KEY);
-        cfg.setTargetPort(targetPort);
-
-        String reachableOn = null;
-        pageData = data.getBundle(kReachableOn);
-        if (pageData != null) reachableOn = pageData.getString(Page.SIMPLE_DATA_KEY);
-        cfg.setReachableBy(reachableOn);
-
-        int bindingPort = -1;
-        pageData = data.getBundle(kBindingPort);
-        if (pageData != null) bindingPort = pageData.getInt(Page.SIMPLE_DATA_KEY);
-        cfg.setPort(bindingPort);
-
-        boolean autoStart = data.getBundle(kAutoStart).getBoolean(Page.SIMPLE_DATA_KEY);
-        cfg.setStartOnLoad(autoStart);
-
-        // Set sensible defaults for a new tunnel
-        cfg.setTunnelDepth(res.getInteger(R.integer.DEFAULT_TUNNEL_LENGTH));
-        cfg.setTunnelVariance(res.getInteger(R.integer.DEFAULT_TUNNEL_VARIANCE));
-        cfg.setTunnelQuantity(res.getInteger(R.integer.DEFAULT_TUNNEL_QUANTITY));
-        cfg.setTunnelBackupQuantity(res.getInteger(R.integer.DEFAULT_TUNNEL_BACKUP_QUANTITY));
-        cfg.setClientHost("internal");
-        cfg.setClientPort("internal");
-        cfg.setCustomOptions("");
-        if (!"streamrclient".equals(type)) {
-            cfg.setProfile("bulk");
-            cfg.setReduceCount(1);
-            cfg.setReduceTime(20);
+        public TunnelConfigFromWizard(TunnelConfig cfg, Bundle data, Resources res,
+                                           TunnelControllerGroup tcg, String type) {
+            super(type);
+            this.cfg = cfg;
+            this.data = data;
+            this.res = res;
+            this.tcg = tcg;
         }
-        if (isClient(type)) { /* Client-only defaults */
-            if (!"streamrclient".equals(type)) {
-                cfg.setNewDest(0);
-                cfg.setCloseTime(30);
+
+        @Override
+        protected void general() {
+            cfg.setName(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_name)).getString(Page.SIMPLE_DATA_KEY));
+            cfg.setDescription(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_desc)).getString(Page.SIMPLE_DATA_KEY));
+            cfg.setStartOnLoad(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_auto_start)).getBoolean(Page.SIMPLE_DATA_KEY));
+
+            if (!isClient(mType) || res.getBoolean(R.bool.DEFAULT_PERSISTENT_KEY))
+                cfg.setPrivKeyFile(getPrivateKeyFile(tcg, -1));
+        }
+
+        @Override
+        protected void generalClient() {
+            // See advancedClient() for persistent key handling
+        }
+
+        @Override
+        protected void generalClientStreamr(boolean isStreamr) {
+            if (isStreamr)
+                cfg.setTargetHost(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_target_host)).getString(Page.SIMPLE_DATA_KEY));
+            else
+                cfg.setShared(res.getBoolean(R.bool.DEFAULT_SHARED_CLIENTS));
+
+            // Only set default tunnel parameters if this is not going to be a shared tunnel
+            if (isStreamr || res.getBoolean(R.bool.DEFAULT_SHARED_CLIENTS)) {
+                cfg.setTunnelDepth(res.getInteger(R.integer.DEFAULT_TUNNEL_LENGTH));
+                cfg.setTunnelVariance(res.getInteger(R.integer.DEFAULT_TUNNEL_VARIANCE));
+                cfg.setTunnelQuantity(res.getInteger(R.integer.DEFAULT_TUNNEL_QUANTITY));
+                cfg.setTunnelBackupQuantity(res.getInteger(R.integer.DEFAULT_TUNNEL_BACKUP_QUANTITY));
             }
-            if ("httpclient".equals(type) ||
-                    "connectclient".equals(type) ||
-                    "sockstunnel".equals(type) |
-                            "socksirctunnel".equals(type)) {
-                cfg.setProxyAuth("false");
-                cfg.setProxyUsername("");
-                cfg.setProxyPassword("");
-                cfg.setOutproxyAuth(false);
-                cfg.setOutproxyUsername("");
-                cfg.setOutproxyPassword("");
+        }
+
+        @Override
+        protected void generalClientPort() {
+            cfg.setPort(Integer.parseInt(data.getBundle(
+                    res.getString(R.string.i2ptunnel_wizard_k_binding_port)).getString(Page.SIMPLE_DATA_KEY)));
+        }
+
+        @Override
+        protected void generalClientPortStreamr(boolean isStreamr) {
+            if (!isStreamr)
+                cfg.setReachableBy(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_reachable_on)).getString(Page.SIMPLE_DATA_KEY));
+        }
+
+        @Override
+        protected void generalClientProxy(boolean isProxy) {
+            if (isProxy)
+                cfg.setProxyList(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_outproxies)).getString(Page.SIMPLE_DATA_KEY));
+            else
+                cfg.setTargetDestination(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_dest)).getString(Page.SIMPLE_DATA_KEY));
+        }
+
+        @Override
+        protected void generalClientProxyHttp(boolean isHttp) {
+            if (isHttp)
+                cfg.setSslProxies(null);
+        }
+
+        @Override
+        protected void generalClientStandardOrIrc(boolean isStandardOrIrc) {
+            if (isStandardOrIrc)
+                cfg.setUseSSL(false);
+        }
+
+        @Override
+        protected void generalClientIrc() {
+            cfg.setDCC(false);
+        }
+
+        @Override
+        protected void generalServerHttp() {
+            cfg.setSpoofedHost(null);
+        }
+
+        @Override
+        protected void generalServerHttpBidirOrStreamr(boolean isStreamr) {
+            cfg.setReachableBy(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_reachable_on)).getString(Page.SIMPLE_DATA_KEY));
+            if (!isStreamr)
+                cfg.setPort(Integer.parseInt(data.getBundle(
+                        res.getString(R.string.i2ptunnel_wizard_k_binding_port)).getString(Page.SIMPLE_DATA_KEY)));
+        }
+
+        @Override
+        protected void generalServerPort() {
+            cfg.setTargetPort(Integer.parseInt(data.getBundle(
+                    res.getString(R.string.i2ptunnel_wizard_k_target_port)).getString(Page.SIMPLE_DATA_KEY)));
+        }
+
+        @Override
+        protected void generalServerPortStreamr(boolean isStreamr) {
+            if (!isStreamr) {
+                cfg.setTargetHost(data.getBundle(res.getString(R.string.i2ptunnel_wizard_k_target_host)).getString(Page.SIMPLE_DATA_KEY));
+                cfg.setUseSSL(false);
             }
-            if ("httpclient".equals(type))
-                cfg.setJumpList(res.getString(R.string.DEFAULT_JUMP_LIST));
-        } else { /* Server-only defaults */
-            cfg.setPrivKeyFile(getPrivateKeyFile(tcg, -1));
+        }
+
+        @Override
+        protected void advanced() {
+            // Tunnel parameters handled in generalClientStreamr()
+        }
+
+        @Override
+        protected void advancedStreamr(boolean isStreamr) {
+            if (!isStreamr)
+                cfg.setProfile("bulk");
+        }
+
+        @Override
+        protected void advancedServerOrStreamrClient(boolean isServerOrStreamrClient) {
+            if (!isServerOrStreamrClient)
+                cfg.setConnectDelay(false);
+        }
+
+        @Override
+        protected void advancedServer() {
             cfg.setEncrypt(false);
             cfg.setAccessMode(0);
+            cfg.setUniqueLocal(false);
+            cfg.setMultihome(false);
             cfg.setLimitMinute(0);
             cfg.setLimitHour(0);
             cfg.setLimitDay(0);
@@ -670,6 +726,57 @@ public class TunnelUtil extends GeneralHelper {
             cfg.setMaxStreams(0);
         }
 
-        return cfg;
+        @Override
+        protected void advancedServerHttp(boolean isHttp) {
+            if (isHttp) {
+                cfg.setRejectInproxy(false);
+                cfg.setPostCheckTime(0);
+                cfg.setPostMax(0);
+                cfg.setPostBanTime(0);
+                cfg.setPostTotalMax(0);
+                cfg.setPostTotalBanTime(0);
+            }
+        }
+
+        @Override
+        protected void advancedIdle() {
+            cfg.setReduce(res.getBoolean(R.bool.DEFAULT_REDUCE_ON_IDLE));
+            cfg.setReduceCount(res.getInteger(R.integer.DEFAULT_REDUCE_COUNT));
+            cfg.setReduceTime(res.getInteger(R.integer.DEFAULT_REDUCE_TIME));
+        }
+
+        @Override
+        protected void advancedIdleServerOrStreamrClient(boolean isServerOrStreamrClient) {
+            if (!isServerOrStreamrClient)
+                cfg.setDelayOpen(res.getBoolean(R.bool.DEFAULT_DELAY_OPEN));
+        }
+
+        @Override
+        protected void advancedClient() {
+            cfg.setClose(res.getBoolean(R.bool.DEFAULT_CLOSE_ON_IDLE));
+            cfg.setCloseTime(res.getInteger(R.integer.DEFAULT_CLOSE_TIME));
+            cfg.setNewDest(res.getBoolean(R.bool.DEFAULT_PERSISTENT_KEY) ? 2 :
+                    res.getBoolean(R.bool.DEFAULT_NEW_KEYS) ? 1 : 0);
+        }
+
+        @Override
+        protected void advancedClientHttp() {
+            cfg.setAllowUserAgent(false);
+            cfg.setAllowReferer(false);
+            cfg.setAllowAccept(false);
+            cfg.setAllowInternalSSL(false);
+            cfg.setJumpList(res.getString(R.string.DEFAULT_JUMP_LIST));
+        }
+
+        @Override
+        protected void advancedClientProxy() {
+            cfg.setProxyAuth("false");
+            cfg.setOutproxyAuth(false);
+        }
+
+        @Override
+        protected void advancedOther() {
+            cfg.setSigType(Integer.toString(res.getInteger(R.integer.DEFAULT_SIGTYPE)));
+        }
     }
 }

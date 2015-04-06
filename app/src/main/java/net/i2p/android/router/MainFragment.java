@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -67,6 +68,12 @@ public class MainFragment extends I2PFragmentBase {
         public boolean shouldBeOn();
         public void onStartRouterClicked();
         public boolean onStopRouterClicked();
+        /** @since 0.9.19 */
+        public boolean isGracefulShutdownInProgress();
+        /** @since 0.9.19 */
+        public boolean onGracefulShutdownClicked();
+        /** @since 0.9.19 */
+        public boolean onCancelGracefulShutdownClicked();
     }
 
     @Override
@@ -123,11 +130,29 @@ public class MainFragment extends I2PFragmentBase {
                     mCallback.onStartRouterClicked();
                     updateOneShot();
                     checkFirstStart();
-                } else {
-                    if(mCallback.onStopRouterClicked()) {
+                } else if(mCallback.onGracefulShutdownClicked())
+                    updateOneShot();
+                return true;
+            }
+        });
+
+        Button gb = (Button) v.findViewById(R.id.button_shutdown_now);
+        gb.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (mCallback.isGracefulShutdownInProgress())
+                    if(mCallback.onStopRouterClicked())
                         updateOneShot();
-                    }
-                }
+                return true;
+            }
+        });
+        gb = (Button) v.findViewById(R.id.button_cancel_graceful);
+        gb.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (mCallback.isGracefulShutdownInProgress())
+                    if(mCallback.onCancelGracefulShutdownClicked())
+                        updateOneShot();
                 return true;
             }
         });
@@ -222,10 +247,27 @@ public class MainFragment extends I2PFragmentBase {
     private void updateVisibility() {
         boolean showOnOff = mCallback.shouldShowOnOff();
         ToggleButton b = (ToggleButton) getActivity().findViewById(R.id.router_onoff_button);
-        b.setVisibility(showOnOff ? View.VISIBLE : View.INVISIBLE);
+        b.setVisibility(showOnOff ? View.VISIBLE : View.GONE);
 
         boolean isOn = mCallback.shouldBeOn();
         b.setChecked(isOn);
+
+        boolean isGraceful = mCallback.isGracefulShutdownInProgress();
+        LinearLayout gv = (LinearLayout) getActivity().findViewById(R.id.router_graceful_buttons);
+        gv.setVisibility(isGraceful ? View.VISIBLE : View.GONE);
+        if (isOn && isGraceful) {
+            RouterContext ctx = getRouterContext();
+            if (ctx != null) {
+                TextView tv = (TextView) gv.findViewById(R.id.router_graceful_status);
+                long ms = ctx.router().getShutdownTimeRemaining();
+                if (ms > 1000) {
+                    tv.setText(getActivity().getResources().getString(R.string.button_router_graceful,
+                            DataHelper.formatDuration(ms)));
+                } else {
+                    tv.setText("Stopping I2P");
+                }
+            }
+        }
 
         if (showOnOff && !isOn) {
             // Sometimes the final state message from the RouterService
@@ -277,6 +319,7 @@ public class MainFragment extends I2PFragmentBase {
                 newState == State.NETWORK_STOPPED) {
             _lightImage.setImageResource(R.drawable.routerlogo_0);
         } else if (newState == State.STARTING ||
+                newState == State.GRACEFUL_SHUTDOWN ||
                 newState == State.STOPPING ||
                 newState == State.MANUAL_STOPPING ||
                 newState == State.MANUAL_QUITTING ||

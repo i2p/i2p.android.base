@@ -42,7 +42,8 @@ public abstract class TunnelLogic {
         } else {
             if ("httpserver".equals(mType) || "httpbidirserver".equals(mType))
                 generalServerHttp();
-            generalServerHttpBidirOrStreamr("httpbidirserver".equals(mType) || "streamrserver".equals(mType));
+            if ("httpbidirserver".equals(mType) || "streamrserver".equals(mType))
+                generalServerHttpBidirOrStreamr("streamrserver".equals(mType));
 
             generalServerPort();
             generalServerPortStreamr("streamrserver".equals(mType));

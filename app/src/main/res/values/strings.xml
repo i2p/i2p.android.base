@@ -29,6 +29,9 @@
 
     <string name="button_router_off">Long press to start I2P</string>
     <string name="button_router_on">I2P is running (long press to stop)</string>
+    <string name="button_router_graceful">I2P will shut down in %s</string>
+    <string name="button_shutdown_now">Long press to stop now</string>
+    <string name="button_cancel_graceful">Long press to cancel shutdown</string>
 
     <!-- Character to indicate a client tunnel. Usually first letter of the word "client". -->
     <string name="char_client_tunnel">C</string>

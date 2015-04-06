@@ -18,8 +18,6 @@
 
 # Short-term
 
-- Graceful shutdown option
-    <zzzccc> Request: graceful shutdown
 - Disable uPnP when on cell networks
     <zzz> spewing UPnP out into cell networks is a waste of time at best and a security risk at worst, but you really want it for wifi
 - I2PTunnel
