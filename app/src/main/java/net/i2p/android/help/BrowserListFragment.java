@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.BetterAsyncTaskLoader;
+import net.i2p.android.widget.DividerItemDecoration;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -54,6 +55,9 @@ public class BrowserListFragment extends Fragment implements
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_help_browsers, container, false);
         RecyclerView mRecyclerView = (RecyclerView) v.findViewById(R.id.browser_list);
+
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
         // use a linear layout manager
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
