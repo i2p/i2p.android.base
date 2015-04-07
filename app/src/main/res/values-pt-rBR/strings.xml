@@ -15,7 +15,7 @@
   <string name="label_info_and_pages">Informações e paginas</string>
   <string name="label_welcome_page">Página de boas-vindas</string>
   <string name="label_news">Novidades</string>
-  <string name="label_peers_status">Nós</string>
+  <string name="label_peers_status">Pares</string>
   <string name="label_release_notes">Comunicados de lançamento</string>
   <string name="label_licenses">Licenças</string>
   <string name="label_nonanon_info">Informação não-anônima</string>
@@ -29,7 +29,7 @@
   <string name="configure_browser_title">Configurar o navegador?</string>
   <string name="configure_browser_for_i2p">Gostaria de configurar um navegador para visualizar sites da I2P? (Você pode também fazer isso depois a partir do menu ajuda.)</string>
   <string name="first_start_title">Parabéns em instalar o I2P!</string>
-  <string name="first_start_welcome"><b>Bem-Vindo ao I2P!</b> Por favor <b> tenha paciência </b> enquanto o I2P inicia e procura por peers.</string>
+  <string name="first_start_welcome">&lt;b&gt;Seja bem-vindo!&lt;/b&gt; Por favor&lt;b&gt;, tenha paciência enquanto o roteador I2P inicia e procura por pares.</string>
   <string name="first_start_read">Enquanto você está esperando, por favor leia as notas de lançamento e a página de boas vindas.</string>
   <string name="first_start_faq">Uma vez que você tenha túneis clientes, por favor <b>verifique</b> nosso FAQ:</string>
   <string name="first_start_faq_nonanon">Ou use esse link não-anonimo se você não deseja esperar por túneis:</string>
@@ -53,7 +53,7 @@
   <string name="stats_not_ready">O configurador de estatística não está pronto. Tente de novo mais tarde.</string>
   <string name="netdb_routers_empty">Sem roteadores em seu NetDB.</string>
   <string name="notification_status_bw">Largura de banda: %1$s KBps Down/ %2$s KBps up</string>
-  <string name="notification_status_peers">Peers: %1$d ativos, %2$d conhecidos</string>
+  <string name="notification_status_peers">Pares: %1$d ativos, %2$d conhecidos</string>
   <string name="notification_status_expl">Túneis exploratórios: %1$d/%2$d</string>
   <string name="notification_status_client">Túneis cliente: %1$d/%2$d</string>
   <string name="menu_settings">Especificações</string>
