@@ -34,6 +34,7 @@ import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.android.router.util.Util;
 import net.i2p.android.util.AlphanumericHeaderAdapter;
 import net.i2p.android.util.FragmentUtils;
+import net.i2p.android.widget.DividerItemDecoration;
 import net.i2p.android.widget.LoadingRecyclerView;
 import net.i2p.client.naming.NamingService;
 import net.i2p.router.RouterContext;
@@ -120,6 +121,7 @@ public class AddressbookFragment extends Fragment implements
         mBook = getArguments().getString(BOOK_NAME);
 
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
         // use a linear layout manager
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());

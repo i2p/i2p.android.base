@@ -27,6 +27,7 @@ import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Util;
 import net.i2p.android.util.FragmentUtils;
+import net.i2p.android.widget.DividerItemDecoration;
 import net.i2p.android.widget.LoadingRecyclerView;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.router.RouterContext;
@@ -110,6 +111,7 @@ public class TunnelListFragment extends Fragment implements
         boolean isTwoPane = getArguments().getBoolean(IS_TWO_PANE);
 
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
         // use a linear layout manager
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
