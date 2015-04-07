@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/host_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/listitem_height_one_line"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/listitem_horizontal_margin"
+        android:paddingLeft="@dimen/listitem_horizontal_margin"
+        android:paddingRight="@dimen/listitem_horizontal_margin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Primary" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground" />
+</FrameLayout>

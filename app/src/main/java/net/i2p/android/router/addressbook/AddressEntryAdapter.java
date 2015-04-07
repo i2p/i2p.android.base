@@ -25,6 +25,16 @@ public class AddressEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    public static class AddressViewHolder extends RecyclerView.ViewHolder {
+        public TextView hostName;
+
+        public AddressViewHolder(View itemView) {
+            super(itemView);
+
+            hostName = (TextView) itemView.findViewById(R.id.host_name);
+        }
+    }
+
     public AddressEntryAdapter(Context context,
                                AddressbookFragment.OnAddressSelectedListener listener) {
         super();
@@ -63,7 +73,7 @@ public class AddressEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         else if (mAddresses.isEmpty())
             return R.layout.listitem_empty;
         else
-            return R.layout.listitem_text;
+            return R.layout.listitem_address;
     }
 
     // Create new views (invoked by the layout manager)
@@ -75,7 +85,12 @@ public class AddressEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(vt, parent, false);
-        return new SimpleViewHolder(v);
+        switch (viewType) {
+            case R.layout.listitem_address:
+                return new AddressViewHolder(v);
+            default:
+                return new SimpleViewHolder(v);
+        }
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -92,11 +107,12 @@ public class AddressEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         mCtx.getString(R.string.addressbook_is_empty));
                 break;
 
-            case R.layout.listitem_text:
+            case R.layout.listitem_address:
                 final AddressEntry address = getAddress(position);
-                ((TextView) holder.itemView).setText(address.getHostName());
+                AddressViewHolder avh = (AddressViewHolder) holder;
+                avh.hostName.setText(address.getHostName());
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                avh.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         mListener.onAddressSelected(address.getHostName());
