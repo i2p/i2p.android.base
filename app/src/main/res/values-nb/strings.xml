@@ -173,7 +173,6 @@
   <string name="enabled">Påskrudd</string>
   <string name="i2ptunnel_wizard_desc_name">Tunnel-navn, for identifikasjon i tunnel-listen.</string>
   <string name="i2ptunnel_wizard_desc_desc">Beskrivelse av tunnelen. Dette er valgfritt, og bare til informasjon.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Skriv inn I2P-målet til tjenesten som denne klienten skal koble til. Det være seg enten full base64 mål-nøkkel, eller en I2P-URL fra adresselisten.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Hvis du vet om noen utgående mellomtjenere for denne typen tunnel (enten HTTP eller SOCKS), fyll dem inn. Oppgis flere mellomtjenere må de deles med komma.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Dette er IP-en din tjeneste kjører på, dette er vanligvis den samme maskinen, så 127.0.0.1 er ferdigutfylt. </string>
   <string name="i2ptunnel_wizard_desc_target_port">Dette er porten tjenesten godtar tilkoblinger på.</string>

@@ -159,7 +159,6 @@
   <string name="enabled">Povolené</string>
   <string name="i2ptunnel_wizard_desc_name">Názov tunela, pre identifikáciu v zozname tunelov.</string>
   <string name="i2ptunnel_wizard_desc_desc">Popis tunela. Toto je voliteľné a čisto len informatívne.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Typ služby na I2P cieli, ku ktorej by sa tento klientský tunel mal pripojiť. Môže to byť plný základný cieľový kľúč 64 alebo I2P URL z vášho adresára.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Ak poznáte nejaké východzie proxy pre tento typ tunela (buď HTTP alebo SOCKS), zadajte ich sem. Viacero proxy oddeľte čiarkami.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Toto je IP, na ktorej je spustená vaša služba, zväčša to býva na rovnakom zariadení, takže je automaticky vyplnená 127.0.0.1.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Toto je na port, na ktorom služba prijíma pripojenia.</string>

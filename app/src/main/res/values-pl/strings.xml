@@ -173,7 +173,6 @@
   <string name="enabled">Włączony</string>
   <string name="i2ptunnel_wizard_desc_name">Nazwa tunelu dla identyfikacji w liście tuneli.</string>
   <string name="i2ptunnel_wizard_desc_desc">Opis tunelu. Ta opcja jest nieobowiązkowa i służąca wyłącznie do celów informacyjnych.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Wpisz przeznaczenie serwisu I2P z którym klient tunelu ma się połączyć. To może być pełny klucz base 64 przeznaczenia, lub URL I2P z Twojej książki adresowej.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Jeśli znasz jakieś wychodzące proxy dla tego typu tunelów (HTTP lub SOCKS), to je wpisz. Serwery proxy oddziel przecinkami.</string>
   <string name="i2ptunnel_wizard_desc_target_host">To jest IP na którym Twój serwis jest uruchomiony, zazwyczaj jest to te same urządzenie więc 127.0.0.1 jest wpisane automatycznie.</string>
   <string name="i2ptunnel_wizard_desc_target_port">To jest port na którym Twój serwis akceptuje połączenia.</string>

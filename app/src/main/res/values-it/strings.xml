@@ -170,7 +170,6 @@
   <string name="enabled">Abilita</string>
   <string name="i2ptunnel_wizard_desc_name">Il nome del tunnel, per identificarlo nell\'elenco dei tunnel.</string>
   <string name="i2ptunnel_wizard_desc_desc">Una descrizione del tunnel. È un attributo opzionale a puro titolo informativo.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Tipologia nella destinazione I2P del servizio a cui il tunnel di questo client può connettersi. Può essere l\'intera chiave di destinazione in base 64, oppure un URL di I2P prelevato dalla tua rubrica.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Se conosci qualche proxy di uscita per questo tipo di tunnel (HTTP oppure SOCKS), inseriscilo. Per inserire più proxy, separa i valori usando le virgole.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Questo è l\'indirizzo IP sul quale è in funzione il servizio, che generalmente risiede sulla stessa macchina: pertanto si assume il valore 127.0.0.1.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Questa è la porta per la quale il servizio accetta connessioni.</string>

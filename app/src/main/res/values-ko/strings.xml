@@ -172,7 +172,6 @@
   <string name="enabled">활성화됨</string>
   <string name="i2ptunnel_wizard_desc_name">터널 리스트에서 구별하기 위한 터널의 이름</string>
   <string name="i2ptunnel_wizard_desc_desc">터널의 설명. 선택적이고 단순 정보용.</string>
-  <string name="i2ptunnel_wizard_desc_dest">클라이언트 터널이 접속하야 하는 I2P 서비스 도착점 입력. 전체 Base 64 도착점 키나 사용자의 주소록에 있는 I2P URL 사용 가능.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">만약 이 터널 종류의 나가는 프록시를 안다면 (HTTP 또는 SOCKS), 입력. 여러 프록시들을 콤마로 구별.</string>
   <string name="i2ptunnel_wizard_desc_target_host">서비스가 작동중인 IP, 대부분의 경우 같은 기기이기 때문에 127.0.0.1이 자동 입력됨.</string>
   <string name="i2ptunnel_wizard_desc_target_port">서비스가 접속을 받아들일 포트.</string>

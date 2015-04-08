@@ -173,7 +173,6 @@
   <string name="enabled">Включить</string>
   <string name="i2ptunnel_wizard_desc_name">Имя туннеля для идентификации в списке туннелей.</string>
   <string name="i2ptunnel_wizard_desc_desc">Описание туннеля. Заполнять не обязательно.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Впишите пункт назначения I2P сервиса, к которому должен подключаться этот туннель. Это может быть base 64 ключ назначения или I2P URL из вашей адресной книги.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Если вам известны любые внешние прокси для этого типа туннеля (как HTTP, так и SOCKS), впишите их. Несколько прокси перечисляются через запятую.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Это IP, на котором запущен ваш сервис, обычно он находится на том же устройстве, так что 127.0.0.1 заполняется автоматически.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Это порт, на котором сервис принимает подключения.</string>

@@ -173,7 +173,6 @@
   <string name="enabled">有効</string>
   <string name="i2ptunnel_wizard_desc_name">トンネルリストでの識別用に、トンネルの名前。</string>
   <string name="i2ptunnel_wizard_desc_desc">トンネルの説明。これは任意であり、単なる参考です。</string>
-  <string name="i2ptunnel_wizard_desc_dest">このクライアントトンネルが接続する I2P のサービスの宛先でのタイプ。これは完全な Base 64 の宛先キーか、アドレスブックからの I2P URL にできます。</string>
   <string name="i2ptunnel_wizard_desc_outproxies">このタイプのトンネル用 （HTTP か SOCKS のいずれか) のアウトプロキシを知っているなら、それらを入力してください。カンマで複数のプロキシを分割できます。</string>
   <string name="i2ptunnel_wizard_desc_target_host">これは、サービスが起動している IPです。通常同一のマシン上なので、 127.0.0.1 が自動で入力されます。</string>
   <string name="i2ptunnel_wizard_desc_target_port">これはサービスが接続を受け入れているポートです。</string>
