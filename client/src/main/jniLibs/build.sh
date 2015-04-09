@@ -83,7 +83,7 @@ fi
 #
 # API level, pulled from ../AndroidManifest.xml
 #
-LEVEL=$(awk -F\" '/minSdkVersion/{print $2}' ../AndroidManifest.xml)
+LEVEL=$(awk -F' ' '/minSdkVersion/{print $2}' ../../../build.gradle)
 
 #
 # 4.6 is the GCC version. GCC 4.4.3 support was removed in NDK r9b.
@@ -132,6 +132,11 @@ case "$ARCH" in
         LINKFLAGS="$COMMONLINKFLAGS"
         ;;
 esac
+
+if [ ! -e $PWD/$ABIDIR ]
+then
+    mkdir $PWD/$ABIDIR
+fi
 
 LIBFILE=$PWD/$ABIDIR/libjbigi.so
 if [ -f $LIBFILE ]
