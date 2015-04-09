@@ -1,6 +1,6 @@
 [main]
 host = https://www.transifex.com
-lang_map = pt_BR: pt-rBR, ru_RU: ru, sv_SE: sv, tr_TR: tr, zh_CN: zh
+lang_map = pt_BR: pt-rBR, ru_RU: ru, sv_SE: sv, tr_TR: tr, uk_UA: uk, zh_CN: zh
 
 [I2P.android]
 file_filter = app/src/main/res/values-<lang>/strings.xml
