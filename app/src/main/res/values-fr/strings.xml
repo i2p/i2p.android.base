@@ -23,6 +23,9 @@
   <string name="label_graphs">Graphiques</string>
   <string name="button_router_off">Presser longtemps pour démarrer I2P</string>
   <string name="button_router_on">I2P est en marche (presser longtemps pour arrêter)</string>
+  <string name="button_router_graceful">I2P s\'arrêtera dans %s</string>
+  <string name="button_shutdown_now">Pressez longtemps pour arrêter maintenant</string>
+  <string name="button_cancel_graceful">Pressez longtemps pour annuler l\'arrêt</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -173,6 +176,7 @@
   <string name="enabled">Activé</string>
   <string name="i2ptunnel_wizard_desc_name">Le nom du tunnel, pour son identification dans la liste des tunnels.</string>
   <string name="i2ptunnel_wizard_desc_desc">Une description du tunnel. Ceci est facultatif et purement informatif.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Tapez la destination I2P du service auquel ce tunnel de client devrait se connecter. Ceci pourrait être une clé de destination en base 64 pleine, ou un nom d\'hôte I2P contenu dans votre carnet d\'adresses.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Si vous connaissez des proxy sortants pour ce type de tunnel (soit HTTP ou SOCKS), ajoutez-les en les séparant par une virgule.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Ceci est l\'adresse IP sur laquelle votre service est connecté. Comme c\'est habituellement sur la machine locale, l\'adresse 127.0.0.1 est pré-remplie. </string>
   <string name="i2ptunnel_wizard_desc_target_port">Ceci est le port sur lequel le service accepte des connexions.</string>
