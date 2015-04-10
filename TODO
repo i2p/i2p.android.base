@@ -6,9 +6,6 @@
 - Create tunnel wizard
     <zzz> hmm would be nice if they could be shared-client or have an option
     <zzz> was setting up email tunnels
-- I2PTunnel details
-    <zzz> on the i2ptunnel details, it lists both a 'target' and 'access point' for clients, with the same info
-    <zzz> generally we use 'target' for servers and 'access point' for clients, never both
 - Browser
     <zzzccc> Bug report: i2p browser treats 302 as an error
     <zzzccc> Bug 2: rotate screen in i2p browser seems to go back one page

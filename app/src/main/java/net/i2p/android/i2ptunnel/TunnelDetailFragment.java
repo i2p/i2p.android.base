@@ -103,11 +103,36 @@ public class TunnelDetailFragment extends Fragment {
             TextView details = (TextView) v.findViewById(R.id.tunnel_details);
             details.setText(mTunnel.getDetails());
 
-            TextView targetIfacePort = (TextView) v.findViewById(R.id.tunnel_target_interface_port);
-            targetIfacePort.setText(mTunnel.getTunnelLink(false));
-
+            View accessIfacePortLabel = v.findViewById(R.id.tunnel_access_interface_port_label);
             TextView accessIfacePort = (TextView) v.findViewById(R.id.tunnel_access_interface_port);
-            accessIfacePort.setText(mTunnel.getTunnelLink(false));
+            View targetIfacePortLabel = v.findViewById(R.id.tunnel_target_interface_port_label);
+            TextView targetIfacePort = (TextView) v.findViewById(R.id.tunnel_target_interface_port);
+            switch (mTunnel.getInternalType()) {
+                case "httpbidirserver":
+                    accessIfacePort.setText(mTunnel.getClientLink(false));
+                    targetIfacePort.setText(mTunnel.getServerLink(false));
+                    break;
+                case "streamrserver":
+                    accessIfacePort.setText(mTunnel.getServerLink(false));
+                    targetIfacePortLabel.setVisibility(View.GONE);
+                    targetIfacePort.setVisibility(View.GONE);
+                    break;
+                case "streamrclient":
+                    accessIfacePortLabel.setVisibility(View.GONE);
+                    accessIfacePort.setVisibility(View.GONE);
+                    targetIfacePort.setText(mTunnel.getClientLink(false));
+                    break;
+                default:
+                    if (mTunnel.isClient()) {
+                        accessIfacePort.setText(mTunnel.getClientLink(false));
+                        targetIfacePortLabel.setVisibility(View.GONE);
+                        targetIfacePort.setVisibility(View.GONE);
+                    } else {
+                        accessIfacePortLabel.setVisibility(View.GONE);
+                        accessIfacePort.setVisibility(View.GONE);
+                        targetIfacePort.setText(mTunnel.getServerLink(false));
+                    }
+            }
 
             CheckBox autoStart = (CheckBox) v.findViewById(R.id.tunnel_autostart);
             autoStart.setChecked(mTunnel.startAutomatically());
