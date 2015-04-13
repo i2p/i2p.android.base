@@ -21,8 +21,12 @@ public class IntListPreference extends ListPreference {
     @Override
     protected String getPersistedString(String defaultReturnValue) {
         if(getSharedPreferences().contains(getKey())) {
-            int intValue = getPersistedInt(0);
-            return String.valueOf(intValue);
+            try {
+                int intValue = getPersistedInt(0);
+                return String.valueOf(intValue);
+            } catch (ClassCastException e) {
+                return getPersistedString("0");
+            }
         } else {
             return defaultReturnValue;
         }
