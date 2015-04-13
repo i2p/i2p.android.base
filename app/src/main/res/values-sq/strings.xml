@@ -161,7 +161,6 @@
   <string name="enabled">I/e mundësuar</string>
   <string name="i2ptunnel_wizard_desc_name">Emri i tunelit, për identifikim në listën e tuneleve.</string>
   <string name="i2ptunnel_wizard_desc_desc">Një përshkrim i tunelit. Kjo është opcionale dhe vetëm informative.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Shtype destinacionin e shërbimit të I2P\'së ku ky tunel i klientëve duhet të lidhet. Kjo mund të jetë baza e plotë 64 e qelësit së destinacionit, ose një URL i I2P\'së nga libri i adresave. </string>
   <string name="i2ptunnel_wizard_desc_outproxies">Nëse keni njohuri për ndonjë outproksë për këtë lloj tuneli (ja HTTP ose SOCKS), plotësoni. Proksa të veqantë dhe shumëfishtë med presje.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Kjo është IP\'ja ku shërbimi juaj është duke punuar, kjo është në të njëjtin kompjuter kështu që 127.0.0.1 është vetëmbushur. </string>
   <string name="i2ptunnel_wizard_desc_target_port">Kjo është portalja ku shërbimi pranon lidhjet. </string>

@@ -23,6 +23,9 @@
   <string name="label_graphs">Gráficas</string>
   <string name="button_router_off">Mantenga pulsado para iniciar I2P</string>
   <string name="button_router_on">I2P está ejecutándose (mantenga pulsado para detenerlo)</string>
+  <string name="button_router_graceful">I2P se cerrará en %s</string>
+  <string name="button_shutdown_now">Mantenga pulsado para detener ahora</string>
+  <string name="button_cancel_graceful">Mantenga pulsado para cancelar cierre</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -173,7 +176,7 @@
   <string name="enabled">Habilitado</string>
   <string name="i2ptunnel_wizard_desc_name">El nombre del túnel, para su identificación el la lista de túneles.</string>
   <string name="i2ptunnel_wizard_desc_desc">Una descripción del túnel. Esto es opcional y puramente informativo.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Introduzca el destino I2P del servicio al que este túnel de cliente debe conectarse. Este podría ser la clave del destino base 64 completa, o una URL I2P de su libreta de direcciones.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Escriba el destino I2P del servicio al que este túnel de cliente debe conectarse. Este podría ser la clave de destino I2P base 64 completa, o un nombre de servidor I2P de su libreta de direcciones.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Si sabe de algunos proxys de salida para este tipo de túnel (bien HTTP o SOCKS), introdúzcalos. Separe múltiples proxys con comas.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Esta es la IP sobre la que su servicio está ejecutándose, este normalmente está en la misma máquina, así que se autorellena con 127.0.0.1</string>
   <string name="i2ptunnel_wizard_desc_target_port">Este es el puerto sobre el que el servicio está aceptando conexiones.</string>

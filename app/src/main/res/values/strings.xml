@@ -213,7 +213,7 @@
 
     <string name="i2ptunnel_wizard_desc_name">The name of the tunnel, for identification in the tunnel list.</string>
     <string name="i2ptunnel_wizard_desc_desc">A description of the tunnel. This is optional and purely informative.</string>
-    <string name="i2ptunnel_wizard_desc_dest">Type in the I2P destination of the service that this client tunnel should connect to. This could be the full base 64 destination key, or an I2P URL from your address book.</string>
+    <string name="i2ptunnel_wizard_desc_dest">Type in the I2P destination of the service that this client tunnel should connect to. This could be the full base 64 destination key, or an I2P host name from your address book.</string>
     <string name="i2ptunnel_wizard_desc_outproxies">If you know of any outproxies for this type of tunnel (either HTTP or SOCKS), fill them in. Separate multiple proxies with commas.</string>
     <string name="i2ptunnel_wizard_desc_target_host">This is the IP that your service is running on, this is usually on the same machine so 127.0.0.1 is autofilled.</string>
     <string name="i2ptunnel_wizard_desc_target_port">This is the port that the service is accepting connections on.</string>

@@ -23,6 +23,9 @@
   <string name="label_graphs">图</string>
   <string name="button_router_off">长按启动I2P</string>
   <string name="button_router_on">I2P 正在运行(长按停止)</string>
+  <string name="button_router_graceful">I2P 将在 %s 后关闭</string>
+  <string name="button_shutdown_now">长按停止</string>
+  <string name="button_cancel_graceful">长按取消关闭</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -173,7 +176,7 @@
   <string name="enabled">已启用</string>
   <string name="i2ptunnel_wizard_desc_name">隧道的名称，是隧道列表中标识.</string>
   <string name="i2ptunnel_wizard_desc_desc">隧道的描述。这是可选的，纯粹提供信息的.</string>
-  <string name="i2ptunnel_wizard_desc_dest">键入这个客户端隧道应该连接到该服务的 I2P 目的地. 这可能是完整的 base 64 目的地密钥 或 您地址簿中的 I2P URL .</string>
+  <string name="i2ptunnel_wizard_desc_dest">输入这个客户端隧道应该连接到的该服务的 I2P 目的地。这可以是完整的 base 64 目的地密钥，或者您地址簿中的 I2P 主机名。</string>
   <string name="i2ptunnel_wizard_desc_outproxies">如果你知道任何这种类型隧道(HTTP或SOCKS)的outproxies,填入它们.用逗号分隔多个代理服务器.</string>
   <string name="i2ptunnel_wizard_desc_target_host">这是您正在运行的服务所在的IP，这通常是在同一台机器上，所以127.0.0.1 是自动填写的.</string>
   <string name="i2ptunnel_wizard_desc_target_port">这是这项服务接受连接的端口.</string>

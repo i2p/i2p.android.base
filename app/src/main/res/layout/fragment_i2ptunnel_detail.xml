@@ -55,7 +55,7 @@
         android:text="Tunnel type" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tunnel_target_interface_port_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -63,19 +63,19 @@
         android:text="@string/i2ptunnel_view_target" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tunnel_access_interface_port_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/tunnel_target_interface_port_label"
         android:text="@string/i2ptunnel_view_access_point" />
 
     <TextView
         android:id="@+id/tunnel_access_interface_port"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignBaseline="@+id/tunnel_access_interface_port_label"
+        android:layout_alignBottom="@+id/tunnel_access_interface_port_label"
         android:layout_alignParentRight="true"
         android:gravity="right"
         android:text="Interface:port" />

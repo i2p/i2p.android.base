@@ -17,6 +17,17 @@ fi
 cd $THISDIR
 
 I2PBASE=${1:-$THISDIR/../../../../../i2p.i2p}
+if [ ! -d "$I2PBASE" ]; then
+    echo "I2P source not found in $I2PBASE"
+    if [ -z "$1" ]; then
+        echo "Extract it there or provide a path:"
+        echo "./build.sh path/to/i2p.i2p"
+    else
+        echo "Extract it there or fix the supplied path"
+    fi
+    exit 1
+fi
+
 ROUTERJARS=$THISDIR/../../../../routerjars
 
 ## Check the local.properties file first
@@ -60,7 +71,7 @@ JBIGI="$I2PBASE/core/c/jbigi"
 # libcrypto crashes on emulator, don't trust it
 # jbigi about 20-25% slower than java on emulator
 #
-GMPVER=4.3.2
+GMPVER=6.0.0
 GMP="$JBIGI/gmp-$GMPVER"
 
 if [ ! -d "$GMP" ]; then
@@ -68,6 +79,9 @@ if [ ! -d "$GMP" ]; then
     echo "Install it there or change GMPVER and/or GMP in this script"
     exit 1
 fi
+
+# Apply necessary patch
+patch -d $GMP -p1 <gmp_thumb_add_mssaaaa.patch
 
 if [ `uname -s` = "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
@@ -81,9 +95,9 @@ if [ ! -f "$JAVA_HOME/include/jni.h" ]; then
 fi
 
 #
-# API level, pulled from ../AndroidManifest.xml
+# API level, pulled from client build.gradle
 #
-LEVEL=$(awk -F\" '/minSdkVersion/{print $2}' ../AndroidManifest.xml)
+LEVEL=$(awk -F' ' '/minSdkVersion/{print $2}' ../../../build.gradle)
 
 #
 # 4.6 is the GCC version. GCC 4.4.3 support was removed in NDK r9b.
@@ -102,38 +116,38 @@ LEVEL=$(awk -F\" '/minSdkVersion/{print $2}' ../AndroidManifest.xml)
 #	x86-4.8
 #	x86-clang3.3
 #	x86-clang3.4
-GCCVER=4.6
+GCCVER=4.8
 
-COMMONLINKFLAGS="-shared -Wl,-soname,libjbigi.so"
+for ABI in "armeabi" "armeabi-v7a" "x86" "mips"; do
 
-for ARCH in "arm" "x86" "mips"; do
-
-# Arch-specific settings
-case "$ARCH" in
-    "arm")
-        ABIDIR="armeabi"
-        AABIPREFIX="arm-linux-androideabi-"
-        export BINPREFIX="$AABIPREFIX"
-        CONFIGUREHOST="armv5-eabi-linux"
-        LINKFLAGS="$COMMONLINKFLAGS,--fix-cortex-a8"
+# ABI-specific settings
+case "$ABI" in
+    "armeabi" | "armeabi-v7a")
+        ARCH="arm"
+        TOOLCHAIN="arm-linux-androideabi-$GCCVER"
+        export BINPREFIX="arm-linux-androideabi-"
+        CONFIGUREHOST="arm-linux-androideabi"
         ;;
     "x86")
-        ABIDIR="x86"
-        AABIPREFIX="x86-"
+        ARCH="x86"
+        TOOLCHAIN="x86-$GCCVER"
         export BINPREFIX="i686-linux-android-"
-        CONFIGUREHOST="x86-linux-android"
-        LINKFLAGS="$COMMONLINKFLAGS,--fix-cortex-a8"
+        CONFIGUREHOST="i686-linux-android"
         ;;
     "mips")
-        ABIDIR="mips"
-        AABIPREFIX="mipsel-linux-android-"
-        export BINPREFIX="$AABIPREFIX"
+        ARCH="mips"
+        TOOLCHAIN="mipsel-linux-android-$GCCVER"
+        export BINPREFIX="mipsel-linux-android-"
         CONFIGUREHOST="mipsel-linux-android"
-        LINKFLAGS="$COMMONLINKFLAGS"
         ;;
 esac
 
-LIBFILE=$PWD/$ABIDIR/libjbigi.so
+if [ ! -e $PWD/$ABI ]
+then
+    mkdir $PWD/$ABI
+fi
+
+LIBFILE=$PWD/$ABI/libjbigi.so
 if [ -f $LIBFILE ]
 then
     echo "$LIBFILE exists, nothing to do here"
@@ -141,30 +155,74 @@ then
     continue
 fi
 
-export SYSROOT="$NDK/platforms/android-$LEVEL/arch-$ARCH/"
+if [ `uname -s` = "Darwin" ]; then
+    export SYSTEM="darwin-x86"
+    BUILDHOST="x86-darwin"
+elif [ `uname -m` = "x86_64" ]; then
+    export SYSTEM="linux-x86_64"
+    BUILDHOST="x86_64-pc-linux-gnu"
+else
+    export SYSTEM="linux-x86"
+    BUILDHOST="x86-pc-linux-gnu"
+fi
+
+TOOLCHAINDIR="/tmp/android-$LEVEL-$ARCH-$GCCVER"
+if [ ! -d ${TOOLCHAINDIR} ]
+then
+    ${NDK}/build/tools/make-standalone-toolchain.sh --toolchain=${TOOLCHAIN} --platform=android-${LEVEL} --install-dir=${TOOLCHAINDIR} --system=${SYSTEM}
+fi
+
+export SYSROOT="$TOOLCHAINDIR/sysroot/"
 if [ ! -d "$SYSROOT" ]; then
     echo "Cannot find $SYSROOT in NDK, check for support of level: $LEVEL arch: $ARCH or adjust LEVEL and ARCH in script"
     exit 1
 fi
 
-export AABI="$AABIPREFIX$GCCVER"
-if [ `uname -s` = "Darwin" ]; then
-    export SYSTEM="darwin-x86"
-elif [ `uname -m` = "x86_64" ]; then
-    export SYSTEM="linux-x86_64"
-else
-    export SYSTEM="linux-x86"
-fi
-
-COMPILER="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}gcc"
+COMPILER="$TOOLCHAINDIR/bin/${BINPREFIX}gcc"
 if [ ! -f "$COMPILER" ]; then
     echo "Cannot find compiler $COMPILER in NDK, check for support of system: $SYSTEM ABI: $AABI or adjust AABI and SYSTEM in script"
     exit 1
 fi
 export CC="$COMPILER --sysroot=$SYSROOT"
 # worked without this on 4.3.2, but 5.0.2 couldn't find it
-export NM="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}nm"
-STRIP="$NDK/toolchains/$AABI/prebuilt/$SYSTEM/bin/${BINPREFIX}strip"
+export NM="$TOOLCHAINDIR/bin/${BINPREFIX}nm"
+STRIP="$TOOLCHAINDIR/bin/${BINPREFIX}strip"
+
+export LIBGMP_LDFLAGS='-avoid-version'
+LINKFLAGS="-shared -Wl,-soname,libjbigi.so"
+
+case "$ARCH" in
+    "arm")
+        BASE_CFLAGS='-O2 -g -pedantic -fomit-frame-pointer -Wa,--noexecstack -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64'
+        case "$ABI" in
+            "armeabi")
+                MPN_PATH="arm/v5 arm generic"
+                export CFLAGS="${BASE_CFLAGS} -march=armv5te -mtune=xscale -msoft-float -mthumb"
+                ;;
+            "armeabi-v7a")
+                MPN_PATH="arm/v6t2 arm/v6 arm/v5 arm generic"
+                export CFLAGS="${BASE_CFLAGS} -march=armv7-a -mfloat-abi=softfp -mfpu=vfp"
+                ;;
+        esac
+        export LDFLAGS='-Wl,--fix-cortex-a8 -Wl,--no-undefined -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now'
+        ;;
+    "x86")
+        MPN_PATH="x86/atom/sse2 x86/atom/mmx x86/atom x86 generic"
+        # Base CFLAGS set from ndk-build output
+        BASE_CFLAGS='-O2 -g -pedantic -Wa,--noexecstack -fomit-frame-pointer -ffunction-sections -funwind-tables -fstrict-aliasing -funswitch-loops -finline-limit=300'
+        # x86, CFLAGS set according to 'CPU Arch ABIs' in the r8c documentation
+        export CFLAGS="${BASE_CFLAGS} -march=i686 -mtune=atom -msse3 -mstackrealign -mfpmath=sse -m32"
+        export LDFLAGS='-Wl,-z,noexecstack,-z,relro'
+        ;;
+    "mips")
+        MPN_PATH=""
+        # Base CFLAGS set from ndk-build output
+        BASE_CFLAGS='-O2 -g -pedantic -fomit-frame-pointer -Wa,--noexecstack -fno-strict-aliasing -finline-functions -ffunction-sections -funwind-tables -fmessage-length=0 -fno-inline-functions-called-once -fgcse-after-reload -frerun-cse-after-loop -frename-registers -funswitch-loops -finline-limit=300'
+        # mips CFLAGS not specified in 'CPU Arch ABIs' in the r8b documentation
+        export CFLAGS="${BASE_CFLAGS}"
+        export LDFLAGS='-Wl,--no-undefined -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now'
+        ;;
+esac
 
 #echo "CC is $CC"
 
@@ -176,15 +234,15 @@ cd build
 # won't attempt to run the a.out files
 if [ ! -f config.status ]; then
     echo "Configuring GMP..."
-    if [ `uname -s` = "Darwin" ]; then
-        $GMP/configure --with-pic --build=x86-darwin --host=$CONFIGUREHOST || exit 1
+    if [ -z "$MPN_PATH" ]; then
+        $GMP/configure --with-pic --build=$BUILDHOST --host=$CONFIGUREHOST || exit 1
     else
-        $GMP/configure --with-pic --build=x86-none-linux --host=$CONFIGUREHOST || exit 1
+        $GMP/configure --with-pic --build=$BUILDHOST --host=$CONFIGUREHOST MPN_PATH="$MPN_PATH" || exit 1
     fi
 fi
 
 echo "Building GMP..."
-make || exit 1
+make -j8 || exit 1
 
 COMPILEFLAGS="-fPIC -Wall"
 INCLUDES="-I. -I$JBIGI/jbigi/include -I$JAVA_HOME/include -I$JAVA_HOME/include/linux"

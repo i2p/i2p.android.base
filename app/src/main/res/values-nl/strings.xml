@@ -173,7 +173,6 @@
   <string name="enabled">Staat aan</string>
   <string name="i2ptunnel_wizard_desc_name">De naam van de tunnel, voor het identificeren in de tunnel lijst.</string>
   <string name="i2ptunnel_wizard_desc_desc">Een beschrijving van de tunnel. Dit is niet verplicht maar wel informatief.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Typ de I2P-bestemming van de dienst in waar deze cliënt-tunnel mee moet verbinden. Dit kan de volledige base-64 bestemmingssleutel zijn, of een I2P-URL van je adresboek.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Als u outproxies kent voor dit type tunnel (HTTP of SOCKS), vul ze dan in. Scheid meerdere proxies door middel van komma\'s.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Dit is het IP adres waarop je service runt, dit is meestal op dezelfde machine, dus 127.0.0.1 is standaard ingevuld.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Dit is de poort waar de service verbindingen op ontvangt.</string>

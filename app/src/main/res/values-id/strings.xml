@@ -161,7 +161,6 @@
   <string name="enabled">Diaktifkan</string>
   <string name="i2ptunnel_wizard_desc_name">Nama saluran, untuk identifikasi dalam daftar saluran.</string>
   <string name="i2ptunnel_wizard_desc_desc">Deskripsi saluran. Ini opsional dan murni informatif.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Jenis dalam tujuan layanan I2P yang saluran klien ini harus hubungkan. Hal ini bisa menjadi kunci tujuan basis 64 penuh, atau sebuah URL I2P dari buku alamat Anda.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Jika Anda tahu berbagai outproxy untuk jenis saluran ini (baik HTTP ataupun SOCKS), isikan mereka. Pisahkan proxy ganda dengan koma.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Ini adalah IP yang padanya berjalan layanan Anda, ini umumnya pada mesin yang sama, jadi 127.0.0.1 diisikan secara otomatis.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Ini adalah port yang padanya menerima koneksi layanan.</string>

@@ -23,6 +23,9 @@
   <string name="label_graphs">Graphen</string>
   <string name="button_router_off">Lange drücken, um I2P zu starten</string>
   <string name="button_router_on">I2P läuft (lange drücken, um zu stoppen)</string>
+  <string name="button_router_graceful">I2P wird in %s abgeschaltet</string>
+  <string name="button_shutdown_now">Lange drücken, um jetzt zu stoppen</string>
+  <string name="button_cancel_graceful">Lange drücken, um das Herunterfahren abzubrechen</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -173,7 +176,6 @@
   <string name="enabled">Aktiviert</string>
   <string name="i2ptunnel_wizard_desc_name">Der Name des Tunnels zur Erkennung in der Tunnelliste.</string>
   <string name="i2ptunnel_wizard_desc_desc">Eine optionale, aber für Sie aussagekräftige Beschreibung des Tunnels.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Bitte geben Sie hier das I2P-Ziel des Dienstes ein, zu dem dieser Tunnel führen soll. Dies kann ein voller Basis64-Zielschlüssel oder eine I2P URL aus dem Adressbuch sein.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Falls Sie Outproxys für diese Tunnelart kennen (entweder HTTP oder SOCKS), geben Sie sie hier ein. Trennen Sie mehrere Proxies mit Kommas.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Das ist die IP, unter der der Dienst erreichbar ist. Normalerweise ist er auf der gleichen Maschine, also wird 127.0.0.1 automatisch ausgefüllt.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Dies ist der Port, unter dem der Dienst erreichbar ist.</string>
@@ -190,9 +192,12 @@
   <string name="edit_tunnel">Tunnel bearbeiten</string>
   <string name="name">Name</string>
   <string name="description">Beschreibung</string>
+  <string name="auto_start">Automatischer Start</string>
   <string name="tunnel_summ_auto_start">Tunnel mit dem Router starten.</string>
   <string name="tunnel_cat_ports">Lokale Ports</string>
+  <string name="shared_client">Gemeinsamer Klient</string>
   <string name="target_destination">Zielort</string>
+  <string name="persistent_key">Persistenter Schlüssel</string>
   <string name="reachable_on">Erreichbarkeit ein</string>
   <string name="listen_port">Lauschport</string>
   <string name="client_ssl">Klient-SSL</string>
@@ -200,6 +205,7 @@
   <string name="irc">IRC</string>
   <string name="enable_dcc">DCC aktivieren</string>
   <string name="tunnel_summ_enable_dcc">IRC-Klienten die Verwendung von DCC erlauben</string>
+  <string name="website_domain_name">Webseiten-Domainname</string>
   <string name="target_host">Zielhost</string>
   <string name="target_port">Zielport</string>
   <string name="use_ssl">SSL verwenden</string>

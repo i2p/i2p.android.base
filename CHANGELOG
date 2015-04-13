@@ -1,6 +1,8 @@
-0.9.19
+0.9.19 / 2015-04-13 / 3cfb748946a5876dc06d5f81d811b142a88846f7
  * Made internal state handling more stable
  * Added graceful shutdown support
+ * Updated libjbigi to use GMP 6.0.0
+ * New libjbigi binary for armeabi-v7a to speed up newer devices
  * Improved logging
  * Bug fixes and translation updates
 
