@@ -25,7 +25,7 @@ public class IntListPreference extends ListPreference {
                 int intValue = getPersistedInt(0);
                 return String.valueOf(intValue);
             } catch (ClassCastException e) {
-                return getPersistedString("0");
+                return super.getPersistedString("0");
             }
         } else {
             return defaultReturnValue;
