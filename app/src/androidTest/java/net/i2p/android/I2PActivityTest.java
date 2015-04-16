@@ -33,21 +33,21 @@ public class I2PActivityTest extends ActivityInstrumentationTestCase2<I2PActivit
     public void testMainTabs() {
         onView(withId(R.id.router_onoff_button)).check(matches(isDisplayed()));
 
-        // Press "Addresses" tab
-        onView(withText(R.string.label_addresses)).perform(click());
-        onView(withId(R.id.router_onoff_button)).check(matches(not(isDisplayed())));
-        onView(withText(R.string.label_router)).check(matches(isDisplayed()));
-
         // Press "Tunnels" tab
         onView(allOf(withText(R.string.label_tunnels),
                 not(isDescendantOfA(withId(R.id.main_scrollview))))).perform(click());
-        onView(withText(R.string.label_router)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.router_onoff_button)).check(matches(not(isDisplayed())));
         onView(withText(R.string.label_i2ptunnel_client)).check(matches(isDisplayed()));
+
+        // Press "Addresses" tab
+        onView(withText(R.string.label_addresses)).perform(click());
+        onView(withText(R.string.label_i2ptunnel_client)).check(matches(not(isDisplayed())));
+        onView(withText(R.string.label_router)).check(matches(isDisplayed()));
 
         // Press "Console" tab
         onView(withText(R.string.label_console)).perform(click());
-        // Tunnels fragment should have been destroyed
-        onView(withText(R.string.label_i2ptunnel_client)).check(doesNotExist());
+        // Addressbook fragment should have been destroyed
+        onView(withText(R.string.label_router)).check(doesNotExist());
         onView(withId(R.id.router_onoff_button)).check(matches(isDisplayed()));
     }
 
@@ -56,13 +56,13 @@ public class I2PActivityTest extends ActivityInstrumentationTestCase2<I2PActivit
 
         onView(allOf(withId(R.id.pager), hasSibling(withId(R.id.main_toolbar)))).perform(swipeLeft());
         onView(withId(R.id.router_onoff_button)).check(matches(not(isDisplayed())));
-        onView(withText(R.string.label_router)).check(matches(isDisplayed()));
+        onView(withText(R.string.label_i2ptunnel_client)).check(matches(isDisplayed()));
 
         onView(allOf(withId(R.id.pager), hasSibling(withId(R.id.main_toolbar)))).perform(swipeLeft());
-        // TODO: test addressbook ViewPager
+        // TODO: test tunnels ViewPager
         onView(allOf(withId(R.id.pager), hasSibling(withId(R.id.main_toolbar)))).perform(swipeLeft());
-        onView(withText(R.string.label_router)).check(matches(not(isDisplayed())));
-        onView(withText(R.string.label_i2ptunnel_client)).check(matches(isDisplayed()));
+        onView(withText(R.string.label_i2ptunnel_client)).check(matches(not(isDisplayed())));
+        onView(withText(R.string.label_router)).check(matches(isDisplayed()));
         // TODO: test addressbook ViewPager
     }
 }
