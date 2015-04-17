@@ -1,9 +1,7 @@
 package net.i2p.android.router.service;
 
-import java.io.IOException;
-
-import net.i2p.I2PAppContext;
 import net.i2p.BOB.BOB;
+import net.i2p.I2PAppContext;
 import net.i2p.addressbook.DaemonThread;
 import net.i2p.android.apps.NewsFetcher;
 import net.i2p.android.router.util.Notifications;
@@ -13,6 +11,8 @@ import net.i2p.router.Job;
 import net.i2p.router.JobImpl;
 import net.i2p.router.RouterContext;
 import net.i2p.util.I2PAppThread;
+
+import java.io.IOException;
 
 /**
  * Load the clients we want.
@@ -88,8 +88,13 @@ class LoadClientsJob extends JobImpl {
         public void runJob() {
             Util.d("Starting i2ptunnel");
             TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
-            int sz = tcg.getControllers().size();
-            Util.d("i2ptunnel started " + sz + " clients");
+            try {
+                tcg.startup();
+                int sz = tcg.getControllers().size();
+                Util.d("i2ptunnel started " + sz + " clients");
+            } catch (IllegalArgumentException iae) {
+                Util.e("i2ptunnel failed to start", iae);
+            }
 
         }
     }
