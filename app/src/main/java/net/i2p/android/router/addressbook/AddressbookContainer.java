@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.viewpagerindicator.TitlePageIndicator;
+
 import net.i2p.android.router.R;
 
 public class AddressbookContainer extends Fragment
@@ -79,8 +81,10 @@ public class AddressbookContainer extends Fragment
 
         if (!mTwoPane) {
             mViewPager = (ViewPager) v.findViewById(R.id.pager);
+            TitlePageIndicator pageIndicator = (TitlePageIndicator) v.findViewById(R.id.page_indicator);
             mFragPagerAdapter = new AddressbookPagerAdapter(getActivity(), getChildFragmentManager());
             mViewPager.setAdapter(mFragPagerAdapter);
+            pageIndicator.setViewPager(mViewPager);
         }
 
         return v;

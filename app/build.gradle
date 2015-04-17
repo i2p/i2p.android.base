@@ -68,6 +68,9 @@ dependencies {
     }
     compile 'com.pnikosis:materialish-progress:1.4'
     compile 'com.eowise:recyclerview-stickyheaders:0.5.2@aar'
+    compile ('com.mcxiaoke.viewpagerindicator:library:2.4.1') {
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
 
     // Testing-only dependencies
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
@@ -83,6 +86,7 @@ dependencyVerification {
             'com.android.support:support-v4-preferencefragment:5470f5872514a6226fa1fc6f4e000991f38805691c534cf0bd2778911fc773ad',
             'com.pnikosis:materialish-progress:5dd770a78047d8dbf2690deb686675fe2b242a6d06bb52ef425c829454ca54b8',
             'com.eowise:recyclerview-stickyheaders:7b236da49b33b840e9ba6e7e4182218d1a2d9047236fdbc3ca947352f9b0883b',
+            'com.mcxiaoke.viewpagerindicator:library:470bbd2bec1ede64ad21efd6f02676807d22f1b526c4ac6a5b41a428c6e47e67',
     ]
 }
 
