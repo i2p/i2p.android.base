@@ -12,15 +12,17 @@
 - Console lights go out when navigating from addresses tab (tab or swipe)
 - Better handling of FABs obscuring content
     <psi> str4d: the + button on the tunnels screen gets in the way of opening kytv's irc tunnel
+- Fix race between RouterContext initialization and first console status update
 
 # Short-term
 
 - Disable uPnP when on cell networks
     <zzz> spewing UPnP out into cell networks is a waste of time at best and a security risk at worst, but you really want it for wifi
 - I2PTunnel
+  - Improve tunnel list status indicators
   - Show all messages somewhere
-  - Improve detail page, expose advanced settings
-  - Add edit page
+  - Improve detail page
+  - Don't show start/stop/restart until TCG has started
 - Progress feedback for addressbook subscriptions reload
 - Display release notes directly on new router version
 - Fill out help pages
