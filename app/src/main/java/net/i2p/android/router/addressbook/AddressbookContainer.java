@@ -67,15 +67,20 @@ public class AddressbookContainer extends Fragment
             mPrivateFrag = (AddressbookFragment) getChildFragmentManager().getFragment(
                     savedInstanceState, FRAGMENT_PRIVATE);
         } else if (mTwoPane) {
-            mRouterFrag = AddressbookFragment.newInstance(AddressbookFragment.ROUTER_BOOK);
-            mPrivateFrag = AddressbookFragment.newInstance(AddressbookFragment.PRIVATE_BOOK);
+            // TODO if these were instantiated in the background, wouldn't savedInstanceState != null?
+            mRouterFrag = (AddressbookFragment) getChildFragmentManager().findFragmentById(R.id.left_fragment);
+            mPrivateFrag = (AddressbookFragment) getChildFragmentManager().findFragmentById(R.id.right_fragment);
 
             // Set up the two pages
             FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-            if (getChildFragmentManager().findFragmentById(R.id.left_fragment) == null)
+            if (mRouterFrag == null) {
+                mRouterFrag = AddressbookFragment.newInstance(AddressbookFragment.ROUTER_BOOK);
                 ft.add(R.id.left_fragment, mRouterFrag);
-            if (getChildFragmentManager().findFragmentById(R.id.right_fragment) == null)
+            }
+            if (mPrivateFrag == null) {
+                mPrivateFrag = AddressbookFragment.newInstance(AddressbookFragment.PRIVATE_BOOK);
                 ft.add(R.id.right_fragment, mPrivateFrag);
+            }
             ft.commit();
         }
 
