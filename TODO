@@ -9,10 +9,19 @@
 - Browser
     <zzzccc> Bug report: i2p browser treats 302 as an error
     <zzzccc> Bug 2: rotate screen in i2p browser seems to go back one page
+- Fix race between RouterContext initialization and first console status update
+
+# New UI fixes
+
 - Console lights go out when navigating from addresses tab (tab or swipe)
 - Better handling of FABs obscuring content
     <psi> str4d: the + button on the tunnels screen gets in the way of opening kytv's irc tunnel
-- Fix race between RouterContext initialization and first console status update
+- Addressbook action items are in tunnel overflow menu after moving from console to tunnels
+- Disable tunnels and addressbook when router not running
+- Material design:
+  - Style for addressbook headers
+  - Two-pane margins
+  - Recommended activity margins for different screen sizes
 
 # Short-term
 
@@ -22,6 +31,7 @@
   - Improve tunnel list status indicators
   - Show all messages somewhere
   - Improve detail page
+    - Icons for tunnel types
 - Progress feedback for addressbook subscriptions reload
 - Display release notes directly on new router version
 - Fill out help pages
