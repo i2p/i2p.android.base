@@ -201,10 +201,10 @@ public class I2PActivity extends I2PActivityBase implements
                 Intent hi = new Intent(this, HelpActivity.class);
                 switch (mViewPager.getCurrentItem()) {
                     case 1:
-                        hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_ADDRESSBOOK);
+                        hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_I2PTUNNEL);
                         break;
                     case 2:
-                        hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_I2PTUNNEL);
+                        hi.putExtra(HelpActivity.CATEGORY, HelpActivity.CAT_ADDRESSBOOK);
                         break;
                 }
                 startActivity(hi);
