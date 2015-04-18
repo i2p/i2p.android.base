@@ -6,12 +6,7 @@
 
     <com.viewpagerindicator.TitlePageIndicator
         android:id="@+id/page_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/primary_text_disabled_material_dark"
-        app:footerColor="@color/primary"
-        app:selectedBold="false"
-        app:selectedColor="@color/primary_text_default_material_dark" />
+        style="@style/PagerIndicator" />
 
     <!-- The main content view -->
     <android.support.v4.view.ViewPager

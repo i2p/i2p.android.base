@@ -12,11 +12,10 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/PagerIndicator.FixedTextView"
             android:text="@string/label_router" />
 
-        <View style="@style/Divider.Horizontal" />
+        <View style="@style/PagerIndicator.FixedFooter" />
 
         <FrameLayout
             android:id="@+id/left_fragment"
@@ -31,11 +30,10 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/PagerIndicator.FixedTextView"
             android:text="@string/label_private" />
 
-        <View style="@style/Divider.Horizontal" />
+        <View style="@style/PagerIndicator.FixedFooter" />
 
         <FrameLayout
             android:id="@+id/right_fragment"

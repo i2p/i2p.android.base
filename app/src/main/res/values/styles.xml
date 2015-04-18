@@ -73,6 +73,31 @@
         <item name="android:textColor">@color/menu_label_text</item>
     </style>
 
+    <style name="Base.PagerIndicator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/pager_indicator_text_size</item>
+    </style>
+
+    <style name="PagerIndicator" parent="Base.PagerIndicator">
+        <item name="android:textColor">@color/pager_indicator_text_color</item>
+        <item name="footerColor">@color/pager_indicator_footer_color</item>
+        <item name="selectedBold">false</item>
+        <item name="selectedColor">@color/pager_indicator_selected_color</item>
+    </style>
+
+    <style name="PagerIndicator.FixedTextView" parent="Base.PagerIndicator">
+        <item name="android:layout_marginBottom">@dimen/pager_indicator_footer_padding</item>
+        <item name="android:layout_marginTop">@dimen/pager_indicator_top_padding</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/pager_indicator_selected_color</item>
+    </style>
+
+    <style name="PagerIndicator.FixedFooter" parent="Base.PagerIndicator">
+        <item name="android:layout_height">@dimen/pager_indicator_footer_line_height</item>
+        <item name="android:background">@color/pager_indicator_footer_color</item>
+    </style>
+
     <style name="WizardPageContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
