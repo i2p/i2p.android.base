@@ -21,6 +21,7 @@ import android.widget.Toast;
 import net.i2p.I2PAppContext;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
+import net.i2p.android.util.FragmentUtils;
 import net.i2p.app.ClientAppState;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 
@@ -53,12 +54,9 @@ public class TunnelDetailFragment extends Fragment {
 
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
-        try {
-            mCallback = (TunnelDetailListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnTunnelDeletedListener");
-        }
+        mCallback = FragmentUtils.getParent(this, TunnelDetailListener.class);
+        if (mCallback == null)
+            throw new ClassCastException("Parent must implement TunnelDetailListener");
 
     }
 
