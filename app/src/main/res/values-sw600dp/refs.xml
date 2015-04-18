@@ -2,6 +2,5 @@
 <resources>
     <item name="activity_navdrawer" type="layout">@layout/activity_twopane</item>
     <item name="container_addressbook" type="layout">@layout/container_addressbook_twopane</item>
-    <item name="container_tunnels" type="layout">@layout/container_tunnels_twopane</item>
     <item name="activity_help" type="layout">@layout/activity_help_twopane</item>
 </resources>

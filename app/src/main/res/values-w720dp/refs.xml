@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="container_tunnels" type="layout">@layout/container_tunnels_twopane</item>
+</resources>
