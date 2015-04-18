@@ -21,6 +21,7 @@ import android.widget.Toast;
 import net.i2p.I2PAppContext;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
+import net.i2p.app.ClientAppState;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 
 import java.util.List;
@@ -151,7 +152,9 @@ public class TunnelDetailFragment extends Fragment {
         MenuItem start = menu.findItem(R.id.action_start_tunnel);
         MenuItem stop = menu.findItem(R.id.action_stop_tunnel);
 
-        if (mTunnel != null) {
+        if (mTunnel != null && mGroup != null &&
+                (mGroup.getState() == ClientAppState.STARTING ||
+                        mGroup.getState() == ClientAppState.RUNNING)) {
             boolean isStopped = mTunnel.getStatus() == TunnelEntry.NOT_RUNNING;
 
             start.setVisible(isStopped);

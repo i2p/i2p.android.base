@@ -29,6 +29,7 @@ import net.i2p.android.router.util.Util;
 import net.i2p.android.util.FragmentUtils;
 import net.i2p.android.widget.DividerItemDecoration;
 import net.i2p.android.widget.LoadingRecyclerView;
+import net.i2p.app.ClientAppState;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.router.RouterContext;
 
@@ -219,10 +220,13 @@ public class TunnelListFragment extends Fragment implements
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         RouterContext rCtx = Util.getRouterContext();
+        boolean showActions = rCtx != null && mGroup != null &&
+                (mGroup.getState() == ClientAppState.STARTING ||
+                        mGroup.getState() == ClientAppState.RUNNING);
 
-        menu.findItem(R.id.action_start_all_tunnels).setVisible(rCtx != null);
-        menu.findItem(R.id.action_stop_all_tunnels).setVisible(rCtx != null);
-        menu.findItem(R.id.action_restart_all_tunnels).setVisible(rCtx != null);
+        menu.findItem(R.id.action_start_all_tunnels).setVisible(showActions);
+        menu.findItem(R.id.action_stop_all_tunnels).setVisible(showActions);
+        menu.findItem(R.id.action_restart_all_tunnels).setVisible(showActions);
     }
 
     @Override

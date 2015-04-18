@@ -22,7 +22,6 @@
   - Improve tunnel list status indicators
   - Show all messages somewhere
   - Improve detail page
-  - Don't show start/stop/restart until TCG has started
 - Progress feedback for addressbook subscriptions reload
 - Display release notes directly on new router version
 - Fill out help pages
