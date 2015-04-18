@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.I2PConstants;
+import net.i2p.android.router.service.State;
 import net.i2p.data.DataHelper;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
@@ -337,5 +338,12 @@ public abstract class Util implements I2PConstants {
             if (in != null) try { in.close(); } catch (IOException ioe) {}
             if (fin != null) try { fin.close(); } catch (IOException ioe) {}
         }
+    }
+
+    public static boolean isStopped(State state) {
+        return state == State.STOPPING || state == State.STOPPED ||
+                state == State.MANUAL_STOPPING || state == State.MANUAL_STOPPED ||
+                state == State.MANUAL_QUITTING || state == State.MANUAL_QUITTED ||
+                state == State.WAITING;
     }
 }

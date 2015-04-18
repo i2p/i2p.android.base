@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +24,7 @@ import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Util;
 import net.i2p.android.util.MemoryFragmentPagerAdapter;
+import net.i2p.android.widget.CustomViewPager;
 import net.i2p.android.widget.SlidingTabLayout;
 
 import java.io.File;
@@ -40,8 +40,9 @@ import java.io.File;
  */
 public class I2PActivity extends I2PActivityBase implements
         MainFragment.RouterControlListener {
-    ViewPager mViewPager;
+    CustomViewPager mViewPager;
     ViewPagerAdapter mViewPagerAdapter;
+    SlidingTabLayout mSlidingTabLayout;
 
     private boolean mAutoStartFromIntent = false;
 
@@ -53,22 +54,22 @@ public class I2PActivity extends I2PActivityBase implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager = (CustomViewPager) findViewById(R.id.pager);
         mViewPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
 
-        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         // Center the tabs in the layout
-        slidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setDistributeEvenly(true);
         // Customize tab color
-        slidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
                 return getResources().getColor(R.color.accent);
             }
         });
         // Give the SlidingTabLayout the ViewPager
-        slidingTabLayout.setViewPager(mViewPager);
+        mSlidingTabLayout.setViewPager(mViewPager);
     }
 
     public static class ViewPagerAdapter extends MemoryFragmentPagerAdapter {
@@ -168,6 +169,7 @@ public class I2PActivity extends I2PActivityBase implements
 
         LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
         IntentFilter filter = new IntentFilter();
+        filter.addAction(RouterService.LOCAL_BROADCAST_STATE_NOTIFICATION);
         filter.addAction(RouterService.LOCAL_BROADCAST_STATE_CHANGED);
         lbm.registerReceiver(onStateChange, filter);
     }
@@ -176,12 +178,26 @@ public class I2PActivity extends I2PActivityBase implements
         @Override
         public void onReceive(Context context, Intent intent) {
             State state = intent.getParcelableExtra(RouterService.LOCAL_BROADCAST_EXTRA_STATE);
+
+            boolean stopped = Util.isStopped(state);
+            mViewPager.setPagingEnabled(!stopped);
+            if (stopped && mViewPager.getCurrentItem() != 0)
+                mViewPager.setCurrentItem(0);
+
             if (state == State.RUNNING && mAutoStartFromIntent) {
                 I2PActivity.this.setResult(RESULT_OK);
                 finish();
             }
         }
     };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Triggers loader init via updateState() if the router is running
+        LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
