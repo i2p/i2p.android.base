@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- General -->
-    <string name="TUNNEL_TYPE">type</string>
-    <string name="TUNNEL_NAME">name</string>
-    <string name="TUNNEL_DESCRIPTION">description</string>
-    <string name="TUNNEL_USE_SSL">useSSL</string>
-    <string name="TUNNEL_START_ON_LOAD">startOnLoad</string>
-    <string name="TUNNEL_PRIV_KEY_FILE">privKeyFile</string>
+    <string name="TUNNEL_TYPE" translatable="false">type</string>
+    <string name="TUNNEL_NAME" translatable="false">name</string>
+    <string name="TUNNEL_DESCRIPTION" translatable="false">description</string>
+    <string name="TUNNEL_USE_SSL" translatable="false">useSSL</string>
+    <string name="TUNNEL_START_ON_LOAD" translatable="false">startOnLoad</string>
+    <string name="TUNNEL_PRIV_KEY_FILE" translatable="false">privKeyFile</string>
 
     <!-- Client -->
-    <string name="TUNNEL_SHARED_CLIENT">sharedClient</string>
-    <string name="TUNNEL_OPT_PERSISTENT_KEY">persistentKey</string>
-    <string name="TUNNEL_INTERFACE">interface</string>
-    <string name="TUNNEL_LISTEN_PORT">listenPort</string>
-    <string name="TUNNEL_DEST">targetDestination</string>
-    <string name="TUNNEL_PROXIES">proxyList</string>
-    <string name="TUNNEL_HTTPCLIENT_SSL_OUTPROXIES">i2ptunnel.httpclient.SSLOutproxies</string>
-    <string name="TUNNEL_IRCCLIENT_ENABLE_DCC">i2ptunnel.ircclient.enableDCC</string>
+    <string name="TUNNEL_SHARED_CLIENT" translatable="false">sharedClient</string>
+    <string name="TUNNEL_OPT_PERSISTENT_KEY" translatable="false">persistentKey</string>
+    <string name="TUNNEL_INTERFACE" translatable="false">interface</string>
+    <string name="TUNNEL_LISTEN_PORT" translatable="false">listenPort</string>
+    <string name="TUNNEL_DEST" translatable="false">targetDestination</string>
+    <string name="TUNNEL_PROXIES" translatable="false">proxyList</string>
+    <string name="TUNNEL_HTTPCLIENT_SSL_OUTPROXIES" translatable="false">i2ptunnel.httpclient.SSLOutproxies</string>
+    <string name="TUNNEL_IRCCLIENT_ENABLE_DCC" translatable="false">i2ptunnel.ircclient.enableDCC</string>
 
     <!-- Server -->
-    <string name="TUNNEL_TARGET_HOST">targetHost</string>
-    <string name="TUNNEL_TARGET_PORT">targetPort</string>
-    <string name="TUNNEL_SPOOFED_HOST">spoofedHost</string>
+    <string name="TUNNEL_TARGET_HOST" translatable="false">targetHost</string>
+    <string name="TUNNEL_TARGET_PORT" translatable="false">targetPort</string>
+    <string name="TUNNEL_SPOOFED_HOST" translatable="false">spoofedHost</string>
 
     <!-- General advanced -->
-    <string name="TUNNEL_OPT_LENGTH">tunnelPool.length</string>
-    <string name="TUNNEL_OPT_VARIANCE">tunnelPool.lengthVariance</string>
-    <string name="TUNNEL_OPT_QUANTITY">tunnelPool.quantity</string>
-    <string name="TUNNEL_OPT_BACKUP_QUANTITY">tunnelPool.backupQuantity</string>
-    <string name="TUNNEL_OPT_PROFILE">profile</string>
-    <string name="TUNNEL_OPT_REDUCE_IDLE">i2cp.reduceOnIdle</string>
-    <string name="TUNNEL_OPT_REDUCE_QUANTITY">i2cp.reduceQuantity</string>
-    <string name="TUNNEL_OPT_REDUCE_TIME">i2cp.reduceIdleTime</string>
-    <string name="TUNNEL_OPT_SIGTYPE">sigType</string>
-    <string name="TUNNEL_OPT_CUSTOM_OPTIONS">customOptions</string>
+    <string name="TUNNEL_OPT_LENGTH" translatable="false">tunnelPool.length</string>
+    <string name="TUNNEL_OPT_VARIANCE" translatable="false">tunnelPool.lengthVariance</string>
+    <string name="TUNNEL_OPT_QUANTITY" translatable="false">tunnelPool.quantity</string>
+    <string name="TUNNEL_OPT_BACKUP_QUANTITY" translatable="false">tunnelPool.backupQuantity</string>
+    <string name="TUNNEL_OPT_PROFILE" translatable="false">profile</string>
+    <string name="TUNNEL_OPT_REDUCE_IDLE" translatable="false">i2cp.reduceOnIdle</string>
+    <string name="TUNNEL_OPT_REDUCE_QUANTITY" translatable="false">i2cp.reduceQuantity</string>
+    <string name="TUNNEL_OPT_REDUCE_TIME" translatable="false">i2cp.reduceIdleTime</string>
+    <string name="TUNNEL_OPT_SIGTYPE" translatable="false">sigType</string>
+    <string name="TUNNEL_OPT_CUSTOM_OPTIONS" translatable="false">customOptions</string>
 
     <!-- Client advanced -->
-    <string name="TUNNEL_OPT_DELAY_CONNECT">delayConnect</string>
-    <string name="TUNNEL_OPT_DELAY_OPEN">i2cp.delayOpen</string>
-    <string name="TUNNEL_OPT_CLOSE_IDLE">i2cp.closeOnIdle</string>
-    <string name="TUNNEL_OPT_CLOSE_TIME">i2cp.closeIdleTime</string>
-    <string name="TUNNEL_OTP_NEW_KEYS">newKeys</string>
-    <string name="TUNNEL_OPT_HTTPCLIENT_PASS_UA">i2ptunnel.httpclient.sendUserAgent</string>
-    <string name="TUNNEL_OPT_HTTPCLIENT_PASS_REFERER">i2ptunnel.httpclient.sendReferer</string>
-    <string name="TUNNEL_OPT_HTTPCLIENT_PASS_ACCEPT">i2ptunnel.httpclient.sendAccept</string>
-    <string name="TUNNEL_OPT_HTTPCLIENT_ALLOW_SSL">i2ptunnel.httpclient.allowInternalSSL</string>
-    <string name="TUNNEL_OPT_LOCAL_AUTH">proxyAuth</string>
-    <string name="TUNNEL_OPT_LOCAL_USERNAME">proxyUsername</string>
-    <string name="TUNNEL_OPT_LOCAL_PASSWORD">proxyPassword</string>
-    <string name="TUNNEL_OPT_OUTPROXY_AUTH">outproxyAuth</string>
-    <string name="TUNNEL_OPT_OUTPROXY_USERNAME">outproxyUsername</string>
-    <string name="TUNNEL_OPT_OUTPROXY_PASSWORD">outproxyPassword</string>
-    <string name="TUNNEL_OPT_JUMP_LIST">jumpList</string>
+    <string name="TUNNEL_OPT_DELAY_CONNECT" translatable="false">delayConnect</string>
+    <string name="TUNNEL_OPT_DELAY_OPEN" translatable="false">i2cp.delayOpen</string>
+    <string name="TUNNEL_OPT_CLOSE_IDLE" translatable="false">i2cp.closeOnIdle</string>
+    <string name="TUNNEL_OPT_CLOSE_TIME" translatable="false">i2cp.closeIdleTime</string>
+    <string name="TUNNEL_OTP_NEW_KEYS" translatable="false">newKeys</string>
+    <string name="TUNNEL_OPT_HTTPCLIENT_PASS_UA" translatable="false">i2ptunnel.httpclient.sendUserAgent</string>
+    <string name="TUNNEL_OPT_HTTPCLIENT_PASS_REFERER" translatable="false">i2ptunnel.httpclient.sendReferer</string>
+    <string name="TUNNEL_OPT_HTTPCLIENT_PASS_ACCEPT" translatable="false">i2ptunnel.httpclient.sendAccept</string>
+    <string name="TUNNEL_OPT_HTTPCLIENT_ALLOW_SSL" translatable="false">i2ptunnel.httpclient.allowInternalSSL</string>
+    <string name="TUNNEL_OPT_LOCAL_AUTH" translatable="false">proxyAuth</string>
+    <string name="TUNNEL_OPT_LOCAL_USERNAME" translatable="false">proxyUsername</string>
+    <string name="TUNNEL_OPT_LOCAL_PASSWORD" translatable="false">proxyPassword</string>
+    <string name="TUNNEL_OPT_OUTPROXY_AUTH" translatable="false">outproxyAuth</string>
+    <string name="TUNNEL_OPT_OUTPROXY_USERNAME" translatable="false">outproxyUsername</string>
+    <string name="TUNNEL_OPT_OUTPROXY_PASSWORD" translatable="false">outproxyPassword</string>
+    <string name="TUNNEL_OPT_JUMP_LIST" translatable="false">jumpList</string>
 
     <!-- Server advanced -->
-    <string name="TUNNEL_OPT_ENCRYPT">i2cp.encryptLeaseSet</string>
-    <string name="TUNNEL_OPT_ENCRYPT_KEY">i2cp.leaseSetKey</string>
-    <string name="TUNNEL_OPT_ACCESS_MODE">accessMode</string>
-    <string name="TUNNEL_OPT_ACCESS_LIST">i2cp.accessList</string>
-    <string name="TUNNEL_OPT_REJECT_INPROXY">rejectInproxy</string>
-    <string name="TUNNEL_OPT_UNIQUE_LOCAL">enableUniqueLocal</string>
-    <string name="TUNNEL_OPT_MULTIHOME">multihome</string>
-    <string name="TUNNEL_OPT_LIMIT_MINUTE">i2p.streaming.maxConnsPerMinute</string>
-    <string name="TUNNEL_OPT_LIMIT_HOUR">i2p.streaming.maxConnsPerHour</string>
-    <string name="TUNNEL_OPT_LIMIT_DAY">i2p.streaming.maxConnsPerDay</string>
-    <string name="TUNNEL_OPT_TOTAL_MINUTE">i2p.streaming.maxTotalConnsPerMinute</string>
-    <string name="TUNNEL_OPT_TOTAL_HOUR">i2p.streaming.maxTotalConnsPerHour</string>
-    <string name="TUNNEL_OPT_TOTAL_DAY">i2p.streaming.maxTotalConnsPerDay</string>
-    <string name="TUNNEL_OPT_MAX_STREAMS">i2p.streaming.maxConcurrentStreams</string>
-    <string name="TUNNEL_OPT_POST_MAX">maxPosts</string>
-    <string name="TUNNEL_OPT_POST_BAN_TIME">postBanTime</string>
-    <string name="TUNNEL_OPT_POST_TOTAL_MAX">maxTotalPosts</string>
-    <string name="TUNNEL_OPT_POST_TOTAL_BAN_TIME">postTotalBanTime</string>
-    <string name="TUNNEL_OPT_POST_CHECK_TIME">postCheckTime</string>
+    <string name="TUNNEL_OPT_ENCRYPT" translatable="false">i2cp.encryptLeaseSet</string>
+    <string name="TUNNEL_OPT_ENCRYPT_KEY" translatable="false">i2cp.leaseSetKey</string>
+    <string name="TUNNEL_OPT_ACCESS_MODE" translatable="false">accessMode</string>
+    <string name="TUNNEL_OPT_ACCESS_LIST" translatable="false">i2cp.accessList</string>
+    <string name="TUNNEL_OPT_REJECT_INPROXY" translatable="false">rejectInproxy</string>
+    <string name="TUNNEL_OPT_UNIQUE_LOCAL" translatable="false">enableUniqueLocal</string>
+    <string name="TUNNEL_OPT_MULTIHOME" translatable="false">multihome</string>
+    <string name="TUNNEL_OPT_LIMIT_MINUTE" translatable="false">i2p.streaming.maxConnsPerMinute</string>
+    <string name="TUNNEL_OPT_LIMIT_HOUR" translatable="false">i2p.streaming.maxConnsPerHour</string>
+    <string name="TUNNEL_OPT_LIMIT_DAY" translatable="false">i2p.streaming.maxConnsPerDay</string>
+    <string name="TUNNEL_OPT_TOTAL_MINUTE" translatable="false">i2p.streaming.maxTotalConnsPerMinute</string>
+    <string name="TUNNEL_OPT_TOTAL_HOUR" translatable="false">i2p.streaming.maxTotalConnsPerHour</string>
+    <string name="TUNNEL_OPT_TOTAL_DAY" translatable="false">i2p.streaming.maxTotalConnsPerDay</string>
+    <string name="TUNNEL_OPT_MAX_STREAMS" translatable="false">i2p.streaming.maxConcurrentStreams</string>
+    <string name="TUNNEL_OPT_POST_MAX" translatable="false">maxPosts</string>
+    <string name="TUNNEL_OPT_POST_BAN_TIME" translatable="false">postBanTime</string>
+    <string name="TUNNEL_OPT_POST_TOTAL_MAX" translatable="false">maxTotalPosts</string>
+    <string name="TUNNEL_OPT_POST_TOTAL_BAN_TIME" translatable="false">postTotalBanTime</string>
+    <string name="TUNNEL_OPT_POST_CHECK_TIME" translatable="false">postCheckTime</string>
 
     <!-- Categories -->
-    <string name="TUNNEL_CAT_GENERAL">generalCategory</string>
-    <string name="TUNNEL_CAT_PORT">portCategory</string>
-    <string name="TUNNEL_CAT_ADVANCED">advanced</string>
-    <string name="TUNNEL_CAT_TUNNEL_PARAMS">tunnelParamsCategory</string>
-    <string name="TUNNEL_CAT_ACCESS_CONTROL">accessControlCategory</string>
-    <string name="TUNNEL_CAT_IDLE">idleCategory</string>
+    <string name="TUNNEL_CAT_GENERAL" translatable="false">generalCategory</string>
+    <string name="TUNNEL_CAT_PORT" translatable="false">portCategory</string>
+    <string name="TUNNEL_CAT_ADVANCED" translatable="false">advanced</string>
+    <string name="TUNNEL_CAT_TUNNEL_PARAMS" translatable="false">tunnelParamsCategory</string>
+    <string name="TUNNEL_CAT_ACCESS_CONTROL" translatable="false">accessControlCategory</string>
+    <string name="TUNNEL_CAT_IDLE" translatable="false">idleCategory</string>
 </resources>

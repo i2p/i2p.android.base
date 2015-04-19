@@ -23,6 +23,6 @@
     <bool name="DEFAULT_CLOSE_ON_IDLE">true</bool>
     <integer name="DEFAULT_CLOSE_TIME">30</integer>
     <bool name="DEFAULT_NEW_KEYS">false</bool>
-    <string name="DEFAULT_JUMP_LIST">http://i2host.i2p/cgi-bin/i2hostjump?
+    <string name="DEFAULT_JUMP_LIST" translatable="false">http://i2host.i2p/cgi-bin/i2hostjump?
 http://stats.i2p/cgi-bin/jump.cgi?a=</string>
 </resources>
