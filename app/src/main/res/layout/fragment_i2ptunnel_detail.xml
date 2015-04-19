@@ -45,6 +45,13 @@
         style="@style/ListItem.TextOnly"
         android:text="Tunnel details" />
 
+    <View
+        style="@style/Divider.Horizontal"
+        android:layout_marginBottom="@dimen/list_vertical_padding"
+        android:layout_marginLeft="@dimen/listitem_text_left_margin"
+        android:layout_marginStart="@dimen/listitem_text_left_margin"
+        android:layout_marginTop="@dimen/list_vertical_padding" />
+
     <RelativeLayout
         android:id="@+id/tunnel_target_interface_port_item"
         style="@style/ListItem.TwoLines">
