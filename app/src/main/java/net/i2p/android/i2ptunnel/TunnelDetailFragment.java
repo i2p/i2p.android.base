@@ -124,6 +124,7 @@ public class TunnelDetailFragment extends Fragment {
                 case "httpbidirserver":
                     accessIfacePort.setText(mTunnel.getClientLink(false));
                     setupOpen(accessIfaceOpen, true);
+                    v.findViewById(R.id.icon_link_access).setVisibility(View.GONE);
                     targetIfacePort.setText(mTunnel.getServerLink(false));
                     setupOpen(targetIfaceOpen, false);
                     break;
