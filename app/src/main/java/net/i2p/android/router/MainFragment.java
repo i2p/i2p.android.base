@@ -189,6 +189,10 @@ public class MainFragment extends I2PFragmentBase {
             State state = intent.getParcelableExtra(RouterService.LOCAL_BROADCAST_EXTRA_STATE);
             if (lastRouterState == null || lastRouterState != state) {
                 updateState(state);
+                // If we have stopped, clear the status info immediately
+                if (Util.isStopped(state)) {
+                    updateOneShot();
+                }
                 lastRouterState = state;
             }
         }
@@ -267,14 +271,6 @@ public class MainFragment extends I2PFragmentBase {
                     tv.setText("Stopping I2P");
                 }
             }
-        }
-
-        if (showOnOff && !isOn) {
-            // Sometimes the final state message from the RouterService
-            // is not received. Ensure that the state image is correct.
-            // TODO: Fix the race between RouterService shutdown and
-            // IRouterState unbinding.
-            updateState(State.INIT);
         }
     }
 

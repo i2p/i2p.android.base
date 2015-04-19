@@ -179,9 +179,9 @@ public class I2PActivity extends I2PActivityBase implements
         public void onReceive(Context context, Intent intent) {
             State state = intent.getParcelableExtra(RouterService.LOCAL_BROADCAST_EXTRA_STATE);
 
-            boolean stopped = Util.isStopped(state);
-            mViewPager.setPagingEnabled(!stopped);
-            if (stopped && mViewPager.getCurrentItem() != 0)
+            boolean pagingDisabled = Util.isStopping(state) || Util.isStopped(state);
+            mViewPager.setPagingEnabled(!pagingDisabled);
+            if (pagingDisabled && mViewPager.getCurrentItem() != 0)
                 mViewPager.setCurrentItem(0);
 
             if (state == State.RUNNING && mAutoStartFromIntent) {

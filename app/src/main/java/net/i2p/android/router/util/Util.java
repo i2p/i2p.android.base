@@ -340,10 +340,16 @@ public abstract class Util implements I2PConstants {
         }
     }
 
+    public static boolean isStopping(State state) {
+        return state == State.STOPPING ||
+                state == State.MANUAL_STOPPING ||
+                state == State.MANUAL_QUITTING;
+    }
+
     public static boolean isStopped(State state) {
-        return state == State.STOPPING || state == State.STOPPED ||
-                state == State.MANUAL_STOPPING || state == State.MANUAL_STOPPED ||
-                state == State.MANUAL_QUITTING || state == State.MANUAL_QUITTED ||
+        return state == State.STOPPED ||
+                state == State.MANUAL_STOPPED ||
+                state == State.MANUAL_QUITTED ||
                 state == State.WAITING;
     }
 }
