@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +63,6 @@ public class TunnelDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
 
         String error;
         try {
@@ -90,6 +89,16 @@ public class TunnelDetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_i2ptunnel_detail, container, false);
 
         if (mTunnel != null) {
+            Toolbar toolbar = (Toolbar) v.findViewById(R.id.detail_toolbar);
+            toolbar.inflateMenu(R.menu.fragment_i2ptunnel_detail_actions);
+            prepareToolbarMenu(toolbar.getMenu());
+            toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    return onToolbarItemSelected(menuItem);
+                }
+            });
+
             TextView name = (TextView) v.findViewById(R.id.tunnel_name);
             name.setText(mTunnel.getName());
 
@@ -136,13 +145,7 @@ public class TunnelDetailFragment extends Fragment {
         return v;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.fragment_i2ptunnel_detail_actions, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    private void prepareToolbarMenu(Menu menu) {
         MenuItem start = menu.findItem(R.id.action_start_tunnel);
         MenuItem stop = menu.findItem(R.id.action_stop_tunnel);
 
@@ -165,8 +168,7 @@ public class TunnelDetailFragment extends Fragment {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    private boolean onToolbarItemSelected(MenuItem item) {
         if (mTunnel == null)
             return false;
 

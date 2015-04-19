@@ -2,27 +2,20 @@ package net.i2p.android.i2ptunnel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import net.i2p.android.I2PActivityBase;
-import net.i2p.android.router.R;
 
 public class TunnelDetailActivity extends I2PActivityBase implements
         TunnelDetailFragment.TunnelDetailListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_onepane);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         if (savedInstanceState == null) {
             int tunnelId = getIntent().getIntExtra(TunnelDetailFragment.TUNNEL_ID, 0);
             TunnelDetailFragment detailFrag = TunnelDetailFragment.newInstance(tunnelId);
             getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_fragment, detailFrag).commit();
+                .add(android.R.id.content, detailFrag).commit();
         }
     }
 
