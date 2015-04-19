@@ -29,8 +29,7 @@
 - I2PTunnel
   - Improve tunnel list status indicators
   - Show all messages somewhere
-  - Improve detail page
-    - Icons for tunnel types
+  - Icons/header images for tunnel types on details page
 - Progress feedback for addressbook subscriptions reload
 - Display release notes directly on new router version
 - Fill out help pages
