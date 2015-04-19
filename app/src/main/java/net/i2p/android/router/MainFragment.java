@@ -52,6 +52,7 @@ public class MainFragment extends I2PFragmentBase {
     private Runnable _updater;
     private Runnable _oneShotUpdate;
     private String _savedStatus;
+    private ScrollView mScrollView;
     private ImageView _lightImage;
     private boolean _keep = true;
     private boolean _startPressed = false;
@@ -117,6 +118,8 @@ public class MainFragment extends I2PFragmentBase {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
+        mScrollView = (ScrollView) v.findViewById(R.id.main_scrollview);
+
         _lightImage = (ImageView) v.findViewById(R.id.main_lights);
         _lightImage.setImageResource(R.drawable.routerlogo_0);
 
@@ -151,7 +154,7 @@ public class MainFragment extends I2PFragmentBase {
             @Override
             public boolean onLongClick(View view) {
                 if (mCallback.isGracefulShutdownInProgress())
-                    if(mCallback.onCancelGracefulShutdownClicked())
+                    if (mCallback.onCancelGracefulShutdownClicked())
                         updateOneShot();
                 return true;
             }
@@ -332,7 +335,10 @@ public class MainFragment extends I2PFragmentBase {
 
     private void updateStatus() {
         RouterContext ctx = getRouterContext();
-        ScrollView sv = (ScrollView) getActivity().findViewById(R.id.main_scrollview);
+        View statusView = getActivity().findViewById(R.id.status_container);
+        // In landscape, hide the entire scrollview
+        if (statusView == null)
+            statusView = mScrollView;
         LinearLayout vStatus = (LinearLayout) getActivity().findViewById(R.id.main_status);
         TextView vStatusText = (TextView) getActivity().findViewById(R.id.main_status_text);
 
@@ -341,7 +347,7 @@ public class MainFragment extends I2PFragmentBase {
             updateState(State.WAITING);
             vStatusText.setText("No Internet connection is available");
             vStatus.setVisibility(View.VISIBLE);
-            sv.setVisibility(View.VISIBLE);
+            statusView.setVisibility(View.VISIBLE);
         } else if(ctx != null) {
             if(_startPressed) {
                 _startPressed = false;
@@ -431,11 +437,11 @@ public class MainFragment extends I2PFragmentBase {
             } else {
                 vStatus.setVisibility(View.GONE);
             }
-            sv.setVisibility(View.VISIBLE);
+            statusView.setVisibility(View.VISIBLE);
         } else {
             // network but no router context
             vStatusText.setText("Not running");
-            sv.setVisibility(View.INVISIBLE);
+            statusView.setVisibility(View.INVISIBLE);
             /**
              * **
              * RouterService svc = _routerService; String status = "connected? "
