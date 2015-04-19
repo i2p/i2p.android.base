@@ -9,7 +9,6 @@
 - Browser
     <zzzccc> Bug report: i2p browser treats 302 as an error
     <zzzccc> Bug 2: rotate screen in i2p browser seems to go back one page
-- Fix race between RouterContext initialization and first console status update
 
 # New UI fixes
 

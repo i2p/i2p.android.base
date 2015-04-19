@@ -232,7 +232,12 @@ public class MainFragment extends I2PFragmentBase {
 
         public void run() {
             updateVisibility();
-            updateStatus();
+            try {
+                updateStatus();
+            } catch (NullPointerException npe) {
+                // RouterContext wasn't quite ready
+                Util.w("Status was updated before RouterContext was ready", npe);
+            }
         }
     }
 
@@ -244,7 +249,12 @@ public class MainFragment extends I2PFragmentBase {
         public void run() {
             updateVisibility();
             if(counter++ % toloop == 0) {
-                updateStatus();
+                try {
+                    updateStatus();
+                } catch (NullPointerException npe) {
+                    // RouterContext wasn't quite ready
+                    Util.w("Status was updated before RouterContext was ready", npe);
+                }
             }
             //_handler.postDelayed(this, 2500);
             _handler.postDelayed(this, delay);
