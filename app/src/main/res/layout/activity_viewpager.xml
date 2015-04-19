@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:elevation="2dp"
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
@@ -20,9 +21,16 @@
         android:background="?attr/colorPrimary"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-    <net.i2p.android.widget.CustomViewPager
-        android:id="@+id/pager"
+    <net.i2p.android.widget.DrawShadowFrameLayout
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:clipChildren="false"
+        app:shadowDrawable="@drawable/header_shadow">
+
+        <net.i2p.android.widget.CustomViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </net.i2p.android.widget.DrawShadowFrameLayout>
 </LinearLayout>
