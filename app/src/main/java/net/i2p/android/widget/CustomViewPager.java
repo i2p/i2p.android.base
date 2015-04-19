@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
 
 public class CustomViewPager extends ViewPager {
     private boolean mEnabled;
@@ -31,7 +32,9 @@ public class CustomViewPager extends ViewPager {
         if (mEnabled || item == 0)
             super.setCurrentItem(item);
         else
-            Toast.makeText(getContext(), R.string.router_not_running, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), Util.getRouterContext() == null ?
+                    R.string.router_not_running : R.string.router_shutting_down,
+                    Toast.LENGTH_SHORT).show();
     }
 
     public void setPagingEnabled(boolean enabled) {
