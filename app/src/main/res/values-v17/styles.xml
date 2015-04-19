@@ -12,4 +12,8 @@
     <style name="ListItemContent.Text" parent="Base.ListItemContent.Text">
         <item name="android:layout_marginStart">@dimen/listitem_text_left_margin</item>
     </style>
+
+    <style name="ListItemContent.Action" parent="Base.ListItemContent.Action">
+        <item name="android:layout_marginStart">@dimen/listitem_horizontal_margin</item>
+    </style>
 </resources>

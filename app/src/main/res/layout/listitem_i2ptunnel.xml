@@ -25,20 +25,6 @@
             android:layout_alignParentStart="true"
             android:text="Tunnel name" />
 
-        <!-- Open link -->
-        <ImageView
-            android:id="@+id/tunnel_open"
-            android:layout_width="@dimen/listitem_icon_size"
-            android:layout_height="@dimen/listitem_icon_size"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/listitem_horizontal_margin"
-            android:layout_marginStart="@dimen/listitem_horizontal_margin"
-            android:contentDescription="Open"
-            android:src="@drawable/ic_open_in_browser_white_24dp"
-            android:visibility="gone" />
-
         <!-- Interface:port the tunnel listens on or points to -->
         <TextView
             android:id="@+id/tunnel_interface_port"
@@ -48,9 +34,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
             android:layout_toEndOf="@id/tunnel_name"
-            android:layout_toLeftOf="@id/tunnel_open"
             android:layout_toRightOf="@id/tunnel_name"
-            android:layout_toStartOf="@id/tunnel_open"
             android:ellipsize="start"
             android:gravity="right"
             android:maxLines="1"
@@ -62,8 +46,6 @@
             android:id="@+id/tunnel_description"
             style="@style/ListItemContent.Text.Second.TwoLines"
             android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@id/tunnel_open"
-            android:layout_toStartOf="@id/tunnel_open"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Tunnel description" />

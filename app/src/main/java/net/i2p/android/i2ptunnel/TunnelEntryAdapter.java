@@ -1,11 +1,6 @@
 package net.i2p.android.i2ptunnel;
 
-import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,7 +35,6 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public TextView name;
         public TextView description;
         public TextView interfacePort;
-        public View open;
 
         public TunnelViewHolder(View itemView) {
             super(itemView);
@@ -49,7 +43,6 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             name = (TextView) itemView.findViewById(R.id.tunnel_name);
             description = (TextView) itemView.findViewById(R.id.tunnel_description);
             interfacePort = (TextView) itemView.findViewById(R.id.tunnel_interface_port);
-            open = itemView.findViewById(R.id.tunnel_open);
         }
     }
 
@@ -146,39 +139,6 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 tvh.name.setText(tunnel.getName());
                 tvh.description.setText(tunnel.getDescription());
                 tvh.interfacePort.setText(tunnel.getTunnelLink(false));
-
-                if (tunnel.isRunning() && tunnel.isTunnelLinkValid()) {
-                    tvh.open.setVisibility(View.VISIBLE);
-                    tvh.open.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse(tunnel.getTunnelLink(true)));
-                            try {
-                                mCtx.startActivity(i);
-                            } catch (ActivityNotFoundException e) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
-                                builder.setTitle(R.string.install_recommended_app)
-                                        .setMessage(R.string.app_needed_for_this_tunnel_type)
-                                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                Uri uri = tunnel.getRecommendedAppForTunnel();
-                                                if (uri != null) {
-                                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                                    mCtx.startActivity(intent);
-                                                }
-                                            }
-                                        })
-                                        .setNegativeButton(net.i2p.android.lib.client.R.string.no, new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                            }
-                                        });
-                                builder.show();
-                            }
-                        }
-                    });
-                } else
-                    tvh.open.setVisibility(View.GONE);
 
                 tvh.itemView.setSelected(mIsTwoPane && position == mActivatedPosition);
                 tvh.itemView.setOnClickListener(new View.OnClickListener() {

@@ -153,6 +153,14 @@
         <item name="android:layout_marginBottom">@dimen/listitem_text_bottom_margin_two_lines</item>
     </style>
 
+    <style name="Base.ListItemContent.Action" parent="ListItemContent">
+        <item name="android:layout_width">@dimen/listitem_icon_size</item>
+        <item name="android:layout_height">@dimen/listitem_icon_size</item>
+        <item name="android:layout_marginLeft">@dimen/listitem_horizontal_margin</item>
+    </style>
+
+    <style name="ListItemContent.Action" parent="Base.ListItemContent.Action"/>
+
     <!-- Wizard styling -->
     <style name="WizardPageContainer">
         <item name="android:layout_width">match_parent</item>

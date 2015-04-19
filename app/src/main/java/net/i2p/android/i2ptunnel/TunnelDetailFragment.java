@@ -3,7 +3,10 @@ package net.i2p.android.i2ptunnel;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -113,28 +116,36 @@ public class TunnelDetailFragment extends Fragment {
 
             View accessIfacePortItem = v.findViewById(R.id.tunnel_access_interface_port_item);
             TextView accessIfacePort = (TextView) v.findViewById(R.id.tunnel_access_interface_port);
+            View accessIfaceOpen = v.findViewById(R.id.tunnel_access_open);
             View targetIfacePortItem = v.findViewById(R.id.tunnel_target_interface_port_item);
             TextView targetIfacePort = (TextView) v.findViewById(R.id.tunnel_target_interface_port);
+            View targetIfaceOpen = v.findViewById(R.id.tunnel_target_open);
             switch (mTunnel.getInternalType()) {
                 case "httpbidirserver":
                     accessIfacePort.setText(mTunnel.getClientLink(false));
+                    setupOpen(accessIfaceOpen, true);
                     targetIfacePort.setText(mTunnel.getServerLink(false));
+                    setupOpen(targetIfaceOpen, false);
                     break;
                 case "streamrserver":
                     accessIfacePort.setText(mTunnel.getServerLink(false));
+                    setupOpen(accessIfaceOpen, true);
                     targetIfacePortItem.setVisibility(View.GONE);
                     break;
                 case "streamrclient":
                     accessIfacePortItem.setVisibility(View.GONE);
                     targetIfacePort.setText(mTunnel.getClientLink(false));
+                    setupOpen(targetIfaceOpen, false);
                     break;
                 default:
                     if (mTunnel.isClient()) {
                         accessIfacePort.setText(mTunnel.getClientLink(false));
+                        setupOpen(accessIfaceOpen, true);
                         targetIfacePortItem.setVisibility(View.GONE);
                     } else {
                         accessIfacePortItem.setVisibility(View.GONE);
                         targetIfacePort.setText(mTunnel.getServerLink(false));
+                        setupOpen(targetIfaceOpen, false);
                     }
             }
 
@@ -143,6 +154,42 @@ public class TunnelDetailFragment extends Fragment {
         }
 
         return v;
+    }
+
+    private void setupOpen(View open, final boolean client) {
+        if (mTunnel.isRunning() &&
+                (client ? mTunnel.isClientLinkValid() : mTunnel.isServerLinkValid())) {
+            open.setVisibility(View.VISIBLE);
+            open.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(client ? mTunnel.getClientLink(true) : mTunnel.getServerLink(true)));
+                    try {
+                        startActivity(i);
+                    } catch (ActivityNotFoundException e) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle(R.string.install_recommended_app)
+                                .setMessage(R.string.app_needed_for_this_tunnel_type)
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Uri uri = mTunnel.getRecommendedAppForTunnel();
+                                        if (uri != null) {
+                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                            startActivity(intent);
+                                        }
+                                    }
+                                })
+                                .setNegativeButton(net.i2p.android.lib.client.R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                });
+                        builder.show();
+                    }
+                }
+            });
+        } else
+            open.setVisibility(View.GONE);
     }
 
     private void prepareToolbarMenu(Menu menu) {
