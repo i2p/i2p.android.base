@@ -4,4 +4,5 @@
     <item name="container_addressbook" type="layout">@layout/container_addressbook_onepane</item>
     <item name="container_tunnels" type="layout">@layout/container_with_add_onepane</item>
     <item name="activity_help" type="layout">@layout/activity_help_onepane</item>
+    <item name="header_shadow" type="drawable">@drawable/bottom_shadow</item>
 </resources>

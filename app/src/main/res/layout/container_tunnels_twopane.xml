@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="match_parent">
 
     <!--
     This layout is a two-pane layout for the master/detail
@@ -14,15 +13,20 @@
     this two-pane version.
     -->
 
-    <!-- The main fragment view -->
-    <RelativeLayout
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:orientation="horizontal"
+        android:paddingEnd="104dp"
+        android:paddingLeft="@dimen/listitem_horizontal_margin"
+        android:paddingRight="104dp"
+        android:paddingStart="@dimen/listitem_horizontal_margin">
 
+        <!-- The main fragment view -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:orientation="vertical">
 
             <com.viewpagerindicator.TitlePageIndicator
@@ -36,25 +40,32 @@
 
         </LinearLayout>
 
-        <net.i2p.android.ext.floatingactionbutton.AddFloatingActionButton
-            android:id="@+id/promoted_action"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/listitem_horizontal_margin"
-            android:layout_marginLeft="@dimen/listitem_horizontal_margin"
-            android:layout_marginStart="@dimen/listitem_horizontal_margin"
-            app:fab_colorNormal="@color/accent"
-            app:fab_colorPressed="@color/accent_dark" />
+        <!-- The detail fragment view -->
+        <FrameLayout
+            android:id="@+id/detail_fragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="-5px"
+            android:layout_marginTop="-5px"
+            android:layout_weight="3"
+            android:background="@drawable/shadow"
+            android:paddingBottom="5px"
+            android:paddingLeft="6px"
+            android:paddingRight="5px"
+            android:paddingTop="5px" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <!-- The detail fragment view -->
-    <FrameLayout
-        android:id="@+id/detail_fragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2" />
-</LinearLayout>
+    <net.i2p.android.ext.floatingactionbutton.AddFloatingActionButton
+        android:id="@+id/promoted_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/listitem_horizontal_margin"
+        android:layout_marginEnd="@dimen/listitem_horizontal_margin"
+        android:layout_marginRight="@dimen/listitem_horizontal_margin"
+        app:fab_colorNormal="@color/accent"
+        app:fab_colorPressed="@color/accent_dark" />
+</RelativeLayout>
