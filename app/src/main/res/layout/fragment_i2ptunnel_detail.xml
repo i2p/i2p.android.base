@@ -11,6 +11,7 @@
         android:layout_height="@dimen/toolbar_height_with_text"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
+        android:layout_marginBottom="@dimen/list_top_margin"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
         <LinearLayout

@@ -17,6 +17,7 @@
     <dimen name="toolbar_height_with_text">112dp</dimen>
 
     <dimen name="list_vertical_padding">8dp</dimen>
+    <dimen name="list_top_margin">@dimen/list_vertical_padding</dimen>
     <dimen name="listitem_horizontal_margin">16dp</dimen>
     <dimen name="listitem_picture_size">40dp</dimen>
     <dimen name="listitem_icon_size">24dp</dimen>
