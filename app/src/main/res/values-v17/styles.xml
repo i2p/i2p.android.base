@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ListItem" parent="Base.ListItem">
+        <item name="android:paddingEnd">@dimen/listitem_horizontal_margin</item>
+    </style>
+
+    <style name="ListItem.TextOnly" parent="Base.ListItem.TextOnly">
+        <item name="android:layout_marginStart">@dimen/listitem_text_left_margin</item>
+    </style>
+
+    <style name="ListItemContent.Text" parent="Base.ListItemContent.Text">
+        <item name="android:layout_marginStart">@dimen/listitem_text_left_margin</item>
+    </style>
+</resources>

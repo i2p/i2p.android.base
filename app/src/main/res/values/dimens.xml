@@ -14,6 +14,8 @@
     <dimen name="pager_indicator_text_size">15dp</dimen>
     <dimen name="pager_indicator_top_padding">7dp</dimen>
 
+    <dimen name="toolbar_height_with_text">112dp</dimen>
+
     <dimen name="list_vertical_padding">8dp</dimen>
     <dimen name="listitem_horizontal_margin">16dp</dimen>
     <dimen name="listitem_picture_size">40dp</dimen>

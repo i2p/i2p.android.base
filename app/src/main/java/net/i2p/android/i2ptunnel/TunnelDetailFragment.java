@@ -102,9 +102,9 @@ public class TunnelDetailFragment extends Fragment {
             TextView details = (TextView) v.findViewById(R.id.tunnel_details);
             details.setText(mTunnel.getDetails());
 
-            View accessIfacePortLabel = v.findViewById(R.id.tunnel_access_interface_port_label);
+            View accessIfacePortItem = v.findViewById(R.id.tunnel_access_interface_port_item);
             TextView accessIfacePort = (TextView) v.findViewById(R.id.tunnel_access_interface_port);
-            View targetIfacePortLabel = v.findViewById(R.id.tunnel_target_interface_port_label);
+            View targetIfacePortItem = v.findViewById(R.id.tunnel_target_interface_port_item);
             TextView targetIfacePort = (TextView) v.findViewById(R.id.tunnel_target_interface_port);
             switch (mTunnel.getInternalType()) {
                 case "httpbidirserver":
@@ -113,22 +113,18 @@ public class TunnelDetailFragment extends Fragment {
                     break;
                 case "streamrserver":
                     accessIfacePort.setText(mTunnel.getServerLink(false));
-                    targetIfacePortLabel.setVisibility(View.GONE);
-                    targetIfacePort.setVisibility(View.GONE);
+                    targetIfacePortItem.setVisibility(View.GONE);
                     break;
                 case "streamrclient":
-                    accessIfacePortLabel.setVisibility(View.GONE);
-                    accessIfacePort.setVisibility(View.GONE);
+                    accessIfacePortItem.setVisibility(View.GONE);
                     targetIfacePort.setText(mTunnel.getClientLink(false));
                     break;
                 default:
                     if (mTunnel.isClient()) {
                         accessIfacePort.setText(mTunnel.getClientLink(false));
-                        targetIfacePortLabel.setVisibility(View.GONE);
-                        targetIfacePort.setVisibility(View.GONE);
+                        targetIfacePortItem.setVisibility(View.GONE);
                     } else {
-                        accessIfacePortLabel.setVisibility(View.GONE);
-                        accessIfacePort.setVisibility(View.GONE);
+                        accessIfacePortItem.setVisibility(View.GONE);
                         targetIfacePort.setText(mTunnel.getServerLink(false));
                     }
             }

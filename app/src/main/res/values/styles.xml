@@ -46,6 +46,7 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <!-- Console menu -->
     <style name="Base.ConsoleMenu">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -73,6 +74,7 @@
         <item name="android:textColor">@color/menu_label_text</item>
     </style>
 
+    <!-- Pager indicators -->
     <style name="Base.PagerIndicator">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -98,6 +100,60 @@
         <item name="android:background">@color/pager_indicator_footer_color</item>
     </style>
 
+    <!-- List items -->
+    <style name="Base.ListItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingRight">@dimen/listitem_horizontal_margin</item>
+    </style>
+
+    <style name="ListItem" parent="Base.ListItem" />
+
+    <style name="ListItem.OneLine">
+        <item name="android:layout_height">@dimen/listitem_height_one_line</item>
+    </style>
+
+    <style name="ListItem.TwoLines">
+        <item name="android:layout_height">@dimen/listitem_height_two_lines</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- For listitems that are just TextViews -->
+    <style name="Base.ListItem.TextOnly" parent="ListItem.OneLine">
+        <item name="android:layout_marginLeft">@dimen/listitem_text_left_margin</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Primary</item>
+    </style>
+
+    <style name="ListItem.TextOnly" parent="Base.ListItem.TextOnly" />
+
+    <style name="ListItemContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Base.ListItemContent.Text" parent="ListItemContent">
+        <item name="android:layout_marginLeft">@dimen/listitem_text_left_margin</item>
+    </style>
+
+    <style name="ListItemContent.Text" parent="Base.ListItemContent.Text" />
+
+    <style name="ListItemContent.Text.Main">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Primary</item>
+    </style>
+
+    <style name="ListItemContent.Text.Main.TwoLines">
+        <item name="android:layout_marginTop">@dimen/listitem_text_top_margin_two_lines</item>
+    </style>
+
+    <style name="ListItemContent.Text.Second">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Secondary</item>
+    </style>
+
+    <style name="ListItemContent.Text.Second.TwoLines">
+        <item name="android:layout_marginBottom">@dimen/listitem_text_bottom_margin_two_lines</item>
+    </style>
+
+    <!-- Wizard styling -->
     <style name="WizardPageContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
