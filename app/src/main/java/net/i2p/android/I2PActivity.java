@@ -179,11 +179,16 @@ public class I2PActivity extends I2PActivityBase implements
         public void onReceive(Context context, Intent intent) {
             State state = intent.getParcelableExtra(RouterService.LOCAL_BROADCAST_EXTRA_STATE);
 
+            // Update menus, FAMs etc.
+            supportInvalidateOptionsMenu();
+
+            // Update main paging state
             boolean pagingDisabled = Util.isStopping(state) || Util.isStopped(state);
             mViewPager.setPagingEnabled(!pagingDisabled);
             if (pagingDisabled && mViewPager.getCurrentItem() != 0)
                 mViewPager.setCurrentItem(0);
 
+            // If I2P was started by another app and is running, return to that app
             if (state == State.RUNNING && mAutoStartFromIntent) {
                 I2PActivity.this.setResult(RESULT_OK);
                 finish();
@@ -195,7 +200,6 @@ public class I2PActivity extends I2PActivityBase implements
     public void onResume() {
         super.onResume();
 
-        // Triggers loader init via updateState() if the router is running
         LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
     }
 
