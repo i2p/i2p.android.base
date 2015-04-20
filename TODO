@@ -1,8 +1,5 @@
 # Fixes
 
-- Better twopane column widths
-    <zzz> on the i2ptunnel and addressbook pages on the tablet, the columns are too skinny, they aren't as wide as the tab
-    <zzz> only a few addressbook entries wrap but on i2ptunnel everything is wrapped and most of the screen is empty
 - Create tunnel wizard
     <zzz> hmm would be nice if they could be shared-client or have an option
     <zzz> was setting up email tunnels
@@ -13,8 +10,6 @@
 # New UI fixes
 
 - Console lights go out when navigating from addresses tab (tab or swipe)
-- Better handling of FABs obscuring content
-    <psi> str4d: the + button on the tunnels screen gets in the way of opening kytv's irc tunnel
 - Addressbook action items are in tunnel overflow menu after moving from console to tunnels
 - Material design:
   - Style for addressbook headers
