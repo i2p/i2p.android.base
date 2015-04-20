@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import net.i2p.android.I2PActivityBase;
+import net.i2p.android.i2ptunnel.preferences.EditTunnelActivity;
 
 public class TunnelDetailActivity extends I2PActivityBase implements
         TunnelDetailFragment.TunnelDetailListener {

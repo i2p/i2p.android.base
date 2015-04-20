@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 
 import com.viewpagerindicator.TitlePageIndicator;
 
+import net.i2p.android.i2ptunnel.preferences.EditTunnelContainerFragment;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
@@ -238,7 +239,7 @@ public class TunnelsContainer extends Fragment implements
 
     @Override
     public void onEditTunnel(int tunnelId) {
-        EditTunnelFragment editFrag = EditTunnelFragment.newInstance(tunnelId);
+        Fragment editFrag = EditTunnelContainerFragment.newInstance(tunnelId);
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.detail_fragment, editFrag)
                 .addToBackStack("")

@@ -139,7 +139,7 @@
                 android:value="net.i2p.android.I2PActivity" />
         </activity>
         <activity
-            android:name="net.i2p.android.i2ptunnel.EditTunnelActivity"
+            android:name="net.i2p.android.i2ptunnel.preferences.EditTunnelActivity"
             android:label="@string/edit_tunnel"
             android:parentActivityName="net.i2p.android.i2ptunnel.TunnelDetailActivity">
             <meta-data
