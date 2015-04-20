@@ -9,6 +9,7 @@ import android.support.v4.preference.PreferenceFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
+import net.i2p.android.I2PActivity;
 import net.i2p.android.preferences.AdvancedPreferenceFragment;
 import net.i2p.android.preferences.GraphsPreferenceFragment;
 import net.i2p.android.preferences.LoggingPreferenceFragment;
@@ -49,9 +50,13 @@ public class SettingsActivity extends ActionBarActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStack();
-            return true;
-        } else
-            return super.onSupportNavigateUp();
+        } else {
+            Intent intent = new Intent(this, I2PActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+        return true;
     }
 
     public static class SettingsFragment extends PreferenceFragment {
