@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="settings_expl_inbound"
+        android:title="@string/settings_label_expl_inbound">
+        <!--
+        router.inboundPool.length=1
+        -->
+        <net.i2p.android.router.util.IntListPreference
+            android:defaultValue="2"
+            android:dialogTitle="@string/settings_desc_expl_length"
+            android:entries="@array/setting0to3"
+            android:entryValues="@array/setting0to3"
+            android:key="@string/PROP_INBOUND_EXPLORATORY_LENGTH"
+            android:summary="@string/settings_summ_expl_length"
+            android:title="@string/settings_label_expl_length" />
+
+        <!--
+        router.inboundPool.lengthVariance=1
+        -->
+        <net.i2p.android.router.util.IntListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/settings_desc_expl_lengthVariance"
+            android:entries="@array/setting2to2"
+            android:entryValues="@array/setting2to2"
+            android:key="@string/PROP_INBOUND_EXPLORATORY_LENGTH_VARIANCE"
+            android:summary="@string/settings_summ_expl_lengthVariance"
+            android:title="@string/settings_label_expl_lengthVariance" />
+
+
+        <!--
+        router.inboundPool.quantity=2
+        -->
+        <net.i2p.android.router.util.IntListPreference
+            android:defaultValue="2"
+            android:dialogTitle="@string/settings_desc_expl_quantity"
+            android:entries="@array/setting0to3"
+            android:entryValues="@array/setting0to3"
+            android:key="@string/PROP_INBOUND_EXPLORATORY_QUANTITY"
+            android:summary="@string/settings_summ_expl_quantity"
+            android:title="@string/settings_label_expl_quantity" />
+
+        <!--
+        router.inboundPool.backupQuantity=0
+        -->
+        <net.i2p.android.router.util.IntListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/settings_desc_expl_backupQuantity"
+            android:entries="@array/setting0to3"
+            android:entryValues="@array/setting0to3"
+            android:key="@string/PROP_INBOUND_EXPLORATORY_BACKUP_QUANTITY"
+            android:summary="@string/settings_summ_expl_backupQuantity"
+            android:title="@string/settings_label_expl_backupQuantity" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="settings_expl_outbound"
+        android:title="@string/settings_label_expl_outbound">
+        <!--
+        router.outboundPool.length=1
+        -->
+        <net.i2p.android.router.util.IntListPreference
+            android:defaultValue="2"
+            android:dialogTitle="@string/settings_desc_expl_length"
+            android:entries="@array/setting0to3"
+            android:entryValues="@array/setting0to3"
+            android:key="@string/PROP_OUTBOUND_EXPLORATORY_LENGTH"
+            android:summary="@string/settings_summ_expl_length"
+            android:title="@string/settings_label_expl_length" />
+
+        <!--
+        router.outboundPool.lengthVariance=1
+        -->
+        <net.i2p.android.router.util.IntListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/settings_desc_expl_lengthVariance"
+            android:entries="@array/setting2to2"
+            android:entryValues="@array/setting2to2"
+            android:key="@string/PROP_OUTBOUND_EXPLORATORY_LENGTH_VARIANCE"
+            android:summary="@string/settings_summ_expl_lengthVariance"
+            android:title="@string/settings_label_expl_lengthVariance" />
+
+        <!--
+        router.outboundPool.quantity=2
+        -->
+        <net.i2p.android.router.util.IntListPreference
+            android:defaultValue="2"
+            android:dialogTitle="@string/settings_desc_expl_quantity"
+            android:entries="@array/setting0to3"
+            android:entryValues="@array/setting0to3"
+            android:key="@string/PROP_OUTBOUND_EXPLORATORY_QUANTITY"
+            android:summary="@string/settings_summ_expl_quantity"
+            android:title="@string/settings_label_expl_quantity" />
+
+        <!--
+        router.outboundPool.backupQuantity=0
+        -->
+        <net.i2p.android.router.util.IntListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/settings_desc_expl_backupQuantity"
+            android:entries="@array/setting0to3"
+            android:entryValues="@array/setting0to3"
+            android:key="@string/PROP_OUTBOUND_EXPLORATORY_BACKUP_QUANTITY"
+            android:summary="@string/settings_summ_expl_backupQuantity"
+            android:title="@string/settings_label_expl_backupQuantity" />
+    </PreferenceCategory>
+</PreferenceScreen>

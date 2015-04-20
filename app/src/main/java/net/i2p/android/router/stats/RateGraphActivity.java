@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -95,12 +94,7 @@ public class RateGraphActivity extends I2PActivityBase {
                                         dialog.dismiss();
                                         mFinishOnResume = true;
                                         Intent i = new Intent(RateGraphActivity.this, SettingsActivity.class);
-                                        // Navigation to a sub-category doesn't seem to work yet
-                                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                                            i.setAction(SettingsActivity.ACTION_PREFS_GRAPHS);
-                                        } else {
-                                            i.putExtra("settings", "graphs");
-                                        }
+                                        i.putExtra(SettingsActivity.PREFERENCE_CATEGORY, SettingsActivity.PREFERENCE_CATEGORY_GRAPHS);
                                         startActivity(i);
                                     }
                                 })

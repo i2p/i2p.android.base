@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:key="preference_category_network"
+        android:title="@string/settings_label_bandwidth_net" />
+    <Preference
+        android:key="preference_category_graphs"
+        android:title="@string/label_graphs" />
+    <Preference
+        android:key="preference_category_logging"
+        android:title="@string/settings_label_logging" />
+    <Preference
+        android:key="preference_category_addressbook"
+        android:title="@string/label_addressbook" />
+    <Preference
+        android:key="preference_category_advanced"
+        android:title="@string/settings_label_advanced" />
+</PreferenceScreen>
