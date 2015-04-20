@@ -180,7 +180,7 @@ public class TunnelListFragment extends Fragment implements
             }
         }
 
-        if (mGroup != null) {
+        if (mGroup != null && isAdded()) {
             mRecyclerView.setLoading(true);
             getLoaderManager().initLoader(mClientTunnels ? CLIENT_LOADER_ID
                     : SERVER_LOADER_ID, null, this);
