@@ -100,6 +100,7 @@ public class MainFragment extends I2PFragmentBase {
         super.onCreate(savedInstanceState);
         // Init stuff here so settings work.
         if(savedInstanceState != null) {
+            lastRouterState = savedInstanceState.getParcelable("lastState");
             String saved = savedInstanceState.getString("status");
             if(saved != null) {
                 _savedStatus = saved;
@@ -121,7 +122,7 @@ public class MainFragment extends I2PFragmentBase {
         mScrollView = (ScrollView) v.findViewById(R.id.main_scrollview);
 
         _lightImage = (ImageView) v.findViewById(R.id.main_lights);
-        _lightImage.setImageResource(R.drawable.routerlogo_0);
+        updateState(lastRouterState);
 
         LongToggleButton b = (LongToggleButton) v.findViewById(R.id.router_onoff_button);
         b.setOnLongClickListener(new View.OnLongClickListener() {
@@ -218,9 +219,10 @@ public class MainFragment extends I2PFragmentBase {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        if(_savedStatus != null) {
+        if (lastRouterState != null)
+            outState.putParcelable("lastState", lastRouterState);
+        if(_savedStatus != null)
             outState.putString("status", _savedStatus);
-        }
         super.onSaveInstanceState(outState);
     }
 

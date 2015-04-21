@@ -9,7 +9,6 @@
 
 # New UI fixes
 
-- Console lights go out when navigating from addresses tab (tab or swipe)
 - Addressbook action items are in tunnel overflow menu after moving from console to tunnels
 - Material design:
   - Style for addressbook headers
