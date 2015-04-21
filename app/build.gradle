@@ -56,9 +56,9 @@ dependencies {
     compile project(':client')
 
     // Android Support Repository dependencies
-    compile 'com.android.support:support-v4:22.0.0'
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.android.support:recyclerview-v7:22.0.0'
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.3'
 
     // Remote dependencies
     compile 'net.i2p.android.ext:floatingactionbutton:1.9.0'
@@ -79,9 +79,9 @@ dependencies {
 
 dependencyVerification {
     verify = [
-            'com.android.support:support-v4:355a11466727e8ba00e239416aec55ac3cd3fb4ffc9d20c4a33373085c050bd1',
-            'com.android.support:appcompat-v7:40114cb756fecffa4a51c5645593cf64509c576594f77e41e801368051115c7b',
-            'com.android.support:recyclerview-v7:859ed80e3761f8fc3126901260b208505120b5678bcf36ad2cfe9c453958b9c7',
+            'com.android.support:support-v4:703572d3015a088cc5604b7e38885af3d307c829d0c5ceaf8654ff41c71cd160',
+            'com.android.support:appcompat-v7:5dbeb5316d0a6027d646ae552804c3baa5e3bd53f7f33db50904d51505c8a0e5',
+            'com.android.support:recyclerview-v7:e525ad3f33c84bb12b73d2dc975b55364a53f0f2d0697e043efba59ba73e22d2',
             'net.i2p.android.ext:floatingactionbutton:b41eae5fe6be599e3fade00273521b0914f2e199d5f04c50fa34cfe935347f76',
             'com.android.support:support-v4-preferencefragment:5470f5872514a6226fa1fc6f4e000991f38805691c534cf0bd2778911fc773ad',
             'com.pnikosis:materialish-progress:5dd770a78047d8dbf2690deb686675fe2b242a6d06bb52ef425c829454ca54b8',
