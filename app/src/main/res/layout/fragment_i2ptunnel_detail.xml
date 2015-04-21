@@ -35,113 +35,125 @@
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/tunnel_type"
-        style="@style/ListItem.TextOnly"
-        android:text="Tunnel type" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/tunnel_details"
-        style="@style/ListItem.TextOnly"
-        android:text="Tunnel details" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <View
-        style="@style/Divider.Horizontal"
-        android:layout_marginBottom="@dimen/list_vertical_padding"
-        android:layout_marginLeft="@dimen/listitem_text_left_margin"
-        android:layout_marginStart="@dimen/listitem_text_left_margin"
-        android:layout_marginTop="@dimen/list_vertical_padding" />
+            <TextView
+                android:id="@+id/tunnel_type"
+                style="@style/ListItem.TextOnly"
+                android:text="Tunnel type" />
 
-    <RelativeLayout
-        android:id="@+id/tunnel_target_interface_port_item"
-        style="@style/ListItem.TwoLines">
+            <TextView
+                android:id="@+id/tunnel_details"
+                style="@style/ListItem.TextOnly"
+                android:text="Tunnel details" />
 
-        <ImageView
-            android:id="@+id/icon_link_target"
-            android:layout_width="@dimen/listitem_icon_size"
-            android:layout_height="@dimen/listitem_icon_size"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/listitem_horizontal_margin"
-            android:layout_marginStart="@dimen/listitem_horizontal_margin"
-            android:src="@drawable/ic_link_white_24dp" />
+            <View
+                style="@style/Divider.Horizontal"
+                android:layout_marginBottom="@dimen/list_vertical_padding"
+                android:layout_marginLeft="@dimen/listitem_text_left_margin"
+                android:layout_marginStart="@dimen/listitem_text_left_margin"
+                android:layout_marginTop="@dimen/list_vertical_padding" />
 
-        <TextView
-            android:id="@+id/tunnel_target_interface_port"
-            style="@style/ListItemContent.Text.Main.TwoLines"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Interface:port" />
+            <RelativeLayout
+                android:id="@+id/tunnel_target_interface_port_item"
+                style="@style/ListItem.TwoLines">
 
-        <!-- Open link -->
-        <ImageView
-            android:id="@+id/tunnel_target_open"
-            style="@style/ListItemContent.Action"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="Open"
-            android:src="@drawable/ic_open_in_browser_white_24dp"
-            android:visibility="gone" />
+                <ImageView
+                    android:id="@+id/icon_link_target"
+                    android:layout_width="@dimen/listitem_icon_size"
+                    android:layout_height="@dimen/listitem_icon_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/listitem_horizontal_margin"
+                    android:layout_marginStart="@dimen/listitem_horizontal_margin"
+                    android:src="@drawable/ic_link_white_24dp" />
 
-        <TextView
-            style="@style/ListItemContent.Text.Second.TwoLines"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@id/tunnel_target_open"
-            android:layout_toStartOf="@id/tunnel_target_open"
-            android:text="@string/i2ptunnel_view_target" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tunnel_target_interface_port"
+                    style="@style/ListItemContent.Text.Main.TwoLines"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:text="Interface:port" />
 
-    <RelativeLayout
-        android:id="@+id/tunnel_access_interface_port_item"
-        style="@style/ListItem.TwoLines">
+                <!-- Open link -->
+                <ImageView
+                    android:id="@+id/tunnel_target_open"
+                    style="@style/ListItemContent.Action"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="Open"
+                    android:src="@drawable/ic_open_in_browser_white_24dp"
+                    android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/icon_link_access"
-            android:layout_width="@dimen/listitem_icon_size"
-            android:layout_height="@dimen/listitem_icon_size"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/listitem_horizontal_margin"
-            android:layout_marginStart="@dimen/listitem_horizontal_margin"
-            android:src="@drawable/ic_link_white_24dp" />
+                <TextView
+                    style="@style/ListItemContent.Text.Second.TwoLines"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@id/tunnel_target_open"
+                    android:layout_toStartOf="@id/tunnel_target_open"
+                    android:text="@string/i2ptunnel_view_target" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tunnel_access_interface_port"
-            style="@style/ListItemContent.Text.Main.TwoLines"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="Interface:port" />
+            <RelativeLayout
+                android:id="@+id/tunnel_access_interface_port_item"
+                style="@style/ListItem.TwoLines">
 
-        <!-- Open link -->
-        <ImageView
-            android:id="@+id/tunnel_access_open"
-            style="@style/ListItemContent.Action"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="Open"
-            android:src="@drawable/ic_open_in_browser_white_24dp"
-            android:visibility="gone" />
+                <ImageView
+                    android:id="@+id/icon_link_access"
+                    android:layout_width="@dimen/listitem_icon_size"
+                    android:layout_height="@dimen/listitem_icon_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/listitem_horizontal_margin"
+                    android:layout_marginStart="@dimen/listitem_horizontal_margin"
+                    android:src="@drawable/ic_link_white_24dp" />
 
-        <TextView
-            style="@style/ListItemContent.Text.Second.TwoLines"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@id/tunnel_access_open"
-            android:layout_toStartOf="@id/tunnel_access_open"
-            android:text="@string/i2ptunnel_view_access_point" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tunnel_access_interface_port"
+                    style="@style/ListItemContent.Text.Main.TwoLines"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:text="Interface:port" />
 
-    <CheckBox
-        android:id="@+id/tunnel_autostart"
-        style="@style/ListItem.TextOnly"
-        android:clickable="false"
-        android:text="@string/i2ptunnel_view_autostart" />
+                <!-- Open link -->
+                <ImageView
+                    android:id="@+id/tunnel_access_open"
+                    style="@style/ListItemContent.Action"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="Open"
+                    android:src="@drawable/ic_open_in_browser_white_24dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    style="@style/ListItemContent.Text.Second.TwoLines"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@id/tunnel_access_open"
+                    android:layout_toStartOf="@id/tunnel_access_open"
+                    android:text="@string/i2ptunnel_view_access_point" />
+            </RelativeLayout>
+
+            <CheckBox
+                android:id="@+id/tunnel_autostart"
+                style="@style/ListItem.TextOnly"
+                android:clickable="false"
+                android:text="@string/i2ptunnel_view_autostart" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
