@@ -36,6 +36,7 @@ public class TunnelDetailFragment extends Fragment {
     TunnelDetailListener mCallback;
     private TunnelControllerGroup mGroup;
     private TunnelEntry mTunnel;
+    private Toolbar mToolbar;
 
     public static TunnelDetailFragment newInstance(int tunnelId) {
         TunnelDetailFragment f = new TunnelDetailFragment();
@@ -91,17 +92,17 @@ public class TunnelDetailFragment extends Fragment {
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_i2ptunnel_detail, container, false);
 
-        if (mTunnel != null) {
-            Toolbar toolbar = (Toolbar) v.findViewById(R.id.detail_toolbar);
-            toolbar.inflateMenu(R.menu.fragment_i2ptunnel_detail_actions);
-            prepareToolbarMenu(toolbar.getMenu());
-            toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    return onToolbarItemSelected(menuItem);
-                }
-            });
+        mToolbar = (Toolbar) v.findViewById(R.id.detail_toolbar);
+        mToolbar.inflateMenu(R.menu.fragment_i2ptunnel_detail_actions);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                return onToolbarItemSelected(menuItem);
+            }
+        });
+        updateToolbar();
 
+        if (mTunnel != null) {
             TextView name = (TextView) v.findViewById(R.id.tunnel_name);
             name.setText(mTunnel.getName());
 
@@ -193,7 +194,8 @@ public class TunnelDetailFragment extends Fragment {
             open.setVisibility(View.GONE);
     }
 
-    private void prepareToolbarMenu(Menu menu) {
+    private void updateToolbar() {
+        Menu menu = mToolbar.getMenu();
         MenuItem start = menu.findItem(R.id.action_start_tunnel);
         MenuItem stop = menu.findItem(R.id.action_stop_tunnel);
 
@@ -227,16 +229,16 @@ public class TunnelDetailFragment extends Fragment {
             Toast.makeText(getActivity().getApplicationContext(),
                     getResources().getString(R.string.i2ptunnel_msg_tunnel_starting)
                     + ' ' + mTunnel.getName(), Toast.LENGTH_LONG).show();
-            // Reload the action bar to change the start/stop action
-            getActivity().supportInvalidateOptionsMenu();
+            // Reload the toolbar to change the start/stop action
+            updateToolbar();
             return true;
         case R.id.action_stop_tunnel:
             mTunnel.getController().stopTunnel();
             Toast.makeText(getActivity().getApplicationContext(),
                     getResources().getString(R.string.i2ptunnel_msg_tunnel_stopping)
                     + ' ' + mTunnel.getName(), Toast.LENGTH_LONG).show();
-            // Reload the action bar to change the start/stop action
-            getActivity().supportInvalidateOptionsMenu();
+            // Reload the toolbar to change the start/stop action
+            updateToolbar();
             return true;
         case R.id.action_edit_tunnel:
             mCallback.onEditTunnel(mTunnel.getId());
