@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -218,7 +221,8 @@ public class TunnelsContainer extends Fragment implements
 
     // TunnelListFragment.OnTunnelSelectedListener
 
-    public void onTunnelSelected(int tunnelId) {
+    public final void onTunnelSelected(int tunnelId, Pair<View, String> tunnelName,
+                                       Pair<View, String> tunnelDescription) {
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
@@ -231,7 +235,10 @@ public class TunnelsContainer extends Fragment implements
             // for the selected item ID.
             Intent detailIntent = new Intent(getActivity(), TunnelDetailActivity.class);
             detailIntent.putExtra(TunnelDetailFragment.TUNNEL_ID, tunnelId);
-            startActivity(detailIntent);
+
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    getActivity(), tunnelName, tunnelDescription);
+            ActivityCompat.startActivity(getActivity(), detailIntent, options.toBundle());
         }
     }
 

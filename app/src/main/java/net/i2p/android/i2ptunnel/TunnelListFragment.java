@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,7 +59,8 @@ public class TunnelListFragment extends Fragment implements
 
     // Container Activity must implement this interface
     public interface OnTunnelSelectedListener {
-        public void onTunnelSelected(int tunnelId);
+        public void onTunnelSelected(int tunnelId, Pair<View, String> tunnelName,
+                                     Pair<View, String> tunnelDescription);
     }
 
     public static TunnelListFragment newInstance(boolean showClientTunnels, boolean isTwoPane) {
