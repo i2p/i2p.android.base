@@ -2,7 +2,7 @@
 
     <style name="Base" />
 
-    <style name="Theme.I2P" parent="Theme.AppCompat.NoActionBar">
+    <style name="Base.Theme.I2P" parent="Theme.AppCompat.NoActionBar">
         <!-- Here we setting appcompat’s actionBarStyle -->
         <!--<item name="actionBarStyle">@style/MyActionBarStyle</item>-->
 
@@ -21,6 +21,8 @@
 
         <!-- The rest of your attributes -->
     </style>
+
+    <style name="Theme.I2P" parent="Base.Theme.I2P" />
 
     <style name="TextAppearance.AppCompat.Primary" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@color/primary_text_default_material_dark</item>
@@ -159,7 +161,7 @@
         <item name="android:layout_marginLeft">@dimen/listitem_horizontal_margin</item>
     </style>
 
-    <style name="ListItemContent.Action" parent="Base.ListItemContent.Action"/>
+    <style name="ListItemContent.Action" parent="Base.ListItemContent.Action" />
 
     <!-- Wizard styling -->
     <style name="WizardPageContainer">
