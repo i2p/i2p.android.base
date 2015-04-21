@@ -1,14 +1,5 @@
 package net.i2p.android.wizard.ui;
 
-import java.util.List;
-
-import net.i2p.android.router.R;
-import net.i2p.android.wizard.model.AbstractWizardModel;
-import net.i2p.android.wizard.model.ModelCallbacks;
-import net.i2p.android.wizard.model.Page;
-import net.i2p.android.wizard.ui.PageFragmentCallbacks;
-import net.i2p.android.wizard.ui.ReviewFragment;
-import net.i2p.android.wizard.ui.StepPagerStrip;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -20,6 +11,13 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import net.i2p.android.router.R;
+import net.i2p.android.wizard.model.AbstractWizardModel;
+import net.i2p.android.wizard.model.ModelCallbacks;
+import net.i2p.android.wizard.model.Page;
+
+import java.util.List;
 
 public abstract class AbstractWizardActivity extends FragmentActivity implements
         PageFragmentCallbacks,
@@ -45,12 +43,14 @@ public abstract class AbstractWizardActivity extends FragmentActivity implements
     protected abstract DialogFragment onGetFinishWizardDialog();
 
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wizard);
-
+        // Create the WizardModel before super.onCreate() in case a Fragment
+        // is created and tries to call e.g. onGetPage()
         mWizardModel = onCreateModel();
         if (savedInstanceState != null)
             mWizardModel.load(savedInstanceState.getBundle("model"));
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_wizard);
 
         mWizardModel.registerListener(this);
 
