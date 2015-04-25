@@ -379,7 +379,7 @@ public class RouterService extends Service {
     }
 
     public boolean canManualStop() {
-        return _state == State.WAITING || _state == State.STARTING ||
+        return _state == State.WAITING ||
                _state == State.RUNNING || _state == State.ACTIVE ||
                _state == State.GRACEFUL_SHUTDOWN;
     }
