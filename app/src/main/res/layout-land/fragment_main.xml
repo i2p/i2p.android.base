@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/desc_i2p_logo"
             android:scaleType="centerInside"
-            android:src="@drawable/routerled_r" />
+            android:src="@drawable/routerlogo_0" />
 
         <net.i2p.android.router.util.LongToggleButton
             android:id="@+id/router_onoff_button"
