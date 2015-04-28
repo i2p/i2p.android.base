@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.i2p.android.router.R;
+import net.i2p.android.util.FragmentUtils;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Context mCtx;
     private boolean mClientTunnels;
     private TunnelListFragment.OnTunnelSelectedListener mListener;
-    private boolean mIsTwoPane;
+    private FragmentUtils.TwoPaneProvider mTwoPane;
     private List<TunnelEntry> mTunnels;
     /**
      * The current activated item position. Only used on tablets.
@@ -49,12 +50,12 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public TunnelEntryAdapter(Context context, boolean clientTunnels,
                               TunnelListFragment.OnTunnelSelectedListener listener,
-                              boolean isTwoPane) {
+                              FragmentUtils.TwoPaneProvider twoPane) {
         super();
         mCtx = context;
         mClientTunnels = clientTunnels;
         mListener = listener;
-        mIsTwoPane = isTwoPane;
+        mTwoPane = twoPane;
     }
 
     public void setTunnels(List<TunnelEntry> tunnels) {
@@ -141,11 +142,13 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 tvh.description.setText(tunnel.getDescription());
                 tvh.interfacePort.setText(tunnel.getTunnelLink(false));
 
-                tvh.itemView.setSelected(mIsTwoPane && position == mActivatedPosition);
+                tvh.itemView.setSelected(mTwoPane.isTwoPane() && position == mActivatedPosition);
                 tvh.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        int oldPosition = mActivatedPosition;
                         mActivatedPosition = position;
+                        notifyItemChanged(oldPosition);
                         notifyItemChanged(position);
                         mListener.onTunnelSelected(tunnel.getId(),
                                 Pair.create((View)tvh.name, mCtx.getString(R.string.TUNNEL_NAME)),

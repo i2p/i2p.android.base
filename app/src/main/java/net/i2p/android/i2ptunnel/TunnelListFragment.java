@@ -40,7 +40,6 @@ import java.util.List;
 public class TunnelListFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<List<TunnelEntry>> {
     public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";
-    public static final String IS_TWO_PANE = "is_two_pane";
 
     private static final int CLIENT_LOADER_ID = 1;
     private static final int SERVER_LOADER_ID = 2;
@@ -51,6 +50,7 @@ public class TunnelListFragment extends Fragment implements
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     OnTunnelSelectedListener mCallback;
+    FragmentUtils.TwoPaneProvider mTwoPane;
     private TunnelControllerGroup mGroup;
 
     private LoadingRecyclerView mRecyclerView;
@@ -63,11 +63,10 @@ public class TunnelListFragment extends Fragment implements
                                      Pair<View, String> tunnelDescription);
     }
 
-    public static TunnelListFragment newInstance(boolean showClientTunnels, boolean isTwoPane) {
+    public static TunnelListFragment newInstance(boolean showClientTunnels) {
         TunnelListFragment f = new TunnelListFragment();
         Bundle args = new Bundle();
         args.putBoolean(TunnelListFragment.SHOW_CLIENT_TUNNELS, showClientTunnels);
-        args.putBoolean(TunnelListFragment.IS_TWO_PANE, isTwoPane);
         f.setArguments(args);
         return f;
     }
@@ -81,6 +80,9 @@ public class TunnelListFragment extends Fragment implements
         mCallback = FragmentUtils.getParent(this, OnTunnelSelectedListener.class);
         if (mCallback == null)
             throw new ClassCastException("Parent must implement OnTunnelSelectedListener");
+        mTwoPane = FragmentUtils.getParent(this, FragmentUtils.TwoPaneProvider.class);
+        if (mTwoPane == null)
+            throw new ClassCastException("Parent must implement TwoPaneProvider");
 
     }
 
@@ -111,7 +113,6 @@ public class TunnelListFragment extends Fragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mClientTunnels = getArguments().getBoolean(SHOW_CLIENT_TUNNELS);
-        boolean isTwoPane = getArguments().getBoolean(IS_TWO_PANE);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
@@ -121,7 +122,7 @@ public class TunnelListFragment extends Fragment implements
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // Set the adapter for the list view
-        mAdapter = new TunnelEntryAdapter(getActivity(), mClientTunnels, mCallback, isTwoPane);
+        mAdapter = new TunnelEntryAdapter(getActivity(), mClientTunnels, mCallback, mTwoPane);
         mRecyclerView.setAdapter(mAdapter);
 
         // Restore the previously serialized activated item position.

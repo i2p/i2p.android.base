@@ -24,10 +24,12 @@ import net.i2p.android.i2ptunnel.preferences.EditTunnelContainerFragment;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
+import net.i2p.android.util.FragmentUtils;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
 
 public class TunnelsContainer extends Fragment implements
+        FragmentUtils.TwoPaneProvider,
         TunnelListFragment.OnTunnelSelectedListener,
         TunnelDetailFragment.TunnelDetailListener {
     static final int TUNNEL_WIZARD_REQUEST = 1;
@@ -87,7 +89,7 @@ public class TunnelsContainer extends Fragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mFragPagerAdapter = new TunnelsPagerAdapter(getActivity(), getChildFragmentManager(), mTwoPane);
+        mFragPagerAdapter = new TunnelsPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mFragPagerAdapter);
 
         // Bind the page indicator to the pager.
@@ -105,13 +107,8 @@ public class TunnelsContainer extends Fragment implements
     public class TunnelsPagerAdapter extends FragmentPagerAdapter {
         private static final int NUM_ITEMS = 2;
 
-        private Context mContext;
-        private boolean mTwoPane;
-
-        public TunnelsPagerAdapter(Context context, FragmentManager fm, boolean twoPane) {
+        public TunnelsPagerAdapter(FragmentManager fm) {
             super(fm);
-            mContext = context;
-            mTwoPane = twoPane;
         }
 
         @Override
@@ -123,9 +120,9 @@ public class TunnelsContainer extends Fragment implements
         public Fragment getItem(int position) {
             switch (position) {
                 case FRAGMENT_ID_CLIENT:
-                    return (mClientFrag = TunnelListFragment.newInstance(true, mTwoPane));
+                    return (mClientFrag = TunnelListFragment.newInstance(true));
                 case FRAGMENT_ID_SERVER:
-                    return (mServerFrag = TunnelListFragment.newInstance(false, mTwoPane));
+                    return (mServerFrag = TunnelListFragment.newInstance(false));
                 default:
                     return null;
             }
@@ -135,9 +132,9 @@ public class TunnelsContainer extends Fragment implements
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case FRAGMENT_ID_CLIENT:
-                    return mContext.getString(R.string.label_i2ptunnel_client);
+                    return getActivity().getString(R.string.label_i2ptunnel_client);
                 case FRAGMENT_ID_SERVER:
-                    return mContext.getString(R.string.label_i2ptunnel_server);
+                    return getActivity().getString(R.string.label_i2ptunnel_server);
                 default:
                     return null;
             }
@@ -217,6 +214,12 @@ public class TunnelsContainer extends Fragment implements
             getChildFragmentManager().putFragment(outState, FRAGMENT_CLIENT, mClientFrag);
         if (mServerFrag != null)
             getChildFragmentManager().putFragment(outState, FRAGMENT_SERVER, mServerFrag);
+    }
+
+    // FragmentUtils.TwoPaneProvider
+
+    public boolean isTwoPane() {
+        return mTwoPane;
     }
 
     // TunnelListFragment.OnTunnelSelectedListener
