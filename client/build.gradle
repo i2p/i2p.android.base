@@ -26,12 +26,12 @@ android {
 
 dependencies {
     compile project(path: ':routerjars', configuration: 'client')
-    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:support-v4:22.1.1'
 }
 
 dependencyVerification {
     verify = [
-            'com.android.support:support-v4:703572d3015a088cc5604b7e38885af3d307c829d0c5ceaf8654ff41c71cd160',
+            'com.android.support:support-v4:1e2e4d35ac7fd30db5ce3bc177b92e4d5af86acef2ef93e9221599d733346f56',
     ]
 }
 
