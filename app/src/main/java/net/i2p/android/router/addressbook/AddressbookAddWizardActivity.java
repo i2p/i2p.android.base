@@ -31,7 +31,7 @@ public class AddressbookAddWizardActivity extends AbstractWizardActivity {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent result = new Intent();
                                         setResult(Activity.RESULT_OK, result);
-                                        result.putExtra(AddressbookFragment.ADD_WIZARD_DATA, mWizardModel.save());
+                                        result.putExtra(AddressbookContainer.ADD_WIZARD_DATA, mWizardModel.save());
                                         dialog.dismiss();
                                         finish();
                                     }

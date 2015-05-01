@@ -23,10 +23,16 @@ import android.view.ViewGroup;
 import com.viewpagerindicator.TitlePageIndicator;
 
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.NamingServiceUtil;
+import net.i2p.android.router.util.Util;
+import net.i2p.client.naming.NamingService;
 
 public class AddressbookContainer extends Fragment
         implements AddressbookFragment.OnAddressSelectedListener,
         SearchView.OnQueryTextListener {
+    public static final int ADD_WIZARD_REQUEST = 1;
+    public static final String ADD_WIZARD_DATA = "add_wizard_data";
+
     /**
      * Whether or not the container is in two-pane mode, i.e. running on a tablet
      * device.
@@ -193,6 +199,19 @@ public class AddressbookContainer extends Fragment
             getChildFragmentManager().putFragment(outState, FRAGMENT_ROUTER, mRouterFrag);
         if (mPrivateFrag != null)
             getChildFragmentManager().putFragment(outState, FRAGMENT_PRIVATE, mPrivateFrag);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ADD_WIZARD_REQUEST &&
+                resultCode == Activity.RESULT_OK) {
+            // Save the new entry
+            Bundle entryData = data.getExtras().getBundle(ADD_WIZARD_DATA);
+            NamingService ns = NamingServiceUtil.getNamingService(Util.getRouterContext(),
+                    AddressbookFragment.PRIVATE_BOOK);
+            NamingServiceUtil.addFromWizard(getActivity(), ns, entryData, false);
+            // The loader will be notified by the NamingService
+        }
     }
 
     // AddressbookFragment.OnAddressSelectedListener

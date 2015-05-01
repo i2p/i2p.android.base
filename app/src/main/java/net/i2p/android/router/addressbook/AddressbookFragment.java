@@ -30,13 +30,11 @@ import net.i2p.addressbook.Daemon;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
-import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.android.router.util.Util;
 import net.i2p.android.util.AlphanumericHeaderAdapter;
 import net.i2p.android.util.FragmentUtils;
 import net.i2p.android.widget.DividerItemDecoration;
 import net.i2p.android.widget.LoadingRecyclerView;
-import net.i2p.client.naming.NamingService;
 import net.i2p.router.RouterContext;
 
 import java.util.ArrayList;
@@ -47,9 +45,6 @@ public class AddressbookFragment extends Fragment implements
     public static final String BOOK_NAME = "book_name";
     public static final String ROUTER_BOOK = "hosts.txt";
     public static final String PRIVATE_BOOK = "privatehosts.txt";
-    public static final String ADD_WIZARD_DATA = "add_wizard_data";
-
-    private static final int ADD_WIZARD_REQUEST = 1;
 
     private static final int ROUTER_LOADER_ID = 1;
     private static final int PRIVATE_LOADER_ID = 2;
@@ -108,7 +103,7 @@ public class AddressbookFragment extends Fragment implements
             @Override
             public void onClick(View view) {
                 Intent wi = new Intent(getActivity(), AddressbookAddWizardActivity.class);
-                startActivityForResult(wi, ADD_WIZARD_REQUEST);
+                getParentFragment().startActivityForResult(wi, AddressbookContainer.ADD_WIZARD_REQUEST);
             }
         });
 
@@ -234,23 +229,6 @@ public class AddressbookFragment extends Fragment implements
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ADD_WIZARD_REQUEST &&
-                resultCode == Activity.RESULT_OK &&
-                PRIVATE_BOOK.equals(mBook)) {
-            // Save the new entry
-            Bundle entryData = data.getExtras().getBundle(ADD_WIZARD_DATA);
-            NamingService ns = NamingServiceUtil.getNamingService(Util.getRouterContext(), mBook);
-            boolean success = NamingServiceUtil.addFromWizard(getActivity(), ns, entryData, false);
-            if (success) {
-                // Reload the list
-                mRecyclerView.setLoading(true);
-                getLoaderManager().restartLoader(PRIVATE_LOADER_ID, null, this);
-            }
         }
     }
 
