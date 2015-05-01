@@ -15,6 +15,15 @@ public class IntListPreference extends ListPreference {
 
     @Override
     protected boolean persistString(String value) {
+        if (getSharedPreferences().contains(getKey())) {
+            try {
+                getPersistedInt(0);
+            } catch (ClassCastException e) {
+                // Fix for where this preference was previously stored in a ListPreference
+                getSharedPreferences().edit().remove(getKey()).commit();
+            }
+        }
+
         return value != null && persistInt(Integer.valueOf(value));
     }
 
@@ -25,7 +34,7 @@ public class IntListPreference extends ListPreference {
                 int intValue = getPersistedInt(0);
                 return String.valueOf(intValue);
             } catch (ClassCastException e) {
-                return getPersistedString("0");
+                return super.getPersistedString("0");
             }
         } else {
             return defaultReturnValue;

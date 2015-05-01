@@ -23,6 +23,7 @@
   <string name="label_graphs">Gráficos</string>
   <string name="button_router_off">Pressionar longo para iniciar I2P</string>
   <string name="button_router_on">I2P está em execução (pressionar longo para para)</string>
+  <string name="button_router_graceful">I2P será desligado em %s</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->

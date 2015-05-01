@@ -1,3 +1,6 @@
+0.9.19.1 / 2015-04-15 / ed86e7e85161dbe3f15932fd4d195c551f8e2c71
+ * Fixed crash when opening advanced settings
+
 0.9.19 / 2015-04-13 / 3cfb748946a5876dc06d5f81d811b142a88846f7
  * Made internal state handling more stable
  * Added graceful shutdown support
