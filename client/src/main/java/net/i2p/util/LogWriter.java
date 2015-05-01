@@ -21,6 +21,7 @@ class LogWriter extends LogWriterBase {
 
     @Override
     protected void writeRecord(LogRecord rec, String s) {
+        //noinspection ThrowableResultOfMethodCallIgnored
         if (rec.getThrowable() == null)
             log(rec.getPriority(), rec.getSource(), rec.getSourceName(), rec.getThreadName(), rec.getMessage());
         else

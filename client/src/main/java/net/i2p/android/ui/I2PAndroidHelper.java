@@ -31,7 +31,7 @@ public class I2PAndroidHelper {
 
     private static final String LOG_TAG = "I2PClientLib";
 
-    private Context mContext;
+    private final Context mContext;
     private boolean mTriedBindState;
     private IRouterState mStateService;
 
@@ -117,7 +117,7 @@ public class I2PAndroidHelper {
         mTriedBindState = false;
     }
 
-    private ServiceConnection mStateConnection = new ServiceConnection() {
+    private final ServiceConnection mStateConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
             mStateService = IRouterState.Stub.asInterface(service);
