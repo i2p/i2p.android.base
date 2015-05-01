@@ -40,7 +40,6 @@ public class SingleChoiceFragment extends ListFragment {
 
     private PageFragmentCallbacks mCallbacks;
     private List<String> mChoices;
-    private String mKey;
     private Page mPage;
 
     public static SingleChoiceFragment create(String key) {
@@ -60,7 +59,7 @@ public class SingleChoiceFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
-        mKey = args.getString(ARG_KEY);
+        String mKey = args.getString(ARG_KEY);
         mPage = mCallbacks.onGetPage(mKey);
 
         SingleFixedChoicePage fixedChoicePage = (SingleFixedChoicePage) mPage;

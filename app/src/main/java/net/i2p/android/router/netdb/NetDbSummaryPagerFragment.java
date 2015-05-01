@@ -1,11 +1,5 @@
 package net.i2p.android.router.netdb;
 
-import java.util.List;
-
-import net.i2p.android.router.I2PFragmentBase;
-import net.i2p.android.router.R;
-import net.i2p.android.router.util.Util;
-import net.i2p.util.ObjectCounter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.i2p.android.router.I2PFragmentBase;
+import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
+import net.i2p.util.ObjectCounter;
+
+import java.util.List;
+
 public class NetDbSummaryPagerFragment extends I2PFragmentBase implements
         LoaderManager.LoaderCallbacks<List<ObjectCounter<String>>> {
     private NetDbPagerAdapter mNetDbPagerAdapter;
@@ -33,8 +34,7 @@ public class NetDbSummaryPagerFragment extends I2PFragmentBase implements
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.parentfragment_viewpager, container, false);
-        return v;
+        return inflater.inflate(R.layout.parentfragment_viewpager, container, false);
     }
 
     @Override

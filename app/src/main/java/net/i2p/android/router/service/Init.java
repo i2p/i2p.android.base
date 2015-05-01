@@ -9,14 +9,10 @@ import java.io.File;
 
 class Init {
 
-    private final Context ctx;
     private final String myDir;
-    private final String _ourVersion;
 
     public Init(Context c) {
-        ctx = c;
         myDir = c.getFilesDir().getAbsolutePath();
-        _ourVersion = Util.getOurVersion(c);
     }
 
     void initialize() {

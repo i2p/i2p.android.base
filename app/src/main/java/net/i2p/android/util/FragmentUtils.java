@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentActivity;
 
 public class FragmentUtils {
     public interface TwoPaneProvider {
-        public boolean isTwoPane();
+        boolean isTwoPane();
     }
 
 	/**

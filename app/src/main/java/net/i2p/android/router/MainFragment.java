@@ -65,16 +65,16 @@ public class MainFragment extends I2PFragmentBase {
 
     // Container Activity must implement this interface
     public interface RouterControlListener {
-        public boolean shouldShowOnOff();
-        public boolean shouldBeOn();
-        public void onStartRouterClicked();
-        public boolean onStopRouterClicked();
+        boolean shouldShowOnOff();
+        boolean shouldBeOn();
+        void onStartRouterClicked();
+        boolean onStopRouterClicked();
         /** @since 0.9.19 */
-        public boolean isGracefulShutdownInProgress();
+        boolean isGracefulShutdownInProgress();
         /** @since 0.9.19 */
-        public boolean onGracefulShutdownClicked();
+        boolean onGracefulShutdownClicked();
         /** @since 0.9.19 */
-        public boolean onCancelGracefulShutdownClicked();
+        boolean onCancelGracefulShutdownClicked();
     }
 
     @Override

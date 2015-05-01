@@ -60,7 +60,7 @@ public class AddressbookFragment extends Fragment implements
 
     // Container Activity must implement this interface
     public interface OnAddressSelectedListener {
-        public void onAddressSelected(CharSequence host);
+        void onAddressSelected(CharSequence host);
     }
 
     public static AddressbookFragment newInstance(String book) {

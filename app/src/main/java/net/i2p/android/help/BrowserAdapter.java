@@ -35,8 +35,8 @@ public class BrowserAdapter extends RecyclerView.Adapter<BrowserAdapter.ViewHold
         }
     }
 
-    public static interface OnBrowserSelectedListener {
-        public void onBrowserSelected(Browser browser);
+    public interface OnBrowserSelectedListener {
+        void onBrowserSelected(Browser browser);
     }
 
     public BrowserAdapter(Context ctx, OnBrowserSelectedListener listener) {

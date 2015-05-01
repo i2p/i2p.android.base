@@ -14,7 +14,7 @@ public class HelpListFragment extends ListFragment {
 
     // Container Activity must implement this interface
     public interface OnEntrySelectedListener {
-        public void onEntrySelected(int entry);
+        void onEntrySelected(int entry);
     }
 
     @Override

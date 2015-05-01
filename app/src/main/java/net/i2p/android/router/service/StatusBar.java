@@ -12,7 +12,6 @@ import net.i2p.android.router.R;
 
 class StatusBar {
 
-    private final Context ctx;
     private final NotificationManager mNotificationManager;
     private final NotificationCompat.Builder mNotifyBuilder;
     private Notification mNotif;
@@ -26,8 +25,7 @@ class StatusBar {
     public static final int ICON_SHUTTING_DOWN = R.drawable.ic_stat_router_shutting_down;
     public static final int ICON_WAITING_NETWORK = R.drawable.ic_stat_router_waiting_network;
 
-    StatusBar(Context cx) {
-        ctx = cx;
+    StatusBar(Context ctx) {
         mNotificationManager = (NotificationManager) ctx.getSystemService(
                 Context.NOTIFICATION_SERVICE);
         Thread.currentThread().setUncaughtExceptionHandler(

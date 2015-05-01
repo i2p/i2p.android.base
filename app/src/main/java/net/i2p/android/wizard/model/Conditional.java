@@ -34,7 +34,7 @@ public class Conditional implements ModelCallbacks {
     }
 
     public interface Condition {
-        public boolean isSatisfied();
+        boolean isSatisfied();
     }
 
     public class EqualCondition<T> implements Condition {

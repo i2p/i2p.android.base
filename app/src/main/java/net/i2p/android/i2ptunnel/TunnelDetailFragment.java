@@ -48,8 +48,8 @@ public class TunnelDetailFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface TunnelDetailListener {
-        public void onEditTunnel(int tunnelId);
-        public void onTunnelDeleted(int tunnelId, int numTunnelsLeft);
+        void onEditTunnel(int tunnelId);
+        void onTunnelDeleted(int tunnelId, int numTunnelsLeft);
     }
 
     @Override

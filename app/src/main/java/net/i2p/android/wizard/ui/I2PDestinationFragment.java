@@ -42,7 +42,6 @@ public class I2PDestinationFragment extends Fragment {
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;
-    private String mKey;
     private SingleTextFieldPage mPage;
     protected TextView mFieldView;
     private TextView mFeedbackView;
@@ -64,7 +63,7 @@ public class I2PDestinationFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
-        mKey = args.getString(ARG_KEY);
+        String mKey = args.getString(ARG_KEY);
         mPage = (SingleTextFieldPage) mCallbacks.onGetPage(mKey);
     }
 

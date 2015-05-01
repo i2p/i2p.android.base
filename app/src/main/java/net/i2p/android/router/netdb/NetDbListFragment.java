@@ -40,7 +40,7 @@ public class NetDbListFragment extends ListFragment implements
 
     // Container Activity must implement this interface
     public interface OnEntrySelectedListener {
-        public void onEntrySelected(boolean isRouterInfo, Hash entryHash);
+        void onEntrySelected(boolean isRouterInfo, Hash entryHash);
     }
 
     @Override

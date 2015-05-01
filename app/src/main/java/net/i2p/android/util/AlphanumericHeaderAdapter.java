@@ -14,7 +14,7 @@ import net.i2p.android.router.R;
 public class AlphanumericHeaderAdapter implements StickyHeadersAdapter<AlphanumericHeaderAdapter.ViewHolder> {
     public interface SortedAdapter {
         @NonNull
-        public String getSortString(int position);
+        String getSortString(int position);
     }
 
     private static final String NUMBERS = "0123456789";

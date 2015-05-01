@@ -48,7 +48,7 @@ public class LogFragment extends ListFragment implements
 
     // Container Activity must implement this interface
     public interface OnEntrySelectedListener {
-        public void onEntrySelected(String entry);
+        void onEntrySelected(String entry);
     }
 
     public static LogFragment newInstance(String level) {

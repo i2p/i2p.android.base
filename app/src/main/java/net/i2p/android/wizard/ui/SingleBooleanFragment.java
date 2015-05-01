@@ -16,9 +16,6 @@
 
 package net.i2p.android.wizard.ui;
 
-import net.i2p.android.router.R;
-import net.i2p.android.wizard.model.Page;
-import net.i2p.android.wizard.model.SingleFixedBooleanPage;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,11 +26,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import net.i2p.android.router.R;
+import net.i2p.android.wizard.model.Page;
+import net.i2p.android.wizard.model.SingleFixedBooleanPage;
+
 public class SingleBooleanFragment extends Fragment {
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;
-    private String mKey;
     private SingleFixedBooleanPage mPage;
     private CheckBox mCheckBox;
 
@@ -54,7 +54,7 @@ public class SingleBooleanFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
-        mKey = args.getString(ARG_KEY);
+        String mKey = args.getString(ARG_KEY);
         mPage = (SingleFixedBooleanPage) mCallbacks.onGetPage(mKey);
     }
 

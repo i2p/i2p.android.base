@@ -17,10 +17,6 @@
 
 package net.i2p.android.wizard.ui;
 
-import net.i2p.android.router.R;
-import net.i2p.android.wizard.model.MultipleFixedChoicePage;
-import net.i2p.android.wizard.model.Page;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +29,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import net.i2p.android.router.R;
+import net.i2p.android.wizard.model.MultipleFixedChoicePage;
+import net.i2p.android.wizard.model.Page;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -42,7 +42,6 @@ public class MultipleChoiceFragment extends ListFragment {
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;
-    private String mKey;
     private List<String> mChoices;
     private Page mPage;
 
@@ -63,7 +62,7 @@ public class MultipleChoiceFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
-        mKey = args.getString(ARG_KEY);
+        String mKey = args.getString(ARG_KEY);
         mPage = mCallbacks.onGetPage(mKey);
 
         MultipleFixedChoicePage fixedChoicePage = (MultipleFixedChoicePage) mPage;
