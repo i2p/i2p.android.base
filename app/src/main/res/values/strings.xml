@@ -238,6 +238,8 @@
     <string name="tunnel_summ_shared_client">Use the same Destination and tunnels as other shared clients</string>
     <string name="target_destination">Target destination</string>
     <string name="persistent_key">Persistent key</string>
+    <string name="persistent_key_conflict_title">Disable new keys on reopen?</string>
+    <string name="persistent_key_conflict_msg">You can\'t enable persistent keys while the tunnel is configured to generate new keys on reopen. Do you want to disable new keys on reopen?</string>
     <string name="tunnel_summ_persistent_key">Keep this tunnel\'s Destination when it restarts</string>
     <string name="reachable_on">Reachable on</string>
     <string name="listen_port">Listen port</string>
@@ -296,6 +298,8 @@
     <string name="reduced_tunnel_quantity">Reduced tunnel quantity</string>
     <string name="close_tunnels">Close tunnels when idle</string>
     <string name="new_keys_on_reopen">New keys on reopen</string>
+    <string name="new_keys_on_reopen_conflict_title">Disable persistent keys?</string>
+    <string name="new_keys_on_reopen_conflict_msg">You can\'t enable new keys on reopen while the tunnel is configured to have persistent keys. Do you want to disable persistent keys?</string>
     <string name="http_client">HTTP client</string>
     <string name="tunnel_summ_user_agent">Pass \'User-Agent\' header through</string>
     <string name="tunnel_summ_referer">Pass \'Referer\' header through</string>

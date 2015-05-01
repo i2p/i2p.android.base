@@ -14,6 +14,7 @@
         android:title="@string/idle_time" />
 
     <CheckBoxPreference
+        android:defaultValue="@bool/DEFAULT_NEW_KEYS"
         android:dependency="@string/TUNNEL_OPT_CLOSE_IDLE"
         android:key="@string/TUNNEL_OTP_NEW_KEYS"
         android:title="@string/new_keys_on_reopen" />

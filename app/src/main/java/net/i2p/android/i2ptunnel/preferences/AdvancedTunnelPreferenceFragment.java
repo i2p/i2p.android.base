@@ -1,8 +1,13 @@
 package net.i2p.android.i2ptunnel.preferences;
 
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.support.v7.app.AlertDialog;
 
 import net.i2p.android.i2ptunnel.util.TunnelLogic;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
@@ -136,6 +141,38 @@ public class AdvancedTunnelPreferenceFragment extends BaseTunnelPreferenceFragme
                     getString(R.string.TUNNEL_CAT_IDLE)
             );
             addPreferencesFromResource(R.xml.tunnel_adv_idle_client, idleCategory);
+
+            // PERSISTENT_KEY and NEW_KEYS can't be set simultaneously
+            final CheckBoxPreference nk = (CheckBoxPreference) findPreference(getString(R.string.TUNNEL_OTP_NEW_KEYS));
+            nk.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    final SharedPreferences prefs = getPreferenceManager().getSharedPreferences();
+                    if ((Boolean) o && prefs.getBoolean(getString(R.string.TUNNEL_OPT_PERSISTENT_KEY),
+                            getResources().getBoolean(R.bool.DEFAULT_PERSISTENT_KEY))) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle(R.string.new_keys_on_reopen_conflict_title)
+                                .setMessage(R.string.new_keys_on_reopen_conflict_msg)
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        SharedPreferences.Editor editor = prefs.edit();
+                                        editor.putBoolean(getString(R.string.TUNNEL_OPT_PERSISTENT_KEY), false);
+                                        editor.apply();
+                                        nk.setChecked(true);
+                                    }
+                                })
+                                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                });
+                        builder.show();
+                        return false;
+                    } else
+                        return true;
+                }
+            });
         }
 
         @Override

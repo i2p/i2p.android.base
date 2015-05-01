@@ -1,16 +1,22 @@
 package net.i2p.android.i2ptunnel.preferences;
 
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 
 import net.i2p.android.i2ptunnel.util.TunnelLogic;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 
 public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragment {
+    private CheckBoxPreference persistentKeys;
+
     public static GeneralTunnelPreferenceFragment newInstance(int tunnelId) {
         GeneralTunnelPreferenceFragment f = new GeneralTunnelPreferenceFragment();
         Bundle args = new Bundle();
@@ -23,6 +29,17 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
     protected void loadPreferences() {
         String type = TunnelUtil.getController(mGroup, mTunnelId).getType();
         new TunnelPreferences(type).runLogic();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // In case this was changed when toggling NEW_KEYS and then we navigated back
+        persistentKeys.setChecked(getPreferenceManager().getSharedPreferences().getBoolean(
+                getString(R.string.TUNNEL_OPT_PERSISTENT_KEY),
+                getResources().getBoolean(R.bool.DEFAULT_PERSISTENT_KEY)
+        ));
     }
 
     class TunnelPreferences extends TunnelLogic {
@@ -47,6 +64,38 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
         @Override
         protected void generalClient() {
             addPreferencesFromResource(R.xml.tunnel_gen_client, generalCategory);
+
+            // PERSISTENT_KEY and NEW_KEYS can't be set simultaneously
+            persistentKeys = (CheckBoxPreference) findPreference(getString(R.string.TUNNEL_OPT_PERSISTENT_KEY));
+            persistentKeys.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    final SharedPreferences prefs = getPreferenceManager().getSharedPreferences();
+                    if ((Boolean) o && prefs.getBoolean(getString(R.string.TUNNEL_OTP_NEW_KEYS),
+                            getResources().getBoolean(R.bool.DEFAULT_NEW_KEYS))) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle(R.string.persistent_key_conflict_title)
+                                .setMessage(R.string.persistent_key_conflict_msg)
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        SharedPreferences.Editor editor = prefs.edit();
+                                        editor.putBoolean(getString(R.string.TUNNEL_OTP_NEW_KEYS), false);
+                                        editor.apply();
+                                        persistentKeys.setChecked(true);
+                                    }
+                                })
+                                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                });
+                        builder.show();
+                        return false;
+                    } else
+                        return true;
+                }
+            });
         }
 
         @Override
