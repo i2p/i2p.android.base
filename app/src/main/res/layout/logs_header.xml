@@ -4,5 +4,5 @@
     android:layout_height="wrap_content" 
     android:padding="8dp"
     android:textSize="18sp"
-    android:text="Logs" >
+    android:text="@string/label_logs" >
 </TextView>
