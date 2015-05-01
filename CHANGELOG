@@ -1,3 +1,10 @@
+0.9.20
+ * Simplified the main interface
+ * Tunnels can now be edited
+ * Material design improvements
+ * Better support for tablets
+ * Bug fixes and translation updates
+
 0.9.19.1 / 2015-04-15 / ed86e7e85161dbe3f15932fd4d195c551f8e2c71
  * Fixed crash when opening advanced settings
 
