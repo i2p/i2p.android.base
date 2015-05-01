@@ -16,22 +16,12 @@
 
 package net.i2p.android.wizard.ui;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import net.i2p.android.router.R;
-import net.i2p.android.router.util.Util;
-import net.i2p.android.wizard.model.Page;
-import net.i2p.android.wizard.model.SingleTextFieldPage;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,6 +32,16 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
+import net.i2p.android.wizard.model.Page;
+import net.i2p.android.wizard.model.SingleTextFieldPage;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class I2PB64DestinationFragment extends Fragment {
     static final int REQUEST_DESTINATION_FILE = 1;
@@ -174,13 +174,12 @@ public class I2PB64DestinationFragment extends Fragment {
         if (requestCode == REQUEST_DESTINATION_FILE) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri result = data.getData();
-                String path = result.getPath();
-                File file = new File(path);
-                BufferedReader br;
+                BufferedReader br = null;
                 try {
+                    ParcelFileDescriptor pfd = getActivity().getContentResolver().openFileDescriptor(result, "r");
                     br = new BufferedReader(
                             new InputStreamReader(
-                                    new FileInputStream(file)));
+                                    new ParcelFileDescriptor.AutoCloseInputStream(pfd)));
                     try {
                         mFieldView.setText(br.readLine());
                     } catch (IOException ioe) {
@@ -192,6 +191,13 @@ public class I2PB64DestinationFragment extends Fragment {
                     Util.e("Could not find B64 file", fnfe);
                     Toast.makeText(getActivity(), "Could not find B64 file.",
                             Toast.LENGTH_SHORT).show();
+                } finally {
+                    if (br != null)
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                 }
             }
         }
