@@ -3,9 +3,12 @@ package net.i2p.android.i2ptunnel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import net.i2p.android.I2PActivityBase;
 import net.i2p.android.i2ptunnel.preferences.EditTunnelActivity;
+import net.i2p.android.router.R;
 
 public class TunnelDetailActivity extends I2PActivityBase implements
         TunnelDetailFragment.TunnelDetailListener {
@@ -22,6 +25,19 @@ public class TunnelDetailActivity extends I2PActivityBase implements
             getSupportFragmentManager().beginTransaction()
                     .add(android.R.id.content, detailFrag).commit();
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
