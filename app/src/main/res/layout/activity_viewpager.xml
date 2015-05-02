@@ -12,14 +12,14 @@
         android:background="?attr/colorPrimary"
         android:elevation="2dp"
         android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
     <net.i2p.android.widget.SlidingTabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
     <net.i2p.android.widget.DrawShadowFrameLayout
         android:layout_width="match_parent"
