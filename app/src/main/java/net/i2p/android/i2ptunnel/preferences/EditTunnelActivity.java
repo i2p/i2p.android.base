@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import net.i2p.android.i2ptunnel.TunnelDetailActivity;
 import net.i2p.android.i2ptunnel.TunnelDetailFragment;
 import net.i2p.android.router.R;
 
-public class EditTunnelActivity extends ActionBarActivity {
+public class EditTunnelActivity extends AppCompatActivity {
     private int mTunnelId;
 
     @Override

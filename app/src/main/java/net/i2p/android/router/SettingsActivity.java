@@ -6,7 +6,7 @@ import android.preference.Preference;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.preference.PreferenceFragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import net.i2p.android.I2PActivity;
@@ -16,7 +16,7 @@ import net.i2p.android.preferences.LoggingPreferenceFragment;
 import net.i2p.android.preferences.NetworkPreferenceFragment;
 import net.i2p.android.router.addressbook.AddressbookSettingsActivity;
 
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends AppCompatActivity {
     public static final String PREFERENCE_CATEGORY = "preference_category";
     public static final String PREFERENCE_CATEGORY_NETWORK = "preference_category_network";
     public static final String PREFERENCE_CATEGORY_GRAPHS = "preference_category_graphs";

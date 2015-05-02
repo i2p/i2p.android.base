@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +13,7 @@ import net.i2p.android.router.LicenseActivity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.dialog.TextResourceDialog;
 
-public class HelpActivity extends ActionBarActivity implements
+public class HelpActivity extends AppCompatActivity implements
         HelpListFragment.OnEntrySelectedListener {
     public static final String CATEGORY = "help_category";
     public static final int CAT_MAIN = 0;

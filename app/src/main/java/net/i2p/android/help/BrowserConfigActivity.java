@@ -1,7 +1,7 @@
 package net.i2p.android.help;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -9,7 +9,7 @@ import net.i2p.android.router.R;
 
 import java.lang.reflect.Field;
 
-public class BrowserConfigActivity extends ActionBarActivity implements
+public class BrowserConfigActivity extends AppCompatActivity implements
         BrowserAdapter.OnBrowserSelectedListener {
 
     /**
