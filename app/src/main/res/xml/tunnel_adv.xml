@@ -45,6 +45,7 @@
             android:entries="@array/tunnel_profile_names"
             android:entryValues="@array/tunnel_profiles"
             android:key="@string/TUNNEL_OPT_PROFILE"
+            android:summary="%s"
             android:title="@string/profile" />
 
         <CheckBoxPreference

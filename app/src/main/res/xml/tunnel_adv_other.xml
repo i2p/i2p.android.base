@@ -7,6 +7,7 @@
             android:entries="@array/sigtype_names"
             android:entryValues="@array/sigtypes"
             android:key="@string/TUNNEL_OPT_SIGTYPE"
+            android:summary="%s"
             android:title="@string/signature_type" />
 
         <EditTextPreference
