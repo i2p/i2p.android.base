@@ -9,12 +9,14 @@
         <CheckBoxPreference
             android:defaultValue="@bool/DEFAULT_DELAY_OPEN"
             android:key="@string/TUNNEL_OPT_DELAY_OPEN"
+            android:order="1"
             android:summary="@string/tunnel_summ_delay_open"
             android:title="@string/delay_open" />
 
         <CheckBoxPreference
             android:defaultValue="@bool/DEFAULT_REDUCE_ON_IDLE"
             android:key="@string/TUNNEL_OPT_REDUCE_IDLE"
+            android:order="10"
             android:summary="@string/tunnel_summ_reduce_quantity"
             android:title="@string/reduce_quantity" />
 
@@ -22,6 +24,7 @@
             android:defaultValue="@integer/DEFAULT_REDUCE_TIME"
             android:dependency="@string/TUNNEL_OPT_REDUCE_IDLE"
             android:key="@string/TUNNEL_OPT_REDUCE_TIME"
+            android:order="11"
             android:summary="@string/num_minutes"
             android:title="@string/idle_time" />
 
@@ -29,6 +32,7 @@
             android:defaultValue="@integer/DEFAULT_REDUCE_COUNT"
             android:dependency="@string/TUNNEL_OPT_REDUCE_IDLE"
             android:key="@string/TUNNEL_OPT_REDUCE_QUANTITY"
+            android:order="12"
             android:title="@string/reduced_tunnel_quantity" />
     </PreferenceCategory>
 
