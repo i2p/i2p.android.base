@@ -1,10 +1,10 @@
 package net.i2p.android.router.dialog;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;

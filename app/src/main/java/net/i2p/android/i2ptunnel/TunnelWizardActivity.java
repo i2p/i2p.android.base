@@ -1,13 +1,13 @@
 package net.i2p.android.i2ptunnel;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 
 import net.i2p.android.router.R;
 import net.i2p.android.wizard.model.AbstractWizardModel;
