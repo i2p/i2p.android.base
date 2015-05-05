@@ -108,6 +108,9 @@
     <string name="settings_desc_upnp">Open firewall ports automatically</string>
     <string name="settings_label_logging">Logging</string>
     <string name="settings_label_default_log_level">Default log level</string>
+    <string name="settings_label_appearance">Appearance</string>
+    <string name="settings_label_language">Language</string>
+    <string name="settings_default">Default</string>
     <string name="settings_label_advanced">Advanced</string>
     <string name="settings_label_showStats">Router statistics</string>
     <string name="settings_summ_showStats">Display advanced stats in main console</string>

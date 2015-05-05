@@ -1,31 +1,41 @@
 package net.i2p.android.router;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import net.i2p.android.I2PActivity;
 import net.i2p.android.preferences.AdvancedPreferenceFragment;
+import net.i2p.android.preferences.AppearancePreferenceFragment;
 import net.i2p.android.preferences.GraphsPreferenceFragment;
 import net.i2p.android.preferences.LoggingPreferenceFragment;
 import net.i2p.android.preferences.NetworkPreferenceFragment;
 import net.i2p.android.router.addressbook.AddressbookSettingsActivity;
+import net.i2p.android.router.service.RouterService;
+import net.i2p.android.util.LocaleManager;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements
+        SharedPreferences.OnSharedPreferenceChangeListener {
     public static final String PREFERENCE_CATEGORY = "preference_category";
     public static final String PREFERENCE_CATEGORY_NETWORK = "preference_category_network";
     public static final String PREFERENCE_CATEGORY_GRAPHS = "preference_category_graphs";
     public static final String PREFERENCE_CATEGORY_LOGGING = "preference_category_logging";
     public static final String PREFERENCE_CATEGORY_ADDRESSBOOK = "preference_category_addressbook";
+    public static final String PREFERENCE_CATEGORY_APPEARANCE = "preference_category_appearance";
     public static final String PREFERENCE_CATEGORY_ADVANCED = "preference_category_advanced";
+
+    private final LocaleManager localeManager = new LocaleManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        localeManager.onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_fragment);
 
@@ -46,6 +56,12 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        localeManager.onResume(this);
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
@@ -57,6 +73,15 @@ public class SettingsActivity extends AppCompatActivity {
             finish();
         }
         return true;
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(getResources().getString(R.string.PREF_LANGUAGE))) {
+            localeManager.onResume(this);
+            Intent intent = new Intent(RouterService.LOCAL_BROADCAST_LOCALE_CHANGED);
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+        }
     }
 
     public static class SettingsFragment extends PreferenceFragment {
@@ -73,6 +98,8 @@ public class SettingsActivity extends AppCompatActivity {
                     .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_LOGGING));
             this.findPreference(PREFERENCE_CATEGORY_ADDRESSBOOK)
                     .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_ADDRESSBOOK));
+            this.findPreference(PREFERENCE_CATEGORY_APPEARANCE)
+                    .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_APPEARANCE));
             this.findPreference(PREFERENCE_CATEGORY_ADVANCED)
                     .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_ADVANCED));
         }
@@ -116,6 +143,8 @@ public class SettingsActivity extends AppCompatActivity {
                 return new GraphsPreferenceFragment();
             case PREFERENCE_CATEGORY_LOGGING:
                 return new LoggingPreferenceFragment();
+            case PREFERENCE_CATEGORY_APPEARANCE:
+                return new AppearancePreferenceFragment();
             case PREFERENCE_CATEGORY_ADVANCED:
                 return new AdvancedPreferenceFragment();
             default:

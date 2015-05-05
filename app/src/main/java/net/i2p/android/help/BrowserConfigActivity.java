@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import net.i2p.android.router.R;
+import net.i2p.android.util.LocaleManager;
 
 import java.lang.reflect.Field;
 
@@ -18,8 +19,11 @@ public class BrowserConfigActivity extends AppCompatActivity implements
      */
     private boolean mTwoPane;
 
+    private final LocaleManager localeManager = new LocaleManager();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        localeManager.onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
@@ -41,6 +45,12 @@ public class BrowserConfigActivity extends AppCompatActivity implements
                     .add(R.id.main_fragment, new BrowserListFragment())
                     .commit();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        localeManager.onResume(this);
     }
 
     @Override

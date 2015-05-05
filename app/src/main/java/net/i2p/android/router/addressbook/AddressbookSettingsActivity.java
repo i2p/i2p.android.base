@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import net.i2p.android.router.R;
+import net.i2p.android.util.LocaleManager;
 import net.i2p.util.FileUtil;
 
 import java.io.File;
@@ -23,8 +24,11 @@ public class AddressbookSettingsActivity extends AppCompatActivity {
     private String filename = "/addressbook/subscriptions.txt";
     private File i2pDir;
 
+    private final LocaleManager localeManager = new LocaleManager();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        localeManager.onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addressbook_settings);
 
@@ -83,5 +87,11 @@ public class AddressbookSettingsActivity extends AppCompatActivity {
         } finally {
         	if (out != null) try {out.close(); } catch (IOException ioe) {}
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        localeManager.onResume(this);
     }
 }

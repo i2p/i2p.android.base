@@ -31,4 +31,7 @@
 
     <!-- net.i2p.util.LogManager -->
     <string name="PROP_DEFAULTLEVEL" translatable="false">logger.defaultLevel</string>
+
+    <!-- Others -->
+    <string name="PREF_LANGUAGE" translatable="false">pref_language</string>
 </resources>

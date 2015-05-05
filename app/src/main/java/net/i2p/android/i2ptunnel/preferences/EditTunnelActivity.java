@@ -10,12 +10,16 @@ import android.support.v7.widget.Toolbar;
 import net.i2p.android.i2ptunnel.TunnelDetailActivity;
 import net.i2p.android.i2ptunnel.TunnelDetailFragment;
 import net.i2p.android.router.R;
+import net.i2p.android.util.LocaleManager;
 
 public class EditTunnelActivity extends AppCompatActivity {
     private int mTunnelId;
 
+    private final LocaleManager localeManager = new LocaleManager();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        localeManager.onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_fragment);
 
@@ -30,6 +34,12 @@ public class EditTunnelActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment, editFrag).commit();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        localeManager.onResume(this);
     }
 
     @Override

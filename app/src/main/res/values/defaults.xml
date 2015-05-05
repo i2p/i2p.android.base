@@ -25,4 +25,7 @@
     <bool name="DEFAULT_NEW_KEYS">false</bool>
     <string name="DEFAULT_JUMP_LIST" translatable="false">http://i2host.i2p/cgi-bin/i2hostjump?
 http://stats.i2p/cgi-bin/jump.cgi?a=</string>
+
+    <!-- Other -->
+    <string name="DEFAULT_LANGUAGE" translatable="false">zz</string>
 </resources>

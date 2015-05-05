@@ -18,6 +18,7 @@ import net.i2p.android.router.receiver.I2PReceiver;
 import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Notifications;
 import net.i2p.android.router.util.Util;
+import net.i2p.android.util.LocaleManager;
 import net.i2p.data.DataHelper;
 import net.i2p.router.Job;
 import net.i2p.router.Router;
@@ -47,6 +48,12 @@ public class RouterService extends Service {
      */
     public static final String LOCAL_BROADCAST_STATE_CHANGED = "net.i2p.android.LOCAL_BROADCAST_STATE_CHANGED";
     public static final String LOCAL_BROADCAST_EXTRA_STATE = "net.i2p.android.STATE";
+    /**
+     * The locale has just changed.
+     */
+    public static final String LOCAL_BROADCAST_LOCALE_CHANGED = "net.i2p.android.LOCAL_BROADCAST_LOCALE_CHANGED";
+
+    private LocaleManager localeManager = new LocaleManager();
 
     private RouterContext _context;
     private String _myDir;
@@ -96,8 +103,9 @@ public class RouterService extends Service {
         _binder = new RouterBinder(this);
         _handler = new Handler();
         _updater = new Updater();
-        LocalBroadcastManager.getInstance(this).registerReceiver(onStateRequested,
-                new IntentFilter(LOCAL_BROADCAST_REQUEST_STATE));
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
+        lbm.registerReceiver(onStateRequested, new IntentFilter(LOCAL_BROADCAST_REQUEST_STATE));
+        lbm.registerReceiver(onLocaleChanged, new IntentFilter(LOCAL_BROADCAST_LOCALE_CHANGED));
         if(lastState == State.RUNNING || lastState == State.ACTIVE) {
             Intent intent = new Intent(this, RouterService.class);
             intent.putExtra(EXTRA_RESTART, true);
@@ -117,6 +125,13 @@ public class RouterService extends Service {
             Intent ni = new Intent(LOCAL_BROADCAST_STATE_NOTIFICATION);
             ni.putExtra(LOCAL_BROADCAST_EXTRA_STATE, (android.os.Parcelable) _state);
             LocalBroadcastManager.getInstance(RouterService.this).sendBroadcast(ni);
+        }
+    };
+
+    private BroadcastReceiver onLocaleChanged = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            localeManager.updateServiceLocale(RouterService.this);
         }
     };
 

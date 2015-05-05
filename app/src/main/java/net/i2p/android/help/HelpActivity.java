@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import net.i2p.android.router.LicenseActivity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.dialog.TextResourceDialog;
+import net.i2p.android.util.LocaleManager;
 
 public class HelpActivity extends AppCompatActivity implements
         HelpListFragment.OnEntrySelectedListener {
@@ -28,8 +29,11 @@ public class HelpActivity extends AppCompatActivity implements
     private boolean mTwoPane;
     private int mCategory;
 
+    private final LocaleManager localeManager = new LocaleManager();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        localeManager.onCreate(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
@@ -56,6 +60,12 @@ public class HelpActivity extends AppCompatActivity implements
         if (mCategory >= 0) {
             showCategory(mCategory);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        localeManager.onResume(this);
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import net.i2p.android.router.service.RouterBinder;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.util.Util;
+import net.i2p.android.util.LocaleManager;
 
 public abstract class I2PActivityBase extends AppCompatActivity {
     /**
@@ -29,12 +30,15 @@ public abstract class I2PActivityBase extends AppCompatActivity {
      */
     protected static final boolean DEFAULT_AUTO_START = false;
 
+    private final LocaleManager localeManager = new LocaleManager();
+
     /**
      * Called when the activity is first created.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Util.d(this + " onCreate called");
+        localeManager.onCreate(this);
         super.onCreate(savedInstanceState);
         _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
     }
@@ -91,6 +95,7 @@ public abstract class I2PActivityBase extends AppCompatActivity {
     public void onResume() {
         Util.d(this + " onResume called");
         super.onResume();
+        localeManager.onResume(this);
     }
 
     @Override

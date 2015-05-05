@@ -13,6 +13,9 @@
         android:key="preference_category_addressbook"
         android:title="@string/label_addressbook" />
     <Preference
+        android:key="preference_category_appearance"
+        android:title="@string/settings_label_appearance" />
+    <Preference
         android:key="preference_category_advanced"
         android:title="@string/settings_label_advanced" />
 </PreferenceScreen>
