@@ -181,10 +181,6 @@
   <string name="i2ptunnel_wizard_desc_auto_start">Skal tunnelen starte automatisk når ruteren starter?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Lag tunnel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Lag tunnel</string>
-  <string name="i2ptunnel_view_type">Type:</string>
-  <string name="i2ptunnel_view_desc">Beskrivelse:</string>
-  <string name="i2ptunnel_view_target">Mål:</string>
-  <string name="i2ptunnel_view_access_point">Tilknytningspunkt:</string>
   <string name="i2ptunnel_view_autostart">Auto-start</string>
   <string name="copy_logs">Kopier loggførsel</string>
   <string name="i2p_android_error_logs">Loggføring av feil for Android I2P</string>

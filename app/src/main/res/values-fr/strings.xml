@@ -7,6 +7,8 @@
   <string name="label_home">Contrôles et statut</string>
   <string name="label_tunnels">Tunnels</string>
   <string name="label_status">Statut</string>
+  <string name="label_console">Console</string>
+  <string name="label_addresses">Adresses</string>
   <string name="label_addressbook">Carnet d\'adresses</string>
   <string name="label_i2ptunnel_client">Tunnels client</string>
   <string name="label_i2ptunnel_server">Tunnels serveur</string>
@@ -57,6 +59,7 @@
   <string name="hint_search_addressbook">Rechercher dans le carnet d\'adresses</string>
   <string name="action_reload_subscriptions">Recharger les abonnements</string>
   <string name="router_not_running">Le routeur ne fonctionne pas.</string>
+  <string name="router_shutting_down">Le routeur s\'arrête.</string>
   <string name="stats_not_ready">Le gestionnaire de statistiques n\'est pas encore prêt. Réessayez plus tard.</string>
   <string name="no_graphs_configured">Aucun graphique n\'a été configuré. Vous pouvez choisir des statistiques à mettre en graphique parmi le menu des paramètres. Tout changement prendra effet après 60 secondes.</string>
   <string name="configure_graphs">Configurer graphiques</string>
@@ -124,6 +127,9 @@
   <string name="about_donate">Vous souhaitez faire un don d\'argent ou de bitcoins pour acheter davantage d\'équipements Android pour les développements et les tests ? Allez sur :</string>
   <string name="menu_help">Aide</string>
   <string name="general">Général</string>
+  <string name="label_router">Routeur</string>
+  <string name="label_private">Privé</string>
+  <string name="addressbook_is_empty">Le carnet d\'adresses est vide</string>
   <string name="addressbook_search_header">%s trouvé</string>
   <string name="addressbook_add_wizard_k_name">Nom</string>
   <string name="addressbook_add_wizard_k_destination">Destination</string>
@@ -185,10 +191,8 @@
   <string name="i2ptunnel_wizard_desc_auto_start">Le tunnel doit-il démarrer automatiquement lorsque le routeur démarre ?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Créer un tunnel ?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Création du tunnel</string>
-  <string name="i2ptunnel_view_type">Type :</string>
-  <string name="i2ptunnel_view_desc">Description :</string>
-  <string name="i2ptunnel_view_target">Cible :</string>
-  <string name="i2ptunnel_view_access_point">Point d\'accès :</string>
+  <string name="i2ptunnel_view_target">Cible</string>
+  <string name="i2ptunnel_view_access_point">Point d\'accès</string>
   <string name="i2ptunnel_view_autostart">Démarrage automatique</string>
   <string name="edit_tunnel">Éditer tunnel</string>
   <string name="name">Nom</string>

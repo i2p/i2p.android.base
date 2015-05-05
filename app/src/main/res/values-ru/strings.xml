@@ -181,10 +181,6 @@
   <string name="i2ptunnel_wizard_desc_auto_start">Должен ли туннель автоматически запускаться при запуске маршрутизатора?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Создать туннель?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Создать туннель</string>
-  <string name="i2ptunnel_view_type">Тип:</string>
-  <string name="i2ptunnel_view_desc">Описание:</string>
-  <string name="i2ptunnel_view_target">Назначение:</string>
-  <string name="i2ptunnel_view_access_point">Точка доступа:</string>
   <string name="i2ptunnel_view_autostart">Авто-запуск</string>
   <string name="copy_logs">Копировать журналы</string>
   <string name="i2p_android_error_logs">Журнал ошибок I2P Android</string>

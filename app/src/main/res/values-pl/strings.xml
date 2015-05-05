@@ -181,10 +181,6 @@
   <string name="i2ptunnel_wizard_desc_auto_start">Czy chcesz, aby tunel włączył się automatycznie kiedy uruchomi się router?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Utworzyć tunel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Utwórz tunel</string>
-  <string name="i2ptunnel_view_type">Typ:</string>
-  <string name="i2ptunnel_view_desc">Opis:</string>
-  <string name="i2ptunnel_view_target">Cel:</string>
-  <string name="i2ptunnel_view_access_point">Punkt dostępu:</string>
   <string name="i2ptunnel_view_autostart">Auto-start</string>
   <string name="copy_logs">Kopiuj logi</string>
   <string name="i2p_android_error_logs">Logi Błędów I2P Android</string>

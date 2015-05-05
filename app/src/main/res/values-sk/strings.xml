@@ -167,9 +167,5 @@
   <string name="i2ptunnel_wizard_desc_auto_start">Mal by byť tunel vytvorený automaticky pri spustení routra?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Vytvoriť tunel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Vytvoriť tunel</string>
-  <string name="i2ptunnel_view_type">Typ:</string>
-  <string name="i2ptunnel_view_desc">Popis:</string>
-  <string name="i2ptunnel_view_target">Cieľ:</string>
-  <string name="i2ptunnel_view_access_point">Prístupový bod:</string>
   <string name="i2ptunnel_view_autostart">Automatické spustenie</string>
 </resources>

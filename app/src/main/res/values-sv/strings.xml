@@ -8,6 +8,8 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="label_home">Inställningar och Status</string>
   <string name="label_tunnels">Tunnlar</string>
   <string name="label_status">Status</string>
+  <string name="label_console">Konsoll</string>
+  <string name="label_addresses">Adresser</string>
   <string name="label_addressbook">Adressbok</string>
   <string name="label_i2ptunnel_client">Klienttunnlar</string>
   <string name="label_i2ptunnel_server">Servertunnlar</string>
@@ -58,6 +60,7 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="hint_search_addressbook">Sök i adressboken</string>
   <string name="action_reload_subscriptions">Ladda om prenumerationer</string>
   <string name="router_not_running">Routern kör inte</string>
+  <string name="router_shutting_down">Routern stänger ner.</string>
   <string name="stats_not_ready">Statistikhanteraren är inte redo än. Försök igen senare.</string>
   <string name="no_graphs_configured">Inga grafer har ställts in. Du kan välja statistik till grafen i inställningsmenyn. Ändringar aktiveras efter 60 sekunder.</string>
   <string name="configure_graphs">Ställ in grafer</string>
@@ -125,6 +128,9 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="about_donate">Vill du donera pengar eller bitcoins för inköp av fler Androidenheter till utveckling och testning? Gå till:</string>
   <string name="menu_help">Hjälp</string>
   <string name="general">Generell</string>
+  <string name="label_router">Router</string>
+  <string name="label_private">Privat</string>
+  <string name="addressbook_is_empty">Adressboken är tom</string>
   <string name="addressbook_search_header">%s hittade</string>
   <string name="addressbook_add_wizard_k_name">Namn</string>
   <string name="addressbook_add_wizard_k_destination">Destination</string>
@@ -186,10 +192,8 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="i2ptunnel_wizard_desc_auto_start">Skall tunneln starta automatiskt när routern startar?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Skapa tunnel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Skapa tunnel</string>
-  <string name="i2ptunnel_view_type">Typ</string>
-  <string name="i2ptunnel_view_desc">Beskrivning:</string>
-  <string name="i2ptunnel_view_target">Mål:</string>
-  <string name="i2ptunnel_view_access_point">Accesspunkt:</string>
+  <string name="i2ptunnel_view_target">Mål</string>
+  <string name="i2ptunnel_view_access_point">Accesspunkt</string>
   <string name="i2ptunnel_view_autostart">Auto-start</string>
   <string name="edit_tunnel">Redigera tunnel</string>
   <string name="name">Namn</string>

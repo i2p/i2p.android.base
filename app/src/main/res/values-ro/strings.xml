@@ -147,10 +147,6 @@
   <string name="i2ptunnel_wizard_desc_auto_start">Ar trebui ca tunelul să pornească automat când ruterul pornește?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Se creează tunelul?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Creare tunel</string>
-  <string name="i2ptunnel_view_type">Tip:</string>
-  <string name="i2ptunnel_view_desc">Descriere:</string>
-  <string name="i2ptunnel_view_target">Tinta:</string>
-  <string name="i2ptunnel_view_access_point">Punct de acces:</string>
   <string name="i2ptunnel_view_autostart">Auto pornire</string>
   <string name="copy_logs">Copiază jurnale</string>
   <string name="i2p_android_error_logs">Jurnale eroare I2P Android</string>

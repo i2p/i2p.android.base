@@ -181,10 +181,6 @@
   <string name="i2ptunnel_wizard_desc_auto_start">ルーターの起動時に自動的にトンネルを開始しますか？</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">トンネルを作成しますか？</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">トンネルを作成</string>
-  <string name="i2ptunnel_view_type">タイプ:</string>
-  <string name="i2ptunnel_view_desc">説明:</string>
-  <string name="i2ptunnel_view_target">ターゲット:</string>
-  <string name="i2ptunnel_view_access_point">アクセスポイント:</string>
   <string name="i2ptunnel_view_autostart">自動開始</string>
   <string name="edit_tunnel">トンネルを編集</string>
   <string name="name">名前</string>

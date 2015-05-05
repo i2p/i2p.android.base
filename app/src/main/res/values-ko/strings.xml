@@ -180,10 +180,6 @@
   <string name="i2ptunnel_wizard_desc_auto_start">라우터가 시작할때 터널도 같이 실행?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">터널을 만들까요?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">터널 </string>
-  <string name="i2ptunnel_view_type">종류:</string>
-  <string name="i2ptunnel_view_desc">설명:</string>
-  <string name="i2ptunnel_view_target">목표:</string>
-  <string name="i2ptunnel_view_access_point">엑세스 포인트:</string>
   <string name="i2ptunnel_view_autostart">자동 시작</string>
   <string name="copy_logs">로그 복사</string>
   <string name="i2p_android_error_logs">I2P 안드로이드 오류 로그</string>

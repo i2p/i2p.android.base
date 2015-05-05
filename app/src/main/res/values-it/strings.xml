@@ -178,10 +178,6 @@
   <string name="i2ptunnel_wizard_desc_auto_start">Vuoi che il tunnel si avvii automaticamente insieme al router?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Creare il tunnel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Crea tunnel</string>
-  <string name="i2ptunnel_view_type">Tipologia:</string>
-  <string name="i2ptunnel_view_desc">Descrizione:</string>
-  <string name="i2ptunnel_view_target">Destinazione:</string>
-  <string name="i2ptunnel_view_access_point">Punto di accesso:</string>
   <string name="i2ptunnel_view_autostart">Avvio automatico</string>
   <string name="label_browser_configuration">Configurazione del browser</string>
 </resources>

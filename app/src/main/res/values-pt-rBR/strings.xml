@@ -148,9 +148,5 @@
   <string name="i2ptunnel_wizard_desc_auto_start">O túnel deve iniciar automaticamente quando o roteador iniciar?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Criar túnel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Criar túnel</string>
-  <string name="i2ptunnel_view_type">Tipo:</string>
-  <string name="i2ptunnel_view_desc">Descrição:</string>
-  <string name="i2ptunnel_view_target">Alvo:</string>
-  <string name="i2ptunnel_view_access_point">Ponto de acesso:</string>
   <string name="i2ptunnel_view_autostart">Auto-início</string>
 </resources>

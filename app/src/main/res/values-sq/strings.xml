@@ -169,9 +169,5 @@
   <string name="i2ptunnel_wizard_desc_auto_start">Të startojë tuneli njëkohësisht me router\'in?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Krijo tunel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Krijo tunel</string>
-  <string name="i2ptunnel_view_type">Tipi:</string>
-  <string name="i2ptunnel_view_desc">Përshkrimi:</string>
-  <string name="i2ptunnel_view_target">Caku</string>
-  <string name="i2ptunnel_view_access_point">Vendqasjaja:</string>
   <string name="i2ptunnel_view_autostart">Autostarto</string>
 </resources>

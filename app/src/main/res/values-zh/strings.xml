@@ -7,6 +7,8 @@
   <string name="label_home">控制和状态</string>
   <string name="label_tunnels">隧道</string>
   <string name="label_status">状态</string>
+  <string name="label_console">控制台</string>
+  <string name="label_addresses">地址簿</string>
   <string name="label_addressbook">地址簿</string>
   <string name="label_i2ptunnel_client">客户隧道</string>
   <string name="label_i2ptunnel_server">服务隧道</string>
@@ -57,6 +59,7 @@
   <string name="hint_search_addressbook">搜索地址簿</string>
   <string name="action_reload_subscriptions">重载订阅</string>
   <string name="router_not_running">路由器未运行.</string>
+  <string name="router_shutting_down">路由器正在关机。</string>
   <string name="stats_not_ready">统计管理器还没有准备好. 稍后再试.</string>
   <string name="no_graphs_configured">没有已配置的图表。您可以在设置菜单中选择统计信息以获得图表。任何更改将在60秒后生效。</string>
   <string name="configure_graphs">配置图表</string>
@@ -124,6 +127,9 @@
   <string name="about_donate">想捐钱或比特币来为开发和测试购买更多Android 设备吗?转到:</string>
   <string name="menu_help">帮助</string>
   <string name="general">常规</string>
+  <string name="label_router">路由器</string>
+  <string name="label_private">私有</string>
+  <string name="addressbook_is_empty">地址簿是空的</string>
   <string name="addressbook_search_header">%s 找到</string>
   <string name="addressbook_add_wizard_k_name">名称</string>
   <string name="addressbook_add_wizard_k_destination">目的地</string>
@@ -185,10 +191,8 @@
   <string name="i2ptunnel_wizard_desc_auto_start">启动路由器时要自动启动隧道吗?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">创建隧道?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">创建隧道</string>
-  <string name="i2ptunnel_view_type">类型:</string>
-  <string name="i2ptunnel_view_desc">描述:</string>
-  <string name="i2ptunnel_view_target">目标:</string>
-  <string name="i2ptunnel_view_access_point">接入点:</string>
+  <string name="i2ptunnel_view_target">目标</string>
+  <string name="i2ptunnel_view_access_point">接入点</string>
   <string name="i2ptunnel_view_autostart">自动启动</string>
   <string name="edit_tunnel">编辑隧道</string>
   <string name="name">名称</string>
