@@ -41,10 +41,11 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
         super.onStart();
 
         // In case this was changed when toggling NEW_KEYS and then we navigated back
-        persistentKeys.setChecked(getPreferenceManager().getSharedPreferences().getBoolean(
-                getString(R.string.TUNNEL_OPT_PERSISTENT_KEY),
-                getResources().getBoolean(R.bool.DEFAULT_PERSISTENT_KEY)
-        ));
+        if (persistentKeys != null)
+            persistentKeys.setChecked(getPreferenceManager().getSharedPreferences().getBoolean(
+                    getString(R.string.TUNNEL_OPT_PERSISTENT_KEY),
+                    getResources().getBoolean(R.bool.DEFAULT_PERSISTENT_KEY)
+            ));
     }
 
     class TunnelPreferences extends TunnelLogic {
