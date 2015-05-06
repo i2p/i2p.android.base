@@ -93,6 +93,9 @@
   <string name="settings_desc_upnp">Firewallports automatisch öffnen</string>
   <string name="settings_label_logging">Statusberichte</string>
   <string name="settings_label_default_log_level">Standard-Detailtiefe der Statusberichte</string>
+  <string name="settings_label_appearance">Erscheinungsbild</string>
+  <string name="settings_label_language">Sprache</string>
+  <string name="settings_default">Standard</string>
   <string name="settings_label_advanced">Erweitert</string>
   <string name="settings_label_showStats">Routerstatistiken</string>
   <string name="settings_summ_showStats">Ausführliche Statistiken in der Hauptkonsole anzeigen.</string>
@@ -202,6 +205,8 @@
   <string name="shared_client">Gemeinsamer Klient</string>
   <string name="target_destination">Zielort</string>
   <string name="persistent_key">Persistenter Schlüssel</string>
+  <string name="persistent_key_conflict_title">Neue Schlüssel beim erneuten Öffnen deaktivieren?</string>
+  <string name="tunnel_summ_persistent_key">Ziel des Tunnels bei einem Neustart beibehalten</string>
   <string name="reachable_on">Erreichbarkeit ein</string>
   <string name="listen_port">Lauschport</string>
   <string name="client_ssl">Klient-SSL</string>
@@ -224,6 +229,8 @@
   <string name="access_list">Zugangsliste</string>
   <string name="reject_inproxies">Eingangsproxies abweisen</string>
   <string name="tunnel_summ_reject_inproxies">Nur I2P-Nutzern eine Verbindung erlauben</string>
+  <string name="unique_local">Eindeutige Sprachumgebung</string>
+  <string name="tunnel_summ_unique_local">Verwenden Sie eindeutige localhost-IPs für jeden Client</string>
   <string name="client_connection_limits">Klient-Verbindungsbegrenzungen</string>
   <string name="connections_per_minute">Verbindungen pro Minute</string>
   <string name="connections_per_hour">Verbindungen pro Stunde</string>

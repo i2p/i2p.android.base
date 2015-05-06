@@ -93,6 +93,9 @@
   <string name="settings_desc_upnp">Ouvrir automatiquement les ports du pare-feu</string>
   <string name="settings_label_logging">Logging</string>
   <string name="settings_label_default_log_level">Niveau de log par défaut</string>
+  <string name="settings_label_appearance">Apparition</string>
+  <string name="settings_label_language">Langue</string>
+  <string name="settings_default">Prédéfini</string>
   <string name="settings_label_advanced">Avancé</string>
   <string name="settings_label_showStats">Statistiques du routeur</string>
   <string name="settings_summ_showStats">Afficher les statistiques avancées dans la console principale</string>
@@ -204,6 +207,8 @@
   <string name="tunnel_summ_shared_client">Utiliser la même Destination et mêmes tunnels que les autres clients partagés</string>
   <string name="target_destination">Destination cible</string>
   <string name="persistent_key">Clé persistante</string>
+  <string name="persistent_key_conflict_title">Désactiver les nouvelles clés lors d\'une réouverture ?</string>
+  <string name="persistent_key_conflict_msg">Vous ne pouvez pas permettre de clés persistantes tandis que le tunnel est configuré pour générer de nouvelles clés lors d\'une rouverture. Voulez-vous mettre hors service les nouvelles clés lors d\'une rouverture ?</string>
   <string name="tunnel_summ_persistent_key">Garder la Destination de ce tunnel lorsqu\'il redémarre</string>
   <string name="reachable_on">Accessible sur</string>
   <string name="listen_port">Port d\'écoute</string>
@@ -262,6 +267,8 @@
   <string name="reduced_tunnel_quantity">Quantité de tunnels réduits</string>
   <string name="close_tunnels">Tunnels fermés quand inoccupé</string>
   <string name="new_keys_on_reopen">Nouvelles clés sur réouverture</string>
+  <string name="new_keys_on_reopen_conflict_title">Ne plus permettre de clés persistantes ?</string>
+  <string name="new_keys_on_reopen_conflict_msg">Vous ne pouvez pas permettre de nouvelles clés sur réouverture tandis que le tunnel est configuré pour avoir des clés persistantes. Voulez-vous mettre hors de service les clés persistantes ?</string>
   <string name="http_client">Client HTTP</string>
   <string name="tunnel_summ_user_agent">Passer l\'en-tête \'User-Agent\' à travers</string>
   <string name="tunnel_summ_referer">Passer l\'en-tête \'Referer\' à travers</string>

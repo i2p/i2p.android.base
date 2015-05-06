@@ -138,10 +138,6 @@
   <string name="finish">Submeter</string>
   <string name="review">Rever</string>
   <string name="enabled">Ativado</string>
-  <string name="i2ptunnel_view_type">Tipo:</string>
-  <string name="i2ptunnel_view_desc">Descrição:</string>
-  <string name="i2ptunnel_view_target">Destino:</string>
-  <string name="i2ptunnel_view_access_point">Ponto de acesso:</string>
   <string name="i2ptunnel_view_autostart">Iniciar-Automático</string>
   <string name="edit_tunnel">Alterar túnel </string>
   <string name="name">Nome</string>

@@ -143,10 +143,6 @@
   <string name="i2ptunnel_wizard_desc_target_port">Це порт, на який сервіс приймає з’єднання.</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Створити тунель?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Створити тунель</string>
-  <string name="i2ptunnel_view_type">Тип:</string>
-  <string name="i2ptunnel_view_desc">Опис:</string>
-  <string name="i2ptunnel_view_target">Ціль:</string>
-  <string name="i2ptunnel_view_access_point">Точка доступу:</string>
   <string name="i2ptunnel_view_autostart">Автозапуск</string>
   <string name="edit_tunnel">Редагувати тунель</string>
   <string name="name">Назва</string>

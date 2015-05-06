@@ -93,6 +93,9 @@
   <string name="settings_desc_upnp">自动打开防火墙端口</string>
   <string name="settings_label_logging">日志</string>
   <string name="settings_label_default_log_level">默认日志级别</string>
+  <string name="settings_label_appearance">外观</string>
+  <string name="settings_label_language">语言</string>
+  <string name="settings_default">默认</string>
   <string name="settings_label_advanced">高级</string>
   <string name="settings_label_showStats">路由器统计</string>
   <string name="settings_summ_showStats">在主控制台中显示高级统计</string>
@@ -204,6 +207,8 @@
   <string name="tunnel_summ_shared_client">使用相同的目的地和隧道为其他客户端共享</string>
   <string name="target_destination">目标目的地</string>
   <string name="persistent_key">持久密钥</string>
+  <string name="persistent_key_conflict_title">禁用重新打开时新建密钥？</string>
+  <string name="persistent_key_conflict_msg">您不能在隧道被配置为重新打开时生成新密钥的情况下启用持久密钥。您想禁用重新打开时新建密钥吗？</string>
   <string name="tunnel_summ_persistent_key">它重启时保持此隧道的目的地</string>
   <string name="reachable_on">可访问到在</string>
   <string name="listen_port">监听端口</string>
@@ -262,6 +267,8 @@
   <string name="reduced_tunnel_quantity">减少隧道数量</string>
   <string name="close_tunnels">关闭隧道在闲置时</string>
   <string name="new_keys_on_reopen">新建密钥在重新打开时</string>
+  <string name="new_keys_on_reopen_conflict_title">禁用持久密钥</string>
+  <string name="new_keys_on_reopen_conflict_msg">您不能在隧道被配置为有持久密钥情况下启用重新打开时新建密钥。您想禁用持久密钥吗？</string>
   <string name="http_client">HTTP 客户端</string>
   <string name="tunnel_summ_user_agent">传递 \'User-Agent\' 头通过</string>
   <string name="tunnel_summ_referer">传递 \'Referer\' 头通过</string>
