@@ -98,6 +98,10 @@ public abstract class I2PActivityBase extends AppCompatActivity {
         localeManager.onResume(this);
     }
 
+    public void notifyLocaleChanged() {
+        localeManager.onResume(this);
+    }
+
     @Override
     public void onPause() {
         Util.d(this + " onPause called");

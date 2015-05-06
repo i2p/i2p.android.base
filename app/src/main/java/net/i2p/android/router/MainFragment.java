@@ -3,6 +3,7 @@ package net.i2p.android.router;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +26,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import net.i2p.android.I2PActivityBase;
-import net.i2p.android.router.dialog.ConfigureBrowserDialog;
+import net.i2p.android.help.BrowserConfigActivity;
 import net.i2p.android.router.dialog.FirstStartDialog;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
@@ -586,12 +588,58 @@ public class MainFragment extends I2PFragmentBase {
     }
 
     private void checkDialog() {
-        I2PActivityBase ab = (I2PActivityBase) getActivity();
-        boolean configureBrowser = ab.getPref(PREF_CONFIGURE_BROWSER, true);
-        if (configureBrowser) {
-            ConfigureBrowserDialog dialog = new ConfigureBrowserDialog();
-            dialog.show(getActivity().getSupportFragmentManager(), "configurebrowser");
-            ab.setPref(PREF_CONFIGURE_BROWSER, false);
+        final I2PActivityBase ab = (I2PActivityBase) getActivity();
+        String language = PreferenceManager.getDefaultSharedPreferences(ab).getString(
+                getString(R.string.PREF_LANGUAGE), null
+        );
+        if (language == null) {
+            AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+            b.setTitle(R.string.choose_language)
+                    .setItems(R.array.language_names, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Save the language choice
+                            String language = getResources().getStringArray(R.array.languages)[which];
+                            PreferenceManager.getDefaultSharedPreferences(getActivity())
+                                    .edit()
+                                    .putString(getString(R.string.PREF_LANGUAGE), language)
+                                    .apply();
+                            // Close the dialog
+                            dialog.dismiss();
+                            // Broadcast the change to RouterService just in case the router is running
+                            Intent intent = new Intent(RouterService.LOCAL_BROADCAST_LOCALE_CHANGED);
+                            LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
+                            // Update the parent
+                            ab.notifyLocaleChanged();
+                            // Run checkDialog() again to show the next dialog
+                            // (if the change doesn't restart the Activity)
+                            checkDialog();
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
+        } else if (ab.getPref(PREF_CONFIGURE_BROWSER, true)) {
+            AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+            b.setTitle(R.string.configure_browser_title)
+                    .setMessage(R.string.configure_browser_for_i2p)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.dismiss();
+                            ab.setPref(PREF_CONFIGURE_BROWSER, false);
+                            Intent hi = new Intent(getActivity(), BrowserConfigActivity.class);
+                            startActivity(hi);
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.cancel();
+                            ab.setPref(PREF_CONFIGURE_BROWSER, false);
+                        }
+                    })
+                    .show();
         }
         /*VersionDialog dialog = new VersionDialog();
         String oldVersion = ((I2PActivityBase) getActivity()).getPref(PREF_INSTALLED_VERSION, "??");

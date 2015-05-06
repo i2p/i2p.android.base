@@ -1,5 +1,6 @@
 0.9.20
  * Simplified the main interface
+ * Language can be configured
  * Tunnels can now be edited
  * Material design improvements
  * Better support for tablets
