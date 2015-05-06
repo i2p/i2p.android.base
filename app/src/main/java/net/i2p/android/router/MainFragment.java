@@ -603,7 +603,7 @@ public class MainFragment extends I2PFragmentBase {
                             PreferenceManager.getDefaultSharedPreferences(getActivity())
                                     .edit()
                                     .putString(getString(R.string.PREF_LANGUAGE), language)
-                                    .apply();
+                                    .commit();
                             // Close the dialog
                             dialog.dismiss();
                             // Broadcast the change to RouterService just in case the router is running
