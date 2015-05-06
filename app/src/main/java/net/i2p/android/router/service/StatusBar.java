@@ -35,7 +35,7 @@ class StatusBar {
 
         int icon = ICON_STARTING;
         // won't be shown if replace() is called
-        String text = "Starting I2P";
+        String text = ctx.getString(R.string.notification_status_starting);
 
         mNotifyBuilder = new NotificationCompat.Builder(ctx)
             .setContentText(text)
@@ -53,16 +53,15 @@ class StatusBar {
         replace(icon, mCtx.getString(textResource));
     }
 
-    public void replace(int icon, String text) {
+    public void replace(int icon, String title) {
         mNotifyBuilder.setSmallIcon(icon)
             .setStyle(null)
-            .setTicker(text);
-        update(text);
+            .setTicker(title);
+        update(title);
     }
 
-    public void update(String text) {
-        String title = "I2P Status";
-        update(title, text);
+    public void update(String title) {
+        update(title, null);
     }
 
     public void update(String title, String text, String bigText) {
