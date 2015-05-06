@@ -35,6 +35,7 @@ import net.i2p.data.DataHelper;
 import net.i2p.data.Destination;
 import net.i2p.data.Hash;
 import net.i2p.data.LeaseSet;
+import net.i2p.router.CommSystemFacade;
 import net.i2p.router.RouterContext;
 import net.i2p.router.TunnelPoolSettings;
 import net.i2p.util.Translate;
@@ -369,7 +370,7 @@ public class MainFragment extends I2PFragmentBase {
             loadDestinations(ctx);
 
             if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean(PREF_SHOW_STATS, false)) {
-                short reach = ctx.commSystem().getReachabilityStatus();
+                CommSystemFacade.Status reach = ctx.commSystem().getStatus();
                 int active = ctx.commSystem().countActivePeers();
                 int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
                 int inEx = ctx.tunnelManager().getFreeTunnelCount();
@@ -383,16 +384,21 @@ public class MainFragment extends I2PFragmentBase {
                 String uptime = DataHelper.formatDuration(ctx.router().getUptime());
 
                 String netstatus;
-                if (reach == net.i2p.router.CommSystemFacade.STATUS_DIFFERENT) {
-                    netstatus = "Symmetric NAT";
-                } else if (reach == net.i2p.router.CommSystemFacade.STATUS_HOSED) {
-                    netstatus = "Port Failure";
-                } else if (reach == net.i2p.router.CommSystemFacade.STATUS_OK) {
-                    netstatus = "OK";
-                } else if (reach == net.i2p.router.CommSystemFacade.STATUS_REJECT_UNSOLICITED) {
-                    netstatus = "Firewalled";
-                } else {
-                    netstatus = "Unknown";
+                switch (reach) {
+                    case DIFFERENT:
+                        netstatus = "Symmetric NAT";
+                        break;
+                    case HOSED:
+                        netstatus = "Port Failure";
+                        break;
+                    case OK:
+                        netstatus = "OK";
+                        break;
+                    case REJECT_UNSOLICITED:
+                        netstatus = "Firewalled";
+                        break;
+                    default:
+                        netstatus = "Unknown";
                 }
                 String tunnelStatus = ctx.throttle().getTunnelStatus();
                 //ctx.commSystem().getReachabilityStatus();
