@@ -40,6 +40,12 @@ public class AboutDialog extends DialogFragment {
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
         b.setTitle(R.string.menu_about)
                 .setView(view)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.dismiss();
+                    }
+                })
                 .setNeutralButton(R.string.label_licenses, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
