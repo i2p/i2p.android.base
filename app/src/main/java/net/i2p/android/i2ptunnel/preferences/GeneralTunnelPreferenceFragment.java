@@ -121,23 +121,26 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
 
         @Override
         protected void generalClientPortStreamr(boolean isStreamr) {
-            final ListPreference reachableBy = (ListPreference) portCategory.findPreference(getString(R.string.TUNNEL_INTERFACE));
+            ListPreference reachableBy = (ListPreference) portCategory.findPreference(getString(R.string.TUNNEL_INTERFACE));
             if (isStreamr)
                 portCategory.removePreference(reachableBy);
-            else {
-                reachableBy.setEnabled(false);
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... voids) {
-                        Set<String> interfaceSet = Addresses.getAllAddresses();
-                        String[] interfaces = interfaceSet.toArray(new String[interfaceSet.size()]);
-                        reachableBy.setEntries(interfaces);
-                        reachableBy.setEntryValues(interfaces);
-                        reachableBy.setEnabled(true);
-                        return null;
-                    }
-                }.execute();
-            }
+            else
+                setupReachableBy(reachableBy);
+        }
+
+        private void setupReachableBy(final ListPreference reachableBy) {
+            reachableBy.setEnabled(false);
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    Set<String> interfaceSet = Addresses.getAllAddresses();
+                    String[] interfaces = interfaceSet.toArray(new String[interfaceSet.size()]);
+                    reachableBy.setEntries(interfaces);
+                    reachableBy.setEntryValues(interfaces);
+                    reachableBy.setEnabled(true);
+                    return null;
+                }
+            }.execute();
         }
 
         @Override
@@ -176,6 +179,8 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
             portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_USE_SSL)));
             if (isStreamr)
                 portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_LISTEN_PORT)));
+
+            setupReachableBy((ListPreference) portCategory.findPreference(getString(R.string.TUNNEL_INTERFACE)));
         }
 
         @Override
