@@ -80,6 +80,19 @@
     <string name="netdb_routers_empty">No routers in your NetDB.</string>
     <string name="netdb_leases_empty">No LeaseSets in your NetDB.</string>
 
+    <string name="notification_status_starting">I2P is starting up</string>
+    <string name="notification_status_restarting">I2P is restarting</string>
+    <string name="notification_status_waiting">I2P is waiting for a network connection</string>
+    <string name="notification_status_starting_after_waiting">Network connected, I2P is starting up</string>
+    <string name="notification_status_running">I2P is running</string>
+    <string name="notification_status_client_ready">Client tunnels are ready</string>
+    <string name="notification_status_client_down">Client tunnels are down</string>
+    <string name="notification_status_graceful">Stopping I2P in %s</string>
+    <string name="notification_status_stopping">Stopping I2P</string>
+    <string name="notification_status_stopping_after_net">Network disconnected, stopping I2P</string>
+    <string name="notification_status_shutdown_cancelled">Shutdown cancelled</string>
+    <string name="notification_status_shutting_down">I2P is shutting down</string>
+    <string name="notification_status_text" translatable="false">%1$s KBps ↓ / %2$s KBps ↑</string>
     <string name="notification_status_bw">Bandwidth: %1$s KBps down / %2$s KBps up</string>
     <string name="notification_status_peers">Peers: %1$d active, %2$d known</string>
     <string name="notification_status_expl">Exploratory tunnels: %1$d/%2$d</string>

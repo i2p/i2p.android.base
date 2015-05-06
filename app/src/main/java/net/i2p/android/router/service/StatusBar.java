@@ -12,6 +12,7 @@ import net.i2p.android.router.R;
 
 class StatusBar {
 
+    private Context mCtx;
     private final NotificationManager mNotificationManager;
     private final NotificationCompat.Builder mNotifyBuilder;
     private Notification mNotif;
@@ -26,6 +27,7 @@ class StatusBar {
     public static final int ICON_WAITING_NETWORK = R.drawable.ic_stat_router_waiting_network;
 
     StatusBar(Context ctx) {
+        mCtx = ctx;
         mNotificationManager = (NotificationManager) ctx.getSystemService(
                 Context.NOTIFICATION_SERVICE);
         Thread.currentThread().setUncaughtExceptionHandler(
@@ -45,6 +47,10 @@ class StatusBar {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mNotifyBuilder.setContentIntent(pi);
+    }
+
+    public void replace(int icon, int textResource) {
+        replace(icon, mCtx.getString(textResource));
     }
 
     public void replace(int icon, String text) {

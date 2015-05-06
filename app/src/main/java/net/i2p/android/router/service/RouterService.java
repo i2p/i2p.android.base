@@ -158,15 +158,15 @@ public class RouterService extends Service {
             _receiver = new I2PReceiver(this);
             if(Connectivity.isConnected(this)) {
                 if(restart) {
-                    _statusBar.replace(StatusBar.ICON_STARTING, "I2P is restarting");
+                    _statusBar.replace(StatusBar.ICON_STARTING, R.string.notification_status_restarting);
                 } else {
-                    _statusBar.replace(StatusBar.ICON_STARTING, "I2P is starting up");
+                    _statusBar.replace(StatusBar.ICON_STARTING, R.string.notification_status_starting);
                 }
                 setState(State.STARTING);
                 _starterThread = new Thread(new Starter());
                 _starterThread.start();
             } else {
-                _statusBar.replace(StatusBar.ICON_WAITING_NETWORK, "I2P is waiting for a network connection");
+                _statusBar.replace(StatusBar.ICON_WAITING_NETWORK, R.string.notification_status_waiting);
                 setState(State.WAITING);
                 _handler.postDelayed(new Waiter(), 10 * 1000);
             }
@@ -195,7 +195,7 @@ public class RouterService extends Service {
                         if(_state != State.WAITING) {
                             return;
                         }
-                        _statusBar.replace(StatusBar.ICON_STARTING, "Network connected, I2P is starting up");
+                        _statusBar.replace(StatusBar.ICON_STARTING, R.string.notification_status_starting_after_waiting);
                         setState(State.STARTING);
                         _starterThread = new Thread(new Starter());
                         _starterThread.start();
@@ -223,7 +223,7 @@ public class RouterService extends Service {
                     return;
                 }
                 setState(State.RUNNING);
-                _statusBar.replace(StatusBar.ICON_RUNNING, "I2P is running");
+                _statusBar.replace(StatusBar.ICON_RUNNING, R.string.notification_status_running);
                 _context = Util.getRouterContext();
                 if (_context == null) {
                     throw new IllegalStateException("No contexts. This is usually because the router is either starting up or shutting down.");
@@ -276,7 +276,7 @@ public class RouterService extends Service {
         }
 
         String text =
-                getResources().getString(R.string.notification_status_bw,
+                getResources().getString(R.string.notification_status_text,
                         fmt.format(inBW), fmt.format(outBW)); 
 
         String bigText =
@@ -293,23 +293,23 @@ public class RouterService extends Service {
         if (isGracefulShutdownInProgress()) {
             long ms = ctx.router().getShutdownTimeRemaining();
             if (ms > 1000) {
-                _currTitle = "Stopping I2P in " + DataHelper.formatDuration(ms);
+                _currTitle = getString(R.string.notification_status_graceful, DataHelper.formatDuration(ms));
             } else {
-                _currTitle = "Stopping I2P";
+                _currTitle = getString(R.string.notification_status_stopping);
             }
         } else if (haveTunnels != _hadTunnels) {
             if(haveTunnels) {
-                _currTitle = "Client tunnels are ready";
+                _currTitle = getString(R.string.notification_status_client_ready);
                 setState(State.ACTIVE);
                 _statusBar.replace(StatusBar.ICON_ACTIVE, _currTitle);
             } else {
-                _currTitle = "Client tunnels are down";
+                _currTitle = getString(R.string.notification_status_client_down);
                 setState(State.RUNNING);
                 _statusBar.replace(StatusBar.ICON_RUNNING, _currTitle);
             }
             _hadTunnels = haveTunnels;
         } else if (_currTitle == null || _currTitle.equals(""))
-            _currTitle = "I2P is running";
+            _currTitle = getString(R.string.notification_status_running);
         _statusBar.update(_currTitle, text, bigText);
     }
 
@@ -416,7 +416,7 @@ public class RouterService extends Service {
             }
             if(_state == State.STARTING || _state == State.RUNNING ||
                _state == State.ACTIVE || _state == State.GRACEFUL_SHUTDOWN) {
-                _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P");
+                _statusBar.replace(StatusBar.ICON_STOPPING, R.string.notification_status_stopping);
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_STOPPING, State.MANUAL_STOPPED));
                 stopperThread.start();
             }
@@ -438,7 +438,7 @@ public class RouterService extends Service {
             }
             if(_state == State.STARTING || _state == State.RUNNING ||
                _state == State.ACTIVE || _state == State.GRACEFUL_SHUTDOWN) {
-                _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P");
+                _statusBar.replace(StatusBar.ICON_STOPPING, R.string.notification_status_stopping);
                 Thread stopperThread = new Thread(new Stopper(State.MANUAL_QUITTING, State.MANUAL_QUITTED));
                 stopperThread.start();
             } else if(_state == State.WAITING) {
@@ -460,7 +460,7 @@ public class RouterService extends Service {
             }
             if(_state == State.STARTING || _state == State.RUNNING ||
                _state == State.ACTIVE || _state == State.GRACEFUL_SHUTDOWN) {
-                _statusBar.replace(StatusBar.ICON_STOPPING, "Network disconnected, stopping I2P");
+                _statusBar.replace(StatusBar.ICON_STOPPING, R.string.notification_status_stopping_after_net);
                 // don't change state, let the shutdown hook do it
                 Thread stopperThread = new Thread(new Stopper(State.NETWORK_STOPPING, State.NETWORK_STOPPING));
                 stopperThread.start();
@@ -480,7 +480,7 @@ public class RouterService extends Service {
             if(!canManualStart()) {
                 return;
             }
-            _statusBar.replace(StatusBar.ICON_STARTING, "I2P is starting up");
+            _statusBar.replace(StatusBar.ICON_STARTING, R.string.notification_status_starting);
             setState(State.STARTING);
             _starterThread = new Thread(new Starter());
             _starterThread.start();
@@ -528,9 +528,12 @@ public class RouterService extends Service {
                         _oldTitle = _currTitle;
                         long ms = ctx.router().getShutdownTimeRemaining();
                         if (ms > 1000) {
-                            _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P in " + DataHelper.formatDuration(ms));
+                            _statusBar.replace(
+                                    StatusBar.ICON_STOPPING,
+                                    getString(R.string.notification_status_graceful, DataHelper.formatDuration(ms))
+                                    );
                         } else {
-                            _statusBar.replace(StatusBar.ICON_STOPPING, "Stopping I2P");
+                            _statusBar.replace(StatusBar.ICON_STOPPING, R.string.notification_status_stopping);
                         }
                         setState(State.GRACEFUL_SHUTDOWN);
                     }
@@ -557,10 +560,10 @@ public class RouterService extends Service {
                 _currTitle = _oldTitle;
                 if (_hadTunnels) {
                     setState(State.ACTIVE);
-                    _statusBar.replace(StatusBar.ICON_ACTIVE, "Shutdown cancelled");
+                    _statusBar.replace(StatusBar.ICON_ACTIVE, R.string.notification_status_shutdown_cancelled);
                 } else {
                     setState(State.RUNNING);
-                    _statusBar.replace(StatusBar.ICON_RUNNING, "Shutdown cancelled");
+                    _statusBar.replace(StatusBar.ICON_RUNNING, R.string.notification_status_shutdown_cancelled);
                 }
             }
         }
@@ -643,7 +646,7 @@ public class RouterService extends Service {
             if(_state == State.STARTING || _state == State.RUNNING ||
                _state == State.ACTIVE || _state == State.GRACEFUL_SHUTDOWN) {
                 // should this be in a thread?
-                _statusBar.replace(StatusBar.ICON_SHUTTING_DOWN, "I2P is shutting down");
+                _statusBar.replace(StatusBar.ICON_SHUTTING_DOWN, R.string.notification_status_shutting_down);
                 Thread stopperThread = new Thread(new Stopper(State.STOPPING, State.STOPPED));
                 stopperThread.start();
             }
@@ -698,7 +701,7 @@ public class RouterService extends Service {
         public void run() {
             Util.d(this + " shutdown hook"
                     + " Current state is: " + _state);
-            _statusBar.replace(StatusBar.ICON_SHUTTING_DOWN, "I2P is shutting down");
+            _statusBar.replace(StatusBar.ICON_SHUTTING_DOWN, R.string.notification_status_shutting_down);
             I2PReceiver rcvr = _receiver;
             if(rcvr != null) {
                 synchronized(rcvr) {
