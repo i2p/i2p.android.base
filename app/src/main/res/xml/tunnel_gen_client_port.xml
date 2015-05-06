@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditTextPreference
+    <ListPreference
         android:key="@string/TUNNEL_INTERFACE"
+        android:summary="%s"
         android:title="@string/reachable_on" />
 
     <net.i2p.android.router.util.PortPreference

@@ -2,8 +2,10 @@ package net.i2p.android.i2ptunnel.preferences;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
@@ -13,6 +15,9 @@ import android.support.v7.app.AlertDialog;
 import net.i2p.android.i2ptunnel.util.TunnelLogic;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
+import net.i2p.util.Addresses;
+
+import java.util.Set;
 
 public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragment {
     private CheckBoxPreference persistentKeys;
@@ -115,8 +120,23 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
 
         @Override
         protected void generalClientPortStreamr(boolean isStreamr) {
+            final ListPreference reachableBy = (ListPreference) portCategory.findPreference(getString(R.string.TUNNEL_INTERFACE));
             if (isStreamr)
-                portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_INTERFACE)));
+                portCategory.removePreference(reachableBy);
+            else {
+                reachableBy.setEnabled(false);
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        Set<String> interfaceSet = Addresses.getAllAddresses();
+                        String[] interfaces = interfaceSet.toArray(new String[interfaceSet.size()]);
+                        reachableBy.setEntries(interfaces);
+                        reachableBy.setEntryValues(interfaces);
+                        reachableBy.setEnabled(true);
+                        return null;
+                    }
+                }.execute();
+            }
         }
 
         @Override
