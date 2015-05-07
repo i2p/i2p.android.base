@@ -12,6 +12,7 @@ public class LicenseActivity extends I2PActivityBase {
         setContentView(R.layout.activity_onepane);
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Start with the base view
         if (savedInstanceState == null) {
             LicenseFragment f = new LicenseFragment();
