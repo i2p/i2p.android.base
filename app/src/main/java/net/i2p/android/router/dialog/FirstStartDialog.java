@@ -1,6 +1,7 @@
 package net.i2p.android.router.dialog;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -27,7 +28,13 @@ public class FirstStartDialog extends DialogFragment {
 
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
         b.setTitle(R.string.first_start_title)
-                .setView(view);
+                .setView(view)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.dismiss();
+                    }
+                });
         return b.create();
     }
 }
