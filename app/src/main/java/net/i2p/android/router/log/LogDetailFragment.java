@@ -1,8 +1,6 @@
 package net.i2p.android.router.log;
 
-import net.i2p.android.router.I2PFragmentBase;
-import net.i2p.android.router.R;
-
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,12 +14,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.i2p.android.router.I2PFragmentBase;
+import net.i2p.android.router.R;
+
 public class LogDetailFragment extends I2PFragmentBase {
     public static final String LOG_ENTRY = "log_entry";
 
     private String mEntry;
 
-    public static LogDetailFragment newInstance (String entry) {
+    public static LogDetailFragment newInstance(String entry) {
         LogDetailFragment f = new LogDetailFragment();
         Bundle args = new Bundle();
         args.putString(LOG_ENTRY, entry);
@@ -37,7 +38,7 @@ public class LogDetailFragment extends I2PFragmentBase {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_log_entry, container, false);
 
         mEntry = getArguments().getString(LOG_ENTRY);
@@ -58,20 +59,28 @@ public class LogDetailFragment extends I2PFragmentBase {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_copy_logs:
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                    android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-                    clipboard.setText(mEntry);
-                } else {
-                    android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-                    android.content.ClipData clip = android.content.ClipData.newPlainText(
-                            getString(R.string.i2p_android_logs), mEntry);
-                    clipboard.setPrimaryClip(clip);
-                }
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+                    copyToClipbardLegacy();
+                else
+                    copyToClipboardHoneycomb();
 
                 Toast.makeText(getActivity(), R.string.logs_copied_to_clipboard, Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void copyToClipbardLegacy() {
+        android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        clipboard.setText(mEntry);
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void copyToClipboardHoneycomb() {
+        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        android.content.ClipData clip = android.content.ClipData.newPlainText(
+                getString(R.string.i2p_android_logs), mEntry);
+        clipboard.setPrimaryClip(clip);
     }
 }
