@@ -77,8 +77,7 @@ public class ConsoleContainer extends Fragment {
                 startActivity(netdb);
             }
         });
-        setAdvancedVisibility();
-        setRouterVisibility();
+        setMenuVisibility();
 
         return v;
     }
@@ -90,26 +89,18 @@ public class ConsoleContainer extends Fragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        setAdvancedVisibility();
-        setRouterVisibility();
+        setMenuVisibility();
     }
 
-    private void setAdvancedVisibility() {
+    private void setMenuVisibility() {
         boolean advanced = PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean(
                 "i2pandroid.main.showStats", false);
-
-        mConsoleMenu.findViewById(R.id.action_graphs).setVisibility(advanced ? View.VISIBLE : View.GONE);
-        mConsoleMenu.findViewById(R.id.action_peers).setVisibility(advanced ? View.VISIBLE : View.GONE);
-        mConsoleMenu.findViewById(R.id.action_netdb).setVisibility(advanced ? View.VISIBLE : View.GONE);
-    }
-
-    private void setRouterVisibility() {
         boolean routerRunning = Util.getRouterContext() != null;
 
         mConsoleMenu.findViewById(R.id.action_logs).setVisibility(routerRunning ? View.VISIBLE : View.GONE);
-        mConsoleMenu.findViewById(R.id.action_graphs).setVisibility(routerRunning ? View.VISIBLE : View.GONE);
-        mConsoleMenu.findViewById(R.id.action_peers).setVisibility(routerRunning ? View.VISIBLE : View.GONE);
-        mConsoleMenu.findViewById(R.id.action_netdb).setVisibility(routerRunning ? View.VISIBLE : View.GONE);
+        mConsoleMenu.findViewById(R.id.action_graphs).setVisibility(advanced && routerRunning ? View.VISIBLE : View.GONE);
+        mConsoleMenu.findViewById(R.id.action_peers).setVisibility(advanced && routerRunning ? View.VISIBLE : View.GONE);
+        mConsoleMenu.findViewById(R.id.action_netdb).setVisibility(advanced && routerRunning ? View.VISIBLE : View.GONE);
     }
 
     @Override
