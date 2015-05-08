@@ -333,6 +333,18 @@
     <string name="signature_type">Signature type</string>
     <string name="custom_options">Custom options</string>
 
+    <string name="no_messages">No messages</string>
+    <string name="no_error_messages">No error messages</string>
+    <plurals name="log_error_messages">
+        <item quantity="zero">@string/no_error_messages</item>
+        <item quantity="one">One error message</item>
+        <item quantity="other">%d error messages, newest first</item>
+    </plurals>
+    <plurals name="log_messages">
+        <item quantity="zero">@string/no_messages</item>
+        <item quantity="one">One message</item>
+        <item quantity="other">%d messages, newest first</item>
+    </plurals>
     <string name="log_entry">Log Entry</string>
     <string name="copy_logs">Copy logs</string>
     <string name="i2p_android_error_logs">I2P Android Error Logs</string>

@@ -113,8 +113,8 @@ public class LogFragment extends ListFragment implements
 
         I2PAppContext ctx = I2PAppContext.getCurrentContext();
         if (ctx != null) {
-            setEmptyText("ERROR".equals(mLogLevel) ?
-                    "No error messages" : "No messages");
+            setEmptyText(getString("ERROR".equals(mLogLevel) ?
+                    R.string.no_error_messages : R.string.no_messages));
 
             setListShown(false);
             getLoaderManager().initLoader("ERROR".equals(mLogLevel) ?
@@ -206,19 +206,9 @@ public class LogFragment extends ListFragment implements
     }
 
     /** fixme plurals */
-    private static String getHeader(int sz, boolean errorsOnly) {
-        if (errorsOnly) {
-            if (sz == 0)
-                return "No error messages";
-            if (sz == 1)
-                return "1 error message";
-            return sz + " error messages, newest first";
-        }
-        if (sz == 0)
-            return "No messages";
-        if (sz == 1)
-            return "1 message";
-        return sz + " messages, newest first";
+    private static String getHeader(Context ctx, int sz, boolean errorsOnly) {
+        return ctx.getResources().getQuantityString(errorsOnly ?
+                R.plurals.log_error_messages : R.plurals.log_messages, sz, sz);
     }
 
     // LoaderManager.LoaderCallbacks<List<String>>
@@ -237,7 +227,7 @@ public class LogFragment extends ListFragment implements
                 mLogEntries.addAll(data);
             }
             mAdapter.setData(data);
-            String header = getHeader(data.size(), ("ERROR".equals(mLogLevel)));
+            String header = getHeader(getActivity(), data.size(), ("ERROR".equals(mLogLevel)));
             mHeaderView.setText(header);
 
             if (isResumed()) {
