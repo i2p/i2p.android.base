@@ -50,8 +50,10 @@
             android:layout_weight="3"
             android:background="@drawable/shadow"
             android:paddingBottom="5px"
+            android:paddingEnd="5px"
             android:paddingLeft="6px"
             android:paddingRight="5px"
+            android:paddingStart="6px"
             android:paddingTop="5px" />
 
     </LinearLayout>

@@ -4,17 +4,18 @@
     android:layout_height="fill_parent"
     android:fillViewport="true"
     android:padding="10dp"
-    android:scrollbarStyle="outsideInset" >
+    android:scrollbarStyle="outsideInset">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/ls_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:padding="3dp"
             android:text="LeaseSet nickname"
@@ -25,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/ls_nickname"
             android:text="Destination" />
 
@@ -33,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/ls_type"
             android:text="LeaseSet hash" />
 
@@ -41,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/dbentry_hash"
             android:text="Expires in:" />
 
@@ -50,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/label_ls_expiry"
             android:layout_alignBottom="@+id/label_ls_expiry"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="X min" />
 
@@ -58,6 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/label_ls_expiry"
             android:text="Leases:" />
 
@@ -66,9 +72,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/label_leases"
-            android:orientation="vertical" >
-        </LinearLayout>
+            android:orientation="vertical" />
     </RelativeLayout>
 
 </ScrollView>

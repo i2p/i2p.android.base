@@ -19,14 +19,16 @@
 
     <TextView style="@style/WizardPageTitle" />
 
-    <ScrollView android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:scrollbarStyle="outsideOverlay">
 
-        <RelativeLayout android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
@@ -34,24 +36,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_marginBottom="16dp"
                 android:layout_toLeftOf="@+id/wizard_text_field_pick"
+                android:layout_toStartOf="@+id/wizard_text_field_pick"
                 android:inputType="text"
                 android:saveEnabled="false" />
 
-            <Button android:id="@+id/wizard_text_field_pick"
+            <Button
+                android:id="@+id/wizard_text_field_pick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:text="@string/label_browse" />
 
-            <TextView android:id="@+id/wizard_text_field_feedback"
+            <TextView
+                android:id="@+id/wizard_text_field_feedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/wizard_text_field" />
 
-            <TextView style="@style/WizardFormLabel"
+            <TextView
                 android:id="@+id/wizard_text_field_desc"
+                style="@style/WizardFormLabel"
                 android:layout_below="@+id/wizard_text_field_feedback" />
 
         </RelativeLayout>
