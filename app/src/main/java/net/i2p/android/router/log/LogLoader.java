@@ -1,12 +1,12 @@
 package net.i2p.android.router.log;
 
-import java.util.Collections;
-import java.util.List;
+import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 
 import net.i2p.I2PAppContext;
 
-import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+import java.util.Collections;
+import java.util.List;
 
 public class LogLoader extends AsyncTaskLoader<List<String>> {
     private I2PAppContext mCtx;
@@ -24,7 +24,7 @@ public class LogLoader extends AsyncTaskLoader<List<String>> {
     @Override
     public List<String> loadInBackground() {
         List<String> msgs;
-        if ("ERROR".equals(mLogLevel)) {
+        if (LogFragment.LOG_LEVEL_ERROR.equals(mLogLevel)) {
             msgs = mCtx.logManager().getBuffer().getMostRecentCriticalMessages();
         } else {
             msgs = mCtx.logManager().getBuffer().getMostRecentMessages();

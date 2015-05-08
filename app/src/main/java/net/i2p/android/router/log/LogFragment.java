@@ -24,6 +24,7 @@ import java.util.List;
 public class LogFragment extends ListFragment implements
         LoaderManager.LoaderCallbacks<List<String>> {
     public static final String LOG_LEVEL = "log_level";
+    public static final String LOG_LEVEL_ERROR = "ERROR";
     /**
      * The serialization (saved instance state) Bundle key representing the
      * activated item position. Only used on tablets.
@@ -113,11 +114,11 @@ public class LogFragment extends ListFragment implements
 
         I2PAppContext ctx = I2PAppContext.getCurrentContext();
         if (ctx != null) {
-            setEmptyText(getString("ERROR".equals(mLogLevel) ?
+            setEmptyText(getString(LOG_LEVEL_ERROR.equals(mLogLevel) ?
                     R.string.no_error_messages : R.string.no_messages));
 
             setListShown(false);
-            getLoaderManager().initLoader("ERROR".equals(mLogLevel) ?
+            getLoaderManager().initLoader(LOG_LEVEL_ERROR.equals(mLogLevel) ?
                     LEVEL_ERROR : LEVEL_ALL, null, this);
         } else
             setEmptyText(getResources().getString(
@@ -163,7 +164,7 @@ public class LogFragment extends ListFragment implements
                     }
                 }
 
-                boolean isError = "ERROR".equals(mLogLevel);
+                boolean isError = LOG_LEVEL_ERROR.equals(mLogLevel);
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
                     android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                     clipboard.setText(logText);
@@ -220,14 +221,14 @@ public class LogFragment extends ListFragment implements
 
     public void onLoadFinished(Loader<List<String>> loader,
             List<String> data) {
-        if (loader.getId() == ("ERROR".equals(mLogLevel) ?
+        if (loader.getId() == (LOG_LEVEL_ERROR.equals(mLogLevel) ?
                 LEVEL_ERROR : LEVEL_ALL)) {
             synchronized (mLogEntries) {
                 mLogEntries.clear();
                 mLogEntries.addAll(data);
             }
             mAdapter.setData(data);
-            String header = getHeader(getActivity(), data.size(), ("ERROR".equals(mLogLevel)));
+            String header = getHeader(getActivity(), data.size(), (LOG_LEVEL_ERROR.equals(mLogLevel)));
             mHeaderView.setText(header);
 
             if (isResumed()) {
@@ -239,7 +240,7 @@ public class LogFragment extends ListFragment implements
     }
 
     public void onLoaderReset(Loader<List<String>> loader) {
-        if (loader.getId() == ("ERROR".equals(mLogLevel) ?
+        if (loader.getId() == (LOG_LEVEL_ERROR.equals(mLogLevel) ?
                 LEVEL_ERROR : LEVEL_ALL)) {
             mAdapter.setData(null);
         }
