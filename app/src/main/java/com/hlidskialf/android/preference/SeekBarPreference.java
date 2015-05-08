@@ -132,7 +132,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         if (shouldPersist()) {
             persistString(t);
         }
-        callChangeListener(Integer.valueOf(value));
+        callChangeListener(value);
     }
 
     public void onStartTrackingTouch(SeekBar seek) {

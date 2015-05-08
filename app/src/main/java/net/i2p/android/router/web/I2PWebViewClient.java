@@ -11,12 +11,7 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+
 import net.i2p.android.apps.EepGetFetcher;
 import net.i2p.android.router.provider.CacheProvider;
 import net.i2p.android.router.util.AppCache;
@@ -24,6 +19,13 @@ import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Util;
 import net.i2p.data.DataHelper;
 import net.i2p.util.EepGet;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class I2PWebViewClient extends WebViewClient {
 
@@ -262,14 +264,14 @@ public class I2PWebViewClient extends WebViewClient {
         }
 
         protected Integer doInBackground(final String... urls) {
-            publishProgress(Integer.valueOf(-1));
+            publishProgress(-1);
             _view.post(new Runnable() {
                 @Override
                 public void run() {
                     _view.loadUrl(urls[0]);
                 }
             });
-            return Integer.valueOf(0);
+            return 0;
         }
 
         @Override
@@ -316,10 +318,10 @@ public class I2PWebViewClient extends WebViewClient {
                     }
                 });
                 // 1 means show the cache toast message
-                return Integer.valueOf(1);
+                return 1;
             }
 
-            publishProgress(Integer.valueOf(-1));
+            publishProgress(-1);
             //EepGetFetcher fetcher = new EepGetFetcher(url);
             OutputStream out = null;
             try {
@@ -330,7 +332,7 @@ public class I2PWebViewClient extends WebViewClient {
                 boolean success = fetcher.fetch();
                 if (isCancelled()) {
                     Util.d("Fetch cancelled for " + url);
-                    return Integer.valueOf(0);
+                    return 0;
                 }
                 try { out.close(); } catch (IOException ioe) {}
                 if (success) {
@@ -342,7 +344,7 @@ public class I2PWebViewClient extends WebViewClient {
                     } else {
                         AppCache.getInstance(_view.getContext()).removeCacheFile(uri);
                         Util.d("cache create error");
-                        return Integer.valueOf(0);
+                        return 0;
                     }
                     Util.d("loading data, base URL: " + uri + " content URL: " + content);
                     _view.post(new Runnable() {
@@ -394,14 +396,14 @@ public class I2PWebViewClient extends WebViewClient {
             } finally {
                 if (out != null) try { out.close(); } catch (IOException ioe) {}
             }
-            return Integer.valueOf(0);
+            return 0;
         }
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
             if (isCancelled())
                 return;
-            int prog = progress[0].intValue();
+            int prog = progress[0];
             if (prog < 0) {
                 _dialog.setTitle("Contacting...");
                 _dialog.setMessage(_host);
@@ -443,7 +445,7 @@ public class I2PWebViewClient extends WebViewClient {
         public void attemptFailed(String url, long bytesTransferred, long bytesRemaining, int currentAttempt, int numRetries, Exception cause) {}
 
         public void bytesTransferred(long alreadyTransferred, int currentWrite, long bytesTransferred, long bytesRemaining, String url) {
-            publishProgress(Integer.valueOf(Math.max(0, (int) (alreadyTransferred + bytesTransferred))));
+            publishProgress(Math.max(0, (int) (alreadyTransferred + bytesTransferred)));
         }
 
         public void transferComplete(long alreadyTransferred, long bytesTransferred, long bytesRemaining, String url, String outputFile, boolean notModified) {}
@@ -454,7 +456,7 @@ public class I2PWebViewClient extends WebViewClient {
             if (key.equalsIgnoreCase("Content-Length")) {
                 try {
                     _total = Integer.parseInt(val.trim());
-                    publishProgress(Integer.valueOf(0));
+                    publishProgress(0);
                 } catch (NumberFormatException nfe) {}
             }
         }
