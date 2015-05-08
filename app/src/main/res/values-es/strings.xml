@@ -66,6 +66,18 @@
   <string name="graphs_not_ready">Las gráficas no están listas, o el router I2P no está ejecutándose. Inténtelo de nuevo más tarde.</string>
   <string name="netdb_routers_empty">No hay routers I2P en su NetDB.</string>
   <string name="netdb_leases_empty">No hay LeaseSets (conjuntos de túneles al mismo destino) en su NetDB.</string>
+  <string name="notification_status_starting">I2P se está iniciando</string>
+  <string name="notification_status_restarting">I2P se está reiniciando</string>
+  <string name="notification_status_waiting">I2P está esperando a una conexión de red</string>
+  <string name="notification_status_starting_after_waiting">Red conectada, I2P se está iniciando</string>
+  <string name="notification_status_running">I2P está en marcha</string>
+  <string name="notification_status_client_ready">Los túneles de cliente están listos</string>
+  <string name="notification_status_client_down">Los túneles de cliente están caídos</string>
+  <string name="notification_status_graceful">Deteniendo I2P en %s</string>
+  <string name="notification_status_stopping">Deteniendo I2P</string>
+  <string name="notification_status_stopping_after_net">Red desconectada, deteniendo I2P</string>
+  <string name="notification_status_shutdown_cancelled">Cierre cancelado</string>
+  <string name="notification_status_shutting_down">I2P se está cerrando</string>
   <string name="notification_status_bw">Ancho de banda: %1$s KBps bajada / %2$s KBps subida</string>
   <string name="notification_status_peers">Pares: %1$d activos, %2$d conocidos</string>
   <string name="notification_status_expl">Túneles exploratorios: %1$d/%2$d</string>
@@ -93,6 +105,9 @@
   <string name="settings_desc_upnp">Abrir los puertos del cortafuegos automáticamente</string>
   <string name="settings_label_logging">Registro (loggin)</string>
   <string name="settings_label_default_log_level">Nivel de registro predeterminado</string>
+  <string name="settings_label_appearance">Apariencia</string>
+  <string name="settings_label_language">Idioma</string>
+  <string name="settings_default">Predeterminado</string>
   <string name="settings_label_advanced">Avanzado</string>
   <string name="settings_label_showStats">Estadísticas del router I2P</string>
   <string name="settings_summ_showStats">Mostrar estadísticas avanzadas en la consola principal</string>
@@ -204,6 +219,8 @@
   <string name="tunnel_summ_shared_client">Usar el mismo destino I2P y túneles que otros clientes compartidos</string>
   <string name="target_destination">Destino I2P objetivo</string>
   <string name="persistent_key">Clave persistente</string>
+  <string name="persistent_key_conflict_title">¿Deshabilitar nuevas claves al reabrir?</string>
+  <string name="persistent_key_conflict_msg">No puede habilitar claves persistentes mientras el túnel está configurado para generar nuevas claves al reabrir ¿Quiere deshabilitar nuevas claves al reabrir?</string>
   <string name="tunnel_summ_persistent_key">Mantener este destino I2P del túnel cuando se reinicie</string>
   <string name="reachable_on">Alcanzable en</string>
   <string name="listen_port">Escuchar puerto</string>
@@ -262,6 +279,8 @@
   <string name="reduced_tunnel_quantity">Cantidad de túneles reducida</string>
   <string name="close_tunnels">Cerrar túneles cuando esté desocupado</string>
   <string name="new_keys_on_reopen">Nuevas claves en la reapertura</string>
+  <string name="new_keys_on_reopen_conflict_title">¿Deshabilitar claves persistentes?</string>
+  <string name="new_keys_on_reopen_conflict_msg">No puede habilitar nuevas claves al reabrir mientras el túnel está configurado para tener claves persistentes. ¿Quiere deshabilitar claves persistentes?</string>
   <string name="http_client">Cliente HTTP</string>
   <string name="tunnel_summ_user_agent">Pasar a través la cabecera \'User-Agent\' (agente de usuario)</string>
   <string name="tunnel_summ_referer">Pasar a través la cabecera \'Referer\' (procedencia)</string>
