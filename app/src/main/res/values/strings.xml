@@ -333,6 +333,7 @@
     <string name="signature_type">Signature type</string>
     <string name="custom_options">Custom options</string>
 
+    <string name="log_entry">Log Entry</string>
     <string name="copy_logs">Copy logs</string>
     <string name="i2p_android_error_logs">I2P Android Error Logs</string>
     <string name="i2p_android_logs">I2P Android Logs</string>

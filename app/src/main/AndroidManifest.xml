@@ -115,7 +115,7 @@
         </activity>
         <activity
             android:name=".addressbook.AddressbookSettingsActivity"
-            android:label="Addressbook Settings"
+            android:label="@string/label_addressbook"
             android:launchMode="singleTop"
             android:parentActivityName="net.i2p.android.I2PActivity">
             <meta-data
@@ -124,7 +124,6 @@
         </activity>
         <activity
             android:name=".addressbook.AddressbookAddWizardActivity"
-            android:label="Add new Destination"
             android:parentActivityName="net.i2p.android.I2PActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -132,7 +131,6 @@
         </activity>
         <activity
             android:name="net.i2p.android.i2ptunnel.TunnelDetailActivity"
-            android:label="I2PTunnel"
             android:parentActivityName="net.i2p.android.I2PActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -148,7 +146,6 @@
         </activity>
         <activity
             android:name="net.i2p.android.i2ptunnel.TunnelWizardActivity"
-            android:label="Tunnel Creation Wizard"
             android:parentActivityName="net.i2p.android.I2PActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -156,7 +153,7 @@
         </activity>
         <activity
             android:name=".log.LogActivity"
-            android:label="I2P Logs"
+            android:label="@string/label_logs"
             android:parentActivityName="net.i2p.android.I2PActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -164,7 +161,7 @@
         </activity>
         <activity
             android:name=".log.LogDetailActivity"
-            android:label="Log Entry"
+            android:label="@string/log_entry"
             android:parentActivityName=".log.LogActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -172,7 +169,7 @@
         </activity>
         <activity
             android:name=".stats.RateGraphActivity"
-            android:label="Rate Graph"
+            android:label="@string/label_graphs"
             android:parentActivityName="net.i2p.android.I2PActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -181,7 +178,7 @@
         <activity
             android:name=".stats.PeersActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:label="I2P Peers and Transport Status"
+            android:label="@string/label_peers_status"
             android:launchMode="singleTop"
             android:parentActivityName="net.i2p.android.I2PActivity">
             <meta-data
