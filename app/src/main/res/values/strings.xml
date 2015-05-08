@@ -336,12 +336,10 @@
     <string name="no_messages">No messages</string>
     <string name="no_error_messages">No error messages</string>
     <plurals name="log_error_messages">
-        <item quantity="zero">@string/no_error_messages</item>
         <item quantity="one">One error message</item>
         <item quantity="other">%d error messages, newest first</item>
     </plurals>
     <plurals name="log_messages">
-        <item quantity="zero">@string/no_messages</item>
         <item quantity="one">One message</item>
         <item quantity="other">%d messages, newest first</item>
     </plurals>

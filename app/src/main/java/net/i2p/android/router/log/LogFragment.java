@@ -206,10 +206,12 @@ public class LogFragment extends ListFragment implements
         mActivatedPosition = position;
     }
 
-    /** fixme plurals */
     private static String getHeader(Context ctx, int sz, boolean errorsOnly) {
-        return ctx.getResources().getQuantityString(errorsOnly ?
-                R.plurals.log_error_messages : R.plurals.log_messages, sz, sz);
+        if (sz > 0)
+            return ctx.getResources().getQuantityString(errorsOnly ?
+                    R.plurals.log_error_messages : R.plurals.log_messages, sz, sz);
+        else
+            return ctx.getString(errorsOnly ? R.string.no_error_messages : R.string.no_messages);
     }
 
     // LoaderManager.LoaderCallbacks<List<String>>
