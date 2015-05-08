@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import net.i2p.I2PAppContext;
+import net.i2p.android.preferences.GraphsPreferenceFragment;
 import net.i2p.android.router.I2PConstants;
 import net.i2p.android.router.service.State;
 import net.i2p.data.DataHelper;
@@ -172,7 +173,11 @@ public abstract class Util implements I2PConstants {
             }
         }
         if (statSummaries.isEmpty()) {
-            routerProps.setProperty("stat.summaries", "");
+            // If the graph preferences have not yet been seen, they should be the default
+            if (preferences.getBoolean(GraphsPreferenceFragment.GRAPH_PREFERENCES_SEEN, false))
+                routerProps.setProperty("stat.summaries", "");
+            else
+                toRemove.setProperty("stat.summaries", "");
         } else {
             Iterator<String> iter = statSummaries.iterator();
             StringBuilder buf = new StringBuilder(iter.next());

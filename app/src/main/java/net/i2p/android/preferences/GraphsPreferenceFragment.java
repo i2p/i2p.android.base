@@ -1,8 +1,10 @@
 package net.i2p.android.preferences;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 
 import net.i2p.android.router.R;
@@ -19,6 +21,8 @@ import java.util.Map;
 import java.util.SortedSet;
 
 public class GraphsPreferenceFragment extends I2PreferenceFragment {
+    public static final String GRAPH_PREFERENCES_SEEN = "graphPreferencesSeen";
+
     @Override
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
@@ -92,6 +96,13 @@ public class GraphsPreferenceFragment extends I2PreferenceFragment {
                     groupPrefs.addPreference(statPref);
                 }
             }
+
+            // The user has now seen the current (possibly default) configuration
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            if (!prefs.getBoolean(GRAPH_PREFERENCES_SEEN, false))
+                prefs.edit()
+                        .putBoolean(GRAPH_PREFERENCES_SEEN, true)
+                        .apply();
         }
     }
 }
