@@ -122,6 +122,9 @@ public class RateGraphFragment extends I2PFragmentBase {
             Util.d("Adding plot updater to listener");
             _listener.addObserver(_plotUpdater);
 
+            // Only one line, so hide the legend
+            _ratePlot.getLegendWidget().setVisible(false);
+
             _ratePlot.setDomainStepMode(XYStepMode.SUBDIVIDE);
             _ratePlot.setDomainStepValue(SummaryListener.HISTORY_SIZE);
 
