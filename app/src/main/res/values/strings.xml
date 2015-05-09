@@ -34,6 +34,8 @@
     <string name="button_shutdown_now">Long press to stop now</string>
     <string name="button_cancel_graceful">Long press to cancel shutdown</string>
 
+    <string name="shared_clients">Shared clients</string>
+
     <!-- Character to indicate a client tunnel. Usually first letter of the word "client". -->
     <string name="char_client_tunnel">C</string>
     <!-- Character to indicate a server tunnel. Usually first letter of the word "server". -->

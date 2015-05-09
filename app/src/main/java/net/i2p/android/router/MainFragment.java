@@ -40,7 +40,6 @@ import net.i2p.data.LeaseSet;
 import net.i2p.router.CommSystemFacade;
 import net.i2p.router.RouterContext;
 import net.i2p.router.TunnelPoolSettings;
-import net.i2p.util.Translate;
 
 import java.text.Collator;
 import java.text.DecimalFormat;
@@ -573,18 +572,21 @@ public class MainFragment extends I2PFragmentBase {
         if (name == null) {
             TunnelPoolSettings out = ctx.tunnelManager().getOutboundSettings(d.calculateHash());
             name = (out != null ? out.getDestinationNickname() : null);
-            if (name == null)
-                name = d.calculateHash().toBase64().substring(0,6);
-            else
-                name = _(ctx, name);
-        } else {
-            name = _(ctx, name);
         }
+
+        if (name == null)
+            name = d.calculateHash().toBase64().substring(0,6);
+        else
+            name = _(ctx, name);
+
         return name;
     }
 
     private String _(RouterContext ctx, String s) {
-        return Translate.getString(s, ctx, "net.i2p.router.web.messages");
+        if ("shared clients".equals(s))
+            return getString(R.string.shared_clients);
+        else
+            return s;
     }
 
     private void checkDialog() {
