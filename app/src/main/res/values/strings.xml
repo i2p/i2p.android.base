@@ -72,6 +72,11 @@
     <string name="hint_search_addressbook">Search addressbook</string>
     <string name="action_reload_subscriptions">Reload subscriptions</string>
 
+    <string name="news_last_updated">News last updated %s ago</string>
+    <string name="news_last_checked">News last checked %s ago</string>
+    <string name="news_updated">News Updated</string>
+    <string name="view_news">Touch to view latest I2P news</string>
+
     <string name="router_not_running">The router is not running.</string>
     <string name="router_shutting_down">The router is shutting down.</string>
     <string name="stats_not_ready">The statistics manager is not ready yet. Try again later.</string>

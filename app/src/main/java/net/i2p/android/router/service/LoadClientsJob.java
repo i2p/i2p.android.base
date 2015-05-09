@@ -1,5 +1,7 @@
 package net.i2p.android.router.service;
 
+import android.content.Context;
+
 import net.i2p.BOB.BOB;
 import net.i2p.I2PAppContext;
 import net.i2p.addressbook.DaemonThread;
@@ -35,6 +37,7 @@ import java.io.IOException;
  */
 class LoadClientsJob extends JobImpl {
 
+    private Context mCtx;
     private Notifications _notif;
     private DaemonThread _addressbook;
     private BOB _bob;
@@ -43,8 +46,9 @@ class LoadClientsJob extends JobImpl {
     private static final long LOAD_DELAY = 90*1000;
 
 
-    public LoadClientsJob(RouterContext ctx, Notifications notif) {
-        super(ctx);
+    public LoadClientsJob(Context ctx, RouterContext rCtx, Notifications notif) {
+        super(rCtx);
+        mCtx = ctx;
         _notif = notif;
         getTiming().setStartAfter(getContext().clock().now() + LOAD_DELAY);
     }
@@ -59,7 +63,7 @@ class LoadClientsJob extends JobImpl {
         t.setPriority(Thread.NORM_PRIORITY - 1);
         t.start();
 
-        NewsFetcher fetcher = NewsFetcher.getInstance(getContext(), _notif);
+        NewsFetcher fetcher = NewsFetcher.getInstance(mCtx, getContext(), _notif);
         t = new I2PAppThread(fetcher, "NewsFetcher", true);
         t.start();
 

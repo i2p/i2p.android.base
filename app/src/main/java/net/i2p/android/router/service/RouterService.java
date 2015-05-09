@@ -229,7 +229,7 @@ public class RouterService extends Service {
                     throw new IllegalStateException("No contexts. This is usually because the router is either starting up or shutting down.");
                 }
                 _context.router().setKillVMOnEnd(false);
-                Job loadJob = new LoadClientsJob(_context, _notif);
+                Job loadJob = new LoadClientsJob(RouterService.this, _context, _notif);
                 _context.jobQueue().addJob(loadJob);
                 _context.addShutdownTask(new ShutdownHook());
                 _context.addFinalShutdownTask(new FinalShutdownHook());

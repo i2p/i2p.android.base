@@ -1,8 +1,9 @@
 package net.i2p.android.apps;
 
-import java.io.File;
+import android.content.Context;
 
 import net.i2p.android.router.NewsActivity;
+import net.i2p.android.router.R;
 import net.i2p.android.router.util.Notifications;
 import net.i2p.data.DataHelper;
 import net.i2p.router.RouterContext;
@@ -10,13 +11,15 @@ import net.i2p.router.util.RFC822Date;
 import net.i2p.util.EepGet;
 import net.i2p.util.FileUtil;
 import net.i2p.util.Log;
-import net.i2p.util.Translate;
+
+import java.io.File;
 
 /**
  * From router console, simplified since we don't deal with router versions
  * or updates.
  */
 public class NewsFetcher implements Runnable, EepGet.StatusListener {
+    private final Context mCtx;
     private final RouterContext _context;
     private final Notifications _notif;
     private final Log _log;
@@ -35,10 +38,10 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     }
 
     public static /* final */ synchronized NewsFetcher getInstance(
-            RouterContext ctx, Notifications notif) {
+            Context context, RouterContext ctx, Notifications notif) {
         if (_instance != null)
             return _instance;
-        _instance = new NewsFetcher(ctx, notif);
+        _instance = new NewsFetcher(context, ctx, notif);
         return _instance;
     }
 
@@ -60,7 +63,8 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private static final String PROP_NEWS_URL = "router.newsURL";
     private static final String DEFAULT_NEWS_URL = "http://echelon.i2p/i2p/news.xml";
 
-    private NewsFetcher(RouterContext ctx, Notifications notif) {
+    private NewsFetcher(Context context, RouterContext ctx, Notifications notif) {
+        mCtx = context;
         _context = ctx;
         _notif = notif;
         _context.addShutdownTask(new Shutdown());
@@ -97,15 +101,13 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
          StringBuilder buf = new StringBuilder(128);
          long now = _context.clock().now();
          if (_lastUpdated > 0) {
-             buf.append(Translate.getString("News last updated {0} ago.",
-                                           DataHelper.formatDuration2(now - _lastUpdated),
-                                           _context, "foo"))
+             buf.append(mCtx.getString(R.string.news_last_updated,
+                                           DataHelper.formatDuration2(now - _lastUpdated)))
                 .append('\n');
          }
          if (_lastFetch > _lastUpdated) {
-             buf.append(Translate.getString("News last checked {0} ago.",
-                                           DataHelper.formatDuration2(now - _lastFetch),
-                                           _context, "foo"));
+             buf.append(mCtx.getString(R.string.news_last_checked,
+                                           DataHelper.formatDuration2(now - _lastFetch)));
          }
          return buf.toString();
     }
@@ -211,7 +213,8 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
                 _tempFile.delete();
 
                 // Notify user
-                _notif.notify("News Updated", "Touch to view latest I2P news",
+                _notif.notify(mCtx.getString(R.string.news_updated),
+                        mCtx.getString(R.string.view_news),
                         NewsActivity.class);
             } else {
                 if (_log.shouldLog(Log.ERROR))
