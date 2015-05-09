@@ -2,6 +2,7 @@
 <resources>
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">I2P-Logo</string>
+  <string name="choose_language">Sprache auswählen</string>
   <string name="welcome_new_install">Willkommen bei I2P! Diese App ist Alpha-Software und bietet keine starke Anonymität. Bitte lesen Sie die Veröffentlichungshinweise und die Lizenzinformationen.</string>
   <string name="welcome_new_version">Eine neue Version wurde installiert. Bitte lesen Sie die Veröffentlichungshinweise. Version:</string>
   <string name="label_home">Einstellungen und Status</string>
@@ -32,7 +33,7 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
-  <string name="no_client_tunnels_running">Keine Kliententunnel laufen noch.</string>
+  <string name="no_client_tunnels_running">Bisher laufen noch keine Kliententunnel.</string>
   <string name="configure_browser_title">Browser konfigurieren?</string>
   <string name="configure_browser_for_i2p">Möchten Sie einen Browser zum Betrachten von I2P-Seiten einrichten? (Sie können dieses auch später noch im Hilfe-Menü erledigen).</string>
   <string name="first_start_title">Herzlichen Glückwunsch, Sie haben I2P installiert!</string>
@@ -197,6 +198,7 @@
   <string name="enabled">Aktiviert</string>
   <string name="i2ptunnel_wizard_desc_name">Der Name des Tunnels zur Erkennung in der Tunnelliste.</string>
   <string name="i2ptunnel_wizard_desc_desc">Eine optionale, aber für Sie aussagekräftige Beschreibung des Tunnels.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Tragen Sie das I2P Ziel des Dienstes ein, zu welchem sich dieser Klient-Tunnel verbinden soll. Dies kann ein kompletter Base 64 Ziel-Schlüssel oder ein I2P Hostname von Ihrem Adressbuch sein.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Falls Sie Ausgangsproxies für diese Tunnelart kennen (entweder HTTP oder SOCKS), geben Sie sie hier ein. Trennen Sie mehrere Proxies mit Kommas.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Das ist die IP, unter der der Dienst erreichbar ist. Normalerweise ist er auf der gleichen Maschine, also wird 127.0.0.1 automatisch ausgefüllt.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Dies ist der Port, unter dem der Dienst erreichbar ist.</string>
@@ -263,10 +265,15 @@
   <string name="total_posts_per_period">Gesamte POSTs pro Zeitabschnitt</string>
   <string name="power_saving">Energie sparen</string>
   <string name="delay_open">Öffnen verzögern</string>
+  <string name="tunnel_summ_delay_open">Tunnel wird bei erst bei Bedarf gestartet</string>
+  <string name="reduce_quantity">Anzahl reduzieren</string>
+  <string name="tunnel_summ_reduce_quantity">Die Anzahl der Tunnel bei Leerlauf reduzieren.</string>
   <string name="idle_time">Leerlaufzeit</string>
   <string name="num_minutes">%s Minuten</string>
+  <string name="reduced_tunnel_quantity">Die Anzahl der Tunnel reduzieren.</string>
   <string name="close_tunnels">Tunnel bei Leerlauf schließen</string>
   <string name="new_keys_on_reopen">Neue Schlüssel beim erneuten Öffnen</string>
+  <string name="new_keys_on_reopen_conflict_title">Permanente Schlüssel deaktivieren?</string>
   <string name="http_client">HTTP-Klient</string>
   <string name="tunnel_summ_user_agent">\"Benutzer-Agent\"-Kopfzeile durchleiten</string>
   <string name="tunnel_summ_referer">\"Referer\"-Kopfzeile durchleiten</string>
@@ -280,6 +287,17 @@
   <string name="other">Weitere</string>
   <string name="signature_type">Signaturtyp</string>
   <string name="custom_options">Benutzerdefinierte Optionen</string>
+  <string name="no_messages">Keine Nachrichten</string>
+  <string name="no_error_messages">Keine Fehlermeldungen</string>
+  <plurals name="log_error_messages">
+    <item quantity="one">Eine Fehlermeldung</item>
+    <item quantity="other">%d Fehlermeldungen, neuste zuerst</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="one">Eine Nachricht</item>
+    <item quantity="other">%d Nachrichten, neuste zuerst</item>
+  </plurals>
+  <string name="log_entry">Protokolleintrag</string>
   <string name="copy_logs">Protokolle kopieren</string>
   <string name="i2p_android_error_logs">I2P Android-Fehlerprotokolle</string>
   <string name="i2p_android_logs">I2P Android-Protokolle</string>

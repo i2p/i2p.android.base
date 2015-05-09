@@ -2,8 +2,9 @@
 <resources>
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">I2P logo</string>
-  <string name="welcome_new_install">Welkom op I2P! Deze app heeft de ALPHA status en het biedt geen sterke anonimiteit. Lees de releaseopmerkingen en licentie-informatie.</string>
-  <string name="welcome_new_version">Nieuwe versie geïnstalleerd. Lees de releaseopmerkingen. Versie:</string>
+  <string name="choose_language">Taal kiezen</string>
+  <string name="welcome_new_install">Welkom op I2P! Deze app heeft de ALPHA status en biedt geen sterke anonimiteit. Lees alstublieft de release opmerkingen en licentie-informatie.</string>
+  <string name="welcome_new_version">Nieuwe versie geïnstalleerd. Lees de release opmerkingen. Versie:</string>
   <string name="label_home">Instellingen en status</string>
   <string name="label_tunnels">Tunnels</string>
   <string name="label_status">Status</string>
@@ -13,7 +14,7 @@
   <string name="label_i2ptunnel_client">Cliënttunnels</string>
   <string name="label_i2ptunnel_server">Servertunnels</string>
   <string name="label_logs">Logboeken</string>
-  <string name="label_error_logs">Foutenlogs</string>
+  <string name="label_error_logs">Foutlogs</string>
   <string name="label_info_and_pages">Informatie en pagina\'s</string>
   <string name="label_welcome_page">Welkomspagina</string>
   <string name="label_news">Nieuws</string>
@@ -72,7 +73,7 @@
   <string name="notification_status_starting_after_waiting">Netwerk verbonden, I2P is aan het opstarten</string>
   <string name="notification_status_running">I2P draait</string>
   <string name="notification_status_client_ready">Cliënttunnels zijn klaar</string>
-  <string name="notification_status_client_down">Cliënttunnels zijn plat</string>
+  <string name="notification_status_client_down">Cliënttunnels staan uit</string>
   <string name="notification_status_graceful">I2P wordt gestopt in %s</string>
   <string name="notification_status_stopping">I2P wordt gestopt</string>
   <string name="notification_status_stopping_after_net">Netwerk verbroken, I2P wordt gestopt</string>
@@ -219,9 +220,11 @@
   <string name="tunnel_summ_shared_client">Gebruik dezelfde bestemming en tunnels als andere gedeelde cliënten</string>
   <string name="target_destination">Doelbestemming</string>
   <string name="persistent_key">Blijvende sleutel</string>
+  <string name="persistent_key_conflict_title">Nieuwe sleutels uitzetten bij herstarten?</string>
   <string name="reachable_on">Bereikbaar op</string>
   <string name="listen_port">Luisterpoort</string>
   <string name="client_ssl">Cliënt-SSL</string>
+  <string name="tunnel_summ_client_ssl">Cliënten moeten SSL gebruiken om te verbinden</string>
   <string name="outproxies">Outproxies</string>
   <string name="ssl_outproxies">SSL outproxies</string>
   <string name="irc">IRC</string>
@@ -234,6 +237,7 @@
   <string name="tunnel_summ_use_ssl">Gebruik SSL om met doel te verbinden</string>
   <string name="tunnel_parameters">Tunnelparameters</string>
   <string name="profile">Profiel</string>
+  <string name="delay_connect">Verbinden uitstellen</string>
   <string name="access_control">Toegangscontrole</string>
   <string name="restricted_access">Beperkte toegang</string>
   <string name="access_list">Toegangslijst</string>
@@ -255,14 +259,41 @@
   <string name="set_zero_for_unlimited">Stel 0 in als je geen limiet wil</string>
   <string name="post_limits">POST-limieten</string>
   <string name="limit_period">Limietperiode</string>
+  <string name="client_posts_per_period">Cliënt POSTs per periode</string>
+  <string name="client_ban_length">Cliënt ban lengte</string>
+  <string name="total_posts_per_period">Totale POSTs per periode</string>
+  <string name="total_ban_length">Totale ban lengte</string>
+  <string name="power_saving">Energiebesparing</string>
+  <string name="delay_open">Openen uitstellen</string>
+  <string name="reduce_quantity">Hoeveelheid verminderen</string>
+  <string name="tunnel_summ_reduce_quantity">Tunnel hoeveelheid verminderen bij inactiviteit</string>
+  <string name="idle_time">Inactieve tijd</string>
   <string name="num_minutes">%s minuten</string>
+  <string name="reduced_tunnel_quantity">Verlaagde tunnel hoeveelheid</string>
+  <string name="close_tunnels">Tunnels sluiten bij inactiviteit</string>
+  <string name="new_keys_on_reopen">Nieuwe sleutels bij herstarten</string>
   <string name="http_client">HTTP-cliënt</string>
+  <string name="tunnel_summ_user_agent">Laar \'User-Agent\' header door</string>
+  <string name="tunnel_summ_referer">Laat \'Referer\' header door</string>
+  <string name="tunnel_summ_accept">laat \'Accept-*\' headers door</string>
+  <string name="tunnel_summ_allow_ssl">SSL toestaan naar I2P adressen</string>
+  <string name="proxy_auth">Proxy toestemming</string>
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
   <string name="outproxy_auth">Outproxy-authorisatie</string>
   <string name="other">Overige</string>
   <string name="signature_type">Handtekeningstype</string>
   <string name="custom_options">Aangepaste opties</string>
+  <string name="no_messages">Geen berichten</string>
+  <string name="no_error_messages">Geen foutmeldingen</string>
+  <plurals name="log_error_messages">
+    <item quantity="one">Een foutmelding.</item>
+    <item quantity="other">%d foutmeldingen, nieuwste eerst</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="one">Een bericht</item>
+    <item quantity="other">%d berichten, nieuwste eerst</item>
+  </plurals>
   <string name="copy_logs">Kopieer logs</string>
   <string name="i2p_android_error_logs">I2P Android foutlogs</string>
   <string name="i2p_android_logs">I2P Android logs</string>

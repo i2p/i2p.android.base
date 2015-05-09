@@ -2,6 +2,7 @@
 <resources>
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">I2P logga</string>
+  <string name="choose_language">Välj språk</string>
   <string name="welcome_new_install">Välkommen till I2P! Denhär appen är ALFA-mjukvara och erbjuder inte stark anonymitet.
 Var god läs release kommentarerna och licens-information.</string>
   <string name="welcome_new_version">Ny version installerad. Var god läs release kommentarerna. Version: </string>
@@ -67,6 +68,18 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="graphs_not_ready">Antingen är graferna inte färdiga eller så kör inte routern. Försök igen senare.</string>
   <string name="netdb_routers_empty">Inga routers i din NetDB.</string>
   <string name="netdb_leases_empty">Inga LeaseSet i din NetDB.</string>
+  <string name="notification_status_starting">I2P startar</string>
+  <string name="notification_status_restarting">I2P startar om</string>
+  <string name="notification_status_waiting">I2P väntar på en nätverksanslutning</string>
+  <string name="notification_status_starting_after_waiting">Nätverk anslutet, I2P startar</string>
+  <string name="notification_status_running">I2P kör</string>
+  <string name="notification_status_client_ready">Klienttunnlar är redo</string>
+  <string name="notification_status_client_down">Klienttunnlar är nere</string>
+  <string name="notification_status_graceful">Stannar I2P om %s</string>
+  <string name="notification_status_stopping">Stannar I2P</string>
+  <string name="notification_status_stopping_after_net">Nätverk nedkopplat, stannar I2P</string>
+  <string name="notification_status_shutdown_cancelled">Avstängning avbruten</string>
+  <string name="notification_status_shutting_down">I2P stänger ner</string>
   <string name="notification_status_bw">Bandbredd:%1$s KBps ner / %2$s KBps upp</string>
   <string name="notification_status_peers">Peers: %1$d aktiva, %2$d kända</string>
   <string name="notification_status_expl">Utforskande tunnlar: %1$d/%2$d</string>
@@ -94,6 +107,9 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="settings_desc_upnp">Öppna portar i brandvägg automatiskt</string>
   <string name="settings_label_logging">Loggning</string>
   <string name="settings_label_default_log_level">Förvald log nivå</string>
+  <string name="settings_label_appearance">Stil</string>
+  <string name="settings_label_language">Språk</string>
+  <string name="settings_default">Förval</string>
   <string name="settings_label_advanced">Avancerat</string>
   <string name="settings_label_showStats">Routerstatistik</string>
   <string name="settings_summ_showStats">Visa avancerade stats i huvudkonsollen</string>
@@ -205,6 +221,8 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="tunnel_summ_shared_client">Använd samma Destination och tunnlar som andra klienter</string>
   <string name="target_destination">Måldestination</string>
   <string name="persistent_key">Beständig nyckel</string>
+  <string name="persistent_key_conflict_title">Avaktivera nya nycklar vid återöppning?</string>
+  <string name="persistent_key_conflict_msg">Du kan inte aktivera beständiga nycklar när tunneln är konfigurerad att generera nya nycklar vid återöppning. Vill du avaktivera ny nycklar vid återöppning?</string>
   <string name="tunnel_summ_persistent_key">Behåll den här tunnelns destination när den startar om</string>
   <string name="reachable_on">Nåbar på</string>
   <string name="listen_port">Lyssnande port</string>
@@ -263,6 +281,8 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="reduced_tunnel_quantity">Minska tunnelmängd</string>
   <string name="close_tunnels">Stäng tunnlar i viloläge</string>
   <string name="new_keys_on_reopen">Nya nycklar vid återöppning</string>
+  <string name="new_keys_on_reopen_conflict_title">Avaktivera beständiga nycklar?</string>
+  <string name="new_keys_on_reopen_conflict_msg">Du kan inte aktivera nya nycklar vid återöppning medan tunneln är konfigurerad att ha beständiga nycklar. Vill du avaktivera beständiga nycklar?</string>
   <string name="http_client">HTTPklient</string>
   <string name="tunnel_summ_user_agent">Släpp igenom \'Användar-Agent\' header</string>
   <string name="tunnel_summ_referer">Släpp igenom \'Referer\' header</string>
@@ -278,9 +298,20 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="other">Annan</string>
   <string name="signature_type">Signaturtyp</string>
   <string name="custom_options">Anpassade alternativ</string>
+  <string name="no_messages">Inga meddelanden</string>
+  <string name="no_error_messages">Inga felmeddelanden</string>
+  <plurals name="log_error_messages">
+    <item quantity="one">Ett felmeddelande</item>
+    <item quantity="other">%d felmeddelanden, nyaste först</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="one">Ett meddelande</item>
+    <item quantity="other">%d meddelanden, nyaste först</item>
+  </plurals>
+  <string name="log_entry">Loggpost</string>
   <string name="copy_logs">Kopiera loggar</string>
   <string name="i2p_android_error_logs">I2P Android Error loggar</string>
-  <string name="i2p_android_logs">I2P Android Loggar</string>
+  <string name="i2p_android_logs">I2P Androidloggar</string>
   <string name="error_logs_copied_to_clipboard">Error loggar kopierade till clipboard</string>
   <string name="logs_copied_to_clipboard">Loggar kopierade till clipboard</string>
   <string name="label_browser_configuration">Browser konfiguration</string>

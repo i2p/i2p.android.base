@@ -2,11 +2,13 @@
 <resources>
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">I2P 로고</string>
+  <string name="choose_language">언어 선택</string>
   <string name="welcome_new_install">I2P에 환영합니다! 이 앱은 알파 소프트웨어이며 강력한 익명성을 제공하지 않습니다. 릴리즈 노트나 라이센스 정보를 참조하세요.</string>
   <string name="welcome_new_version">새 버전이 설치되었습니다. 릴리즈 노트를 읽어주세요. 버전:</string>
   <string name="label_home">컨트롤과 상태</string>
   <string name="label_tunnels">터널들</string>
   <string name="label_status">상태</string>
+  <string name="label_console">콘솔</string>
   <string name="label_addressbook">주소록</string>
   <string name="label_i2ptunnel_client">클라이언트 터널들</string>
   <string name="label_i2ptunnel_server">서버 터널들</string>
@@ -23,6 +25,9 @@
   <string name="label_graphs">그래프</string>
   <string name="button_router_off">길게 눌러 I2P 시작</string>
   <string name="button_router_on">I2P가 실행중입니다 (길게 눌러 정지)</string>
+  <string name="button_router_graceful">I2P가 %s 안에 종료됩니다</string>
+  <string name="button_shutdown_now">길게 눌러 지금 멈추기</string>
+  <string name="button_cancel_graceful">길게 눌러 종료 취소</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">클</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -54,12 +59,25 @@
   <string name="hint_search_addressbook">주소록 검색</string>
   <string name="action_reload_subscriptions">구독 다시 불러오기</string>
   <string name="router_not_running">라우터가 실행중이지 않습니다.</string>
+  <string name="router_shutting_down">라우터가 종료 중입니다.</string>
   <string name="stats_not_ready">통계 관리자가 아직 준비되지 않았습니다. 나중에 다시 시도하세요.</string>
   <string name="no_graphs_configured">설정된 그래프가 없습니다. 설정 메뉴에서 그래프로 표시할 통계를 고를 수 있습니다. 모든 변경은 60초 후에 적용됩니다.</string>
   <string name="configure_graphs">그래프 설정</string>
   <string name="graphs_not_ready">그래프가 준비되지 않았거나, 라우터가 실행중이 아닙니다. 나중에 다시 시도하세요.</string>
   <string name="netdb_routers_empty">NetDB에 라우터들이 없습니다.</string>
   <string name="netdb_leases_empty">NetDB에 LeaseSet들이 없습니다.</string>
+  <string name="notification_status_starting">I2P 시작 중</string>
+  <string name="notification_status_restarting">I2P 재시작 중</string>
+  <string name="notification_status_waiting">I2P 네크워크 연결 대기중</string>
+  <string name="notification_status_starting_after_waiting">네트워크 연결됨, I2P 시작 중</string>
+  <string name="notification_status_running">I2P 작동 중</string>
+  <string name="notification_status_client_ready">클라이언트 터널 준비됨</string>
+  <string name="notification_status_client_down">클라이언트 터널 꺼짐</string>
+  <string name="notification_status_graceful">I2P %s 안에 멈추는 중</string>
+  <string name="notification_status_stopping">I2P 멈추는 중</string>
+  <string name="notification_status_stopping_after_net">네트워크 끊김, I2P 멈추는 중</string>
+  <string name="notification_status_shutdown_cancelled">종료 취소됨</string>
+  <string name="notification_status_shutting_down">I2P 종료 중</string>
   <string name="notification_status_bw">대역폭: %1$s KBps 다운 / %2$s KBps 업로드</string>
   <string name="notification_status_peers">피어들: %1$d 활성, %2$d 알려짐</string>
   <string name="notification_status_expl">예비 터널들: %1$d/%2$d</string>
@@ -87,6 +105,9 @@
   <string name="settings_desc_upnp">자동으로 방화벽 포트 열기</string>
   <string name="settings_label_logging">로그 기록</string>
   <string name="settings_label_default_log_level">기본 로그 레벨</string>
+  <string name="settings_label_appearance">외관</string>
+  <string name="settings_label_language">언어</string>
+  <string name="settings_default">기본</string>
   <string name="settings_label_advanced">고급</string>
   <string name="settings_label_showStats">라우터 통계</string>
   <string name="settings_summ_showStats">메인 콘솔에서 고급 통계 표시</string>
@@ -110,6 +131,7 @@
   <string name="settings_label_expl_backupQuantity">백업된 수량</string>
   <string name="settings_summ_expl_backupQuantity">%s 터널들</string>
   <string name="settings_desc_expl_backupQuantity">터널 백업의 수</string>
+  <string name="settings_need_transport_enabled">최소 하나의 transport 가 활성화 되어야 합니다</string>
   <string name="settings_router_restart_required">변경사항을 적용하기 위해서 I2P를 다시 시작해주세요</string>
   <string name="menu_about">알아보기</string>
   <string name="about_version">버전:</string>
@@ -120,6 +142,9 @@
   <string name="about_donate">돈이나 비트코인 기부로 개발과 테스팅에 필요한 안드로이드 기기 구입을 돕고 싶나요? 참조하세요:</string>
   <string name="menu_help">도움말</string>
   <string name="general">일반</string>
+  <string name="label_router">라우터</string>
+  <string name="label_private">개인</string>
+  <string name="addressbook_is_empty">주소록 비어 있음</string>
   <string name="addressbook_search_header">%s 찾음</string>
   <string name="addressbook_add_wizard_k_name">이름</string>
   <string name="addressbook_add_wizard_k_destination">목적지</string>
@@ -172,6 +197,7 @@
   <string name="enabled">활성화됨</string>
   <string name="i2ptunnel_wizard_desc_name">터널 리스트에서 구별하기 위한 터널의 이름</string>
   <string name="i2ptunnel_wizard_desc_desc">터널의 설명. 선택적이고 단순 정보용.</string>
+  <string name="i2ptunnel_wizard_desc_dest">클라이언트 터널이 접속하야 하는 I2P 서비스 도착점 입력. 전체 Base 64 도착점 키나 사용자의 주소록에 있는 I2P 호스트 이름 사용 가능.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">만약 이 터널 종류의 나가는 프록시를 안다면 (HTTP 또는 SOCKS), 입력. 여러 프록시들을 콤마로 구별.</string>
   <string name="i2ptunnel_wizard_desc_target_host">서비스가 작동중인 IP, 대부분의 경우 같은 기기이기 때문에 127.0.0.1이 자동 입력됨.</string>
   <string name="i2ptunnel_wizard_desc_target_port">서비스가 접속을 받아들일 포트.</string>
@@ -180,7 +206,16 @@
   <string name="i2ptunnel_wizard_desc_auto_start">라우터가 시작할때 터널도 같이 실행?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">터널을 만들까요?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">터널 </string>
+  <string name="i2ptunnel_view_target">목표</string>
+  <string name="i2ptunnel_view_access_point">엑세스 포인트</string>
   <string name="i2ptunnel_view_autostart">자동 시작</string>
+  <string name="edit_tunnel">터널 편집</string>
+  <string name="name">이름</string>
+  <string name="description">설명</string>
+  <string name="auto_start">자동 시작</string>
+  <string name="tunnel_summ_auto_start">라우터 시작 시 터널도 시작</string>
+  <string name="tunnel_cat_ports">로컬 포트들</string>
+  <string name="shared_client">공유된 클라이언트</string>
   <string name="copy_logs">로그 복사</string>
   <string name="i2p_android_error_logs">I2P 안드로이드 오류 로그</string>
   <string name="i2p_android_logs">I2P 안드로이드 로그</string>
