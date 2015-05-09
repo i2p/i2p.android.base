@@ -4,7 +4,7 @@
         android:defaultValue="@string/DEFAULT_LANGUAGE"
         android:entries="@array/language_names"
         android:entryValues="@array/languages"
-        android:key="pref_language"
+        android:key="@string/PREF_LANGUAGE"
         android:summary="%s"
         android:title="@string/settings_label_language" />
 </PreferenceScreen>

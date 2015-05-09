@@ -6,10 +6,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 
 import net.i2p.I2PAppContext;
 import net.i2p.android.preferences.GraphsPreferenceFragment;
 import net.i2p.android.router.I2PConstants;
+import net.i2p.android.router.R;
 import net.i2p.android.router.service.State;
 import net.i2p.data.DataHelper;
 import net.i2p.router.Router;
@@ -167,6 +169,19 @@ public abstract class Util implements I2PConstants {
                 String string = all.get(x).toString();
                 String inverted = Boolean.toString(!Boolean.parseBoolean(string));
                 routerProps.setProperty(x, inverted);
+            } else if (x.equals(context.getString(R.string.PREF_LANGUAGE))) {
+                String language[] = TextUtils.split(all.get(x).toString(), "_");
+
+                if (language[0].equals(context.getString(R.string.DEFAULT_LANGUAGE))) {
+                    toRemove.setProperty("routerconsole.lang", "");
+                    toRemove.setProperty("routerconsole.country", "");
+                } else {
+                    routerProps.setProperty("routerconsole.lang", language[0].toLowerCase());
+                    if (language.length == 2)
+                        routerProps.setProperty("routerconsole.country", language[1].toUpperCase());
+                    else
+                        toRemove.setProperty("routerconsole.country", "");
+                }
             } else if (!x.startsWith(ANDROID_PREF_PREFIX)) { // Skip over UI-related I2P Android settings
                 String string = all.get(x).toString();
                 routerProps.setProperty(x, string);
