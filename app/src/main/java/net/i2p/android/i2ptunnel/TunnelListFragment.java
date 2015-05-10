@@ -14,12 +14,8 @@ import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
 
@@ -30,9 +26,7 @@ import net.i2p.android.router.util.Util;
 import net.i2p.android.util.FragmentUtils;
 import net.i2p.android.widget.DividerItemDecoration;
 import net.i2p.android.widget.LoadingRecyclerView;
-import net.i2p.app.ClientAppState;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
-import net.i2p.router.RouterContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,12 +78,6 @@ public class TunnelListFragment extends Fragment implements
         if (mTwoPane == null)
             throw new ClassCastException("Parent must implement TwoPaneProvider");
 
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -213,47 +201,6 @@ public class TunnelListFragment extends Fragment implements
         super.onStop();
 
         LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(onStateChange);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.fragment_i2ptunnel_list_actions, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        RouterContext rCtx = Util.getRouterContext();
-        boolean showActions = rCtx != null && mGroup != null &&
-                (mGroup.getState() == ClientAppState.STARTING ||
-                        mGroup.getState() == ClientAppState.RUNNING);
-
-        menu.findItem(R.id.action_start_all_tunnels).setVisible(showActions);
-        menu.findItem(R.id.action_stop_all_tunnels).setVisible(showActions);
-        menu.findItem(R.id.action_restart_all_tunnels).setVisible(showActions);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        List<String> msgs;
-        switch (item.getItemId()) {
-            case R.id.action_start_all_tunnels:
-                msgs = mGroup.startAllControllers();
-                break;
-            case R.id.action_stop_all_tunnels:
-                msgs = mGroup.stopAllControllers();
-                break;
-            case R.id.action_restart_all_tunnels:
-                msgs = mGroup.restartAllControllers();
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        // TODO: Do something with the other messages
-        if (msgs.size() > 0)
-            Toast.makeText(getActivity().getApplicationContext(),
-                    msgs.get(0), Toast.LENGTH_LONG).show();
-        return true;
     }
 
     public void addTunnel(TunnelEntry tunnelEntry) {

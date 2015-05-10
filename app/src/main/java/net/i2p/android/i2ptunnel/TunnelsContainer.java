@@ -13,9 +13,11 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.viewpagerindicator.TitlePageIndicator;
 
@@ -24,8 +26,12 @@ import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import net.i2p.android.util.FragmentUtils;
+import net.i2p.app.ClientAppState;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
+import net.i2p.router.RouterContext;
+
+import java.util.List;
 
 public class TunnelsContainer extends Fragment implements
         FragmentUtils.TwoPaneProvider,
@@ -143,10 +149,50 @@ public class TunnelsContainer extends Fragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_i2ptunnel_list_actions, menu);
+    }
 
-        if (Util.getRouterContext() == null) {
-            mNewTunnel.setVisibility(View.GONE);
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        RouterContext rCtx = Util.getRouterContext();
+        TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
+        boolean showActions = rCtx != null && tcg != null &&
+                (tcg.getState() == ClientAppState.STARTING ||
+                        tcg.getState() == ClientAppState.RUNNING);
+
+        menu.findItem(R.id.action_start_all_tunnels).setVisible(showActions);
+        menu.findItem(R.id.action_stop_all_tunnels).setVisible(showActions);
+        menu.findItem(R.id.action_restart_all_tunnels).setVisible(showActions);
+
+        mNewTunnel.setVisibility(showActions ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
+        if (tcg == null)
+            return false;
+
+        // Handle presses on the action bar items
+        List<String> msgs;
+        switch (item.getItemId()) {
+            case R.id.action_start_all_tunnels:
+                msgs = tcg.startAllControllers();
+                break;
+            case R.id.action_stop_all_tunnels:
+                msgs = tcg.stopAllControllers();
+                break;
+            case R.id.action_restart_all_tunnels:
+                msgs = tcg.restartAllControllers();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+        // TODO: Do something with the other messages
+        if (msgs.size() > 0)
+            Toast.makeText(getActivity().getApplicationContext(),
+                    msgs.get(0), Toast.LENGTH_LONG).show();
+        return true;
     }
 
     @Override
@@ -164,36 +210,6 @@ public class TunnelsContainer extends Fragment implements
                 else if (mServerFrag != null)
                     mServerFrag.addTunnel(tunnel);
             }
-        }
-    }
-
-    @Override
-    public void setMenuVisibility(boolean menuVisible) {
-        super.setMenuVisibility(menuVisible);
-
-        setChildMenuVisibility(mClientFrag, FRAGMENT_ID_CLIENT, menuVisible);
-        setChildMenuVisibility(mServerFrag, FRAGMENT_ID_SERVER, menuVisible);
-    }
-
-    private void setChildMenuVisibility(Fragment fragment, int itemNumber, boolean menuVisible) {
-        if (fragment != null) {
-            menuVisible = menuVisible && mViewPager.getCurrentItem() == itemNumber;
-            fragment.setMenuVisibility(menuVisible);
-        }
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        setChildUserVisibleHint(mClientFrag, FRAGMENT_ID_CLIENT, isVisibleToUser);
-        setChildUserVisibleHint(mServerFrag, FRAGMENT_ID_SERVER, isVisibleToUser);
-    }
-
-    private void setChildUserVisibleHint(Fragment fragment, int itemNumber, boolean isVisibleToUser) {
-        if (fragment != null) {
-            isVisibleToUser = isVisibleToUser && mViewPager.getCurrentItem() == itemNumber;
-            fragment.setUserVisibleHint(isVisibleToUser);
         }
     }
 
