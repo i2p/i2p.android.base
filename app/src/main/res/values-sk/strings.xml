@@ -4,7 +4,6 @@
   <string name="desc_i2p_logo">I2P logo</string>
   <string name="welcome_new_install">Vitajte v I2P! Táto aplikácia je ALPHA softvér a neposkytuje silnú ochranu anonymity. Prosím prečítajte si poznámky k vydaniu a licenčné informácie.</string>
   <string name="welcome_new_version">Bola nainštalovaná nová verzia. Prosím prečítajte si poznámky k vydaniu. Verzia:</string>
-  <string name="label_home">Ovládacie prvky a stav</string>
   <string name="label_tunnels">Tunely</string>
   <string name="label_status">Stav</string>
   <string name="label_addressbook">Adresár</string>
@@ -12,13 +11,10 @@
   <string name="label_i2ptunnel_server">Serverové tunely</string>
   <string name="label_logs">Logy</string>
   <string name="label_error_logs">Chybové logy</string>
-  <string name="label_info_and_pages">Informácie a stránky</string>
-  <string name="label_welcome_page">Uvítacia stránka</string>
   <string name="label_news">Novinky</string>
   <string name="label_peers_status">Peerovia</string>
   <string name="label_release_notes">Poznámky k vydaniu</string>
   <string name="label_licenses">Licencie</string>
-  <string name="label_nonanon_info">Neanonymné informácie</string>
   <string name="label_browse">Prehliadať</string>
   <string name="label_graphs">Grafy</string>
   <string name="button_router_off">Dlhšie stlačte pre spustenie I2P</string>
@@ -31,14 +27,10 @@
   <string name="first_start_faq">Akonáhle už budete mať klientské tunely, prosím <b> pozrite si </b> naše FAQ:</string>
   <string name="first_start_faq_nonanon">Alebo použite tento neanonymný link, ak nechcete čakať na tunely:</string>
   <string name="first_start_irc">Nasmerujte vášho IRC klienta na <b>localhost:6668</b> a pozdravte nás na:</string>
-  <string name="drawer_open">Otvoriť navigáciu</string>
-  <string name="drawer_close">Zavrieť navigáciu</string>
   <string name="action_search">Hľadať</string>
   <string name="action_add">Pridať</string>
   <string name="action_edit">Upraviť</string>
   <string name="action_delete">Odstrániť</string>
-  <string name="action_router_start">Spustiť router</string>
-  <string name="action_router_stop">Zastaviť router</string>
   <string name="action_i2ptunnel_start">Spustiť tunel</string>
   <string name="action_i2ptunnel_stop">Zastaviť tunel</string>
   <string name="action_i2ptunnel_start_all">Spustiť všetky tunely</string>

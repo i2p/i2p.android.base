@@ -4,7 +4,6 @@
   <string name="desc_i2p_logo">Logo I2P</string>
   <string name="welcome_new_install">Benvenuto su I2P! Questa app è ancora in versione preliminare e non fornisce un anonimato robusto. Leggi le note di rilascio e le informazioni sulla licenza.</string>
   <string name="welcome_new_version">Nuova versione installata. Leggi le note di rilascio. Versione:</string>
-  <string name="label_home">Controlli e Stato</string>
   <string name="label_tunnels">Tunnel</string>
   <string name="label_status">Stato</string>
   <string name="label_addressbook">Rubrica</string>
@@ -12,13 +11,10 @@
   <string name="label_i2ptunnel_server">I tunnel del server</string>
   <string name="label_logs">Logs</string>
   <string name="label_error_logs">Log errori</string>
-  <string name="label_info_and_pages">Informazioni e pagine</string>
-  <string name="label_welcome_page">Pagina di benvenuto</string>
   <string name="label_news">News</string>
   <string name="label_peers_status">Peers</string>
   <string name="label_release_notes">Note di rilascio</string>
   <string name="label_licenses">Licenze</string>
-  <string name="label_nonanon_info">Informazioni non anonime</string>
   <string name="label_browse">Sfoglia</string>
   <string name="label_graphs">Grafici</string>
   <string name="button_router_off">Tieni premuto per avviare I2P</string>
@@ -35,14 +31,10 @@
   <string name="first_start_faq">Una volta che hai ottenuto i tunnel per il client, puoi <b>controllare</b> la nostra FAQ:</string>
   <string name="first_start_faq_nonanon">Oppure usare questo collegamento, non anonimo, se non vuoi attendere per i tunnel:</string>
   <string name="first_start_irc">Apri il tuo client IRC su <b>localhost:6668</b> e salutaci su:</string>
-  <string name="drawer_open">Apri navigazione</string>
-  <string name="drawer_close">Chiudi navigazione</string>
   <string name="action_search">Ricerca</string>
   <string name="action_add">Aggiungi</string>
   <string name="action_edit">Modifica</string>
   <string name="action_delete">Elimina</string>
-  <string name="action_router_start">Start Router</string>
-  <string name="action_router_stop">Stop Router</string>
   <string name="action_i2ptunnel_start">Avvia tunnel</string>
   <string name="action_i2ptunnel_stop">Ferma tunnel</string>
   <string name="action_i2ptunnel_start_all">Avvia tutti i tunnel</string>

@@ -4,7 +4,6 @@
   <string name="desc_i2p_logo">Логотип I2P</string>
   <string name="welcome_new_install">Ласкаво просимо до I2P! Ця програма є альфа версією і вона не забезпечує анонімність. Будь ласка, прочитайте примітки до випуску та інформацію про ліцензії.</string>
   <string name="welcome_new_version">Встановлено нову версія. Будь ласка, прочитайте примітки до випуску. Версія:</string>
-  <string name="label_home">Управління і Статус</string>
   <string name="label_tunnels">Тунелі</string>
   <string name="label_status">Статус</string>
   <string name="label_addressbook">Адресна книга</string>
@@ -12,13 +11,10 @@
   <string name="label_i2ptunnel_server">Серверні тунелі</string>
   <string name="label_logs">Журнали</string>
   <string name="label_error_logs">Журнали помилок</string>
-  <string name="label_info_and_pages">Інформація і сторінки</string>
-  <string name="label_welcome_page">Початкова сторінка</string>
   <string name="label_news">Новини</string>
   <string name="label_peers_status">Піри</string>
   <string name="label_release_notes">Примітки до випуску</string>
   <string name="label_licenses">Ліцензії</string>
-  <string name="label_nonanon_info">Не анонімна інформація</string>
   <string name="label_browse">Огляд</string>
   <string name="label_graphs">Графіки</string>
   <string name="button_router_off">Утримуйте щоб запустити I2P</string>
@@ -41,8 +37,6 @@
   <string name="action_add">Додати</string>
   <string name="action_edit">Правка</string>
   <string name="action_delete">Видалити</string>
-  <string name="action_router_start">Запустити роутер</string>
-  <string name="action_router_stop">Зупинити роутер</string>
   <string name="action_i2ptunnel_start">Запустити тунель</string>
   <string name="action_i2ptunnel_stop">Зупинити тунель</string>
   <string name="action_i2ptunnel_start_all">Запустити всі тунелі</string>

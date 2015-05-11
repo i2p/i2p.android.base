@@ -5,7 +5,6 @@
   <string name="choose_language">언어 선택</string>
   <string name="welcome_new_install">I2P에 환영합니다! 이 앱은 알파 소프트웨어이며 강력한 익명성을 제공하지 않습니다. 릴리즈 노트나 라이센스 정보를 참조하세요.</string>
   <string name="welcome_new_version">새 버전이 설치되었습니다. 릴리즈 노트를 읽어주세요. 버전:</string>
-  <string name="label_home">컨트롤과 상태</string>
   <string name="label_tunnels">터널들</string>
   <string name="label_status">상태</string>
   <string name="label_console">콘솔</string>
@@ -14,13 +13,10 @@
   <string name="label_i2ptunnel_server">서버 터널들</string>
   <string name="label_logs">로그</string>
   <string name="label_error_logs">오류 로그</string>
-  <string name="label_info_and_pages">정보와 페이지</string>
-  <string name="label_welcome_page">환영 페이지</string>
   <string name="label_news">뉴스</string>
   <string name="label_peers_status">피어</string>
   <string name="label_release_notes">릴리즈 노트</string>
   <string name="label_licenses">라이센스</string>
-  <string name="label_nonanon_info">비 익명 정보</string>
   <string name="label_browse">탐색</string>
   <string name="label_graphs">그래프</string>
   <string name="button_router_off">길게 눌러 I2P 시작</string>
@@ -41,14 +37,10 @@
   <string name="first_start_faq">클라이언트 터널이 준비되면, FAQ를 <b>참조하세요</b>:</string>
   <string name="first_start_faq_nonanon">혹은 터널을 기다리기 싫다면 이 비-익명 링크를 사용해도 됩니다:</string>
   <string name="first_start_irc">IRC 클라이언트를 <b>localhost:6668</b>로 포인트 해서 우리들에게 인사를 건네주세요:</string>
-  <string name="drawer_open">메뉴 열기</string>
-  <string name="drawer_close">메뉴 닫기</string>
   <string name="action_search">검색</string>
   <string name="action_add">추가</string>
   <string name="action_edit">편집</string>
   <string name="action_delete">삭제</string>
-  <string name="action_router_start">라우터 시작</string>
-  <string name="action_router_stop">라우터 정지</string>
   <string name="action_i2ptunnel_start">터널 시작</string>
   <string name="action_i2ptunnel_stop">터널 중지</string>
   <string name="action_i2ptunnel_start_all">모든 터널들 시작</string>

@@ -5,7 +5,6 @@
   <string name="choose_language">Выберите язык</string>
   <string name="welcome_new_install">Добро пожаловать в I2P! Это приложение является альфа-версией и оно не обеспечивает сильной анонимности. Пожалуйста, прочтите примечания к выпуску и информацию о лицензии.</string>
   <string name="welcome_new_version">Новая версия установлена. Пожалуйста, прочтите примечания к выпуску. Версия:</string>
-  <string name="label_home">Управление и cтатус</string>
   <string name="label_tunnels">Туннели</string>
   <string name="label_status">Статус</string>
   <string name="label_console">Консоль</string>
@@ -15,13 +14,10 @@
   <string name="label_i2ptunnel_server">Туннели сервера</string>
   <string name="label_logs">Журналы</string>
   <string name="label_error_logs">Журнал ошибок</string>
-  <string name="label_info_and_pages">Информация и страницы</string>
-  <string name="label_welcome_page">Начальная страница</string>
   <string name="label_news">Новости</string>
   <string name="label_peers_status">Пиры</string>
   <string name="label_release_notes">Примечания к выпуску</string>
   <string name="label_licenses">Лицензии</string>
-  <string name="label_nonanon_info">Не анонимная информация</string>
   <string name="label_browse">Просмотр</string>
   <string name="label_graphs">Графики</string>
   <string name="button_router_off">Долгое нажатие для запуска I2P</string>
@@ -42,14 +38,10 @@
   <string name="first_start_faq">Как только у вас появятся клиентские туннели, пожалуйста, <b>посмотрите</b> раздел FAQ:</string>
   <string name="first_start_faq_nonanon">Или используйте эту не анонимную ссылку, если вы не хотите ждать создания туннелей:</string>
   <string name="first_start_irc">Настройте свой клиент IRC на <b>localhost:6668</b> и скажите нам привет:</string>
-  <string name="drawer_open">Открыть nav</string>
-  <string name="drawer_close">Закрыть nav</string>
   <string name="action_search">Поиск</string>
   <string name="action_add">Добавить</string>
   <string name="action_edit">Изменить</string>
   <string name="action_delete">Удалить</string>
-  <string name="action_router_start">Запустить маршрутизатор</string>
-  <string name="action_router_stop">Остановить маршрутизатор</string>
   <string name="action_i2ptunnel_start">Запустить туннель</string>
   <string name="action_i2ptunnel_stop">Остановить туннель</string>
   <string name="action_i2ptunnel_start_all">Запустить все туннели</string>

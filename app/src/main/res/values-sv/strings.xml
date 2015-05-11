@@ -6,7 +6,6 @@
   <string name="welcome_new_install">Välkommen till I2P! Denhär appen är ALFA-mjukvara och erbjuder inte stark anonymitet.
 Var god läs release kommentarerna och licens-information.</string>
   <string name="welcome_new_version">Ny version installerad. Var god läs release kommentarerna. Version: </string>
-  <string name="label_home">Inställningar och Status</string>
   <string name="label_tunnels">Tunnlar</string>
   <string name="label_status">Status</string>
   <string name="label_console">Konsoll</string>
@@ -16,13 +15,10 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="label_i2ptunnel_server">Servertunnlar</string>
   <string name="label_logs">Loggar</string>
   <string name="label_error_logs">Felloggar</string>
-  <string name="label_info_and_pages">Information och sidor</string>
-  <string name="label_welcome_page">Välkomstsida</string>
   <string name="label_news">Nyheter</string>
   <string name="label_peers_status">Peers</string>
   <string name="label_release_notes">Releasekommentarer</string>
   <string name="label_licenses">Licenser</string>
-  <string name="label_nonanon_info">Icke-anonym Information</string>
   <string name="label_browse">Bläddra</string>
   <string name="label_graphs">Grafer</string>
   <string name="button_router_off">Långt tryck för att starta I2P</string>
@@ -43,14 +39,10 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="first_start_faq">När du har fått klienttunnlar, vänligen <b>kolla</b> vår FAQ:</string>
   <string name="first_start_faq_nonanon">Använd den här icke-anonyma länken om du inte vill vänta på tunnlar:</string>
   <string name="first_start_irc">Peka din IRCclient till <b>localhost:6668</b> och säg hej till oss på:</string>
-  <string name="drawer_open">Öppna nav</string>
-  <string name="drawer_close">Stäng nav</string>
   <string name="action_search">Sök</string>
   <string name="action_add">Lägg till</string>
   <string name="action_edit">Redigera</string>
   <string name="action_delete">Radera</string>
-  <string name="action_router_start">Starta Router</string>
-  <string name="action_router_stop">Stanna Router</string>
   <string name="action_i2ptunnel_start">Starta tunnel</string>
   <string name="action_i2ptunnel_stop">Stanna tunnel</string>
   <string name="action_i2ptunnel_start_all">Starta alla tunnlar</string>

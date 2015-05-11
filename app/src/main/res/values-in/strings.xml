@@ -4,7 +4,6 @@
   <string name="desc_i2p_logo">Logo I2P</string>
   <string name="welcome_new_install">Selamat datang di I2P! Apl ini adalah perangkat lunak ALPHA dan tidak meyediakan anonimitas yang kuat. Silahkan baca catatan rilis dan informasi lisensi.</string>
   <string name="welcome_new_version">Versi baru dipasang. Silahkan baca catatan rilis. Versi:</string>
-  <string name="label_home">Kontrol dan Status</string>
   <string name="label_tunnels">Saluran</string>
   <string name="label_status">Status</string>
   <string name="label_addressbook">Buku alamat</string>
@@ -12,13 +11,10 @@
   <string name="label_i2ptunnel_server">Saluran server</string>
   <string name="label_logs">Log</string>
   <string name="label_error_logs">Log Kesalahan</string>
-  <string name="label_info_and_pages">Informasi dan halaman</string>
-  <string name="label_welcome_page">Laman Sambutan</string>
   <string name="label_news">News</string>
   <string name="label_peers_status">Peers</string>
   <string name="label_release_notes">Catatan Rilis</string>
   <string name="label_licenses">Lisensi</string>
-  <string name="label_nonanon_info">Informasi Non Anonim</string>
   <string name="label_browse">Jelajah</string>
   <string name="label_graphs">Grafik</string>
   <string name="button_router_off">Tekan dan tahan untuk memulai I2P</string>
@@ -31,14 +27,10 @@
   <string name="first_start_faq">Setelah Anda memiliki saluran klien, silahkan <b>baca</b> FAQ kami:</string>
   <string name="first_start_faq_nonanon">Atau gunakan tautan non anonim ini jika Anda tidak ingin menunggu saluran:</string>
   <string name="first_start_irc">Arahkan klien IRC Anda ke <b>localhost:6668</b> dan katakan hi kepada kami di:</string>
-  <string name="drawer_open">Buka nav</string>
-  <string name="drawer_close">Tutup nav</string>
   <string name="action_search">Cari</string>
   <string name="action_add">Tambahkan</string>
   <string name="action_edit">Edit</string>
   <string name="action_delete">Hapus</string>
-  <string name="action_router_start">Mulai Router</string>
-  <string name="action_router_stop">Hentikan Router</string>
   <string name="action_i2ptunnel_start">Mulai saluran</string>
   <string name="action_i2ptunnel_stop">Hentikan saluran</string>
   <string name="action_i2ptunnel_start_all">Mulai semua saluran</string>

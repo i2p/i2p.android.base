@@ -5,7 +5,6 @@
   <string name="choose_language">选择语言</string>
   <string name="welcome_new_install">欢迎使用 I2P！本应用是 Alpha 版的测试软件，并不提供强有力的匿名性。请阅读发布说明和许可信息。</string>
   <string name="welcome_new_version">新版本已安装，请阅读发布说明。版本：</string>
-  <string name="label_home">控制和状态</string>
   <string name="label_tunnels">隧道</string>
   <string name="label_status">状态</string>
   <string name="label_console">控制台</string>
@@ -15,13 +14,10 @@
   <string name="label_i2ptunnel_server">服务隧道</string>
   <string name="label_logs">日志</string>
   <string name="label_error_logs">错误日志</string>
-  <string name="label_info_and_pages">信息和页面</string>
-  <string name="label_welcome_page">欢迎页面</string>
   <string name="label_news">新闻</string>
   <string name="label_peers_status">节点</string>
   <string name="label_release_notes">版本说明</string>
   <string name="label_licenses">许可协议</string>
-  <string name="label_nonanon_info">非匿名信息</string>
   <string name="label_browse">浏览</string>
   <string name="label_graphs">图表</string>
   <string name="button_router_off">长按启动 I2P</string>
@@ -42,14 +38,10 @@
   <string name="first_start_faq">一旦您有了客户端隧道，请<b>看看</b>我们的常见问题解答：</string>
   <string name="first_start_faq_nonanon">或使用此非匿名链接，如果您不想等待隧道：</string>
   <string name="first_start_irc">将您的 IRC 客户端引导到 <b>localhost:6668</b> 然后与我们打招呼，就在：</string>
-  <string name="drawer_open">打开导航</string>
-  <string name="drawer_close">关闭导航</string>
   <string name="action_search">搜索</string>
   <string name="action_add">添加</string>
   <string name="action_edit">编辑</string>
   <string name="action_delete">刪除</string>
-  <string name="action_router_start">启动路由器</string>
-  <string name="action_router_stop">关闭路由器</string>
   <string name="action_i2ptunnel_start">启动隧道</string>
   <string name="action_i2ptunnel_stop">停止隧道</string>
   <string name="action_i2ptunnel_start_all">启动所有隧道</string>

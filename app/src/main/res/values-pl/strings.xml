@@ -4,7 +4,6 @@
   <string name="desc_i2p_logo">Logo I2P</string>
   <string name="welcome_new_install">Witamy w I2P! Aplikacja jest w fazie ALPHA i nie zapewnia mocnej anonimowości. Zalecamy zapoznanie się z listą zmian i licencją. </string>
   <string name="welcome_new_version">Nowa wersja zainstalowana. Przeczytaj listę zmian. Wersja:</string>
-  <string name="label_home">Kontrola i Status</string>
   <string name="label_tunnels">Tunele</string>
   <string name="label_status">Status</string>
   <string name="label_addressbook">Książka adresowa</string>
@@ -12,13 +11,10 @@
   <string name="label_i2ptunnel_server">Tunele serwerów</string>
   <string name="label_logs">Logi</string>
   <string name="label_error_logs">Logi błędów</string>
-  <string name="label_info_and_pages">Informacje i strony</string>
-  <string name="label_welcome_page">Strona Powitalna</string>
   <string name="label_news">Wiadomości</string>
   <string name="label_peers_status">Peery</string>
   <string name="label_release_notes">Informacje o wydaniu</string>
   <string name="label_licenses">Licencje</string>
-  <string name="label_nonanon_info">Nie Anonimowe Informacje</string>
   <string name="label_browse">Przeglądaj</string>
   <string name="label_graphs">Wykresy</string>
   <string name="button_router_off">Przytrzymaj dłużej, aby uruchomić I2P</string>
@@ -36,14 +32,10 @@
   <string name="first_start_faq">Kiedy już będziesz miał tunele klienta proszę <b>sprawdź</b> nasze FAQ:</string>
   <string name="first_start_faq_nonanon">Also użyj tego nie-anonimowego linka jeśli nie chcesz czekać na tunele:</string>
   <string name="first_start_irc">Skieruj swojego klienta IRC do <b>localhost:6668</b> i przywitaj się z nami na.</string>
-  <string name="drawer_open">Otwórz nawigację</string>
-  <string name="drawer_close">Zamknij nawigację</string>
   <string name="action_search">Szukaj</string>
   <string name="action_add">Dodaj</string>
   <string name="action_edit">Edytuj</string>
   <string name="action_delete">Usuń</string>
-  <string name="action_router_start">Uruchom Router</string>
-  <string name="action_router_stop">Zatrzymaj Router</string>
   <string name="action_i2ptunnel_start">Uruchom tunel</string>
   <string name="action_i2ptunnel_stop">Zatrzymaj tunel</string>
   <string name="action_i2ptunnel_start_all">Uruchom wszystkie tunele</string>

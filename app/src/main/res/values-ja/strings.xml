@@ -4,7 +4,6 @@
   <string name="desc_i2p_logo">I2P ロゴ</string>
   <string name="welcome_new_install">I2P へようこそ！このアプリはアルファ版のソフトウェアであり、強い匿名性を提供いたしません。リリース・ノート及びライセンス情報をご覧ください。</string>
   <string name="welcome_new_version">新しいバージョンがインストールされました。リリース・ノートをご覧ください。バージョン:</string>
-  <string name="label_home">コントロールとステータス</string>
   <string name="label_tunnels">トンネル</string>
   <string name="label_status">ステータス</string>
   <string name="label_addressbook">アドレス帳</string>
@@ -12,13 +11,10 @@
   <string name="label_i2ptunnel_server">サーバートンネル</string>
   <string name="label_logs">ログ</string>
   <string name="label_error_logs">エラーログ</string>
-  <string name="label_info_and_pages">情報とページ</string>
-  <string name="label_welcome_page">ウェルカムページ</string>
   <string name="label_news">ニュース</string>
   <string name="label_peers_status">ピア</string>
   <string name="label_release_notes">リリース・ノート</string>
   <string name="label_licenses">ライセンス</string>
-  <string name="label_nonanon_info">非匿名の情報</string>
   <string name="label_browse">ブラウズ</string>
   <string name="label_graphs">グラフ</string>
   <string name="button_router_off">長押しして I2P を起動</string>
@@ -36,14 +32,10 @@
   <string name="first_start_faq">クライアントトンネルを得たら、以下の FAQ を<b>ご確認ください</b>:</string>
   <string name="first_start_faq_nonanon">あるいは、トンネルを待ちたくないなら、この非匿名リンクを使用してください:</string>
   <string name="first_start_irc">IRC クライアントを <b>localhost:6668</b> に合わせて、私たちに一言挨拶してください:</string>
-  <string name="drawer_open">ナビを開く</string>
-  <string name="drawer_close">ナビを閉じる</string>
   <string name="action_search">検索</string>
   <string name="action_add">追加</string>
   <string name="action_edit">編集</string>
   <string name="action_delete">削除</string>
-  <string name="action_router_start">ルーターを開始</string>
-  <string name="action_router_stop">ルーターを停止</string>
   <string name="action_i2ptunnel_start">トンネルを開始</string>
   <string name="action_i2ptunnel_stop">トンネルを停止</string>
   <string name="action_i2ptunnel_start_all">全てのトンネルを開始</string>

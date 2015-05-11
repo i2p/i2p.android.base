@@ -4,7 +4,6 @@
   <string name="desc_i2p_logo">Logoja e I2P\'së</string>
   <string name="welcome_new_install">Mirë se vini në I2P! Ky aplikacion është i tipit ALPHA sopftware dhe nuk mund të ju shërbej me anonimitet të plotë. Ju lutem lexoni notat dhe informacionin e lisencës. </string>
   <string name="welcome_new_version">Tip/version i ri është instaluar. Ju lutem lexoni notat e lëshimit .Versioni:</string>
-  <string name="label_home">Mënyrat e kontrollit dhe Statusi</string>
   <string name="label_tunnels">Tunelet</string>
   <string name="label_status">Statusi</string>
   <string name="label_addressbook">Libri i adresave. </string>
@@ -12,13 +11,10 @@
   <string name="label_i2ptunnel_server">Tunelet e Serverave. </string>
   <string name="label_logs">Logot</string>
   <string name="label_error_logs">Logot e gabimeve</string>
-  <string name="label_info_and_pages">Informacioni dhe faqet.</string>
-  <string name="label_welcome_page">Faqja mirëseardhëse. </string>
   <string name="label_news">Lajmet. </string>
   <string name="label_peers_status">Të barabartit/shokët. </string>
   <string name="label_release_notes">Shënime lëshimi</string>
   <string name="label_licenses">Lisencat</string>
-  <string name="label_nonanon_info">Informacioni i pa anonim</string>
   <string name="label_browse">Shfletimi</string>
   <string name="label_graphs">Grafikët</string>
   <string name="button_router_off">Mbaje tastin për ta filluar I2P\'në</string>
@@ -31,14 +27,10 @@
   <string name="first_start_faq">Kur ti keni tunelët për klientë, ju lutem &lt;b&gt;vështroni&lt;b&gt; FAQ\'un tonë: </string>
   <string name="first_start_faq_nonanon">Ose mund ta përdorni këtë link që nuk mund të ku sigurojë anonimitetin, nëse nuk keni durim të pritni për tunelët: </string>
   <string name="first_start_irc">Drejtoni IRC klientin tuaj te &lt;b&gt; localhost:66688&lt;b&gt; dhe na përshëndetni në: </string>
-  <string name="drawer_open">Qele nav</string>
-  <string name="drawer_close">Mbylle nav</string>
   <string name="action_search">Kërko</string>
   <string name="action_add">Shto</string>
   <string name="action_edit">Përmirso</string>
   <string name="action_delete">Fshij</string>
-  <string name="action_router_start">Starto Router\'in</string>
-  <string name="action_router_stop">Ndalo Router\'in</string>
   <string name="action_i2ptunnel_start">Starto tunelin</string>
   <string name="action_i2ptunnel_stop">Ndalo tunelin</string>
   <string name="action_i2ptunnel_start_all">Starto të gjithë tunelët</string>
