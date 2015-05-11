@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">I2P</string>
-  <string name="desc_i2p_logo">I2P logo</string>
+  <string name="desc_i2p_logo">I2P-logo</string>
   <string name="choose_language">Taal kiezen</string>
   <string name="welcome_new_install">Welkom op I2P! Deze app heeft de ALPHA status en biedt geen sterke anonimiteit. Lees alstublieft de release opmerkingen en licentie-informatie.</string>
   <string name="welcome_new_version">Nieuwe versie geïnstalleerd. Lees de release opmerkingen. Versie:</string>

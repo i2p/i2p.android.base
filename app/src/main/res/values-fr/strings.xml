@@ -2,6 +2,7 @@
 <resources>
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">Logo I2P</string>
+  <string name="choose_language">Choisir la langue</string>
   <string name="welcome_new_install">Bienvenue sur I2P ! Cette application est un logiciel en version ALPHA et ne permet pas un niveau d\'anonymat élevé. Veuillez lire les notes de version et les informations de licence.</string>
   <string name="welcome_new_version">Nouvelle version installée. Veuillez lire les notes de version. Version :</string>
   <string name="label_home">Contrôles et statut</string>
@@ -296,6 +297,17 @@
   <string name="other">Autre</string>
   <string name="signature_type">Type de signature</string>
   <string name="custom_options">Options personnalisées</string>
+  <string name="no_messages">Pas de messages</string>
+  <string name="no_error_messages">Pas de messages d\'erreur</string>
+  <plurals name="log_error_messages">
+    <item quantity="one">Un message d\'erreur</item>
+    <item quantity="other">%d messages d\'erreur, les plus récents d\'abord</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="one">Un message</item>
+    <item quantity="other">%d messages, les plus récents d\'abord</item>
+  </plurals>
+  <string name="log_entry">Entrée dans le log</string>
   <string name="copy_logs">Copier les historiques (logs)</string>
   <string name="i2p_android_error_logs">Historiques des erreurs d\'I2P Android</string>
   <string name="i2p_android_logs">Historiques d\'I2P Android</string>
