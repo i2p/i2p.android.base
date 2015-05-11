@@ -124,8 +124,9 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 break;
 
             case R.layout.listitem_empty:
-                ((TextView) holder.itemView).setText(
-                        mClientTunnels ? "No configured client tunnels." : "No configured server tunnels.");
+                ((TextView) holder.itemView).setText(mClientTunnels ?
+                        R.string.no_configured_client_tunnels :
+                        R.string.no_configured_server_tunnels);
                 break;
 
             case R.layout.listitem_i2ptunnel:

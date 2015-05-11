@@ -208,6 +208,8 @@
     <string name="app_needed_for_this_tunnel_type">You need to install an app to use this tunnel. Would you like to install the recommended app?</string>
 
     <string name="i2ptunnel_not_initialized">Tunnels are not initialized yet, please reload in two minutes.</string>
+    <string name="no_configured_client_tunnels">No configured client tunnels.</string>
+    <string name="no_configured_server_tunnels">No configured server tunnels.</string>
     <string name="i2ptunnel_new_tunnel">New Tunnel</string>
     <string name="i2ptunnel_msg_config_saved">Configuration changes saved</string>
     <string name="i2ptunnel_msg_config_save_failed">Failed to save configuration</string>
