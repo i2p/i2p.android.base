@@ -189,7 +189,6 @@ export NM="$TOOLCHAINDIR/bin/${BINPREFIX}nm"
 STRIP="$TOOLCHAINDIR/bin/${BINPREFIX}strip"
 
 export LIBGMP_LDFLAGS='-avoid-version'
-LINKFLAGS="-shared -Wl,-soname,libjbigi.so"
 
 case "$ARCH" in
     "arm")
@@ -244,8 +243,9 @@ fi
 echo "Building GMP..."
 make -j8 || exit 1
 
-COMPILEFLAGS="-fPIC -Wall"
+COMPILEFLAGS="-fPIC -Wall $CFLAGS"
 INCLUDES="-I. -I$JBIGI/jbigi/include -I$JAVA_HOME/include -I$JAVA_HOME/include/linux"
+LINKFLAGS="-shared -Wl,-soname,libjbigi.so $LDFLAGS"
 
 echo "Building jbigi lib that is statically linked to GMP"
 STATICLIBS=".libs/libgmp.a"
@@ -254,8 +254,8 @@ echo "Compiling C code..."
 rm -f jbigi.o $LIBFILE
 echo "$CC -c $COMPILEFLAGS $INCLUDES $JBIGI/jbigi/src/jbigi.c"
 $CC -c $COMPILEFLAGS $INCLUDES $JBIGI/jbigi/src/jbigi.c || exit 1
-echo "$CC $LINKFLAGS $INCLUDES $INCLUDELIBS -o $LIBFILE jbigi.o $STATICLIBS"
-$CC $LINKFLAGS $INCLUDES $INCLUDELIBS -o $LIBFILE jbigi.o $STATICLIBS || exit 1
+echo "$CC $LINKFLAGS $INCLUDES -o $LIBFILE jbigi.o $STATICLIBS"
+$CC $LINKFLAGS $INCLUDES -o $LIBFILE jbigi.o $STATICLIBS || exit 1
 echo "$STRIP $LIBFILE"
 $STRIP $LIBFILE || exit 1
 
