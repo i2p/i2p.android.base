@@ -7,7 +7,6 @@
     <string name="welcome_new_install">Welcome to I2P! This app is ALPHA software and it does not provide strong anonymity. Please read the release notes and license information.</string>
     <string name="welcome_new_version">New version installed. Please read the release notes. Version:</string>
 
-    <string name="label_home">Controls and Status</string>
     <string name="label_tunnels">Tunnels</string>
     <string name="label_status">Status</string>
     <string name="label_console">Console</string>
@@ -18,13 +17,10 @@
     <string name="label_i2ptunnel_server">Server tunnels</string>
     <string name="label_logs">Logs</string>
     <string name="label_error_logs">Error Logs</string>
-    <string name="label_info_and_pages">Information and pages</string>
-    <string name="label_welcome_page">Welcome Page</string>
     <string name="label_news">News</string>
     <string name="label_peers_status">Peers</string>
     <string name="label_release_notes">Release Notes</string>
     <string name="label_licenses">Licenses</string>
-    <string name="label_nonanon_info">Non Anonymous Information</string>
     <string name="label_browse">Browse</string>
     <string name="label_graphs">Graphs</string>
 
@@ -54,14 +50,10 @@
     <string name="first_start_irc">Point your IRC client to <b>localhost:6668</b> and say hi to us on:</string>
     <string name="url_irc_i2p" translatable="false">irc://127.0.0.1:6668/i2p | irc://127.0.0.1:6668/i2p-dev</string>
 
-    <string name="drawer_open">Open nav</string>
-    <string name="drawer_close">Close nav</string>
     <string name="action_search">Search</string>
     <string name="action_add">Add</string>
     <string name="action_edit">Edit</string>
     <string name="action_delete">Delete</string>
-    <string name="action_router_start">Start Router</string>
-    <string name="action_router_stop">Stop Router</string>
     <string name="action_i2ptunnel_start">Start tunnel</string>
     <string name="action_i2ptunnel_stop">Stop tunnel</string>
     <string name="action_i2ptunnel_start_all">Start all tunnels</string>
