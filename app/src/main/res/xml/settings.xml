@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference
+        android:icon="@drawable/ic_settings_ethernet_white_36dp"
         android:key="preference_category_network"
         android:title="@string/settings_label_bandwidth_net" />
     <Preference
+        android:icon="@drawable/ic_insert_chart_white_36dp"
         android:key="preference_category_graphs"
         android:title="@string/label_graphs" />
     <Preference
+        android:icon="@drawable/ic_bug_report_white_36dp"
         android:key="preference_category_logging"
         android:title="@string/settings_label_logging" />
     <Preference
+        android:icon="@drawable/ic_book_white_36dp"
         android:key="preference_category_addressbook"
         android:title="@string/label_addressbook" />
     <Preference
+        android:icon="@drawable/ic_settings_display_white_36dp"
         android:key="preference_category_appearance"
         android:title="@string/settings_label_appearance" />
     <Preference
+        android:icon="@drawable/ic_settings_white_36dp"
         android:key="preference_category_advanced"
         android:title="@string/settings_label_advanced" />
 </PreferenceScreen>
