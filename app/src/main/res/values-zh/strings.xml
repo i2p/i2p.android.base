@@ -25,6 +25,7 @@
   <string name="button_router_graceful">I2P 将在 %s 后关闭</string>
   <string name="button_shutdown_now">长按现在停止</string>
   <string name="button_cancel_graceful">长按取消关闭</string>
+  <string name="shared_clients">共享客户端</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -51,6 +52,10 @@
   <string name="action_refresh">刷新</string>
   <string name="hint_search_addressbook">搜索地址簿</string>
   <string name="action_reload_subscriptions">重新载入订阅</string>
+  <string name="news_last_updated">新闻上次更新于 %s 前</string>
+  <string name="news_last_checked">新闻上次检查于 %s 前</string>
+  <string name="news_updated">新闻已更新</string>
+  <string name="view_news">触摸查看最新 I2P 新闻</string>
   <string name="router_not_running">路由器未在运行。</string>
   <string name="router_shutting_down">路由器正在关闭。</string>
   <string name="stats_not_ready">统计管理器还没有准备好。请稍后再试。</string>
@@ -163,6 +168,8 @@
   <string name="install_recommended_app">安装推荐的应用？</string>
   <string name="app_needed_for_this_tunnel_type">您需要安装一个应用以使用此隧道。您想安装推荐的应用吗？</string>
   <string name="i2ptunnel_not_initialized">隧道未初始化完成，请在两分钟后重新加载。</string>
+  <string name="no_configured_client_tunnels">没有已配置的客户端隧道。</string>
+  <string name="no_configured_server_tunnels">没有已配置的服务器隧道。</string>
   <string name="i2ptunnel_new_tunnel">新隧道</string>
   <string name="i2ptunnel_msg_config_saved">配置更改已保存</string>
   <string name="i2ptunnel_msg_config_save_failed">保存配置失败</string>

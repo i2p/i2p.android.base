@@ -2,6 +2,7 @@
 <resources>
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">Logotipo de IP2</string>
+  <string name="choose_language">Elija idioma</string>
   <string name="welcome_new_install">¡Bienvenido a I2P! Esta aplicación es un software ALFA y no proporciona un fuerte anonimato. Por favor, lea las notas de veriones y la información sobre la licencia.</string>
   <string name="welcome_new_version">Nueva versión instalada. Por favor lea las notas de versiones. Versión:</string>
   <string name="label_tunnels">Túneles</string>
@@ -24,6 +25,7 @@
   <string name="button_router_graceful">I2P se cerrará en %s</string>
   <string name="button_shutdown_now">Mantenga pulsado para detener ahora</string>
   <string name="button_cancel_graceful">Mantenga pulsado para cancelar cierre</string>
+  <string name="shared_clients">Clientes compartidos</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -50,6 +52,10 @@
   <string name="action_refresh">Refrescar</string>
   <string name="hint_search_addressbook">Buscar en la libreta de direcciones</string>
   <string name="action_reload_subscriptions">Volver a cargar suscripciones</string>
+  <string name="news_last_updated">Última actualización de novedades hace %s</string>
+  <string name="news_last_checked">Última comprobación de novedades hace %s</string>
+  <string name="news_updated">Novedades actualizadas</string>
+  <string name="view_news">Pulsar para ver las últimas novedades de I2P</string>
   <string name="router_not_running">El router I2P no está ejecutándose.</string>
   <string name="router_shutting_down">El router I2P está cerrándose.</string>
   <string name="stats_not_ready">El administrador de estadísticas aún no está listo. Inténtelo de nuevo más tarde.</string>
@@ -162,6 +168,8 @@
   <string name="install_recommended_app">¿Instalar aplicación recomendada?</string>
   <string name="app_needed_for_this_tunnel_type">Tiene que instalar una aplicación para usar este túnel. ¿Desea instalar la aplicación recomendada?</string>
   <string name="i2ptunnel_not_initialized">Los túneles no están inicializados aún, por favor vuelva a cargar en dos minutos.</string>
+  <string name="no_configured_client_tunnels">No hay túneles de cliente configurados.</string>
+  <string name="no_configured_server_tunnels">No hay túneles de servidor configurados.</string>
   <string name="i2ptunnel_new_tunnel">Nuevo túnel</string>
   <string name="i2ptunnel_msg_config_saved">Se guardaron los cambios en la configuración </string>
   <string name="i2ptunnel_msg_config_save_failed">No se pudo guardar la configuración</string>
@@ -288,6 +296,17 @@
   <string name="other">Otro</string>
   <string name="signature_type">Tipo de firma</string>
   <string name="custom_options">Opciones personalizadas</string>
+  <string name="no_messages">No hay mensajes</string>
+  <string name="no_error_messages">No hay mensajes de error</string>
+  <plurals name="log_error_messages">
+    <item quantity="one">Un mensaje de error</item>
+    <item quantity="other">%d mensajes de error, los más recientes primero</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="one">Un mensaje</item>
+    <item quantity="other">%d mensajes, los más recientes primero</item>
+  </plurals>
+  <string name="log_entry">Entrada de registro (log)</string>
   <string name="copy_logs">Copiar registros (logs)</string>
   <string name="i2p_android_error_logs">Registros (logs) de errores de I2P Android</string>
   <string name="i2p_android_logs">Registros (logs) de I2P Android</string>

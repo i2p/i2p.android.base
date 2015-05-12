@@ -163,6 +163,8 @@
   <string name="install_recommended_app">Empfohlene App installieren?</string>
   <string name="app_needed_for_this_tunnel_type">Sie müssen eine App installieren, um diesen Tunnel nutzen zu können. Möchten Sie die empfohlene App installieren?</string>
   <string name="i2ptunnel_not_initialized">Tunnel sind noch nicht initialisiert. Bitte laden Sie die Seite in zwei Minuten erneut.</string>
+  <string name="no_configured_client_tunnels">Keine konfigurierten Client-Tunnel.</string>
+  <string name="no_configured_server_tunnels">Keine konfigurierten Server-Tunnel.</string>
   <string name="i2ptunnel_new_tunnel">Neuer Tunnel</string>
   <string name="i2ptunnel_msg_config_saved">Änderungen gespeichert</string>
   <string name="i2ptunnel_msg_config_save_failed">Speichern der Änderungen fehlgeschlagen</string>

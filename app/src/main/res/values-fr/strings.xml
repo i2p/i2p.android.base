@@ -25,6 +25,7 @@
   <string name="button_router_graceful">I2P s\'arrêtera dans %s</string>
   <string name="button_shutdown_now">Pressez longtemps pour arrêter maintenant</string>
   <string name="button_cancel_graceful">Pressez longtemps pour annuler l\'arrêt</string>
+  <string name="shared_clients">Clients partagés</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -51,6 +52,10 @@
   <string name="action_refresh">Rafraîchir</string>
   <string name="hint_search_addressbook">Rechercher dans le carnet d\'adresses</string>
   <string name="action_reload_subscriptions">Recharger les abonnements</string>
+  <string name="news_last_updated">Actualités mises à jour %s auparavant</string>
+  <string name="news_last_checked">Actualités récemment vérifiés %s auparavant</string>
+  <string name="news_updated">Actualités mises à jour</string>
+  <string name="view_news">Toucher pour voir les dernières actualités I2P</string>
   <string name="router_not_running">Le routeur ne fonctionne pas.</string>
   <string name="router_shutting_down">Le routeur s\'arrête.</string>
   <string name="stats_not_ready">Le gestionnaire de statistiques n\'est pas encore prêt. Réessayez plus tard.</string>
@@ -163,6 +168,8 @@
   <string name="install_recommended_app">Installer l\'app recommandée ?</string>
   <string name="app_needed_for_this_tunnel_type">Vous devez installer une app pour utiliser ce tunnel. Voudriez-vous installer l\'app recommandée ?</string>
   <string name="i2ptunnel_not_initialized">Les tunnels ne sont pas encore initialisés, veuillez recharger dans deux minutes.</string>
+  <string name="no_configured_client_tunnels">Pas de tunnels clients configurés.</string>
+  <string name="no_configured_server_tunnels">Pas de tunnels serveurs configurés.</string>
   <string name="i2ptunnel_new_tunnel">Nouveau tunnel</string>
   <string name="i2ptunnel_msg_config_saved">Changements de configuration sauvegardés</string>
   <string name="i2ptunnel_msg_config_save_failed">Échec de sauvegarde de la configuration</string>

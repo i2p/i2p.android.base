@@ -26,6 +26,7 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="button_router_graceful">I2P kommer att stanna om %s</string>
   <string name="button_shutdown_now">Långt tryck för att stanna nu</string>
   <string name="button_cancel_graceful">Långt tryck för att ångra nedstängning</string>
+  <string name="shared_clients">Delade klienter</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -52,6 +53,10 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="action_refresh">Uppdatera</string>
   <string name="hint_search_addressbook">Sök i adressboken</string>
   <string name="action_reload_subscriptions">Ladda om prenumerationer</string>
+  <string name="news_last_updated">Nyheter senast uppdaterade för %s sedan</string>
+  <string name="news_last_checked">Nyheter senast kontrollerade för %s sedan</string>
+  <string name="news_updated">Nyheter uppdaterade</string>
+  <string name="view_news">Tryck för att se de senaste I2P-nyheterna</string>
   <string name="router_not_running">Routern kör inte</string>
   <string name="router_shutting_down">Routern stänger ner.</string>
   <string name="stats_not_ready">Statistikhanteraren är inte redo än. Försök igen senare.</string>
@@ -164,6 +169,8 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="install_recommended_app">Installera rekommenderad app?</string>
   <string name="app_needed_for_this_tunnel_type">Du behöver installera en app för att använda den här tunneln. Vill du installera den rekommenderade appen?</string>
   <string name="i2ptunnel_not_initialized">Tunnlarna är inte initialiserad än, ladda igen om två minuter.</string>
+  <string name="no_configured_client_tunnels">Inga konfigurerade klienttunnlar</string>
+  <string name="no_configured_server_tunnels">Inga konfigurerade servertunnlar</string>
   <string name="i2ptunnel_new_tunnel">Ny tunnel</string>
   <string name="i2ptunnel_msg_config_saved">Konfigurationsändringar sparade</string>
   <string name="i2ptunnel_msg_config_save_failed">Misslyckades med att spara konfiguration</string>
