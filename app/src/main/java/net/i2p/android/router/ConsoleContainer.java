@@ -98,7 +98,7 @@ public class ConsoleContainer extends Fragment {
         boolean routerRunning = Util.getRouterContext() != null;
 
         mConsoleMenu.findViewById(R.id.action_logs).setVisibility(routerRunning ? View.VISIBLE : View.GONE);
-        mConsoleMenu.findViewById(R.id.action_graphs).setVisibility(advanced && routerRunning ? View.VISIBLE : View.GONE);
+        mConsoleMenu.findViewById(R.id.action_graphs).setVisibility(routerRunning ? View.VISIBLE : View.GONE);
         mConsoleMenu.findViewById(R.id.action_peers).setVisibility(advanced && routerRunning ? View.VISIBLE : View.GONE);
         mConsoleMenu.findViewById(R.id.action_netdb).setVisibility(advanced && routerRunning ? View.VISIBLE : View.GONE);
     }
