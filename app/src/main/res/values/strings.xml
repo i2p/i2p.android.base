@@ -165,8 +165,8 @@
     <string name="menu_help">Help</string>
     <string name="general">General</string>
 
-    <string name="label_router">Router</string>
-    <string name="label_private">Private</string>
+    <string name="label_router">Public addresses</string>
+    <string name="label_private">Private addresses</string>
     <string name="addressbook_is_empty">Addressbook is empty</string>
     <string name="addressbook_search_header">%s found</string>
 
