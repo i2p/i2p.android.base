@@ -1,11 +1,8 @@
 package net.i2p.android.router.stats;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,6 +15,7 @@ import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;
 import net.i2p.android.router.service.StatSummarizer;
 import net.i2p.android.router.service.SummaryListener;
+import net.i2p.android.router.util.Util;
 import net.i2p.stat.Rate;
 
 import java.util.Comparator;
@@ -42,7 +40,29 @@ public class RateGraphActivity extends I2PActivityBase {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (StatSummarizer.instance() != null) {
+        if (Util.getRouterContext() == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.router_not_running)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    })
+                    .setCancelable(false);
+            builder.show();
+        } else if (StatSummarizer.instance() == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.graphs_not_ready)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    })
+                    .setCancelable(false);
+            builder.show();
+        } else {
             // Get the rates currently being graphed
             List<SummaryListener> listeners = StatSummarizer.instance().getListeners();
             TreeSet<SummaryListener> ordered = new TreeSet<>(new AlphaComparator());
@@ -83,52 +103,27 @@ public class RateGraphActivity extends I2PActivityBase {
                 } else
                     selectRate(0);
             } else {
-                DialogFragment df = new DialogFragment() {
-                    @NonNull
-                    @Override
-                    public Dialog onCreateDialog(Bundle savedInstanceState) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setMessage(R.string.no_graphs_configured)
-                                .setPositiveButton(R.string.configure_graphs, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        mFinishOnResume = true;
-                                        Intent i = new Intent(RateGraphActivity.this, SettingsActivity.class);
-                                        i.putExtra(SettingsActivity.PREFERENCE_CATEGORY, SettingsActivity.PREFERENCE_CATEGORY_GRAPHS);
-                                        startActivity(i);
-                                    }
-                                })
-                                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int i) {
-                                        dialog.cancel();
-                                        finish();
-                                    }
-                                })
-                                .setCancelable(false);
-                        return builder.create();
-                    }
-                };
-                df.show(getSupportFragmentManager(), "nographs");
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.no_graphs_configured)
+                        .setPositiveButton(R.string.configure_graphs, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                mFinishOnResume = true;
+                                Intent i = new Intent(RateGraphActivity.this, SettingsActivity.class);
+                                i.putExtra(SettingsActivity.PREFERENCE_CATEGORY, SettingsActivity.PREFERENCE_CATEGORY_GRAPHS);
+                                startActivity(i);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                dialog.cancel();
+                                finish();
+                            }
+                        })
+                        .setCancelable(false);
+                builder.show();
             }
-        } else {
-            DialogFragment df = new DialogFragment() {
-                @NonNull
-                @Override
-                public Dialog onCreateDialog(Bundle savedInstanceState) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setMessage(R.string.graphs_not_ready)
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    finish();
-                                }
-                            })
-                            .setCancelable(false);
-                    return builder.create();
-                }
-            };
-            df.show(getSupportFragmentManager(), "graphsnotready");
         }
     }
 
