@@ -44,7 +44,6 @@
   <string name="stats_not_ready">menaxheri i statistikave nuk është gati ende. Provoni përsëri më vone. </string>
   <string name="no_graphs_configured">Asnjë graf nuk është konfigururar. Mund të zgjedhni statistikat për graf në menynë e cilësimeve. Ndryshimet do të kenë efekt pas 60 sekondave.</string>
   <string name="configure_graphs">Konfiguro grafët</string>
-  <string name="graphs_not_ready">Grafët nuk janë gati ende, ose routeri nuk është duke punuar. Provoni përsëri më vonë. </string>
   <string name="netdb_routers_empty">Nuk ka routerë në NetDB\'në tuaj. </string>
   <string name="netdb_leases_empty">Nuk ka LeaseSets në NetDB\'në tuaj.</string>
   <string name="notification_status_bw">Gjërësia: %1$s KBps poshtë / %2$s KBps lart</string>

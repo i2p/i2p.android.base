@@ -30,7 +30,7 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
-  <string name="no_client_tunnels_running">还没有可信的客户端隧道正在运行。</string>
+  <string name="no_tunnels_running">尚无运行中的隧道。</string>
   <string name="configure_browser_title">配置浏览器？</string>
   <string name="configure_browser_for_i2p">您想配置一个浏览器来查看 I2P 站点吗？（您也可以以后再从帮助菜单设置这个）</string>
   <string name="first_start_title">恭喜，I2P 已安装！</string>
@@ -61,7 +61,7 @@
   <string name="stats_not_ready">统计管理器还没有准备好。请稍后再试。</string>
   <string name="no_graphs_configured">没有已配置的图表。您可以在设置菜单中选择统计信息以获得图表。任何更改将在60秒后生效。</string>
   <string name="configure_graphs">配置图表</string>
-  <string name="graphs_not_ready">图表还没有准备好，或者路由器未在运行。请稍后再试。</string>
+  <string name="graphs_not_ready">图表尚未就绪。请稍候再试。</string>
   <string name="netdb_routers_empty">您的网络库中没有路由器。</string>
   <string name="netdb_leases_empty">您的网络库中没有赁集。</string>
   <string name="notification_status_starting">I2P 正在启动</string>
@@ -140,8 +140,8 @@
   <string name="about_donate">想捐钱或比特币来为开发和测试购买更多 Android 设备吗？前往:</string>
   <string name="menu_help">帮助</string>
   <string name="general">常规</string>
-  <string name="label_router">路由器</string>
-  <string name="label_private">私有</string>
+  <string name="label_router">公网地址</string>
+  <string name="label_private">私网地址</string>
   <string name="addressbook_is_empty">地址簿是空的</string>
   <string name="addressbook_search_header">%s 找到</string>
   <string name="addressbook_add_wizard_k_name">名称</string>

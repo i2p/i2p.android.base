@@ -28,7 +28,6 @@
   <string name="char_client_tunnel">클</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">서</string>
-  <string name="no_client_tunnels_running">동작중인 클라이언트 터널이 아직 없습니다.</string>
   <string name="configure_browser_title">브라우저를 설정할까요?</string>
   <string name="configure_browser_for_i2p">브라우저가 I2P 사이트들을 볼 수 있게 설정할까요? (추후 도움말 메뉴에서 할 수도 있습니다.)</string>
   <string name="first_start_title">I2P가 설치 된것을 환영합니다!</string>
@@ -55,7 +54,6 @@
   <string name="stats_not_ready">통계 관리자가 아직 준비되지 않았습니다. 나중에 다시 시도하세요.</string>
   <string name="no_graphs_configured">설정된 그래프가 없습니다. 설정 메뉴에서 그래프로 표시할 통계를 고를 수 있습니다. 모든 변경은 60초 후에 적용됩니다.</string>
   <string name="configure_graphs">그래프 설정</string>
-  <string name="graphs_not_ready">그래프가 준비되지 않았거나, 라우터가 실행중이 아닙니다. 나중에 다시 시도하세요.</string>
   <string name="netdb_routers_empty">NetDB에 라우터들이 없습니다.</string>
   <string name="netdb_leases_empty">NetDB에 LeaseSet들이 없습니다.</string>
   <string name="notification_status_starting">I2P 시작 중</string>
@@ -134,8 +132,6 @@
   <string name="about_donate">돈이나 비트코인 기부로 개발과 테스팅에 필요한 안드로이드 기기 구입을 돕고 싶나요? 참조하세요:</string>
   <string name="menu_help">도움말</string>
   <string name="general">일반</string>
-  <string name="label_router">라우터</string>
-  <string name="label_private">개인</string>
   <string name="addressbook_is_empty">주소록 비어 있음</string>
   <string name="addressbook_search_header">%s 찾음</string>
   <string name="addressbook_add_wizard_k_name">이름</string>

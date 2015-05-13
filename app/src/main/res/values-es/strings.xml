@@ -30,7 +30,6 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
-  <string name="no_client_tunnels_running">Ya no hay túneles de cliente ejecutándose.</string>
   <string name="configure_browser_title">¿Configurar navegador?</string>
   <string name="configure_browser_for_i2p">¿Le gustaría configurar un navegador para ver sitios I2P? (También puede hacer esto más tarde desde el menú de ayuda).</string>
   <string name="first_start_title">¡Felicidades por conseguir instalar I2P!</string>
@@ -61,7 +60,6 @@
   <string name="stats_not_ready">El administrador de estadísticas aún no está listo. Inténtelo de nuevo más tarde.</string>
   <string name="no_graphs_configured">No se ha configurado ninguna gráfica. Puede escoger la estadísticas a graficar en el menú de configuración. Cualquier cambio tendrá efecto después de 60 segundos.</string>
   <string name="configure_graphs">Configurar gráficas</string>
-  <string name="graphs_not_ready">Las gráficas no están listas, o el router I2P no está ejecutándose. Inténtelo de nuevo más tarde.</string>
   <string name="netdb_routers_empty">No hay routers I2P en su NetDB.</string>
   <string name="netdb_leases_empty">No hay LeaseSets (conjuntos de túneles al mismo destino) en su NetDB.</string>
   <string name="notification_status_starting">I2P se está iniciando</string>
@@ -140,8 +138,6 @@
   <string name="about_donate">¿Quiere donar dinero o bitcoins para la compra de más dispositivos Android para el desarrollo y testeo? Vaya a:</string>
   <string name="menu_help">Ayuda</string>
   <string name="general">General</string>
-  <string name="label_router">Router I2P</string>
-  <string name="label_private">Privado</string>
   <string name="addressbook_is_empty">La libreta de direcciones está vacía</string>
   <string name="addressbook_search_header">%s encontrados</string>
   <string name="addressbook_add_wizard_k_name">Nombre</string>

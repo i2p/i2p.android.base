@@ -23,7 +23,6 @@
   <string name="char_client_tunnel">K</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">T</string>
-  <string name="no_client_tunnels_running">Foreløpig kjører ingen klient-tunneler</string>
   <string name="configure_browser_title">Sett opp nettleser?</string>
   <string name="configure_browser_for_i2p">Vil du sette opp nettleseren for visning av I2P-sider? (Du kan også gjøre dette senere fra hjelpemenyen.)</string>
   <string name="first_start_title">Til lykke med ny installasjon av I2P!</string>
@@ -49,7 +48,6 @@
   <string name="stats_not_ready">Statestikk-behandleren er ikke klar enda. Prøv igjen senere.</string>
   <string name="no_graphs_configured">Ingen grafer har blitt konfigurert ennå. Du kan velge at statistikk programmet skal vise grafer under instillinger. Det vil tre i kraft ca 1minutt etter start.</string>
   <string name="configure_graphs">Konfigurer grafer</string>
-  <string name="graphs_not_ready">Grafer er ikke klare, eller ruteren kjører ikke. Prøv igjen senere.</string>
   <string name="netdb_routers_empty">Ingen rutere i din NetDB</string>
   <string name="netdb_leases_empty">Ingen LeaseSets i din NetDB.</string>
   <string name="notification_status_bw">Båndbredde: %1$s KBps ned / %2$s KBps opp</string>

@@ -23,7 +23,6 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
-  <string name="no_client_tunnels_running">まだクライアントトンネルは起動していません。</string>
   <string name="configure_browser_title">ブラウザの設定をしますか？</string>
   <string name="configure_browser_for_i2p">I2Pサイトを見るためにブラウザを設定しますか？(あとでヘルプメニューからも設定できます)</string>
   <string name="first_start_title">I2P のインストールおめでとうございます！</string>
@@ -49,7 +48,6 @@
   <string name="stats_not_ready">統計マネージャーはまだ準備出来ていません。後でやり直してください。</string>
   <string name="no_graphs_configured">グラフは設定されていません。設定でどの統計をグラフにするか選択できます。すべての変更は60秒後に有効になります</string>
   <string name="configure_graphs">グラフ設定</string>
-  <string name="graphs_not_ready">グラフが準備出来ていない、あるいはルーターが起動していません。後でもう一度やり直してください。</string>
   <string name="netdb_routers_empty">NetDB にルーターがありません。</string>
   <string name="netdb_leases_empty">NetDB にリースセットがありません。</string>
   <string name="notification_status_bw">帯域幅: %1$s KBps 下方向 / %2$s KBps 上方向</string>

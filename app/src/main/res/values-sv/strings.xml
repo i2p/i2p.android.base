@@ -31,7 +31,6 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
-  <string name="no_client_tunnels_running">Inga klienttunnlar kör ännu</string>
   <string name="configure_browser_title">Konfigurera browsern?</string>
   <string name="configure_browser_for_i2p">Vill du konfigurera en browser för att se på I2P sidor? (Du kan också göra detta senare från hjälpmenyn.)</string>
   <string name="first_start_title">Gratulerar till din I2P installation!</string>
@@ -62,7 +61,6 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="stats_not_ready">Statistikhanteraren är inte redo än. Försök igen senare.</string>
   <string name="no_graphs_configured">Inga grafer har ställts in. Du kan välja statistik till grafen i inställningsmenyn. Ändringar aktiveras efter 60 sekunder.</string>
   <string name="configure_graphs">Ställ in grafer</string>
-  <string name="graphs_not_ready">Antingen är graferna inte färdiga eller så kör inte routern. Försök igen senare.</string>
   <string name="netdb_routers_empty">Inga routers i din NetDB.</string>
   <string name="netdb_leases_empty">Inga LeaseSet i din NetDB.</string>
   <string name="notification_status_starting">I2P startar</string>
@@ -141,8 +139,6 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="about_donate">Vill du donera pengar eller bitcoins för inköp av fler Androidenheter till utveckling och testning? Gå till:</string>
   <string name="menu_help">Hjälp</string>
   <string name="general">Generell</string>
-  <string name="label_router">Router</string>
-  <string name="label_private">Privat</string>
   <string name="addressbook_is_empty">Adressboken är tom</string>
   <string name="addressbook_search_header">%s hittade</string>
   <string name="addressbook_add_wizard_k_name">Namn</string>

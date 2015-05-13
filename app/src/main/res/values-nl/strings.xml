@@ -29,7 +29,6 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
-  <string name="no_client_tunnels_running">Er draaien nog geen client tunnels.</string>
   <string name="configure_browser_title">Browser instellen?</string>
   <string name="configure_browser_for_i2p">Wil je een browser instellen om I2P-sites te kunnen bekijken? (Je kan dit ook later doen vanuit het help-menu.)</string>
   <string name="first_start_title">Gefeliciteerd met de installatie van I2P!</string>
@@ -56,7 +55,6 @@
   <string name="stats_not_ready">De statistiekenbeheerder is nog niet klaar. Probeer het later opnieuw.</string>
   <string name="no_graphs_configured">Geen grafieken ingesteld. Je kan de statistieken om in grafieken weer te geven instellen in het instellingenmenu. Alle wijzigingen vinden plaats na 60 seconden.</string>
   <string name="configure_graphs">Grafieken instellen</string>
-  <string name="graphs_not_ready">Grafieken zijn niet klaar, of de router staat uit. Probeer het later opnieuw.</string>
   <string name="netdb_routers_empty">Geen routers in je NetDB.</string>
   <string name="netdb_leases_empty">Geen LeaseSets in je NetDB.</string>
   <string name="notification_status_starting">I2P is aan het opstarten</string>
@@ -135,8 +133,6 @@
   <string name="about_donate">Wil je geld of bitcoins doneren zodat we op meer Android telefoons kunnen ontwikkelen en testen? Ga naar:</string>
   <string name="menu_help">Help</string>
   <string name="general">Algemeen</string>
-  <string name="label_router">Router</string>
-  <string name="label_private">Privé</string>
   <string name="addressbook_is_empty">Adresboek is leeg</string>
   <string name="addressbook_search_header">%s gevonden</string>
   <string name="addressbook_add_wizard_k_name">Naam</string>

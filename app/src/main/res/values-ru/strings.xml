@@ -29,7 +29,6 @@
   <string name="char_client_tunnel">K</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">С</string>
-  <string name="no_client_tunnels_running">Ещё нет работающих клиентских туннелей.</string>
   <string name="configure_browser_title">Настроить браузер?</string>
   <string name="configure_browser_for_i2p">Настроить браузер для просмотра I2P сайтов? (Вы сможете сделать это позже из меню \"Справка\")</string>
   <string name="first_start_title">Поздравляем с установкой I2P!</string>
@@ -56,7 +55,6 @@
   <string name="stats_not_ready">Менеджер статистики ещё не готов. Попробуйте позже.</string>
   <string name="no_graphs_configured">Графики не настроены. Вы можете выбрать статистику для отображения на графике в настройках меню. Любые изменения начнут действовать через 60 секунд.</string>
   <string name="configure_graphs">Настройки графиков</string>
-  <string name="graphs_not_ready">Графики не готовы или маршрутизатор не запущен. Повторите попытку позже.</string>
   <string name="netdb_routers_empty">Нет маршрутизаторов в вашем NetDB.</string>
   <string name="netdb_leases_empty">Нет LeaseSet-ов в вашем NetDB.</string>
   <string name="notification_status_starting">I2P запускается</string>
@@ -135,8 +133,6 @@
   <string name="about_donate">Хотите пожертвовать деньги или bitcoins на покупку дополнительных Android устройств для разработчиков и тестировщиков? Зайдите:</string>
   <string name="menu_help">Справка</string>
   <string name="general">Общие</string>
-  <string name="label_router">Маршрутизатор</string>
-  <string name="label_private">Личное</string>
   <string name="addressbook_is_empty">Адресная книга пустая</string>
   <string name="addressbook_search_header">%s найдено</string>
   <string name="addressbook_add_wizard_k_name">Имя</string>

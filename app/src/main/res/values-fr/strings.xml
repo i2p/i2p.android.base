@@ -30,7 +30,6 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
-  <string name="no_client_tunnels_running">Aucun tunnel de client n\'est encore en marche.</string>
   <string name="configure_browser_title">Configurer le navigateur ?</string>
   <string name="configure_browser_for_i2p">Voudriez-vous configurer un navigateur pour voir les sites d\'I2P ? (vous pouvez aussi faire cela plus tard depuis le menu d\'aide).</string>
   <string name="first_start_title">Félicitations pour avoir installé I2P !</string>
@@ -61,7 +60,6 @@
   <string name="stats_not_ready">Le gestionnaire de statistiques n\'est pas encore prêt. Réessayez plus tard.</string>
   <string name="no_graphs_configured">Aucun graphique n\'a été configuré. Vous pouvez choisir des statistiques à mettre en graphique parmi le menu des paramètres. Tout changement prendra effet après 60 secondes.</string>
   <string name="configure_graphs">Configurer graphiques</string>
-  <string name="graphs_not_ready">Les graphiques ne sont pas prêts, ou le routeur ne fonctionne pas. Réessayez plus tard.</string>
   <string name="netdb_routers_empty">Pas de routeur dans votre NetDB.</string>
   <string name="netdb_leases_empty">Pas de jeux de baux dans votre NetDB.</string>
   <string name="notification_status_starting">I2P en cours de démarrage</string>
@@ -140,8 +138,6 @@
   <string name="about_donate">Vous souhaitez faire un don d\'argent ou de bitcoins pour acheter davantage d\'équipements Android pour les développements et les tests ? Allez sur :</string>
   <string name="menu_help">Aide</string>
   <string name="general">Général</string>
-  <string name="label_router">Routeur</string>
-  <string name="label_private">Privé</string>
   <string name="addressbook_is_empty">Le carnet d\'adresses est vide</string>
   <string name="addressbook_search_header">%s trouvé</string>
   <string name="addressbook_add_wizard_k_name">Nom</string>

@@ -23,7 +23,6 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
-  <string name="no_client_tunnels_running">Jeszcze żadne tunele klienta nie są uruchomione.</string>
   <string name="configure_browser_title">Konfigurować przeglądarkę?</string>
   <string name="configure_browser_for_i2p">Czy chciałbyś skonfigurować przeglądarkę, aby przeglądać strony I2P? (Możesz to zrobić później w wybierająć pomoc z menu.)</string>
   <string name="first_start_title">Gratulacje, zainstalowałeś I2P!</string>
@@ -49,7 +48,6 @@
   <string name="stats_not_ready">Menadżer statystyk nie jest jeszcze gotowy. Spróbuj później.</string>
   <string name="no_graphs_configured">Żadne wykresy nie zostały skonfigurowane. Możesz wybrać statystyki graficzne w menu ustawień. Wszelkie zmiany wejdą w życie po upływie 60 sekund.</string>
   <string name="configure_graphs">Konfiguruj wykresy</string>
-  <string name="graphs_not_ready">Wykresy nie są gotowe, lub router nie jest włączony. Spróbuj później.</string>
   <string name="netdb_routers_empty">Brak routerów w Twoim NetDB.</string>
   <string name="netdb_leases_empty">Brak LeaseSets w Twoim NetDB.</string>
   <string name="notification_status_bw">Przepustowość: %1$s KBps pobieranie / %2$s KBps wysyłanie</string>

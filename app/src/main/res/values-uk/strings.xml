@@ -24,7 +24,6 @@
   <string name="button_cancel_graceful">Утримуйте, щоб скасувати зупинку</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
-  <string name="no_client_tunnels_running">Клієнтських тунелів ще немає.</string>
   <string name="configure_browser_title">Налаштувати браузер?</string>
   <string name="configure_browser_for_i2p">Бажаєте налаштувати браузер для перегляду I2P-сайтів? (Ви також можете зробити це пізніше через меню).</string>
   <string name="first_start_title">Вітаємо! I2P встановлено.</string>

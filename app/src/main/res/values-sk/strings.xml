@@ -42,7 +42,6 @@
   <string name="action_reload_subscriptions">Obnoviť príspevky</string>
   <string name="router_not_running">Router nie je spustený.</string>
   <string name="stats_not_ready">Správca štatistík zatiaľ nie je pripravený. Prosím vyskúšajte to znova neskôr.</string>
-  <string name="graphs_not_ready">Grafy nie sú pripravené a router nie je spustený. Vyskúšajte to znova neskôr.</string>
   <string name="netdb_routers_empty">Žiadne routre vo vašej NetDB.</string>
   <string name="netdb_leases_empty">Žiadne prenajaté sady vo vašej NetDB.</string>
   <string name="notification_status_bw">Šírka pásma: %1$s KBps pokles / %2$s KBps nárast</string>
