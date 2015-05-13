@@ -538,7 +538,7 @@ public class MainFragment extends I2PFragmentBase {
         } else {
             TableRow empty = new TableRow(getActivity());
             TextView emptyText = new TextView(getActivity());
-            emptyText.setText(R.string.no_client_tunnels_running);
+            emptyText.setText(R.string.no_tunnels_running);
             empty.addView(emptyText);
             dests.addView(empty);
         }

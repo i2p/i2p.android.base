@@ -36,7 +36,7 @@
     <string name="char_client_tunnel">C</string>
     <!-- Character to indicate a server tunnel. Usually first letter of the word "server". -->
     <string name="char_server_tunnel">S</string>
-    <string name="no_client_tunnels_running">No client tunnels are running yet.</string>
+    <string name="no_tunnels_running">No tunnels are running yet.</string>
 
     <string name="configure_browser_title">Configure browser?</string>
     <string name="configure_browser_for_i2p">Would you like to configure a browser to view I2P sites? (You can also do this later from the help menu.)</string>
