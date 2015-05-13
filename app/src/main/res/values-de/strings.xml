@@ -25,6 +25,7 @@
   <string name="button_router_graceful">I2P wird in %s abgeschaltet</string>
   <string name="button_shutdown_now">Lange drücken, um jetzt zu stoppen</string>
   <string name="button_cancel_graceful">Lange drücken, um das Herunterfahren abzubrechen</string>
+  <string name="shared_clients">Mehrere Klienten</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -51,6 +52,10 @@
   <string name="action_refresh">Auffrischen</string>
   <string name="hint_search_addressbook">Adressbuch durchsuchen</string>
   <string name="action_reload_subscriptions">Abonnements neu laden</string>
+  <string name="news_last_updated">News vor %s das letzte Mal aktualisiert</string>
+  <string name="news_last_checked">News vor %s das letzte Mal überprüft</string>
+  <string name="news_updated">News aktualisiert</string>
+  <string name="view_news">Klicken um die aktuellen I2P News zu sehen </string>
   <string name="router_not_running">Der Router läuft nicht.</string>
   <string name="router_shutting_down">Der Router fährt herunter.</string>
   <string name="stats_not_ready">Der Statistikmanager ist noch nicht bereit. Versuchen Sie es später noch einmal.</string>
@@ -211,9 +216,11 @@
   <string name="tunnel_summ_auto_start">Tunnel mit dem Router starten.</string>
   <string name="tunnel_cat_ports">Lokale Ports</string>
   <string name="shared_client">Gemeinsamer Klient</string>
+  <string name="tunnel_summ_shared_client">Benutzt die selbe Destiantion und Tunnel wie andere geteilte Klienten </string>
   <string name="target_destination">Zielort</string>
   <string name="persistent_key">Persistenter Schlüssel</string>
   <string name="persistent_key_conflict_title">Neue Schlüssel beim erneuten Öffnen deaktivieren?</string>
+  <string name="persistent_key_conflict_msg">Sie können keine dauerhaften Schlüssel nutzen wenn der Tunnel zum Neuerzeugen der Schlüssel bei jedem Start konfiguiert ist. Möchten Sie das Erzeugen neuer Schlüssel bei jedem Neustart deaktivieren?</string>
   <string name="tunnel_summ_persistent_key">Ziel des Tunnels bei einem Neustart beibehalten</string>
   <string name="reachable_on">Erreichbarkeit ein</string>
   <string name="listen_port">Lauschport</string>
@@ -232,6 +239,7 @@
   <string name="tunnel_parameters">Tunnelparameter</string>
   <string name="profile">Profil</string>
   <string name="delay_connect">Verbinden verzögern</string>
+  <string name="tunnel_summ_delay_connect">Aktivieren für Frage/Antwort Verbindungen</string>
   <string name="access_control">Zugangskontrolle</string>
   <string name="restricted_access">Eingeschränkter Zugang</string>
   <string name="access_list">Zugangsliste</string>
@@ -239,6 +247,8 @@
   <string name="tunnel_summ_reject_inproxies">Nur I2P-Nutzern eine Verbindung erlauben</string>
   <string name="unique_local">Eindeutige Sprachumgebung</string>
   <string name="tunnel_summ_unique_local">Verwenden Sie eindeutige localhost-IPs für jeden Client</string>
+  <string name="multihome">Multihome</string>
+  <string name="tunnel_summ_multihome">Aktiviere Optimierungen fürs Multihoming</string>
   <string name="client_connection_limits">Klient-Verbindungsbegrenzungen</string>
   <string name="connections_per_minute">Verbindungen pro Minute</string>
   <string name="connections_per_hour">Verbindungen pro Stunde</string>
@@ -256,10 +266,12 @@
   <string name="post_limits">POST-Begrenzungen</string>
   <string name="limit_period">Zeitabschnitt begrenzen</string>
   <string name="client_posts_per_period">Client-POSTs pro Zeitabschnitt</string>
+  <string name="client_ban_length">Länge der Bannzeit für Klienten</string>
   <string name="total_posts_per_period">Gesamte POSTs pro Zeitabschnitt</string>
+  <string name="total_ban_length">Totale Bannzeit</string>
   <string name="power_saving">Energie sparen</string>
   <string name="delay_open">Öffnen verzögern</string>
-  <string name="tunnel_summ_delay_open">Tunnel wird bei erst bei Bedarf gestartet</string>
+  <string name="tunnel_summ_delay_open">Tunnel wird erst bei Bedarf gestartet</string>
   <string name="reduce_quantity">Anzahl reduzieren</string>
   <string name="tunnel_summ_reduce_quantity">Die Anzahl der Tunnel bei Leerlauf reduzieren.</string>
   <string name="idle_time">Leerlaufzeit</string>
@@ -268,12 +280,15 @@
   <string name="close_tunnels">Tunnel bei Leerlauf schließen</string>
   <string name="new_keys_on_reopen">Neue Schlüssel beim erneuten Öffnen</string>
   <string name="new_keys_on_reopen_conflict_title">Permanente Schlüssel deaktivieren?</string>
+  <string name="new_keys_on_reopen_conflict_msg">Sie können die Funktion \"Neue Schlüssel beim Start des Tunnels\" nicht nutzen während \"dauerhafter Schlüssel\" aktiviert ist. Möchten Sie \"dauerhafter Schlüssel\" deaktivieren?</string>
   <string name="http_client">HTTP-Klient</string>
   <string name="tunnel_summ_user_agent">\"Benutzer-Agent\"-Kopfzeile durchleiten</string>
   <string name="tunnel_summ_referer">\"Referer\"-Kopfzeile durchleiten</string>
   <string name="tunnel_summ_accept">\"Accept-*\"-Kopfzeilen durchleiten</string>
   <string name="tunnel_summ_allow_ssl">SSL für I2P-Adressen erlauben</string>
+  <string name="jump_url_list">URL Sprungliste</string>
   <string name="proxy_auth">Proxy-Autorisierung</string>
+  <string name="tunnel_summ_proxy_auth">Proxy benötigt ein Login zur Nutzung</string>
   <string name="username">Benutzername</string>
   <string name="password">Passwort</string>
   <string name="outproxy_auth">Ausgangsproxy-Autorisierung</string>
