@@ -120,11 +120,11 @@ public class NetDbSummaryPagerFragment extends I2PFragmentBase implements
         public CharSequence getPageTitle(int i) {
             switch (i) {
             case 1:
-                return "Countries";
+                return getString(R.string.countries);
             case 2:
-                return "Transports";
+                return getString(R.string.settings_label_transports);
             default:
-                return "Versions";
+                return getString(R.string.versions);
             } 
         }
     }

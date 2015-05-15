@@ -83,16 +83,16 @@ public class NetDbSummaryTableFragment extends Fragment {
 
         switch (mCategory) {
         case 1:
-            tl1.setText("Transports");
+            tl1.setText(R.string.country);
             break;
         case 2:
-            tl1.setText("Country");
+            tl1.setText(R.string.transport);
             break;
         default:
-            tl1.setText("Version");
+            tl1.setText(R.string.version);
             break;
         }
-        tl2.setText("Count");
+        tl2.setText(R.string.count);
 
         titleRow.addView(tl1);
         titleRow.addView(tl2);

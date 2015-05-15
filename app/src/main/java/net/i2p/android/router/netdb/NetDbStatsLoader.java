@@ -3,6 +3,7 @@ package net.i2p.android.router.netdb;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
+import net.i2p.android.router.R;
 import net.i2p.data.Hash;
 import net.i2p.data.router.RouterAddress;
 import net.i2p.data.router.RouterInfo;
@@ -69,14 +70,28 @@ public class NetDbStatsLoader extends AsyncTaskLoader<List<ObjectCounter<String>
     private static final int SSUI = 2;
     private static final int NTCP = 4;
     private static final int IPV6 = 8;
-    private static final String[] TNAMES = { "Hidden or starting up", "SSU", "SSU with introducers", "",
-                                  "NTCP", "NTCP and SSU", "NTCP and SSU with introducers", "",
-                                  "", "IPv6 SSU", "IPv6 Only SSU, introducers", "IPv6 SSU, introducers",
-                                  "IPv6 NTCP", "IPv6 NTCP, SSU", "IPv6 Only NTCP, SSU, introducers", "IPv6 NTCP, SSU, introducers" };
+    private static final int[] TNAMES = {
+            R.string.tname_0,
+            R.string.tname_1,
+            R.string.tname_2,
+            0,
+            R.string.tname_4,
+            R.string.tname_5,
+            R.string.tname_6,
+            0,
+            0,
+            R.string.tname_9,
+            R.string.tname_10,
+            R.string.tname_11,
+            R.string.tname_12,
+            R.string.tname_13,
+            R.string.tname_14,
+            R.string.tname_15,
+    };
     /**
      *  what transport types
      */
-    private static String classifyTransports(RouterInfo info) {
+    private String classifyTransports(RouterInfo info) {
         int rv = 0;
         for (RouterAddress addr : info.getAddresses()) {
             String style = addr.getTransportStyle();
@@ -93,7 +108,7 @@ public class NetDbStatsLoader extends AsyncTaskLoader<List<ObjectCounter<String>
                 rv |= IPV6;
 
         }
-        return TNAMES[rv];
+        return getContext().getString(TNAMES[rv]);
     }
 
     @Override

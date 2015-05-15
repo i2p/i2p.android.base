@@ -2,7 +2,7 @@
 <resources>
     <string-array name="log_level_list">
         <item>ERROR</item>
-        <item>All</item>
+        <item>@string/all</item>
     </string-array>
     <string-array name="log_levels">
         <item>CRIT</item>
@@ -12,9 +12,9 @@
         <item>DEBUG</item>
     </string-array>
     <string-array name="netdb_pages">
-        <item>Statistics</item>
-        <item>Routers</item>
-        <item>LeaseSets</item>
+        <item>@string/statistics</item>
+        <item>@string/routers</item>
+        <item>@string/leasesets</item>
     </string-array>
     <string-array name="setting0to3">
         <item>0</item>
@@ -114,8 +114,8 @@
         <item>interactive</item>
     </string-array>
     <string-array name="tunnel_profile_names">
-        <item>Bulk connection (downloads/websites/BT)</item>
-        <item>Interactive connection</item>
+        <item>@string/profile_bulk</item>
+        <item>@string/profile_interactive</item>
     </string-array>
     <string-array name="access_modes">
         <item>0</item>
@@ -123,9 +123,9 @@
         <item>2</item>
     </string-array>
     <string-array name="access_mode_names">
-        <item>Disabled</item>
-        <item>Whitelist</item>
-        <item>Blacklist</item>
+        <item>@string/disabled</item>
+        <item>@string/whitelist</item>
+        <item>@string/blacklist</item>
     </string-array>
     <string-array name="sigtypes">
         <item>0</item>

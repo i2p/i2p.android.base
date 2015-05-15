@@ -77,6 +77,28 @@
     <string name="configure_graphs">Configure graphs</string>
     <string name="graphs_not_ready">Graphs are not ready yet. Try again later.</string>
 
+    <string name="statistics">Statistics</string>
+    <string name="routers">Routers</string>
+    <string name="leasesets">LeaseSets</string>
+    <string name="countries">Countries</string>
+    <string name="country">Country</string>
+    <string name="transport">Transport</string>
+    <string name="versions">Versions</string>
+    <string name="version">Version</string>
+    <string name="count">Count</string>
+    <string name="tname_0">Hidden or starting up</string>
+    <string name="tname_1" translatable="false">SSU</string>
+    <string name="tname_2" translatable="false">SSU with introducers</string>
+    <string name="tname_4" translatable="false">NTCP</string>
+    <string name="tname_5" translatable="false">NTCP and SSU</string>
+    <string name="tname_6" translatable="false">NTCP and SSU with introducers</string>
+    <string name="tname_9" translatable="false">IPv6 SSU</string>
+    <string name="tname_10" translatable="false">IPv6 Only SSU, introducers</string>
+    <string name="tname_11" translatable="false">IPv6 SSU, introducers</string>
+    <string name="tname_12" translatable="false">IPv6 NTCP</string>
+    <string name="tname_13" translatable="false">IPv6 NTCP, SSU</string>
+    <string name="tname_14" translatable="false">IPv6 Only NTCP, SSU, introducers</string>
+    <string name="tname_15" translatable="false">IPv6 NTCP, SSU, introducers</string>
     <string name="netdb_routers_empty">No routers in your NetDB.</string>
     <string name="netdb_leases_empty">No LeaseSets in your NetDB.</string>
 
@@ -275,10 +297,15 @@
     <string name="tunnel_summ_use_ssl">Use SSL to connect to target</string>
     <string name="tunnel_parameters">Tunnel parameters</string>
     <string name="profile">Profile</string>
+    <string name="profile_bulk">Bulk connection (downloads/websites/BT)</string>
+    <string name="profile_interactive">Interactive connection</string>
     <string name="delay_connect">Delay connect</string>
     <string name="tunnel_summ_delay_connect">Enable for request/response connections</string>
     <string name="access_control">Access control</string>
     <string name="restricted_access">Restricted access</string>
+    <string name="disabled">Disabled</string>
+    <string name="whitelist">Whitelist</string>
+    <string name="blacklist">Blacklist</string>
     <string name="access_list">Access list</string>
     <string name="reject_inproxies">Reject inproxies</string>
     <string name="tunnel_summ_reject_inproxies">Only allow I2P users to connect</string>
@@ -334,6 +361,7 @@
     <string name="signature_type">Signature type</string>
     <string name="custom_options">Custom options</string>
 
+    <string name="all">All</string>
     <string name="no_messages">No messages</string>
     <string name="no_error_messages">No error messages</string>
     <plurals name="log_error_messages">
