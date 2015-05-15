@@ -80,7 +80,7 @@
     </target>
 
     <target name="clean">
-        <ant dir="${i2pbase}" target="clean" />
+        <ant dir="${i2pbase}" target="distclean" />
         <delete dir="${jar.libs.dir}" />
     </target>
 
