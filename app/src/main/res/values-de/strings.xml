@@ -30,6 +30,7 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
+  <string name="no_tunnels_running">Es laufen noch keine Tunnel.</string>
   <string name="configure_browser_title">Browser konfigurieren?</string>
   <string name="configure_browser_for_i2p">Möchten Sie einen Browser zum Betrachten von I2P-Seiten einrichten? (Sie können dieses auch später noch im Hilfe-Menü erledigen).</string>
   <string name="first_start_title">Herzlichen Glückwunsch, Sie haben I2P installiert!</string>
@@ -58,8 +59,9 @@
   <string name="router_not_running">Der Router läuft nicht.</string>
   <string name="router_shutting_down">Der Router fährt herunter.</string>
   <string name="stats_not_ready">Der Statistikmanager ist noch nicht bereit. Versuchen Sie es später noch einmal.</string>
-  <string name="no_graphs_configured">Keine Graphen konfiguriert. Sie können die Statistiken zum Erstellen der Graphen im Einstellungsmenu auswählen. Jede Änderung wird nach 60 Sekunden aktiv gesetzt.</string>
+  <string name="no_graphs_configured">Es wurden keine Graphen konfiguriert. Sie können die Statistiken zum Erstellen der Graphen im Einstellungsmenü auswählen. Jede Änderung wird nach 60 Sekunden aktiv werden.</string>
   <string name="configure_graphs">Graphen konfigurieren</string>
+  <string name="graphs_not_ready">Graphen sind noch nicht bereit. Versuchen Sie es später erneut.</string>
   <string name="netdb_routers_empty">Keine Router in Ihrer NetDB.</string>
   <string name="netdb_leases_empty">Keine LeaseSets in Ihrer NetDB.</string>
   <string name="notification_status_starting">I2P wird gestartet</string>
@@ -138,6 +140,8 @@
   <string name="about_donate">Sie wollen Geld oder Bitcoins spenden, damit wir mehr Android-Geräte zum Entwickeln und Testen kaufen können? Gehen Sie auf:</string>
   <string name="menu_help">Hilfe</string>
   <string name="general">Allgemein</string>
+  <string name="label_router">Öffentliche Adressen</string>
+  <string name="label_private">Private Adressen</string>
   <string name="addressbook_is_empty">Adressbuch ist leer</string>
   <string name="addressbook_search_header">%s gefunden</string>
   <string name="addressbook_add_wizard_k_name">Name</string>
