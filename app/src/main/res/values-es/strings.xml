@@ -30,6 +30,7 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
+  <string name="no_tunnels_running">Aún no hay túneles en ejecución.</string>
   <string name="configure_browser_title">¿Configurar navegador?</string>
   <string name="configure_browser_for_i2p">¿Le gustaría configurar un navegador para ver sitios I2P? (También puede hacer esto más tarde desde el menú de ayuda).</string>
   <string name="first_start_title">¡Felicidades por conseguir instalar I2P!</string>
@@ -60,6 +61,7 @@
   <string name="stats_not_ready">El administrador de estadísticas aún no está listo. Inténtelo de nuevo más tarde.</string>
   <string name="no_graphs_configured">No se ha configurado ninguna gráfica. Puede escoger la estadísticas a graficar en el menú de configuración. Cualquier cambio tendrá efecto después de 60 segundos.</string>
   <string name="configure_graphs">Configurar gráficas</string>
+  <string name="graphs_not_ready">Las gráficas aún no están listas. Inténtelo de nuevo más tarde.</string>
   <string name="netdb_routers_empty">No hay routers I2P en su NetDB.</string>
   <string name="netdb_leases_empty">No hay LeaseSets (conjuntos de túneles al mismo destino) en su NetDB.</string>
   <string name="notification_status_starting">I2P se está iniciando</string>
@@ -138,6 +140,8 @@
   <string name="about_donate">¿Quiere donar dinero o bitcoins para la compra de más dispositivos Android para el desarrollo y testeo? Vaya a:</string>
   <string name="menu_help">Ayuda</string>
   <string name="general">General</string>
+  <string name="label_router">Direcciones públicas</string>
+  <string name="label_private">Direcciones privadas</string>
   <string name="addressbook_is_empty">La libreta de direcciones está vacía</string>
   <string name="addressbook_search_header">%s encontrados</string>
   <string name="addressbook_add_wizard_k_name">Nombre</string>
@@ -244,7 +248,7 @@
   <string name="unique_local">Dirección local única</string>
   <string name="tunnel_summ_unique_local">Usar IPs de equipo local (localhost) únicas para cada cliente</string>
   <string name="multihome">Multihospedaje</string>
-  <string name="tunnel_summ_multihome">Habilitar optimizaciones de multihospedaje (multihoming)</string>
+  <string name="tunnel_summ_multihome">Habilitar optimizaciones de alojamiento redundante (multihoming)</string>
   <string name="client_connection_limits">Límites de conexión de cliente</string>
   <string name="connections_per_minute">Conexiones por minuto</string>
   <string name="connections_per_hour">Conexiones por hora</string>
