@@ -1,67 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:orientation="horizontal"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/main_lights"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/desc_i2p_logo"
-            android:scaleType="centerInside"
-            android:src="@drawable/routerlogo_0" />
-
-        <net.i2p.android.router.util.LongToggleButton
-            android:id="@+id/router_onoff_button"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:textOff="@string/button_router_off"
-            android:textOn="@string/button_router_on" />
-
         <LinearLayout
-            android:id="@+id/router_graceful_buttons"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
-            <TextView
-                android:id="@+id/router_graceful_status"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/main_lights"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:contentDescription="@string/desc_i2p_logo"
+                android:scaleType="centerInside"
+                android:src="@drawable/routerlogo_0" />
+
+            <net.i2p.android.router.util.LongToggleButton
+                android:id="@+id/router_onoff_button"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:textOff="@string/button_router_off"
+                android:textOn="@string/button_router_on" />
 
             <LinearLayout
+                android:id="@+id/router_graceful_buttons"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-                <Button
-                    android:id="@+id/button_shutdown_now"
-                    android:layout_width="0dp"
-                    android:layout_height="68dp"
-                    android:layout_weight="1"
-                    android:text="@string/button_shutdown_now" />
+                <TextView
+                    android:id="@+id/router_graceful_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" />
 
-                <Button
-                    android:id="@+id/button_cancel_graceful"
-                    android:layout_width="0dp"
-                    android:layout_height="68dp"
-                    android:layout_weight="1"
-                    android:text="@string/button_cancel_graceful" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/button_shutdown_now"
+                        android:layout_width="0dp"
+                        android:layout_height="68dp"
+                        android:layout_weight="1"
+                        android:text="@string/button_shutdown_now" />
+
+                    <Button
+                        android:id="@+id/button_cancel_graceful"
+                        android:layout_width="0dp"
+                        android:layout_height="68dp"
+                        android:layout_weight="1"
+                        android:text="@string/button_cancel_graceful" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+            <LinearLayout
+                android:id="@+id/console_usage_stats"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Download"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                    <TextView
+                        android:id="@+id/console_download_stats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="0.0 KBps / 0.0 KB" />
+                </LinearLayout>
+
+                <View
+                    style="@style/Divider.Vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Upload"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                    <TextView
+                        android:id="@+id/console_upload_stats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="0.0 KBps / 0.0 KB" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
     </LinearLayout>
 
     <ScrollView
@@ -70,8 +136,10 @@
         android:layout_height="fill_parent"
         android:layout_weight="2"
         android:fillViewport="true"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingStart="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
         android:scrollbarStyle="outsideInset">
 
         <LinearLayout

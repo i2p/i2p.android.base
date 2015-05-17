@@ -403,31 +403,6 @@ public class MainFragment extends I2PFragmentBase {
                 }
                 String tunnelStatus = ctx.throttle().getTunnelStatus();
                 //ctx.commSystem().getReachabilityStatus();
-                double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
-                double outBW = ctx.bandwidthLimiter().getSendBps() / 1024;
-
-                // control total width
-                DecimalFormat fmt;
-                if(inBW >= 1000 || outBW >= 1000) {
-                    fmt = new DecimalFormat("#0");
-                } else if(inBW >= 100 || outBW >= 100) {
-                    fmt = new DecimalFormat("#0.0");
-                } else {
-                    fmt = new DecimalFormat("#0.00");
-                }
-
-                double kBytesIn = ctx.bandwidthLimiter().getTotalAllocatedInboundBytes() / 1024;
-                double kBytesOut = ctx.bandwidthLimiter().getTotalAllocatedOutboundBytes() / 1024;
-
-                // control total width
-                DecimalFormat kBfmt;
-                if(kBytesIn >= 1000 || kBytesOut >= 1000) {
-                    kBfmt = new DecimalFormat("#0");
-                } else if(kBytesIn >= 100 || kBytesOut >= 100) {
-                    kBfmt = new DecimalFormat("#0.0");
-                } else {
-                    kBfmt = new DecimalFormat("#0.00");
-                }
 
                 String status =
                         "Network: " + netstatus
@@ -442,9 +417,7 @@ public class MainFragment extends I2PFragmentBase {
                 String participate = "\nParticipation: " + tunnelStatus +" (" + part + ")";
 
                 String details =
-                        "\nBandwidth in/out: " + fmt.format(inBW) + " / " + fmt.format(outBW) + " KBps"
-                                + "\nData usage in/out: " + kBfmt.format(kBytesIn) + " / " + kBfmt.format(kBytesOut) + " KB"
-                                + "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
+                        "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
                                 + "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B'
                                 + "\nJob Lag: " + jobLag
                                 + "\nMsg Delay: " + msgDelay
@@ -457,10 +430,46 @@ public class MainFragment extends I2PFragmentBase {
                 vStatus.setVisibility(View.GONE);
             }
             statusView.setVisibility(View.VISIBLE);
+
+            // Usage stats in bottom toolbar
+
+            double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
+            double outBW = ctx.bandwidthLimiter().getSendBps() / 1024;
+
+            // control total width
+            DecimalFormat fmt;
+            if(inBW >= 1000 || outBW >= 1000) {
+                fmt = new DecimalFormat("#0");
+            } else if(inBW >= 100 || outBW >= 100) {
+                fmt = new DecimalFormat("#0.0");
+            } else {
+                fmt = new DecimalFormat("#0.00");
+            }
+
+            double kBytesIn = ctx.bandwidthLimiter().getTotalAllocatedInboundBytes() / 1024;
+            double kBytesOut = ctx.bandwidthLimiter().getTotalAllocatedOutboundBytes() / 1024;
+
+            // control total width
+            DecimalFormat kBfmt;
+            if(kBytesIn >= 1000 || kBytesOut >= 1000) {
+                kBfmt = new DecimalFormat("#0");
+            } else if(kBytesIn >= 100 || kBytesOut >= 100) {
+                kBfmt = new DecimalFormat("#0.0");
+            } else {
+                kBfmt = new DecimalFormat("#0.00");
+            }
+
+            ((TextView) getActivity().findViewById(R.id.console_download_stats)).setText(
+                    fmt.format(inBW) + " KBps / " + kBfmt.format(kBytesIn) + " KB");
+            ((TextView) getActivity().findViewById(R.id.console_upload_stats)).setText(
+                    fmt.format(outBW) + " KBps / " + kBfmt.format(kBytesOut) + " KB");
+
+            getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.VISIBLE);
         } else {
             // network but no router context
             vStatusText.setText("Not running");
             statusView.setVisibility(View.INVISIBLE);
+            getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.INVISIBLE);
             /**
              * **
              * RouterService svc = _routerService; String status = "connected? "
