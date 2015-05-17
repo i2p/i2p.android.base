@@ -480,15 +480,15 @@ public class MainFragment extends I2PFragmentBase {
             }
 
             ((TextView) getActivity().findViewById(R.id.console_download_stats)).setText(
-                    fmt.format(inBW) + " KBps / " + kBfmt.format(kBytesIn) + " KB");
+                    fmt.format(inBW) + "KBps / " + kBfmt.format(kBytesIn) + "KB");
             ((TextView) getActivity().findViewById(R.id.console_upload_stats)).setText(
-                    fmt.format(outBW) + " KBps / " + kBfmt.format(kBytesOut) + " KB");
+                    fmt.format(outBW) + "KBps / " + kBfmt.format(kBytesOut) + "KB");
 
             getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.VISIBLE);
         } else {
             // network but no router context
             vStatusText.setText("Not running");
-            statusView.setVisibility(View.INVISIBLE);
+            statusView.setVisibility(View.GONE);
             getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.INVISIBLE);
             /**
              * **
