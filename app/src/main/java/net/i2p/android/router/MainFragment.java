@@ -68,14 +68,26 @@ public class MainFragment extends I2PFragmentBase {
     // Container Activity must implement this interface
     public interface RouterControlListener {
         boolean shouldShowOnOff();
+
         boolean shouldBeOn();
+
         void onStartRouterClicked();
+
         boolean onStopRouterClicked();
-        /** @since 0.9.19 */
+
+        /**
+         * @since 0.9.19
+         */
         boolean isGracefulShutdownInProgress();
-        /** @since 0.9.19 */
+
+        /**
+         * @since 0.9.19
+         */
         boolean onGracefulShutdownClicked();
-        /** @since 0.9.19 */
+
+        /**
+         * @since 0.9.19
+         */
         boolean onCancelGracefulShutdownClicked();
     }
 
@@ -101,10 +113,10 @@ public class MainFragment extends I2PFragmentBase {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Init stuff here so settings work.
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             lastRouterState = savedInstanceState.getParcelable("lastState");
             String saved = savedInstanceState.getString("status");
-            if(saved != null) {
+            if (saved != null) {
                 _savedStatus = saved;
             }
         }
@@ -136,7 +148,7 @@ public class MainFragment extends I2PFragmentBase {
                     mCallback.onStartRouterClicked();
                     updateOneShot();
                     checkFirstStart();
-                } else if(mCallback.onGracefulShutdownClicked())
+                } else if (mCallback.onGracefulShutdownClicked())
                     updateOneShot();
                 return true;
             }
@@ -147,7 +159,7 @@ public class MainFragment extends I2PFragmentBase {
             @Override
             public boolean onLongClick(View view) {
                 if (mCallback.isGracefulShutdownInProgress())
-                    if(mCallback.onStopRouterClicked())
+                    if (mCallback.onStopRouterClicked())
                         updateOneShot();
                 return true;
             }
@@ -171,7 +183,7 @@ public class MainFragment extends I2PFragmentBase {
         super.onStart();
         _handler.removeCallbacks(_updater);
         _handler.removeCallbacks(_oneShotUpdate);
-        if(_savedStatus != null) {
+        if (_savedStatus != null) {
             TextView tv = (TextView) getActivity().findViewById(R.id.main_status_text);
             tv.setText(_savedStatus);
         }
@@ -223,7 +235,7 @@ public class MainFragment extends I2PFragmentBase {
     public void onSaveInstanceState(Bundle outState) {
         if (lastRouterState != null)
             outState.putParcelable("lastState", lastRouterState);
-        if(_savedStatus != null)
+        if (_savedStatus != null)
             outState.putString("status", _savedStatus);
         super.onSaveInstanceState(outState);
     }
@@ -250,9 +262,10 @@ public class MainFragment extends I2PFragmentBase {
         private int counter;
         private final int delay = 1000;
         private final int toloop = delay / 500;
+
         public void run() {
             updateVisibility();
-            if(counter++ % toloop == 0) {
+            if (counter++ % toloop == 0) {
                 try {
                     updateStatus();
                 } catch (NullPointerException npe) {
@@ -304,7 +317,7 @@ public class MainFragment extends I2PFragmentBase {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(!_keep) {
+        if (!_keep) {
             Thread t = new Thread(new KillMe());
             t.start();
         }
@@ -318,7 +331,7 @@ public class MainFragment extends I2PFragmentBase {
             Util.d("*********************************************************");
             try {
                 Thread.sleep(500); // is 500ms long enough?
-            } catch(InterruptedException ex) {
+            } catch (InterruptedException ex) {
             }
             System.exit(0);
         }
@@ -355,25 +368,53 @@ public class MainFragment extends I2PFragmentBase {
             statusView = mScrollView;
         LinearLayout vStatus = (LinearLayout) getActivity().findViewById(R.id.main_status);
         TextView vStatusText = (TextView) getActivity().findViewById(R.id.main_status_text);
+        TextView vNetworkStatus = (TextView) getActivity().findViewById(R.id.console_net_status);
+        TextView vUptime = (TextView) getActivity().findViewById(R.id.console_uptime);
+        TextView vActive = (TextView) getActivity().findViewById(R.id.console_active);
+        TextView vKnown = (TextView) getActivity().findViewById(R.id.console_known);
 
-        if(!Connectivity.isConnected(getActivity())) {
+        if (!Connectivity.isConnected(getActivity())) {
             // Manually set state, RouterService won't be running
             updateState(State.WAITING);
             vStatusText.setText("No Internet connection is available");
             vStatus.setVisibility(View.VISIBLE);
             statusView.setVisibility(View.VISIBLE);
-        } else if(ctx != null) {
-            if(_startPressed) {
+        } else if (ctx != null) {
+            if (_startPressed) {
                 _startPressed = false;
             }
+
+            String netstatus;
+            CommSystemFacade.Status reach = ctx.commSystem().getStatus();
+            switch (reach) {
+                case DIFFERENT:
+                    netstatus = "Symmetric NAT";
+                    break;
+                case HOSED:
+                    netstatus = "Port Failure";
+                    break;
+                case OK:
+                    netstatus = "OK";
+                    break;
+                case REJECT_UNSOLICITED:
+                    netstatus = "Firewalled";
+                    break;
+                default:
+                    netstatus = "Unknown";
+            }
+            vNetworkStatus.setText("Network: " + netstatus);
+
+            String uptime = DataHelper.formatDuration(ctx.router().getUptime());
+            int active = ctx.commSystem().countActivePeers();
+            int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
+            vUptime.setText("" + uptime);
+            vActive.setText("" + active);
+            vKnown.setText("" + known);
 
             // Load running tunnels
             loadDestinations(ctx);
 
             if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean(PREF_SHOW_STATS, false)) {
-                CommSystemFacade.Status reach = ctx.commSystem().getStatus();
-                int active = ctx.commSystem().countActivePeers();
-                int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
                 int inEx = ctx.tunnelManager().getFreeTunnelCount();
                 int outEx = ctx.tunnelManager().getOutboundTunnelCount();
                 int inCl = ctx.tunnelManager().getInboundClientTunnelCount();
@@ -382,46 +423,25 @@ public class MainFragment extends I2PFragmentBase {
                 double dLag = ctx.statManager().getRate("jobQueue.jobLag").getRate(60000).getAverageValue();
                 String jobLag = DataHelper.formatDuration((long) dLag);
                 String msgDelay = DataHelper.formatDuration(ctx.throttle().getMessageDelay());
-                String uptime = DataHelper.formatDuration(ctx.router().getUptime());
 
-                String netstatus;
-                switch (reach) {
-                    case DIFFERENT:
-                        netstatus = "Symmetric NAT";
-                        break;
-                    case HOSED:
-                        netstatus = "Port Failure";
-                        break;
-                    case OK:
-                        netstatus = "OK";
-                        break;
-                    case REJECT_UNSOLICITED:
-                        netstatus = "Firewalled";
-                        break;
-                    default:
-                        netstatus = "Unknown";
-                }
                 String tunnelStatus = ctx.throttle().getTunnelStatus();
                 //ctx.commSystem().getReachabilityStatus();
 
                 String status =
-                        "Network: " + netstatus
-                        + "\nPeers active/known: " + active + " / " + known
-                        + "\nExploratory Tunnels in/out: " + inEx + " / " + outEx
-                        + "\nClient Tunnels in/out: " + inCl + " / " + outCl;
+                        "Exploratory Tunnels in/out: " + inEx + " / " + outEx
+                                + "\nClient Tunnels in/out: " + inCl + " / " + outCl;
 
 
                 // Need to see if we have the participation option set to on.
                 // I thought there was a router method for that? I guess not! WHY NOT?
                 // It would be easier if we had a number to test status.
-                String participate = "\nParticipation: " + tunnelStatus +" (" + part + ")";
+                String participate = "\nParticipation: " + tunnelStatus + " (" + part + ")";
 
                 String details =
                         "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
                                 + "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B'
                                 + "\nJob Lag: " + jobLag
-                                + "\nMsg Delay: " + msgDelay
-                                + "\nUptime: " + uptime;
+                                + "\nMsg Delay: " + msgDelay;
 
                 _savedStatus = status + participate + details;
                 vStatusText.setText(_savedStatus);
@@ -438,9 +458,9 @@ public class MainFragment extends I2PFragmentBase {
 
             // control total width
             DecimalFormat fmt;
-            if(inBW >= 1000 || outBW >= 1000) {
+            if (inBW >= 1000 || outBW >= 1000) {
                 fmt = new DecimalFormat("#0");
-            } else if(inBW >= 100 || outBW >= 100) {
+            } else if (inBW >= 100 || outBW >= 100) {
                 fmt = new DecimalFormat("#0.0");
             } else {
                 fmt = new DecimalFormat("#0.00");
@@ -451,9 +471,9 @@ public class MainFragment extends I2PFragmentBase {
 
             // control total width
             DecimalFormat kBfmt;
-            if(kBytesIn >= 1000 || kBytesOut >= 1000) {
+            if (kBytesIn >= 1000 || kBytesOut >= 1000) {
                 kBfmt = new DecimalFormat("#0");
-            } else if(kBytesIn >= 100 || kBytesOut >= 100) {
+            } else if (kBytesIn >= 100 || kBytesOut >= 100) {
                 kBfmt = new DecimalFormat("#0.0");
             } else {
                 kBfmt = new DecimalFormat("#0.00");
@@ -483,13 +503,14 @@ public class MainFragment extends I2PFragmentBase {
              * "null" : svc.canManualStart()) + "\ncan stop? " + (svc == null ?
              * "null" : svc.canManualStop()); tv.setText(status);
              * tv.setVisibility(View.VISIBLE);
-          ***
+             ***
              */
         }
     }
 
     /**
      * Based on net.i2p.router.web.SummaryHelper.getDestinations()
+     *
      * @param ctx The RouterContext
      */
     private void loadDestinations(RouterContext ctx) {
@@ -553,7 +574,9 @@ public class MainFragment extends I2PFragmentBase {
         }
     }
 
-    /** compare translated nicknames - put "shared clients" first in the sort */
+    /**
+     * compare translated nicknames - put "shared clients" first in the sort
+     */
     private class AlphaComparator implements Comparator<Destination> {
         private String xsc;
         private RouterContext _ctx;
@@ -574,7 +597,9 @@ public class MainFragment extends I2PFragmentBase {
         }
     }
 
-    /** translate here so collation works above */
+    /**
+     * translate here so collation works above
+     */
     private String getName(RouterContext ctx, Destination d) {
         TunnelPoolSettings in = ctx.tunnelManager().getInboundSettings(d.calculateHash());
         String name = (in != null ? in.getDestinationNickname() : null);
@@ -584,7 +609,7 @@ public class MainFragment extends I2PFragmentBase {
         }
 
         if (name == null)
-            name = d.calculateHash().toBase64().substring(0,6);
+            name = d.calculateHash().toBase64().substring(0, 6);
         else
             name = _(ctx, name);
 

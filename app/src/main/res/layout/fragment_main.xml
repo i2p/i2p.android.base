@@ -30,9 +30,9 @@
                     android:id="@+id/main_lights"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
                     android:contentDescription="@string/desc_i2p_logo"
                     android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
                     android:src="@drawable/routerlogo_0" />
 
                 <LinearLayout
@@ -88,34 +88,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/label_tunnels"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <TableLayout
-                        android:id="@+id/main_tunnels"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:id="@+id/main_status"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/label_status"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                        <TextView
-                            android:id="@+id/main_status_text"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
+                    <include layout="@layout/console_status" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
