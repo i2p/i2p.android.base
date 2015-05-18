@@ -298,7 +298,7 @@ public class MainFragment extends I2PFragmentBase {
                     tv.setText(getActivity().getResources().getString(R.string.button_router_graceful,
                             DataHelper.formatDuration(ms)));
                 } else {
-                    tv.setText("Stopping I2P");
+                    tv.setText(getActivity().getString(R.string.notification_status_stopping));
                 }
             }
         }

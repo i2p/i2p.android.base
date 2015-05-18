@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Uptime" />
+                android:text="@string/uptime" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Active peers" />
+                android:text="@string/active_peers" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,7 +95,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Known peers" />
+                android:text="@string/known_peers" />
         </LinearLayout>
     </LinearLayout>
 

@@ -95,7 +95,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Download"
+                        android:text="@string/download"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
                     <TextView
@@ -120,7 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Upload"
+                        android:text="@string/upload"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
                     <TextView
