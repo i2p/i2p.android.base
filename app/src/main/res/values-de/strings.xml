@@ -62,6 +62,15 @@
   <string name="no_graphs_configured">Es wurden keine Graphen konfiguriert. Sie können die Statistiken zum Erstellen der Graphen im Einstellungsmenü auswählen. Jede Änderung wird nach 60 Sekunden aktiv werden.</string>
   <string name="configure_graphs">Graphen konfigurieren</string>
   <string name="graphs_not_ready">Graphen sind noch nicht bereit. Versuchen Sie es später erneut.</string>
+  <string name="statistics">Statistiken</string>
+  <string name="routers">Router</string>
+  <string name="countries">Länder</string>
+  <string name="country">Land</string>
+  <string name="transport">Übertragungen</string>
+  <string name="versions">Versionen</string>
+  <string name="version">Version</string>
+  <string name="count">Anzahl</string>
+  <string name="tname_0">Ausgeblendet oder startend</string>
   <string name="netdb_routers_empty">Keine Router in Ihrer NetDB.</string>
   <string name="netdb_leases_empty">Keine LeaseSets in Ihrer NetDB.</string>
   <string name="notification_status_starting">I2P wird gestartet</string>
@@ -109,7 +118,7 @@
   <string name="settings_label_advanced">Erweitert</string>
   <string name="settings_label_showStats">Routerstatistiken</string>
   <string name="settings_summ_showStats">Ausführliche Statistiken in der Hauptkonsole anzeigen.</string>
-  <string name="settings_label_transports">Transporte</string>
+  <string name="settings_label_transports">Übertragungen</string>
   <string name="settings_label_maxConns">Max. Verbindungen</string>
   <string name="settings_label_i2cp">I2CP-Benutzeroberfläche</string>
   <string name="settings_desc_i2cp">Auf Port 7654 lauschen</string>
@@ -129,7 +138,7 @@
   <string name="settings_label_expl_backupQuantity">Anzahl der Reservetunnel</string>
   <string name="settings_summ_expl_backupQuantity">%s Tunnel</string>
   <string name="settings_desc_expl_backupQuantity">Wie viele Reservertunnel</string>
-  <string name="settings_need_transport_enabled">Sie müssen mindestens einen Transport aktivieren</string>
+  <string name="settings_need_transport_enabled">Sie müssen mindestens eine Übertragung aktivieren</string>
   <string name="settings_router_restart_required">Bitte starten Sie I2P neu, um die Änderungen anzuwenden</string>
   <string name="menu_about">Über uns</string>
   <string name="about_version">Version:</string>
@@ -238,10 +247,15 @@
   <string name="tunnel_summ_use_ssl">SSL verwenden, um mit dem Ziel zu verbinden</string>
   <string name="tunnel_parameters">Tunnelparameter</string>
   <string name="profile">Profil</string>
+  <string name="profile_bulk">Massenverbindung (Herunterladevorgänge/Webseiten/BT)</string>
+  <string name="profile_interactive">Interaktive Verbindung</string>
   <string name="delay_connect">Verbinden verzögern</string>
   <string name="tunnel_summ_delay_connect">Aktivieren für Frage/Antwort Verbindungen</string>
   <string name="access_control">Zugangskontrolle</string>
   <string name="restricted_access">Eingeschränkter Zugang</string>
+  <string name="disabled">Deaktiviert</string>
+  <string name="whitelist">Weiße Liste</string>
+  <string name="blacklist">Schwarze Liste</string>
   <string name="access_list">Zugangsliste</string>
   <string name="reject_inproxies">Eingangsproxies abweisen</string>
   <string name="tunnel_summ_reject_inproxies">Nur I2P-Nutzern eine Verbindung erlauben</string>
@@ -296,6 +310,7 @@
   <string name="other">Weitere</string>
   <string name="signature_type">Signaturtyp</string>
   <string name="custom_options">Benutzerdefinierte Optionen</string>
+  <string name="all">Alle</string>
   <string name="no_messages">Keine Nachrichten</string>
   <string name="no_error_messages">Keine Fehlermeldungen</string>
   <plurals name="log_error_messages">
