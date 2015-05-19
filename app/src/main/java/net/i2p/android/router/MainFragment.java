@@ -362,9 +362,6 @@ public class MainFragment extends I2PFragmentBase {
     private void updateStatus() {
         RouterContext ctx = getRouterContext();
         View statusView = getActivity().findViewById(R.id.status_container);
-        // In landscape, hide the entire scrollview
-        if (statusView == null)
-            statusView = mScrollView;
         ImageView vNetStatusLevel = (ImageView) getActivity().findViewById(R.id.console_net_status_level);
         TextView vNetStatusText = (TextView) getActivity().findViewById(R.id.console_net_status_text);
         View vNonNetStatus = getActivity().findViewById(R.id.console_non_net_status_container);
