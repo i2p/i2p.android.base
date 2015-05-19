@@ -183,7 +183,7 @@ public class MainFragment extends I2PFragmentBase {
         _handler.removeCallbacks(_updater);
         _handler.removeCallbacks(_oneShotUpdate);
         if (_savedStatus != null) {
-            TextView tv = (TextView) getActivity().findViewById(R.id.main_status_text);
+            TextView tv = (TextView) getActivity().findViewById(R.id.console_advanced_status_text);
             tv.setText(_savedStatus);
         }
         checkDialog();
@@ -365,19 +365,21 @@ public class MainFragment extends I2PFragmentBase {
         // In landscape, hide the entire scrollview
         if (statusView == null)
             statusView = mScrollView;
-        LinearLayout vStatus = (LinearLayout) getActivity().findViewById(R.id.main_status);
-        TextView vStatusText = (TextView) getActivity().findViewById(R.id.main_status_text);
         ImageView vNetStatusLevel = (ImageView) getActivity().findViewById(R.id.console_net_status_level);
-        TextView vNetworkStatus = (TextView) getActivity().findViewById(R.id.console_net_status);
+        TextView vNetStatusText = (TextView) getActivity().findViewById(R.id.console_net_status_text);
+        View vNonNetStatus = getActivity().findViewById(R.id.console_non_net_status_container);
         TextView vUptime = (TextView) getActivity().findViewById(R.id.console_uptime);
         TextView vActive = (TextView) getActivity().findViewById(R.id.console_active);
         TextView vKnown = (TextView) getActivity().findViewById(R.id.console_known);
+        LinearLayout vAdvStatus = (LinearLayout) getActivity().findViewById(R.id.console_advanced_status);
+        TextView vAdvStatusText = (TextView) getActivity().findViewById(R.id.console_advanced_status_text);
 
         if (!Connectivity.isConnected(getActivity())) {
             // Manually set state, RouterService won't be running
             updateState(State.WAITING);
-            vNetworkStatus.setText(R.string.no_internet);
+            vNetStatusText.setText(R.string.no_internet);
             statusView.setVisibility(View.VISIBLE);
+            vNonNetStatus.setVisibility(View.GONE);
         } else if (ctx != null) {
             if (_startPressed) {
                 _startPressed = false;
@@ -397,7 +399,7 @@ public class MainFragment extends I2PFragmentBase {
                 default:
                     vNetStatusLevel.setVisibility(View.GONE);
             }
-            vNetworkStatus.setText(getString(R.string.settings_label_network) + ": " + netStatus.status);
+            vNetStatusText.setText(getString(R.string.settings_label_network) + ": " + netStatus.status);
 
             String uptime = DataHelper.formatDuration(ctx.router().getUptime());
             int active = ctx.commSystem().countActivePeers();
@@ -439,12 +441,13 @@ public class MainFragment extends I2PFragmentBase {
                                 + "\nMsg Delay: " + msgDelay;
 
                 _savedStatus = status + participate + details;
-                vStatusText.setText(_savedStatus);
-                vStatus.setVisibility(View.VISIBLE);
+                vAdvStatusText.setText(_savedStatus);
+                vAdvStatus.setVisibility(View.VISIBLE);
             } else {
-                vStatus.setVisibility(View.GONE);
+                vAdvStatus.setVisibility(View.GONE);
             }
             statusView.setVisibility(View.VISIBLE);
+            vNonNetStatus.setVisibility(View.VISIBLE);
 
             // Usage stats in bottom toolbar
 
