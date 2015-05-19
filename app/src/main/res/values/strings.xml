@@ -40,6 +40,7 @@
 
     <string name="vm_comm_system" translatable="false">VM Comm System</string>
     <string name="net_status_error_i2cp">Client manager I2CP error - check logs</string>
+    <!-- Parameter is a time, e.g. 32s or 2m -->
     <string name="net_status_error_skew">Clock skew of %s</string>
     <string name="net_status_error_unresolved_tcp">Unresolved TCP address</string>
     <string name="net_status_error_private_tcp">Private TCP address</string>
@@ -47,7 +48,7 @@
     <string name="net_status_warn_firewalled_floodfill">Firewalled and floodfill</string>
     <string name="net_status_info_disconnected">Disconnected - check network connection</string>
     <string name="net_status_error_udp_port">UDP port in use - change in settings and restart</string>
-    <string name="net_status_error_no_active_peers">No active peers, check network connection and firewall</string>
+    <string name="net_status_error_no_active_peers">No active peers - check network connection and firewall</string>
     <string name="net_status_error_udp_disabled_tcp_not_set">UDP disabled and inbound TCP host/port not set</string>
     <string name="net_status_warn_firewalled_udp_disabled">Firewalled with UDP disabled</string>
 
