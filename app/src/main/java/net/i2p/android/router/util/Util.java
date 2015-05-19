@@ -14,9 +14,13 @@ import net.i2p.android.router.I2PConstants;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.State;
 import net.i2p.data.DataHelper;
+import net.i2p.data.router.RouterAddress;
+import net.i2p.data.router.RouterInfo;
+import net.i2p.router.CommSystemFacade;
 import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
 import net.i2p.router.transport.TransportManager;
+import net.i2p.router.transport.TransportUtil;
 import net.i2p.router.transport.udp.UDPTransport;
 import net.i2p.util.OrderedProperties;
 
@@ -371,5 +375,163 @@ public abstract class Util implements I2PConstants {
                 state == State.MANUAL_STOPPED ||
                 state == State.MANUAL_QUITTED ||
                 state == State.WAITING;
+    }
+
+    public static class NetStatus {
+        public enum Level {
+            ERROR,
+            WARN,
+            INFO,
+        }
+
+        public final Level level;
+        public final String status;
+
+        public NetStatus(Level level, String status) {
+            this.level = level;
+            this.status = status;
+        }
+    }
+    public static NetStatus getNetStatus(Context ctx, RouterContext rCtx) {
+        if (rCtx.commSystem().isDummy())
+            return new NetStatus(NetStatus.Level.INFO, ctx.getString(R.string.vm_comm_system));
+        if (rCtx.router().getUptime() > 60*1000 && (!rCtx.router().gracefulShutdownInProgress()) &&
+                !rCtx.clientManager().isAlive())  // not a router problem but the user should know
+            return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.net_status_error_i2cp));
+        // Warn based on actual skew from peers, not update status, so if we successfully offset
+        // the clock, we don't complain.
+        //if (!rCtx.clock().getUpdatedSuccessfully())
+        long skew = rCtx.commSystem().getFramedAveragePeerClockSkew(33);
+        // Display the actual skew, not the offset
+        if (Math.abs(skew) > 30*1000)
+            return new NetStatus(NetStatus.Level.ERROR,
+                    ctx.getString(R.string.net_status_error_skew, DataHelper.formatDuration2(Math.abs(skew))));
+        if (rCtx.router().isHidden())
+            return new NetStatus(NetStatus.Level.INFO, ctx.getString(R.string.hidden));
+        RouterInfo routerInfo = rCtx.router().getRouterInfo();
+        if (routerInfo == null)
+            return new NetStatus(NetStatus.Level.INFO, ctx.getString(R.string.testing));
+
+        CommSystemFacade.Status status = rCtx.commSystem().getStatus();
+        switch (status) {
+            case OK:
+            case IPV4_OK_IPV6_UNKNOWN:
+            case IPV4_OK_IPV6_FIREWALLED:
+            case IPV4_UNKNOWN_IPV6_OK:
+            case IPV4_DISABLED_IPV6_OK:
+            case IPV4_SNAT_IPV6_OK:
+                RouterAddress ra = routerInfo.getTargetAddress("NTCP");
+                if (ra == null)
+                    return new NetStatus(NetStatus.Level.INFO, toStatusString(ctx, status));
+                byte[] ip = ra.getIP();
+                if (ip == null)
+                    return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.net_status_error_unresolved_tcp));
+                // TODO set IPv6 arg based on configuration?
+                if (TransportUtil.isPubliclyRoutable(ip, true))
+                    return new NetStatus(NetStatus.Level.INFO, toStatusString(ctx, status));
+                return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.net_status_error_private_tcp));
+
+            case IPV4_SNAT_IPV6_UNKNOWN:
+            case DIFFERENT:
+                return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.symmetric_nat));
+
+            case REJECT_UNSOLICITED:
+            case IPV4_DISABLED_IPV6_FIREWALLED:
+                if (routerInfo.getTargetAddress("NTCP") != null)
+                    return new NetStatus(NetStatus.Level.WARN, ctx.getString(R.string.net_status_warn_firewalled_inbound_tcp));
+                // fall through...
+            case IPV4_FIREWALLED_IPV6_OK:
+            case IPV4_FIREWALLED_IPV6_UNKNOWN:
+                if (rCtx.netDb().floodfillEnabled())
+                    return new NetStatus(NetStatus.Level.WARN, ctx.getString(R.string.net_status_warn_firewalled_floodfill));
+                //if (rCtx.router().getRouterInfo().getCapabilities().indexOf('O') >= 0)
+                //    return _("WARN-Firewalled and Fast");
+                return new NetStatus(NetStatus.Level.INFO, toStatusString(ctx, status));
+
+            case DISCONNECTED:
+                return new NetStatus(NetStatus.Level.INFO, ctx.getString(R.string.net_status_info_disconnected));
+
+            case HOSED:
+                return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.net_status_error_udp_port));
+
+            case UNKNOWN:
+            case IPV4_UNKNOWN_IPV6_FIREWALLED:
+            case IPV4_DISABLED_IPV6_UNKNOWN:
+            default:
+                ra = routerInfo.getTargetAddress("SSU");
+                if (ra == null && rCtx.router().getUptime() > 5*60*1000) {
+                    if (rCtx.commSystem().countActivePeers() <= 0)
+                        return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.net_status_error_no_active_peers));
+                    else if (rCtx.getProperty(ctx.getString(R.string.PROP_I2NP_NTCP_HOSTNAME)) == null ||
+                            rCtx.getProperty(ctx.getString(R.string.PROP_I2NP_NTCP_PORT)) == null)
+                        return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.net_status_error_udp_disabled_tcp_not_set));
+                    else
+                        return new NetStatus(NetStatus.Level.WARN, ctx.getString(R.string.net_status_warn_firewalled_udp_disabled));
+                }
+                return new NetStatus(NetStatus.Level.INFO, toStatusString(ctx, status));
+        }
+    }
+
+    private static String toStatusString(Context ctx, CommSystemFacade.Status status) {
+        String ipv4Status = "";
+        String ipv6Status = "";
+        switch (status) {
+            case OK:
+                return ctx.getString(android.R.string.ok);
+            case IPV4_OK_IPV6_UNKNOWN:
+                ipv4Status = ctx.getString(android.R.string.ok);
+                ipv6Status = ctx.getString(R.string.testing);
+                break;
+            case IPV4_OK_IPV6_FIREWALLED:
+                ipv4Status = ctx.getString(android.R.string.ok);
+                ipv6Status = ctx.getString(R.string.firewalled);
+                break;
+            case IPV4_UNKNOWN_IPV6_OK:
+                ipv4Status = ctx.getString(R.string.testing);
+                ipv6Status = ctx.getString(android.R.string.ok);
+                break;
+            case IPV4_FIREWALLED_IPV6_OK:
+                ipv4Status = ctx.getString(R.string.firewalled);
+                ipv6Status = ctx.getString(android.R.string.ok);
+                break;
+            case IPV4_DISABLED_IPV6_OK:
+                ipv4Status = ctx.getString(R.string.disabled);
+                ipv6Status = ctx.getString(android.R.string.ok);
+                break;
+            case IPV4_SNAT_IPV6_OK:
+                ipv4Status = ctx.getString(R.string.symmetric_nat);
+                ipv6Status = ctx.getString(android.R.string.ok);
+                break;
+            case DIFFERENT:
+                return ctx.getString(R.string.symmetric_nat);
+            case IPV4_SNAT_IPV6_UNKNOWN:
+                ipv4Status = ctx.getString(R.string.symmetric_nat);
+                ipv6Status = ctx.getString(R.string.testing);
+                break;
+            case IPV4_FIREWALLED_IPV6_UNKNOWN:
+                ipv4Status = ctx.getString(R.string.firewalled);
+                ipv6Status = ctx.getString(R.string.testing);
+                break;
+            case REJECT_UNSOLICITED:
+                return ctx.getString(R.string.firewalled);
+            case IPV4_UNKNOWN_IPV6_FIREWALLED:
+                ipv4Status = ctx.getString(R.string.testing);
+                ipv6Status = ctx.getString(R.string.firewalled);
+                break;
+            case IPV4_DISABLED_IPV6_UNKNOWN:
+                ipv4Status = ctx.getString(R.string.disabled);
+                ipv6Status = ctx.getString(R.string.testing);
+                break;
+            case IPV4_DISABLED_IPV6_FIREWALLED:
+                ipv4Status = ctx.getString(R.string.disabled);
+                ipv6Status = ctx.getString(R.string.firewalled);
+                break;
+            case UNKNOWN:
+                return ctx.getString(R.string.testing);
+            default:
+                return status.toStatusString();
+        }
+
+        return ctx.getString(R.string.net_status_ipv4_ipv6, ipv4Status, ipv6Status);
     }
 }

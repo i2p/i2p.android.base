@@ -11,6 +11,7 @@
     <!-- net.i2p.router.transport.udp.UDPTransport -->
     <string name="PROP_UDP_INTERNAL_PORT" translatable="false">i2np.udp.internalPort</string>
     <!-- net.i2p.router.transport.ntcp.NTCPTransport -->
+    <string name="PROP_I2NP_NTCP_HOSTNAME" translatable="false">i2np.ntcp.hostname</string>
     <string name="PROP_I2NP_NTCP_AUTO_PORT" translatable="false">i2np.ntcp.autoport</string>
     <string name="PROP_I2NP_NTCP_PORT" translatable="false">i2np.ntcp.port</string>
     <!-- net.i2p.router.transport.TransportImpl.getMaxConnections() -->

@@ -37,7 +37,6 @@ import net.i2p.data.DataHelper;
 import net.i2p.data.Destination;
 import net.i2p.data.Hash;
 import net.i2p.data.LeaseSet;
-import net.i2p.router.CommSystemFacade;
 import net.i2p.router.RouterContext;
 import net.i2p.router.TunnelPoolSettings;
 
@@ -376,33 +375,15 @@ public class MainFragment extends I2PFragmentBase {
         if (!Connectivity.isConnected(getActivity())) {
             // Manually set state, RouterService won't be running
             updateState(State.WAITING);
-            vStatusText.setText("No Internet connection is available");
-            vStatus.setVisibility(View.VISIBLE);
+            vNetworkStatus.setText(R.string.no_internet);
             statusView.setVisibility(View.VISIBLE);
         } else if (ctx != null) {
             if (_startPressed) {
                 _startPressed = false;
             }
 
-            String netstatus;
-            CommSystemFacade.Status reach = ctx.commSystem().getStatus();
-            switch (reach) {
-                case DIFFERENT:
-                    netstatus = "Symmetric NAT";
-                    break;
-                case HOSED:
-                    netstatus = "Port Failure";
-                    break;
-                case OK:
-                    netstatus = "OK";
-                    break;
-                case REJECT_UNSOLICITED:
-                    netstatus = "Firewalled";
-                    break;
-                default:
-                    netstatus = "Unknown";
-            }
-            vNetworkStatus.setText("Network: " + netstatus);
+            Util.NetStatus netStatus = Util.getNetStatus(getActivity(), ctx);
+            vNetworkStatus.setText(getString(R.string.settings_label_network) + ": " + netStatus.status);
 
             String uptime = DataHelper.formatDuration(ctx.router().getUptime());
             int active = ctx.commSystem().countActivePeers();
@@ -487,7 +468,6 @@ public class MainFragment extends I2PFragmentBase {
             getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.VISIBLE);
         } else {
             // network but no router context
-            vStatusText.setText("Not running");
             statusView.setVisibility(View.GONE);
             getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.INVISIBLE);
             /**
@@ -574,6 +554,7 @@ public class MainFragment extends I2PFragmentBase {
         }
     }
 
+    private static final String SHARED_CLIENTS = "shared clients";
     /**
      * compare translated nicknames - put "shared clients" first in the sort
      */
@@ -583,7 +564,7 @@ public class MainFragment extends I2PFragmentBase {
 
         public AlphaComparator(RouterContext ctx) {
             _ctx = ctx;
-            xsc = _(ctx, "shared clients");
+            xsc = _(ctx, SHARED_CLIENTS);
         }
 
         public int compare(Destination lhs, Destination rhs) {
@@ -617,7 +598,7 @@ public class MainFragment extends I2PFragmentBase {
     }
 
     private String _(RouterContext ctx, String s) {
-        if ("shared clients".equals(s))
+        if (SHARED_CLIENTS.equals(s))
             return getString(R.string.shared_clients);
         else
             return s;
