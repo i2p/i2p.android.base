@@ -25,12 +25,28 @@
   <string name="button_router_graceful">I2P wird in %s abgeschaltet</string>
   <string name="button_shutdown_now">Lange drücken, um jetzt zu stoppen</string>
   <string name="button_cancel_graceful">Lange drücken, um das Herunterfahren abzubrechen</string>
+  <string name="no_internet">Es ist keine Internetverbindung verfügbar</string>
+  <string name="hidden">Versteckt</string>
+  <string name="testing">Erprobung</string>
+  <string name="firewalled">Mit Firewall</string>
+  <string name="symmetric_nat">Symmetrisches NAT</string>
+  <!--Parameter is a time, e.g. 32s or 2m-->
+  <string name="net_status_error_unresolved_tcp">Nicht aufgelöste TCP-Adresse</string>
+  <string name="net_status_error_private_tcp">Private TCP-Adresse</string>
+  <string name="net_status_warn_firewalled_inbound_tcp">Mit Firewall und aktiviertem eingehendem TCP</string>
+  <string name="net_status_info_disconnected">Getrennt - überprüfen Sie die Netzwerkverbindung</string>
+  <string name="net_status_error_udp_port">UDP-Port in Gebrauch - in Einstellungen ändern und neu starten</string>
+  <string name="net_status_error_udp_disabled_tcp_not_set">UDP deaktiviert und eingehender TCP-Host/Port nicht festgelegt</string>
+  <string name="net_status_warn_firewalled_udp_disabled">Mit Firewall und deaktiviertem UDP</string>
   <string name="shared_clients">Mehrere Klienten</string>
+  <string name="uptime">Betriebszeit</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
   <string name="no_tunnels_running">Es laufen noch keine Tunnel.</string>
+  <string name="download">Herunterladen</string>
+  <string name="upload">Hochladen</string>
   <string name="configure_browser_title">Browser konfigurieren?</string>
   <string name="configure_browser_for_i2p">Möchten Sie einen Browser zum Betrachten von I2P-Seiten einrichten? (Sie können dieses auch später noch im Hilfe-Menü erledigen).</string>
   <string name="first_start_title">Herzlichen Glückwunsch, Sie haben I2P installiert!</string>

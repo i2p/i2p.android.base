@@ -25,12 +25,34 @@
   <string name="button_router_graceful">I2P가 %s 안에 종료됩니다</string>
   <string name="button_shutdown_now">길게 눌러 지금 멈추기</string>
   <string name="button_cancel_graceful">길게 눌러 종료 취소</string>
+  <string name="no_internet">사용 가능한 인터넷 연결이 없습니다</string>
+  <string name="hidden">숨김</string>
+  <string name="testing">테스팅</string>
+  <string name="firewalled">방화벽</string>
+  <string name="symmetric_nat">대칭 NAT</string>
+  <string name="net_status_error_i2cp">클라이언트 매니저 I2CP 오류 - 로그 확인</string>
+  <!--Parameter is a time, e.g. 32s or 2m-->
+  <string name="net_status_error_skew">%s 의 시간 왜곡</string>
+  <string name="net_status_error_unresolved_tcp">확인되지 않는 TCP 주소</string>
+  <string name="net_status_error_private_tcp">개인 TCP 주소</string>
+  <string name="net_status_warn_firewalled_inbound_tcp">인바운드 TCP와 방화벽 사용됨</string>
+  <string name="net_status_warn_firewalled_floodfill">플로드 필과 방화벽 사용됨</string>
+  <string name="net_status_info_disconnected">연결 끊김 - 네트워크 연결 확인</string>
+  <string name="net_status_error_udp_port">UDP 포트 사용중 - 설정에서 변경 후 재시작</string>
+  <string name="net_status_error_no_active_peers">활성 피어 없음 - 네트워크 연결과 방화벽 확인</string>
+  <string name="net_status_error_udp_disabled_tcp_not_set">UDP 비활성화와 인바운드 TCP 호스트/포트 미설정</string>
+  <string name="net_status_warn_firewalled_udp_disabled">방화벽 사용중과 UDP 비활성화 됨</string>
   <string name="shared_clients">공유된 클라이언트</string>
+  <string name="uptime">가동 시간</string>
+  <string name="active_peers">활성 피어들</string>
+  <string name="known_peers">알려진 피어들</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">클</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">서</string>
   <string name="no_tunnels_running">아직 아무 터널도 실행중이 아님.</string>
+  <string name="download">다운로드</string>
+  <string name="upload">업로드</string>
   <string name="configure_browser_title">브라우저를 설정할까요?</string>
   <string name="configure_browser_for_i2p">브라우저가 I2P 사이트들을 볼 수 있게 설정할까요? (추후 도움말 메뉴에서 할 수도 있습니다.)</string>
   <string name="first_start_title">I2P가 설치 된것을 환영합니다!</string>

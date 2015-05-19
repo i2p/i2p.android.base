@@ -19,6 +19,7 @@
   <string name="label_graphs">Grafer</string>
   <string name="button_router_off">Hold inne kappen for å starte I2P</string>
   <string name="button_router_on">I2P kjører (hold inne knappen for å stoppe)</string>
+  <!--Parameter is a time, e.g. 32s or 2m-->
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">K</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->

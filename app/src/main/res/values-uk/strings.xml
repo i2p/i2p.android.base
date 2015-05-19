@@ -25,6 +25,7 @@
   <string name="button_router_graceful">I2P буде зупинено протягом %s</string>
   <string name="button_shutdown_now">Утримуйте, щоб зупинити</string>
   <string name="button_cancel_graceful">Утримуйте, щоб скасувати зупинку</string>
+  <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="shared_clients">Колективні клієнти</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->

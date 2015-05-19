@@ -25,6 +25,7 @@
   <string name="button_router_graceful">I2P será desligado em %s</string>
   <string name="button_shutdown_now">Pressionar longo para parar imediatamente</string>
   <string name="button_cancel_graceful">Pressionar longo para não desligar</string>
+  <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="shared_clients">Cliente partilhados</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>

@@ -19,6 +19,7 @@
   <string name="label_graphs">グラフ</string>
   <string name="button_router_off">長押しして I2P を起動</string>
   <string name="button_router_on">I2P を起動中 (長押しで中止)</string>
+  <!--Parameter is a time, e.g. 32s or 2m-->
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
