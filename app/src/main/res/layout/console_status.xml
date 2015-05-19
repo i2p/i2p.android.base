@@ -8,12 +8,25 @@
         android:layout_marginTop="8dp">
 
         <ImageView
+            android:id="@+id/console_net_status_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:visibility="gone" />
+
+        <ImageView
             android:id="@+id/console_net_status_help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:src="@drawable/ic_info_white_24dp"
             android:visibility="gone" />
 
@@ -21,9 +34,9 @@
             android:id="@+id/console_net_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_toEndOf="@+id/console_net_status_level"
             android:layout_toLeftOf="@+id/console_net_status_help"
+            android:layout_toRightOf="@+id/console_net_status_level"
             android:layout_toStartOf="@+id/console_net_status_help"
             android:textAppearance="?android:attr/textAppearanceLarge"
             tools:text="Network: Firewalled" />

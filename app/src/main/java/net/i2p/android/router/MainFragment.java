@@ -367,6 +367,7 @@ public class MainFragment extends I2PFragmentBase {
             statusView = mScrollView;
         LinearLayout vStatus = (LinearLayout) getActivity().findViewById(R.id.main_status);
         TextView vStatusText = (TextView) getActivity().findViewById(R.id.main_status_text);
+        ImageView vNetStatusLevel = (ImageView) getActivity().findViewById(R.id.console_net_status_level);
         TextView vNetworkStatus = (TextView) getActivity().findViewById(R.id.console_net_status);
         TextView vUptime = (TextView) getActivity().findViewById(R.id.console_uptime);
         TextView vActive = (TextView) getActivity().findViewById(R.id.console_active);
@@ -383,6 +384,19 @@ public class MainFragment extends I2PFragmentBase {
             }
 
             Util.NetStatus netStatus = Util.getNetStatus(getActivity(), ctx);
+            switch (netStatus.level) {
+                case ERROR:
+                    vNetStatusLevel.setImageDrawable(getResources().getDrawable(R.drawable.ic_error_red_24dp));
+                    vNetStatusLevel.setVisibility(View.VISIBLE);
+                    break;
+                case WARN:
+                    vNetStatusLevel.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning_amber_24dp));
+                    vNetStatusLevel.setVisibility(View.VISIBLE);
+                    break;
+                case INFO:
+                default:
+                    vNetStatusLevel.setVisibility(View.GONE);
+            }
             vNetworkStatus.setText(getString(R.string.settings_label_network) + ": " + netStatus.status);
 
             String uptime = DataHelper.formatDuration(ctx.router().getUptime());
@@ -555,6 +569,7 @@ public class MainFragment extends I2PFragmentBase {
     }
 
     private static final String SHARED_CLIENTS = "shared clients";
+
     /**
      * compare translated nicknames - put "shared clients" first in the sort
      */
