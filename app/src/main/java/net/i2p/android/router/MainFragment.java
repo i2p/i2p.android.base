@@ -53,8 +53,22 @@ public class MainFragment extends I2PFragmentBase {
     private Runnable _updater;
     private Runnable _oneShotUpdate;
     private String _savedStatus;
+
+    private ImageView mConsoleLights;
+    private LongToggleButton mOnOffButton;
+    private LinearLayout vGracefulButtons;
     private ScrollView mScrollView;
-    private ImageView _lightImage;
+    private View vStatusContainer;
+    private ImageView vNetStatusLevel;
+    private TextView vNetStatusText;
+    private View vNonNetStatus;
+    private TextView vUptime;
+    private TextView vActive;
+    private TextView vKnown;
+    private TableLayout vTunnels;
+    private LinearLayout vAdvStatus;
+    private TextView vAdvStatusText;
+
     private boolean _keep = true;
     private boolean _startPressed = false;
     private static final String PREF_CONFIGURE_BROWSER = "app.dialog.configureBrowser";
@@ -132,13 +146,24 @@ public class MainFragment extends I2PFragmentBase {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
+        mConsoleLights = (ImageView) v.findViewById(R.id.console_lights);
+        mOnOffButton = (LongToggleButton) v.findViewById(R.id.router_onoff_button);
+        vGracefulButtons = (LinearLayout) getActivity().findViewById(R.id.router_graceful_buttons);
         mScrollView = (ScrollView) v.findViewById(R.id.main_scrollview);
+        vStatusContainer = v.findViewById(R.id.status_container);
+        vNetStatusLevel = (ImageView) v.findViewById(R.id.console_net_status_level);
+        vNetStatusText = (TextView) v.findViewById(R.id.console_net_status_text);
+        vNonNetStatus = v.findViewById(R.id.console_non_net_status_container);
+        vUptime = (TextView) v.findViewById(R.id.console_uptime);
+        vActive = (TextView) v.findViewById(R.id.console_active);
+        vKnown = (TextView) v.findViewById(R.id.console_known);
+        vTunnels = (TableLayout) v.findViewById(R.id.main_tunnels);
+        vAdvStatus = (LinearLayout) v.findViewById(R.id.console_advanced_status);
+        vAdvStatusText = (TextView) v.findViewById(R.id.console_advanced_status_text);
 
-        _lightImage = (ImageView) v.findViewById(R.id.main_lights);
         updateState(lastRouterState);
 
-        LongToggleButton b = (LongToggleButton) v.findViewById(R.id.router_onoff_button);
-        b.setOnLongClickListener(new View.OnLongClickListener() {
+        mOnOffButton.setOnLongClickListener(new View.OnLongClickListener() {
 
             public boolean onLongClick(View view) {
                 boolean on = ((ToggleButton) view).isChecked();
@@ -279,19 +304,17 @@ public class MainFragment extends I2PFragmentBase {
 
     private void updateVisibility() {
         boolean showOnOff = mCallback.shouldShowOnOff();
-        ToggleButton b = (ToggleButton) getActivity().findViewById(R.id.router_onoff_button);
-        b.setVisibility(showOnOff ? View.VISIBLE : View.GONE);
+        mOnOffButton.setVisibility(showOnOff ? View.VISIBLE : View.GONE);
 
         boolean isOn = mCallback.shouldBeOn();
-        b.setChecked(isOn);
+        mOnOffButton.setChecked(isOn);
 
         boolean isGraceful = mCallback.isGracefulShutdownInProgress();
-        LinearLayout gv = (LinearLayout) getActivity().findViewById(R.id.router_graceful_buttons);
-        gv.setVisibility(isGraceful ? View.VISIBLE : View.GONE);
+        vGracefulButtons.setVisibility(isGraceful ? View.VISIBLE : View.GONE);
         if (isOn && isGraceful) {
             RouterContext ctx = getRouterContext();
             if (ctx != null) {
-                TextView tv = (TextView) gv.findViewById(R.id.router_graceful_status);
+                TextView tv = (TextView) vGracefulButtons.findViewById(R.id.router_graceful_status);
                 long ms = ctx.router().getShutdownTimeRemaining();
                 if (ms > 1000) {
                     tv.setText(getActivity().getResources().getString(R.string.button_router_graceful,
@@ -342,40 +365,31 @@ public class MainFragment extends I2PFragmentBase {
                 newState == State.MANUAL_STOPPED ||
                 newState == State.MANUAL_QUITTED ||
                 newState == State.NETWORK_STOPPED) {
-            _lightImage.setImageResource(R.drawable.routerlogo_0);
+            mConsoleLights.setImageResource(R.drawable.routerlogo_0);
         } else if (newState == State.STARTING ||
                 newState == State.GRACEFUL_SHUTDOWN ||
                 newState == State.STOPPING ||
                 newState == State.MANUAL_STOPPING ||
                 newState == State.MANUAL_QUITTING ||
                 newState == State.NETWORK_STOPPING) {
-            _lightImage.setImageResource(R.drawable.routerlogo_1);
+            mConsoleLights.setImageResource(R.drawable.routerlogo_1);
         } else if (newState == State.RUNNING) {
-            _lightImage.setImageResource(R.drawable.routerlogo_2);
+            mConsoleLights.setImageResource(R.drawable.routerlogo_2);
         } else if (newState == State.ACTIVE) {
-            _lightImage.setImageResource(R.drawable.routerlogo_3);
+            mConsoleLights.setImageResource(R.drawable.routerlogo_3);
         } else if (newState == State.WAITING) {
-            _lightImage.setImageResource(R.drawable.routerlogo_4);
+            mConsoleLights.setImageResource(R.drawable.routerlogo_4);
         } // Ignore unknown states.
     }
 
     private void updateStatus() {
         RouterContext ctx = getRouterContext();
-        View statusView = getActivity().findViewById(R.id.status_container);
-        ImageView vNetStatusLevel = (ImageView) getActivity().findViewById(R.id.console_net_status_level);
-        TextView vNetStatusText = (TextView) getActivity().findViewById(R.id.console_net_status_text);
-        View vNonNetStatus = getActivity().findViewById(R.id.console_non_net_status_container);
-        TextView vUptime = (TextView) getActivity().findViewById(R.id.console_uptime);
-        TextView vActive = (TextView) getActivity().findViewById(R.id.console_active);
-        TextView vKnown = (TextView) getActivity().findViewById(R.id.console_known);
-        LinearLayout vAdvStatus = (LinearLayout) getActivity().findViewById(R.id.console_advanced_status);
-        TextView vAdvStatusText = (TextView) getActivity().findViewById(R.id.console_advanced_status_text);
 
         if (!Connectivity.isConnected(getActivity())) {
             // Manually set state, RouterService won't be running
             updateState(State.WAITING);
             vNetStatusText.setText(R.string.no_internet);
-            statusView.setVisibility(View.VISIBLE);
+            vStatusContainer.setVisibility(View.VISIBLE);
             vNonNetStatus.setVisibility(View.GONE);
         } else if (ctx != null) {
             if (_startPressed) {
@@ -443,7 +457,7 @@ public class MainFragment extends I2PFragmentBase {
             } else {
                 vAdvStatus.setVisibility(View.GONE);
             }
-            statusView.setVisibility(View.VISIBLE);
+            vStatusContainer.setVisibility(View.VISIBLE);
             vNonNetStatus.setVisibility(View.VISIBLE);
 
             // Usage stats in bottom toolbar
@@ -482,7 +496,7 @@ public class MainFragment extends I2PFragmentBase {
             getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.VISIBLE);
         } else {
             // network but no router context
-            statusView.setVisibility(View.GONE);
+            vStatusContainer.setVisibility(View.GONE);
             getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.INVISIBLE);
             /**
              * **
@@ -508,8 +522,7 @@ public class MainFragment extends I2PFragmentBase {
      * @param ctx The RouterContext
      */
     private void loadDestinations(RouterContext ctx) {
-        TableLayout dests = (TableLayout) getView().findViewById(R.id.main_tunnels);
-        dests.removeAllViews();
+        vTunnels.removeAllViews();
 
         List<Destination> clients = null;
         if (ctx.clientManager() != null)
@@ -557,14 +570,14 @@ public class MainFragment extends I2PFragmentBase {
                     type.setBackgroundResource(R.drawable.tunnel_yellow);
                 }
 
-                dests.addView(dest);
+                vTunnels.addView(dest);
             }
         } else {
             TableRow empty = new TableRow(getActivity());
             TextView emptyText = new TextView(getActivity());
             emptyText.setText(R.string.no_tunnels_running);
             empty.addView(emptyText);
-            dests.addView(empty);
+            vTunnels.addView(empty);
         }
     }
 

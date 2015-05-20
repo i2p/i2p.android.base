@@ -23,7 +23,7 @@
             android:paddingTop="@dimen/activity_vertical_margin">
 
             <ImageView
-                android:id="@+id/main_lights"
+                android:id="@+id/console_lights"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
