@@ -148,7 +148,7 @@ public class MainFragment extends I2PFragmentBase {
 
         mConsoleLights = (ImageView) v.findViewById(R.id.console_lights);
         mOnOffButton = (LongToggleButton) v.findViewById(R.id.router_onoff_button);
-        vGracefulButtons = (LinearLayout) getActivity().findViewById(R.id.router_graceful_buttons);
+        vGracefulButtons = (LinearLayout) v.findViewById(R.id.router_graceful_buttons);
         mScrollView = (ScrollView) v.findViewById(R.id.main_scrollview);
         vStatusContainer = v.findViewById(R.id.status_container);
         vNetStatusLevel = (ImageView) v.findViewById(R.id.console_net_status_level);
