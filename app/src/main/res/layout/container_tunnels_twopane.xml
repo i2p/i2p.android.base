@@ -45,16 +45,16 @@
             android:id="@+id/detail_fragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="-5px"
-            android:layout_marginTop="-5px"
+            android:layout_marginEnd="-5dp"
+            android:layout_marginLeft="-6dp"
+            android:layout_marginRight="-5dp"
+            android:layout_marginStart="-6dp"
             android:layout_weight="3"
-            android:background="@drawable/shadow"
-            android:paddingBottom="5px"
-            android:paddingEnd="5px"
-            android:paddingLeft="6px"
-            android:paddingRight="5px"
-            android:paddingStart="6px"
-            android:paddingTop="5px" />
+            android:background="@drawable/side_shadow"
+            android:paddingEnd="5dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="5dp"
+            android:paddingStart="6dp" />
 
     </LinearLayout>
 
