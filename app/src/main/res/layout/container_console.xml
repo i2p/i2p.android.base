@@ -7,7 +7,11 @@
     <FrameLayout
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingEnd="@dimen/activity_horizontal_margin_no_padding"
+        android:paddingLeft="@dimen/activity_horizontal_margin_no_padding"
+        android:paddingRight="@dimen/activity_horizontal_margin_no_padding"
+        android:paddingStart="@dimen/activity_horizontal_margin_no_padding" />
 
     <net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/console_action_menu"

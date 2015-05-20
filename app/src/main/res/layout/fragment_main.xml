@@ -9,11 +9,16 @@
         android:id="@+id/main_scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginEnd="-5dp"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginRight="-5dp"
+        android:layout_marginStart="-6dp"
         android:layout_weight="1"
+        android:background="@drawable/side_shadow"
         android:fillViewport="true"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
         android:scrollbarStyle="outsideInset">
 
         <LinearLayout
