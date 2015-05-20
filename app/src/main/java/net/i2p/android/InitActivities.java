@@ -94,15 +94,23 @@ class InitActivities {
             docsDir.mkdir();
             copyResourceToFile(R.raw.ahelper_conflict_header_ht, "docs/ahelper-conflict-header.ht");
             copyResourceToFile(R.raw.ahelper_new_header_ht, "docs/ahelper-new-header.ht");
+            copyResourceToFile(R.raw.ahelper_notfound_header_ht, "docs/ahelper-notfound-header.ht");
             copyResourceToFile(R.raw.auth_header_ht, "docs/auth-header.ht");
+            copyResourceToFile(R.raw.baduri_header_ht, "docs/baduri-header.ht");
             copyResourceToFile(R.raw.denied_header_ht, "docs/denied-header.ht");
             copyResourceToFile(R.raw.dnf_header_ht, "docs/dnf-header.ht");
             copyResourceToFile(R.raw.dnfb_header_ht, "docs/dnfb-header.ht");
             copyResourceToFile(R.raw.dnfh_header_ht, "docs/dnfh-header.ht");
             copyResourceToFile(R.raw.dnfp_header_ht, "docs/dnfp-header.ht");
+            copyResourceToFile(R.raw.enc_header_ht, "docs/enc-header.ht");
+            copyResourceToFile(R.raw.encp_header_ht, "docs/encp-header.ht");
             copyResourceToFile(R.raw.localhost_header_ht, "docs/localhost-header.ht");
+            copyResourceToFile(R.raw.nols_header_ht, "docs/nols-header.ht");
+            copyResourceToFile(R.raw.nolsp_header_ht, "docs/nolsp-header.ht");
             copyResourceToFile(R.raw.noproxy_header_ht, "docs/noproxy-header.ht");
             copyResourceToFile(R.raw.protocol_header_ht, "docs/protocol-header.ht");
+            copyResourceToFile(R.raw.reset_header_ht, "docs/reset-header.ht");
+            copyResourceToFile(R.raw.resetp_header_ht, "docs/resetp-header.ht");
 
             File cssDir = new File(docsDir, "themes/console/light");
             cssDir.mkdirs();

@@ -121,6 +121,14 @@ task copyI2PResources(type: Copy) {
     into('raw') {
         from(i2pbase + '/installer/resources/blocklist.txt') { rename { 'blocklist_txt' } }
         from(i2pbase + '/installer/resources/hosts.txt') { rename { 'hosts_txt' } }
+        from(i2pbase + '/installer/resources/proxy') {
+            include { elem ->
+                elem.name.endsWith('.ht')
+            }
+            rename { String name ->
+                name.toLowerCase(Locale.US).replace('-', '_').replace('.', '_')
+            }
+        }
         from('../LICENSE.txt') { rename { 'license_app_txt' } }
         from('../licenses/LICENSE-Apache2.0.txt') { rename { 'license_apache20_txt' } }
         from(i2pbase + '/licenses') {
@@ -141,9 +149,7 @@ task copyI2PResources(type: Copy) {
                 ]
             }
             rename { String name ->
-                String part = name.substring(8, name.lastIndexOf('.txt'))
-                String.format('license_%s_txt',
-                        part.toLowerCase(Locale.US).replace('.', '_'))
+                name.toLowerCase(Locale.US).replace('-', '_').replace('.', '_')
             }
         }
         from certificatesZip
@@ -175,6 +181,7 @@ task cleanI2PResources(type: Delete) {
     delete fileTree('src/main/res/raw') {
         include 'blocklist_txt'
         include 'hosts_txt'
+        include '*_ht'
         include 'license_*'
         include 'certificates_zip'
     }
