@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<animation-list xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:drawable="@drawable/routerled_ry_1" android:duration="200" />
-    <item android:drawable="@drawable/routerled_ry_2" android:duration="200" />
-    <item android:drawable="@drawable/routerled_ry_3" android:duration="200" />
-    <item android:drawable="@drawable/routerled_ry_4" android:duration="200" />
-    <item android:drawable="@drawable/routerled_ry_5" android:duration="200" />
-</animation-list>
