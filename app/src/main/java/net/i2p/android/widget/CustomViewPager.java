@@ -39,5 +39,11 @@ public class CustomViewPager extends ViewPager {
 
     public void setPagingEnabled(boolean enabled) {
         mEnabled = enabled;
+        updatePagingState();
+    }
+
+    public void updatePagingState() {
+        if (!mEnabled && getCurrentItem() != 0)
+            setCurrentItem(0);
     }
 }

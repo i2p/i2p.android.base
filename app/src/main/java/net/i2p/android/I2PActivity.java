@@ -191,10 +191,7 @@ public class I2PActivity extends I2PActivityBase implements
             supportInvalidateOptionsMenu();
 
             // Update main paging state
-            boolean pagingDisabled = Util.isStopping(state) || Util.isStopped(state);
-            mViewPager.setPagingEnabled(!pagingDisabled);
-            if (pagingDisabled && mViewPager.getCurrentItem() != 0)
-                mViewPager.setCurrentItem(0);
+            mViewPager.setPagingEnabled(!(Util.isStopping(state) || Util.isStopped(state)));
 
             // If I2P was started by another app and is running, return to that app
             if (state == State.RUNNING && mAutoStartFromIntent) {
@@ -207,6 +204,9 @@ public class I2PActivity extends I2PActivityBase implements
     @Override
     public void onResume() {
         super.onResume();
+
+        // Handle edge cases after shutting down router
+        mViewPager.updatePagingState();
 
         LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(RouterService.LOCAL_BROADCAST_REQUEST_STATE));
     }
