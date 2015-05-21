@@ -26,6 +26,7 @@ import net.i2p.android.router.util.Util;
 import net.i2p.android.util.MemoryFragmentPagerAdapter;
 import net.i2p.android.widget.CustomViewPager;
 import net.i2p.android.widget.SlidingTabLayout;
+import net.i2p.router.RouterContext;
 
 import java.io.File;
 
@@ -45,6 +46,8 @@ public class I2PActivity extends I2PActivityBase implements
     SlidingTabLayout mSlidingTabLayout;
 
     private boolean mAutoStartFromIntent = false;
+    private boolean _keep = true;
+    private boolean _startPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,8 @@ public class I2PActivity extends I2PActivityBase implements
         });
         // Give the SlidingTabLayout the ViewPager
         mSlidingTabLayout.setViewPager(mViewPager);
+
+        _keep = true;
     }
 
     public static class ViewPagerAdapter extends MemoryFragmentPagerAdapter {
@@ -179,6 +184,9 @@ public class I2PActivity extends I2PActivityBase implements
         public void onReceive(Context context, Intent intent) {
             State state = intent.getParcelableExtra(RouterService.LOCAL_BROADCAST_EXTRA_STATE);
 
+            if (_startPressed && Util.getRouterContext() != null)
+                _startPressed = false;
+
             // Update menus, FAMs etc.
             supportInvalidateOptionsMenu();
 
@@ -235,11 +243,45 @@ public class I2PActivity extends I2PActivityBase implements
         }
     }
 
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        RouterContext ctx = Util.getRouterContext();
+        // RouterService svc = _routerService; Which is better to use?!
+        _keep = Connectivity.isConnected(this) && (ctx != null || _startPressed);
+        Util.d("*********************************************************");
+        Util.d("Back pressed, Keep? " + _keep);
+        Util.d("*********************************************************");
+    }
+
     @Override
     public void onStop() {
         super.onStop();
 
         LocalBroadcastManager.getInstance(this).unregisterReceiver(onStateChange);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (!_keep) {
+            Thread t = new Thread(new KillMe());
+            t.start();
+        }
+    }
+
+    private class KillMe implements Runnable {
+
+        public void run() {
+            Util.d("*********************************************************");
+            Util.d("KillMe started!");
+            Util.d("*********************************************************");
+            try {
+                Thread.sleep(500); // is 500ms long enough?
+            } catch (InterruptedException ex) {
+            }
+            System.exit(0);
+        }
     }
 
     private boolean canStart() {
@@ -265,6 +307,7 @@ public class I2PActivity extends I2PActivityBase implements
     }
 
     public void onStartRouterClicked() {
+        _startPressed = true;
         RouterService svc = _routerService;
         if (svc != null && _isBound) {
             setPref(PREF_AUTO_START, true);

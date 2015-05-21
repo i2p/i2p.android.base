@@ -68,8 +68,6 @@ public class MainFragment extends I2PFragmentBase {
     private LinearLayout vAdvStatus;
     private TextView vAdvStatusText;
 
-    private boolean _keep = true;
-    private boolean _startPressed = false;
     private static final String PREF_CONFIGURE_BROWSER = "app.dialog.configureBrowser";
     private static final String PREF_FIRST_START = "app.router.firstStart";
     private static final String PREF_SHOW_STATS = "i2pandroid.main.showStats";
@@ -133,8 +131,6 @@ public class MainFragment extends I2PFragmentBase {
             }
         }
 
-        _keep = true;
-
         _handler = new Handler();
         _updater = new Updater();
         _oneShotUpdate = new OneShotUpdate();
@@ -167,7 +163,6 @@ public class MainFragment extends I2PFragmentBase {
             public boolean onLongClick(View view) {
                 boolean on = ((ToggleButton) view).isChecked();
                 if (on) {
-                    _startPressed = true;
                     mCallback.onStartRouterClicked();
                     updateOneShot();
                     checkFirstStart();
@@ -325,39 +320,6 @@ public class MainFragment extends I2PFragmentBase {
         }
     }
 
-    public boolean onBackPressed() {
-        RouterContext ctx = getRouterContext();
-        // RouterService svc = _routerService; Which is better to use?!
-        _keep = Connectivity.isConnected(getActivity()) && (ctx != null || _startPressed);
-        Util.d("*********************************************************");
-        Util.d("Back pressed, Keep? " + _keep);
-        Util.d("*********************************************************");
-        return false;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (!_keep) {
-            Thread t = new Thread(new KillMe());
-            t.start();
-        }
-    }
-
-    private class KillMe implements Runnable {
-
-        public void run() {
-            Util.d("*********************************************************");
-            Util.d("KillMe started!");
-            Util.d("*********************************************************");
-            try {
-                Thread.sleep(500); // is 500ms long enough?
-            } catch (InterruptedException ex) {
-            }
-            System.exit(0);
-        }
-    }
-
     public void updateState(State newState) {
         if (newState == State.INIT ||
                 newState == State.STOPPED ||
@@ -391,10 +353,6 @@ public class MainFragment extends I2PFragmentBase {
             vStatusContainer.setVisibility(View.VISIBLE);
             vNonNetStatus.setVisibility(View.GONE);
         } else if (ctx != null) {
-            if (_startPressed) {
-                _startPressed = false;
-            }
-
             Util.NetStatus netStatus = Util.getNetStatus(getActivity(), ctx);
             switch (netStatus.level) {
                 case ERROR:
