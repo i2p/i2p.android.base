@@ -277,8 +277,9 @@ public class RouterService extends Service {
 
         String text =
                 getResources().getString(R.string.notification_status_text,
-                        fmt.format(inBW), fmt.format(outBW)); 
+                        Util.formatSize(inBW), Util.formatSize(outBW));
 
+        // TODO change string resource after 0.9.20 to use Util.formatSize()
         String bigText =
                 getResources().getString(R.string.notification_status_bw,
                         fmt.format(inBW), fmt.format(outBW)) + '\n'

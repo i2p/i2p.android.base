@@ -41,7 +41,6 @@ import net.i2p.router.RouterContext;
 import net.i2p.router.TunnelPoolSettings;
 
 import java.text.Collator;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -462,36 +461,15 @@ public class MainFragment extends I2PFragmentBase {
 
             // Usage stats in bottom toolbar
 
-            double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
-            double outBW = ctx.bandwidthLimiter().getSendBps() / 1024;
-
-            // control total width
-            DecimalFormat fmt;
-            if (inBW >= 1000 || outBW >= 1000) {
-                fmt = new DecimalFormat("#0");
-            } else if (inBW >= 100 || outBW >= 100) {
-                fmt = new DecimalFormat("#0.0");
-            } else {
-                fmt = new DecimalFormat("#0.00");
-            }
-
-            double kBytesIn = ctx.bandwidthLimiter().getTotalAllocatedInboundBytes() / 1024;
-            double kBytesOut = ctx.bandwidthLimiter().getTotalAllocatedOutboundBytes() / 1024;
-
-            // control total width
-            DecimalFormat kBfmt;
-            if (kBytesIn >= 1000 || kBytesOut >= 1000) {
-                kBfmt = new DecimalFormat("#0");
-            } else if (kBytesIn >= 100 || kBytesOut >= 100) {
-                kBfmt = new DecimalFormat("#0.0");
-            } else {
-                kBfmt = new DecimalFormat("#0.00");
-            }
+            double inBw = ctx.bandwidthLimiter().getReceiveBps();
+            double outBw = ctx.bandwidthLimiter().getSendBps();
+            double inData = ctx.bandwidthLimiter().getTotalAllocatedInboundBytes();
+            double outData = ctx.bandwidthLimiter().getTotalAllocatedOutboundBytes();
 
             ((TextView) getActivity().findViewById(R.id.console_download_stats)).setText(
-                    fmt.format(inBW) + "KBps / " + kBfmt.format(kBytesIn) + "KB");
+                    Util.formatSize(inBw) + "Bps / " + Util.formatSize(inData) + "B");
             ((TextView) getActivity().findViewById(R.id.console_upload_stats)).setText(
-                    fmt.format(outBW) + "KBps / " + kBfmt.format(kBytesOut) + "KB");
+                    Util.formatSize(outBw) + "Bps / " + Util.formatSize(outData) + "B");
 
             getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.VISIBLE);
         } else {

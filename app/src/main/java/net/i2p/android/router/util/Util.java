@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -533,5 +534,44 @@ public abstract class Util implements I2PConstants {
         }
 
         return ctx.getString(R.string.net_status_ipv4_ipv6, ipv4Status, ipv6Status);
+    }
+
+    public static String formatSize(double size) {
+        int scale;
+        for (scale = 0; size >= 1024.0D; size /= 1024.0D) {
+            ++scale;
+        }
+
+        // control total width
+        DecimalFormat fmt;
+        if (size >= 1000) {
+            fmt = new DecimalFormat("#0");
+        } else if (size >= 100) {
+            fmt = new DecimalFormat("#0.0");
+        } else {
+            fmt = new DecimalFormat("#0.00");
+        }
+
+        String str = fmt.format(size);
+        switch (scale) {
+            case 1:
+                return str + "K";
+            case 2:
+                return str + "M";
+            case 3:
+                return str + "G";
+            case 4:
+                return str + "T";
+            case 5:
+                return str + "P";
+            case 6:
+                return str + "E";
+            case 7:
+                return str + "Z";
+            case 8:
+                return str + "Y";
+            default:
+                return str + "";
+        }
     }
 }
