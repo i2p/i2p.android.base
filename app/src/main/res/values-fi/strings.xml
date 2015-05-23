@@ -24,11 +24,22 @@
   <string name="button_router_graceful">I2P sulkeutuu %s</string>
   <string name="button_shutdown_now">Pitkä painallus nyt pysäyttämiseksi</string>
   <string name="button_cancel_graceful">Pitkä painallus sulkemisen perumiseksi</string>
+  <string name="hidden">Piilotettu</string>
+  <string name="testing">Testataan</string>
+  <string name="firewalled">Palomuuritettu</string>
+  <!--Parameter is a time, e.g. 32s or 2m-->
+  <string name="net_status_error_unresolved_tcp">Ratkaisematon TCP-osoite</string>
+  <string name="net_status_error_private_tcp">Ykstyinen TCP-osoite</string>
+  <string name="net_status_info_disconnected">Yhteys poikki - tarkista verkkoyhteys</string>
+  <string name="net_status_error_udp_port">UDP-portti käytössä - vaihda asetukset ja käynnistä uudelleen</string>
+  <string name="net_status_error_udp_disabled_tcp_not_set">UDP poissa käytöstä ja tuleva TCP-verkkotietokone/-portti ei ole asetettu</string>
   <string name="shared_clients">Jaetut asiakkaat</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">A</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">P</string>
+  <string name="no_tunnels_running">Yhtään tunnelia ei ole vielä käynnissä.</string>
+  <string name="download">Lataa</string>
   <string name="configure_browser_title">Asetetaanko selain?</string>
   <string name="configure_browser_for_i2p">Haluaisitko asettaa selaimesi katsomaan I2P-sivustoja? (Voit myös tehdä tämän myöhemmin opaste-valikosta).</string>
   <string name="first_start_title">Onnittelut I2P:n asentamisesta!</string>
@@ -52,6 +63,7 @@
   <string name="news_last_checked">Uutiset viimeksi tarkistettu %s sitten</string>
   <string name="news_updated">Uutiset päivitetty</string>
   <string name="router_not_running">Reititin ei ole käynnissä.</string>
+  <string name="router_shutting_down">Reititin sulkeutuu.</string>
   <string name="statistics">Tilastot</string>
   <string name="routers">Reitittimet</string>
   <string name="countries">Maat</string>
@@ -62,6 +74,7 @@
   <string name="notification_status_starting">I2P on käynnistymässä</string>
   <string name="notification_status_restarting">I2P on käynnistymässä uudelleen</string>
   <string name="notification_status_waiting">I2P odottaa verkkoyhteyttä</string>
+  <string name="notification_status_starting_after_waiting">Verkko kytketty, I2P käynnistyy</string>
   <string name="notification_status_running">I2P on käynnissä</string>
   <string name="notification_status_client_ready">Asiakastunnelit ovat valmiina</string>
   <string name="notification_status_client_down">Asiakastunnelit eivät ole valmiina</string>
@@ -74,6 +87,7 @@
   <string name="notification_status_client">Asiakastunnelit: %1$d/%2$d</string>
   <string name="menu_settings">Asetukset</string>
   <string name="settings_enable">Ota käyttöön</string>
+  <string name="settings_desc_subscriptions">Tilausverkko-osoitteet</string>
   <string name="settings_label_bandwidth_net">Kaistanleveys ja verkko</string>
   <string name="settings_label_bandwidth">Kaistanleveys</string>
   <string name="settings_label_bw_inbound">Tulonopeus</string>
@@ -151,6 +165,7 @@
   <string name="shared_client">Jadttu asiakas</string>
   <string name="listen_port">Kuuntele porttia</string>
   <string name="irc">IRC</string>
+  <string name="use_ssl">Käytä SSL:ää</string>
   <string name="tunnel_parameters">Tunneliparametrit</string>
   <string name="profile">Profiili</string>
   <string name="whitelist">Valkoinen lista</string>
@@ -158,6 +173,8 @@
   <string name="connections_per_minute">Yhteyksiä minuutissa</string>
   <string name="connections_per_hour">Yhteyksiä tunnissa</string>
   <string name="connections_per_day">Yhteyksiä päivässä</string>
+  <string name="unlimited">Rajoittamaton</string>
+  <string name="num_minutes">%s minuuttia</string>
   <string name="http_client">HTTP-asiakas</string>
   <string name="jump_url_list">Hyppää verkko-osoiteluetteloon</string>
   <string name="username">Käyttäjätunnus</string>
@@ -165,6 +182,16 @@
   <string name="other">Muut</string>
   <string name="signature_type">Allekirjoitustyyppi</string>
   <string name="all">Kaikki</string>
+  <string name="no_messages">Ei viestejä</string>
+  <string name="no_error_messages">Ei virheilmoituksia</string>
+  <plurals name="log_error_messages">
+    <item quantity="one">Yksi virheilmoitus</item>
+    <item quantity="other">%d virheilmoitusta, uusin ensin</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="one">Yksi viesti</item>
+    <item quantity="other">%d viestiä, uusin ensin</item>
+  </plurals>
   <string name="copy_logs">Kopioi lokitiedostot</string>
   <string name="i2p_android_error_logs">I2P Android-virhelokitiedostot</string>
   <string name="i2p_android_logs">I2P Android-lokitiedostot</string>
