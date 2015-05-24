@@ -31,7 +31,16 @@ class DomainServerSocket extends ServerSocket {
      * @throws IOException
      */
     public DomainServerSocket(String name, DomainSocketFactory domainSocketFactory) throws IOException {
-        mLocalServerSocket = new LocalServerSocket(name);
+        this(new LocalServerSocket(name), domainSocketFactory);
+    }
+
+    /**
+     * Used for testing.
+     *
+     * @throws IOException
+     */
+    DomainServerSocket(LocalServerSocket localServerSocket, DomainSocketFactory domainSocketFactory) throws IOException {
+        mLocalServerSocket = localServerSocket;
         mDomainSocketFactory = domainSocketFactory;
     }
 

@@ -27,6 +27,9 @@ android {
 dependencies {
     compile project(path: ':routerjars', configuration: 'client')
     compile 'com.android.support:support-v4:22.1.1'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.9.5'
 }
 
 dependencyVerification {
