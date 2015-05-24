@@ -42,6 +42,7 @@ build
 ^app/src/main/res/drawable/i2plogo.png
 ^app/src/main/res/raw/blocklist_txt
 ^app/src/main/res/raw/hosts_txt
+^app/src/main/res/raw/.*_ht
 ^app/src/main/res/raw/license_
 ^app/src/main/res/raw/certificates_zip
 ^app/src/main/assets/themes/console/images
