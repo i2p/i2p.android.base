@@ -31,9 +31,14 @@ public class I2PAndroidHelper {
 
     private static final String LOG_TAG = "I2PClientLib";
 
+    public interface Callback {
+        void onI2PAndroidBound();
+    }
+
     private final Context mContext;
     private boolean mTriedBindState;
     private IRouterState mStateService;
+    private Callback mCallback;
 
     public I2PAndroidHelper(Context context) {
         mContext = context;
@@ -42,6 +47,21 @@ public class I2PAndroidHelper {
     /**
      * Try to bind to I2P Android. Call this method from
      * {@link android.app.Activity#onStart()}.
+     *
+     * @param callback will be called once the helper has bound to the I2P app.
+     * @since 0.7
+     */
+    public void bind(Callback callback) {
+        mCallback = callback;
+        bind();
+    }
+
+    /**
+     * Try to bind to I2P Android. Call this method from
+     * {@link android.app.Activity#onStart()}.
+     * <p/>
+     * If you need to be notified as soon as the helper has been bound to the
+     * I2P app, use {@link I2PAndroidHelper#bind(Callback)} instead.
      */
     public void bind() {
         Log.i(LOG_TAG, "Binding to I2P Android");
@@ -115,17 +135,22 @@ public class I2PAndroidHelper {
         if (mTriedBindState)
             mContext.unbindService(mStateConnection);
         mTriedBindState = false;
+        mCallback = null;
     }
 
     private final ServiceConnection mStateConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
             mStateService = IRouterState.Stub.asInterface(service);
+            Log.i(LOG_TAG, "Bound to I2P Android");
+            if (mCallback != null)
+                mCallback.onI2PAndroidBound();
         }
 
         public void onServiceDisconnected(ComponentName className) {
             // This is called when the connection with the service has been
             // unexpectedly disconnected -- that is, its process crashed.
+            Log.w(LOG_TAG, "I2P Android disconnected unexpectedly");
             mStateService = null;
         }
     };
@@ -178,8 +203,13 @@ public class I2PAndroidHelper {
     }
 
     /**
-     * Check if I2P Android is running. If {@link net.i2p.android.ui.I2PAndroidHelper#bind()}
+     * Check if I2P Android is running. If {@link I2PAndroidHelper#bind()}
      * has not been called previously, this will always return false.
+     * <p/>
+     * Do not call this from {@link Activity#onResume()}. The Android lifecycle
+     * calls that method before binding the helper to the I2P app, so this will
+     * always return false. Use {@link I2PAndroidHelper#bind(Callback)} instead
+     * and call this method inside the callback.
      *
      * @return true if I2P Android is running, false otherwise.
      */
@@ -190,7 +220,7 @@ public class I2PAndroidHelper {
         try {
             return mStateService.isStarted();
         } catch (RemoteException e) {
-            // TODO: log
+            Log.w(LOG_TAG, "Failed to communicate with I2P Android", e);
             return false;
         }
     }
