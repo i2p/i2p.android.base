@@ -67,7 +67,6 @@ public class RouterService extends Service {
     private final Object _stateLock = new Object();
     private Handler _handler;
     private Runnable _updater;
-    private boolean mStartCalled;
     private static final String SHARED_PREFS = "net.i2p.android.router";
     private static final String LAST_STATE = "service.lastState";
     private static final String EXTRA_RESTART = "restart";
@@ -83,7 +82,6 @@ public class RouterService extends Service {
 
     @Override
     public void onCreate() {
-        mStartCalled = false;
         State lastState = getSavedState();
         setState(State.INIT);
         Util.d(this + " onCreate called"
@@ -145,7 +143,6 @@ public class RouterService extends Service {
                 + " Flags is: " + flags
                 + " ID is: " + startId
                 + " Current state is: " + _state);
-        mStartCalled = true;
         boolean restart = intent != null && intent.getBooleanExtra(EXTRA_RESTART, false);
         if(restart) {
             Util.d(this + " RESTARTING");
@@ -350,7 +347,10 @@ public class RouterService extends Service {
         }
 
         public boolean isStarted() throws RemoteException {
-            return mStartCalled;
+            return _state != State.INIT &&
+                    _state != State.STOPPED &&
+                    _state != State.MANUAL_STOPPED &&
+                    _state != State.MANUAL_QUITTED;
         }
 
         public State getState() throws RemoteException {
