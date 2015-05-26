@@ -115,7 +115,7 @@ public class I2PAndroidHelper {
     }
 
     private Intent getI2PAndroidIntent() {
-        Intent intent = new Intent(IRouterState.class.getName());
+        Intent intent = new Intent("net.i2p.android.router.service.IRouterState");
         if (isAppInstalled(URI_I2P_ANDROID))
             intent.setClassName(URI_I2P_ANDROID, ROUTER_SERVICE_CLASS);
         else if (isAppInstalled(URI_I2P_ANDROID_DONATE))
