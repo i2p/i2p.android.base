@@ -15,6 +15,7 @@ import android.util.Log;
 
 import net.i2p.android.lib.client.R;
 import net.i2p.android.router.service.IRouterState;
+import net.i2p.android.router.service.State;
 
 /**
  * @author str4d
@@ -245,5 +246,31 @@ public class I2PAndroidHelper {
                     }
                 });
         builder.show();
+    }
+
+    /**
+     * Check if tunnels are active. This is the best indicator that the default
+     * tunnels (such as the HTTP proxy tunnel at localhost:4444) are ready to
+     * be used. If {@link I2PAndroidHelper#bind()} has not been called
+     * previously, this will always return false.
+     * <p/>
+     * Do not call this from {@link Activity#onResume()}. The Android lifecycle
+     * calls that method before binding the helper to the I2P app, so this will
+     * always return false. Use {@link I2PAndroidHelper#bind(Callback)} instead
+     * and call this method inside the callback.
+     *
+     * @return true if tunnels are active, false otherwise.
+     * @since 0.7
+     */
+    public boolean areTunnelsActive() {
+        if (mStateService == null)
+            return false;
+
+        try {
+            return mStateService.getState() == State.ACTIVE;
+        } catch (RemoteException e) {
+            Log.w(LOG_TAG, "Failed to communicate with I2P Android", e);
+            return false;
+        }
     }
 }
