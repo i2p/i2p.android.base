@@ -627,6 +627,7 @@ public class RouterService extends Service {
         _statusBar.remove();
 
         LocalBroadcastManager.getInstance(this).unregisterReceiver(onStateRequested);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(onLocaleChanged);
 
         I2PReceiver rcvr = _receiver;
         if(rcvr != null) {
