@@ -8,7 +8,7 @@
     <bool name="DEFAULT_PERSISTENT_KEY">false</bool>
 
     <!-- General advanced -->
-    <integer name="DEFAULT_TUNNEL_LENGTH">3</integer>
+    <integer name="DEFAULT_TUNNEL_LENGTH">2</integer>
     <integer name="DEFAULT_TUNNEL_VARIANCE">0</integer>
     <integer name="DEFAULT_TUNNEL_QUANTITY">2</integer>
     <integer name="DEFAULT_TUNNEL_BACKUP_QUANTITY">0</integer>
