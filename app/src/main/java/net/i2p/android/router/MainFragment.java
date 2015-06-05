@@ -328,7 +328,7 @@ public class MainFragment extends I2PFragmentBase {
                 newState == State.NETWORK_STOPPED) {
             mConsoleLights.setImageResource(R.drawable.routerlogo_0);
         } else if (newState == State.STARTING ||
-                newState == State.GRACEFUL_SHUTDOWN ||
+                //newState == State.GRACEFUL_SHUTDOWN || // Don't change lights for graceful
                 newState == State.STOPPING ||
                 newState == State.MANUAL_STOPPING ||
                 newState == State.MANUAL_QUITTING ||
