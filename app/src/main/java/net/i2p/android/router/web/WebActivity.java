@@ -26,7 +26,7 @@ public class WebActivity extends I2PActivityBase {
 
     @Override
     public void onBackPressed() {
-        WebFragment f = (WebFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment);
+        WebFragment f = (WebFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
         if (!f.onBackPressed())
             super.onBackPressed();
     }
