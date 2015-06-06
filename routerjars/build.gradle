@@ -23,6 +23,7 @@ artifacts {
     client file: file('libs/streaming.jar'), builtBy: buildClient
 
     'default' file: file('libs/router.jar'), builtBy: buildRouter
+    'default' file: file('libs/newsxml.jar'), builtBy: buildRouter
     'default' file: file('libs/i2ptunnel.jar'), builtBy: buildRouter
     'default' file: file('libs/i2ptunnel-ui.jar'), builtBy: buildRouter
     'default' file: file('libs/addressbook.jar'), builtBy: buildRouter
