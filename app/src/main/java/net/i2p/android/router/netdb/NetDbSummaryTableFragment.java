@@ -51,7 +51,7 @@ public class NetDbSummaryTableFragment extends Fragment {
 
             switch (mCategory) {
             case 1:
-            case 2:
+            //case 2:
                 Collections.sort(objects);
                 break;
             default:
@@ -83,9 +83,9 @@ public class NetDbSummaryTableFragment extends Fragment {
 
         switch (mCategory) {
         case 1:
-            tl1.setText(R.string.country);
-            break;
-        case 2:
+        //    tl1.setText(R.string.country);
+        //    break;
+        //case 2:
             tl1.setText(R.string.transport);
             break;
         default:

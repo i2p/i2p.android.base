@@ -60,7 +60,7 @@ public class NetDbStatsLoader extends AsyncTaskLoader<List<ObjectCounter<String>
         }
 
         ret.add(versions);
-        ret.add(countries);
+        //ret.add(countries);
         ret.add(transports);
 
         return ret;

@@ -113,15 +113,15 @@ public class NetDbSummaryPagerFragment extends I2PFragmentBase implements
             if (mData == null)
                 return 0;
             else
-                return 3;
+                return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int i) {
             switch (i) {
             case 1:
-                return getString(R.string.countries);
-            case 2:
+            //    return getString(R.string.countries);
+            //case 2:
                 return getString(R.string.settings_label_transports);
             default:
                 return getString(R.string.versions);
