@@ -128,6 +128,24 @@ task copyI2PResources(type: Copy) {
             rename { String name ->
                 name.toLowerCase(Locale.US).replace('-', '_').replace('.', '_')
             }
+            filter { String line ->
+                // Remove links to routerconsole
+                def m = line =~ /127.0.0.1:7657/
+                if (m.getCount()) {
+                    // Links around content
+                    line = line.replaceAll(/<a href="http:\/\/127.0.0.1:7657[^>]*>(.+?)<\/a>/) { fullmatch, content ->
+                        content
+                    }
+                    // Links in translation substitutions
+                    line = line.replaceAll(/"<a href=\\"http:\/\/127.0.0.1:7657[^>]*>", "<\/a>"/, '"", ""')
+                }
+                // Remove "Configuration - Help - Addressbook" heading
+                def n = line =~ /Configuration.+Help.+Addressbook/
+                if (n.getCount())
+                    ""
+                else
+                    line
+            }
         }
         from('../LICENSE.txt') { rename { 'license_app_txt' } }
         from('../licenses/LICENSE-Apache2.0.txt') { rename { 'license_apache20_txt' } }
