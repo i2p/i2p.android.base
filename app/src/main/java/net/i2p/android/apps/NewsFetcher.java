@@ -50,16 +50,16 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private static final String TEMP_NEWS_FILE = "news.xml.temp";
 
     /**
-     *  Changed in 0.9.11 to the b32 for psi.i2p, run by psi.
-     *  We may be able to change it to psi.i2p in a future release after
-     *  the hostname propagates.
+     * Changed in 0.9.11 to the b32 for psi.i2p, run by psi.
+     * We may be able to change it to psi.i2p in a future release after
+     * the hostname propagates.
      *
-     *  @since 0.7.14 not configurable
+     * @since 0.7.14 not configurable
      */
     private static final String BACKUP_NEWS_URL = "http://avviiexdngd32ccoy4kuckvc3mkf53ycvzbz6vz75vzhv4tbpk5a.b32.i2p/news.xml";
     private static final String PROP_LAST_CHECKED = "router.newsLastChecked";
     private static final String PROP_REFRESH_FREQUENCY = "router.newsRefreshFrequency";
-    private static final String DEFAULT_REFRESH_FREQUENCY = 24*60*60*1000 + "";
+    private static final String DEFAULT_REFRESH_FREQUENCY = 24 * 60 * 60 * 1000 + "";
     private static final String PROP_NEWS_URL = "router.newsURL";
     private static final String DEFAULT_NEWS_URL = "http://echelon.i2p/i2p/news.xml";
 
@@ -73,7 +73,8 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             String last = ctx.getProperty(PROP_LAST_CHECKED);
             if (last != null)
                 _lastFetch = Long.parseLong(last);
-        } catch (NumberFormatException nfe) {}
+        } catch (NumberFormatException nfe) {
+        }
         File newsDir = new File(_context.getRouterDir(), NEWS_DIR);
         // isn't already there on android
         newsDir.mkdir();
@@ -98,22 +99,24 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     }
 
     public String status() {
-         StringBuilder buf = new StringBuilder(128);
-         long now = _context.clock().now();
-         if (_lastUpdated > 0) {
-             buf.append(mCtx.getString(R.string.news_last_updated,
-                                           DataHelper.formatDuration2(now - _lastUpdated)))
-                .append('\n');
-         }
-         if (_lastFetch > _lastUpdated) {
-             buf.append(mCtx.getString(R.string.news_last_checked,
-                                           DataHelper.formatDuration2(now - _lastFetch)));
-         }
-         return buf.toString();
+        StringBuilder buf = new StringBuilder(128);
+        long now = _context.clock().now();
+        if (_lastUpdated > 0) {
+            buf.append(mCtx.getString(R.string.news_last_updated,
+                    DataHelper.formatDuration2(now - _lastUpdated)))
+                    .append('\n');
+        }
+        if (_lastFetch > _lastUpdated) {
+            buf.append(mCtx.getString(R.string.news_last_checked,
+                    DataHelper.formatDuration2(now - _lastFetch)));
+        }
+        return buf.toString();
     }
 
-    private static final long INITIAL_DELAY = 5*60*1000;
-    private static final long RUN_DELAY = 30*60*1000;
+    // Runnable
+
+    private static final long INITIAL_DELAY = 5 * 60 * 1000;
+    private static final long RUN_DELAY = 30 * 60 * 1000;
 
     public void run() {
         _thread = Thread.currentThread();
@@ -139,7 +142,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             return true;
         updateLastFetched();
         String freq = _context.getProperty(PROP_REFRESH_FREQUENCY,
-                                           DEFAULT_REFRESH_FREQUENCY);
+                DEFAULT_REFRESH_FREQUENCY);
         try {
             long ms = Long.parseLong(freq);
             if (ms <= 0)
@@ -160,8 +163,9 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     }
 
     /**
-     *  Call this when changing news URLs to force an update next time the timer fires.
-     *  @since 0.8.7
+     * Call this when changing news URLs to force an update next time the timer fires.
+     *
+     * @since 0.8.7
      */
     void invalidateNews() {
         _lastModified = null;
@@ -195,15 +199,15 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
         }
     }
 
-    public void attemptFailed(String url, long bytesTransferred, long bytesRemaining, int currentAttempt, int numRetries, Exception cause) {
-        // ignore
-    }
+    // EepGet.StatusListener
+
     public void bytesTransferred(long alreadyTransferred, int currentWrite, long bytesTransferred, long bytesRemaining, String url) {
         // ignore
     }
+
     public void transferComplete(long alreadyTransferred, long bytesTransferred, long bytesRemaining, String url, String outputFile, boolean notModified) {
         if (_log.shouldLog(Log.INFO))
-            _log.info("News fetched from " + url + " with " + (alreadyTransferred+bytesTransferred));
+            _log.info("News fetched from " + url + " with " + (alreadyTransferred + bytesTransferred));
 
         long now = _context.clock().now();
         if (_tempFile.exists()) {
@@ -229,13 +233,21 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
         _context.router().saveConfig();
     }
 
+    public void attemptFailed(String url, long bytesTransferred, long bytesRemaining, int currentAttempt, int numRetries, Exception cause) {
+        // ignore
+    }
+
     public void transferFailed(String url, long bytesTransferred, long bytesRemaining, int currentAttempt) {
         if (_log.shouldLog(Log.WARN))
             _log.warn("Failed to fetch the news from " + url);
         _tempFile.delete();
     }
-    public void headerReceived(String url, int attemptNum, String key, String val) {}
-    public void attempting(String url) {}
+
+    public void headerReceived(String url, int attemptNum, String key, String val) {
+    }
+
+    public void attempting(String url) {
+    }
 
     private class Shutdown implements Runnable {
         public void run() {
