@@ -50,7 +50,6 @@
   - Also look at connection type: Connectivity.isConnectionFast()
 - Expose log level overrides
 - Improve graphs
-  - Show time on bottom axis
   - Show fixed x range, not only available data
   - Think about pan/zoom
   - How to persist data across restarts?

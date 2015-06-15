@@ -1,8 +1,5 @@
 package net.i2p.android.router.service;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYSeries;
 
@@ -10,6 +7,9 @@ import net.i2p.I2PAppContext;
 import net.i2p.stat.Rate;
 import net.i2p.stat.RateStat;
 import net.i2p.stat.RateSummaryListener;
+
+import java.util.Observable;
+import java.util.Observer;
 
 public class SummaryListener implements RateSummaryListener {
     public static final int HISTORY_SIZE = 30;
@@ -45,8 +45,7 @@ public class SummaryListener implements RateSummaryListener {
 
     public void add(double totalValue, long eventCount, double totalEventTime,
             long period) {
-        long now = now();
-        long when = now / 1000;
+        long when = now();
         double val = eventCount > 0 ? (totalValue / eventCount) : 0d;
 
         if (_series.size() > HISTORY_SIZE)
@@ -70,7 +69,6 @@ public class SummaryListener implements RateSummaryListener {
         long period = _rate.getPeriod();
         _name = rs.getName() + "." + period;
         _series = new SimpleXYSeries(_name);
-        _series.useImplicitXVals();
         _rate.setSummaryListener(this);
     }
 
