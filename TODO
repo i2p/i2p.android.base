@@ -6,12 +6,21 @@
 - Browser
     <zzzccc> Bug report: i2p browser treats 302 as an error
     <zzzccc> Bug 2: rotate screen in i2p browser seems to go back one page
+- Console text change
+    <zzz> "download" and "upload" at the bottom of the status is a little misleading..
+    <zzz> maybe 'downstream bandwidth' or 'inbound usage' ?
+- Fix visibility of advanced tunnel parameter changes
+    <zzz> when I change an advanced tunnel param e.g. length or variance, the change isn't displayed, I have to go back and forward again to see the change
+- Verify default tunnel quantities
+    <zzz> backup quantity default is 2? that looks wrong
 
 # New UI fixes
 
 - Addressbook action items are in tunnel overflow menu after moving from console to tunnels
 - Material design:
   - Style for addressbook headers
+  - Change console FAM icon when possible
+    <zzz> on the bottom right, the + and x icons might be better as a double-up arrow and double-down arrow?
 
 # Short-term
 
