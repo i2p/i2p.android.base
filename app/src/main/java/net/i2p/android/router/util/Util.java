@@ -49,7 +49,8 @@ public abstract class Util implements I2PConstants {
             //System.err.println("APK Path" + ": " + _apkPath);
             if (pi.versionName != null)
                 return pi.versionName;
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         return "??";
     }
 
@@ -60,7 +61,7 @@ public abstract class Util implements I2PConstants {
      */
     public static RouterContext getRouterContext() {
         List<RouterContext> contexts = RouterContext.listContexts();
-        if ( !((contexts == null) || (contexts.isEmpty())) ) {
+        if (!((contexts == null) || (contexts.isEmpty()))) {
             return contexts.get(0);
         }
         return null;
@@ -73,8 +74,8 @@ public abstract class Util implements I2PConstants {
     }
 
     /**
-     *  Log to the context logger if available (which goes to the console buffer
-     *  and to logcat), else just to logcat.
+     * Log to the context logger if available (which goes to the console buffer
+     * and to logcat), else just to logcat.
      */
     public static void e(String m, Throwable t) {
         I2PAppContext ctx = I2PAppContext.getCurrentContext();
@@ -119,6 +120,7 @@ public abstract class Util implements I2PConstants {
                 android.util.Log.i(ANDROID_TAG, m);
         }
     }
+
     public static void d(String m) {
         d(m, null);
     }
@@ -135,7 +137,9 @@ public abstract class Util implements I2PConstants {
         }
     }
 
-    /** copied from various private components */
+    /**
+     * copied from various private components
+     */
     final static String PROP_I2NP_NTCP_PORT = "i2np.ntcp.port";
     final static String PROP_I2NP_NTCP_AUTO_PORT = "i2np.ntcp.autoport";
 
@@ -229,6 +233,7 @@ public abstract class Util implements I2PConstants {
     // propName -> defaultValue
     private static HashMap<String, Boolean> booleanOptionsRequiringRestart = new HashMap<>();
     private static HashMap<String, String> stringOptionsRequiringRestart = new HashMap<>();
+
     static {
         HashMap<String, Boolean> boolToAdd = new HashMap<>();
         HashMap<String, String> strToAdd = new HashMap<>();
@@ -245,6 +250,7 @@ public abstract class Util implements I2PConstants {
         booleanOptionsRequiringRestart.putAll(boolToAdd);
         stringOptionsRequiringRestart.putAll(strToAdd);
     }
+
     /**
      * This function performs two tasks:
      * <ul><li>
@@ -256,7 +262,7 @@ public abstract class Util implements I2PConstants {
      * changed that will require a router restart.
      * </li></ul>
      *
-     * @param props a Properties object containing the router.config
+     * @param props    a Properties object containing the router.config
      * @param toRemove a Collection of properties that will be removed
      * @return true if the router needs to be restarted.
      */
@@ -297,26 +303,26 @@ public abstract class Util implements I2PConstants {
     }
 
     /**
-     *  Write properties to a file. If the file does not exist, it is created.
-     *  If the properties already exist in the file, they are updated.
+     * Write properties to a file. If the file does not exist, it is created.
+     * If the properties already exist in the file, they are updated.
      *
-     *  @param dir the file directory
-     *  @param file relative to dir
-     *  @param props properties to set
+     * @param dir   the file directory
+     * @param file  relative to dir
+     * @param props properties to set
      */
     public static void writePropertiesToFile(Context ctx, String dir, String file, Properties props) {
         mergeResourceToFile(ctx, dir, file, 0, props, null);
     }
 
     /**
-     *  Load defaults from resource, then add props from settings, and write back.
-     *  If resID is 0, defaults are not written over the existing file content.
+     * Load defaults from resource, then add props from settings, and write back.
+     * If resID is 0, defaults are not written over the existing file content.
      *
-     *  @param dir the file directory
-     *  @param file relative to dir
-     *  @param resID the ID of the default resource, or 0
-     *  @param userProps local properties or null
-     *  @param toRemove properties to remove, or null
+     * @param dir       the file directory
+     * @param file      relative to dir
+     * @param resID     the ID of the default resource, or 0
+     * @param userProps local properties or null
+     * @param toRemove  properties to remove, or null
      */
     public static void mergeResourceToFile(Context ctx, String dir, String file, int resID,
                                            Properties userProps, Collection<String> toRemove) {
@@ -343,7 +349,7 @@ public abstract class Util implements I2PConstants {
             if (resID > 0)
                 in = ctx.getResources().openRawResource(resID);
             if (in != null)
-                DataHelper.loadProps(props,  in);
+                DataHelper.loadProps(props, in);
 
             // override with user settings
             if (userProps != null)
@@ -356,12 +362,18 @@ public abstract class Util implements I2PConstants {
 
             File path = new File(dir, file);
             DataHelper.storeProps(props, path);
-            Util.d("Saved " + props.size() +" properties in " + file);
+            Util.d("Saved " + props.size() + " properties in " + file);
         } catch (IOException ioe) {
         } catch (Resources.NotFoundException nfe) {
         } finally {
-            if (in != null) try { in.close(); } catch (IOException ioe) {}
-            if (fin != null) try { fin.close(); } catch (IOException ioe) {}
+            if (in != null) try {
+                in.close();
+            } catch (IOException ioe) {
+            }
+            if (fin != null) try {
+                fin.close();
+            } catch (IOException ioe) {
+            }
         }
     }
 
@@ -393,10 +405,11 @@ public abstract class Util implements I2PConstants {
             this.status = status;
         }
     }
+
     public static NetStatus getNetStatus(Context ctx, RouterContext rCtx) {
         if (rCtx.commSystem().isDummy())
             return new NetStatus(NetStatus.Level.INFO, ctx.getString(R.string.vm_comm_system));
-        if (rCtx.router().getUptime() > 60*1000 && (!rCtx.router().gracefulShutdownInProgress()) &&
+        if (rCtx.router().getUptime() > 60 * 1000 && (!rCtx.router().gracefulShutdownInProgress()) &&
                 !rCtx.clientManager().isAlive())  // not a router problem but the user should know
             return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.net_status_error_i2cp));
         // Warn based on actual skew from peers, not update status, so if we successfully offset
@@ -404,9 +417,12 @@ public abstract class Util implements I2PConstants {
         //if (!rCtx.clock().getUpdatedSuccessfully())
         long skew = rCtx.commSystem().getFramedAveragePeerClockSkew(33);
         // Display the actual skew, not the offset
-        if (Math.abs(skew) > 30*1000)
+        if (Math.abs(skew) > 30 * 1000)
             return new NetStatus(NetStatus.Level.ERROR,
-                    ctx.getString(R.string.net_status_error_skew, DataHelper.formatDuration2(Math.abs(skew))));
+                    ctx.getString(R.string.net_status_error_skew,
+                            DataHelper.formatDuration2(Math.abs(skew))
+                                    .replace("&minus;", "-")
+                                    .replace("&nbsp;", " ")));
         if (rCtx.router().isHidden())
             return new NetStatus(NetStatus.Level.INFO, ctx.getString(R.string.hidden));
         RouterInfo routerInfo = rCtx.router().getRouterInfo();
@@ -460,7 +476,7 @@ public abstract class Util implements I2PConstants {
             case IPV4_DISABLED_IPV6_UNKNOWN:
             default:
                 ra = routerInfo.getTargetAddress("SSU");
-                if (ra == null && rCtx.router().getUptime() > 5*60*1000) {
+                if (ra == null && rCtx.router().getUptime() > 5 * 60 * 1000) {
                     if (rCtx.commSystem().countActivePeers() <= 0)
                         return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.net_status_error_no_active_peers));
                     else if (rCtx.getProperty(ctx.getString(R.string.PROP_I2NP_NTCP_HOSTNAME)) == null ||
