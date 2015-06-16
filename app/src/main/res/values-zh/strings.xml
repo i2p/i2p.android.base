@@ -108,7 +108,7 @@
   <string name="notification_status_stopping_after_net">网络已中断，正在停止 I2P</string>
   <string name="notification_status_shutdown_cancelled">关闭已取消</string>
   <string name="notification_status_shutting_down">I2P 正在关闭</string>
-  <string name="notification_status_bw">带宽：下行 %1$s KBps / 上行 %2$s KBps </string>
+  <string name="notification_status_bw">带宽：下行 %1$s KB/s / 上行 %2$s KB/s</string>
   <string name="notification_status_peers">节点：%1$d 活动，%2$d 已知</string>
   <string name="notification_status_expl">探索隧道：%1$d/%2$d</string>
   <string name="notification_status_client">客户隧道：%1$d/%2$d</string>

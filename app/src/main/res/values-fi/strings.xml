@@ -173,6 +173,8 @@
   <string name="connections_per_minute">Yhteyksiä minuutissa</string>
   <string name="connections_per_hour">Yhteyksiä tunnissa</string>
   <string name="connections_per_day">Yhteyksiä päivässä</string>
+  <string name="num_per_hour">%s per tunti</string>
+  <string name="num_per_day">%s per päivä</string>
   <string name="unlimited">Rajoittamaton</string>
   <string name="num_minutes">%s minuuttia</string>
   <string name="http_client">HTTP-asiakas</string>
