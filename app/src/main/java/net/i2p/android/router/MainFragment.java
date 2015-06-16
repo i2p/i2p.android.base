@@ -352,7 +352,10 @@ public class MainFragment extends I2PFragmentBase {
             vNetStatusText.setText(R.string.no_internet);
             vStatusContainer.setVisibility(View.VISIBLE);
             vNonNetStatus.setVisibility(View.GONE);
-        } else if (ctx != null) {
+        } else if (lastRouterState != null &&
+                !Util.isStopping(lastRouterState) &&
+                !Util.isStopped(lastRouterState) &&
+                ctx != null) {
             Util.NetStatus netStatus = Util.getNetStatus(getActivity(), ctx);
             switch (netStatus.level) {
                 case ERROR:
