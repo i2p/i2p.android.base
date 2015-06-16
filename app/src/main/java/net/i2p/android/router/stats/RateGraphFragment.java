@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.androidplot.Plot;
+import com.androidplot.xy.BarFormatter;
+import com.androidplot.xy.BarRenderer;
 import com.androidplot.xy.BoundaryMode;
-import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.XYStepMode;
@@ -34,15 +34,9 @@ import java.util.Observer;
 public class RateGraphFragment extends I2PFragmentBase {
     // redraws a plot whenever an update is received:
     private class MyPlotUpdater implements Observer {
-        Plot plot;
-
-        public MyPlotUpdater(Plot plot) {
-            this.plot = plot;
-        }
-
         public void update(Observable o, Object arg) {
             Util.d("Redrawing plot");
-            plot.redraw();
+            updatePlot();
         }
     }
 
@@ -54,6 +48,7 @@ public class RateGraphFragment extends I2PFragmentBase {
     private SummaryListener _listener;
     private XYPlot _ratePlot;
     private MyPlotUpdater _plotUpdater;
+    private int _k;
 
     public static RateGraphFragment newInstance(String name, long period) {
         RateGraphFragment f = new RateGraphFragment();
@@ -102,9 +97,9 @@ public class RateGraphFragment extends I2PFragmentBase {
         public void run() {
             String rateName = getArguments().getString(RATE_NAME);
             long period = getArguments().getLong(RATE_PERIOD);
-            int k = 1000;
+            _k = 1000;
             if (rateName.startsWith("bw.") || rateName.contains("Size") || rateName.contains("Bps") || rateName.contains("memory"))
-                k = 1024;
+                _k = 1024;
 
             Util.d("Setting up " + rateName + "." + period);
             if (StatSummarizer.instance() == null) {
@@ -121,12 +116,11 @@ public class RateGraphFragment extends I2PFragmentBase {
 
             XYSeries rateSeries = _listener.getSeries();
 
-            _plotUpdater = new MyPlotUpdater(_ratePlot);
+            _plotUpdater = new MyPlotUpdater();
 
-            _ratePlot.addSeries(rateSeries, new LineAndPointFormatter(Color.rgb(0, 0, 0), null, Color.rgb(0, 80, 0), null));
+            _ratePlot.addSeries(rateSeries, new BarFormatter(Color.argb(200, 0, 80, 0), Color.argb(200, 0, 80, 0)));
             _ratePlot.calculateMinMaxVals();
             long maxX = _ratePlot.getCalculatedMaxX().longValue();
-            final double maxY = _ratePlot.getCalculatedMaxY().doubleValue();
 
             Util.d("Adding plot updater to listener");
             _listener.addObserver(_plotUpdater);
@@ -134,12 +128,15 @@ public class RateGraphFragment extends I2PFragmentBase {
             // Only one line, so hide the legend
             _ratePlot.getLegendWidget().setVisible(false);
 
+            BarRenderer renderer = (BarRenderer) _ratePlot.getRenderer(BarRenderer.class);
+            renderer.setBarWidthStyle(BarRenderer.BarWidthStyle.VARIABLE_WIDTH);
+            renderer.setBarGap(0);
+
             _ratePlot.setDomainUpperBoundary(maxX, BoundaryMode.GROW);
             _ratePlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 15 * 60 * 1000);
             _ratePlot.setTicksPerDomainLabel(4);
 
             _ratePlot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
-            _ratePlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, getRangeStep(maxY, k));
             _ratePlot.setTicksPerRangeLabel(5);
 
             _ratePlot.setDomainValueFormat(new Format() {
@@ -159,13 +156,14 @@ public class RateGraphFragment extends I2PFragmentBase {
                 }
             });
 
-            final int finalK = k;
+            final int finalK = _k;
             _ratePlot.setRangeValueFormat(new Format() {
 
                 @Override
                 public StringBuffer format(Object obj, @NonNull StringBuffer toAppendTo,
                                            @NonNull FieldPosition pos) {
                     double val = ((Number) obj).doubleValue();
+                    double maxY = _ratePlot.getCalculatedMaxY().doubleValue();
 
                     if (val == 0 || maxY < finalK) {
                         return new DecimalFormat("0").format(val, toAppendTo, pos);
@@ -190,8 +188,16 @@ public class RateGraphFragment extends I2PFragmentBase {
             });
 
             Util.d("Redrawing plot");
-            _ratePlot.redraw();
+            updatePlot();
         }
+    }
+
+    private void updatePlot() {
+        _ratePlot.calculateMinMaxVals();
+        double maxY = _ratePlot.getCalculatedMaxY().doubleValue();
+        _ratePlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, getRangeStep(maxY, _k));
+
+        _ratePlot.redraw();
     }
 
     private double getRangeStep(double maxY, int k) {
