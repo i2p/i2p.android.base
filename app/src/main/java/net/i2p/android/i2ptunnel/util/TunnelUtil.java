@@ -225,7 +225,7 @@ public class TunnelUtil extends GeneralHelper {
             ed.putInt(res.getString(R.string.TUNNEL_OPT_QUANTITY),
                     getTunnelQuantity(tunnel, res.getInteger(R.integer.DEFAULT_TUNNEL_QUANTITY)));
             ed.putInt(res.getString(R.string.TUNNEL_OPT_BACKUP_QUANTITY),
-                    getTunnelQuantity(tunnel, res.getInteger(R.integer.DEFAULT_TUNNEL_BACKUP_QUANTITY)));
+                    getTunnelBackupQuantity(tunnel, res.getInteger(R.integer.DEFAULT_TUNNEL_BACKUP_QUANTITY)));
         }
 
         @Override

@@ -11,8 +11,6 @@
     <zzz> maybe 'downstream bandwidth' or 'inbound usage' ?
 - Fix visibility of advanced tunnel parameter changes
     <zzz> when I change an advanced tunnel param e.g. length or variance, the change isn't displayed, I have to go back and forward again to see the change
-- Verify default tunnel quantities
-    <zzz> backup quantity default is 2? that looks wrong
 
 # New UI fixes
 
