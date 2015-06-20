@@ -2,6 +2,10 @@ package net.i2p.android.router.dialog;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -14,6 +18,8 @@ import android.widget.TextView;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.I2Patterns;
 
+import java.util.List;
+
 public class FirstStartDialog extends DialogFragment {
     @NonNull
     @Override
@@ -23,8 +29,20 @@ public class FirstStartDialog extends DialogFragment {
 
         TextView tv = (TextView)view.findViewById(R.id.url_faq);
         Linkify.addLinks(tv, I2Patterns.I2P_WEB_URL, "http://");
-        tv = (TextView)view.findViewById(R.id.url_irc_i2p);
-        Linkify.addLinks(tv, I2Patterns.IRC_URL, "irc://");
+
+        // Find all installed browsers that listen for "irc://"
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("irc://127.0.0.1:6668/i2p"));
+        final PackageManager pm = getActivity().getPackageManager();
+        List<ResolveInfo> installedIrcClients = pm.queryIntentActivities(intent, 0);
+
+        // Only linkify "irc://" if we have an app that can handle them.
+        // Otherwise, the app crashes with an un-catchable ActivityNotFoundException
+        // if the user clicks one of them.
+        if (installedIrcClients.size() > 0) {
+            tv = (TextView) view.findViewById(R.id.url_irc_i2p);
+            Linkify.addLinks(tv, I2Patterns.IRC_URL, "irc://");
+        }
 
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
         b.setTitle(R.string.first_start_title)
