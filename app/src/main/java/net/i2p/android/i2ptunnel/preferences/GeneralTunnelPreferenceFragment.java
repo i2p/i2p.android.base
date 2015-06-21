@@ -134,10 +134,15 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
                 @Override
                 protected Void doInBackground(Void... voids) {
                     Set<String> interfaceSet = Addresses.getAllAddresses();
-                    String[] interfaces = interfaceSet.toArray(new String[interfaceSet.size()]);
-                    reachableBy.setEntries(interfaces);
-                    reachableBy.setEntryValues(interfaces);
-                    reachableBy.setEnabled(true);
+                    final String[] interfaces = interfaceSet.toArray(new String[interfaceSet.size()]);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            reachableBy.setEntries(interfaces);
+                            reachableBy.setEntryValues(interfaces);
+                            reachableBy.setEnabled(true);
+                        }
+                    });
                     return null;
                 }
             }.execute();
