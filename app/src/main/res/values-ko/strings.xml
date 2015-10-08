@@ -108,7 +108,6 @@
   <string name="notification_status_stopping_after_net">네트워크 끊김, I2P 멈추는 중</string>
   <string name="notification_status_shutdown_cancelled">종료 취소됨</string>
   <string name="notification_status_shutting_down">I2P 종료 중</string>
-  <string name="notification_status_bw">대역폭: %1$s KBps 다운 / %2$s KBps 업로드</string>
   <string name="notification_status_peers">피어들: %1$d 활성, %2$d 알려짐</string>
   <string name="notification_status_expl">예비 터널들: %1$d/%2$d</string>
   <string name="notification_status_client">클라이언트 터널들: %1$d/%2$d</string>

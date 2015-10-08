@@ -108,7 +108,6 @@
   <string name="notification_status_stopping_after_net">Disconnesso da internet, I2P in spegnimento</string>
   <string name="notification_status_shutdown_cancelled">Spegnimento cancellato</string>
   <string name="notification_status_shutting_down">I2P si sta spegnendo</string>
-  <string name="notification_status_bw">Banda: %1$s KBps ricezione / %2$s KBps invio</string>
   <string name="notification_status_peers">Peer: %1$d attivo, %2$d conosciuto</string>
   <string name="notification_status_expl">Tunnel d\'esplorazione: %1$d/%2$d</string>
   <string name="notification_status_client">Tunnel del client : %1$d/%2$d</string>

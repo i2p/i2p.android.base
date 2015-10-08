@@ -26,7 +26,6 @@ import net.i2p.router.RouterContext;
 import net.i2p.router.RouterLaunch;
 
 import java.lang.ref.WeakReference;
-import java.text.DecimalFormat;
 
 /**
  * Runs the router
@@ -260,26 +259,16 @@ public class RouterService extends Service {
         int inCl = ctx.tunnelManager().getInboundClientTunnelCount();
         int outCl = ctx.tunnelManager().getOutboundClientTunnelCount();
         String uptime = DataHelper.formatDuration(ctx.router().getUptime());
-        double inBW = ctx.bandwidthLimiter().getReceiveBps() / 1024;
-        double outBW = ctx.bandwidthLimiter().getSendBps() / 1024;
-        // control total width
-        DecimalFormat fmt;
-        if(inBW >= 1000 || outBW >= 1000) {
-            fmt = new DecimalFormat("#0");
-        } else if(inBW >= 100 || outBW >= 100) {
-            fmt = new DecimalFormat("#0.0");
-        } else {
-            fmt = new DecimalFormat("#0.00");
-        }
+        double inBW = ctx.bandwidthLimiter().getReceiveBps();
+        double outBW = ctx.bandwidthLimiter().getSendBps();
 
         String text =
                 getResources().getString(R.string.notification_status_text,
                         Util.formatSize(inBW), Util.formatSize(outBW));
 
-        // TODO change string resource after 0.9.20 to use Util.formatSize()
         String bigText =
                 getResources().getString(R.string.notification_status_bw,
-                        fmt.format(inBW), fmt.format(outBW)) + '\n'
+                        Util.formatSize(inBW), Util.formatSize(outBW)) + '\n'
                 + getResources().getString(R.string.notification_status_peers,
                         active, known) + '\n'
                 + getResources().getString(R.string.notification_status_expl,

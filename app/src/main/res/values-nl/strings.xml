@@ -106,7 +106,6 @@
   <string name="notification_status_stopping_after_net">Netwerk verbroken, I2P wordt gestopt</string>
   <string name="notification_status_shutdown_cancelled">Afsluiten geannuleerd</string>
   <string name="notification_status_shutting_down">I2P is aan het afsluiten</string>
-  <string name="notification_status_bw">Bandbreedte: %1$s KBps down / %2$s KBps up</string>
   <string name="notification_status_peers">Peers: %1$d actief, %2$d bekend</string>
   <string name="notification_status_expl">Verkennende tunnels: %1$d/%2$d</string>
   <string name="notification_status_client">Cliënttunnels: %1$d/%2$d</string>

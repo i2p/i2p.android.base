@@ -92,7 +92,6 @@
   <string name="notification_status_stopping_after_net">Ağ devre dışı bırakıldı, I2P durduruluyor</string>
   <string name="notification_status_shutdown_cancelled">Kapatma iptal edildi</string>
   <string name="notification_status_shutting_down">I2P kapatılıyor</string>
-  <string name="notification_status_bw">Bant genişliği: %1$s KBps indirme / %2$s KBps yükleme</string>
   <string name="notification_status_peers">Eşler: %1$d etkin, %2$d bilinmeyen</string>
   <string name="notification_status_expl">Keşif tünelleri: %1$d/%2$d</string>
   <string name="notification_status_client">İstemci tünelleri: %1$d/%2$d</string>

@@ -103,7 +103,6 @@
   <string name="notification_status_stopping_after_net">Sieć rozłączona, zatrzymywanie I2P</string>
   <string name="notification_status_shutdown_cancelled">Anulowano zamknięcie</string>
   <string name="notification_status_shutting_down">Trwa wyłączanie I2P</string>
-  <string name="notification_status_bw">Przepustowość: %1$s KBps pobieranie / %2$s KBps wysyłanie</string>
   <string name="notification_status_peers">Peery: %1$d aktywnych, %2$d znanych</string>
   <string name="notification_status_expl">Tunelów rozpoznawczych: %1$d/%2$d</string>
   <string name="notification_status_client">Tunele klienta: %1$d/%2$d</string>

@@ -104,7 +104,6 @@
   <string name="notification_status_stopping_after_net">Немає з\'єднання з мережею, вимикаємо I2P</string>
   <string name="notification_status_shutdown_cancelled">Вимикання було відмінено</string>
   <string name="notification_status_shutting_down">Вимикаємо I2P</string>
-  <string name="notification_status_bw">Пропускна здатність: %1$s КБ/с прийом / %2$s КБ/с передача</string>
   <string name="notification_status_peers">Піри: %1$d активно, %2$d відомо</string>
   <string name="notification_status_expl">Пошукові тунелі: %1$d/%2$d</string>
   <string name="notification_status_client">Клієнтські тунелі: %1$d/%2$d</string>

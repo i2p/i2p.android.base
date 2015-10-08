@@ -76,7 +76,6 @@
   <string name="notification_status_restarting">I2P repornește</string>
   <string name="notification_status_waiting">I2P așteaptă pentru o conexiune la rețea</string>
   <string name="notification_status_running">I2P rulează</string>
-  <string name="notification_status_bw">Lățime de bandă: %1$s KBps desc / %2$s KBps în</string>
   <string name="notification_status_peers">Parteneri: %1$d activi, %2$d cunoscuți</string>
   <string name="menu_settings">Configurări</string>
   <string name="settings_enable">Activează</string>
