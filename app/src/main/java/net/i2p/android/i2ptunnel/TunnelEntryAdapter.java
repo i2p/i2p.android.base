@@ -3,6 +3,7 @@ package net.i2p.android.i2ptunnel;
 import android.content.Context;
 import android.os.Build;
 import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -143,6 +144,11 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 tvh.description.setText(tunnel.getDescription());
                 tvh.interfacePort.setText(tunnel.getTunnelLink(false));
 
+                ViewCompat.setTransitionName(tvh.name,
+                        mCtx.getString(R.string.TUNNEL_NAME) + tunnel.getId());
+                ViewCompat.setTransitionName(tvh.description,
+                        mCtx.getString(R.string.TUNNEL_DESCRIPTION) + tunnel.getId());
+
                 tvh.itemView.setSelected(mTwoPane.isTwoPane() && position == mActivatedPosition);
                 tvh.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -151,9 +157,14 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         mActivatedPosition = position;
                         notifyItemChanged(oldPosition);
                         notifyItemChanged(position);
-                        mListener.onTunnelSelected(tunnel.getId(),
-                                Pair.create((View)tvh.name, mCtx.getString(R.string.TUNNEL_NAME)),
-                                Pair.create((View)tvh.description, mCtx.getString(R.string.TUNNEL_DESCRIPTION)));
+                        Pair<View, String> namePair = Pair.create(
+                                (View)tvh.name,
+                                ViewCompat.getTransitionName(tvh.name));
+                        Pair<View, String> descPair = Pair.create(
+                                (View)tvh.description,
+                                ViewCompat.getTransitionName(tvh.description));
+                        Pair<View, String>[] pairs = new Pair[]{ namePair, descPair};
+                        mListener.onTunnelSelected(tunnel.getId(), pairs);
                     }
                 });
                 break;

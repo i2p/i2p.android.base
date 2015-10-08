@@ -23,8 +23,7 @@
             style="@style/ListItemContent.Text.Main.TwoLines"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="Tunnel name"
-            android:transitionName="@string/TUNNEL_NAME" />
+            android:text="Tunnel name" />
 
         <!-- Interface:port the tunnel listens on or points to -->
         <TextView
@@ -49,8 +48,7 @@
             android:layout_alignParentBottom="true"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Tunnel description"
-            android:transitionName="@string/TUNNEL_DESCRIPTION" />
+            android:text="Tunnel description" />
 
     </RelativeLayout>
 

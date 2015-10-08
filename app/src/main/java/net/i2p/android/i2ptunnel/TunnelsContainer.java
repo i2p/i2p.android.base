@@ -239,8 +239,7 @@ public class TunnelsContainer extends Fragment implements
 
     // TunnelListFragment.OnTunnelSelectedListener
 
-    public final void onTunnelSelected(int tunnelId, Pair<View, String> tunnelName,
-                                       Pair<View, String> tunnelDescription) {
+    public final void onTunnelSelected(int tunnelId, Pair<View, String>[] pairs) {
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
@@ -255,7 +254,7 @@ public class TunnelsContainer extends Fragment implements
             detailIntent.putExtra(TunnelDetailFragment.TUNNEL_ID, tunnelId);
 
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    getActivity(), tunnelName, tunnelDescription);
+                    getActivity(), pairs);
             ActivityCompat.startActivity(getActivity(), detailIntent, options.toBundle());
         }
     }

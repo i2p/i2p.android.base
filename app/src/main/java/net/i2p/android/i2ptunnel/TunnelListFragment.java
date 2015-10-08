@@ -53,8 +53,7 @@ public class TunnelListFragment extends Fragment implements
 
     // Container Activity must implement this interface
     public interface OnTunnelSelectedListener {
-        void onTunnelSelected(int tunnelId, Pair<View, String> tunnelName,
-                              Pair<View, String> tunnelDescription);
+        void onTunnelSelected(int tunnelId, Pair<View, String>[] pairs);
     }
 
     public static TunnelListFragment newInstance(boolean showClientTunnels) {

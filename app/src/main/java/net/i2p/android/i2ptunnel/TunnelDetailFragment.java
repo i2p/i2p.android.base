@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -105,12 +106,16 @@ public class TunnelDetailFragment extends Fragment {
         if (mTunnel != null) {
             TextView name = (TextView) v.findViewById(R.id.tunnel_name);
             name.setText(mTunnel.getName());
+            ViewCompat.setTransitionName(name,
+                    getActivity().getString(R.string.TUNNEL_NAME) + mTunnel.getId());
 
             TextView type = (TextView) v.findViewById(R.id.tunnel_type);
             type.setText(mTunnel.getType());
 
             TextView description = (TextView) v.findViewById(R.id.tunnel_description);
             description.setText(mTunnel.getDescription());
+            ViewCompat.setTransitionName(description,
+                    getActivity().getString(R.string.TUNNEL_DESCRIPTION) + mTunnel.getId());
 
             TextView details = (TextView) v.findViewById(R.id.tunnel_details);
             details.setText(mTunnel.getDetails());
