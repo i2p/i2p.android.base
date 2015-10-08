@@ -25,11 +25,31 @@
   <string name="button_router_graceful">I2P буде зупинено протягом %s</string>
   <string name="button_shutdown_now">Утримуйте, щоб зупинити</string>
   <string name="button_cancel_graceful">Утримуйте, щоб скасувати зупинку</string>
+  <string name="no_internet">Немає підключення до Інтернету</string>
+  <string name="hidden">Приховано</string>
+  <string name="testing">Тестування</string>
+  <string name="firewalled">Зафаерволено</string>
+  <string name="symmetric_nat">Симетричний NAT</string>
+  <string name="net_status_error_i2cp">Помилка клієнт менеджера i2cp - перевірити журнали</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
+  <string name="net_status_error_unresolved_tcp">Невирішена адреса TCP</string>
+  <string name="net_status_error_private_tcp">Приватна TCP адреса</string>
+  <string name="net_status_warn_firewalled_inbound_tcp">Зафаерволено з включеними вхідними TCP</string>
+  <string name="net_status_warn_firewalled_floodfill">перевірено фаєрволом та застосовано алгоритм \"заливки\" </string>
+  <string name="net_status_info_disconnected">Від’єднано, перевірте мережевий кабель</string>
+  <string name="net_status_error_udp_port">Використовується UDP порт - змініть в налаштуваннях та перезавантажте</string>
+  <string name="net_status_error_no_active_peers">Немає активних пірів - перевірте мережеве з\'єднання і файрвол</string>
+  <string name="net_status_error_udp_disabled_tcp_not_set">UDP вимкнено і вхідний TCP хост/порт не встановлено</string>
+  <string name="net_status_warn_firewalled_udp_disabled">перевірено фаєрволом з виключеним UDP </string>
   <string name="shared_clients">Колективні клієнти</string>
+  <string name="uptime">Аптайм</string>
+  <string name="active_peers">Активні піри</string>
+  <string name="known_peers">Відомі піри</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="no_tunnels_running">Нема жодного працюючого клієнта</string>
+  <string name="download">Завантажено</string>
+  <string name="upload">Вивантажено</string>
   <string name="configure_browser_title">Налаштувати браузер?</string>
   <string name="configure_browser_for_i2p">Бажаєте налаштувати браузер для перегляду I2P-сайтів? (Ви також можете зробити це пізніше через меню).</string>
   <string name="first_start_title">Вітаємо! I2P встановлено.</string>
@@ -174,6 +194,7 @@
   <string name="i2ptunnel_type_streamrserver">Streamr сервер</string>
   <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
   <string name="install_recommended_app">Встановити рекомендований додаток?</string>
+  <string name="app_needed_for_this_tunnel_type">Вам необхідно встановити додаток щоб використовувати цей тунель. Бажаєте встановити рекомендований додаток?</string>
   <string name="i2ptunnel_not_initialized">Тунелі ще неініціалізовані, будь ласка, перезавантажте через дві хвилини.</string>
   <string name="no_configured_client_tunnels">Нема жодного налаштованого клієнтського тунеля.</string>
   <string name="no_configured_server_tunnels">Нема жодного налаштованого серверного тунеля.</string>
@@ -219,7 +240,12 @@
   <string name="tunnel_summ_auto_start">Запускати тунель, коли запускається маршрутизатор.</string>
   <string name="tunnel_cat_ports">Локальні порти</string>
   <string name="shared_client">Колективний клієнт</string>
+  <string name="tunnel_summ_shared_client">Використовувати такі ж самі Призначення і тунелі як інші спільні клієнти</string>
   <string name="target_destination">Ціль призначення</string>
+  <string name="persistent_key">Постійні ключі</string>
+  <string name="persistent_key_conflict_title">Виключити нові ключі при перевідкритті?</string>
+  <string name="persistent_key_conflict_msg">Ви не можете включити постійні ключі доки тунель налаштовується щоб згенерувати нові ключі після перезапуску. Чи хочете ви відключити нові ключі після перезапуску?</string>
+  <string name="tunnel_summ_persistent_key">Залишити це Призначення тунелю після перезапуску</string>
   <string name="reachable_on">Доступний на</string>
   <string name="outproxies">Вихідні проксі</string>
   <string name="ssl_outproxies">Вихідні проксі SSL</string>

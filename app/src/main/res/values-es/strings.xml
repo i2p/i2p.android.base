@@ -14,7 +14,7 @@
   <string name="label_i2ptunnel_server">Túneles de servidor</string>
   <string name="label_logs">Registros (logs)</string>
   <string name="label_error_logs">Registros (logs) de errores</string>
-  <string name="label_news">Novedades de la consola</string>
+  <string name="label_news">Noticias de la consola</string>
   <string name="label_peers_status">Pares (peers)</string>
   <string name="label_release_notes">Notas de versiones</string>
   <string name="label_licenses">Licencias</string>
@@ -74,10 +74,10 @@
   <string name="action_refresh">Refrescar</string>
   <string name="hint_search_addressbook">Buscar en la libreta de direcciones</string>
   <string name="action_reload_subscriptions">Volver a cargar suscripciones</string>
-  <string name="news_last_updated">Última actualización de las novedades de consola hace %s</string>
-  <string name="news_last_checked">Última comprobación de las novedades de consola hace %s</string>
-  <string name="news_updated">Novedades de consola actualizadas</string>
-  <string name="view_news">Pulse para ver las últimas novedades de consola de I2P</string>
+  <string name="news_last_updated">Última actualización de las noticias hace %s</string>
+  <string name="news_last_checked">Última comprobación de las noticias hace %s</string>
+  <string name="news_updated">Noticias actualizadas</string>
+  <string name="view_news">Pulse para ver las últimas noticias de I2P</string>
   <string name="router_not_running">El router I2P no está en marcha.</string>
   <string name="router_shutting_down">El router I2P se está cerrando.</string>
   <string name="stats_not_ready">El administrador de estadísticas aún no está listo. Inténtelo de nuevo más tarde.</string>

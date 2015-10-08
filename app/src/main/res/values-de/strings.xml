@@ -30,6 +30,7 @@
   <string name="testing">Erprobung</string>
   <string name="firewalled">Mit Firewall</string>
   <string name="symmetric_nat">Symmetrisches NAT</string>
+  <string name="net_status_error_i2cp">Klientenmanager I2CP Fehler - bitte Fehlerberichte überprüfen</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_skew">Zeitabweichung von %s</string>
   <string name="net_status_error_unresolved_tcp">Nicht aufgelöste TCP-Adresse</string>
@@ -85,6 +86,7 @@
   <string name="graphs_not_ready">Graphen sind noch nicht bereit. Versuchen Sie es später erneut.</string>
   <string name="statistics">Statistiken</string>
   <string name="routers">Router</string>
+  <string name="leasesets">LeaseSet</string>
   <string name="countries">Länder</string>
   <string name="country">Land</string>
   <string name="transport">Übertragungen</string>
