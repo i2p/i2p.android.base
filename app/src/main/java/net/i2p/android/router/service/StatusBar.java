@@ -40,6 +40,7 @@ class StatusBar {
         mNotifyBuilder = new NotificationCompat.Builder(ctx)
             .setContentText(text)
             .setSmallIcon(icon)
+                .setColor(mCtx.getResources().getColor(R.color.primary_light))
             .setOngoing(true)
             .setOnlyAlertOnce(true);
 

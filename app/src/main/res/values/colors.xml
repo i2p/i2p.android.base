@@ -1,6 +1,7 @@
 <resources>
     <color name="primary">#673ab7</color><!-- Deep Purple 500 -->
     <color name="primary_dark">#512da8</color><!-- Deep Purple 700 -->
+    <color name="primary_light">#9575cd</color><!-- Deep Purple 300 -->
     <color name="accent">#ff6e40</color><!-- Deep Orange A200 -->
     <color name="accent_dark">#ff3d00</color><!-- Deep Orange A400 -->
 
