@@ -47,7 +47,7 @@
   <string name="configure_browser_title">Configurar navegador?</string>
   <string name="configure_browser_for_i2p">Vols configurar un navegador per veure els llocs web de I2P? (També podràs fer-ho posteriorment des del menú d\'ajuda)</string>
   <string name="first_start_title">Felicitats I2P ja s\'ha instal·lat!</string>
-  <string name="first_start_welcome">&lt;b&gt;Benvingut a I2P!&lt;/b&gt; Tingues paciència&lt;/b&gt; I2P s'està arrencant i buscant iguals.</string>
+  <string name="first_start_welcome">&lt;b&gt;Benvingut a I2P!&lt;/b&gt; Tingues paciència&lt;/b&gt; I2P s\'està arrencant i buscant iguals.</string>
   <string name="first_start_read">Durant la espera, llegeix les notes de versió i la pàgina d\'inici.</string>
   <string name="first_start_faq">Un cop tingui túnels de client, <b>consulta</b> les preguntes més freqüents:</string>
   <string name="first_start_faq_nonanon">O utilitza aquest enllaç sense ser anònim si no vols esperar als túnels.</string>
