@@ -147,10 +147,16 @@ public class I2PActivity extends I2PActivityBase implements
         if (action == null)
             return;
 
-        if (action.equals("net.i2p.android.router.START_I2P")) {
-            if (mViewPager.getCurrentItem() != 0)
-                mViewPager.setCurrentItem(0, false);
-            autoStart();
+        switch (action) {
+            case "net.i2p.android.router.START_I2P":
+                if (mViewPager.getCurrentItem() != 0)
+                    mViewPager.setCurrentItem(0, false);
+                autoStart();
+                break;
+
+            case Intent.ACTION_PICK:
+                mViewPager.setFixedPage(2, R.string.select_an_address);
+                break;
         }
     }
 

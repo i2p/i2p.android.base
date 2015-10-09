@@ -15,29 +15,37 @@ import net.i2p.android.router.util.Util;
 
 public class CustomViewPager extends ViewPager {
     private boolean mEnabled;
+    private int mFixedPage;
+    private int mFixedPageString;
 
     public CustomViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         mEnabled = false;
+        mFixedPage = -1;
+        mFixedPageString = 0;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return mEnabled && super.onTouchEvent(event);
+        return mEnabled && mFixedPage < 0 && super.onTouchEvent(event);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        return mEnabled && super.onInterceptTouchEvent(event);
+        return mEnabled && mFixedPage < 0 && super.onInterceptTouchEvent(event);
     }
 
     @Override
     public void setCurrentItem(int item) {
-        if (mEnabled || item == 0)
+        if ((mEnabled && (mFixedPage < 0 || item == mFixedPage))
+                || (!mEnabled && item == 0))
             super.setCurrentItem(item);
-        else
+        else if (!mEnabled)
             Toast.makeText(getContext(), Util.getRouterContext() == null ?
                     R.string.router_not_running : R.string.router_shutting_down,
+                    Toast.LENGTH_SHORT).show();
+        else if (mFixedPageString > 0)
+            Toast.makeText(getContext(), getContext().getString(mFixedPageString),
                     Toast.LENGTH_SHORT).show();
     }
 
@@ -46,13 +54,25 @@ public class CustomViewPager extends ViewPager {
         updatePagingState();
     }
 
+    public void setFixedPage(int page, int res) {
+        mFixedPage = page;
+        mFixedPageString = res;
+        updatePagingState();
+    }
+
     public void updatePagingState() {
-        if (!mEnabled && getCurrentItem() != 0)
+        if (mEnabled) {
+            if (mFixedPage >= 0 && getCurrentItem() != mFixedPage)
+                setCurrentItem(mFixedPage);
+
+        } else if (getCurrentItem() != 0)
             setCurrentItem(0);
     }
 
     public static class SavedState extends BaseSavedState {
         boolean enabled;
+        int fixedPage;
+        int fixedPageString;
 
         public SavedState(Parcelable superState) {
             super(superState);
@@ -62,13 +82,15 @@ public class CustomViewPager extends ViewPager {
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeInt(enabled ? 1 : 0);
+            out.writeInt(fixedPage);
+            out.writeInt(fixedPageString);
         }
 
         @Override
         public String toString() {
             return "CustomViewPager.SavedState{"
                     + Integer.toHexString(System.identityHashCode(this))
-                    + " enabled=" + enabled + "}";
+                    + " enabled=" + enabled + " fixedPage=" + fixedPage + "}";
         }
 
         public static final Parcelable.Creator<SavedState> CREATOR
@@ -90,6 +112,8 @@ public class CustomViewPager extends ViewPager {
                 loader = getClass().getClassLoader();
             }
             enabled = in.readInt() != 0;
+            fixedPage = in.readInt();
+            fixedPageString = in.readInt();
         }
     }
 
@@ -98,6 +122,8 @@ public class CustomViewPager extends ViewPager {
         Parcelable superState = super.onSaveInstanceState();
         SavedState ss = new SavedState(superState);
         ss.enabled = mEnabled;
+        ss.fixedPage = mFixedPage;
+        ss.fixedPageString = mFixedPageString;
         return ss;
     }
 
@@ -112,5 +138,7 @@ public class CustomViewPager extends ViewPager {
         super.onRestoreInstanceState(ss.getSuperState());
 
         mEnabled = ss.enabled;
+        mFixedPage = ss.fixedPage;
+        mFixedPageString = ss.fixedPageString;
     }
 }

@@ -99,6 +99,7 @@
     <string name="router_not_running">The router is not running.</string>
     <string name="router_shutting_down">The router is shutting down.</string>
     <string name="stats_not_ready">The statistics manager is not ready yet. Try again later.</string>
+    <string name="select_an_address">Select an address.</string>
 
     <string name="no_graphs_configured">No graphs have been configured. You can choose statistics to graph in the settings menu. Any changes will take effect after 60 seconds.</string>
     <string name="configure_graphs">Configure graphs</string>
