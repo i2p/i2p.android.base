@@ -56,21 +56,22 @@ dependencies {
     compile project(':client')
 
     // Android Support Repository dependencies
-    compile 'com.android.support:support-v4:22.2.0'
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:recyclerview-v7:22.2.0'
+    compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
 
     // Remote dependencies
-    compile 'net.i2p.android.ext:floatingactionbutton:1.9.0'
+    compile 'net.i2p.android.ext:floatingactionbutton:1.10.0'
     compile files('libs/androidplot-core-0.6.1.jar')
     compile ('com.android.support:support-v4-preferencefragment:1.0.0@aar'){
         exclude module: 'support-v4'
     }
-    compile 'com.pnikosis:materialish-progress:1.5'
+    compile 'com.pnikosis:materialish-progress:1.7'
     compile 'com.eowise:recyclerview-stickyheaders:0.5.2@aar'
     compile ('com.mcxiaoke.viewpagerindicator:library:2.4.1') {
         exclude group: 'com.android.support', module: 'support-v4'
     }
+    compile 'org.sufficientlysecure:html-textview:1.2'
 
     // Testing-only dependencies
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
@@ -79,14 +80,15 @@ dependencies {
 
 dependencyVerification {
     verify = [
-            'com.android.support:support-v4:7bb6e40a18774aa2595e4d8f9fe0ae14e61670f71a1279272fb0b79b8be71180',
-            'com.android.support:appcompat-v7:2d5867698410b41f75140c91d6c1e58da74ae0f97baf6e0bdd1f7cc1017ceb2c',
-            'com.android.support:recyclerview-v7:3a8da14585fa1c81f06e7cef4d93a7641f0323d8f984ff9a7bd7a6e416b46888',
-            'net.i2p.android.ext:floatingactionbutton:b41eae5fe6be599e3fade00273521b0914f2e199d5f04c50fa34cfe935347f76',
+            'com.android.support:support-v4:5ddf1feda096c164d0dd299cc6786fde18a845ce47dbfe484ff27cce27e19638',
+            'com.android.support:appcompat-v7:db48e76616882b00e407b19027aae4e92d129456a65b9bb4e4bc5262e3ad9b76',
+            'com.android.support:recyclerview-v7:9621f5790e47010e14196c3ecee168cc68659316d19b2ef6b5a843f35a81c3db',
+            'net.i2p.android.ext:floatingactionbutton:32bd3a15680aee3fcd28a7be226ff986b3b025ae8d8977487c1df3e3bb029044',
             'com.android.support:support-v4-preferencefragment:5470f5872514a6226fa1fc6f4e000991f38805691c534cf0bd2778911fc773ad',
-            'com.pnikosis:materialish-progress:d71d80e00717a096784482aee21001a9d299fec3833e4ebd87739ed36cf77c54',
+            'com.pnikosis:materialish-progress:da089a90d1dab61e9b50038c09081019398f81190d12b0b567ce94b83ef8cf93',
             'com.eowise:recyclerview-stickyheaders:7b236da49b33b840e9ba6e7e4182218d1a2d9047236fdbc3ca947352f9b0883b',
             'com.mcxiaoke.viewpagerindicator:library:1e8aad664137f68abdfee94889f6da3dc98be652a235176a403965a07a25de62',
+            'org.sufficientlysecure:html-textview:1d3bed31ef837437154de8d2362a0e6b0e59b6c3535d87ee48c2fab12c84f9bb',
     ]
 }
 
