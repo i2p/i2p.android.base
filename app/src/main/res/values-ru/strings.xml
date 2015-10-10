@@ -108,6 +108,7 @@
   <string name="notification_status_stopping_after_net">Сеть отключена, остановка I2P</string>
   <string name="notification_status_shutdown_cancelled">Выключение отменено</string>
   <string name="notification_status_shutting_down">I2P выключается</string>
+  <string name="notification_status_bw">Пропускная способность: %1$sBps прием / %2$sBps отправка</string>
   <string name="notification_status_peers">Узлы: %1$d активны, %2$d известны</string>
   <string name="notification_status_expl">Исследовательские туннели: %1$d/%2$d</string>
   <string name="notification_status_client">Туннели клиента: %1$d/%2$d</string>

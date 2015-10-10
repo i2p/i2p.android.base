@@ -51,6 +51,7 @@
   <string name="configure_graphs">Konfigurer grafer</string>
   <string name="netdb_routers_empty">Ingen rutere i din NetDB</string>
   <string name="netdb_leases_empty">Ingen LeaseSets i din NetDB.</string>
+  <string name="notification_status_bw">Båndbredde: %1$sBps ned / %2$sBps opp</string>
   <string name="notification_status_peers">Likemenn: %1$d aktive, %2$d kjente</string>
   <string name="notification_status_expl">Utforsknings-tunneler: %1$d/%2$d</string>
   <string name="notification_status_client">Klient-tunneler: %1$d/%2$d</string>

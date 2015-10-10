@@ -90,6 +90,7 @@
   <string name="notification_status_stopping_after_net">Rede desconectada, interrompendo I2P</string>
   <string name="notification_status_shutdown_cancelled">Desligamento cancelado</string>
   <string name="notification_status_shutting_down">O roteador I2P está sendo desligado</string>
+  <string name="notification_status_bw">Largura de banda: %1$sBps Down/ %2$sBps up</string>
   <string name="notification_status_peers">Pares: %1$d ativos, %2$d conhecidos</string>
   <string name="notification_status_expl">Túneis exploratórios: %1$d/%2$d</string>
   <string name="notification_status_client">Túneis cliente: %1$d/%2$d</string>

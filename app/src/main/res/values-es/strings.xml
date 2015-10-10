@@ -108,6 +108,7 @@
   <string name="notification_status_stopping_after_net">Red desconectada, deteniendo I2P</string>
   <string name="notification_status_shutdown_cancelled">Cierre cancelado</string>
   <string name="notification_status_shutting_down">I2P se está cerrando</string>
+  <string name="notification_status_bw">Ancho de banda: %1$sBps bajada / %2$sBps subida</string>
   <string name="notification_status_peers">Pares: %1$d activos, %2$d conocidos</string>
   <string name="notification_status_expl">Túneles exploratorios: %1$d/%2$d</string>
   <string name="notification_status_client">Túneles de cliente: %1$d/%2$d</string>

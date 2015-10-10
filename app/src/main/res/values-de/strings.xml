@@ -108,6 +108,7 @@
   <string name="notification_status_stopping_after_net">Netzwerk getrennt, I2P wird gestoppt</string>
   <string name="notification_status_shutdown_cancelled">Herunterfahren abgebrochen</string>
   <string name="notification_status_shutting_down">I2P fährt herunter</string>
+  <string name="notification_status_bw">Bandbreite: %1$sB/s eingehend / %2$sB/s ausgehend</string>
   <string name="notification_status_peers">Teilnehmer: %1$d aktiv, %2$d bekannt</string>
   <string name="notification_status_expl">Erkundungstunnel: %1$d/%2$d</string>
   <string name="notification_status_client">Kliententunnel: %1$d/%2$d</string>

@@ -99,6 +99,7 @@
   <string name="notification_status_stopping_after_net">Xarxa desconnectada, aturant I2P</string>
   <string name="notification_status_shutdown_cancelled">Aturada cancel·lada</string>
   <string name="notification_status_shutting_down">S\'està aturant I2P</string>
+  <string name="notification_status_bw">Ample de banda: %1$sBps baixada / %2$sBps pujada</string>
   <string name="notification_status_peers">Iguals: %1$d actius, %2$d coneguts</string>
   <string name="notification_status_expl">Túnels d\'exploració: %1$d/%2$d</string>
   <string name="notification_status_client">Túnels de clients: %1$d/%2$d</string>

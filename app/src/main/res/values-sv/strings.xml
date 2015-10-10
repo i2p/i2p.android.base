@@ -109,6 +109,7 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="notification_status_stopping_after_net">Nätverk nedkopplat, stannar I2P</string>
   <string name="notification_status_shutdown_cancelled">Avstängning avbruten</string>
   <string name="notification_status_shutting_down">I2P stänger ner</string>
+  <string name="notification_status_bw">Bandbredd:%1$sBps ner / %2$sBps upp</string>
   <string name="notification_status_peers">Peers: %1$d aktiva, %2$d kända</string>
   <string name="notification_status_expl">Utforskande tunnlar: %1$d/%2$d</string>
   <string name="notification_status_client">Klienttunnlar:%1$d/%2$d</string>
