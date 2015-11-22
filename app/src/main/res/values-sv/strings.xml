@@ -16,7 +16,7 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="label_logs">Loggar</string>
   <string name="label_error_logs">Felloggar</string>
   <string name="label_news">Nyheter</string>
-  <string name="label_peers_status">Peers</string>
+  <string name="label_peers_status">Noder</string>
   <string name="label_release_notes">Releasekommentarer</string>
   <string name="label_licenses">Licenser</string>
   <string name="label_browse">Bläddra</string>
@@ -31,7 +31,7 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="testing">Testar</string>
   <string name="firewalled">Bakom brandvägg</string>
   <string name="symmetric_nat">Symmetrisk NAT</string>
-  <string name="net_status_error_i2cp">Klienthanterare I2CP fel - kontrollera loggar</string>
+  <string name="net_status_error_i2cp">Klienthanterare I2CP-fel - kontrollera loggar</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_skew">Klockförskjutning på %s</string>
   <string name="net_status_error_unresolved_tcp">Ej upplöst TCP-adress</string>
@@ -40,13 +40,13 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="net_status_warn_firewalled_floodfill">Bakom brandvägg och floodfill</string>
   <string name="net_status_info_disconnected">Frånkopplad - kontrollera nätverksanslutning</string>
   <string name="net_status_error_udp_port">UDP-porten används - ändra i inställningar och start om</string>
-  <string name="net_status_error_no_active_peers">Inga aktiva peers - kontrollera nätverksanslutning och brandvägg</string>
+  <string name="net_status_error_no_active_peers">Inga aktiva noder - kontrollera nätverksanslutning och brandvägg</string>
   <string name="net_status_error_udp_disabled_tcp_not_set">UDP deaktiverad och inåtgående TCP host/port inte angiven</string>
   <string name="net_status_warn_firewalled_udp_disabled">Bakom brandvägg med UDP avaktiverad</string>
   <string name="shared_clients">Delade klienter</string>
   <string name="uptime">Upptid</string>
-  <string name="active_peers">Aktiva peers</string>
-  <string name="known_peers">Kända peers</string>
+  <string name="active_peers">Aktiva noder</string>
+  <string name="known_peers">Kända noder</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -57,7 +57,7 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="configure_browser_title">Konfigurera browsern?</string>
   <string name="configure_browser_for_i2p">Vill du konfigurera en browser för att se på I2P sidor? (Du kan också göra detta senare från hjälpmenyn.)</string>
   <string name="first_start_title">Gratulerar till din I2P installation!</string>
-  <string name="first_start_welcome"><b>Välkommen till I2P</b>Vänligen<b>ha tålamod</b> medan I2P bootar och letar upp peers.</string>
+  <string name="first_start_welcome"><b>Välkommen till I2P!</b> Vänligen <b>ha tålamod</b> medan I2P startar och letar upp noder.</string>
   <string name="first_start_read">Medan du väntar, vänligen läs utgåvans meddelanden och välkomstsidan.</string>
   <string name="first_start_faq">När du har fått klienttunnlar, vänligen <b>kolla</b> vår FAQ:</string>
   <string name="first_start_faq_nonanon">Använd den här icke-anonyma länken om du inte vill vänta på tunnlar:</string>
@@ -82,6 +82,7 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="router_not_running">Routern kör inte</string>
   <string name="router_shutting_down">Routern stänger ner.</string>
   <string name="stats_not_ready">Statistikhanteraren är inte redo än. Försök igen senare.</string>
+  <string name="select_an_address">Välj en adress.</string>
   <string name="no_graphs_configured">Inga grafer har ställts in. Du kan välja statistik till grafen i inställningsmenyn. Ändringar aktiveras efter 60 sekunder.</string>
   <string name="configure_graphs">Ställ in grafer</string>
   <string name="graphs_not_ready">Graferna är inte färdiga än. Försök igen senare.</string>
@@ -110,7 +111,7 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="notification_status_shutdown_cancelled">Avstängning avbruten</string>
   <string name="notification_status_shutting_down">I2P stänger ner</string>
   <string name="notification_status_bw">Bandbredd:%1$sBps ner / %2$sBps upp</string>
-  <string name="notification_status_peers">Peers: %1$d aktiva, %2$d kända</string>
+  <string name="notification_status_peers">Noder: %1$d aktiva, %2$d kända</string>
   <string name="notification_status_expl">Utforskande tunnlar: %1$d/%2$d</string>
   <string name="notification_status_client">Klienttunnlar:%1$d/%2$d</string>
   <string name="menu_settings">Inställningar</string>
@@ -169,8 +170,8 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="about_project">Projektets Hem:</string>
   <string name="about_bugs">Bugs och Support:</string>
   <string name="about_helpwanted">Hjälp Önskas!</string>
-  <string name="about_volunteer">Vill du hjälpa till att göra appen bättre? Anmäl dig på Android forum:</string>
-  <string name="about_donate">Vill du donera pengar eller bitcoins för inköp av fler Androidenheter till utveckling och testning? Gå till:</string>
+  <string name="about_volunteer">Vill du hjälpa till att göra appen bättre? Anmäl dig på Android-forumet:</string>
+  <string name="about_donate">Vill du donera pengar eller bitcoin för inköp av fler Androidenheter till utveckling och testning? Gå till:</string>
   <string name="menu_help">Hjälp</string>
   <string name="general">Generell</string>
   <string name="label_router">Offentliga adresser</string>

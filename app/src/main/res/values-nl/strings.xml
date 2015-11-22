@@ -32,6 +32,7 @@
   <string name="symmetric_nat">Symmetrische NAT</string>
   <string name="net_status_error_i2cp">Cliëntbeheerder I2CP-fout - controleer logs</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
+  <string name="net_status_error_skew">Klok afwijking van %s</string>
   <string name="net_status_error_unresolved_tcp">Onopgelost TCP-adres</string>
   <string name="net_status_error_private_tcp">Privaat TCP-adres</string>
   <string name="net_status_warn_firewalled_inbound_tcp">Gefirewalld met inkomende TCP aangezet</string>
@@ -49,6 +50,7 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
+  <string name="no_tunnels_running">Er draaien nog geen tunnels</string>
   <string name="download">Download</string>
   <string name="upload">Upload</string>
   <string name="configure_browser_title">Browser instellen?</string>
@@ -79,6 +81,7 @@
   <string name="router_not_running">De router is uit.</string>
   <string name="router_shutting_down">De router is aan het afsluiten.</string>
   <string name="stats_not_ready">De statistiekenbeheerder is nog niet klaar. Probeer het later opnieuw.</string>
+  <string name="select_an_address">Selecteer een adres</string>
   <string name="no_graphs_configured">Geen grafieken ingesteld. Je kan de statistieken om in grafieken weer te geven instellen in het instellingenmenu. Alle wijzigingen vinden plaats na 60 seconden.</string>
   <string name="configure_graphs">Grafieken instellen</string>
   <string name="graphs_not_ready">Grafieken zijn nog niet klaar, probeer later opnieuw.</string>
@@ -250,6 +253,7 @@
   <string name="target_destination">Doelbestemming</string>
   <string name="persistent_key">Blijvende sleutel</string>
   <string name="persistent_key_conflict_title">Nieuwe sleutels uitzetten bij herstarten?</string>
+  <string name="tunnel_summ_persistent_key">Bewaar deze tunnel\'s bestemming als hij opnieuw start</string>
   <string name="reachable_on">Bereikbaar op</string>
   <string name="listen_port">Luisterpoort</string>
   <string name="client_ssl">Cliënt-SSL</string>
@@ -270,9 +274,13 @@
   <string name="delay_connect">Verbinden uitstellen</string>
   <string name="access_control">Toegangscontrole</string>
   <string name="restricted_access">Beperkte toegang</string>
+  <string name="disabled">Uitgeschakeld</string>
+  <string name="whitelist">Whitelist</string>
+  <string name="blacklist">Blacklist</string>
   <string name="access_list">Toegangslijst</string>
   <string name="reject_inproxies">Inproxies weigeren</string>
   <string name="tunnel_summ_reject_inproxies">Enkel I2P-gebruikers toelaten te verbinden</string>
+  <string name="unique_local">Unieke landinstelling</string>
   <string name="client_connection_limits">Cliënt-verbindingslimieten</string>
   <string name="connections_per_minute">Verbindingen per minuut</string>
   <string name="connections_per_hour">Verbindingen per uur</string>

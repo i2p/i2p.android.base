@@ -81,6 +81,7 @@
   <string name="router_not_running">Le routeur ne fonctionne pas.</string>
   <string name="router_shutting_down">Le routeur s\'arrête.</string>
   <string name="stats_not_ready">Le gestionnaire de statistiques n\'est pas encore prêt. Réessayez plus tard.</string>
+  <string name="select_an_address">Sélectionnez une adresse.</string>
   <string name="no_graphs_configured">Aucun graphique n\'a été configuré. Vous pouvez choisir les statistiques à afficher dans les paramètres. Tout changement prendra effet après 60 secondes.</string>
   <string name="configure_graphs">Configurer les graphiques</string>
   <string name="graphs_not_ready">Les graphiques ne sont pas encore prêts. Veuillez réessayer plus tard.</string>

@@ -81,6 +81,7 @@
   <string name="router_not_running">路由器未在运行。</string>
   <string name="router_shutting_down">路由器正在关闭。</string>
   <string name="stats_not_ready">统计管理器还没有准备好。请稍后再试。</string>
+  <string name="select_an_address">选择一个地址。</string>
   <string name="no_graphs_configured">没有已配置的图表。您可以在设置菜单中选择统计信息以获得图表。任何更改将在60秒后生效。</string>
   <string name="configure_graphs">配置图表</string>
   <string name="graphs_not_ready">图表尚未就绪。请稍候再试。</string>

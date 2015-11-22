@@ -81,6 +81,7 @@
   <string name="router_not_running">Маршрутизатор не запущен.</string>
   <string name="router_shutting_down">Маршрутизатор выключается.</string>
   <string name="stats_not_ready">Менеджер статистики ещё не готов. Попробуйте позже.</string>
+  <string name="select_an_address">Выбрать адрес.</string>
   <string name="no_graphs_configured">Графики не настроены. Вы можете выбрать статистику для отображения на графике в настройках меню. Любые изменения начнут действовать через 60 секунд.</string>
   <string name="configure_graphs">Настройки графиков</string>
   <string name="graphs_not_ready">Графики ещё не готовы. Попробуйте позже.</string>
@@ -110,7 +111,7 @@
   <string name="notification_status_shutting_down">I2P выключается</string>
   <string name="notification_status_bw">Пропускная способность: %1$sBps прием / %2$sBps отправка</string>
   <string name="notification_status_peers">Узлы: %1$d активны, %2$d известны</string>
-  <string name="notification_status_expl">Исследовательские туннели: %1$d/%2$d</string>
+  <string name="notification_status_expl">Поисковые туннели: %1$d/%2$d</string>
   <string name="notification_status_client">Туннели клиента: %1$d/%2$d</string>
   <string name="menu_settings">Настройки</string>
   <string name="settings_enable">Включить</string>
@@ -245,7 +246,7 @@
   <string name="name">Имя</string>
   <string name="description">Описание</string>
   <string name="auto_start">Автозапуск</string>
-  <string name="tunnel_summ_auto_start">Запустить туннель с запуском маршрутизатора</string>
+  <string name="tunnel_summ_auto_start">Запустить туннель с запуском маршрутизатора.</string>
   <string name="tunnel_cat_ports">Локальный порт</string>
   <string name="shared_client">Общий клиент</string>
   <string name="tunnel_summ_shared_client">Использовать то же назначение и туннели, что и общие клиенты</string>

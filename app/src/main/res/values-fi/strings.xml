@@ -27,6 +27,7 @@
   <string name="hidden">Piilotettu</string>
   <string name="testing">Testataan</string>
   <string name="firewalled">Palomuuritettu</string>
+  <string name="symmetric_nat">Symmetrinen NAT</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_unresolved_tcp">Ratkaisematon TCP-osoite</string>
   <string name="net_status_error_private_tcp">Ykstyinen TCP-osoite</string>
