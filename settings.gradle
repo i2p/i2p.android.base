@@ -1,4 +1,4 @@
-include ':app', ':routerjars', ':lib:client'
+include ':app', ':routerjars', ':lib:helper', ':lib:client'
 
 //System.out.println("Do you want to access the network to download dependencies? (y/n)")
 //useNet = (System.console().readLine().toLowerCase() == 'y')

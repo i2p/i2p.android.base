@@ -13,7 +13,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
-import net.i2p.android.lib.client.R;
+import net.i2p.android.lib.helper.R;
 import net.i2p.android.router.service.IRouterState;
 import net.i2p.android.router.service.State;
 
