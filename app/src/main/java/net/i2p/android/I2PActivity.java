@@ -24,7 +24,7 @@ import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Connectivity;
 import net.i2p.android.router.util.Util;
 import net.i2p.android.util.MemoryFragmentPagerAdapter;
-import net.i2p.android.widget.CustomViewPager;
+import android.support.v4.view.CustomViewPager;
 import net.i2p.android.widget.SlidingTabLayout;
 import net.i2p.router.RouterContext;
 

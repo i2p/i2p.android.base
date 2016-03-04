@@ -1,11 +1,10 @@
-package net.i2p.android.widget;
+package android.support.v4.view;
 
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.os.ParcelableCompat;
 import android.support.v4.os.ParcelableCompatCreatorCallbacks;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.Toast;
@@ -69,7 +68,7 @@ public class CustomViewPager extends ViewPager {
             setCurrentItem(0);
     }
 
-    public static class SavedState extends BaseSavedState {
+    public static class SavedState extends ViewPager.SavedState {
         boolean enabled;
         int fixedPage;
         int fixedPageString;
@@ -107,10 +106,7 @@ public class CustomViewPager extends ViewPager {
         });
 
         SavedState(Parcel in, ClassLoader loader) {
-            super(in);
-            if (loader == null) {
-                loader = getClass().getClassLoader();
-            }
+            super(in, loader);
             enabled = in.readInt() != 0;
             fixedPage = in.readInt();
             fixedPageString = in.readInt();
