@@ -40,13 +40,15 @@
   <string name="net_status_error_udp_port">Використовується UDP порт - змініть в налаштуваннях та перезавантажте</string>
   <string name="net_status_error_no_active_peers">Немає активних пірів - перевірте мережеве з\'єднання і файрвол</string>
   <string name="net_status_error_udp_disabled_tcp_not_set">UDP вимкнено і вхідний TCP хост/порт не встановлено</string>
-  <string name="net_status_warn_firewalled_udp_disabled">перевірено фаєрволом з виключеним UDP </string>
+  <string name="net_status_warn_firewalled_udp_disabled">перевірено фаєрволом з вимкненим UDP </string>
   <string name="shared_clients">Колективні клієнти</string>
   <string name="uptime">Аптайм</string>
   <string name="active_peers">Активні піри</string>
   <string name="known_peers">Відомі піри</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">К</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">С</string>
   <string name="no_tunnels_running">Нема жодного працюючого клієнта</string>
   <string name="download">Завантажено</string>
   <string name="upload">Вивантажено</string>
@@ -78,6 +80,7 @@
   <string name="router_not_running">Маршрутизатор не працює.</string>
   <string name="router_shutting_down">Маршрутизатор вимикається.</string>
   <string name="stats_not_ready">Менеджер статистики ще не готовий. Спробуйте пізніше.</string>
+  <string name="select_an_address">Оберіть адресу.</string>
   <string name="no_graphs_configured">Немає налаштованих графиків. Ви можете вибрати яку статистику показувати на графіках у меню налаштувань. Будь-які зміни набудуть чинності за 60 секунд.</string>
   <string name="configure_graphs">Налаштування графиків</string>
   <string name="graphs_not_ready">Графіки ще не готові. Спробуйте пізніше.</string>
@@ -225,8 +228,12 @@
   <string name="enabled">Увімкнено</string>
   <string name="i2ptunnel_wizard_desc_name">Назва тунелю для ідентифікації у списці тунелів.</string>
   <string name="i2ptunnel_wizard_desc_desc">Опис тунелю. Використовуйте це необов\'язкове поле задля більшої інформативності.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Тип призначення сервісу в мережі I2P, тобто куди клієнт має приєднатися. Це може бути повний BASE64 ключ призначення або імʼя вузла I2P з вашої адресної книги.</string>
+  <string name="i2ptunnel_wizard_desc_outproxies">Якщо ви знаєте інші вихідні проксі для цього типу тунелю (або HTTP або SOCKS), то надрукуйте тут. Розділяйте проксі комами.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Це IP-адреса, на якій сервіс працює. Зазвичай така сама, як у машини, тому 127.0.0.1 введено автоматично.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Це порт, на який сервіс приймає з’єднання.</string>
+  <string name="i2ptunnel_wizard_desc_reachable_on">Встановлює обмеження на доступ до цього тунелю через компʼютери чи смартфони.</string>
+  <string name="i2ptunnel_wizard_desc_binding_port">Локальний порт доступу для клієнтського тунелю; клієнтський порт для тунелю для двонаправленого HTTP серверу.</string>
   <string name="i2ptunnel_wizard_desc_auto_start">Чи повинен тунель запускатись автоматично коли запускається маршрутизатор?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Створити тунель?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Створити тунель</string>
@@ -247,11 +254,15 @@
   <string name="persistent_key_conflict_msg">Ви не можете включити постійні ключі доки тунель налаштовується щоб згенерувати нові ключі після перезапуску. Чи хочете ви відключити нові ключі після перезапуску?</string>
   <string name="tunnel_summ_persistent_key">Залишити це Призначення тунелю після перезапуску</string>
   <string name="reachable_on">Доступний на</string>
+  <string name="listen_port">Вхідний порт</string>
+  <string name="client_ssl">Клієнт SSL</string>
+  <string name="tunnel_summ_client_ssl">Клієнт має використовувати SSL для зʼєднання</string>
   <string name="outproxies">Вихідні проксі</string>
   <string name="ssl_outproxies">Вихідні проксі SSL</string>
   <string name="irc">IRC</string>
   <string name="enable_dcc">Увімкнути DCC</string>
   <string name="tunnel_summ_enable_dcc">Дозволити IRC клієнтам використовувати DCC</string>
+  <string name="website_domain_name">Імʼя домену сайта</string>
   <string name="target_host">Цільовий хост</string>
   <string name="target_port">Цільовий порт</string>
   <string name="use_ssl">Використовувати SSL</string>
@@ -260,9 +271,17 @@
   <string name="profile">Профіль</string>
   <string name="profile_interactive">Інтерактивне з’єднання</string>
   <string name="delay_connect">Затримка з’єднання</string>
+  <string name="tunnel_summ_delay_connect">Дозволити зʼєднання типу запит/відповідь</string>
   <string name="access_control">Контроль доступу</string>
+  <string name="restricted_access">Обмежений доступ</string>
   <string name="disabled">Вимкнено</string>
+  <string name="whitelist">Білий список</string>
   <string name="blacklist">Чорний список</string>
+  <string name="access_list">Список дозволів</string>
+  <string name="reject_inproxies">Відхилити вхідні проксі</string>
+  <string name="tunnel_summ_reject_inproxies">Дозволити зʼєднання тільки користувачам I2P</string>
+  <string name="unique_local">Унікальні локальні мережі</string>
+  <string name="tunnel_summ_unique_local">Використовувати унікальні локальні адреси для кожного клієнту</string>
   <string name="connections_per_minute">З’єднань за хвилину</string>
   <string name="connections_per_hour">З’єднань за годину</string>
   <string name="connections_per_day">З’єднань за день</string>

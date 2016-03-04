@@ -253,6 +253,7 @@
   <string name="target_destination">Doelbestemming</string>
   <string name="persistent_key">Blijvende sleutel</string>
   <string name="persistent_key_conflict_title">Nieuwe sleutels uitzetten bij herstarten?</string>
+  <string name="persistent_key_conflict_msg">Je kunt vaste sleutels niet gebruiken wanneer de tunnel ingesteld is om bij herstart nieuwe sleutels aan te maken. Wil je deze functie uitzetten?</string>
   <string name="tunnel_summ_persistent_key">Bewaar deze tunnel\'s bestemming als hij opnieuw start</string>
   <string name="reachable_on">Bereikbaar op</string>
   <string name="listen_port">Luisterpoort</string>
@@ -270,8 +271,10 @@
   <string name="tunnel_summ_use_ssl">Gebruik SSL om met doel te verbinden</string>
   <string name="tunnel_parameters">Tunnelparameters</string>
   <string name="profile">Profiel</string>
+  <string name="profile_bulk">Grote verbinding (downloads/websites/BT)</string>
   <string name="profile_interactive">Interactieve verbinding</string>
   <string name="delay_connect">Verbinden uitstellen</string>
+  <string name="tunnel_summ_delay_connect">Zet dit aan voor request/response verbindigen</string>
   <string name="access_control">Toegangscontrole</string>
   <string name="restricted_access">Beperkte toegang</string>
   <string name="disabled">Uitgeschakeld</string>
@@ -281,6 +284,9 @@
   <string name="reject_inproxies">Inproxies weigeren</string>
   <string name="tunnel_summ_reject_inproxies">Enkel I2P-gebruikers toelaten te verbinden</string>
   <string name="unique_local">Unieke landinstelling</string>
+  <string name="tunnel_summ_unique_local">Gebruik unieke localhost IP-adressen voor alle clients</string>
+  <string name="multihome">Multihome</string>
+  <string name="tunnel_summ_multihome">Zet multihoming optimalizaties aan</string>
   <string name="client_connection_limits">Cliënt-verbindingslimieten</string>
   <string name="connections_per_minute">Verbindingen per minuut</string>
   <string name="connections_per_hour">Verbindingen per uur</string>
@@ -303,6 +309,7 @@
   <string name="total_ban_length">Totale ban lengte</string>
   <string name="power_saving">Energiebesparing</string>
   <string name="delay_open">Openen uitstellen</string>
+  <string name="tunnel_summ_delay_open">Vertraag het openen van een tunnel totdat dit nodig is</string>
   <string name="reduce_quantity">Hoeveelheid verminderen</string>
   <string name="tunnel_summ_reduce_quantity">Tunnel hoeveelheid verminderen bij inactiviteit</string>
   <string name="idle_time">Inactieve tijd</string>
@@ -310,15 +317,20 @@
   <string name="reduced_tunnel_quantity">Verlaagde tunnel hoeveelheid</string>
   <string name="close_tunnels">Tunnels sluiten bij inactiviteit</string>
   <string name="new_keys_on_reopen">Nieuwe sleutels bij herstarten</string>
+  <string name="new_keys_on_reopen_conflict_title">Wil je vaste sleutesl uitzetten?</string>
+  <string name="new_keys_on_reopen_conflict_msg">Wanneer de tunnel geconfigureerd is om vaste sleutels te gebruiken, kun je de functie van nieuwe sleutels bij herstart niet aanzetten. Wil je vaste sleutels uitzetten?</string>
   <string name="http_client">HTTP-cliënt</string>
   <string name="tunnel_summ_user_agent">Laar \'User-Agent\' header door</string>
   <string name="tunnel_summ_referer">Laat \'Referer\' header door</string>
   <string name="tunnel_summ_accept">laat \'Accept-*\' headers door</string>
   <string name="tunnel_summ_allow_ssl">SSL toestaan naar I2P adressen</string>
+  <string name="jump_url_list">Lijst van Jump URLs</string>
   <string name="proxy_auth">Proxy toestemming</string>
+  <string name="tunnel_summ_proxy_auth">Zorg ervoor dat inloggen nodig is voor deze proxy</string>
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
   <string name="outproxy_auth">Outproxy-authorisatie</string>
+  <string name="tunnel_summ_outproxy_auth">De login die nodig is voor de proxy naar buiten</string>
   <string name="other">Overige</string>
   <string name="signature_type">Handtekeningstype</string>
   <string name="custom_options">Aangepaste opties</string>
@@ -333,6 +345,7 @@
     <item quantity="one">Een bericht</item>
     <item quantity="other">%d berichten, nieuwste eerst</item>
   </plurals>
+  <string name="log_entry">Logboek Item</string>
   <string name="copy_logs">Kopieer logs</string>
   <string name="i2p_android_error_logs">I2P Android foutlogs</string>
   <string name="i2p_android_logs">I2P Android logs</string>

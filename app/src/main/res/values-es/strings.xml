@@ -81,6 +81,7 @@
   <string name="router_not_running">El router I2P no está en marcha.</string>
   <string name="router_shutting_down">El router I2P se está cerrando.</string>
   <string name="stats_not_ready">El administrador de estadísticas aún no está listo. Inténtelo de nuevo más tarde.</string>
+  <string name="select_an_address">Seleccione una dirección.</string>
   <string name="no_graphs_configured">No se ha configurado ninguna gráfica. Puede escoger las estadísticas a graficar en el menú de configuración. Cualquier cambio tendrá efecto después de 60 segundos.</string>
   <string name="configure_graphs">Configurar gráficas</string>
   <string name="graphs_not_ready">Las gráficas aún no están listas. Inténtelo de nuevo más tarde.</string>

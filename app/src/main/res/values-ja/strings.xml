@@ -223,8 +223,12 @@
   <string name="set_zero_for_unlimited">0=無制限</string>
   <string name="post_limits">投稿制限</string>
   <string name="power_saving">パワーセーブ</string>
+  <string name="tunnel_summ_delay_open">要求されるまでトンネルのオープンを遅らせる</string>
+  <string name="tunnel_summ_reduce_quantity">アイドル時トンネルの数を減らす</string>
   <string name="num_minutes">%s /分</string>
+  <string name="close_tunnels">アイドル時トンネルを閉じる</string>
   <string name="http_client">HTTPクライアント</string>
+  <string name="tunnel_summ_allow_ssl">I2PアドレスにSSLを使用可能にする</string>
   <string name="jump_url_list">ジャンプURLリスト</string>
   <string name="proxy_auth">プロキシ認証</string>
   <string name="tunnel_summ_proxy_auth">このプロキシを使用するにはログインが必要です</string>

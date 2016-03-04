@@ -20,12 +20,17 @@
   <string name="label_licenses">Licenças</string>
   <string name="label_browse">Navegador</string>
   <string name="label_graphs">Gráficos</string>
+  <string name="button_router_off">Mantenha pressionado para iniciar o I2P</string>
+  <string name="button_router_on">I2P está funcionando (mantenha pressionado para parar)</string>
   <string name="button_router_graceful">O software I2P será encerrado em %s</string>
+  <string name="button_shutdown_now">Mantenha pressionado para parar agora</string>
+  <string name="button_cancel_graceful">Mantenha pressionado para cancelar o desligamento</string>
   <string name="no_internet">Não há conexões de internet disponíveis</string>
   <string name="hidden">Oculto</string>
   <string name="testing">Testando</string>
   <string name="firewalled">Sob firewall</string>
   <string name="symmetric_nat">NAT simétrico</string>
+  <string name="net_status_error_i2cp">Erro no gerenciador de clientes I2CP - verificar logs</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_unresolved_tcp">Endereço TCP não resolvido</string>
   <string name="net_status_error_private_tcp">Endereço TCP privado</string>
@@ -65,10 +70,17 @@
   <string name="action_refresh">Atualizar</string>
   <string name="hint_search_addressbook">Procurar por livro de endereços</string>
   <string name="action_reload_subscriptions">Recarregar inscriçoes</string>
+  <string name="news_last_updated">Última atualização das noticias a %s atrás</string>
+  <string name="news_last_checked">Última verificação das noticias a %s atrás</string>
   <string name="news_updated">Novidades atualizadas</string>
+  <string name="view_news">Toque para ver as últimas notícias do I2P</string>
   <string name="router_not_running">O roteador não está funcionando</string>
   <string name="router_shutting_down">O roteador está sendo desligado.</string>
   <string name="stats_not_ready">O configurador de estatística não está pronto. Tente de novo mais tarde.</string>
+  <string name="select_an_address">Selecionar um endereço.</string>
+  <string name="no_graphs_configured">Nenhum gráfico foi configurado. Você pode escolher estatísticas para gráficos no menu de configurações. Qualquer mudança ira ter efeito em 60 segundos.</string>
+  <string name="configure_graphs">Configurar gráficos</string>
+  <string name="graphs_not_ready">Gráficos não estão prontos ainda. Tente novamente.</string>
   <string name="statistics">Estatísticas</string>
   <string name="routers">Roteadores</string>
   <string name="countries">Países</string>
@@ -76,6 +88,7 @@
   <string name="transport">Transporte</string>
   <string name="versions">Versões</string>
   <string name="version">Versão</string>
+  <string name="count">Contagem</string>
   <string name="tname_0">Oculto ou inicializando</string>
   <string name="netdb_routers_empty">Sem roteadores em seu NetDB.</string>
   <string name="notification_status_starting">O roteador I2P está inicializando</string>
@@ -174,7 +187,10 @@
   <string name="i2ptunnel_type_streamrclient">Cliente Streamr</string>
   <string name="i2ptunnel_type_streamrserver">Servidor Streamr</string>
   <string name="install_recommended_app">Instalar aplicativo recomendado?</string>
+  <string name="app_needed_for_this_tunnel_type">Você deve instalar um aplicativo para usar este túnel. Gostaria de instalar o aplicativo recomendado?</string>
   <string name="i2ptunnel_not_initialized">Os túneis não foram iniciados ainda, por favor recarregue em dois minutos.</string>
+  <string name="no_configured_client_tunnels">Nenhum cliente de tuneis configurado.</string>
+  <string name="no_configured_server_tunnels">Nenhum servidor de tuneis configurado.</string>
   <string name="i2ptunnel_new_tunnel">Novo túnel</string>
   <string name="i2ptunnel_msg_config_saved">Mudanças nas configurações salvas</string>
   <string name="i2ptunnel_msg_config_save_failed">Falha ao salvar as configurações</string>
@@ -279,10 +295,16 @@
   <string name="username">Nome de usuário</string>
   <string name="password">Senha</string>
   <string name="outproxy_auth">Autorização de proxy de saída</string>
+  <string name="other">Outros</string>
   <string name="signature_type">Tipo de assinatura</string>
   <string name="custom_options">Opções personalizadas</string>
+  <string name="all">Todos</string>
   <string name="no_messages">Sem mensagens</string>
   <string name="no_error_messages">Nenhuma mensagem de erro</string>
+  <plurals name="log_messages">
+    <item quantity="one">Uma mensagem</item>
+    <item quantity="other">%d mensagens, mais novas primeiro</item>
+  </plurals>
   <string name="log_entry">Entrada no log</string>
   <string name="copy_logs">Copiar logs</string>
   <string name="error_logs_copied_to_clipboard">Logs de erro copiados para a área de transferência</string>

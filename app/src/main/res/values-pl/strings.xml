@@ -257,6 +257,7 @@
   <string name="target_host">Host docelowy</string>
   <string name="target_port">Port docelowy</string>
   <string name="use_ssl">Użyj SSL</string>
+  <string name="tunnel_summ_use_ssl">Wykorzystaj SSL, aby połączyć się ze wskazanym celem</string>
   <string name="tunnel_parameters">Parametry tuneli</string>
   <string name="profile">Profil</string>
   <string name="profile_interactive">Połączenie interaktywne</string>
