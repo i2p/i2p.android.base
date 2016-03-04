@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -52,10 +53,31 @@
                 style="@style/ListItem.TextOnly"
                 android:text="Tunnel type" />
 
-            <TextView
-                android:id="@+id/tunnel_details"
-                style="@style/ListItem.TextOnly"
-                android:text="Tunnel details" />
+            <RelativeLayout
+                android:id="@+id/tunnel_details_container"
+                style="@style/ListItem.OneLine"
+                android:visibility="gone">
+
+                <!-- Open link -->
+                <ImageView
+                    android:id="@+id/tunnel_details_copy"
+                    style="@style/ListItemContent.Action"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="Copy"
+                    android:src="@drawable/ic_content_copy_white_24dp"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tunnel_details"
+                    style="@style/ListItemContent.Text.Main"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@id/tunnel_details_copy"
+                    android:layout_toStartOf="@id/tunnel_details_copy"
+                    tools:text="Tunnel details" />
+            </RelativeLayout>
 
             <View
                 style="@style/Divider.Horizontal"

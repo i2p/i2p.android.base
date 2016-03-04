@@ -252,7 +252,7 @@ public class TunnelEntry {
         if (isClient())
             details = getClientDestination();
         else
-            details = "";
+            details = getDestHashBase32();
         return details;
     }
 

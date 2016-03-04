@@ -295,6 +295,7 @@
     <string name="i2ptunnel_view_target">Target</string>
     <string name="i2ptunnel_view_access_point">Access point</string>
     <string name="i2ptunnel_view_autostart">Auto-start</string>
+    <string name="address_copied_to_clipboard">Address copied to clipboard</string>
 
     <string name="edit_tunnel">Edit tunnel</string>
     <string name="name">Name</string>

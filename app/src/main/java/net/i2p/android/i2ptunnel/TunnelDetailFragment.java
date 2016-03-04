@@ -1,11 +1,14 @@
 package net.i2p.android.i2ptunnel;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -117,8 +120,26 @@ public class TunnelDetailFragment extends Fragment {
             ViewCompat.setTransitionName(description,
                     getActivity().getString(R.string.TUNNEL_DESCRIPTION) + mTunnel.getId());
 
-            TextView details = (TextView) v.findViewById(R.id.tunnel_details);
-            details.setText(mTunnel.getDetails());
+            if (!mTunnel.getDetails().isEmpty()) {
+                v.findViewById(R.id.tunnel_details_container).setVisibility(View.VISIBLE);
+                TextView details = (TextView) v.findViewById(R.id.tunnel_details);
+                View copyDetails = v.findViewById(R.id.tunnel_details_copy);
+                details.setText(mTunnel.getDetails());
+                if (!mTunnel.isClient()) {
+                    copyDetails.setVisibility(View.VISIBLE);
+                    copyDetails.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+                                copyToClipbardLegacy();
+                            else
+                                copyToClipboardHoneycomb();
+
+                            Toast.makeText(getActivity(), R.string.address_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
 
             View accessIfacePortItem = v.findViewById(R.id.tunnel_access_interface_port_item);
             TextView accessIfacePort = (TextView) v.findViewById(R.id.tunnel_access_interface_port);
@@ -278,5 +299,18 @@ public class TunnelDetailFragment extends Fragment {
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void copyToClipbardLegacy() {
+        android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        clipboard.setText(mTunnel.getDetails());
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void copyToClipboardHoneycomb() {
+        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        android.content.ClipData clip = android.content.ClipData.newPlainText(
+                mTunnel.getName(), mTunnel.getDetails());
+        clipboard.setPrimaryClip(clip);
     }
 }
