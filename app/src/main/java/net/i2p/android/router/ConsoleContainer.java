@@ -93,14 +93,18 @@ public class ConsoleContainer extends Fragment {
     }
 
     private void setMenuVisibility() {
-        boolean advanced = PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean(
-                "i2pandroid.main.showStats", false);
         boolean routerRunning = Util.getRouterContext() != null;
-
         mConsoleMenu.findViewById(R.id.action_logs).setVisibility(routerRunning ? View.VISIBLE : View.GONE);
         mConsoleMenu.findViewById(R.id.action_graphs).setVisibility(routerRunning ? View.VISIBLE : View.GONE);
-        mConsoleMenu.findViewById(R.id.action_peers).setVisibility(advanced && routerRunning ? View.VISIBLE : View.GONE);
-        mConsoleMenu.findViewById(R.id.action_netdb).setVisibility(advanced && routerRunning ? View.VISIBLE : View.GONE);
+
+        if (getActivity() != null) {
+            boolean advanced = PreferenceManager.getDefaultSharedPreferences(getActivity())
+                    .getBoolean("i2pandroid.main.showStats", false);
+            mConsoleMenu.findViewById(R.id.action_peers).setVisibility(
+                    advanced && routerRunning ? View.VISIBLE : View.GONE);
+            mConsoleMenu.findViewById(R.id.action_netdb).setVisibility(
+                    advanced && routerRunning ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
