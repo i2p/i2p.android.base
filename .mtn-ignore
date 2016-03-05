@@ -35,7 +35,6 @@ signing.properties
 .*.iws
 
 #Gradle
-^.gradle
 build
 
 # I2P-specific ignores
