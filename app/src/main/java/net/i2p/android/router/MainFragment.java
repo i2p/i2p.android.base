@@ -428,9 +428,9 @@ public class MainFragment extends I2PFragmentBase {
             double outData = ctx.bandwidthLimiter().getTotalAllocatedOutboundBytes();
 
             ((TextView) getActivity().findViewById(R.id.console_download_stats)).setText(
-                    Util.formatSize(inBw) + "Bps / " + Util.formatSize(inData) + "B");
+                    Util.formatSpeed(inBw) + "Bps / " + Util.formatSize(inData) + "B");
             ((TextView) getActivity().findViewById(R.id.console_upload_stats)).setText(
-                    Util.formatSize(outBw) + "Bps / " + Util.formatSize(outData) + "B");
+                    Util.formatSpeed(outBw) + "Bps / " + Util.formatSize(outData) + "B");
 
             getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.VISIBLE);
         } else {

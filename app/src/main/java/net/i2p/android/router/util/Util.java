@@ -553,8 +553,19 @@ public abstract class Util implements I2PConstants {
     }
 
     public static String formatSize(double size) {
+        return formatSize(size, 0);
+    }
+
+    public static String formatSpeed(double size) {
+        return formatSize(size, 1);
+    }
+
+    public static String formatSize(double size, int baseScale) {
         int scale;
-        for (scale = 0; size >= 1024.0D; size /= 1024.0D) {
+        for (int i = 0; i < baseScale; i++) {
+            size /= 1024.0D;
+        }
+        for (scale = baseScale; size >= 1024.0D; size /= 1024.0D) {
             ++scale;
         }
 

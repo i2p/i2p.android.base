@@ -264,11 +264,11 @@ public class RouterService extends Service {
 
         String text =
                 getResources().getString(R.string.notification_status_text,
-                        Util.formatSize(inBW), Util.formatSize(outBW));
+                        Util.formatSpeed(inBW), Util.formatSpeed(outBW));
 
         String bigText =
                 getResources().getString(R.string.notification_status_bw,
-                        Util.formatSize(inBW), Util.formatSize(outBW)) + '\n'
+                        Util.formatSpeed(inBW), Util.formatSpeed(outBW)) + '\n'
                 + getResources().getString(R.string.notification_status_peers,
                         active, known) + '\n'
                 + getResources().getString(R.string.notification_status_expl,
