@@ -55,7 +55,7 @@ public class SeekBarPreference extends Preference implements Persistable {
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, @NonNull Object defaultValue) {
-        int average = (mController.getMaxValue() - mController.getMinValue()) / 2;
+        int average = mController.getMaxValue() / 2;
         if(restoreValue) mController.setCurrentValue(getPersistedInt(average));
         else mController.onSetInitialValue(restoreValue, defaultValue);
     }
@@ -84,14 +84,6 @@ public class SeekBarPreference extends Preference implements Persistable {
 
     public void setMeasurementUnit(String measurementUnit) {
         mController.setMeasurementUnit(measurementUnit);
-    }
-
-    public int getMinValue() {
-        return mController.getMinValue();
-    }
-
-    public void setMinValue(int minValue) {
-        mController.setMinValue(minValue);
     }
 
     public int getMaxValue() {

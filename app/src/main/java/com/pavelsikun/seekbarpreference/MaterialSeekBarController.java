@@ -8,36 +8,30 @@ import android.support.v7.preference.Preference;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import net.i2p.android.router.R;
 
-import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
-
 /**
  * Based on MaterialSeekBarController created by mrbimc on 30.09.15.
  */
-public class MaterialSeekBarController implements DiscreteSeekBar.OnProgressChangeListener {
+public class MaterialSeekBarController implements SeekBar.OnSeekBarChangeListener {
 
     private final String TAG = getClass().getName();
 
     public static final int DEFAULT_CURRENT_VALUE = 50;
-    private static final int DEFAULT_MIN_VALUE = 0;
     private static final int DEFAULT_MAX_VALUE = 100;
     private static final String DEFAULT_MEASUREMENT_UNIT = "";
 
     private int mMaxValue;
     private int mMaxDigits;
-    private int mMinValue;
     private int mCurrentValue;
     private String mMeasurementUnit;
 
-    private DiscreteSeekBar mSeekBar;
+    private SeekBar mSeekBar;
     private TextView mSeekBarValue;
     private TextView mMeasurementUnitView;
-
-    private String mTitle;
-    private String mSummary;
 
     private Context mContext;
 
@@ -49,12 +43,6 @@ public class MaterialSeekBarController implements DiscreteSeekBar.OnProgressChan
         init(attrs, null);
     }
 
-    public MaterialSeekBarController(Context context, AttributeSet attrs, View view, Persistable persistable) {
-        mContext = context;
-        mPersistable = persistable;
-        init(attrs, view);
-    }
-
     private void init(AttributeSet attrs, View view) {
         setValuesFromXml(attrs);
         if(view != null) onBindView(view);
@@ -62,20 +50,15 @@ public class MaterialSeekBarController implements DiscreteSeekBar.OnProgressChan
     private void setValuesFromXml(@Nullable AttributeSet attrs) {
         if (attrs == null) {
             mCurrentValue = DEFAULT_CURRENT_VALUE;
-            mMinValue = DEFAULT_MIN_VALUE;
             mMaxValue = DEFAULT_MAX_VALUE;
             mMeasurementUnit = DEFAULT_MEASUREMENT_UNIT;
         } else {
             TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.SeekBarPreference);
             try {
-                mMinValue = a.getInt(R.styleable.SeekBarPreference_msbp_minValue, DEFAULT_MIN_VALUE);
                 mMaxValue = a.getInt(R.styleable.SeekBarPreference_msbp_maxValue, DEFAULT_MAX_VALUE);
                 mCurrentValue = a.getInt(R.styleable.SeekBarPreference_msbp_defaultValue, DEFAULT_CURRENT_VALUE);
 
-                mTitle = a.getString(R.styleable.SeekBarPreference_msbp_title);
-                mSummary = a.getString(R.styleable.SeekBarPreference_msbp_summary);
-
-                if(mCurrentValue < mMinValue) mCurrentValue = (mMaxValue - mMinValue) / 2;
+                if(mCurrentValue > mMaxValue) mCurrentValue = mMaxValue / 2;
                 mMeasurementUnit = a.getString(R.styleable.SeekBarPreference_msbp_measurementUnit);
                 if (mMeasurementUnit == null)
                     mMeasurementUnit = DEFAULT_MEASUREMENT_UNIT;
@@ -86,16 +69,11 @@ public class MaterialSeekBarController implements DiscreteSeekBar.OnProgressChan
         mMaxDigits = (int) Math.log10(mMaxValue) + 1;
     }
 
-    public void setOnPersistListener(Persistable persistable) {
-        mPersistable = persistable;
-    }
-
     public void onBindView(@NonNull View view) {
 
-        mSeekBar = (DiscreteSeekBar) view.findViewById(R.id.seekbar);
-        mSeekBar.setMin(mMinValue);
+        mSeekBar = (SeekBar) view.findViewById(R.id.seekbar);
         mSeekBar.setMax(mMaxValue);
-        mSeekBar.setOnProgressChangeListener(this);
+        mSeekBar.setOnSeekBarChangeListener(this);
 
         mSeekBarValue = (TextView) view.findViewById(R.id.seekbar_value);
         setPaddedValue(mCurrentValue);
@@ -109,18 +87,10 @@ public class MaterialSeekBarController implements DiscreteSeekBar.OnProgressChan
             mSeekBar.setEnabled(false);
             mSeekBarValue.setEnabled(false);
         }
-
-        if(mTitle != null || mSummary != null) {
-            TextView title = (TextView) view.findViewById(android.R.id.title);
-            TextView summary = (TextView) view.findViewById(android.R.id.summary);
-
-            if(mTitle != null) title.setText(mTitle);
-            if(mSummary != null) summary.setText(mSummary);
-        }
     }
 
     protected void onSetInitialValue(boolean restoreValue, @NonNull Object defaultValue) {
-        mCurrentValue = (mMaxValue - mMinValue) / 2;
+        mCurrentValue = mMaxValue / 2;
         try {
             mCurrentValue = (Integer) defaultValue;
         } catch (Exception ex) {
@@ -140,17 +110,17 @@ public class MaterialSeekBarController implements DiscreteSeekBar.OnProgressChan
 
     //SeekBarListener:
     @Override
-    public void onProgressChanged(@NonNull DiscreteSeekBar seekBar, int progress, boolean fromUser) {
+    public void onProgressChanged(@NonNull SeekBar seekBar, int progress, boolean fromUser) {
         mCurrentValue = progress;
         setPaddedValue(progress);
     }
 
     @Override
-    public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+    public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
     @Override
-    public void onStopTrackingTouch(@NonNull DiscreteSeekBar seekBar) {
+    public void onStopTrackingTouch(@NonNull SeekBar seekBar) {
         setCurrentValue(mCurrentValue);
     }
 
@@ -180,16 +150,6 @@ public class MaterialSeekBarController implements DiscreteSeekBar.OnProgressChan
     }
 
 
-    public void setMinValue(int minValue) {
-        mMinValue = minValue;
-        if (mSeekBar != null) mSeekBar.setMin(mMinValue);
-    }
-
-    public int getMinValue() {
-        return mMinValue;
-    }
-
-
     public void setMeasurementUnit(String measurementUnit) {
         mMeasurementUnit = measurementUnit;
         if (mMeasurementUnitView != null) mMeasurementUnitView.setText(mMeasurementUnit);
@@ -197,9 +157,5 @@ public class MaterialSeekBarController implements DiscreteSeekBar.OnProgressChan
 
     public String getMeasurementUnit() {
         return mMeasurementUnit;
-    }
-
-    static int pxFromDp(int dp, Context context) {
-        return (int) (dp * context.getResources().getDisplayMetrics().density);
     }
 }

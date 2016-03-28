@@ -35,7 +35,7 @@
             android:textColor="?android:attr/textColorSecondary"/>
     </LinearLayout>
 
-    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+    <SeekBar
         android:id="@+id/seekbar"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@id/value_holder"

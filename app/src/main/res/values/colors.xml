@@ -12,10 +12,6 @@
     <color name="menu_label_background">#b2000000</color>
     <color name="menu_label_text">#fafafa</color>
 
-    <color name="dsb_progress_color">@color/accent</color>
-    <color name="dsb_track_color">#48ffffff</color> <!-- 30% White -->
-    <color name="dsb_disabled_color">#48ffffff</color> <!-- 30% White -->
-
     <color name="pager_indicator_footer_color">@color/primary</color>
     <color name="pager_indicator_selected_color">@color/primary_text_default_material_dark</color>
     <color name="pager_indicator_text_color">@color/primary_text_disabled_material_dark</color>
