@@ -91,6 +91,7 @@ dependencyVerification {
             'com.eowise:recyclerview-stickyheaders:7b236da49b33b840e9ba6e7e4182218d1a2d9047236fdbc3ca947352f9b0883b',
             'com.mcxiaoke.viewpagerindicator:library:1e8aad664137f68abdfee94889f6da3dc98be652a235176a403965a07a25de62',
             'org.sufficientlysecure:html-textview:39048e35894e582adada388e6c00631803283f8defed8e07ad58a5f284f272ee',
+            'org.adw.library:discrete-seekbar:5d12196065939d5cf709969da416d1275ad020cddace186488e5bed030663432',
     ]
 }
 
