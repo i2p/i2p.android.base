@@ -52,8 +52,8 @@ android {
 
 dependencies {
     // Local dependencies
-    compile project(':routerjars')
     compile project(':lib:client')
+    compile project(':routerjars')
 
     // Android Support Repository dependencies
     def supportVersion = '23.2.1'

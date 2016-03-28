@@ -1,15 +1,5 @@
 apply plugin: 'java'
 
-configurations {
-    client
-}
-
-configurations.default.extendsFrom configurations.client
-
-task buildClient(type: Exec) {
-    outputs.dir('libs')
-    commandLine 'ant', 'buildclient'
-}
 task buildRouter(type: Exec) {
     outputs.dir('libs')
     commandLine 'ant', 'buildrouter'
@@ -18,10 +8,6 @@ task buildRouter(type: Exec) {
 // TODO an empty routerjars.jar is added to the classpath
 
 artifacts {
-    client file: file('libs/i2p.jar'), builtBy: buildClient
-    client file: file('libs/mstreaming.jar'), builtBy: buildClient
-    client file: file('libs/streaming.jar'), builtBy: buildClient
-
     'default' file: file('libs/router.jar'), builtBy: buildRouter
     'default' file: file('libs/newsxml.jar'), builtBy: buildRouter
     'default' file: file('libs/i2ptunnel.jar'), builtBy: buildRouter
@@ -30,7 +16,7 @@ artifacts {
     'default' file: file('libs/BOB.jar'), builtBy: buildRouter
 }
 
-clean.dependsOn cleanBuildClient, cleanBuildRouter
+clean.dependsOn cleanBuildRouter
 
 clean << {
     exec {
