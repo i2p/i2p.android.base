@@ -6,7 +6,7 @@
         <!--
         router.inboundPool.length=1
         -->
-        <net.i2p.android.router.util.IntListPreference
+        <net.i2p.android.preferences.util.IntListPreference
             android:defaultValue="2"
             android:dialogTitle="@string/settings_desc_expl_length"
             android:entries="@array/setting0to3"
@@ -18,7 +18,7 @@
         <!--
         router.inboundPool.lengthVariance=1
         -->
-        <net.i2p.android.router.util.IntListPreference
+        <net.i2p.android.preferences.util.IntListPreference
             android:defaultValue="0"
             android:dialogTitle="@string/settings_desc_expl_lengthVariance"
             android:entries="@array/setting2to2"
@@ -31,7 +31,7 @@
         <!--
         router.inboundPool.quantity=2
         -->
-        <net.i2p.android.router.util.IntListPreference
+        <net.i2p.android.preferences.util.IntListPreference
             android:defaultValue="2"
             android:dialogTitle="@string/settings_desc_expl_quantity"
             android:entries="@array/setting0to3"
@@ -43,7 +43,7 @@
         <!--
         router.inboundPool.backupQuantity=0
         -->
-        <net.i2p.android.router.util.IntListPreference
+        <net.i2p.android.preferences.util.IntListPreference
             android:defaultValue="0"
             android:dialogTitle="@string/settings_desc_expl_backupQuantity"
             android:entries="@array/setting0to3"
@@ -59,7 +59,7 @@
         <!--
         router.outboundPool.length=1
         -->
-        <net.i2p.android.router.util.IntListPreference
+        <net.i2p.android.preferences.util.IntListPreference
             android:defaultValue="2"
             android:dialogTitle="@string/settings_desc_expl_length"
             android:entries="@array/setting0to3"
@@ -71,7 +71,7 @@
         <!--
         router.outboundPool.lengthVariance=1
         -->
-        <net.i2p.android.router.util.IntListPreference
+        <net.i2p.android.preferences.util.IntListPreference
             android:defaultValue="0"
             android:dialogTitle="@string/settings_desc_expl_lengthVariance"
             android:entries="@array/setting2to2"
@@ -83,7 +83,7 @@
         <!--
         router.outboundPool.quantity=2
         -->
-        <net.i2p.android.router.util.IntListPreference
+        <net.i2p.android.preferences.util.IntListPreference
             android:defaultValue="2"
             android:dialogTitle="@string/settings_desc_expl_quantity"
             android:entries="@array/setting0to3"
@@ -95,7 +95,7 @@
         <!--
         router.outboundPool.backupQuantity=0
         -->
-        <net.i2p.android.router.util.IntListPreference
+        <net.i2p.android.preferences.util.IntListPreference
             android:defaultValue="0"
             android:dialogTitle="@string/settings_desc_expl_backupQuantity"
             android:entries="@array/setting0to3"

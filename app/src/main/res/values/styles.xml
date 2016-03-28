@@ -22,7 +22,9 @@
         <!-- The rest of your attributes -->
     </style>
 
-    <style name="Theme.I2P" parent="Base.Theme.I2P" />
+    <style name="Theme.I2P" parent="Base.Theme.I2P">
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    </style>
 
     <style name="TextAppearance.AppCompat.Primary" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@color/primary_text_default_material_dark</item>

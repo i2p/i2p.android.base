@@ -3,7 +3,7 @@
 
     <PreferenceCategory android:title="@string/other">
 
-        <net.i2p.android.router.util.IntListPreference
+        <net.i2p.android.preferences.util.IntListPreference
             android:entries="@array/sigtype_names"
             android:entryValues="@array/sigtypes"
             android:key="@string/TUNNEL_OPT_SIGTYPE"

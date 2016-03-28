@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--
     Keys and the default values from current installation:
     -->
@@ -16,26 +17,22 @@
     <!--
     i2np.bandwidth.inboundKBytesPerSecond=100
     -->
-    <com.hlidskialf.android.preference.SeekBarPreference
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:key="@string/PROP_INBOUND_BANDWIDTH"
-        android:defaultValue="100"
-        android:max="1000"
-        android:title="@string/settings_label_bw_inbound"
-        android:summary="@string/settings_desc_bw_inbound"
-        android:dialogMessage="Maximum inbound speed"
-        android:text=" KBytes/sec"
+        android:title="@string/settings_desc_bw_inbound"
+        app:msbp_defaultValue="100"
+        app:msbp_maxValue="1000"
+        app:msbp_measurementUnit="KB/s"
         />
     <!--
     i2np.bandwidth.outboundKBytesPerSecond=30
     -->
-    <com.hlidskialf.android.preference.SeekBarPreference
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:key="@string/PROP_OUTBOUND_BANDWIDTH"
-        android:defaultValue="100"
-        android:max="1000"
-        android:title="@string/settings_label_bw_outbound"
-        android:summary="@string/settings_desc_bw_outbound"
-        android:dialogMessage="Maximum outbound speed"
-        android:text=" KBytes/sec"
+        android:title="@string/settings_desc_bw_outbound"
+        app:msbp_defaultValue="100"
+        app:msbp_maxValue="1000"
+        app:msbp_measurementUnit="KB/s"
         />
     </PreferenceCategory>
 

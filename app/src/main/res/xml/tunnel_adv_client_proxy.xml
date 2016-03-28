@@ -8,7 +8,7 @@
             android:summary="@string/tunnel_summ_proxy_auth"
             android:title="@string/settings_enable" />
 
-        <net.i2p.android.router.util.SummaryEditTextPreference
+        <net.i2p.android.preferences.util.SummaryEditTextPreference
             android:dependency="@string/TUNNEL_OPT_LOCAL_AUTH"
             android:key="@string/TUNNEL_OPT_LOCAL_USERNAME"
             android:title="@string/username" />
@@ -27,7 +27,7 @@
             android:summary="@string/tunnel_summ_outproxy_auth"
             android:title="@string/settings_enable" />
 
-        <net.i2p.android.router.util.SummaryEditTextPreference
+        <net.i2p.android.preferences.util.SummaryEditTextPreference
             android:dependency="@string/TUNNEL_OPT_OUTPROXY_AUTH"
             android:key="@string/TUNNEL_OPT_OUTPROXY_USERNAME"
             android:title="@string/username" />

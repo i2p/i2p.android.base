@@ -7,7 +7,7 @@
         android:order="20"
         android:title="@string/close_tunnels" />
 
-    <net.i2p.android.router.util.IntEditTextPreference
+    <net.i2p.android.preferences.util.IntEditTextPreference
         android:defaultValue="@integer/DEFAULT_CLOSE_TIME"
         android:dependency="@string/TUNNEL_OPT_CLOSE_IDLE"
         android:key="@string/TUNNEL_OPT_CLOSE_TIME"

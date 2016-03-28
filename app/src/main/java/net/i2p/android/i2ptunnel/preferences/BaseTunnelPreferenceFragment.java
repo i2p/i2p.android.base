@@ -2,27 +2,25 @@ package net.i2p.android.i2ptunnel.preferences;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
-import android.support.v4.preference.PreferenceFragment;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 
 import net.i2p.I2PAppContext;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
+import net.i2p.android.preferences.util.CustomPreferenceFragment;
 import net.i2p.android.router.R;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
 
-public abstract class BaseTunnelPreferenceFragment extends PreferenceFragment {
+public abstract class BaseTunnelPreferenceFragment extends CustomPreferenceFragment {
     protected static final String ARG_TUNNEL_ID = "tunnelId";
 
     protected TunnelControllerGroup mGroup;
     protected int mTunnelId;
 
     @Override
-    public void onCreate(Bundle paramBundle) {
-        super.onCreate(paramBundle);
-
+    public void onCreatePreferences(Bundle paramBundle, String s) {
         String error;
         try {
             mGroup = TunnelControllerGroup.getInstance();

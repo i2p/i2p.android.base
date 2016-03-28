@@ -1,9 +1,9 @@
 package net.i2p.android.preferences;
 
-import android.support.v4.preference.PreferenceFragment;
 import android.widget.Toast;
 
 import net.i2p.I2PAppContext;
+import net.i2p.android.preferences.util.CustomPreferenceFragment;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import net.i2p.router.RouterContext;
@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * A PreferenceFragment that handles saving router settings.
  */
-public class I2PreferenceFragment extends PreferenceFragment {
+public abstract class I2PreferenceFragment extends CustomPreferenceFragment {
     @Override
     public void onPause() {
         List<Properties> lProps = Util.getPropertiesFromPreferences(getActivity());

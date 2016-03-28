@@ -7,7 +7,7 @@
         android:summary="@string/tunnel_summ_shared_client"
         android:title="@string/shared_client" />
 
-    <net.i2p.android.router.util.SummaryEditTextPreference
+    <net.i2p.android.preferences.util.SummaryEditTextPreference
         android:key="@string/TUNNEL_DEST"
         android:title="@string/target_destination" />
 

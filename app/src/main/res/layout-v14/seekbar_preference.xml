@@ -1,0 +1,39 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+    android:paddingRight="?android:attr/listPreferredItemPaddingRight">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <TextView android:id="@android:id/title"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:singleLine="true"
+                  android:textAppearance="@style/Preference_TextAppearanceMaterialSubhead"
+                  android:ellipsize="marquee" />
+
+        <TextView android:id="@android:id/summary"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@android:id/title"
+                  android:layout_alignLeft="@android:id/title"
+                  android:textAppearance="?android:attr/textAppearanceSmall"
+                  android:textColor="?android:attr/textColorSecondary"
+                  android:maxLines="10" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/seekbar_inner"/>
+
+</LinearLayout>

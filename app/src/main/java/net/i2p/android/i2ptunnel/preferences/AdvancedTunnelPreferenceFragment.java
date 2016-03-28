@@ -3,11 +3,11 @@ package net.i2p.android.i2ptunnel.preferences;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.preference.CheckBoxPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceScreen;
 
 import net.i2p.android.i2ptunnel.util.TunnelLogic;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;

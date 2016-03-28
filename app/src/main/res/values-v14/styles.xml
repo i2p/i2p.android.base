@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="Theme.I2P" parent="Base.Theme.I2P">
+        <!-- This fixes a UI bug in the support preference library -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+    </style>
+
     <style name="WizardPageTitle" parent="WizardPageTitleBase">
         <item name="android:paddingLeft">?android:attr/listPreferredItemPaddingLeft</item>
     </style>

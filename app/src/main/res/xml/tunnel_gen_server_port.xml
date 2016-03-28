@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <net.i2p.android.router.util.SummaryEditTextPreference
+    <net.i2p.android.preferences.util.SummaryEditTextPreference
         android:key="@string/TUNNEL_TARGET_HOST"
         android:title="@string/target_host" />
 
-    <net.i2p.android.router.util.PortPreference
+    <net.i2p.android.preferences.util.PortPreference
         android:key="@string/TUNNEL_TARGET_PORT"
         android:title="@string/target_port" />
 

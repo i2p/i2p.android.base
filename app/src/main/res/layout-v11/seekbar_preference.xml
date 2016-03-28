@@ -1,0 +1,39 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:gravity="center_vertical"
+    android:paddingRight="?android:attr/scrollbarSize"
+    android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dip"
+        android:layout_marginBottom="6dip">
+
+        <TextView android:id="@android:id/title"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:singleLine="true"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
+                  android:textColor="?android:attr/textColorPrimary"
+                  android:ellipsize="marquee"
+                  android:fadingEdge="horizontal" />
+
+        <TextView android:id="@android:id/summary"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@android:id/title"
+                  android:textAppearance="?android:attr/textAppearanceSmall"
+                  android:textColor="?android:attr/textColorSecondary"
+                  android:maxLines="4" />
+
+    </RelativeLayout>
+
+
+    <include layout="@layout/seekbar_inner"/>
+
+</LinearLayout>

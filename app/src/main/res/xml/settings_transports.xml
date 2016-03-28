@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
         android:key="settings_udp"
         android:title="UDP">
@@ -13,7 +14,7 @@
             android:summary="DO NOT DISABLE THIS"
             android:title="@string/settings_enable" />
 
-        <net.i2p.android.router.util.PortPreference
+        <net.i2p.android.preferences.util.PortPreference
             android:dependency="@string/PROP_ENABLE_UDP"
             android:key="@string/PROP_UDP_INTERNAL_PORT"
             android:title="UDP port" />
@@ -21,16 +22,13 @@
         <!--
         i2np.udp.maxConnections=12
         -->
-        <com.hlidskialf.android.preference.SeekBarPreference
-            android:defaultValue="32"
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
             android:dependency="@string/PROP_ENABLE_UDP"
-            android:dialogMessage="Maximum UDP connections"
             android:key="@string/PROP_UDP_MAX_CONNECTIONS"
-            android:max="500"
             android:shouldDisableView="true"
-            android:summary="Maximum UDP connections allowed"
-            android:text=" connections"
-            android:title="@string/settings_label_maxConns" />
+            android:title="@string/settings_label_maxConns"
+            app:msbp_defaultValue="32"
+            app:msbp_maxValue="500" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -49,22 +47,19 @@
             android:summary="Use same port as UDP"
             android:title="Auto-set port" />
 
-        <net.i2p.android.router.util.PortPreference
+        <net.i2p.android.preferences.util.PortPreference
             android:dependency="@string/PROP_I2NP_NTCP_AUTO_PORT"
             android:key="@string/PROP_I2NP_NTCP_PORT"
             android:title="NTCP port" />
         <!--
         i2np.ntcp.maxConnections=24
         -->
-        <com.hlidskialf.android.preference.SeekBarPreference
-            android:defaultValue="32"
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
             android:dependency="i2np.ntcp.enable"
-            android:dialogMessage="Maximum NTCP connections"
             android:key="@string/PROP_NTCP_MAX_CONNECTIONS"
-            android:max="250"
             android:shouldDisableView="true"
-            android:summary="Maximum NTCP connections allowed (default=32)"
-            android:text=" connections"
-            android:title="@string/settings_label_maxConns" />
+            android:title="@string/settings_label_maxConns"
+            app:msbp_defaultValue="32"
+            app:msbp_maxValue="250" />
     </PreferenceCategory>
 </PreferenceScreen>

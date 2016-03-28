@@ -1,8 +1,7 @@
-package net.i2p.android.router.util;
+package net.i2p.android.preferences.util;
 
 import android.content.Context;
-import android.preference.EditTextPreference;
-import android.text.InputType;
+import android.support.v7.preference.EditTextPreference;
 import android.util.AttributeSet;
 
 import net.i2p.android.router.R;
@@ -10,17 +9,14 @@ import net.i2p.android.router.R;
 public class PortPreference extends EditTextPreference {
     public PortPreference(Context context) {
         super(context);
-        getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     public PortPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     public PortPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     @Override

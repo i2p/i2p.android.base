@@ -1,7 +1,7 @@
 package net.i2p.android.preferences;
 
 import android.os.Bundle;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceScreen;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;
@@ -11,8 +11,7 @@ import net.i2p.util.LogManager;
 
 public class LoggingPreferenceFragment extends I2PreferenceFragment {
     @Override
-    public void onCreate(Bundle paramBundle) {
-        super.onCreate(paramBundle);
+    public void onCreatePreferences(Bundle paramBundle, String s) {
         addPreferencesFromResource(R.xml.settings_logging);
         setupLoggingSettings();
     }

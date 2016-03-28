@@ -6,7 +6,7 @@
         android:summary="%s"
         android:title="@string/reachable_on" />
 
-    <net.i2p.android.router.util.PortPreference
+    <net.i2p.android.preferences.util.PortPreference
         android:key="@string/TUNNEL_LISTEN_PORT"
         android:title="@string/listen_port" />
 

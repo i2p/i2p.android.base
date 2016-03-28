@@ -3,12 +3,12 @@ package net.i2p.android.router;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.widget.Toolbar;
 
 import net.i2p.android.I2PActivity;
@@ -84,10 +84,11 @@ public class SettingsActivity extends AppCompatActivity implements
         }
     }
 
-    public static class SettingsFragment extends PreferenceFragment {
+    public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
-        public void onCreate(Bundle paramBundle) {
-            super.onCreate(paramBundle);
+        public void onCreatePreferences(Bundle paramBundle, String s) {
+            migrateOldSettings();
+
             addPreferencesFromResource(R.xml.settings);
 
             this.findPreference(PREFERENCE_CATEGORY_NETWORK)
@@ -102,6 +103,29 @@ public class SettingsActivity extends AppCompatActivity implements
                     .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_APPEARANCE));
             this.findPreference(PREFERENCE_CATEGORY_ADVANCED)
                     .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_ADVANCED));
+        }
+
+        private void migrateOldSettings() {
+            SharedPreferences prefs = getPreferenceManager().getSharedPreferences();
+            try {
+                prefs.getInt("i2np.bandwidth.inboundKBytesPerSecond", 0);
+            } catch (ClassCastException e) {
+                // Migrate pre-0.9.25 settings
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.remove("i2np.bandwidth.inboundKBytesPerSecond");
+                editor.putInt("i2np.bandwidth.inboundKBytesPerSecond", Integer.parseInt(
+                        prefs.getString("i2np.bandwidth.inboundKBytesPerSecond", "100")));
+                editor.remove("i2np.bandwidth.outboundKBytesPerSecond");
+                editor.putInt("i2np.bandwidth.outboundKBytesPerSecond", Integer.parseInt(
+                        prefs.getString("i2np.bandwidth.outboundKBytesPerSecond", "100")));
+                editor.remove("i2np.ntcp.maxConnections");
+                editor.putInt("i2np.ntcp.maxConnections", Integer.parseInt(
+                        prefs.getString("i2np.ntcp.maxConnections", "32")));
+                editor.remove("i2np.udp.maxConnections");
+                editor.putInt("i2np.udp.maxConnections", Integer.parseInt(
+                        prefs.getString("i2np.udp.maxConnections", "32")));
+                editor.apply();
+            }
         }
 
         @Override

@@ -1,9 +1,8 @@
-package net.i2p.android.router.util;
+package net.i2p.android.preferences.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.preference.EditTextPreference;
-import android.text.InputType;
+import android.support.v7.preference.EditTextPreference;
 import android.util.AttributeSet;
 
 import net.i2p.android.router.R;
@@ -26,7 +25,6 @@ public class ConnectionLimitPreference extends EditTextPreference {
     }
 
     void init(Context context, AttributeSet attrs) {
-        getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.ConnectionLimitPreference, 0, 0);
         mValueInTitle = attr.getBoolean(R.styleable.ConnectionLimitPreference_clp_valueInTitle, false);
         attr.recycle();

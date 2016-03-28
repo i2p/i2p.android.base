@@ -7,8 +7,7 @@ import net.i2p.android.router.SettingsActivity;
 
 public class ExploratoryPoolPreferenceFragment extends I2PreferenceFragment {
     @Override
-    public void onCreate(Bundle paramBundle) {
-        super.onCreate(paramBundle);
+    public void onCreatePreferences(Bundle paramBundle, String s) {
         addPreferencesFromResource(R.xml.settings_expl_tunnels);
     }
 

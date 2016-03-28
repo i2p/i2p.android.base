@@ -3,25 +3,25 @@
 
     <PreferenceCategory android:title="@string/post_limits">
 
-        <net.i2p.android.router.util.IntEditTextPreference
+        <net.i2p.android.preferences.util.IntEditTextPreference
             android:key="@string/TUNNEL_OPT_POST_CHECK_TIME"
             android:summary="%s minutes"
             android:title="@string/limit_period" />
 
-        <net.i2p.android.router.util.ConnectionLimitPreference
+        <net.i2p.android.preferences.util.ConnectionLimitPreference
             android:key="@string/TUNNEL_OPT_POST_MAX"
             android:title="@string/client_posts_per_period" />
 
-        <net.i2p.android.router.util.IntEditTextPreference
+        <net.i2p.android.preferences.util.IntEditTextPreference
             android:key="@string/TUNNEL_OPT_POST_BAN_TIME"
             android:summary="%s minutes"
             android:title="@string/client_ban_length" />
 
-        <net.i2p.android.router.util.ConnectionLimitPreference
+        <net.i2p.android.preferences.util.ConnectionLimitPreference
             android:key="@string/TUNNEL_OPT_POST_TOTAL_MAX"
             android:title="@string/total_posts_per_period" />
 
-        <net.i2p.android.router.util.IntEditTextPreference
+        <net.i2p.android.preferences.util.IntEditTextPreference
             android:key="@string/TUNNEL_OPT_POST_TOTAL_BAN_TIME"
             android:summary="%s minutes"
             android:title="@string/total_ban_length" />

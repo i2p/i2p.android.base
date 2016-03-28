@@ -20,7 +20,7 @@
             android:summary="@string/tunnel_summ_reduce_quantity"
             android:title="@string/reduce_quantity" />
 
-        <net.i2p.android.router.util.IntEditTextPreference
+        <net.i2p.android.preferences.util.IntEditTextPreference
             android:defaultValue="@integer/DEFAULT_REDUCE_TIME"
             android:dependency="@string/TUNNEL_OPT_REDUCE_IDLE"
             android:key="@string/TUNNEL_OPT_REDUCE_TIME"
@@ -28,7 +28,7 @@
             android:summary="@string/num_minutes"
             android:title="@string/idle_time" />
 
-        <net.i2p.android.router.util.IntEditTextPreference
+        <net.i2p.android.preferences.util.IntEditTextPreference
             android:defaultValue="@integer/DEFAULT_REDUCE_COUNT"
             android:dependency="@string/TUNNEL_OPT_REDUCE_IDLE"
             android:key="@string/TUNNEL_OPT_REDUCE_QUANTITY"

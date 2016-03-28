@@ -1,20 +1,19 @@
 package net.i2p.android.preferences;
 
 import android.os.Bundle;
-import android.preference.Preference;
 import android.support.v4.app.Fragment;
-import android.support.v4.preference.PreferenceFragment;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceFragmentCompat;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;
 
-public class AdvancedPreferenceFragment extends PreferenceFragment {
+public class AdvancedPreferenceFragment extends PreferenceFragmentCompat {
     private static final String PREFERENCE_CATEGORY_TRANSPORTS = "preference_category_transports";
     private static final String PREFERENCE_CATEGORY_EXPL_TUNNELS = "preference_category_expl_tunnels";
 
     @Override
-    public void onCreate(Bundle paramBundle) {
-        super.onCreate(paramBundle);
+    public void onCreatePreferences(Bundle paramBundle, String s) {
         addPreferencesFromResource(R.xml.settings_advanced);
 
         findPreference(PREFERENCE_CATEGORY_TRANSPORTS)

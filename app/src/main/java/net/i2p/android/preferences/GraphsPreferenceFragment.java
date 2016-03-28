@@ -2,10 +2,10 @@ package net.i2p.android.preferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.CheckBoxPreference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceScreen;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;
@@ -24,8 +24,7 @@ public class GraphsPreferenceFragment extends I2PreferenceFragment {
     public static final String GRAPH_PREFERENCES_SEEN = "graphPreferencesSeen";
 
     @Override
-    public void onCreate(Bundle paramBundle) {
-        super.onCreate(paramBundle);
+    public void onCreatePreferences(Bundle paramBundle, String s) {
         addPreferencesFromResource(R.xml.settings_graphs);
         setupGraphSettings();
     }
