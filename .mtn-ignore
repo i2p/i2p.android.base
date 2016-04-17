@@ -24,6 +24,7 @@ _jsp\.java$
 /classes/
 
 # Android-specific ignores
+^lib/client/libs
 ^routerjars/libs
 local.properties
 signing.properties
