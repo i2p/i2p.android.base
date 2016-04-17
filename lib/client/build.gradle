@@ -24,12 +24,20 @@ android {
     }
 }
 
+task buildClient(type: Exec) {
+    outputs.dir('libs')
+    commandLine 'ant', 'buildclient'
+}
+
 dependencies {
-    compile fileTree('libs') {
-        builtBy 'buildClient'
-        include 'i2p.jar'
-        include 'mstreaming.jar'
-        include 'streaming.jar'
+    compile files('libs/i2p.jar') {
+        builtBy tasks.buildClient
+    }
+    compile files('libs/mstreaming.jar') {
+        builtBy tasks.buildClient
+    }
+    compile files('libs/streaming.jar') {
+        builtBy tasks.buildClient
     }
     // No direct dependencies on the helper lib, but this ensures consistent library behavior
     compile project(':lib:helper')
@@ -44,13 +52,6 @@ dependencyVerification {
             'com.android.support:support-v4:81ce890f26d35c75ad17d0f998a7e3230330c3b41e0b629566bc744bee89e448',
     ]
 }
-
-task buildClient(type: Exec) {
-    outputs.dir('libs')
-    commandLine 'ant', 'buildclient'
-}
-
-clean.dependsOn cleanBuildClient
 
 clean << {
     exec {
