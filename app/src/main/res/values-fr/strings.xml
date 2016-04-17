@@ -51,7 +51,7 @@
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
   <string name="no_tunnels_running">Aucun tunnel n\'est encore actif.</string>
-  <string name="download">Récéption</string>
+  <string name="download">Réception</string>
   <string name="upload">Envoi</string>
   <string name="configure_browser_title">Configurer le navigateur ?</string>
   <string name="configure_browser_for_i2p">Voudriez-vous configurer un navigateur pour voir les sites d\'I2P ? (vous pouvez aussi faire cela plus tard depuis le menu d\'aide).</string>
@@ -115,7 +115,7 @@
   <string name="notification_status_client">Tunnels client : %1$d/%2$d</string>
   <string name="menu_settings">Paramètres</string>
   <string name="settings_enable">Activer</string>
-  <string name="settings_desc_subscriptions">URLs d\'abonnement</string>
+  <string name="settings_desc_subscriptions">URL d\'abonnement</string>
   <string name="settings_label_bandwidth_net">Bande passante et réseau</string>
   <string name="settings_label_startOnBoot">Démarrer I2P lors du boot</string>
   <string name="settings_desc_startOnBoot">Se connecter automatiquement à I2P lorsque Android démarre</string>
@@ -284,7 +284,7 @@
   <string name="reject_inproxies">Rejeter les inproxies</string>
   <string name="tunnel_summ_reject_inproxies">Permettre seulement aux utilisateurs I2P de se connecter</string>
   <string name="unique_local">Local unique</string>
-  <string name="tunnel_summ_unique_local">Utiliser des IPs localhost uniques pour chaque client</string>
+  <string name="tunnel_summ_unique_local">Utiliser des IP localhost uniques pour chaque client</string>
   <string name="multihome">Multi domicile</string>
   <string name="tunnel_summ_multihome">Permettre les optimisations multi domiciles</string>
   <string name="client_connection_limits">Limites de clients connectés</string>

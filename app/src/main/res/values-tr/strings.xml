@@ -34,7 +34,7 @@
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_skew">%s saat sapması</string>
   <string name="net_status_error_unresolved_tcp">Çözümlenmemiş TCP adresi</string>
-  <string name="net_status_error_private_tcp">Özel TCP adresi</string>
+  <string name="net_status_error_private_tcp">Kişisel TCP adresi</string>
   <string name="net_status_warn_firewalled_inbound_tcp">Gelen TCP güvenlik duvarı etkinleştirilmiş </string>
   <string name="net_status_warn_firewalled_floodfill">Güvenlik duvarlı ve akış korumalı</string>
   <string name="net_status_info_disconnected">Bağlantı kesildi - ağ bağlantısını denetleyin</string>
@@ -174,7 +174,7 @@
   <string name="menu_help">Yardım</string>
   <string name="general">Genel</string>
   <string name="label_router">Herkese açık adresler</string>
-  <string name="label_private">Özel adresler</string>
+  <string name="label_private">Kişisel adresler</string>
   <string name="addressbook_is_empty">Adres defteri boş</string>
   <string name="addressbook_search_header">%s bulundu</string>
   <string name="addressbook_add_wizard_k_name">Ad</string>
@@ -285,6 +285,8 @@
   <string name="tunnel_summ_reject_inproxies">Yalnız I2P kullanıcıları bağlanabilsin</string>
   <string name="unique_local">Eşsiz yerel</string>
   <string name="tunnel_summ_unique_local">Her istemci için eşsiz yerel sunucu IP adresi kullanılsın</string>
+  <string name="multihome">Çoklu ev</string>
+  <string name="tunnel_summ_multihome">Çoklu ev iyileştirmeleri kullanılsın</string>
   <string name="client_connection_limits">İstemci bağlantı sınırları</string>
   <string name="connections_per_minute">Dakikalık bağlantı sayısı</string>
   <string name="connections_per_hour">Saatlik bağlantı sayısı</string>
@@ -318,4 +320,35 @@
   <string name="new_keys_on_reopen_conflict_title">Sürekli anahtarlar kullanılamasın</string>
   <string name="new_keys_on_reopen_conflict_msg">Tünel yeniden açıldığında yeni anahtarlar oluşturuluyorsa sürekli anahtarlar kullanılamaz. Sürekli anahtarlar devre dışı bırakılsın mı?</string>
   <string name="http_client">HTTP istemcisi</string>
+  <string name="tunnel_summ_user_agent">\'User-Agent\' üstbilgisi geçirilsin</string>
+  <string name="tunnel_summ_referer">\'Referer\' üstbilgisi geçirilsin</string>
+  <string name="tunnel_summ_accept">\'Accept-*\' üstbilgisi geçirilsin</string>
+  <string name="tunnel_summ_allow_ssl">I2P adreslerinde SSL kullanılabilsin</string>
+  <string name="jump_url_list">İnternet adresi listesine sıçra</string>
+  <string name="proxy_auth">Vekil sunucu kimlik doğrulaması</string>
+  <string name="tunnel_summ_proxy_auth">Bu vekil sunucuda oturum açmak için kimlik doğrulaması istensin</string>
+  <string name="username">Kullanıcı Adı</string>
+  <string name="password">Parola</string>
+  <string name="outproxy_auth">Giden vekil sunucu kimlik doğrulaması</string>
+  <string name="tunnel_summ_outproxy_auth">Giden vekil sunucu için oturum açılması gerekiyor</string>
+  <string name="other">Diğer</string>
+  <string name="signature_type">İmza tipi</string>
+  <string name="custom_options">Uyarlanmış seçenekler</string>
+  <string name="all">Tümü</string>
+  <string name="no_messages">Henüz bir ileti yok</string>
+  <string name="no_error_messages">Henüz bir hata iletisi yok</string>
+  <plurals name="log_error_messages">
+    <item quantity="other">%d hata iletisi, yeniden eskiye</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="other">%d ileti, yeniden eskiye</item>
+  </plurals>
+  <string name="log_entry">Günlük Kaydı</string>
+  <string name="copy_logs">Günlükleri kopyala</string>
+  <string name="i2p_android_error_logs">I2P Android Hata Günlükleri</string>
+  <string name="i2p_android_logs">I2P Android Günlükleri</string>
+  <string name="error_logs_copied_to_clipboard">Hata günlükleri panoya kopyalandı</string>
+  <string name="logs_copied_to_clipboard">Günlükler panoya kopyalandı</string>
+  <string name="label_browser_configuration">Tarayıcı ayarları</string>
+  <string name="unset">Ayarı Kaldır</string>
 </resources>

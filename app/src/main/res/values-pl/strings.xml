@@ -33,18 +33,21 @@
   <string name="net_status_error_i2cp">Błąd Menedżera Klienta I2CP - sprawdź logi</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_skew">Odchylenie zegara o %s</string>
+  <string name="net_status_error_unresolved_tcp">Nierozwiązany adres TCP</string>
   <string name="net_status_error_private_tcp">Prywatny adres TCP</string>
   <string name="net_status_warn_firewalled_inbound_tcp">Włączona zapora akceptująca przychodzące pakiety TCP</string>
+  <string name="net_status_warn_firewalled_floodfill">Za zaporą i floodfill</string>
   <string name="net_status_info_disconnected">Rozłączony - sprawdź połączenie z internetem.</string>
   <string name="net_status_error_udp_port">Port UDP w użyciu. Zmień ustawienia i zrestartuj.</string>
   <string name="net_status_error_no_active_peers">Brak aktywnych uczestników, sprawdź połączenie sieciowe i firewall</string>
+  <string name="net_status_error_udp_disabled_tcp_not_set">UDP wyłączone i nazwa/port przychodzącego portu TCP nie ustawiona</string>
   <string name="net_status_warn_firewalled_udp_disabled">Włączona zapora z zablokowanym UDP</string>
   <string name="shared_clients">Współdzielone klienty</string>
   <string name="uptime">Czas działania</string>
   <string name="active_peers">Aktywni uczestnicy</string>
   <string name="known_peers">Znani uczestnicy</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
-  <string name="char_client_tunnel">C</string>
+  <string name="char_client_tunnel">K</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
   <string name="no_tunnels_running">Brak aktywnych tuneli</string>
@@ -78,17 +81,20 @@
   <string name="router_not_running">Router nie jest włączony.</string>
   <string name="router_shutting_down">Trwa wyłączanie routera</string>
   <string name="stats_not_ready">Menadżer statystyk nie jest jeszcze gotowy. Spróbuj później.</string>
+  <string name="select_an_address">Wybierz adres.</string>
   <string name="no_graphs_configured">Żadne wykresy nie zostały skonfigurowane. Możesz wybrać statystyki graficzne w menu ustawień. Wszelkie zmiany wejdą w życie po upływie 60 sekund.</string>
   <string name="configure_graphs">Konfiguruj wykresy</string>
   <string name="graphs_not_ready">Wykresy nie są jeszcze gotowe. Spróbuj później.</string>
   <string name="statistics">Statystyki</string>
   <string name="routers">Rutery</string>
+  <string name="leasesets">LeaseSety</string>
   <string name="countries">Kraje</string>
   <string name="country">Kraj</string>
   <string name="transport">Transport</string>
   <string name="versions">Wersje</string>
   <string name="version">Wersja</string>
   <string name="count">Licznik</string>
+  <string name="tname_0">Ukryty lub uruchamia się</string>
   <string name="netdb_routers_empty">Brak routerów w Twoim NetDB.</string>
   <string name="netdb_leases_empty">Brak LeaseSets w Twoim NetDB.</string>
   <string name="notification_status_starting">Uruchamianie I2P!</string>
@@ -224,6 +230,7 @@
   <string name="enabled">Włączony</string>
   <string name="i2ptunnel_wizard_desc_name">Nazwa tunelu dla identyfikacji w liście tuneli.</string>
   <string name="i2ptunnel_wizard_desc_desc">Opis tunelu. Ta opcja jest nieobowiązkowa i służąca wyłącznie do celów informacyjnych.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Wpisz adres Przeznaczenia I2P usługi z którą klient powinien się połączyć. To powinien być pełny adres Przeznaczenia w formacie Base64, lub adres z Twojej książki adresowej.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Jeśli znasz jakieś wychodzące proxy dla tego typu tunelów (HTTP lub SOCKS), to je wpisz. Serwery proxy oddziel przecinkami.</string>
   <string name="i2ptunnel_wizard_desc_target_host">To jest IP na którym Twój serwis jest uruchomiony, zazwyczaj jest to te same urządzenie więc 127.0.0.1 jest wpisane automatycznie.</string>
   <string name="i2ptunnel_wizard_desc_target_port">To jest port na którym Twój serwis akceptuje połączenia.</string>
@@ -239,11 +246,15 @@
   <string name="name">Nazwa</string>
   <string name="description">Opis</string>
   <string name="auto_start">Auto-start</string>
+  <string name="tunnel_summ_auto_start">Uruchom tunel podczas startu węzła.</string>
   <string name="tunnel_cat_ports">Porty lokalne</string>
   <string name="shared_client">Klient współdzielony</string>
+  <string name="tunnel_summ_shared_client">Użyj tego samego adresu Przeznaczenia i tuneli co inne współdzielone klienty.</string>
+  <string name="target_destination">Adres docelowy</string>
   <string name="persistent_key">Trwały klucz</string>
   <string name="persistent_key_conflict_title">Zablokować nowe klucze przy ponownym otwarciu?</string>
   <string name="persistent_key_conflict_msg">Nie możesz aktywować trwałych kluczy gdy tunel jest skonfigurowany by generować klucze przy ponownym otwarciu. Czy chcesz zablokować generowanie nowych kluczy przy ponownym otwarciu?</string>
+  <string name="tunnel_summ_persistent_key">Zachowaj adresy Przeznaczenia tuneli podczas restartu.</string>
   <string name="reachable_on">Dostępny na</string>
   <string name="listen_port">Port nasłuchu</string>
   <string name="client_ssl">Klient SSL</string>
@@ -260,8 +271,10 @@
   <string name="tunnel_summ_use_ssl">Wykorzystaj SSL, aby połączyć się ze wskazanym celem</string>
   <string name="tunnel_parameters">Parametry tuneli</string>
   <string name="profile">Profil</string>
+  <string name="profile_bulk">Połączenia masowe (pobierania/strony/BT)</string>
   <string name="profile_interactive">Połączenie interaktywne</string>
   <string name="delay_connect">Opóźnij połączenie</string>
+  <string name="tunnel_summ_delay_connect">Włącz dla połączeń żądań/odpowiedzi</string>
   <string name="access_control">Kontrola dostępu</string>
   <string name="restricted_access">Zastrzeżony dostęp</string>
   <string name="disabled">Wyłączony</string>
@@ -270,6 +283,10 @@
   <string name="access_list">Lista Dostępu</string>
   <string name="reject_inproxies">Odrzucaj wejściowe proxy</string>
   <string name="tunnel_summ_reject_inproxies">Pozwól na połączenia wyłącznie od użytkowników I2P</string>
+  <string name="unique_local">Unikalny lokalny</string>
+  <string name="tunnel_summ_unique_local">Użyj unikalnego lokalnego adresu IP dla każdego klienta</string>
+  <string name="multihome">Wieloadresowość</string>
+  <string name="tunnel_summ_multihome">Włącz optymalizacje wieloadresowe</string>
   <string name="client_connection_limits">Limit połączeń klienta</string>
   <string name="connections_per_minute">Połączenia na minutę</string>
   <string name="connections_per_hour">Połączenia na godzinę</string>
@@ -286,7 +303,9 @@
   <string name="set_zero_for_unlimited">Wpisz 0 dla nielimitowanych</string>
   <string name="post_limits">Limity zapytań POST</string>
   <string name="limit_period">Czas ograniczenia</string>
+  <string name="client_posts_per_period">Zapytania POST klienta na okres</string>
   <string name="client_ban_length">Długość bana klienta</string>
+  <string name="total_posts_per_period">Wszystkie zapytania POST na okres</string>
   <string name="total_ban_length">Całkowita długość bana</string>
   <string name="power_saving">Oszczędzanie energii</string>
   <string name="delay_open">Opóźnij otwarcie</string>
@@ -299,7 +318,10 @@
   <string name="close_tunnels">Zamknij tunele podczas bezczynności</string>
   <string name="new_keys_on_reopen">Nowe klucze przy ponownym otwarciu</string>
   <string name="new_keys_on_reopen_conflict_title">Zablokować trwałe klucze?</string>
+  <string name="new_keys_on_reopen_conflict_msg">Nie możesz aktywować tworzenia nowych kluczy przy otwarciu jeżeli tunel jest skonfigurowany do używania trwałych kluczy. Czy chcesz wyłączyć trwałe klucze?</string>
   <string name="http_client">Klient HTTP</string>
+  <string name="tunnel_summ_user_agent">Przepuszczaj nagłówek \'User-Agent\'</string>
+  <string name="tunnel_summ_referer">Przepuszczaj nagłówek \'Referer\'</string>
   <string name="tunnel_summ_accept">Przekazuj nagłówek Accept</string>
   <string name="tunnel_summ_allow_ssl">Zezwalaj na SSL do adresów I2P</string>
   <string name="jump_url_list">Lista adresów usług Jump</string>
@@ -308,12 +330,18 @@
   <string name="username">Użytkownik</string>
   <string name="password">Hasło</string>
   <string name="outproxy_auth">Autoryzacja Proxy Wyjściowego</string>
+  <string name="tunnel_summ_outproxy_auth">Login wymagany przez Proxy Wyjściowe</string>
   <string name="other">Inne</string>
   <string name="signature_type">Rodzaj podpisu</string>
   <string name="custom_options">Dodatkowe opcje</string>
   <string name="all">Wszystkie</string>
   <string name="no_messages">Brak wiadomości</string>
   <string name="no_error_messages">Brak wiadomości o błędach</string>
+  <plurals name="log_error_messages">
+    <item quantity="one">Jeden komunikat o błędzie</item>
+    <item quantity="few">%d komunikaty o błędach, od najnowszych</item>
+    <item quantity="other">%d komunikatów o błędach, od najnowszych</item>
+  </plurals>
   <string name="log_entry">Wpis w logu</string>
   <string name="copy_logs">Kopiuj logi</string>
   <string name="i2p_android_error_logs">Logi Błędów I2P Android</string>
