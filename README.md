@@ -48,6 +48,13 @@ systemProp.socksProxyPort=9150
 
 2. Check out the [`i2p.i2p`](https://github.com/i2p/i2p.i2p) repository.
 
+3. Create a `local.properties` file in `i2p.android.base/lib/client` containing:
+
+    ```
+    i2psrc=/path/to/i2p.i2p
+    ndk.dir=/path/to/ndk
+    ```
+
 3. Create a `local.properties` file in `i2p.android.base/routerjars` containing:
 
     ```
@@ -107,8 +114,8 @@ systemProp.socksProxyPort=9150
     signing.keyId=
     signing.password=
     signing.secretKeyRingFile=/path/to/secring.gpg
-    ossrhUsername=
-    ossrhPassword=
+    NEXUS_USERNAME=
+    NEXUS_PASSWORD=
     ```
 
 2. `gradle :client:uploadArchives`
