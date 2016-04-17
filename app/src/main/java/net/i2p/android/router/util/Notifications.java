@@ -1,6 +1,7 @@
 package net.i2p.android.router.util;
 
 import net.i2p.android.router.R;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -18,7 +19,7 @@ public class Notifications {
         mNotificationManager = (NotificationManager) ctx.getSystemService(
                 Context.NOTIFICATION_SERVICE);
     }
-    
+
     public void notify(String title, String text) {
         notify(title, text, null);
     }
@@ -26,10 +27,11 @@ public class Notifications {
     public void notify(String title, String text, Class<?> c) {
         NotificationCompat.Builder b =
                 new NotificationCompat.Builder(mCtx)
-                .setContentTitle(title)
-                .setContentText(text)
-                .setSmallIcon(ICON)
-                .setAutoCancel(true);
+                        .setContentTitle(title)
+                        .setContentText(text)
+                        .setSmallIcon(ICON)
+                        .setColor(mCtx.getResources().getColor(R.color.primary_light))
+                        .setAutoCancel(true);
 
         if (c != null) {
             Intent intent = new Intent(mCtx, c);
