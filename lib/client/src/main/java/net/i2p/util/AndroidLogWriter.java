@@ -10,8 +10,8 @@ package net.i2p.util;
  *
  * @author zzz
  */
-class LogWriter extends LogWriterBase {
-    public LogWriter(LogManager manager) {
+class AndroidLogWriter extends LogWriter {
+    public AndroidLogWriter(LogManager manager) {
         super(manager);
     }
 

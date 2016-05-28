@@ -28,13 +28,7 @@
         <mkdir dir="${jar.libs.dir}" />
 
         <!-- core -->
-        <!-- lots of unneeded stuff could be deleted here -->
-        <jar destfile="${jar.libs.dir}/i2p.jar" >
-            <zipfileset src="${i2plib}/i2p.jar" >
-                <exclude name="net/i2p/client/DomainSocketFactory.class" />
-                <exclude name="net/i2p/util/LogWriter.class" />
-            </zipfileset>
-        </jar>
+        <copy file="${i2plib}/i2p.jar" todir="${jar.libs.dir}" />
 
         <!-- streaming -->
         <copy file="${i2plib}/mstreaming.jar" todir="${jar.libs.dir}" />
