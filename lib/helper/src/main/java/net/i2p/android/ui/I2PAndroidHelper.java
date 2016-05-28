@@ -24,7 +24,7 @@ import net.i2p.android.router.service.State;
 public class I2PAndroidHelper {
     public static final String URI_I2P_ANDROID = "net.i2p.android";
     public static final String URI_I2P_ANDROID_DONATE = "net.i2p.android.donate";
-    public static final String URI_I2P_ANDROID_LEGACY = "net.i2p.android.legacy";
+    public static final String URI_I2P_ANDROID_LEGACY = "net.i2p.android.router";
 
     public static final int REQUEST_START_I2P = 9857;
 
