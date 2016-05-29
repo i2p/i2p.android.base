@@ -73,7 +73,9 @@ class DomainServerSocket extends ServerSocket {
      */
     @Override
     public void close() throws IOException {
+        mDomainSocketFactory._log.debug("Closing DomainServerSocket");
         mLocalServerSocket.close();
+        mDomainSocketFactory._log.debug("DomainServerSocket closed");
         mClosed = true;
     }
 
