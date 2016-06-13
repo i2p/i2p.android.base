@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="yes">بله</string>
+  <string name="no">خیر</string>
+  <string name="install_i2p_android">نصب I2P اندروید؟</string>
+</resources>
