@@ -25,12 +25,13 @@ public class I2PAndroidHelper {
     public static final String URI_I2P_ANDROID = "net.i2p.android";
     public static final String URI_I2P_ANDROID_DONATE = "net.i2p.android.donate";
     public static final String URI_I2P_ANDROID_LEGACY = "net.i2p.android.router";
+    public static final String URI_I2P_ANDROID_DEBUG = "net.i2p.android.debug";
 
     public static final int REQUEST_START_I2P = 9857;
 
     private static final String ROUTER_SERVICE_CLASS = "net.i2p.android.router.service.RouterService";
 
-    private static final String LOG_TAG = "I2PClientLib";
+    private static final String LOG_TAG = "I2PHelperLib";
 
     public interface Callback {
         void onI2PAndroidBound();
@@ -123,7 +124,10 @@ public class I2PAndroidHelper {
             intent.setClassName(URI_I2P_ANDROID_DONATE, ROUTER_SERVICE_CLASS);
         else if (isAppInstalled(URI_I2P_ANDROID_LEGACY))
             intent.setClassName(URI_I2P_ANDROID_LEGACY, ROUTER_SERVICE_CLASS);
-        else
+        else if (isAppInstalled(URI_I2P_ANDROID_DEBUG)) {
+            Log.w(LOG_TAG, "Using debug build of I2P Android");
+            intent.setClassName(URI_I2P_ANDROID_DEBUG, ROUTER_SERVICE_CLASS);
+        } else
             intent = null;
         return intent;
     }
