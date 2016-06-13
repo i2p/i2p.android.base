@@ -76,7 +76,7 @@
   <string name="action_reload_subscriptions">Volver a cargar suscripciones</string>
   <string name="news_last_updated">Última actualización de las noticias hace %s</string>
   <string name="news_last_checked">Última comprobación de las noticias hace %s</string>
-  <string name="news_updated">Noticias actualizadas</string>
+  <string name="news_updated">Se han actualizado las noticias</string>
   <string name="view_news">Pulse para ver las últimas noticias de I2P</string>
   <string name="router_not_running">El router I2P no está en marcha.</string>
   <string name="router_shutting_down">El router I2P se está cerrando.</string>

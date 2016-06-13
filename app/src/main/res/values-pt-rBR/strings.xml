@@ -220,6 +220,7 @@
   <string name="i2ptunnel_wizard_desc_target_host">Esse é o IP no qual o serviço está rodando, isto está geralmente na mesma maquina então 127.0.0.1 é autopreenchido.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Essa é a porta pela qual o serviço está aceitando conexões.</string>
   <string name="i2ptunnel_wizard_desc_reachable_on">Isso limita quais computadores ou smartphones podem acessar esse túnel</string>
+  <string name="i2ptunnel_wizard_desc_binding_port">Esta é a porta para o túnel cliente ser acessado localmente. Esta também é a porta para o túnel servidor de HTTP.</string>
   <string name="i2ptunnel_wizard_desc_auto_start">O túnel deve iniciar automaticamente quando o roteador iniciar?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Criar túnel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Criar túnel</string>
@@ -233,6 +234,7 @@
   <string name="tunnel_summ_auto_start">Iniciar o túnel na inicialização do roteador.</string>
   <string name="tunnel_cat_ports">Portas locais</string>
   <string name="shared_client">Cliente compartilhado</string>
+  <string name="tunnel_summ_shared_client">Usar mesmo Destino e túneis para demais clientes compartilhados</string>
   <string name="target_destination">Destino alvo</string>
   <string name="persistent_key">Chave persistente</string>
   <string name="persistent_key_conflict_title">Desativar novas chaves na reabertura?</string>
@@ -240,6 +242,7 @@
   <string name="tunnel_summ_persistent_key">Manter o destino desse túnel quando ele reiniciar</string>
   <string name="reachable_on">Ao alcance em</string>
   <string name="listen_port">Porta de escuta</string>
+  <string name="client_ssl">Cliente SSL</string>
   <string name="tunnel_summ_client_ssl">Os clientes devem usar SSL para se conectar</string>
   <string name="outproxies">Proxies de saída</string>
   <string name="ssl_outproxies">Proxies de saida com SSL</string>
@@ -255,6 +258,7 @@
   <string name="profile">Perfil</string>
   <string name="profile_bulk">Conexão em massa (downloads/websites/BT)</string>
   <string name="profile_interactive">Conexão interativa</string>
+  <string name="delay_connect">Atrasar conexão</string>
   <string name="tunnel_summ_delay_connect">Ativar para conexões de pedidos/respostas</string>
   <string name="access_control">Controle de acesso</string>
   <string name="restricted_access">Acesso restrito</string>
@@ -268,9 +272,11 @@
   <string name="tunnel_summ_unique_local">Usar IPs de host locais únicos para cada cliente</string>
   <string name="multihome">Multihome</string>
   <string name="tunnel_summ_multihome">Ativar otimizações de multihoming</string>
+  <string name="client_connection_limits">Limites de conexões de cliente</string>
   <string name="connections_per_minute">Conexões por minuto</string>
   <string name="connections_per_hour">Conexões por hora</string>
   <string name="connections_per_day">Conexões por dia</string>
+  <string name="total_connection_limits">Limites totais de conexões</string>
   <string name="total_connections_per_minute">Total de conexões por minuto</string>
   <string name="total_connections_per_hour">Total de conexões por hora</string>
   <string name="total_connections_per_day">Total de conexões por dia</string>
@@ -280,6 +286,11 @@
   <string name="num_per_day">%s por dia</string>
   <string name="unlimited">Ilimitado</string>
   <string name="set_zero_for_unlimited">Especifique 0 para ilimitado</string>
+  <string name="post_limits">Limites de POST</string>
+  <string name="limit_period">Período limite</string>
+  <string name="power_saving">Economia de energia</string>
+  <string name="delay_open">Atrasar a abertura</string>
+  <string name="tunnel_summ_delay_open">Atrasar a abertura do túnel até ser utilizado</string>
   <string name="reduce_quantity">Reduzir quantidade</string>
   <string name="tunnel_summ_reduce_quantity">Reduzir quantidade de túneis quando ocioso</string>
   <string name="idle_time">Tempo ocioso</string>
@@ -288,6 +299,11 @@
   <string name="close_tunnels">Fechar túneis quando ociosos</string>
   <string name="new_keys_on_reopen">Novas chaves na reabertura</string>
   <string name="new_keys_on_reopen_conflict_title">Desativar chaves persistentes?</string>
+  <string name="new_keys_on_reopen_conflict_msg">Você não pode habilitar novas chaves enquanto o túnel estiver configurado para ter chaves permanentes. Deseja desabilitar as chaves permanentes?</string>
+  <string name="http_client">Cliente HTTP</string>
+  <string name="tunnel_summ_user_agent">Passar o cabeçalho original \'User-Agent\'</string>
+  <string name="tunnel_summ_referer">Passar o cabeçalho original \'Referer\'</string>
+  <string name="tunnel_summ_accept">Passar o cabeçalho original \'Accept-*\'</string>
   <string name="tunnel_summ_allow_ssl">Permitir SSL para endereços I2P</string>
   <string name="jump_url_list">Pular lista de URLs</string>
   <string name="proxy_auth">Autorização de proxy</string>
@@ -295,6 +311,7 @@
   <string name="username">Nome de usuário</string>
   <string name="password">Senha</string>
   <string name="outproxy_auth">Autorização de proxy de saída</string>
+  <string name="tunnel_summ_outproxy_auth">Autenticação necessária para o proxy de saída</string>
   <string name="other">Outros</string>
   <string name="signature_type">Tipo de assinatura</string>
   <string name="custom_options">Opções personalizadas</string>
@@ -310,4 +327,5 @@
   <string name="error_logs_copied_to_clipboard">Logs de erro copiados para a área de transferência</string>
   <string name="logs_copied_to_clipboard">Logs copiados para a área de transferência</string>
   <string name="label_browser_configuration">Configuração do navegador</string>
+  <string name="unset">Desligado</string>
 </resources>

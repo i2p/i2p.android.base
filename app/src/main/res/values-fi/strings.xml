@@ -3,7 +3,7 @@
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">I2P-logo</string>
   <string name="choose_language">Valitse kieli</string>
-  <string name="welcome_new_install">Tervetuloa I2P-sovellukseen! Täsmä sovellus on ALFA-ohjelmisto ja se ei tarjoa vahvaa nimettömyyttä. Lue julkaisutiedot ja linsessitiedot.</string>
+  <string name="welcome_new_install">Tervetuloa I2P-sovellukseen! Tämä sovellus on ALFA-ohjelmisto ja se ei tarjoa vahvaa nimettömyyttä. Lue julkaisutiedot ja lisenssitiedot.</string>
   <string name="welcome_new_version">Uusi versio asennettu. Lue julkaisutiedot. Versio:</string>
   <string name="label_tunnels">Tunnelit</string>
   <string name="label_status">Tila</string>
@@ -24,16 +24,20 @@
   <string name="button_router_graceful">I2P sulkeutuu %s</string>
   <string name="button_shutdown_now">Pitkä painallus nyt pysäyttämiseksi</string>
   <string name="button_cancel_graceful">Pitkä painallus sulkemisen perumiseksi</string>
+  <string name="no_internet">Internet-yhteys ei ole käytettävissä</string>
   <string name="hidden">Piilotettu</string>
   <string name="testing">Testataan</string>
   <string name="firewalled">Palomuuritettu</string>
   <string name="symmetric_nat">Symmetrinen NAT</string>
+  <string name="net_status_error_i2cp">Asiakasohjelmahallinnan I2CP-virhe - tarkista lokitiedostot</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_unresolved_tcp">Ratkaisematon TCP-osoite</string>
   <string name="net_status_error_private_tcp">Ykstyinen TCP-osoite</string>
+  <string name="net_status_warn_firewalled_inbound_tcp">Palomuuritettu tuleva TCP otettu käyttöön</string>
   <string name="net_status_info_disconnected">Yhteys poikki - tarkista verkkoyhteys</string>
   <string name="net_status_error_udp_port">UDP-portti käytössä - vaihda asetukset ja käynnistä uudelleen</string>
   <string name="net_status_error_udp_disabled_tcp_not_set">UDP poissa käytöstä ja tuleva TCP-verkkotietokone/-portti ei ole asetettu</string>
+  <string name="net_status_warn_firewalled_udp_disabled">Palomuuritettu UDP-poiskytkettynä</string>
   <string name="shared_clients">Jaetut asiakkaat</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">A</string>
@@ -65,6 +69,7 @@
   <string name="news_updated">Uutiset päivitetty</string>
   <string name="router_not_running">Reititin ei ole käynnissä.</string>
   <string name="router_shutting_down">Reititin sulkeutuu.</string>
+  <string name="select_an_address">Valitse osoite.</string>
   <string name="statistics">Tilastot</string>
   <string name="routers">Reitittimet</string>
   <string name="countries">Maat</string>
