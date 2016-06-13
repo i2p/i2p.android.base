@@ -64,14 +64,14 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$supportVersion"
 
     // Remote dependencies
-    compile 'com.androidplot:androidplot-core:0.9.6'
+    compile 'com.androidplot:androidplot-core:0.9.8'
     compile 'com.eowise:recyclerview-stickyheaders:0.5.2@aar'
     compile ('com.mcxiaoke.viewpagerindicator:library:2.4.1') {
         exclude group: 'com.android.support', module: 'support-v4'
     }
     compile 'com.pnikosis:materialish-progress:1.7'
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.1'
-    compile 'org.sufficientlysecure:html-textview:1.3'
+    compile 'org.sufficientlysecure:html-textview:1.6'
 
     // Testing-only dependencies
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
@@ -85,12 +85,12 @@ dependencyVerification {
             'com.android.support:preference-v7:b834787ee64db6c7c53ed7490537eeef52245b7862d4069c06e12b24b77ebbc4',
             'com.android.support:preference-v14:21c55edf74928a96fa816e32c0c4d0c98e2280002e84d2b10b458b4a36be9615',
             'com.android.support:recyclerview-v7:24465b2ba90dc5ed7e2c05f1c87fe4256c27df6d3cd69b6177f3cb447b05c021',
-            'com.androidplot:androidplot-core:1aaa931974da9d351976ed3d4b67170ac2a78be6c6afd13559ded5534eefc264',
+            'com.androidplot:androidplot-core:e44d9e59e06f025330831f7d3c987d2778a3302025184cf0cef05714b5171212',
             'com.eowise:recyclerview-stickyheaders:7b236da49b33b840e9ba6e7e4182218d1a2d9047236fdbc3ca947352f9b0883b',
             'com.mcxiaoke.viewpagerindicator:library:1e8aad664137f68abdfee94889f6da3dc98be652a235176a403965a07a25de62',
             'com.pnikosis:materialish-progress:da089a90d1dab61e9b50038c09081019398f81190d12b0b567ce94b83ef8cf93',
             'net.i2p.android.ext:floatingactionbutton:09d43e2d4ac04a91bf7a37e1ec48a8d220204e3a55dca72cd36cd9fa27461ade',
-            'org.sufficientlysecure:html-textview:39048e35894e582adada388e6c00631803283f8defed8e07ad58a5f284f272ee',
+            'org.sufficientlysecure:html-textview:c409b471618b675e3d2a8588f883c5fe8f3369d00df61ec84b29f29c648370ae',
     ]
 }
 
