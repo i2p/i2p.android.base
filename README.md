@@ -51,7 +51,6 @@ systemProp.socksProxyPort=9150
 3. Create a `local.properties` file in `i2p.android.base/lib/client` containing:
 
     ```
-    i2psrc=/path/to/i2p.i2p
     ndk.dir=/path/to/ndk
     ```
 
