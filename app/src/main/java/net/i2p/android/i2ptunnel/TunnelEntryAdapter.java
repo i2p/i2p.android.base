@@ -65,8 +65,13 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public void addTunnel(TunnelEntry tunnel) {
+        boolean wasEmpty = mTunnels.isEmpty();
         mTunnels.add(tunnel);
-        notifyItemInserted(mTunnels.size()-1);
+        if (wasEmpty) {
+            notifyDataSetChanged();
+        } else {
+            notifyItemInserted(mTunnels.size() - 1);
+        }
     }
 
     public TunnelEntry getTunnel(int position) {

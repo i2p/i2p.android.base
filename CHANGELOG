@@ -1,5 +1,6 @@
 0.9.26
  * Fixed "I2CP already listening" bug
+ * Fixed crash when adding tunnel to empty list
 
 0.9.25 / 2016-04-17 / 46d45a878a2b73394b26ca27dbe6c696dedcf1c3
  * Fixed a bug on Samsung Android 4.2 devices
