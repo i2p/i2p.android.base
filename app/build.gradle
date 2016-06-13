@@ -56,7 +56,7 @@ dependencies {
     compile project(':routerjars')
 
     // Android Support Repository dependencies
-    def supportVersion = '23.2.1'
+    def supportVersion = '23.4.0'
     compile "com.android.support:support-v4:$supportVersion"
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile "com.android.support:preference-v7:$supportVersion"
@@ -80,11 +80,11 @@ dependencies {
 
 dependencyVerification {
     verify = [
-            'com.android.support:support-v4:81ce890f26d35c75ad17d0f998a7e3230330c3b41e0b629566bc744bee89e448',
-            'com.android.support:appcompat-v7:00f9d93acacd6731f309724054bf51492814b4b2869f16d7d5c0038dcb8c9a0d',
-            'com.android.support:preference-v7:775101bd07bd052e455761c5c5d9523d7ad59f2f320e3e8cbde241fd6b1d6025',
-            'com.android.support:preference-v14:44881bb46094e86d0bc2426f205419674a5b4eb514b44b5a4659b5de29f71eb7',
-            'com.android.support:recyclerview-v7:44040a888e23e0c93162a3377cfe06751080e3c22d369ab0d4301ef60d63b0fe',
+            'com.android.support:support-v4:a0d002465c0f611eedaaef2b2530707d2e9fb3a5c7ed66f53c556a12f714f43a',
+            'com.android.support:appcompat-v7:d3d96637b0e8e61046567b8c87b667dcf3cd31c7447f651cb58d6e6e744adfba',
+            'com.android.support:preference-v7:b834787ee64db6c7c53ed7490537eeef52245b7862d4069c06e12b24b77ebbc4',
+            'com.android.support:preference-v14:21c55edf74928a96fa816e32c0c4d0c98e2280002e84d2b10b458b4a36be9615',
+            'com.android.support:recyclerview-v7:24465b2ba90dc5ed7e2c05f1c87fe4256c27df6d3cd69b6177f3cb447b05c021',
             'com.androidplot:androidplot-core:1aaa931974da9d351976ed3d4b67170ac2a78be6c6afd13559ded5534eefc264',
             'com.eowise:recyclerview-stickyheaders:7b236da49b33b840e9ba6e7e4182218d1a2d9047236fdbc3ca947352f9b0883b',
             'com.mcxiaoke.viewpagerindicator:library:1e8aad664137f68abdfee94889f6da3dc98be652a235176a403965a07a25de62',
