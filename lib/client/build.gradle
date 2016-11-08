@@ -25,8 +25,8 @@ android {
 }
 
 dependencies {
-    compile 'net.i2p:i2p:0.9.26'
-    compile 'net.i2p.client:streaming:0.9.26'
+    compile 'net.i2p:i2p:0.9.27'
+    compile 'net.i2p.client:streaming:0.9.27'
     // No direct dependencies on the helper lib, but this ensures consistent library behavior
     compile project(':lib:helper')
     compile 'com.android.support:support-v4:23.4.0'
@@ -38,9 +38,9 @@ dependencies {
 dependencyVerification {
     verify = [
             'com.android.support:support-v4:a0d002465c0f611eedaaef2b2530707d2e9fb3a5c7ed66f53c556a12f714f43a',
-            'net.i2p:i2p:5e0f5efa8849e2abe72efaf1530bdf4a090717d49acfdfbe92911a14d4b4e511',
-            'net.i2p.client:mstreaming:1f343a640f79707f6652bbf344f65b42215ae3f7a221a3ee8ddd70ff59e812ae',
-            'net.i2p.client:streaming:5add7390de089f3c3c4f4005f0daa83014418416e890ed6c475e15cef51ba3c7',
+            'net.i2p:i2p:efd4afaaff278951ff42cfa20ec1862d7981ac44b376ddf50c7edf713e33a730',
+            'net.i2p.client:mstreaming:1b698890faf6b5237b8c6df94abf02945720d065f2c717ab5ba5b9f94b0b62fe',
+            'net.i2p.client:streaming:af1b8cf3bb215c1116c0f8d8d019edf021f258805a4035ddc45b996a8abd892d',
     ]
 }
 

@@ -8,7 +8,6 @@ task buildRouter(type: Exec) {
 // TODO an empty routerjars.jar is added to the classpath
 
 artifacts {
-    'default' file: file('libs/router.jar'), builtBy: buildRouter
     'default' file: file('libs/newsxml.jar'), builtBy: buildRouter
     'default' file: file('libs/i2ptunnel.jar'), builtBy: buildRouter
     'default' file: file('libs/i2ptunnel-ui.jar'), builtBy: buildRouter
