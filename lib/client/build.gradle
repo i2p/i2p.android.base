@@ -29,7 +29,6 @@ dependencies {
     compile 'net.i2p.client:streaming:0.9.27'
     // No direct dependencies on the helper lib, but this ensures consistent library behavior
     compile project(':lib:helper')
-    compile 'com.android.support:support-v4:23.4.0'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.9.5'
@@ -37,7 +36,6 @@ dependencies {
 
 dependencyVerification {
     verify = [
-            'com.android.support:support-v4:a0d002465c0f611eedaaef2b2530707d2e9fb3a5c7ed66f53c556a12f714f43a',
             'net.i2p:i2p:efd4afaaff278951ff42cfa20ec1862d7981ac44b376ddf50c7edf713e33a730',
             'net.i2p.client:mstreaming:1b698890faf6b5237b8c6df94abf02945720d065f2c717ab5ba5b9f94b0b62fe',
             'net.i2p.client:streaming:af1b8cf3bb215c1116c0f8d8d019edf021f258805a4035ddc45b996a8abd892d',
