@@ -75,8 +75,7 @@ dependencies {
     compile 'org.sufficientlysecure:html-textview:1.6'
 
     // Testing-only dependencies
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
-    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
 }
 
 dependencyVerification {
