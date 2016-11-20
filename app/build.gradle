@@ -53,6 +53,7 @@ android {
 dependencies {
     // Local dependencies
     compile project(':lib:client')
+    compile project(':lib:helper')
     compile project(':routerjars')
 
     // Android Support Repository dependencies

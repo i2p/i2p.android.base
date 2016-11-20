@@ -9,10 +9,13 @@ buildscript {
 }
 
 allprojects {
-    version = VERSION_NAME
     group = GROUP
 
     repositories {
         jcenter()
     }
+}
+
+configure(project(':lib').subprojects) {
+    version = VERSION_NAME
 }

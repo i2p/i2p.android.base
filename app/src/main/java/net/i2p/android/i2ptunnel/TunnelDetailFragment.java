@@ -208,7 +208,7 @@ public class TunnelDetailFragment extends Fragment {
                                         }
                                     }
                                 })
-                                .setNegativeButton(net.i2p.android.lib.client.R.string.no, new DialogInterface.OnClickListener() {
+                                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                     }
                                 });
