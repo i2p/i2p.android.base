@@ -3,7 +3,7 @@
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">I2P logosu</string>
   <string name="choose_language">Dil seçin</string>
-  <string name="welcome_new_install">I2P dünyasına hoş geldiniz. Bu uygulama henüz ALPHA geliştirme düzeyindedir ve yaygın olarak herkese açılmamıştır. Lütfen notları ve lisans bilgilerini okuyun.</string>
+  <string name="welcome_new_install">I2P dünyasına hoş geldiniz. Bu uygulama henüz ALPHA geliştirme düzeyindedir ve güçlü bir isimsiz kalma özelliği sağlamamaktadır. Lütfen yayım notlarını ve lisans bilgilerini okuyun.</string>
   <string name="welcome_new_version">Yeni sürüm yüklendi. Lütfen yayım notlarını okuyun. Sürüm:</string>
   <string name="label_tunnels">Tüneller</string>
   <string name="label_status">Durum</string>
@@ -59,7 +59,7 @@
   <string name="first_start_welcome"><b>I2P Yazılımına Hoşgeldiniz</b> Lütfen I2P yüklenip eşleri bulana kadar <b>sabırlı olun</b>.</string>
   <string name="first_start_read">Beklerken, lütfen sürüm notları ve hoş geldiniz sayfalarını okuyun.</string>
   <string name="first_start_faq">İstemci tünelleri bulunduğunda, lütfen Sık Sorulan Sorular bölümüne <b>bakın</b>:</string>
-  <string name="first_start_faq_nonanon">Ya da tünelleri beklemek istemiyorsanız anonim olmayan şu bağlantıyı kullanın:</string>
+  <string name="first_start_faq_nonanon">Ya da tünelleri beklemek istemiyorsanız isimsiz olmayan şu bağlantıyı kullanın:</string>
   <string name="first_start_irc">IRC istemcinizi <b>localhost:6668</b> adresine yönlendirip şuradan bize merhaba deyin:</string>
   <string name="action_search">Arama</string>
   <string name="action_add">Ekle</string>
@@ -213,7 +213,7 @@
   <string name="i2ptunnel_wizard_k_client_server">İstemci ya da Sunucu</string>
   <string name="i2ptunnel_wizard_v_client">İstemci tüneli</string>
   <string name="i2ptunnel_wizard_v_server">Sunucu tüneli</string>
-  <string name="i2ptunnel_wizard_k_type">Tünel tipi</string>
+  <string name="i2ptunnel_wizard_k_type">Tünel türü</string>
   <string name="i2ptunnel_wizard_k_name">Ad</string>
   <string name="i2ptunnel_wizard_k_desc">Açıklama</string>
   <string name="i2ptunnel_wizard_k_dest">Hedef</string>
@@ -231,7 +231,7 @@
   <string name="i2ptunnel_wizard_desc_name">Tünel listesinde görüntülenecek tünel adı.</string>
   <string name="i2ptunnel_wizard_desc_desc">İsteğe bağlı olarak yazılabilecek tünel açıklaması.</string>
   <string name="i2ptunnel_wizard_desc_dest">Bu istemci tünelinin bağlanacağı hizmetin I2P hedefini yazın. Tam Base 64 hedef anahtarı ya da adres defterinizden bir sunucu adı olabilir.</string>
-  <string name="i2ptunnel_wizard_desc_outproxies">Bu tünel tipi için bildiğiniz çıkış sunucuları varsa (HTTP ya da SOCKS) buraya virgül ile ayırarak yazın. </string>
+  <string name="i2ptunnel_wizard_desc_outproxies">Bu tünel türü için bildiğiniz çıkış sunucuları varsa (HTTP ya da SOCKS) buraya virgül ile ayırarak yazın. </string>
   <string name="i2ptunnel_wizard_desc_target_host">Çalıştırdığınız hizmetin IP adresi. Genellikle aynı bilgisayarda olduğundan otomatik olarak 127.0.0.1 yazılır.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Hizmetin bağlantıları kabul edeceği kapı numarası.</string>
   <string name="i2ptunnel_wizard_desc_reachable_on">Bu seçenek bu tünele erişebilecek bilgisayar ve akıllı telefonları sınırlar.</string>
@@ -332,7 +332,7 @@
   <string name="outproxy_auth">Giden vekil sunucu kimlik doğrulaması</string>
   <string name="tunnel_summ_outproxy_auth">Giden vekil sunucu için oturum açılması gerekiyor</string>
   <string name="other">Diğer</string>
-  <string name="signature_type">İmza tipi</string>
+  <string name="signature_type">İmza türü</string>
   <string name="custom_options">Uyarlanmış seçenekler</string>
   <string name="all">Tümü</string>
   <string name="no_messages">Henüz bir ileti yok</string>
