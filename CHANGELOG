@@ -1,3 +1,7 @@
+0.9.27 / 2016-11-20
+ * Removed kytv's IRC server from default tunnel list
+ * Translation updates
+
 0.9.26 / 2016-06-13 / b003272c8b504bb0d904edca2e95359a57c9a52c
  * Fixed "I2CP already listening" bug
  * Fixed crash when adding tunnel to empty list
