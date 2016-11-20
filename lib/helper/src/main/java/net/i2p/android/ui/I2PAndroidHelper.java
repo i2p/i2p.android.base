@@ -38,12 +38,22 @@ public class I2PAndroidHelper {
     }
 
     private final Context mContext;
+    private final boolean mUseDebug;
     private boolean mTriedBindState;
     private IRouterState mStateService;
     private Callback mCallback;
 
     public I2PAndroidHelper(Context context) {
         mContext = context;
+        mUseDebug = false;
+    }
+
+    /**
+     * @param useDebug Enable usage against debug builds of I2P Android.
+     */
+    public I2PAndroidHelper(Context context, boolean useDebug) {
+        mContext = context;
+        mUseDebug = useDebug;
     }
 
     /**
@@ -124,11 +134,12 @@ public class I2PAndroidHelper {
             intent.setClassName(URI_I2P_ANDROID_DONATE, ROUTER_SERVICE_CLASS);
         else if (isAppInstalled(URI_I2P_ANDROID_LEGACY))
             intent.setClassName(URI_I2P_ANDROID_LEGACY, ROUTER_SERVICE_CLASS);
-        else if (isAppInstalled(URI_I2P_ANDROID_DEBUG)) {
+        else
+            intent = null;
+        if (mUseDebug && isAppInstalled(URI_I2P_ANDROID_DEBUG)) {
             Log.w(LOG_TAG, "Using debug build of I2P Android");
             intent.setClassName(URI_I2P_ANDROID_DEBUG, ROUTER_SERVICE_CLASS);
-        } else
-            intent = null;
+        }
         return intent;
     }
 
@@ -166,7 +177,8 @@ public class I2PAndroidHelper {
      * @return true if I2P Android is installed, false otherwise.
      */
     public boolean isI2PAndroidInstalled() {
-        return isAppInstalled(URI_I2P_ANDROID) ||
+        return (mUseDebug && isAppInstalled(URI_I2P_ANDROID_DEBUG)) ||
+                isAppInstalled(URI_I2P_ANDROID) ||
                 isAppInstalled(URI_I2P_ANDROID_DONATE) ||
                 isAppInstalled(URI_I2P_ANDROID_LEGACY);
     }
