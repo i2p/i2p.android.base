@@ -5,8 +5,8 @@ android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION as String)
     buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION as String
     defaultConfig {
-        versionCode 4745234
-        versionName '0.9.27'
+        versionCode 4745235
+        versionName '0.9.28'
         minSdkVersion 9
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION as String)
 

@@ -1,4 +1,7 @@
-0.9.27 / 2016-11-20
+0.9.28 / 2017-01-02
+ * Bug fixes and translation updates
+
+0.9.27 / 2016-11-20 / 64ff68efe98c345acb6ba1d0432fa49d1d650358
  * Removed kytv's IRC server from default tunnel list
  * Translation updates
 
