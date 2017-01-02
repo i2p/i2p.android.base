@@ -249,7 +249,7 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="auto_start">Auto-start</string>
   <string name="tunnel_summ_auto_start">Start tunneln när routern startar.</string>
   <string name="tunnel_cat_ports">Lokala portar</string>
-  <string name="shared_client">Delade klienter</string>
+  <string name="shared_client">Delad klient</string>
   <string name="tunnel_summ_shared_client">Använd samma Destination och tunnlar som andra klienter</string>
   <string name="target_destination">Måldestination</string>
   <string name="persistent_key">Beständig nyckel</string>

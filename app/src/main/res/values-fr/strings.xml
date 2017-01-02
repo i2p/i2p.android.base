@@ -329,8 +329,8 @@
   <string name="tunnel_summ_proxy_auth">Login nécessaire pour utiliser ce proxy</string>
   <string name="username">Utilisateur</string>
   <string name="password">Mot de passe</string>
-  <string name="outproxy_auth">Autorisation outproxy</string>
-  <string name="tunnel_summ_outproxy_auth">Login requis pour le outproxy</string>
+  <string name="outproxy_auth">Autorisation proxy sortant</string>
+  <string name="tunnel_summ_outproxy_auth">Identification requise pour le proxy sortant</string>
   <string name="other">Autre</string>
   <string name="signature_type">Type de signature</string>
   <string name="custom_options">Options personnalisées</string>
