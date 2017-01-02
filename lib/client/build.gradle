@@ -34,9 +34,9 @@ dependencies {
 
 dependencyVerification {
     verify = [
-            'net.i2p:i2p:efd4afaaff278951ff42cfa20ec1862d7981ac44b376ddf50c7edf713e33a730',
-            'net.i2p.client:mstreaming:1b698890faf6b5237b8c6df94abf02945720d065f2c717ab5ba5b9f94b0b62fe',
-            'net.i2p.client:streaming:af1b8cf3bb215c1116c0f8d8d019edf021f258805a4035ddc45b996a8abd892d',
+            'net.i2p:i2p:c9629c90341fd274516813e57f71a3c1ff5021ffc4999eec97ff2863cb57612e',
+            'net.i2p.client:mstreaming:8e656e4c782886a33e7a4245acc0d5c8ab1e461164576eaec4b2fbc52ef6f4eb',
+            'net.i2p.client:streaming:ee04fbbeb6525fa086a275c71d533f967c99f54118acf267bf0291bbe85f5cc5',
     ]
 }
 

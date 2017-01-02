@@ -71,7 +71,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
     }
     compile 'com.pnikosis:materialish-progress:1.7'
-    compile 'net.i2p:router:0.9.27'
+    compile 'net.i2p:router:0.9.28'
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.1'
     compile 'org.sufficientlysecure:html-textview:1.6'
 
@@ -90,6 +90,7 @@ dependencyVerification {
             'com.eowise:recyclerview-stickyheaders:7b236da49b33b840e9ba6e7e4182218d1a2d9047236fdbc3ca947352f9b0883b',
             'com.mcxiaoke.viewpagerindicator:library:1e8aad664137f68abdfee94889f6da3dc98be652a235176a403965a07a25de62',
             'com.pnikosis:materialish-progress:da089a90d1dab61e9b50038c09081019398f81190d12b0b567ce94b83ef8cf93',
+            'net.i2p:router:de3cf0a0e99823662c938d6a1083f201f8feba7d0ebebaf3179fed7040863b7c',
             'net.i2p.android.ext:floatingactionbutton:09d43e2d4ac04a91bf7a37e1ec48a8d220204e3a55dca72cd36cd9fa27461ade',
             'org.sufficientlysecure:html-textview:c409b471618b675e3d2a8588f883c5fe8f3369d00df61ec84b29f29c648370ae',
     ]
