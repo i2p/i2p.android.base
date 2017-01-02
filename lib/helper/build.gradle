@@ -25,7 +25,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:25.0.0'
+    compile 'com.android.support:support-v4:25.0.1'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.9.5'
@@ -33,7 +33,7 @@ dependencies {
 
 dependencyVerification {
     verify = [
-            'com.android.support:support-v4:c25c657954152c4315584572f5008a6780b086169519f67acd20c2617b9da325',
+            'com.android.support:support-v4:50da261acc4ca3d2dea9a43106bf65488711ca97b20a4daa095dba381c205c98',
     ]
 }
 
