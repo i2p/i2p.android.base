@@ -6,6 +6,10 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+-dontobfuscate
+-dontoptimize
+-dontpreverify
+-dontshrink
 
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface
@@ -21,8 +25,5 @@
 # https://code.google.com/p/android/issues/detail?id=78377#c302
 -keepattributes **
 -keep class !android.support.v7.view.menu.**,** {*;}
--dontpreverify
--dontoptimize
--dontshrink
 -dontwarn **
 -dontnote **
