@@ -19,38 +19,61 @@
   - Style for addressbook headers
   - Change console FAM icon when possible
     <zzz> on the bottom right, the + and x icons might be better as a double-up arrow and double-down arrow?
+  - Use Material design for LongPressButton
+  - Highlight selected tunnel in two-pane mode
 
 # Short-term
 
+- Remove peers page (HTML version)
+- Add firewall help page showing current port settings
+- GMP 6
+- Fetch all JARs from Maven Central (ie. upload everything that I2P Android uses)
 - Disable uPnP when on cell networks
     <zzz> spewing UPnP out into cell networks is a waste of time at best and a security risk at worst, but you really want it for wifi
+- Rewrite settings config handling
+- Rewrite InitActivities
 - I2PTunnel
   - Improve tunnel list status indicators
+  - Icon overlay to indicate which tunnels are shared
+    - Or reorder / group tunnels?
   - Show all messages somewhere
+    - Bottom toolbar?
   - Icons/header images for tunnel types on details page
+  - Setting to close when not on WiFi
 - Progress feedback for addressbook subscriptions reload
 - Display release notes directly on new router version
 - Fill out help pages
+- Fix navigation to specific settings pages
 - Rewrite release notes to be release-specific
 - Fix release notes UI, either make back button use clear or add buttons
+- Notify user when autostart fails?
 - NetDB tablet view fixes
   - Refresh detail fragment when changing tab
   - Move list to correct item when changing tab
   - Create nav history when viewing RI from LS
+- Handle NetDB null cases (failed lookup of requested hash in detail page)
 - Include GeoIP db for country info
 - Maybe change router-off mechanic for various pages? Enable as they become available?
 
 # Medium-term
 
+- SQLite naming service backend to store addresses more effectively
+  - Leverage for name completion in e.g. browsers
+- Create/edit tunnels while router is not running
+- Separate out shared tunnel config
+  - Convey to users that one config controls all shared tunnels
 - Network profiles
   - User selects profile in settings
   - Change network participation etc. based on profile
   - Also look at connection type: Connectivity.isConnectionFast()
 - Expose log level overrides
+- Bug report feature
+- Replace peers page (native version)
 - Improve graphs
   - Show fixed x range, not only available data
   - Think about pan/zoom
   - How to persist data across restarts?
+- Enable apps to specify when they don't need the router anymore
 
 # Silent Store approval checks to confirm/implement
 
@@ -98,6 +121,8 @@
 
 # Long-term
 
+- Reproducible builds
+- Extract RouterService into a library
 - Remote router support
   - Implement a "router wrapper" that can represent a local or remote router
   - Implement/use client APIs to talk to remote router
