@@ -15,7 +15,3 @@ allprojects {
         jcenter()
     }
 }
-
-configure(project(':lib').subprojects) {
-    version = VERSION_NAME
-}

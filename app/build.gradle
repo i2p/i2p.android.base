@@ -6,7 +6,7 @@ android {
     buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION as String
     defaultConfig {
         versionCode 4745235
-        versionName '0.9.28'
+        versionName "$I2P_VERSION"
         minSdkVersion 9
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION as String)
 
@@ -69,7 +69,7 @@ dependencies {
     compile 'com.eowise:recyclerview-stickyheaders:0.5.2@aar'
     compile 'com.inkapplications.viewpageindicator:library:2.4.4'
     compile 'com.pnikosis:materialish-progress:1.7'
-    compile 'net.i2p:router:0.9.28'
+    compile "net.i2p:router:$I2P_VERSION"
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.1'
     compile 'org.sufficientlysecure:html-textview:3.1'
 
@@ -88,7 +88,7 @@ dependencyVerification {
             'com.eowise:recyclerview-stickyheaders:7b236da49b33b840e9ba6e7e4182218d1a2d9047236fdbc3ca947352f9b0883b',
             'com.inkapplications.viewpageindicator:library:77b26a7723cd10fa5e29480be239e8d68f431f4bc20d9144169c9ce06ebac2bf',
             'com.pnikosis:materialish-progress:da089a90d1dab61e9b50038c09081019398f81190d12b0b567ce94b83ef8cf93',
-            'net.i2p:router:de3cf0a0e99823662c938d6a1083f201f8feba7d0ebebaf3179fed7040863b7c',
+            'net.i2p:router:d5018bb262ab1e070efacb32811a72e149aaabe600dce32fb192d2ddadd285f3',
             'net.i2p.android.ext:floatingactionbutton:09d43e2d4ac04a91bf7a37e1ec48a8d220204e3a55dca72cd36cd9fa27461ade',
             'org.sufficientlysecure:html-textview:ed740adf05cae2373999c7a3047c803183d9807b2cf66162902090d7c112a832',
     ]
