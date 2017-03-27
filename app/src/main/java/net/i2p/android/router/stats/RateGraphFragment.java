@@ -11,9 +11,10 @@ import android.view.ViewGroup;
 import com.androidplot.xy.BarFormatter;
 import com.androidplot.xy.BarRenderer;
 import com.androidplot.xy.BoundaryMode;
+import com.androidplot.xy.StepMode;
+import com.androidplot.xy.XYGraphWidget;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
-import com.androidplot.xy.XYStepMode;
 
 import net.i2p.android.router.I2PFragmentBase;
 import net.i2p.android.router.R;
@@ -120,26 +121,25 @@ public class RateGraphFragment extends I2PFragmentBase {
 
             _ratePlot.addSeries(rateSeries, new BarFormatter(Color.argb(200, 0, 80, 0), Color.argb(200, 0, 80, 0)));
             _ratePlot.calculateMinMaxVals();
-            long maxX = _ratePlot.getCalculatedMaxX().longValue();
+            long maxX = _ratePlot.getBounds().getMaxX().longValue();
 
             Util.d("Adding plot updater to listener");
             _listener.addObserver(_plotUpdater);
 
             // Only one line, so hide the legend
-            _ratePlot.getLegendWidget().setVisible(false);
+            _ratePlot.getLegend().setVisible(false);
 
-            BarRenderer renderer = (BarRenderer) _ratePlot.getRenderer(BarRenderer.class);
-            renderer.setBarWidthStyle(BarRenderer.BarWidthStyle.VARIABLE_WIDTH);
-            renderer.setBarGap(0);
+            BarRenderer renderer = _ratePlot.getRenderer(BarRenderer.class);
+            renderer.setBarGroupWidth(BarRenderer.BarGroupWidthMode.FIXED_GAP, 0);
 
             _ratePlot.setDomainUpperBoundary(maxX, BoundaryMode.GROW);
-            _ratePlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 15 * 60 * 1000);
-            _ratePlot.setTicksPerDomainLabel(4);
+            _ratePlot.setDomainStep(StepMode.INCREMENT_BY_VAL, 15 * 60 * 1000);
+            _ratePlot.setLinesPerDomainLabel(4);
 
             _ratePlot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
-            _ratePlot.setTicksPerRangeLabel(5);
+            _ratePlot.setLinesPerRangeLabel(5);
 
-            _ratePlot.setDomainValueFormat(new Format() {
+            _ratePlot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).setFormat(new Format() {
                 private DateFormat dateFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 
                 @Override
@@ -157,13 +157,13 @@ public class RateGraphFragment extends I2PFragmentBase {
             });
 
             final int finalK = _k;
-            _ratePlot.setRangeValueFormat(new Format() {
+            _ratePlot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).setFormat(new Format() {
 
                 @Override
                 public StringBuffer format(Object obj, @NonNull StringBuffer toAppendTo,
                                            @NonNull FieldPosition pos) {
                     double val = ((Number) obj).doubleValue();
-                    double maxY = _ratePlot.getCalculatedMaxY().doubleValue();
+                    double maxY = _ratePlot.getBounds().getMaxY().doubleValue();
 
                     if (val == 0 || maxY < finalK) {
                         return new DecimalFormat("0").format(val, toAppendTo, pos);
@@ -194,8 +194,8 @@ public class RateGraphFragment extends I2PFragmentBase {
 
     private void updatePlot() {
         _ratePlot.calculateMinMaxVals();
-        double maxY = _ratePlot.getCalculatedMaxY().doubleValue();
-        _ratePlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, getRangeStep(maxY, _k));
+        double maxY = _ratePlot.getBounds().getMaxY().doubleValue();
+        _ratePlot.setRangeStep(StepMode.INCREMENT_BY_VAL, getRangeStep(maxY, _k));
 
         _ratePlot.redraw();
     }

@@ -30,7 +30,7 @@ public class HelpHtmlFragment extends Fragment {
         int padH = getResources().getDimensionPixelOffset(R.dimen.activity_horizontal_margin);
         int padV = getResources().getDimensionPixelOffset(R.dimen.activity_vertical_margin);
         text.setPadding(padH, padV, padH, padV);
-        text.setHtmlFromRawResource(getActivity(), getArguments().getInt(ARG_HTML_FILE), true);
+        text.setHtml(getArguments().getInt(ARG_HTML_FILE));
         return scroller;
     }
 }
