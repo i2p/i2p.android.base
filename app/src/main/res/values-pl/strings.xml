@@ -340,7 +340,14 @@
   <plurals name="log_error_messages">
     <item quantity="one">Jeden komunikat o błędzie</item>
     <item quantity="few">%d komunikaty o błędach, od najnowszych</item>
+    <item quantity="many">%d komunikatów o błędach, od najnowszych</item>
     <item quantity="other">%d komunikatów o błędach, od najnowszych</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="one">Jedna wiadomość</item>
+    <item quantity="few">%d wiadomości, od najnowszych</item>
+    <item quantity="many">%d wiadomości, od najnowszych</item>
+    <item quantity="other">%d wiadomości, od najnowszych</item>
   </plurals>
   <string name="log_entry">Wpis w logu</string>
   <string name="copy_logs">Kopiuj logi</string>

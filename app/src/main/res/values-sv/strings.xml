@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">I2P</string>
-  <string name="desc_i2p_logo">I2P logga</string>
+  <string name="desc_i2p_logo">I2P-logo</string>
   <string name="choose_language">Välj språk</string>
-  <string name="welcome_new_install">Välkommen till I2P! Denhär appen är ALFA-mjukvara och erbjuder inte stark anonymitet.
-Var god läs release kommentarerna och licens-information.</string>
+  <string name="welcome_new_install">Välkommen till I2P! Den här appen är ALFA-mjukvara och erbjuder inte stark anonymitet.
+Var god läs utgåvenoteringar och licens-information.</string>
   <string name="welcome_new_version">Ny version installerad. Var god läs release kommentarerna. Version: </string>
   <string name="label_tunnels">Tunnlar</string>
   <string name="label_status">Status</string>
@@ -37,11 +37,11 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="net_status_error_unresolved_tcp">Ej upplöst TCP-adress</string>
   <string name="net_status_error_private_tcp">Privat TCP-adress</string>
   <string name="net_status_warn_firewalled_inbound_tcp">Bakom brandvägg med inåtgående TCP aktiverad</string>
-  <string name="net_status_warn_firewalled_floodfill">Bakom brandvägg och floodfill</string>
+  <string name="net_status_warn_firewalled_floodfill">Bakom brandvägg och \'floodfill\'</string>
   <string name="net_status_info_disconnected">Frånkopplad - kontrollera nätverksanslutning</string>
   <string name="net_status_error_udp_port">UDP-porten används - ändra i inställningar och start om</string>
   <string name="net_status_error_no_active_peers">Inga aktiva noder - kontrollera nätverksanslutning och brandvägg</string>
-  <string name="net_status_error_udp_disabled_tcp_not_set">UDP deaktiverad och inåtgående TCP host/port inte angiven</string>
+  <string name="net_status_error_udp_disabled_tcp_not_set">UDP deaktiverad och inåtgående TCP värd/port inte angiven</string>
   <string name="net_status_warn_firewalled_udp_disabled">Bakom brandvägg med UDP avaktiverad</string>
   <string name="shared_clients">Delade klienter</string>
   <string name="uptime">Upptid</string>
@@ -55,11 +55,11 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="download">Ladda ner</string>
   <string name="upload">Ladda upp</string>
   <string name="configure_browser_title">Konfigurera browsern?</string>
-  <string name="configure_browser_for_i2p">Vill du konfigurera en browser för att se på I2P sidor? (Du kan också göra detta senare från hjälpmenyn.)</string>
+  <string name="configure_browser_for_i2p">Vill du konfigurera en browser för att se på I2P-sidor? (Du kan också göra detta senare från hjälpmenyn.)</string>
   <string name="first_start_title">Gratulerar till din I2P installation!</string>
   <string name="first_start_welcome"><b>Välkommen till I2P!</b> Vänligen <b>ha tålamod</b> medan I2P startar och letar upp noder.</string>
   <string name="first_start_read">Medan du väntar, vänligen läs utgåvans meddelanden och välkomstsidan.</string>
-  <string name="first_start_faq">När du har fått klienttunnlar, vänligen <b>kolla</b> vår FAQ:</string>
+  <string name="first_start_faq">När du har fått klienttunnlar, vänligen <b>kolla</b> våra vanliga frågor:</string>
   <string name="first_start_faq_nonanon">Använd den här icke-anonyma länken om du inte vill vänta på tunnlar:</string>
   <string name="first_start_irc">Peka din IRCclient till <b>localhost:6668</b> och säg hej till oss på:</string>
   <string name="action_search">Sök</string>
@@ -265,14 +265,14 @@ Var god läs release kommentarerna och licens-information.</string>
   <string name="irc">IRC</string>
   <string name="enable_dcc">Aktivera DCC</string>
   <string name="tunnel_summ_enable_dcc">Tillåt IRCklienter att använda DCC</string>
-  <string name="website_domain_name">Webbsidas domännamn</string>
+  <string name="website_domain_name">Webbplats domännamn</string>
   <string name="target_host">Målvärd</string>
   <string name="target_port">Målport</string>
   <string name="use_ssl">Använd SSL</string>
   <string name="tunnel_summ_use_ssl">Använd SSL för att ansluta till mål</string>
   <string name="tunnel_parameters">Tunnelparametrar</string>
   <string name="profile">Profil</string>
-  <string name="profile_bulk">Bulkanslutning (nedladdningar/webbsidor/BT)</string>
+  <string name="profile_bulk">Bulkanslutning (nedladdningar/webbplatser/BT)</string>
   <string name="profile_interactive">Interaktiv förbindelse</string>
   <string name="delay_connect">Fördröj anslutning</string>
   <string name="tunnel_summ_delay_connect">Aktivera för request/response-anslutningar</string>
@@ -348,10 +348,10 @@ Var god läs release kommentarerna och licens-information.</string>
   </plurals>
   <string name="log_entry">Loggpost</string>
   <string name="copy_logs">Kopiera loggar</string>
-  <string name="i2p_android_error_logs">I2P Android Error loggar</string>
+  <string name="i2p_android_error_logs">I2P Android felloggar</string>
   <string name="i2p_android_logs">I2P Androidloggar</string>
-  <string name="error_logs_copied_to_clipboard">Error loggar kopierade till clipboard</string>
-  <string name="logs_copied_to_clipboard">Loggar kopierade till clipboard</string>
+  <string name="error_logs_copied_to_clipboard">Error loggar kopierade till urklipp</string>
+  <string name="logs_copied_to_clipboard">Loggar kopierade till urklipp</string>
   <string name="label_browser_configuration">Browser konfiguration</string>
   <string name="unset">Återställ</string>
 </resources>
