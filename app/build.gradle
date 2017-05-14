@@ -57,7 +57,7 @@ dependencies {
     compile project(':routerjars')
 
     // Android Support Repository dependencies
-    def supportVersion = '25.3.0'
+    def supportVersion = '25.3.1'
     compile "com.android.support:support-v4:$supportVersion"
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile "com.android.support:preference-v7:$supportVersion"
@@ -74,21 +74,23 @@ dependencies {
     compile 'org.sufficientlysecure:html-textview:3.1'
 
     // Testing-only dependencies
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 }
 
 dependencyVerification {
     verify = [
-            'com.android.support:support-v4:9142d2f386eeb4483050d7f13fcaeddcd01011650f4216208376ff7d4d7a6bf1',
-            'com.android.support:appcompat-v7:2841b0786c50018a14b6bbcdadb63d6b077ea9e2aadcc7611de1caeecaccf06a',
-            'com.android.support:preference-v7:0eede78cace2404e107886a4eaf11c4b895df949a4f1deee58e2e60e25c73dd2',
-            'com.android.support:preference-v14:19d384a0476cf6e03fc857a29c3d7f2055c701f828b502c78e80b66b2bfe5ef4',
-            'com.android.support:recyclerview-v7:423b183809ef75051c150f5f401c4077ddedac26b2c515b6ee231c4c5724f5bf',
+            'com.android.support:support-v4:07d389154bcf73b47e514964df1578136b26cba78257b8a577a3ccb54beff0ae',
+            'com.android.support:appcompat-v7:ac1ebbc46589195dda3e0b1becfe410bafd75bdf3edd1cd9acf04850f3895830',
+            'com.android.support:preference-v7:b37d8193c65cf8eb3c4ba9cbfc6d5c96042177901622717fb089290bef784a58',
+            'com.android.support:preference-v14:970904d676ea886d0be459e7e5e36c0db650daefea5bbe80cc59146091905be5',
+            'com.android.support:recyclerview-v7:375974a8724e359d97d77fa8522c614f813a3ac4583c1807f154a3f9a054b0a1',
             'com.androidplot:androidplot-core:7670da5838ce2ae2b0b5faabeb9d6a1f2787d30d3fe9f0952adc5611910d18c0',
             'com.eowise:recyclerview-stickyheaders:7b236da49b33b840e9ba6e7e4182218d1a2d9047236fdbc3ca947352f9b0883b',
             'com.inkapplications.viewpageindicator:library:77b26a7723cd10fa5e29480be239e8d68f431f4bc20d9144169c9ce06ebac2bf',
             'com.pnikosis:materialish-progress:da089a90d1dab61e9b50038c09081019398f81190d12b0b567ce94b83ef8cf93',
-            'net.i2p:router:d5018bb262ab1e070efacb32811a72e149aaabe600dce32fb192d2ddadd285f3',
+            'net.i2p:router:ffbc2ca2817ad5822c924822ce94e60929dd0caa4d9f4c97a1e324b7bc203b80',
             'net.i2p.android.ext:floatingactionbutton:09d43e2d4ac04a91bf7a37e1ec48a8d220204e3a55dca72cd36cd9fa27461ade',
             'org.sufficientlysecure:html-textview:ed740adf05cae2373999c7a3047c803183d9807b2cf66162902090d7c112a832',
     ]
