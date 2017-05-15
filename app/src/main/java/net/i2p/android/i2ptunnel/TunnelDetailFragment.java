@@ -270,35 +270,22 @@ public class TunnelDetailFragment extends Fragment {
             mCallback.onEditTunnel(mTunnel.getId());
             return true;
         case R.id.action_delete_tunnel:
-            DialogFragment dg = new DialogFragment() {
-                @NonNull
-                @Override
-                public Dialog onCreateDialog(Bundle savedInstanceState) {
-                    return new AlertDialog.Builder(getActivity())
-                        .setMessage(R.string.i2ptunnel_delete_confirm_message)
-                        .setPositiveButton(R.string.i2ptunnel_delete_confirm_button,
-                                new DialogInterface.OnClickListener() {
-
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        List<String> msgs = TunnelUtil.deleteTunnel(
-                                                I2PAppContext.getGlobalContext(),
-                                                mGroup, mTunnel.getId(), null);
-                                        dialog.dismiss();
-                                        Toast.makeText(getActivity().getApplicationContext(),
-                                                msgs.get(0), Toast.LENGTH_LONG).show();
-                                        mCallback.onTunnelDeleted(mTunnel.getId(),
-                                                mGroup.getControllers().size());
-                                    }
-                                })
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .create();
-                }
-            };
-            dg.show(getFragmentManager(), "delete_tunnel_dialog");
+            DialogFragment dg = DeleteTunnelDialogFragment.newInstance();
+            dg.show(getChildFragmentManager(), "delete_tunnel_dialog");
             return true;
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void onDeleteTunnel() {
+        List<String> msgs = TunnelUtil.deleteTunnel(
+                I2PAppContext.getGlobalContext(),
+                mGroup, mTunnel.getId(), null);
+        Toast.makeText(getActivity().getApplicationContext(),
+                msgs.get(0), Toast.LENGTH_LONG).show();
+        mCallback.onTunnelDeleted(mTunnel.getId(),
+                mGroup.getControllers().size());
     }
 
     private void copyToClipbardLegacy() {
@@ -312,5 +299,48 @@ public class TunnelDetailFragment extends Fragment {
         android.content.ClipData clip = android.content.ClipData.newPlainText(
                 mTunnel.getName(), mTunnel.getDetails());
         clipboard.setPrimaryClip(clip);
+    }
+
+    public static class DeleteTunnelDialogFragment extends DialogFragment {
+        TunnelDetailFragment mListener;
+
+        public static DialogFragment newInstance() {
+            return new DeleteTunnelDialogFragment();
+        }
+
+        private void onAttachToParentFragment(Fragment fragment) {
+            // Verify that the host fragment implements the callback interface
+            try {
+                // Instantiate the TunnelDetailFragment so we can send events to the host
+                mListener = (TunnelDetailFragment) fragment;
+            } catch (ClassCastException e) {
+                // The fragment doesn't implement the interface, throw exception
+                throw new ClassCastException(fragment.toString()
+                        + " must be TunnelDetailFragment");
+            }
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            onAttachToParentFragment(getParentFragment());
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.i2ptunnel_delete_confirm_message)
+                    .setPositiveButton(R.string.i2ptunnel_delete_confirm_button,
+                            new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    mListener.onDeleteTunnel();
+                                }
+                            })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .create();
+        }
     }
 }
