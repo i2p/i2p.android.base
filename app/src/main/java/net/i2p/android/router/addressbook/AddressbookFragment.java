@@ -26,7 +26,6 @@ import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
-import net.i2p.addressbook.Daemon;
 import net.i2p.android.router.R;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
@@ -223,9 +222,12 @@ public class AddressbookFragment extends Fragment implements
 
         switch (item.getItemId()) {
             case R.id.action_reload_subscriptions:
-                Daemon.wakeup();
-                Toast.makeText(getActivity(), "Reloading subscriptions...",
-                        Toast.LENGTH_SHORT).show();
+                RouterContext rCtx = Util.getRouterContext();
+                if (rCtx != null) {
+                    rCtx.namingService().requestUpdate(null);
+                    Toast.makeText(getActivity(), "Reloading subscriptions...",
+                            Toast.LENGTH_SHORT).show();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
