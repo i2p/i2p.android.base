@@ -44,7 +44,7 @@ Var god läs utgåvenoteringar och licens-information.</string>
   <string name="net_status_error_udp_disabled_tcp_not_set">UDP deaktiverad och inåtgående TCP värd/port inte angiven</string>
   <string name="net_status_warn_firewalled_udp_disabled">Bakom brandvägg med UDP avaktiverad</string>
   <string name="shared_clients">Delade klienter</string>
-  <string name="uptime">Upptid</string>
+  <string name="uptime">Drifttid</string>
   <string name="active_peers">Aktiva noder</string>
   <string name="known_peers">Kända noder</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
@@ -87,7 +87,7 @@ Var god läs utgåvenoteringar och licens-information.</string>
   <string name="configure_graphs">Ställ in grafer</string>
   <string name="graphs_not_ready">Graferna är inte färdiga än. Försök igen senare.</string>
   <string name="statistics">Statistik</string>
-  <string name="routers">Routers</string>
+  <string name="routers">Routrar</string>
   <string name="leasesets">LeaseSets</string>
   <string name="countries">Länder</string>
   <string name="country">Land</string>
@@ -96,7 +96,7 @@ Var god läs utgåvenoteringar och licens-information.</string>
   <string name="version">Version</string>
   <string name="count">Antal</string>
   <string name="tname_0">Dold eller under uppstart</string>
-  <string name="netdb_routers_empty">Inga routers i din NetDB.</string>
+  <string name="netdb_routers_empty">Inga routrar i din NetDB.</string>
   <string name="netdb_leases_empty">Inga LeaseSet i din NetDB.</string>
   <string name="notification_status_starting">I2P startar</string>
   <string name="notification_status_restarting">I2P startar om</string>
@@ -168,7 +168,7 @@ Var god läs utgåvenoteringar och licens-information.</string>
   <string name="menu_about">Om</string>
   <string name="about_version">Version:</string>
   <string name="about_project">Projektets Hem:</string>
-  <string name="about_bugs">Bugs och Support:</string>
+  <string name="about_bugs">Fel och Support:</string>
   <string name="about_helpwanted">Hjälp Önskas!</string>
   <string name="about_volunteer">Vill du hjälpa till att göra appen bättre? Anmäl dig på Android-forumet:</string>
   <string name="about_donate">Vill du donera pengar eller bitcoin för inköp av fler Androidenheter till utveckling och testning? Gå till:</string>
