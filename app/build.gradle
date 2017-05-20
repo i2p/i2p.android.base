@@ -23,6 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
+            debuggable true
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
         }
