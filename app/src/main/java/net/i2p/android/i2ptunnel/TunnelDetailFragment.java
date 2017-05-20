@@ -30,6 +30,7 @@ import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
 import net.i2p.android.util.FragmentUtils;
 import net.i2p.app.ClientAppState;
+import net.i2p.i2ptunnel.TunnelController;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 
 import java.util.List;
@@ -73,11 +74,14 @@ public class TunnelDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         String error;
+        List<TunnelController> controllers;
         try {
             mGroup = TunnelControllerGroup.getInstance();
             error = mGroup == null ? getResources().getString(R.string.i2ptunnel_not_initialized) : null;
+            controllers = mGroup.getControllers();
         } catch (IllegalArgumentException iae) {
             mGroup = null;
+            controllers = null;
             error = iae.toString();
         }
 
@@ -86,7 +90,7 @@ public class TunnelDetailFragment extends Fragment {
         } else if (getArguments().containsKey(TUNNEL_ID)) {
             int tunnelId = getArguments().getInt(TUNNEL_ID);
             mTunnel = new TunnelEntry(getActivity(),
-                    mGroup.getControllers().get(tunnelId),
+                    controllers.get(tunnelId),
                     tunnelId);
         }
     }
