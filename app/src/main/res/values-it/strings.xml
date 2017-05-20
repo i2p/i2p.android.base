@@ -12,7 +12,7 @@
   <string name="label_addressbook">Rubrica</string>
   <string name="label_i2ptunnel_client">I tunnel del client</string>
   <string name="label_i2ptunnel_server">I tunnel del server</string>
-  <string name="label_logs">Logs</string>
+  <string name="label_logs">Log</string>
   <string name="label_error_logs">Log errori</string>
   <string name="label_news">News</string>
   <string name="label_peers_status">Peers</string>
