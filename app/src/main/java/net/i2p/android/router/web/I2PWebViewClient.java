@@ -1,6 +1,7 @@
 package net.i2p.android.router.web;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -215,10 +216,12 @@ public class I2PWebViewClient extends WebViewClient {
 
     private abstract static class BGLoad extends AsyncTask<String, Integer, Integer> implements DialogInterface.OnCancelListener {
         protected final WebView _view;
+        protected final Context _ctx;
         protected final ProgressDialog _dialog;
 
         public BGLoad(WebView view, ProgressDialog dialog) {
             _view = view;
+            _ctx = view.getContext();
             if (dialog != null)
                 dialog.setCancelable(true);
             _dialog = dialog;
@@ -305,9 +308,9 @@ public class I2PWebViewClient extends WebViewClient {
         protected Integer doInBackground(String... urls) {
             final String url = urls[0];
             Uri uri = Uri.parse(url);
-            File cacheFile = AppCache.getInstance(_view.getContext()).getCacheFile(uri);
+            File cacheFile = AppCache.getInstance(_ctx).getCacheFile(uri);
             if (cacheFile.exists()) {
-                final Uri resUri = AppCache.getInstance(_view.getContext()).getCacheUri(uri);
+                final Uri resUri = AppCache.getInstance(_ctx).getCacheUri(uri);
                 Util.d("Loading " + url + " from resource cache " + resUri);
                 _view.post(new Runnable() {
                     @Override
@@ -325,7 +328,7 @@ public class I2PWebViewClient extends WebViewClient {
             //EepGetFetcher fetcher = new EepGetFetcher(url);
             OutputStream out = null;
             try {
-                out = AppCache.getInstance(_view.getContext()).createCacheFile(uri);
+                out = AppCache.getInstance(_ctx).createCacheFile(uri);
                 // write error to stream
                 EepGetFetcher fetcher = new EepGetFetcher(url, out, true);
                 fetcher.addStatusListener(this);
@@ -338,11 +341,11 @@ public class I2PWebViewClient extends WebViewClient {
                 if (success) {
                     // store in cache, get content URL, and load that way
                     // Set as current base
-                    final Uri content = AppCache.getInstance(_view.getContext()).addCacheFile(uri, true);
+                    final Uri content = AppCache.getInstance(_ctx).addCacheFile(uri, true);
                     if (content != null) {
                         Util.d("Stored cache in " + content);
                     } else {
-                        AppCache.getInstance(_view.getContext()).removeCacheFile(uri);
+                        AppCache.getInstance(_ctx).removeCacheFile(uri);
                         Util.d("cache create error");
                         return 0;
                     }
@@ -381,7 +384,7 @@ public class I2PWebViewClient extends WebViewClient {
                               if (fis != null) try { fis.close(); } catch (IOException ioe) {}
                         }
                     }
-                    AppCache.getInstance(_view.getContext()).removeCacheFile(uri);
+                    AppCache.getInstance(_ctx).removeCacheFile(uri);
                      Util.d("loading error data URL: " + url);
                     final String finalMsg = msg;
                     _view.post(new Runnable() {
