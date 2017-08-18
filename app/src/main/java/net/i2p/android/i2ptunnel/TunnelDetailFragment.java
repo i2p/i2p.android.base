@@ -29,6 +29,7 @@ import android.widget.Toast;
 import net.i2p.I2PAppContext;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
 import net.i2p.android.util.FragmentUtils;
 import net.i2p.app.ClientAppState;
 import net.i2p.i2ptunnel.TunnelController;
@@ -88,12 +89,21 @@ public class TunnelDetailFragment extends Fragment {
         }
 
         if (mGroup == null) {
-            // Show error
+            Toast.makeText(getActivity().getApplicationContext(),
+                    error, Toast.LENGTH_LONG).show();
+            getActivity().finish();
         } else if (getArguments().containsKey(TUNNEL_ID)) {
             int tunnelId = getArguments().getInt(TUNNEL_ID);
-            mTunnel = new TunnelEntry(getActivity(),
-                    controllers.get(tunnelId),
-                    tunnelId);
+            try {
+                TunnelController controller = controllers.get(tunnelId);
+                mTunnel = new TunnelEntry(getActivity(), controller, tunnelId);
+            } catch (IndexOutOfBoundsException e) {
+                // Tunnel doesn't exist
+                Util.e("Could not load tunnel details", e);
+                Toast.makeText(getActivity().getApplicationContext(),
+                        R.string.i2ptunnel_no_tunnel_details, Toast.LENGTH_LONG).show();
+                getActivity().finish();
+            }
         }
     }
 
