@@ -15,8 +15,7 @@
     <bool name="DEFAULT_REDUCE_ON_IDLE">true</bool>
     <integer name="DEFAULT_REDUCE_COUNT">1</integer>
     <integer name="DEFAULT_REDUCE_TIME">20</integer>
-    <!-- We bundle SpongyCastle, so this is guaranteed to be available. -->
-    <integer name="DEFAULT_SIGTYPE">1</integer>
+    <integer name="DEFAULT_SIGTYPE">7</integer>
 
     <!-- Client advanced -->
     <bool name="DEFAULT_DELAY_OPEN">true</bool>
