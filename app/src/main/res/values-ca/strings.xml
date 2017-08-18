@@ -117,7 +117,12 @@
   <string name="settings_label_hiddenMode">Participació</string>
   <string name="settings_desc_hiddenMode">Desactivar el mode ocult</string>
   <string name="settings_label_maxPartTunnels">Màx. túnels participats</string>
+  <string name="settings_desc_maxPartTunnels">Maximum tunnels to participate in (default=20)</string>
+  <string name="settings_dialog_maxPartTunnels">Maximum tunnels to participate in</string>
   <string name="settings_label_sharePercent">Percentatge de participació</string>
+  <string name="settings_desc_sharePercent">Percentage of bandwidth to share (default=80)</string>
+  <string name="settings_dialog_sharePercent">Percentage of bandwidth to share</string>
+  <string name="settings_desc_upnp">Open firewall ports automatically</string>
   <string name="settings_label_logging">Entrant</string>
   <string name="settings_label_appearance">Aparença</string>
   <string name="settings_label_language">Idioma</string>
@@ -134,7 +139,10 @@
   <string name="settings_label_expl_outbound">Túnels de sortida</string>
   <string name="settings_label_expl_length">Longitud</string>
   <string name="settings_summ_expl_length">%s salts</string>
+  <string name="settings_desc_expl_length">How many hops to use</string>
+  <string name="settings_label_expl_lengthVariance">Hop variance</string>
   <string name="settings_summ_expl_lengthVariance">%s</string>
+  <string name="settings_desc_expl_lengthVariance">How many hops to randomly add</string>
   <string name="settings_label_expl_quantity">Quantitat</string>
   <string name="settings_summ_expl_quantity">%s túnels</string>
   <string name="settings_desc_expl_quantity">Quantitat dels túnels</string>
@@ -178,6 +186,7 @@
   <string name="tunnel_summ_client_ssl">Els clients han d\'usar SSL per a connectar-se</string>
   <string name="irc">IRC</string>
   <string name="use_ssl">Usa SSL</string>
+  <string name="tunnel_parameters">Paràmetres del túnel</string>
   <string name="profile">Perfil</string>
   <string name="profile_interactive">Connexió interactiva</string>
   <string name="access_control">Control d\'accés</string>
@@ -198,6 +207,7 @@
   <string name="set_zero_for_unlimited">Definiu 0 per a il·limitades</string>
   <string name="post_limits">Límits POST</string>
   <string name="num_minutes">%s hores</string>
+  <string name="http_client">Client HTTP</string>
   <string name="username">Nom d\'usuari</string>
   <string name="password">Contrasenya</string>
   <string name="signature_type">Tipus de signatura</string>

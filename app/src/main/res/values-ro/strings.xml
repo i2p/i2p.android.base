@@ -32,8 +32,10 @@
   <string name="symmetric_nat">NAT simetric</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_private_tcp">Adrese TCP private</string>
+  <string name="net_status_info_disconnected">Deconectat - verificați conexiunea la rețea</string>
   <string name="net_status_warn_firewalled_udp_disabled">Cu Firewall și UDP dezactivat</string>
   <string name="shared_clients">Clienți partajați</string>
+  <string name="uptime">Timpul de funcționare</string>
   <string name="active_peers">Parteneri activi</string>
   <string name="known_peers">Parteneri cunoscuți</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
@@ -69,11 +71,14 @@
   <string name="configure_graphs">Configurează graficele</string>
   <string name="statistics">Statistici</string>
   <string name="routers">Rutere</string>
+  <string name="leasesets">LeaseSets</string>
   <string name="countries">Regiuni</string>
   <string name="country">Regiune</string>
   <string name="transport">Transport</string>
   <string name="versions">Versiuni</string>
   <string name="version">Versiune</string>
+  <string name="count">Număr</string>
+  <string name="tname_0">Ascuns sau pentru pornire</string>
   <string name="netdb_routers_empty">Nu sunt rutere în NetDB.</string>
   <string name="notification_status_starting">I2P este pornit</string>
   <string name="notification_status_restarting">I2P repornește</string>
@@ -155,8 +160,13 @@
   <string name="i2ptunnel_type_httpserver">HTTP server</string>
   <string name="i2ptunnel_type_sockstunnel">SOCKS 4/4a/5 proxy</string>
   <string name="i2ptunnel_type_socksirctunnel">SOCKS IRC proxy</string>
+  <string name="i2ptunnel_type_connectclient">CONNECTEAZA/SSL/HTTPS proxy</string>
   <string name="i2ptunnel_type_ircserver">Server IRC</string>
+  <string name="i2ptunnel_type_streamrclient">Client Streamr</string>
+  <string name="i2ptunnel_type_streamrserver">Server streamr</string>
+  <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
   <string name="install_recommended_app">Se instalează aplicația recomandată?</string>
+  <string name="i2ptunnel_not_initialized">Tuneluri încă nu sunt inițializate , vă rugăm să reîncărcați în două minute.</string>
   <string name="i2ptunnel_new_tunnel">Tunel nou</string>
   <string name="i2ptunnel_msg_config_saved">Modificările configurării s-au salvat</string>
   <string name="i2ptunnel_msg_config_save_failed">A eșuat salvarea configurării</string>
@@ -169,6 +179,7 @@
   <string name="i2ptunnel_wizard_k_name">Nume</string>
   <string name="i2ptunnel_wizard_k_desc">Descriere</string>
   <string name="i2ptunnel_wizard_k_dest">Destinatie</string>
+  <string name="i2ptunnel_wizard_k_outproxies">Outproxy</string>
   <string name="i2ptunnel_wizard_k_target_host">Gazda tinta</string>
   <string name="i2ptunnel_wizard_k_target_port">Port tinta</string>
   <string name="i2ptunnel_wizard_k_auto_start">Auto pornire</string>
@@ -178,6 +189,8 @@
   <string name="enabled">Activat</string>
   <string name="i2ptunnel_wizard_desc_name">Numele tunelului, pentru identificare în lista tunelurilor.</string>
   <string name="i2ptunnel_wizard_desc_desc">O descriere a tunelului. Este facultativ și pur informativ.</string>
+  <string name="i2ptunnel_wizard_desc_target_host">Acesta este IP la care serviciul se execută, aceasta este, de obicei pe aceeași mașină, astfel 127.0.0.1 este autofilled.</string>
+  <string name="i2ptunnel_wizard_desc_target_port">Acesta este portul pe care serviciul  accepta conexiuni.</string>
   <string name="i2ptunnel_wizard_desc_reachable_on">Aceasta limitează ce computere sau smartphone-uri pot accesa acest tunel.</string>
   <string name="i2ptunnel_wizard_desc_auto_start">Ar trebui ca tunelul să pornească automat când ruterul pornește?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Se creează tunelul?</string>
@@ -196,9 +209,12 @@
   <string name="persistent_key">Cheie permanentă</string>
   <string name="client_ssl">Client SSL</string>
   <string name="tunnel_summ_client_ssl">Clienții trebuie să utilizeze SSL pentru conectare</string>
+  <string name="outproxies">Outproxy</string>
   <string name="irc">IRC</string>
   <string name="enable_dcc">Activează DCC</string>
   <string name="tunnel_summ_enable_dcc">Permite clienților IRC să utilizeze DCC</string>
+  <string name="target_host">Gazda tinta</string>
+  <string name="target_port">Port tinta</string>
   <string name="use_ssl">Utilizează SSL</string>
   <string name="tunnel_summ_use_ssl">Utilizează SSL pentru conectarea la țintă</string>
   <string name="tunnel_parameters">Parametri tunel</string>
@@ -219,7 +235,10 @@
   <string name="num_per_day">%s pe zi</string>
   <string name="unlimited">Nelimitat</string>
   <string name="set_zero_for_unlimited">Configurați 0 pentru nelimitat</string>
+  <string name="tunnel_summ_delay_open">Întârziere tunelului deschis până este necesar</string>
+  <string name="tunnel_summ_reduce_quantity">Reducerea cantitatii tunelilor atunci când este inactiva</string>
   <string name="num_minutes">%s minute</string>
+  <string name="close_tunnels">Inchiderea tunelurilor când e  inactiv</string>
   <string name="http_client">Client HTTP</string>
   <string name="proxy_auth">Autorizare proxy</string>
   <string name="username">Nume utilizator</string>

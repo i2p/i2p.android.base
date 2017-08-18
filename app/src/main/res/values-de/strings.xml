@@ -10,7 +10,7 @@
   <string name="label_console">Konsole</string>
   <string name="label_addresses">Adressen</string>
   <string name="label_addressbook">Adressbuch</string>
-  <string name="label_i2ptunnel_client">Kliententunnel</string>
+  <string name="label_i2ptunnel_client">Client Tunnel</string>
   <string name="label_i2ptunnel_server">Servertunnel</string>
   <string name="label_logs">Statusberichte</string>
   <string name="label_error_logs">Fehlerprotokolle</string>
@@ -27,8 +27,8 @@
   <string name="button_cancel_graceful">Lange drücken, um das Herunterfahren abzubrechen</string>
   <string name="no_internet">Es ist keine Internetverbindung verfügbar</string>
   <string name="hidden">Versteckt</string>
-  <string name="testing">Erprobung</string>
-  <string name="firewalled">Mit Firewall</string>
+  <string name="testing">Im Test</string>
+  <string name="firewalled">Durch Firewall geschützt</string>
   <string name="symmetric_nat">Symmetrisches NAT</string>
   <string name="net_status_error_i2cp">Klientenmanager I2CP Fehler - bitte Fehlerberichte überprüfen</string>
   <!--Parameter is a time, e.g. 32s or 2m-->

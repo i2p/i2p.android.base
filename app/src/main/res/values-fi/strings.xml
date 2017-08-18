@@ -15,6 +15,7 @@
   <string name="label_logs">Lokitiedostot</string>
   <string name="label_error_logs">Virhelokitiedostot</string>
   <string name="label_news">Uutiset</string>
+  <string name="label_peers_status">Vertaiset</string>
   <string name="label_release_notes">Julkaisutiedot</string>
   <string name="label_licenses">Lisenssit</string>
   <string name="label_browse">Selaa</string>
@@ -77,6 +78,7 @@
   <string name="transport">Siirto</string>
   <string name="versions">Versiot</string>
   <string name="version">Versio</string>
+  <string name="count">Lukumäärä</string>
   <string name="notification_status_starting">I2P on käynnistymässä</string>
   <string name="notification_status_restarting">I2P on käynnistymässä uudelleen</string>
   <string name="notification_status_waiting">I2P odottaa verkkoyhteyttä</string>
@@ -103,6 +105,8 @@
   <string name="settings_desc_hiddenMode">Käännä piilotila pois päältä</string>
   <string name="settings_label_sharePercent">Jakoprosentti</string>
   <string name="settings_desc_upnp">Avaa palomuuriportit automaattisesti</string>
+  <string name="settings_label_logging">Lokit</string>
+  <string name="settings_label_default_log_level">Oletus loggaustaso</string>
   <string name="settings_label_language">Kieli</string>
   <string name="settings_default">Oletus</string>
   <string name="settings_label_advanced">Lisätietoja</string>
@@ -116,8 +120,10 @@
   <string name="settings_label_expl_outbound">Lähtötunnelit</string>
   <string name="settings_label_expl_length">Pituus</string>
   <string name="settings_summ_expl_lengthVariance">%s</string>
+  <string name="settings_label_expl_quantity">Määrä</string>
   <string name="settings_summ_expl_quantity">%s tunnelia</string>
   <string name="settings_desc_expl_quantity">Kuinka monta tunnelia</string>
+  <string name="settings_label_expl_backupQuantity">Määrä varalla</string>
   <string name="settings_summ_expl_backupQuantity">%s tunnelia</string>
   <string name="menu_about">Ohjelmasta</string>
   <string name="about_version">Versio:</string>
@@ -139,7 +145,10 @@
   <string name="i2ptunnel_type_httpserver">HTTP-palvelin</string>
   <string name="i2ptunnel_type_sockstunnel">SOCKS 4/4a/5-välityspalvelin</string>
   <string name="i2ptunnel_type_socksirctunnel">SOCKS IRC-välityspalvelin</string>
+  <string name="i2ptunnel_type_connectclient">CONNECT/SSL/HTTPS-välityspalvelin</string>
   <string name="i2ptunnel_type_ircserver">IRC-palvelin</string>
+  <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
+  <string name="i2ptunnel_not_initialized">Tunneleita ei ole vielä alustettu, lataa uudelleen kahdessa minuutissa.</string>
   <string name="i2ptunnel_new_tunnel">Uusi tunneli</string>
   <string name="i2ptunnel_msg_tunnel_starting">Käynnistetään tunneli</string>
   <string name="i2ptunnel_msg_tunnel_stopping">Pysäytetään tunneli</string>
@@ -152,6 +161,7 @@
   <string name="i2ptunnel_wizard_k_name">Nimi</string>
   <string name="i2ptunnel_wizard_k_desc">Kuvaus</string>
   <string name="i2ptunnel_wizard_k_dest">Kohde</string>
+  <string name="i2ptunnel_wizard_k_outproxies">Outproxies</string>
   <string name="i2ptunnel_wizard_k_target_host">Kohdetietokone</string>
   <string name="i2ptunnel_wizard_k_target_port">Kohdeportti</string>
   <string name="next">Seuraava</string>
@@ -162,6 +172,7 @@
   <string name="i2ptunnel_wizard_desc_desc">Tunnelikuvaus. Tämän on valinnainen ja puhtaaasti tiedottamista.</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Luodaanko tunneli?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Luo tunneli</string>
+  <string name="i2ptunnel_view_target">Kohde</string>
   <string name="edit_tunnel">Muokkaa tunnelia</string>
   <string name="name">Nimi</string>
   <string name="description">Kuvaus</string>
@@ -169,7 +180,10 @@
   <string name="tunnel_cat_ports">Paikalliset portit</string>
   <string name="shared_client">Jadttu asiakas</string>
   <string name="listen_port">Kuuntele porttia</string>
+  <string name="outproxies">Outproxies</string>
   <string name="irc">IRC</string>
+  <string name="target_host">Kohdetietokone</string>
+  <string name="target_port">Kohdeportti</string>
   <string name="use_ssl">Käytä SSL:ää</string>
   <string name="tunnel_parameters">Tunneliparametrit</string>
   <string name="profile">Profiili</string>
@@ -188,6 +202,7 @@
   <string name="password">Salasana</string>
   <string name="other">Muut</string>
   <string name="signature_type">Allekirjoitustyyppi</string>
+  <string name="custom_options">Omat valitsimet</string>
   <string name="all">Kaikki</string>
   <string name="no_messages">Ei viestejä</string>
   <string name="no_error_messages">Ei virheilmoituksia</string>

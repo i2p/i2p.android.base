@@ -32,6 +32,7 @@
   <string name="symmetric_nat">Симетричний NAT</string>
   <string name="net_status_error_i2cp">Помилка клієнт менеджера i2cp - перевірити журнали</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
+  <string name="net_status_error_skew">Відхилення годинника на %s</string>
   <string name="net_status_error_unresolved_tcp">Невирішена адреса TCP</string>
   <string name="net_status_error_private_tcp">Приватна TCP адреса</string>
   <string name="net_status_warn_firewalled_inbound_tcp">Зафаерволено з включеними вхідними TCP</string>
@@ -86,6 +87,7 @@
   <string name="graphs_not_ready">Графіки ще не готові. Спробуйте пізніше.</string>
   <string name="statistics">Статистика</string>
   <string name="routers">Маршрутизатори</string>
+  <string name="leasesets">LeaseSet-и</string>
   <string name="countries">Країни</string>
   <string name="country">Країна</string>
   <string name="transport">Транспорт</string>
@@ -269,6 +271,7 @@
   <string name="tunnel_summ_use_ssl">Використовувати SSL для з’єднання з ціллю</string>
   <string name="tunnel_parameters">Параметри тунелю</string>
   <string name="profile">Профіль</string>
+  <string name="profile_bulk">Оптимізувати для великого об\'єму (завантаження/веб-серфінг/Бітторрент)</string>
   <string name="profile_interactive">Інтерактивне з’єднання</string>
   <string name="delay_connect">Затримка з’єднання</string>
   <string name="tunnel_summ_delay_connect">Дозволити зʼєднання типу запит/відповідь</string>
@@ -282,25 +285,45 @@
   <string name="tunnel_summ_reject_inproxies">Дозволити зʼєднання тільки користувачам I2P</string>
   <string name="unique_local">Унікальні локальні мережі</string>
   <string name="tunnel_summ_unique_local">Використовувати унікальні локальні адреси для кожного клієнту</string>
+  <string name="multihome">Multihome</string>
+  <string name="tunnel_summ_multihome">Ввімкнути multihome оптимізації</string>
+  <string name="client_connection_limits">Обмеження з’єднань клієнта</string>
   <string name="connections_per_minute">З’єднань за хвилину</string>
   <string name="connections_per_hour">З’єднань за годину</string>
   <string name="connections_per_day">З’єднань за день</string>
   <string name="total_connection_limits">Загальне обмеження з’єднань</string>
+  <string name="total_connections_per_minute">Усього з’єднань за хвилину</string>
+  <string name="total_connections_per_hour">Усього з’єднань за годину</string>
+  <string name="total_connections_per_day">Усього з’єднань за день</string>
+  <string name="max_active_connections">Максимальна кількість з’єднань</string>
   <string name="num_per_minute">%s за хвилину</string>
   <string name="num_per_hour">%s за годину</string>
   <string name="num_per_day">%s за день</string>
   <string name="unlimited">Необмежено</string>
   <string name="set_zero_for_unlimited">Встановіть 0 для необмеженого</string>
+  <string name="post_limits">Обмеження POST</string>
+  <string name="limit_period">Період обмеження</string>
+  <string name="client_posts_per_period">Клієнтських POST за період</string>
+  <string name="client_ban_length">Довжина бану клієнта</string>
+  <string name="total_posts_per_period">Всього POST за період</string>
+  <string name="total_ban_length">Загальна довжина бану</string>
   <string name="power_saving">Енергозбереження</string>
+  <string name="delay_open">Затримка відкриття</string>
+  <string name="tunnel_summ_delay_open">Відкласти відкриття тунелю до першого запиту</string>
   <string name="reduce_quantity">Зменшувати кількість</string>
+  <string name="tunnel_summ_reduce_quantity">Зменшувати кількість тунелів при простої</string>
+  <string name="idle_time">Час простою</string>
   <string name="num_minutes">%s хвилин</string>
   <string name="reduced_tunnel_quantity">Зменшена кількість тунелів</string>
   <string name="close_tunnels">Закривати тунелі при бездіяльності</string>
   <string name="new_keys_on_reopen">Нові ключі при перевідкритті</string>
+  <string name="new_keys_on_reopen_conflict_title">Вимкнути постійні ключі</string>
+  <string name="new_keys_on_reopen_conflict_msg">Ви не можете включити Нові ключі при перевідкритті доки тунель налаштований на постійні ключі. Чи хочете ви відключити постійні ключі?</string>
   <string name="http_client">HTTP клієнт</string>
   <string name="tunnel_summ_user_agent">Пропускати заголовок User-Agent</string>
   <string name="tunnel_summ_referer">Пропускати заголовок Referer</string>
   <string name="tunnel_summ_accept">Пропускати заголовок Accept</string>
+  <string name="tunnel_summ_allow_ssl">Дозволяти SSL до I2P адрес</string>
   <string name="jump_url_list">Список jump-сервісів</string>
   <string name="proxy_auth">Авторизація в проксі</string>
   <string name="tunnel_summ_proxy_auth">Потрібен вхід для використання цього проксі</string>
@@ -310,12 +333,26 @@
   <string name="tunnel_summ_outproxy_auth">Логін, необхідний для вихідного проксі</string>
   <string name="other">Інше</string>
   <string name="signature_type">Тип підпису</string>
+  <string name="custom_options">Вибіркові параметри</string>
   <string name="all">Все</string>
   <string name="no_messages">Немає повідомлень</string>
   <string name="no_error_messages">Немає повідомлень про помилки</string>
+  <plurals name="log_error_messages">
+    <item quantity="one">Одне повідомлення про помилку</item>
+    <item quantity="few">%d повідомлень про помилку, спочатку нові</item>
+    <item quantity="other">%d повідомлень про помилки, спочатку нові</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="one">Одне повідомлення</item>
+    <item quantity="few">%d повідомлень, спочатку нові</item>
+    <item quantity="other">%d повідомлень, спочатку нові</item>
+  </plurals>
+  <string name="log_entry">Запис у журналі</string>
   <string name="copy_logs">Скопіювати логи</string>
+  <string name="i2p_android_error_logs">Логи помилок Android I2P</string>
   <string name="i2p_android_logs">Логи Android I2P</string>
   <string name="error_logs_copied_to_clipboard">Логи з помилками скопійовані у буфер обміну</string>
   <string name="logs_copied_to_clipboard">Логи скопійовані у буфер обміну</string>
   <string name="label_browser_configuration">Налаштування браузера</string>
+  <string name="unset">Відключити</string>
 </resources>

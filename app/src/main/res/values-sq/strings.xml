@@ -6,6 +6,7 @@
   <string name="welcome_new_version">Tip/version i ri është instaluar. Ju lutem lexoni notat e lëshimit .Versioni:</string>
   <string name="label_tunnels">Tunelet</string>
   <string name="label_status">Statusi</string>
+  <string name="label_addresses">Adresa</string>
   <string name="label_addressbook">Libri i adresave. </string>
   <string name="label_i2ptunnel_client">Tunelet e klientëve</string>
   <string name="label_i2ptunnel_server">Tunelet e Serverave. </string>
@@ -19,6 +20,8 @@
   <string name="label_graphs">Grafikët</string>
   <string name="button_router_off">Mbaje tastin për ta filluar I2P\'në</string>
   <string name="button_router_on">I2P është në funkcion (mbaje tastin gjatë për ta ndalur) </string>
+  <string name="hidden">Fshehur</string>
+  <!--Parameter is a time, e.g. 32s or 2m-->
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="first_start_title">Urime që arritët ta instaloni I2P\'në!</string>
@@ -46,7 +49,6 @@
   <string name="configure_graphs">Konfiguro grafët</string>
   <string name="netdb_routers_empty">Nuk ka routerë në NetDB\'në tuaj. </string>
   <string name="netdb_leases_empty">Nuk ka LeaseSets në NetDB\'në tuaj.</string>
-  <string name="notification_status_bw">Gjërësia: %1$s KBps poshtë / %2$s KBps lart</string>
   <string name="notification_status_peers">Peers: %1$d aktivë, %2$d të njohur</string>
   <string name="notification_status_expl">Tunelët zbulues: %1$d/%2$d</string>
   <string name="notification_status_client">Tunelët për klientë: %1$d/%2$d</string>
@@ -71,6 +73,8 @@
   <string name="settings_desc_upnp">Hapni portalet e firewall\'ëve automatikisht</string>
   <string name="settings_label_logging">Logimet</string>
   <string name="settings_label_default_log_level">Niveli i logimit mesatar</string>
+  <string name="settings_label_language">Gjuhë</string>
+  <string name="settings_default">Parazgjedhje</string>
   <string name="settings_label_advanced">I/e avancuar</string>
   <string name="settings_label_showStats">Statistikat e Router\'ëve</string>
   <string name="settings_summ_showStats">Paraqiti cilësitë e avancuara në konsolin kryesor</string>
@@ -102,6 +106,7 @@
   <string name="about_volunteer">Doni të ndihmoni aplikacionin të përmirësohet? Ndihmo vullnetarisht në forumin e Android\'it:</string>
   <string name="about_donate">Doni të jipni para ose bitcoins për të blerë më shumë pajisje të Android\'it për zhvillim dhe testim? Shko te:</string>
   <string name="menu_help">Ndihmë</string>
+  <string name="general">Të përgjithshme</string>
   <string name="addressbook_search_header">%s u gjetën</string>
   <string name="addressbook_add_wizard_k_name">Emër</string>
   <string name="addressbook_add_wizard_k_destination">Destinacioni</string>
@@ -161,4 +166,19 @@
   <string name="i2ptunnel_wizard_submit_confirm_message">Krijo tunel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Krijo tunel</string>
   <string name="i2ptunnel_view_autostart">Autostarto</string>
+  <string name="name">Emër</string>
+  <string name="description">Përshkrim</string>
+  <string name="auto_start">Autostarto</string>
+  <string name="reachable_on">Mund të arrihet në </string>
+  <string name="outproxies">Prokurët jashtësor</string>
+  <string name="target_host">Host\'i i shënjuar</string>
+  <string name="target_port">Portalja e shenjuar</string>
+  <string name="tunnel_parameters">Parametrat e tunelëve</string>
+  <string name="profile">Profil</string>
+  <string name="whitelist">Listë lejimesh</string>
+  <string name="unlimited">E pakufizuar</string>
+  <string name="num_minutes">%s minuta</string>
+  <string name="http_client">Klient i HTTP\'së</string>
+  <string name="password">Fjalëkalim</string>
+  <string name="no_messages">Nuk ka mesazhe</string>
 </resources>

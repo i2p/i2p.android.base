@@ -40,6 +40,7 @@
   <string name="net_status_error_no_active_peers">Sem pares ativos - verifique a conexão de rede e o firewall</string>
   <string name="net_status_warn_firewalled_udp_disabled">Sob firewall com UDP desativado</string>
   <string name="shared_clients">Clientes compartilhados</string>
+  <string name="uptime">Ligado a</string>
   <string name="active_peers">Pares ativos</string>
   <string name="known_peers">Pares conhecidos</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
@@ -183,9 +184,12 @@
   <string name="i2ptunnel_type_server">Servidor padrão</string>
   <string name="i2ptunnel_type_httpserver">Servidor HTTP</string>
   <string name="i2ptunnel_type_sockstunnel">Proxy 4/4a/5 SOCKS</string>
+  <string name="i2ptunnel_type_socksirctunnel">SOCKS IRC proxy</string>
+  <string name="i2ptunnel_type_connectclient">CONNECT/SSL/HTTPS proxy</string>
   <string name="i2ptunnel_type_ircserver">Servidor IRC</string>
   <string name="i2ptunnel_type_streamrclient">Cliente Streamr</string>
   <string name="i2ptunnel_type_streamrserver">Servidor Streamr</string>
+  <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
   <string name="install_recommended_app">Instalar aplicativo recomendado?</string>
   <string name="app_needed_for_this_tunnel_type">Você deve instalar um aplicativo para usar este túnel. Gostaria de instalar o aplicativo recomendado?</string>
   <string name="i2ptunnel_not_initialized">Os túneis não foram iniciados ainda, por favor recarregue em dois minutos.</string>

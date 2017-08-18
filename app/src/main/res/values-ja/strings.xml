@@ -6,6 +6,7 @@
   <string name="welcome_new_version">新しいバージョンがインストールされました。リリース・ノートをご覧ください。バージョン:</string>
   <string name="label_tunnels">トンネル</string>
   <string name="label_status">ステータス</string>
+  <string name="label_addresses">アドレス</string>
   <string name="label_addressbook">アドレス帳</string>
   <string name="label_i2ptunnel_client">クライアントトンネル</string>
   <string name="label_i2ptunnel_server">サーバートンネル</string>
@@ -19,12 +20,17 @@
   <string name="label_graphs">グラフ</string>
   <string name="button_router_off">長押しして I2P を起動</string>
   <string name="button_router_on">I2P を起動中 (長押しで中止)</string>
+  <string name="hidden">非表示</string>
   <string name="testing">テスト中</string>
+  <string name="firewalled">警告-ファイアーウォールされ、高速</string>
+  <string name="symmetric_nat">対称型NAT</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
+  <string name="uptime">稼働時間</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
+  <string name="download">ダウンロード</string>
   <string name="configure_browser_title">ブラウザの設定をしますか？</string>
   <string name="configure_browser_for_i2p">I2Pサイトを見るためにブラウザを設定しますか？(あとでヘルプメニューからも設定できます)</string>
   <string name="first_start_title">I2P のインストールおめでとうございます！</string>
@@ -50,6 +56,13 @@
   <string name="stats_not_ready">統計マネージャーはまだ準備出来ていません。後でやり直してください。</string>
   <string name="no_graphs_configured">グラフは設定されていません。設定でどの統計をグラフにするか選択できます。すべての変更は60秒後に有効になります</string>
   <string name="configure_graphs">グラフ設定</string>
+  <string name="statistics">統計</string>
+  <string name="leasesets">リースセット</string>
+  <string name="country">国</string>
+  <string name="transport">トランスポート</string>
+  <string name="version">バージョン</string>
+  <string name="count">カウント</string>
+  <string name="tname_0">隠すか起動中</string>
   <string name="netdb_routers_empty">NetDB にルーターがありません。</string>
   <string name="netdb_leases_empty">NetDB にリースセットがありません。</string>
   <string name="notification_status_bw">帯域幅: %1$sBps 下方向 / %2$sBps 上方向</string>
@@ -79,6 +92,7 @@
   <string name="settings_desc_upnp">自動的にファイアーウォールのポートを開く</string>
   <string name="settings_label_logging">ロギング</string>
   <string name="settings_label_default_log_level">デフォルトのログ水準</string>
+  <string name="settings_label_language">言語</string>
   <string name="settings_label_advanced">高度</string>
   <string name="settings_label_showStats">ルーターの統計</string>
   <string name="settings_summ_showStats">メインコンソールに高度な統計を表示</string>
@@ -173,6 +187,7 @@
   <string name="i2ptunnel_wizard_desc_auto_start">ルーターの起動時に自動的にトンネルを開始しますか？</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">トンネルを作成しますか？</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">トンネルを作成</string>
+  <string name="i2ptunnel_view_target">ターゲット</string>
   <string name="i2ptunnel_view_autostart">自動開始</string>
   <string name="edit_tunnel">トンネルを編集</string>
   <string name="name">名前</string>
@@ -202,6 +217,8 @@
   <string name="delay_connect">接続延滞</string>
   <string name="access_control">アクセスコントロール</string>
   <string name="restricted_access">許可されたアクセス</string>
+  <string name="whitelist">ホワイトリスト</string>
+  <string name="blacklist">ブラックリスト</string>
   <string name="access_list">アクセスリスト</string>
   <string name="tunnel_summ_reject_inproxies">I2Pユーザー飲みに接続を許可</string>
   <string name="unique_local">ユニークローカル</string>
@@ -238,6 +255,8 @@
   <string name="other">その他</string>
   <string name="signature_type">署名形式</string>
   <string name="custom_options">カスタムオプション</string>
+  <string name="all">すべて</string>
+  <string name="no_messages">本文がありません</string>
   <string name="copy_logs">ログをコピー</string>
   <string name="i2p_android_error_logs">I2PAndroidエラーログ</string>
   <string name="i2p_android_logs">I2PAndroidログ</string>
