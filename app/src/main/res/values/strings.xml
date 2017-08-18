@@ -259,6 +259,7 @@
     <string name="i2ptunnel_msg_tunnel_stopping">Stopping tunnel</string>
     <string name="i2ptunnel_delete_confirm_message">Delete tunnel?</string>
     <string name="i2ptunnel_delete_confirm_button">Delete tunnel</string>
+    <string name="i2ptunnel_no_tunnel_details">Could not load tunnel details</string>
 
     <string name="i2ptunnel_wizard_k_client_server">Client or Server</string>
     <string name="i2ptunnel_wizard_v_client">Client tunnel</string>

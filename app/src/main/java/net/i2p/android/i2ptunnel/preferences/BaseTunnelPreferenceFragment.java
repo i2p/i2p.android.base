@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+import android.widget.Toast;
 
 import net.i2p.I2PAppContext;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.preferences.util.CustomPreferenceFragment;
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
 
@@ -31,10 +33,20 @@ public abstract class BaseTunnelPreferenceFragment extends CustomPreferenceFragm
         }
 
         if (mGroup == null) {
-            // TODO Show error
+            Toast.makeText(getActivity().getApplicationContext(),
+                    error, Toast.LENGTH_LONG).show();
+            getActivity().finish();
         } else if (getArguments().containsKey(ARG_TUNNEL_ID)) {
             mTunnelId = getArguments().getInt(ARG_TUNNEL_ID, 0);
-            TunnelUtil.writeTunnelToPreferences(getActivity(), mGroup, mTunnelId);
+            try {
+                TunnelUtil.writeTunnelToPreferences(getActivity(), mGroup, mTunnelId);
+            } catch (IllegalArgumentException e) {
+                // Tunnel doesn't exist, or the tunnel config file could not be read
+                Util.e("Could not load tunnel details", e);
+                Toast.makeText(getActivity().getApplicationContext(),
+                        R.string.i2ptunnel_no_tunnel_details, Toast.LENGTH_LONG).show();
+                getActivity().finish();
+            }
             // https://stackoverflow.com/questions/17880437/which-settings-file-does-preferencefragment-read-write
             getPreferenceManager().setSharedPreferencesName(TunnelUtil.getPreferencesFilename(mTunnelId));
             loadPreferences();
