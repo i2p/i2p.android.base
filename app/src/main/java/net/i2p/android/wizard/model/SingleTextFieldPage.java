@@ -31,6 +31,7 @@ public class SingleTextFieldPage extends Page {
     protected String mDef = null;
     protected String mDesc = "";
     protected boolean mNumeric = false;
+    private String mFeedback;
 
     public SingleTextFieldPage(ModelCallbacks callbacks, String title) {
         super(callbacks, title);
@@ -81,14 +82,24 @@ public class SingleTextFieldPage extends Page {
     // Override these in subclasses to add content verification.
 
     public boolean isValid() {
+        if (mNumeric) {
+            try {
+                //noinspection ResultOfMethodCallIgnored
+                Integer.parseInt(mData.getString(SIMPLE_DATA_KEY));
+            } catch (NumberFormatException e) {
+                mFeedback = "Not a number";
+                return false;
+            }
+        }
+        mFeedback = "";
         return true;
     }
 
     public boolean showFeedback() {
-        return false;
+        return true;
     }
 
     public String getFeedback() {
-        return "";
+        return mFeedback;
     }
 }
