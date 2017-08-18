@@ -299,7 +299,15 @@ public abstract class Util implements I2PConstants {
 
     public static String getFileDir(Context context) {
         // This needs to be changed so that we can have an alternative place
-        return context.getFilesDir().getAbsolutePath();
+        File f = context.getFilesDir();
+        if (f == null) {
+            // https://code.google.com/p/android/issues/detail?id=8886
+            // Seems to be a race condition; try again.
+            // Supposedly only in pre-4.4 devices, but this was observed on a
+            // Samsung Galaxy Grand Prime (grandprimeve3g), 1024MB RAM, Android 5.1
+            f = context.getFilesDir();
+        }
+        return f.getAbsolutePath();
     }
 
     /**
