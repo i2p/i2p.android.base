@@ -242,6 +242,7 @@
   <string name="i2ptunnel_view_target">Objetivo</string>
   <string name="i2ptunnel_view_access_point">Punto de acceso</string>
   <string name="i2ptunnel_view_autostart">Auto-iniciar</string>
+  <string name="address_copied_to_clipboard">Dirección copiada al portapapeles</string>
   <string name="edit_tunnel">Editar túnel</string>
   <string name="name">Nombre</string>
   <string name="description">Descripción</string>
