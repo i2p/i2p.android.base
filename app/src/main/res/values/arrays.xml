@@ -140,6 +140,6 @@
         <item>ECDSA-P256</item>
         <item>ECDSA-P384</item>
         <item>ECDSA-P521</item>
-        <item>Ed25519-SHA-512</item>
+        <item>Ed25519</item>
     </string-array>
 </resources>
