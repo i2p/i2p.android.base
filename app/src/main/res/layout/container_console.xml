@@ -29,11 +29,11 @@
             app:fab_icon="@drawable/ic_cloud_white_24dp"
             app:fab_title="NetDB" />
 
-        <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_peers"
-            style="@style/ConsoleMenu.Button.Mini"
-            app:fab_icon="@drawable/ic_wifi_tethering_white_24dp"
-            app:fab_title="@string/label_peers_status" />
+        <!--<net.i2p.android.ext.floatingactionbutton.FloatingActionButton-->
+            <!--android:id="@+id/action_peers"-->
+            <!--style="@style/ConsoleMenu.Button.Mini"-->
+            <!--app:fab_icon="@drawable/ic_wifi_tethering_white_24dp"-->
+            <!--app:fab_title="@string/label_peers_status" />-->
 
         <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_graphs"

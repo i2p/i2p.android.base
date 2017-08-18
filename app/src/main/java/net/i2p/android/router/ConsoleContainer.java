@@ -63,13 +63,13 @@ public class ConsoleContainer extends Fragment {
                 startActivity(graphs);
             }
         });
-        mConsoleMenu.findViewById(R.id.action_peers).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent peers = new Intent(getActivity(), PeersActivity.class);
-                startActivity(peers);
-            }
-        });
+//        mConsoleMenu.findViewById(R.id.action_peers).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent peers = new Intent(getActivity(), PeersActivity.class);
+//                startActivity(peers);
+//            }
+//        });
         mConsoleMenu.findViewById(R.id.action_netdb).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,8 +100,8 @@ public class ConsoleContainer extends Fragment {
         if (getActivity() != null) {
             boolean advanced = PreferenceManager.getDefaultSharedPreferences(getActivity())
                     .getBoolean("i2pandroid.main.showStats", false);
-            mConsoleMenu.findViewById(R.id.action_peers).setVisibility(
-                    advanced && routerRunning ? View.VISIBLE : View.GONE);
+//            mConsoleMenu.findViewById(R.id.action_peers).setVisibility(
+//                    advanced && routerRunning ? View.VISIBLE : View.GONE);
             mConsoleMenu.findViewById(R.id.action_netdb).setVisibility(
                     advanced && routerRunning ? View.VISIBLE : View.GONE);
         }
