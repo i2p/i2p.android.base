@@ -1,5 +1,6 @@
 package net.i2p.android.i2ptunnel.preferences;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -135,14 +136,17 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
                 protected Void doInBackground(Void... voids) {
                     Set<String> interfaceSet = Addresses.getAllAddresses();
                     final String[] interfaces = interfaceSet.toArray(new String[interfaceSet.size()]);
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            reachableBy.setEntries(interfaces);
-                            reachableBy.setEntryValues(interfaces);
-                            reachableBy.setEnabled(true);
-                        }
-                    });
+                    Activity activity = getActivity();
+                    if (activity != null) {
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                reachableBy.setEntries(interfaces);
+                                reachableBy.setEntryValues(interfaces);
+                                reachableBy.setEnabled(true);
+                            }
+                        });
+                    }
                     return null;
                 }
             }.execute();
