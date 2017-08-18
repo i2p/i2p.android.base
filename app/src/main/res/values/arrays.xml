@@ -109,6 +109,7 @@
         <item>com.sec.android.app.sbrowser</item>
         <item>mobi.mgeek.TunnyBrowser</item>
         <item>com.lastpass.lpandroid</item>
+        <item>org.mozilla.focus</item>
     </string-array>
     <string-array name="tunnel_profiles">
         <item>bulk</item>
