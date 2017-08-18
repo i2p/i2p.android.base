@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -48,10 +47,26 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tunnel_type"
-                style="@style/ListItem.TextOnly"
-                android:text="Tunnel type" />
+            <RelativeLayout
+                android:id="@+id/tunnel_status_container"
+                style="@style/ListItem.OneLine">
+
+                <ImageView
+                    android:id="@+id/tunnel_status"
+                    android:layout_width="@dimen/listitem_icon_size"
+                    android:layout_height="@dimen/listitem_icon_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/listitem_horizontal_margin"
+                    android:layout_marginStart="@dimen/listitem_horizontal_margin"
+                    android:contentDescription="Status" />
+
+                <TextView
+                    android:id="@+id/tunnel_type"
+                    style="@style/ListItem.TextOnly"
+                    android:text="Tunnel type" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/tunnel_details_container"

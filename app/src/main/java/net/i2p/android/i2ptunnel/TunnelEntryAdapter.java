@@ -144,15 +144,12 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     tvh.status.setBackgroundDrawable(tunnel.getStatusBackground());
                 else
                     tvh.status.setBackground(tunnel.getStatusBackground());
+                ViewCompat.setTransitionName(tvh.status,
+                        "status" + tunnel.getId());
 
                 tvh.name.setText(tunnel.getName());
                 tvh.description.setText(tunnel.getDescription());
                 tvh.interfacePort.setText(tunnel.getTunnelLink(false));
-
-                ViewCompat.setTransitionName(tvh.name,
-                        mCtx.getString(R.string.TUNNEL_NAME) + tunnel.getId());
-                ViewCompat.setTransitionName(tvh.description,
-                        mCtx.getString(R.string.TUNNEL_DESCRIPTION) + tunnel.getId());
 
                 tvh.itemView.setSelected(mTwoPane.isTwoPane() && position == mActivatedPosition);
                 tvh.itemView.setOnClickListener(new View.OnClickListener() {
@@ -162,13 +159,10 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         mActivatedPosition = position;
                         notifyItemChanged(oldPosition);
                         notifyItemChanged(position);
-                        Pair<View, String> namePair = Pair.create(
-                                (View)tvh.name,
-                                ViewCompat.getTransitionName(tvh.name));
-                        Pair<View, String> descPair = Pair.create(
-                                (View)tvh.description,
-                                ViewCompat.getTransitionName(tvh.description));
-                        Pair<View, String>[] pairs = new Pair[]{ namePair, descPair};
+                        Pair<View, String> statusPair = Pair.create(
+                                (View)tvh.status,
+                                ViewCompat.getTransitionName(tvh.status));
+                        Pair<View, String>[] pairs = new Pair[]{ statusPair};
                         mListener.onTunnelSelected(tunnel.getId(), pairs);
                     }
                 });

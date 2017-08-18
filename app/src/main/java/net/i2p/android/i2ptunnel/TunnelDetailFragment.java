@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class TunnelDetailFragment extends Fragment {
     private TunnelControllerGroup mGroup;
     private TunnelEntry mTunnel;
     private Toolbar mToolbar;
+    private ImageView mStatus;
 
     public static TunnelDetailFragment newInstance(int tunnelId) {
         TunnelDetailFragment f = new TunnelDetailFragment();
@@ -111,18 +113,18 @@ public class TunnelDetailFragment extends Fragment {
         updateToolbar();
 
         if (mTunnel != null) {
+            mStatus = (ImageView) v.findViewById(R.id.tunnel_status);
+            updateStatus();
+            ViewCompat.setTransitionName(mStatus, "status" + mTunnel.getId());
+
             TextView name = (TextView) v.findViewById(R.id.tunnel_name);
             name.setText(mTunnel.getName());
-            ViewCompat.setTransitionName(name,
-                    getActivity().getString(R.string.TUNNEL_NAME) + mTunnel.getId());
 
             TextView type = (TextView) v.findViewById(R.id.tunnel_type);
             type.setText(mTunnel.getType());
 
             TextView description = (TextView) v.findViewById(R.id.tunnel_description);
             description.setText(mTunnel.getDescription());
-            ViewCompat.setTransitionName(description,
-                    getActivity().getString(R.string.TUNNEL_DESCRIPTION) + mTunnel.getId());
 
             if (!mTunnel.getDetails().isEmpty()) {
                 v.findViewById(R.id.tunnel_details_container).setVisibility(View.VISIBLE);
@@ -248,6 +250,14 @@ public class TunnelDetailFragment extends Fragment {
         }
     }
 
+    private void updateStatus() {
+        mStatus.setImageDrawable(mTunnel.getStatusIcon());
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
+            mStatus.setBackgroundDrawable(mTunnel.getStatusBackground());
+        else
+            mStatus.setBackground(mTunnel.getStatusBackground());
+    }
+
     private boolean onToolbarItemSelected(MenuItem item) {
         if (mTunnel == null)
             return false;
@@ -261,6 +271,8 @@ public class TunnelDetailFragment extends Fragment {
                     + ' ' + mTunnel.getName(), Toast.LENGTH_LONG).show();
             // Reload the toolbar to change the start/stop action
             updateToolbar();
+            // Update the status icon
+            updateStatus();
             return true;
         case R.id.action_stop_tunnel:
             mTunnel.getController().stopTunnel();
@@ -269,6 +281,8 @@ public class TunnelDetailFragment extends Fragment {
                     + ' ' + mTunnel.getName(), Toast.LENGTH_LONG).show();
             // Reload the toolbar to change the start/stop action
             updateToolbar();
+            // Update the status icon
+            updateStatus();
             return true;
         case R.id.action_edit_tunnel:
             mCallback.onEditTunnel(mTunnel.getId());
