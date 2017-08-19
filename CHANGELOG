@@ -1,3 +1,9 @@
+0.9.31 / 2017-08-19
+ * Fixed various crashes in the Tunnels UI
+ * Updated Firefox browser config instructions
+ * Minor bug fixes
+ * Dependency and translation updates
+
 0.9.30 / 2017-05-20
  * Fixed crashes when creating or deleting tunnels, or adding names to the
    private addressbook
