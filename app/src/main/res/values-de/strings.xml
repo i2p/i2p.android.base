@@ -210,6 +210,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">Tunnel wird gestoppt</string>
   <string name="i2ptunnel_delete_confirm_message">Tunnel löschen?</string>
   <string name="i2ptunnel_delete_confirm_button">Tunnel löschen</string>
+  <string name="i2ptunnel_no_tunnel_details">Tunneldetails konnten nicht geladen werden</string>
   <string name="i2ptunnel_wizard_k_client_server">Klient oder Server</string>
   <string name="i2ptunnel_wizard_v_client">Kliententunnel</string>
   <string name="i2ptunnel_wizard_v_server">Servertunnel</string>
@@ -242,6 +243,7 @@
   <string name="i2ptunnel_view_target">Ziel</string>
   <string name="i2ptunnel_view_access_point">Zugangspunkt</string>
   <string name="i2ptunnel_view_autostart">Autostart</string>
+  <string name="address_copied_to_clipboard">Adresse in die Zwischenablage kopiert</string>
   <string name="edit_tunnel">Tunnel bearbeiten</string>
   <string name="name">Name</string>
   <string name="description">Beschreibung</string>

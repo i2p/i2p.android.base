@@ -210,6 +210,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">Deteniendo túnel</string>
   <string name="i2ptunnel_delete_confirm_message">¿Eliminar túnel?</string>
   <string name="i2ptunnel_delete_confirm_button">Eliminar túnel</string>
+  <string name="i2ptunnel_no_tunnel_details">No se pudieron cargar los detalles del túnel</string>
   <string name="i2ptunnel_wizard_k_client_server">Cliente o servidor</string>
   <string name="i2ptunnel_wizard_v_client">Túnel de cliente</string>
   <string name="i2ptunnel_wizard_v_server">Túnel de servidor</string>
