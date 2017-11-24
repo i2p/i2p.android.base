@@ -150,14 +150,18 @@ public class TunnelListFragment extends Fragment implements
     };
 
     public void updateState(State state) {
-        if (state == State.STOPPING || state == State.STOPPED ||
-                state == State.MANUAL_STOPPING ||
-                state == State.MANUAL_STOPPED ||
-                state == State.MANUAL_QUITTING ||
-                state == State.MANUAL_QUITTED)
-            getLoaderManager().destroyLoader(mClientTunnels ? CLIENT_LOADER_ID : SERVER_LOADER_ID);
-        else
-            initTunnels();
+        try {
+            if (state == State.STOPPING || state == State.STOPPED ||
+                    state == State.MANUAL_STOPPING ||
+                    state == State.MANUAL_STOPPED ||
+                    state == State.MANUAL_QUITTING ||
+                    state == State.MANUAL_QUITTED)
+                getLoaderManager().destroyLoader(mClientTunnels ? CLIENT_LOADER_ID : SERVER_LOADER_ID);
+            else
+                initTunnels();
+        } catch (IllegalStateException ise) {
+            // Fragment isn't attached to any activity, so ignore state change
+        }
     }
 
     private void initTunnels() {
