@@ -61,7 +61,7 @@ public class AddressbookSettingsActivity extends AppCompatActivity {
 
     private boolean load() {
         String res = FileUtil.readTextFile(i2pDir.getAbsolutePath(), -1, true);
-        if (res.length() > 0) {
+        if (res != null && res.length() > 0) {
             text_content_subscriptions.setText(res);
             return true;
         }

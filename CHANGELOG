@@ -1,6 +1,7 @@
 0.9.32
  * Fixed crash when viewing tunnels
  * Fixed crash when viewing the addressbook
+ * Fixed crash when configuring addressbook subscriptions
 
 0.9.31 / 2017-08-19
  * Fixed various crashes in the Tunnels UI
