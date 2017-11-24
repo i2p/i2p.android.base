@@ -46,8 +46,12 @@ public abstract class AbstractWizardActivity extends FragmentActivity implements
         // Create the WizardModel before super.onCreate() in case a Fragment
         // is created and tries to call e.g. onGetPage()
         mWizardModel = onCreateModel();
-        if (savedInstanceState != null)
-            mWizardModel.load(savedInstanceState.getBundle("model"));
+        if (savedInstanceState != null) {
+            Bundle model = savedInstanceState.getBundle("model");
+            if (model != null) {
+                mWizardModel.load(model);
+            }
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wizard);
