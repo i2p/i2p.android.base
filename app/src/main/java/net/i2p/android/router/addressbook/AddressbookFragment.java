@@ -166,15 +166,20 @@ public class AddressbookFragment extends Fragment implements
         int loaderId = PRIVATE_BOOK.equals(mBook) ?
                 PRIVATE_LOADER_ID : ROUTER_LOADER_ID;
 
-        if (state == State.STOPPING || state == State.STOPPED ||
-                state == State.MANUAL_STOPPING ||
-                state == State.MANUAL_STOPPED ||
-                state == State.MANUAL_QUITTING ||
-                state == State.MANUAL_QUITTED)
-            getLoaderManager().destroyLoader(loaderId);
-        else {
-            mRecyclerView.setLoading(true);
-            getLoaderManager().initLoader(loaderId, null, this);
+        try {
+            LoaderManager manager = getLoaderManager();
+            if (state == State.STOPPING || state == State.STOPPED ||
+                    state == State.MANUAL_STOPPING ||
+                    state == State.MANUAL_STOPPED ||
+                    state == State.MANUAL_QUITTING ||
+                    state == State.MANUAL_QUITTED)
+                manager.destroyLoader(loaderId);
+            else {
+                mRecyclerView.setLoading(true);
+                manager.initLoader(loaderId, null, this);
+            }
+        } catch (IllegalStateException ise) {
+            // Fragment isn't attached to any activity, so ignore state change
         }
     }
 
