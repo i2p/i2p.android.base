@@ -65,6 +65,14 @@ public class TunnelsContainer extends Fragment implements
         setHasOptionsMenu(true);
     }
 
+    private boolean showActions() {
+        RouterContext rCtx = Util.getRouterContext();
+        TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
+        return rCtx != null && tcg != null &&
+                (tcg.getState() == ClientAppState.STARTING ||
+                        tcg.getState() == ClientAppState.RUNNING);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.container_tunnels, container, false);
@@ -72,6 +80,7 @@ public class TunnelsContainer extends Fragment implements
         mViewPager = (ViewPager) v.findViewById(R.id.pager);
         mPageIndicator = (TitlePageIndicator) v.findViewById(R.id.page_indicator);
         mNewTunnel = (ImageButton) v.findViewById(R.id.promoted_action);
+        mNewTunnel.setVisibility(showActions() ? View.VISIBLE : View.GONE);
 
         if (v.findViewById(R.id.detail_fragment) != null) {
             // The detail container view will be present only in the
@@ -154,17 +163,16 @@ public class TunnelsContainer extends Fragment implements
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        RouterContext rCtx = Util.getRouterContext();
-        TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
-        boolean showActions = rCtx != null && tcg != null &&
-                (tcg.getState() == ClientAppState.STARTING ||
-                        tcg.getState() == ClientAppState.RUNNING);
+        boolean showActions = showActions();
 
         menu.findItem(R.id.action_start_all_tunnels).setVisible(showActions);
         menu.findItem(R.id.action_stop_all_tunnels).setVisible(showActions);
         menu.findItem(R.id.action_restart_all_tunnels).setVisible(showActions);
 
-        mNewTunnel.setVisibility(showActions ? View.VISIBLE : View.GONE);
+        // Was causing a NPE in version 4745238 (0.9.31)
+        if (mNewTunnel != null) {
+            mNewTunnel.setVisibility(showActions ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override

@@ -1,3 +1,6 @@
+0.9.32
+ * Fixed crash when viewing tunnels
+
 0.9.31 / 2017-08-19
  * Fixed various crashes in the Tunnels UI
  * Updated Firefox browser config instructions
