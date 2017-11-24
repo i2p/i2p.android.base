@@ -213,16 +213,18 @@ public class RouterService extends Service {
             //Util.d(MARKER + this + " JBigI speed test finished, launching router");
 
             // Launch the router!
-            RouterLaunch.main(null);
+            // TODO Store this somewhere instead of relying on global context?
+            Router r = new Router();
+            r.runRouter();
             synchronized(_stateLock) {
                 if(_state != State.STARTING) {
                     return;
                 }
                 setState(State.RUNNING);
                 _statusBar.replace(StatusBar.ICON_RUNNING, R.string.notification_status_running);
-                _context = Util.getRouterContext();
+                _context = r.getContext();
                 if (_context == null) {
-                    throw new IllegalStateException("No contexts. This is usually because the router is either starting up or shutting down.");
+                    throw new IllegalStateException("Router has no context?");
                 }
                 _context.router().setKillVMOnEnd(false);
                 Job loadJob = new LoadClientsJob(RouterService.this, _context, _notif);
