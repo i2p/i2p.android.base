@@ -1,23 +1,28 @@
 apply plugin: 'java'
 
+configurations {
+    routerjars
+}
+
 task buildRouter(type: Exec) {
     outputs.dir('libs')
     commandLine 'ant', 'buildrouter'
 }
 
-// TODO an empty routerjars.jar is added to the classpath
+// An empty routerjars.jar is added to the classpath for the "default" configuration.
+// But we are using the "routerjars" configuration, which only contains what we want.
 
 artifacts {
-    'default' file: file('libs/newsxml.jar'), builtBy: buildRouter
-    'default' file: file('libs/i2ptunnel.jar'), builtBy: buildRouter
-    'default' file: file('libs/i2ptunnel-ui.jar'), builtBy: buildRouter
-    'default' file: file('libs/addressbook.jar'), builtBy: buildRouter
-    'default' file: file('libs/BOB.jar'), builtBy: buildRouter
+    routerjars file: file('libs/newsxml.jar'), builtBy: buildRouter
+    routerjars file: file('libs/i2ptunnel.jar'), builtBy: buildRouter
+    routerjars file: file('libs/i2ptunnel-ui.jar'), builtBy: buildRouter
+    routerjars file: file('libs/addressbook.jar'), builtBy: buildRouter
+    routerjars file: file('libs/BOB.jar'), builtBy: buildRouter
 }
 
 clean.dependsOn cleanBuildRouter
 
-clean << {
+clean.doLast {
     exec {
         commandLine 'ant', 'clean'
     }

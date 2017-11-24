@@ -1,10 +1,10 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath files('gradle/libs/gradle-witness.jar')
+        classpath 'com.android.tools.build:gradle:3.0.1'
     }
 }
 

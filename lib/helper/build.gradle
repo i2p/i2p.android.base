@@ -1,11 +1,9 @@
 apply plugin: 'com.android.library'
-apply plugin: 'witness'
 
 version = '0.9.4'
 
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION as String)
-    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION as String
 
     defaultConfig {
         minSdkVersion 9
@@ -27,16 +25,10 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:25.3.1'
+    implementation 'com.android.support:support-v4:25.3.1'
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.9.5'
-}
-
-dependencyVerification {
-    verify = [
-            'com.android.support:support-v4:07d389154bcf73b47e514964df1578136b26cba78257b8a577a3ccb54beff0ae',
-    ]
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:1.9.5'
 }
 
 apply from: "${project.rootDir}/gradle/maven-push.gradle"

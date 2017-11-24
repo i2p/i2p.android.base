@@ -1,11 +1,9 @@
 apply plugin: 'com.android.library'
-apply plugin: 'witness'
 
 version = "$I2P_VERSION"
 
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION as String)
-    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION as String
 
     defaultConfig {
         minSdkVersion 9
@@ -27,19 +25,11 @@ android {
 }
 
 dependencies {
-    compile "net.i2p:i2p:$I2P_VERSION"
-    compile "net.i2p.client:streaming:$I2P_VERSION"
+    implementation "net.i2p:i2p:$I2P_VERSION"
+    implementation "net.i2p.client:streaming:$I2P_VERSION"
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.9.5'
-}
-
-dependencyVerification {
-    verify = [
-            'net.i2p:i2p:e766537af2494d2489e0476f51847aa249e27f914a52261ae83fa7f0f8d34c98',
-            'net.i2p.client:mstreaming:a516bb06100e2c21d36d5e85f203d479cfb19e50e248af062fe7468871810d20',
-            'net.i2p.client:streaming:77871bf8ea5acda55abf012429b80e89af2689b69a07b3b7dcf6ca6668dad377',
-    ]
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:1.9.5'
 }
 
 apply from: "${project.rootDir}/gradle/maven-push.gradle"
