@@ -87,11 +87,6 @@ public class ConsoleContainer extends Fragment {
         inflater.inflate(R.menu.activity_main_actions, menu);
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        setMenuVisibility();
-    }
-
     private void setMenuVisibility() {
         boolean routerRunning = Util.getRouterContext() != null;
         mConsoleMenu.findViewById(R.id.action_logs).setVisibility(routerRunning ? View.VISIBLE : View.GONE);

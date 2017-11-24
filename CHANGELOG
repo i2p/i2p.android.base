@@ -1,4 +1,5 @@
 0.9.32
+ * Fixed crash when opening the console menu
  * Fixed crash when starting the router
  * Fixed crash when viewing tunnels
  * Fixed crash when viewing the addressbook
