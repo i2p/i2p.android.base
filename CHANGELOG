@@ -1,9 +1,11 @@
 0.9.32
- * Fixed crash when opening the console menu
- * Fixed crash when starting the router
- * Fixed crash when viewing tunnels
- * Fixed crash when viewing the addressbook
- * Fixed crash when configuring addressbook subscriptions
+ * Fixed crashes when:
+   * opening the console menu
+   * starting the router
+   * starting the router for the first time
+   * viewing tunnels
+   * viewing the addressbook
+   * configuring addressbook subscriptions
 
 0.9.31 / 2017-08-19
  * Fixed various crashes in the Tunnels UI

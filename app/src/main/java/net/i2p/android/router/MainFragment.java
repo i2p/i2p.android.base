@@ -648,9 +648,11 @@ public class MainFragment extends I2PFragmentBase {
     private void checkFirstStart() {
         I2PActivityBase ab = (I2PActivityBase) getActivity();
         boolean firstStart = ab.getPref(PREF_FIRST_START, true);
-        if (firstStart) {
+        // Check ab.isFinishing() because DialogFragment.show() will throw IllegalStateException if
+        // called after ab.onSaveInstanceState().
+        if (firstStart && !ab.isFinishing()) {
             FirstStartDialog dialog = new FirstStartDialog();
-            dialog.show(getActivity().getSupportFragmentManager(), "firststart");
+            dialog.show(ab.getSupportFragmentManager(), "firststart");
             ab.setPref(PREF_FIRST_START, false);
         }
     }
