@@ -1,5 +1,6 @@
 package net.i2p.android.help;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.ColorMatrix;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.i2p.android.router.R;
 
@@ -84,7 +86,11 @@ public class BrowserAdapter extends RecyclerView.Adapter<BrowserAdapter.ViewHold
                         String uriMarket = "market://search?q=pname:" + browser.packageName;
                         Uri uri = Uri.parse(uriMarket);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        mCtx.startActivity(intent);
+                        try {
+                            mCtx.startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            Toast.makeText(mCtx, R.string.no_market_app, Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
                 holder.mStatus.setVisibility(View.VISIBLE);
