@@ -214,8 +214,11 @@ public class AddressbookFragment extends Fragment implements
             mAddToAddressbook.setVisibility(rCtx == null ? View.GONE : View.VISIBLE);
 
         // Only show "Reload subscriptions" for router addressbook
-        menu.findItem(R.id.action_reload_subscriptions).setVisible(
-                rCtx != null && !PRIVATE_BOOK.equals(mBook));
+        MenuItem reloadSubs = menu.findItem(R.id.action_reload_subscriptions);
+        if (reloadSubs != null) {
+            reloadSubs.setVisible(
+                    rCtx != null && !PRIVATE_BOOK.equals(mBook));
+        }
 
         // Only allow adding to private book 
         if (!PRIVATE_BOOK.equals(mBook) && mAddToAddressbook != null) {

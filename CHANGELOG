@@ -6,6 +6,7 @@
    * starting the router for the first time
    * viewing tunnels
    * viewing the addressbook
+   * opening the addressbook menu
    * configuring addressbook subscriptions
    * using a configuration wizard
    * loading a B64 Destination from file
