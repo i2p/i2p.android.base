@@ -10,9 +10,10 @@
    * using a configuration wizard
    * loading a B64 Destination from file
    * saving tunnel settings
+   * installing a tunnel's recommended app without a market app
    * installing a browser without a market app
    * rotating the screen while using the built-in browser
- * Update Firefox browser config instructions for Firefox Quantum
+ * Updated Firefox browser config instructions for Firefox Quantum
  * Translation updates
 
 0.9.31 / 2017-08-19

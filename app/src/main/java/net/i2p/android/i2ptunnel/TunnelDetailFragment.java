@@ -220,7 +220,13 @@ public class TunnelDetailFragment extends Fragment {
                                         Uri uri = mTunnel.getRecommendedAppForTunnel();
                                         if (uri != null) {
                                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                            startActivity(intent);
+                                            try {
+                                                startActivity(intent);
+                                            } catch (ActivityNotFoundException e) {
+                                                Toast.makeText(getContext(),
+                                                        R.string.no_market_app,
+                                                        Toast.LENGTH_LONG).show();
+                                            }
                                         }
                                     }
                                 })
