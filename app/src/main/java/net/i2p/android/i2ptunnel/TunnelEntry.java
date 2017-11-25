@@ -280,6 +280,8 @@ public class TunnelEntry {
             return mContext.getResources()
                     .getDrawable(R.drawable.ic_schedule_black_24dp);
         case STARTING:
+            return mContext.getResources()
+                    .getDrawable(R.drawable.ic_sync_black_24dp);
         case RUNNING:
         case NOT_RUNNING:
         default:

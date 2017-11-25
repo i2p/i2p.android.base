@@ -13,6 +13,7 @@
    * installing a tunnel's recommended app without a market app
    * installing a browser without a market app
    * rotating the screen while using the built-in browser
+ * Added a "sync" icon to more clearly indicate tunnel "starting" status
  * Updated Firefox browser config instructions for Firefox Quantum
  * Translation updates
 
