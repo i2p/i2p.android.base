@@ -56,7 +56,7 @@
   <string name="configure_browser_title">Sett opp nettleser?</string>
   <string name="configure_browser_for_i2p">Vil du sette opp nettleseren for visning av I2P-sider? (Du kan også gjøre dette senere fra hjelpemenyen.)</string>
   <string name="first_start_title">Til lykke med ny installasjon av I2P!</string>
-  <string name="first_start_welcome"><b> Velkommen til I2P</b> Vennligst <b>ha tålmodighet</b> mens I2P starter opp og finner likemenn.</string>
+  <string name="first_start_welcome"><b> Velkommen til I2P</b> <b>Ha tålmodighet</b> mens I2P starter opp og finner likemenn.</string>
   <string name="first_start_read">Mens du venter, vennligst les versjons-notatene og velkomstsiden.</string>
   <string name="first_start_faq">Når du har klient-tunneler, vennligst <b>sjekk ut</b> Ofte Stilte Spørsmpål:</string>
   <string name="first_start_faq_nonanon">Eller bruk denne ikke-anonyme lenken hvis du ikke vil vente på tunneler:</string>
@@ -82,8 +82,8 @@
   <string name="router_shutting_down">Ruteren slås av</string>
   <string name="stats_not_ready">Statestikk-behandleren er ikke klar enda. Prøv igjen senere.</string>
   <string name="select_an_address">Velg en adresse.</string>
-  <string name="no_graphs_configured">Ingen grafer har blitt konfigurert ennå. Du kan velge at statistikk programmet skal vise grafer under instillinger. Det vil tre i kraft ca 1minutt etter start.</string>
-  <string name="configure_graphs">Konfigurer grafer</string>
+  <string name="no_graphs_configured">Ingen grafer har blitt satt opp enda. Du kan velge at statistikkprogrammet skal vise grafer under innstillinger. Det vil tre i kraft ca 1 minutt etter start.</string>
+  <string name="configure_graphs">Sett opp grafer</string>
   <string name="graphs_not_ready">Grafer er ikke klare enda. Prøv igjen senere.</string>
   <string name="statistics">Statistikk</string>
   <string name="routers">Rutere</string>
@@ -210,6 +210,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">Stopper tunnel</string>
   <string name="i2ptunnel_delete_confirm_message">Slett tunnel?</string>
   <string name="i2ptunnel_delete_confirm_button">Slett tunnel</string>
+  <string name="i2ptunnel_no_tunnel_details">Kunne ikke laste inn tunneldetaljer</string>
   <string name="i2ptunnel_wizard_k_client_server">Klient eller Tjener</string>
   <string name="i2ptunnel_wizard_v_client">Klient-tunnel</string>
   <string name="i2ptunnel_wizard_v_server">Tjener-tunnel</string>
@@ -242,6 +243,7 @@
   <string name="i2ptunnel_view_target">Mål</string>
   <string name="i2ptunnel_view_access_point">Tilgangspunkt</string>
   <string name="i2ptunnel_view_autostart">Auto-start</string>
+  <string name="address_copied_to_clipboard">Adresse kopiert til utklippstavle</string>
   <string name="edit_tunnel">Rediger tunnel</string>
   <string name="name">Navn</string>
   <string name="description">Beskrivelse</string>
@@ -278,7 +280,7 @@
   <string name="access_control">Tilgangskontroll</string>
   <string name="restricted_access">Begrenset tilgang</string>
   <string name="disabled">Avskrudd</string>
-  <string name="whitelist">hviteliste</string>
+  <string name="whitelist">hvitliste</string>
   <string name="blacklist">svarteliste</string>
   <string name="access_list">Tilgangsliste</string>
   <string name="reject_inproxies">Avslå inngående mellomtjenere</string>
@@ -311,11 +313,11 @@
   <string name="delay_open">Utsett åpning</string>
   <string name="tunnel_summ_delay_open">Utsett opprettelse av tunnel frem til det er nødvendig</string>
   <string name="reduce_quantity">Reduser mengde</string>
-  <string name="tunnel_summ_reduce_quantity">Reduser tunnel kvantitet når inaktiv</string>
+  <string name="tunnel_summ_reduce_quantity">Reduser tunnelmengde når inaktiv</string>
   <string name="idle_time">Lediggangstid</string>
   <string name="num_minutes">1%s minutter</string>
   <string name="reduced_tunnel_quantity">Redusert tunnelmengde</string>
-  <string name="close_tunnels">Lukk tunneller når de er inaktiv</string>
+  <string name="close_tunnels">Lukk tunneler når de er inaktive</string>
   <string name="new_keys_on_reopen">Nye nøkler å gjenåpne</string>
   <string name="new_keys_on_reopen_conflict_title">Skru av vedvarende nøkler?</string>
   <string name="new_keys_on_reopen_conflict_msg">Du kan ikke skru på nye nøkler mens tunnelen er oppsatt for å ha vedvarende nøkler. Ønsker du å skru av vedvarende nøkler?</string>

@@ -210,6 +210,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">Bezig met het stoppen van de tunnel</string>
   <string name="i2ptunnel_delete_confirm_message">Verwijder tunnel?</string>
   <string name="i2ptunnel_delete_confirm_button">Verwijder tunnel</string>
+  <string name="i2ptunnel_no_tunnel_details">Kon geen tunnel details laden</string>
   <string name="i2ptunnel_wizard_k_client_server">Cliënt of server</string>
   <string name="i2ptunnel_wizard_v_client">Cliënttunnel</string>
   <string name="i2ptunnel_wizard_v_server">Servertunnel</string>
@@ -242,6 +243,7 @@
   <string name="i2ptunnel_view_target">Doel</string>
   <string name="i2ptunnel_view_access_point">Toegangspunt</string>
   <string name="i2ptunnel_view_autostart">Automatisch starten</string>
+  <string name="address_copied_to_clipboard">Adres gekopieerd naar klembord</string>
   <string name="edit_tunnel">Tunnel bewerken</string>
   <string name="name">Naam</string>
   <string name="description">Beschrijving</string>

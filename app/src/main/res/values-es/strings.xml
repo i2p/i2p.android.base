@@ -222,7 +222,7 @@
   <string name="i2ptunnel_wizard_k_target_host">Nodo objetivo</string>
   <string name="i2ptunnel_wizard_k_target_port">Puerto objetivo</string>
   <string name="i2ptunnel_wizard_k_reachable_on">Alcanzable en</string>
-  <string name="i2ptunnel_wizard_k_binding_port">Puerto de acoplamiento</string>
+  <string name="i2ptunnel_wizard_k_binding_port">Puerto de asociación</string>
   <string name="i2ptunnel_wizard_k_auto_start">Auto iniciar</string>
   <string name="next">Siguiente</string>
   <string name="prev">Anterior</string>

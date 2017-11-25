@@ -53,7 +53,7 @@
   <string name="no_tunnels_running">Henüz çalışan bir tünel yok.</string>
   <string name="download">İndirme</string>
   <string name="upload">Yükleme</string>
-  <string name="configure_browser_title">Tarayıcı yapılandırılsın mı?</string>
+  <string name="configure_browser_title">Tarayıcı ayarlansın mı?</string>
   <string name="configure_browser_for_i2p">I2P sitelerini görüntüleyecek bir tarayıcı ayarlamak ister misiniz? (bu işlemi daha sonra Yardım menüsünden yapabilirsiniz).</string>
   <string name="first_start_title">Tebrikler, I2P yüklendi!</string>
   <string name="first_start_welcome"><b>I2P Yazılımına Hoşgeldiniz</b> Lütfen I2P yüklenip eşleri bulana kadar <b>sabırlı olun</b>.</string>
@@ -210,6 +210,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">Tünel kapatılıyor</string>
   <string name="i2ptunnel_delete_confirm_message">Tüneli sil</string>
   <string name="i2ptunnel_delete_confirm_button">Tüneli sil</string>
+  <string name="i2ptunnel_no_tunnel_details">Tünel ayrıntıları yüklenemedi</string>
   <string name="i2ptunnel_wizard_k_client_server">İstemci ya da Sunucu</string>
   <string name="i2ptunnel_wizard_v_client">İstemci tüneli</string>
   <string name="i2ptunnel_wizard_v_server">Sunucu tüneli</string>
@@ -242,6 +243,7 @@
   <string name="i2ptunnel_view_target">Hedef</string>
   <string name="i2ptunnel_view_access_point">Erişim noktası</string>
   <string name="i2ptunnel_view_autostart">Otomatik başlat</string>
+  <string name="address_copied_to_clipboard">Adres panoya kopyalandı</string>
   <string name="edit_tunnel">Tüneli düzenle</string>
   <string name="name">Ad</string>
   <string name="description">Açıklama</string>

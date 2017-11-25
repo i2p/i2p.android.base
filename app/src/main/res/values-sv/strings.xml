@@ -4,7 +4,7 @@
   <string name="desc_i2p_logo">I2P-logo</string>
   <string name="choose_language">Välj språk</string>
   <string name="welcome_new_install">Välkommen till I2P! Den här appen är ALFA-mjukvara och erbjuder inte stark anonymitet.
-Var god läs utgåvenoteringar och licens-information.</string>
+Läs utgåvenoteringar och licens-information.</string>
   <string name="welcome_new_version">Ny version installerad. Var god läs release kommentarerna. Version: </string>
   <string name="label_tunnels">Tunnlar</string>
   <string name="label_status">Status</string>
@@ -17,7 +17,7 @@ Var god läs utgåvenoteringar och licens-information.</string>
   <string name="label_error_logs">Felloggar</string>
   <string name="label_news">Nyheter</string>
   <string name="label_peers_status">Noder</string>
-  <string name="label_release_notes">Releasekommentarer</string>
+  <string name="label_release_notes">Utgåva noteringar</string>
   <string name="label_licenses">Licenser</string>
   <string name="label_browse">Bläddra</string>
   <string name="label_graphs">Diagram</string>
@@ -75,8 +75,8 @@ Var god läs utgåvenoteringar och licens-information.</string>
   <string name="action_refresh">Uppdatera</string>
   <string name="hint_search_addressbook">Sök i adressboken</string>
   <string name="action_reload_subscriptions">Ladda om prenumerationer</string>
-  <string name="news_last_updated">Nyheter senast uppdaterade för %s sedan</string>
-  <string name="news_last_checked">Nyheter senast kontrollerade för %s sedan</string>
+  <string name="news_last_updated">Nyheterna uppdaterades senast för %s sedan</string>
+  <string name="news_last_checked">Nyheterna kontrollerades senast för %s sedan</string>
   <string name="news_updated">Nyheter uppdaterade</string>
   <string name="view_news">Tryck för att se de senaste I2P-nyheterna</string>
   <string name="router_not_running">Routern kör inte</string>
@@ -308,7 +308,7 @@ Var god läs utgåvenoteringar och licens-information.</string>
   <string name="client_ban_length">Klient ban längd</string>
   <string name="total_posts_per_period">Antal POSTs per period</string>
   <string name="total_ban_length">Total banlängd</string>
-  <string name="power_saving">Energi spar</string>
+  <string name="power_saving">Energibesparing</string>
   <string name="delay_open">Fördröj öppnande</string>
   <string name="tunnel_summ_delay_open">Fördröj tunnelöppning tills påkallat</string>
   <string name="reduce_quantity">Minska mängd</string>

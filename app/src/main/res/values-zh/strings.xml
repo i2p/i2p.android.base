@@ -210,6 +210,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">停止隧道</string>
   <string name="i2ptunnel_delete_confirm_message">删除隧道?</string>
   <string name="i2ptunnel_delete_confirm_button">删除隧道</string>
+  <string name="i2ptunnel_no_tunnel_details">无法加载隧道详情</string>
   <string name="i2ptunnel_wizard_k_client_server">客户端或服务器</string>
   <string name="i2ptunnel_wizard_v_client">客户端隧道</string>
   <string name="i2ptunnel_wizard_v_server">服务器隧道</string>
@@ -242,6 +243,7 @@
   <string name="i2ptunnel_view_target">目标</string>
   <string name="i2ptunnel_view_access_point">接入点</string>
   <string name="i2ptunnel_view_autostart">自动启动</string>
+  <string name="address_copied_to_clipboard">地址已复制到剪切板</string>
   <string name="edit_tunnel">编辑隧道</string>
   <string name="name">名称</string>
   <string name="description">描述</string>

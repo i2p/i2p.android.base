@@ -38,6 +38,7 @@
   <string name="net_status_info_disconnected">Desconectado - verifique a conexão de rede</string>
   <string name="net_status_error_udp_port">Porta UDP em uso - altere as configurações e reinicie</string>
   <string name="net_status_error_no_active_peers">Sem pares ativos - verifique a conexão de rede e o firewall</string>
+  <string name="net_status_error_udp_disabled_tcp_not_set">UDP desativado e host/porta TCP entrante não definido</string>
   <string name="net_status_warn_firewalled_udp_disabled">Sob firewall com UDP desativado</string>
   <string name="shared_clients">Clientes compartilhados</string>
   <string name="uptime">Ligado a</string>
@@ -202,6 +203,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">Parando túnel</string>
   <string name="i2ptunnel_delete_confirm_message">Apagar túnel?</string>
   <string name="i2ptunnel_delete_confirm_button">Apagar túnel</string>
+  <string name="i2ptunnel_no_tunnel_details">Não foi possível carregar os detalhes do túnel</string>
   <string name="i2ptunnel_wizard_k_client_server">Cliente ou servidor</string>
   <string name="i2ptunnel_wizard_v_client">Túnel cliente</string>
   <string name="i2ptunnel_wizard_v_server">Túnel servidor</string>
@@ -213,6 +215,7 @@
   <string name="i2ptunnel_wizard_k_target_host">Host alvo</string>
   <string name="i2ptunnel_wizard_k_target_port">Porta alvo</string>
   <string name="i2ptunnel_wizard_k_reachable_on">Ao alcance em</string>
+  <string name="i2ptunnel_wizard_k_binding_port">Porta de ligação</string>
   <string name="i2ptunnel_wizard_k_auto_start">Auto-início</string>
   <string name="next">Próximo</string>
   <string name="prev">Anterior</string>

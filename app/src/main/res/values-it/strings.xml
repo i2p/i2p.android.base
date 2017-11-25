@@ -242,6 +242,7 @@
   <string name="i2ptunnel_view_target">Destinazione</string>
   <string name="i2ptunnel_view_access_point">Punto di Accesso</string>
   <string name="i2ptunnel_view_autostart">Avvio automatico</string>
+  <string name="address_copied_to_clipboard">Indirizzi copiati negli appunti</string>
   <string name="edit_tunnel">Modifica tunnel</string>
   <string name="name">Nome</string>
   <string name="description">Descrizione</string>

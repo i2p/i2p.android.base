@@ -210,6 +210,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">Остановка туннеля</string>
   <string name="i2ptunnel_delete_confirm_message">Удалить туннель?</string>
   <string name="i2ptunnel_delete_confirm_button">Удалить туннель</string>
+  <string name="i2ptunnel_no_tunnel_details">Невозможно загрузить сведения о туннеле</string>
   <string name="i2ptunnel_wizard_k_client_server">Клиент или сервер</string>
   <string name="i2ptunnel_wizard_v_client">Туннель клиента</string>
   <string name="i2ptunnel_wizard_v_server">Туннель сервера</string>
@@ -242,6 +243,7 @@
   <string name="i2ptunnel_view_target">Цель</string>
   <string name="i2ptunnel_view_access_point">Точка доступа</string>
   <string name="i2ptunnel_view_autostart">Авто-запуск</string>
+  <string name="address_copied_to_clipboard">Адрес скопирован в буфер обмена</string>
   <string name="edit_tunnel">Изменить туннель</string>
   <string name="name">Имя</string>
   <string name="description">Описание</string>
