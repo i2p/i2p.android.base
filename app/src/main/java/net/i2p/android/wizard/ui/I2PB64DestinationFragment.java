@@ -190,6 +190,10 @@ public class I2PB64DestinationFragment extends Fragment {
                     Util.e("Could not find B64 file", fnfe);
                     Toast.makeText(getActivity(), "Could not find B64 file.",
                             Toast.LENGTH_SHORT).show();
+                } catch (SecurityException se) {
+                    Util.e("Could not open B64 file", se);
+                    Toast.makeText(getActivity(), "Could not open B64 file.",
+                            Toast.LENGTH_SHORT).show();
                 } finally {
                     if (br != null)
                         try {
