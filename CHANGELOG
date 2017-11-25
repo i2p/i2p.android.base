@@ -1,4 +1,5 @@
 0.9.32
+ * Fixed "Application Not Responding" error when restarting all tunnels
  * Fixed crashes when:
    * opening the console menu
    * starting the router

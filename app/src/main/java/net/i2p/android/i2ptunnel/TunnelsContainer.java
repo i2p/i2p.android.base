@@ -191,7 +191,10 @@ public class TunnelsContainer extends Fragment implements
                 msgs = tcg.stopAllControllers();
                 break;
             case R.id.action_restart_all_tunnels:
-                msgs = tcg.restartAllControllers();
+                // Do a manual stop-start cycle, because tcg.restartAllControllers() happens in the
+                // foreground, whereas tcg.startAllControllers() fires off threads for starting.
+                msgs = tcg.stopAllControllers();
+                msgs.addAll(tcg.startAllControllers());
                 break;
             default:
                 return super.onOptionsItemSelected(item);
