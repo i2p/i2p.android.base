@@ -7,13 +7,15 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.widget.Toast;
 
-import net.i2p.I2PAppContext;
+import net.i2p.android.i2ptunnel.util.SaveTunnelTask;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.preferences.util.CustomPreferenceFragment;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
+
+import java.util.concurrent.ExecutionException;
 
 public abstract class BaseTunnelPreferenceFragment extends CustomPreferenceFragment {
     protected static final String ARG_TUNNEL_ID = "tunnelId";
@@ -74,7 +76,14 @@ public abstract class BaseTunnelPreferenceFragment extends CustomPreferenceFragm
     private void saveTunnel() {
         if (mGroup != null) {
             TunnelConfig cfg = TunnelUtil.createConfigFromPreferences(getActivity(), mGroup, mTunnelId);
-            TunnelUtil.saveTunnel(I2PAppContext.getGlobalContext(), mGroup, mTunnelId, cfg);
+            SaveTunnelTask task = new SaveTunnelTask(mGroup, mTunnelId, cfg);
+            try {
+                task.execute().get();
+            } catch (InterruptedException e) {
+                Util.e("Interrupted while saving tunnel config", e);
+            } catch (ExecutionException e) {
+                Util.e("Error while saving tunnel config", e);
+            }
         }
     }
 

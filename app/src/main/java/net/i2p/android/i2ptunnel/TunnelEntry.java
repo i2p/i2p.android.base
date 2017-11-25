@@ -6,15 +6,19 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import net.i2p.I2PAppContext;
+import net.i2p.android.i2ptunnel.util.SaveTunnelTask;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
 import net.i2p.data.Destination;
 import net.i2p.data.PrivateKeyFile;
 import net.i2p.i2ptunnel.TunnelController;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class TunnelEntry {
     public static final int RUNNING = 1;
@@ -26,18 +30,32 @@ public class TunnelEntry {
     private final TunnelController mController;
     private final int mId;
 
+    /**
+     * @return the new TunnelEntry, or null if there was an error.
+     */
     public static TunnelEntry createNewTunnel(
             Context ctx,
             TunnelControllerGroup tcg,
             TunnelConfig cfg) {
         int tunnelId = tcg.getControllers().size();
-        List<String> msgs = TunnelUtil.saveTunnel(
-                I2PAppContext.getGlobalContext(), tcg, -1, cfg);
+        TunnelEntry ret = null;
+        List<String> msgs = new ArrayList<>();
+        SaveTunnelTask task = new SaveTunnelTask(tcg, -1, cfg);
+        try {
+            msgs.addAll(task.execute().get());
+            TunnelController cur = TunnelUtil.getController(tcg, tunnelId);
+            ret = new TunnelEntry(ctx, cur, tunnelId);
+        } catch (InterruptedException e) {
+            Util.e("Interrupted while saving tunnel config", e);
+            msgs.add(ctx.getString(R.string.i2ptunnel_msg_config_save_failed));
+        } catch (ExecutionException e) {
+            Util.e("Error while saving tunnel config", e);
+            msgs.add(ctx.getString(R.string.i2ptunnel_msg_config_save_failed));
+        }
         // TODO: Do something else with the other messages.
         Toast.makeText(ctx.getApplicationContext(),
                 msgs.get(0), Toast.LENGTH_LONG).show();
-        TunnelController cur = TunnelUtil.getController(tcg, tunnelId);
-        return new TunnelEntry(ctx, cur, tunnelId);
+        return ret;
     }
 
     public TunnelEntry(Context context, TunnelController controller, int id) {

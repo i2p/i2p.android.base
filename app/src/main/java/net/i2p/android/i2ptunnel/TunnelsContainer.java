@@ -213,10 +213,12 @@ public class TunnelsContainer extends Fragment implements
                 TunnelConfig cfg = TunnelUtil.createConfigFromWizard(getActivity(), tcg, tunnelData);
                 TunnelEntry tunnel = TunnelEntry.createNewTunnel(getActivity(), tcg, cfg);
 
-                if (tunnel.isClient() && mClientFrag != null)
-                    mClientFrag.addTunnel(tunnel);
-                else if (mServerFrag != null)
-                    mServerFrag.addTunnel(tunnel);
+                if (tunnel != null) {
+                    if (tunnel.isClient() && mClientFrag != null)
+                        mClientFrag.addTunnel(tunnel);
+                    else if (mServerFrag != null)
+                        mServerFrag.addTunnel(tunnel);
+                }
             }
         }
     }
