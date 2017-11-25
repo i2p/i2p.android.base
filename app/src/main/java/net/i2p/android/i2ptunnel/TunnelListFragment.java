@@ -151,7 +151,10 @@ public class TunnelListFragment extends Fragment implements
 
     public void updateState(State state) {
         try {
-            if (state == State.STOPPING || state == State.STOPPED ||
+            if (state == State.INIT ||
+                    state == State.STARTING || // Wait until RouterContext is initialised
+                    state == State.STOPPING ||
+                    state == State.STOPPED ||
                     state == State.MANUAL_STOPPING ||
                     state == State.MANUAL_STOPPED ||
                     state == State.MANUAL_QUITTING ||
