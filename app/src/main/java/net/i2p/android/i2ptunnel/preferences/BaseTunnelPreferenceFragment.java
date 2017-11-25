@@ -51,7 +51,14 @@ public abstract class BaseTunnelPreferenceFragment extends CustomPreferenceFragm
             }
             // https://stackoverflow.com/questions/17880437/which-settings-file-does-preferencefragment-read-write
             getPreferenceManager().setSharedPreferencesName(TunnelUtil.getPreferencesFilename(mTunnelId));
-            loadPreferences();
+            try {
+                loadPreferences();
+            } catch (IllegalArgumentException iae) {
+                // mGroup couldn't load its config file
+                Toast.makeText(getActivity().getApplicationContext(),
+                        iae.toString(), Toast.LENGTH_LONG).show();
+                getActivity().finish();
+            }
         }
     }
 
