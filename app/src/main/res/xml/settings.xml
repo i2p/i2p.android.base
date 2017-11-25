@@ -17,7 +17,7 @@
         android:key="preference_category_addressbook"
         android:title="@string/label_addressbook" />
     <Preference
-        android:icon="@drawable/ic_settings_display_white_36dp"
+        android:icon="@drawable/ic_settings_brightness_white_36dp"
         android:key="preference_category_appearance"
         android:title="@string/settings_label_appearance" />
     <Preference
