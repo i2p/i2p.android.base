@@ -78,6 +78,9 @@ public abstract class BaseTunnelPreferenceFragment extends CustomPreferenceFragm
             TunnelConfig cfg = TunnelUtil.createConfigFromPreferences(getActivity(), mGroup, mTunnelId);
             SaveTunnelTask task = new SaveTunnelTask(mGroup, mTunnelId, cfg);
             try {
+                // TODO: There used to be a possible ANR here, because the underlying I2P code
+                // checks if the session is open as part of updating its config. We may need to save
+                // completely asynchronously (and ensure we do actually save before the app closes).
                 task.execute().get();
             } catch (InterruptedException e) {
                 Util.e("Interrupted while saving tunnel config", e);
