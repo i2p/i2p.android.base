@@ -406,30 +406,35 @@ public class I2PWebViewClient extends WebViewClient {
         protected void onProgressUpdate(Integer... progress) {
             if (isCancelled())
                 return;
-            int prog = progress[0];
-            if (prog < 0) {
-                _dialog.setTitle("Contacting...");
-                _dialog.setMessage(_host);
-                _dialog.setIndeterminate(true);
-                _dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                _dialog.setOnCancelListener(this);
-                _dialog.show();
-            } else if (prog == 0 && _total > 0) {
-                _dialog.setTitle("Downloading...");
-                _dialog.setMessage("...from " + _host);
-                _dialog.setIndeterminate(false);
-                _dialog.setMax(_total);
-                _dialog.setProgress(0);
-            } else if (_total > 0) {
-                // so it isn't at 100% while loading images and CSS
-                _dialog.setProgress(Math.min(prog, _total * 99 / 100));
-            } else if (prog > 0) {
-                // ugly, need custom
-                _dialog.setTitle("Downloading...");
-                _dialog.setMessage("...from " + _host + ": " + DataHelper.formatSize(prog) + 'B');
-                //_dialog.setProgress(prog);
-            } else {
-                // nothing
+            try {
+                int prog = progress[0];
+                if (prog < 0) {
+                    _dialog.setTitle("Contacting...");
+                    _dialog.setMessage(_host);
+                    _dialog.setIndeterminate(true);
+                    _dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    _dialog.setOnCancelListener(this);
+                    _dialog.show();
+                } else if (prog == 0 && _total > 0) {
+                    _dialog.setTitle("Downloading...");
+                    _dialog.setMessage("...from " + _host);
+                    _dialog.setIndeterminate(false);
+                    _dialog.setMax(_total);
+                    _dialog.setProgress(0);
+                } else if (_total > 0) {
+                    // so it isn't at 100% while loading images and CSS
+                    _dialog.setProgress(Math.min(prog, _total * 99 / 100));
+                } else if (prog > 0) {
+                    // ugly, need custom
+                    _dialog.setTitle("Downloading...");
+                    _dialog.setMessage("...from " + _host + ": " + DataHelper.formatSize(prog) + 'B');
+                    //_dialog.setProgress(prog);
+                } else {
+                    // nothing
+                }
+            } catch (IllegalArgumentException iae) {
+                // throws IAE - not attached to window manager - perhaps due to screen rotation?
+                Util.e("Error while updating I2PWebViewClient dialog", iae);
             }
         }
 
