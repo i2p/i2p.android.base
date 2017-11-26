@@ -531,7 +531,7 @@ public class MainFragment extends I2PFragmentBase {
 
         public AlphaComparator(RouterContext ctx) {
             _ctx = ctx;
-            xsc = _(ctx, SHARED_CLIENTS);
+            xsc = _t(ctx, SHARED_CLIENTS);
         }
 
         public int compare(Destination lhs, Destination rhs) {
@@ -559,12 +559,12 @@ public class MainFragment extends I2PFragmentBase {
         if (name == null)
             name = d.calculateHash().toBase64().substring(0, 6);
         else
-            name = _(ctx, name);
+            name = _t(ctx, name);
 
         return name;
     }
 
-    private String _(RouterContext ctx, String s) {
+    private String _t(RouterContext ctx, String s) {
         if (SHARED_CLIENTS.equals(s))
             return getString(R.string.shared_clients);
         else
