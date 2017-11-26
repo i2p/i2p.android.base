@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.View;
 import android.webkit.HttpAuthHandler;
@@ -30,6 +31,7 @@ import java.io.OutputStream;
 
 public class I2PWebViewClient extends WebViewClient {
 
+    private Fragment _parentFrag;
     private BGLoad _lastTask;
     /** save it here so we can dismiss it in onPageFinished() */
     private ProgressDialog _lastDialog;
@@ -40,6 +42,11 @@ public class I2PWebViewClient extends WebViewClient {
     private static final String FOOTER = "</body></html>";
     private static final String ERROR_URL = "<p>Unable to load URL: ";
     private static final String ERROR_ROUTER = "<p>Your router (or the HTTP proxy) does not appear to be running.</p>";
+
+    public I2PWebViewClient(Fragment parentFrag) {
+        super();
+        _parentFrag = parentFrag;
+    }
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -103,7 +110,7 @@ public class I2PWebViewClient extends WebViewClient {
                 ///////// API 8
                 // Otherwise hangs waiting for CSS
                 view.getSettings().setBlockNetworkLoads(false);
-                _lastDialog = new ProgressDialog(view.getContext());
+                _lastDialog = new ProgressDialog(_parentFrag.getContext());
                 BGLoad task = new BackgroundEepLoad(view, h, _lastDialog);
                 _lastTask = task;
                 task.execute(url);
