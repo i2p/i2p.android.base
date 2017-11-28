@@ -1,4 +1,4 @@
-0.9.32
+0.9.32 / 2017-11-28
  * Fixed "Application Not Responding" error when restarting all tunnels
  * Fixed crashes when:
    * opening the console menu
