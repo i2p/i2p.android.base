@@ -352,5 +352,6 @@
   <string name="error_logs_copied_to_clipboard">Error log disalin ke clipboard</string>
   <string name="logs_copied_to_clipboard">Log disalin ke clipboard</string>
   <string name="label_browser_configuration">Konfigurasi peramban</string>
+  <string name="no_market_app">Tidak ada aplikasi market ditemukan, silakan install secara manual</string>
   <string name="unset">Belum disetel</string>
 </resources>

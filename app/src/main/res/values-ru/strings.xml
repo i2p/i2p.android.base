@@ -358,5 +358,6 @@
   <string name="error_logs_copied_to_clipboard">Журнал ошибок скопирован в буфер</string>
   <string name="logs_copied_to_clipboard">Журналы скопированы в буфер</string>
   <string name="label_browser_configuration">Настройки браузера</string>
+  <string name="no_market_app">Не найдено приложение маркета. Пожалуйста, установите вручную.</string>
   <string name="unset">Отменить</string>
 </resources>

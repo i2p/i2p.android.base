@@ -354,5 +354,6 @@
   <string name="error_logs_copied_to_clipboard">Les journaux d’erreurs ont été copiés dans le presse-papiers</string>
   <string name="logs_copied_to_clipboard">Les journaux ont été copiés dans le presse-papiers</string>
   <string name="label_browser_configuration">Configuration du navigateur</string>
+  <string name="no_market_app">Aucune logithèque trouvée, veuillez installer manuellement.</string>
   <string name="unset">Non défini</string>
 </resources>

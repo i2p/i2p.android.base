@@ -3,8 +3,8 @@
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">I2P-logo</string>
   <string name="choose_language">Taal kiezen</string>
-  <string name="welcome_new_install">Welkom op I2P! Deze app heeft de ALPHA status en biedt geen sterke anonimiteit. Lees alstublieft de release opmerkingen en licentie-informatie.</string>
-  <string name="welcome_new_version">Nieuwe versie geïnstalleerd. Lees de release opmerkingen. Versie:</string>
+  <string name="welcome_new_install">Welkom bij I2P! Deze app heeft de ALFA-status en biedt geen sterke anonimiteit. Lees de uitgaveopmerkingen en licentie-informatie.</string>
+  <string name="welcome_new_version">Nieuwe versie geïnstalleerd. Lees de uitgaveopmerkingen. Versie:</string>
   <string name="label_tunnels">Tunnels</string>
   <string name="label_status">Status</string>
   <string name="label_console">Console</string>
@@ -13,10 +13,10 @@
   <string name="label_i2ptunnel_client">Cliënttunnels</string>
   <string name="label_i2ptunnel_server">Servertunnels</string>
   <string name="label_logs">Logboeken</string>
-  <string name="label_error_logs">Foutlogs</string>
+  <string name="label_error_logs">Foutlogboeken</string>
   <string name="label_news">Nieuws</string>
   <string name="label_peers_status">Peers</string>
-  <string name="label_release_notes">Versieopmerkingen</string>
+  <string name="label_release_notes">Uitgaveopmerkingen</string>
   <string name="label_licenses">Licenties</string>
   <string name="label_browse">Bladeren</string>
   <string name="label_graphs">Grafieken</string>
@@ -354,5 +354,6 @@
   <string name="error_logs_copied_to_clipboard">Foutlogs gekopieerd naar klembord</string>
   <string name="logs_copied_to_clipboard">Logs gekopieerd naar klembord</string>
   <string name="label_browser_configuration">Browserconfiguratie</string>
+  <string name="no_market_app">Geen winkelapp gevonden, installeer er handmatig een</string>
   <string name="unset">Niet ingesteld</string>
 </resources>

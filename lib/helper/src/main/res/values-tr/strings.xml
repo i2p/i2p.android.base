@@ -2,8 +2,8 @@
 <resources>
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
-  <string name="install_i2p_android">I2P Android Yüklensin</string>
-  <string name="you_must_have_i2p_android">I2P Android yazılımı yüklenmiş ve çalışıyor olmalıdır. Yüklemek ister misiniz?</string>
+  <string name="install_i2p_android">I2P Android Kurulsun mu?</string>
+  <string name="you_must_have_i2p_android">I2P Android yazılımı kurulmuş ve çalışıyor olmalıdır. Kurmak ister misiniz?</string>
   <string name="start_i2p_android">I2P Android Başlatılsın</string>
   <string name="would_you_like_to_start_i2p_android">I2P Android yazılımı çalışmıyor gibi görünüyor. Başlatmak ister misiniz?</string>
 </resources>

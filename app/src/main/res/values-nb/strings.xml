@@ -354,5 +354,6 @@
   <string name="error_logs_copied_to_clipboard">Utklippstavle for feil-logg</string>
   <string name="logs_copied_to_clipboard">Utklippstavle for loggføringer</string>
   <string name="label_browser_configuration">Oppsett av nettleser</string>
+  <string name="no_market_app">Fant inget program på markedet, installer manuelt</string>
   <string name="unset">Fravelg</string>
 </resources>

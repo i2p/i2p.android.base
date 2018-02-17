@@ -358,5 +358,6 @@
   <string name="error_logs_copied_to_clipboard">Logi błędów zostały skopiowane do schowka</string>
   <string name="logs_copied_to_clipboard">Logi zostały skopiowane do schowka</string>
   <string name="label_browser_configuration">Konfiguracja przeglądarki</string>
+  <string name="no_market_app">Nie znaleziono aplikacji sklep, prosimy zainstalować ręcznie</string>
   <string name="unset">Odpisz</string>
 </resources>

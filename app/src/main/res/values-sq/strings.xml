@@ -24,6 +24,7 @@
   <!--Parameter is a time, e.g. 32s or 2m-->
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="download">Shkarkim</string>
   <string name="first_start_title">Urime që arritët ta instaloni I2P\'në!</string>
   <string name="first_start_welcome">&lt;b&gt;Mirë se vini në I2P!&lt;b&gt; Ju lutem &lt;b&gt;duroni&lt;b&gt; deri sa I2P të boot dhe tåe gjejë peers, </string>
   <string name="first_start_read">Deri sa jeni duke pritur, ju lutem lexoni notat që janë lëshuar dhe vizitoni faqen e mirëseardhjes. </string>
@@ -175,10 +176,13 @@
   <string name="target_port">Portalja e shenjuar</string>
   <string name="tunnel_parameters">Parametrat e tunelëve</string>
   <string name="profile">Profil</string>
+  <string name="disabled">E çaktivizuar</string>
   <string name="whitelist">Listë lejimesh</string>
   <string name="unlimited">E pakufizuar</string>
   <string name="num_minutes">%s minuta</string>
   <string name="http_client">Klient i HTTP\'së</string>
+  <string name="username">Emër përdoruesi</string>
   <string name="password">Fjalëkalim</string>
+  <string name="all">Krejt</string>
   <string name="no_messages">Nuk ka mesazhe</string>
 </resources>
