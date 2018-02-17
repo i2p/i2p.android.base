@@ -1,3 +1,6 @@
+0.9.33 / 2018-02-18
+ * Translation updates
+
 0.9.32 / 2017-11-28
  * Fixed "Application Not Responding" error when restarting all tunnels
  * Fixed crashes when:
