@@ -210,6 +210,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">Зупинка тунель</string>
   <string name="i2ptunnel_delete_confirm_message">Видалити тунель?</string>
   <string name="i2ptunnel_delete_confirm_button">Видалити тунель</string>
+  <string name="i2ptunnel_no_tunnel_details">Не вдалося завантажити деталі тунелю</string>
   <string name="i2ptunnel_wizard_k_client_server">Клієнт або Сервер</string>
   <string name="i2ptunnel_wizard_v_client">Клієнтський тунель</string>
   <string name="i2ptunnel_wizard_v_server">Серверний тунель</string>
@@ -242,6 +243,7 @@
   <string name="i2ptunnel_view_target">Ціль</string>
   <string name="i2ptunnel_view_access_point">Точка доступу</string>
   <string name="i2ptunnel_view_autostart">Автозапуск</string>
+  <string name="address_copied_to_clipboard">Адреса скопійована в буфер обміну</string>
   <string name="edit_tunnel">Редагувати тунель</string>
   <string name="name">Назва</string>
   <string name="description">Опис</string>
@@ -354,5 +356,6 @@
   <string name="error_logs_copied_to_clipboard">Логи з помилками скопійовані у буфер обміну</string>
   <string name="logs_copied_to_clipboard">Логи скопійовані у буфер обміну</string>
   <string name="label_browser_configuration">Налаштування браузера</string>
+  <string name="no_market_app">Не знайдено жодного магазину додатків, будь-ласка, встановіть його вручну</string>
   <string name="unset">Відключити</string>
 </resources>

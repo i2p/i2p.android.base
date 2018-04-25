@@ -40,12 +40,14 @@
   <string name="net_status_error_udp_disabled_tcp_not_set">UDP poissa käytöstä ja tuleva TCP-verkkotietokone/-portti ei ole asetettu</string>
   <string name="net_status_warn_firewalled_udp_disabled">Palomuuritettu UDP-poiskytkettynä</string>
   <string name="shared_clients">Jaetut asiakkaat</string>
+  <string name="uptime">Päälläoloaika</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">A</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">P</string>
   <string name="no_tunnels_running">Yhtään tunnelia ei ole vielä käynnissä.</string>
   <string name="download">Lataa</string>
+  <string name="upload">Kopioi palvelimelle</string>
   <string name="configure_browser_title">Asetetaanko selain?</string>
   <string name="configure_browser_for_i2p">Haluaisitko asettaa selaimesi katsomaan I2P-sivustoja? (Voit myös tehdä tämän myöhemmin opaste-valikosta).</string>
   <string name="first_start_title">Onnittelut I2P:n asentamisesta!</string>
@@ -68,6 +70,7 @@
   <string name="news_last_updated">Uutisdt päivitetty viimeksi %s sitten</string>
   <string name="news_last_checked">Uutiset viimeksi tarkistettu %s sitten</string>
   <string name="news_updated">Uutiset päivitetty</string>
+  <string name="view_news">Napauta viimeisimpien I2P-uutisten katselemiseksi</string>
   <string name="router_not_running">Reititin ei ole käynnissä.</string>
   <string name="router_shutting_down">Reititin sulkeutuu.</string>
   <string name="select_an_address">Valitse osoite.</string>
@@ -86,16 +89,20 @@
   <string name="notification_status_running">I2P on käynnissä</string>
   <string name="notification_status_client_ready">Asiakastunnelit ovat valmiina</string>
   <string name="notification_status_client_down">Asiakastunnelit eivät ole valmiina</string>
+  <string name="notification_status_graceful">Pysäytetään I2P ajassa %s</string>
   <string name="notification_status_stopping">Pysäytetään I2P</string>
   <string name="notification_status_stopping_after_net">Verkkoyhteys katkesi, pysäytetään I2P</string>
   <string name="notification_status_shutdown_cancelled">Sulkeminen peruttu</string>
   <string name="notification_status_shutting_down">I2P on sulkeutumassa</string>
+  <string name="notification_status_bw">Kaistanleveys: %1$stavua sekunnissa alas / %2$stavua sekunnissa ylös</string>
   <string name="notification_status_peers">Vertaisverkkovastaanottajaa: %1$d aktiivista, %2$d tunnettua</string>
   <string name="notification_status_client">Asiakastunnelit: %1$d/%2$d</string>
   <string name="menu_settings">Asetukset</string>
   <string name="settings_enable">Ota käyttöön</string>
   <string name="settings_desc_subscriptions">Tilausverkko-osoitteet</string>
   <string name="settings_label_bandwidth_net">Kaistanleveys ja verkko</string>
+  <string name="settings_label_startOnBoot">Käynnistä I2P tietokoneen käynnistyksen yhteydessä</string>
+  <string name="settings_desc_startOnBoot">Yhdistä I2P:hen automaattisesti Android-laitteesi käynnistyessä</string>
   <string name="settings_label_bandwidth">Kaistanleveys</string>
   <string name="settings_label_bw_inbound">Tulonopeus</string>
   <string name="settings_desc_bw_inbound">Enimmäistulonopeus</string>
@@ -128,6 +135,7 @@
   <string name="menu_about">Ohjelmasta</string>
   <string name="about_version">Versio:</string>
   <string name="about_project">Hankekoti:</string>
+  <string name="about_bugs">Ohjelmistoviat ja tuki:</string>
   <string name="about_helpwanted">Etsitään apua!</string>
   <string name="menu_help">Opaste</string>
   <string name="general">Yleistä</string>
@@ -147,7 +155,10 @@
   <string name="i2ptunnel_type_socksirctunnel">SOCKS IRC-välityspalvelin</string>
   <string name="i2ptunnel_type_connectclient">CONNECT/SSL/HTTPS-välityspalvelin</string>
   <string name="i2ptunnel_type_ircserver">IRC-palvelin</string>
+  <string name="i2ptunnel_type_streamrclient">Streamr-asiakasohjelma</string>
+  <string name="i2ptunnel_type_streamrserver">Streamr-palvelin</string>
   <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
+  <string name="install_recommended_app">Asennetaanko suositeltu sovellus?</string>
   <string name="i2ptunnel_not_initialized">Tunneleita ei ole vielä alustettu, lataa uudelleen kahdessa minuutissa.</string>
   <string name="i2ptunnel_new_tunnel">Uusi tunneli</string>
   <string name="i2ptunnel_msg_tunnel_starting">Käynnistetään tunneli</string>

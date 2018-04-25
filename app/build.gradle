@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION as String)
     defaultConfig {
-        versionCode 4745240
+        versionCode 4745241
         versionName "$I2P_VERSION"
         minSdkVersion 9
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION as String)
@@ -82,7 +82,7 @@ dependencies {
     }
 }
 
-project.ext.i2pbase = '../i2p.i2p'
+project.ext.i2pbase = "../i2p.i2p"
 def Properties props = new Properties()
 def propFile = new File(project(':routerjars').projectDir, 'local.properties')
 

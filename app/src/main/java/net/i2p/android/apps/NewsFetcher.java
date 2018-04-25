@@ -11,12 +11,12 @@ import net.i2p.router.RouterContext;
 import net.i2p.router.news.NewsEntry;
 import net.i2p.router.news.NewsMetadata;
 import net.i2p.router.news.NewsXMLParser;
-import net.i2p.router.util.RFC822Date;
 import net.i2p.util.EepGet;
 import net.i2p.util.FileUtil;
 import net.i2p.util.Log;
 import net.i2p.util.ReusableGZIPInputStream;
 import net.i2p.util.SecureFileOutputStream;
+import net.i2p.util.RFC822Date;
 
 import java.io.BufferedWriter;
 import java.io.File;
