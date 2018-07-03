@@ -1,6 +1,6 @@
 1. Check out a clean copy of i2p.i2p at the correct release version.
 2. Edit `routerjars/local.properties` to use the clean i2p.i2p copy.
-3. Pull the latest translations with `tx pull -a` and commit them.
+3. Pull the latest translations with `tx pull -a` and commit them. (If you don't have the `tx` command, do `pip install transifex-client` )
 4. Ensure that `signing.properties` contains the details of the release key.
 5. Edit `gradle.properties` to bump the I2P version.
 6. Edit `app/build.gradle` to bump the Android version number.
