@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">I2P</string>
-  <string name="desc_i2p_logo">Logo d’I2P</string>
+  <string name="desc_i2p_logo">Logo I2P</string>
   <string name="choose_language">Choisir la langue</string>
   <string name="welcome_new_install">Bienvenue sur I2P ! Cette appli est un logiciel en version ALPHA de développement et n’offre pas un niveau d’anonymat élevé. Veuillez lire les notes de mise à jour et les informations de licence.</string>
   <string name="welcome_new_version">La nouvelle version est installée. Veuillez lire les notes de mise à jour. Version :</string>

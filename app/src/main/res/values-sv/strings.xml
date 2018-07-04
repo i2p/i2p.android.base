@@ -25,7 +25,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="button_router_on">I2P kör (långt tryck för att stanna)</string>
   <string name="button_router_graceful">I2P kommer att stängas av om %s</string>
   <string name="button_shutdown_now">Långt tryck för att stanna nu</string>
-  <string name="button_cancel_graceful">Långt tryck för att ångra avstängning</string>
+  <string name="button_cancel_graceful">Långt tryck för att ångra stängning</string>
   <string name="no_internet">Ingen internetuppkoppling är tillgängling</string>
   <string name="hidden">Dold</string>
   <string name="testing">Testar</string>
@@ -108,7 +108,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="notification_status_graceful">Stannar I2P om %s</string>
   <string name="notification_status_stopping">Stannar I2P</string>
   <string name="notification_status_stopping_after_net">Nätverk nedkopplat, stannar I2P</string>
-  <string name="notification_status_shutdown_cancelled">Avstängning avbruten</string>
+  <string name="notification_status_shutdown_cancelled">Stängning avbruten</string>
   <string name="notification_status_shutting_down">I2P stängs av</string>
   <string name="notification_status_bw">Bandbredd:%1$sBps ner / %2$sBps upp</string>
   <string name="notification_status_peers">Noder: %1$d aktiva, %2$d kända</string>
