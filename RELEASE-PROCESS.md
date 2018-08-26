@@ -1,3 +1,5 @@
+# Release Process
+
 1. Check out a clean copy of i2p.i2p at the correct release version.
 2. Edit `routerjars/local.properties` to use the clean i2p.i2p copy.
 3. Pull the latest translations with `tx pull -a` and commit them. (If you don't have the `tx` command, do `pip install transifex-client` )
@@ -18,3 +20,6 @@
 17. Check F-Droid repo works, and app works.
 18. `mtn ci gradle.properties lib/helper/gradle.properties app/build.gradle`
 19. Push free and donate builds to Google Play.
+20. Tag the new release. Example `mtn tag h: android-0.9.36`
+
+

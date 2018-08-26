@@ -15,7 +15,7 @@
   <string name="label_logs">Log</string>
   <string name="label_error_logs">Log errori</string>
   <string name="label_news">News</string>
-  <string name="label_peers_status">Peers</string>
+  <string name="label_peers_status">Peer</string>
   <string name="label_release_notes">Note di rilascio</string>
   <string name="label_licenses">Licenze</string>
   <string name="label_browse">Sfoglia</string>
@@ -28,13 +28,13 @@
   <string name="no_internet">Nessuna connessione Internet disponibile</string>
   <string name="hidden">Nascosto</string>
   <string name="testing">Test</string>
-  <string name="firewalled">Bloccato dal Firewall</string>
+  <string name="firewalled">Bloccato dal firewall</string>
   <string name="symmetric_nat">NAT simmetrico</string>
   <string name="net_status_error_i2cp">Errore del Gestore di Client I2CP - controllare i log </string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_skew">Disallineamento del Clock di %s</string>
   <string name="net_status_error_unresolved_tcp">Indirizzo TCP non risolto</string>
-  <string name="net_status_error_private_tcp">Indirizzo TCP Privato</string>
+  <string name="net_status_error_private_tcp">Indirizzo TCP privato</string>
   <string name="net_status_warn_firewalled_inbound_tcp">Bloccato da firewall con TCP in entrata abilitato</string>
   <string name="net_status_warn_firewalled_floodfill">Bloccato dal Firewall e Riempimento</string>
   <string name="net_status_info_disconnected">Disconesso - controlla la connessione a internet</string>

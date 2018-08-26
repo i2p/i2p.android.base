@@ -326,7 +326,7 @@
   <string name="tunnel_summ_referer">\'Referer\' üstbilgisi geçirilsin</string>
   <string name="tunnel_summ_accept">\'Accept-*\' üstbilgisi geçirilsin</string>
   <string name="tunnel_summ_allow_ssl">I2P adreslerinde SSL kullanılabilsin</string>
-  <string name="jump_url_list">İnternet adresi listesine sıçra</string>
+  <string name="jump_url_list">Adresi listesine sıçra</string>
   <string name="proxy_auth">Vekil sunucu kimlik doğrulaması</string>
   <string name="tunnel_summ_proxy_auth">Bu vekil sunucuda oturum açmak için kimlik doğrulaması istensin</string>
   <string name="username">Kullanıcı Adı</string>
@@ -340,9 +340,11 @@
   <string name="no_messages">Henüz bir ileti yok</string>
   <string name="no_error_messages">Henüz bir hata iletisi yok</string>
   <plurals name="log_error_messages">
+    <item quantity="one">%d hata iletisi, yeniden eskiye</item>
     <item quantity="other">%d hata iletisi, yeniden eskiye</item>
   </plurals>
   <plurals name="log_messages">
+    <item quantity="one">%d ileti, yeniden eskiye</item>
     <item quantity="other">%d ileti, yeniden eskiye</item>
   </plurals>
   <string name="log_entry">Günlük Kaydı</string>

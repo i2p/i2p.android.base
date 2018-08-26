@@ -354,5 +354,6 @@
   <string name="error_logs_copied_to_clipboard">Fehlerprotokolle in die Zwischenablage kopiert</string>
   <string name="logs_copied_to_clipboard">Protokolle in die Zwischenablage kopiert</string>
   <string name="label_browser_configuration">Browserkonfiguration</string>
+  <string name="no_market_app">Keine angebotene App gefunden, bitte manuell installieren.</string>
   <string name="unset">Deaktivieren</string>
 </resources>

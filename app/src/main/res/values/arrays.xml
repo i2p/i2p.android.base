@@ -31,6 +31,7 @@
     </string-array>
     <string-array name="languages">
         <item>zz</item>
+        <item>az</item>
         <item>en</item>
         <item>ca</item>
         <item>zh</item>
@@ -58,6 +59,7 @@
     </string-array>
     <string-array name="language_names">
         <item>@string/settings_default</item>
+        <item>Azerbaijani</item>
         <item>English</item>
         <item>Català</item>
         <item>Chinese 中国的</item>
