@@ -74,6 +74,7 @@
   <string name="settings_desc_upnp">Automaticky otvoriť porty firewallu</string>
   <string name="settings_label_logging">Logovanie</string>
   <string name="settings_label_default_log_level">Predvolená úroveń logovania</string>
+  <string name="settings_default">Predvolené</string>
   <string name="settings_label_advanced">Pokročilé</string>
   <string name="settings_label_showStats">Štatistiky routra</string>
   <string name="settings_summ_showStats">Zobraziť pokročilé štatistiky v hlavnej konzole</string>
@@ -175,6 +176,7 @@
   <string name="target_port">Cieľový port</string>
   <string name="tunnel_parameters">Parametre tunelov</string>
   <string name="profile">Profil</string>
+  <string name="disabled">Zrušené</string>
   <string name="whitelist">Whitelist</string>
   <string name="blacklist">Blacklist</string>
   <string name="tunnel_summ_delay_open">Pozdržať otvorenie tunelov až pokiaľ to nebude vyžadované</string>
@@ -184,4 +186,5 @@
   <string name="username">Užívateľské meno</string>
   <string name="password">Heslo</string>
   <string name="custom_options">Vlastné nastavenia</string>
+  <string name="all">Všetko</string>
 </resources>
