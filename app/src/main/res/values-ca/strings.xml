@@ -149,10 +149,12 @@
   <string name="settings_label_expl_backupQuantity">Quantitat de còpies de seguretat</string>
   <string name="settings_summ_expl_backupQuantity">%s túnels</string>
   <string name="settings_desc_expl_backupQuantity">Quantitat de còpies de seguretat del túnel</string>
+  <string name="menu_about">Quant a</string>
   <string name="about_version">Versió:</string>
   <string name="about_helpwanted">Es necessita ajuda!</string>
   <string name="about_volunteer">Voleu ajudar a millorar l\'aplicació? Oferiu-vos voluntaris al fòrum Android:</string>
   <string name="menu_help">Ajuda</string>
+  <string name="general">Generals</string>
   <string name="label_router">Adreces públiques</string>
   <string name="label_private">Adreces privades</string>
   <string name="addressbook_add_wizard_k_name">Nom</string>
@@ -176,6 +178,7 @@
   <string name="i2ptunnel_wizard_desc_desc">Una descripció del túnel. És opcional i purament informativa.</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Voleu crear el túnel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Crea el túnel</string>
+  <string name="i2ptunnel_view_target">Objectiu</string>
   <string name="i2ptunnel_view_access_point">Punt d\'accés</string>
   <string name="edit_tunnel">Edita el túnel</string>
   <string name="name">Nom</string>
@@ -190,6 +193,7 @@
   <string name="profile">Perfil</string>
   <string name="profile_interactive">Connexió interactiva</string>
   <string name="access_control">Control d\'accés</string>
+  <string name="disabled">Desactivat</string>
   <string name="access_list">Llista d\'accés</string>
   <string name="client_connection_limits">Límit de connexions del client</string>
   <string name="connections_per_minute">Connexions per minut</string>

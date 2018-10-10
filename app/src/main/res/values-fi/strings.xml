@@ -114,6 +114,7 @@
   <string name="settings_desc_upnp">Avaa palomuuriportit automaattisesti</string>
   <string name="settings_label_logging">Lokit</string>
   <string name="settings_label_default_log_level">Oletus loggaustaso</string>
+  <string name="settings_label_appearance">Ulkoasu</string>
   <string name="settings_label_language">Kieli</string>
   <string name="settings_default">Oletus</string>
   <string name="settings_label_advanced">Lisätietoja</string>
@@ -198,6 +199,7 @@
   <string name="use_ssl">Käytä SSL:ää</string>
   <string name="tunnel_parameters">Tunneliparametrit</string>
   <string name="profile">Profiili</string>
+  <string name="disabled">Otettu pois käytöstä</string>
   <string name="whitelist">Valkoinen lista</string>
   <string name="blacklist">Musta lista</string>
   <string name="connections_per_minute">Yhteyksiä minuutissa</string>

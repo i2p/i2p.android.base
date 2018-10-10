@@ -23,7 +23,9 @@
   <string name="hidden">Fshehur</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">S</string>
   <string name="download">Shkarkim</string>
   <string name="first_start_title">Urime që arritët ta instaloni I2P\'në!</string>
   <string name="first_start_welcome">&lt;b&gt;Mirë se vini në I2P!&lt;b&gt; Ju lutem &lt;b&gt;duroni&lt;b&gt; deri sa I2P të boot dhe tåe gjejë peers, </string>
@@ -48,6 +50,8 @@
   <string name="stats_not_ready">menaxheri i statistikave nuk është gati ende. Provoni përsëri më vone. </string>
   <string name="no_graphs_configured">Asnjë graf nuk është konfigururar. Mund të zgjedhni statistikat për graf në menynë e cilësimeve. Ndryshimet do të kenë efekt pas 60 sekondave.</string>
   <string name="configure_graphs">Konfiguro grafët</string>
+  <string name="country">Vendi</string>
+  <string name="version">Version</string>
   <string name="netdb_routers_empty">Nuk ka routerë në NetDB\'në tuaj. </string>
   <string name="netdb_leases_empty">Nuk ka LeaseSets në NetDB\'në tuaj.</string>
   <string name="notification_status_peers">Peers: %1$d aktivë, %2$d të njohur</string>
@@ -74,6 +78,7 @@
   <string name="settings_desc_upnp">Hapni portalet e firewall\'ëve automatikisht</string>
   <string name="settings_label_logging">Logimet</string>
   <string name="settings_label_default_log_level">Niveli i logimit mesatar</string>
+  <string name="settings_label_appearance">Paraqitja</string>
   <string name="settings_label_language">Gjuhë</string>
   <string name="settings_default">Parazgjedhje</string>
   <string name="settings_label_advanced">I/e avancuar</string>
@@ -174,6 +179,7 @@
   <string name="outproxies">Prokurët jashtësor</string>
   <string name="target_host">Host\'i i shënjuar</string>
   <string name="target_port">Portalja e shenjuar</string>
+  <string name="use_ssl">Përdorni SSL</string>
   <string name="tunnel_parameters">Parametrat e tunelëve</string>
   <string name="profile">Profil</string>
   <string name="disabled">E çaktivizuar</string>

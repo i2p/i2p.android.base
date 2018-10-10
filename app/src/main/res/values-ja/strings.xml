@@ -31,6 +31,7 @@
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
   <string name="download">ダウンロード</string>
+  <string name="upload">アップロード</string>
   <string name="configure_browser_title">ブラウザの設定をしますか？</string>
   <string name="configure_browser_for_i2p">I2Pサイトを見るためにブラウザを設定しますか？(あとでヘルプメニューからも設定できます)</string>
   <string name="first_start_title">I2P のインストールおめでとうございます！</string>
@@ -92,7 +93,9 @@
   <string name="settings_desc_upnp">自動的にファイアーウォールのポートを開く</string>
   <string name="settings_label_logging">ロギング</string>
   <string name="settings_label_default_log_level">デフォルトのログ水準</string>
+  <string name="settings_label_appearance">外観</string>
   <string name="settings_label_language">言語</string>
+  <string name="settings_default">デフォルト</string>
   <string name="settings_label_advanced">高度</string>
   <string name="settings_label_showStats">ルーターの統計</string>
   <string name="settings_summ_showStats">メインコンソールに高度な統計を表示</string>
@@ -217,6 +220,7 @@
   <string name="delay_connect">接続延滞</string>
   <string name="access_control">アクセスコントロール</string>
   <string name="restricted_access">許可されたアクセス</string>
+  <string name="disabled">無効</string>
   <string name="whitelist">ホワイトリスト</string>
   <string name="blacklist">ブラックリスト</string>
   <string name="access_list">アクセスリスト</string>

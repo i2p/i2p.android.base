@@ -25,7 +25,9 @@
   <string name="hidden">Skrytý</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
+  <string name="char_server_tunnel">S</string>
   <string name="first_start_title">Gratulácia k nainštalovaniu I2P!</string>
   <string name="first_start_welcome"><b>Vitajte v I2P!</b> Prosím <b>majte trpezlivosť</b>, kým sa I2P nabootuje a nájde peerov.</string>
   <string name="first_start_read">Zatiaľ čo budete čakať, prosím prečítajte si poznámky k vydaniu a úvodnú stránku.</string>
@@ -47,6 +49,8 @@
   <string name="action_reload_subscriptions">Obnoviť príspevky</string>
   <string name="router_not_running">Router nie je spustený.</string>
   <string name="stats_not_ready">Správca štatistík zatiaľ nie je pripravený. Prosím vyskúšajte to znova neskôr.</string>
+  <string name="country">Krajina</string>
+  <string name="version">Verzia</string>
   <string name="count">Počet</string>
   <string name="netdb_routers_empty">Žiadne routre vo vašej NetDB.</string>
   <string name="netdb_leases_empty">Žiadne prenajaté sady vo vašej NetDB.</string>
@@ -74,6 +78,8 @@
   <string name="settings_desc_upnp">Automaticky otvoriť porty firewallu</string>
   <string name="settings_label_logging">Logovanie</string>
   <string name="settings_label_default_log_level">Predvolená úroveń logovania</string>
+  <string name="settings_label_appearance">Vzhľad</string>
+  <string name="settings_label_language">Jazyk</string>
   <string name="settings_default">Predvolené</string>
   <string name="settings_label_advanced">Pokročilé</string>
   <string name="settings_label_showStats">Štatistiky routra</string>
@@ -106,6 +112,7 @@
   <string name="about_volunteer">Chceli by ste urobiť aplikáciu lepšou? Prihláste sa na androidovom fóre:</string>
   <string name="about_donate">Chcete darovať peniaze alebo bitcoiny za účelom zakúpenia ďalších zariadení s Androidom pre vývoj a testovanie? Choďte na:</string>
   <string name="menu_help">Pomoc</string>
+  <string name="general">Všeobecné</string>
   <string name="addressbook_search_header">%s nájdených</string>
   <string name="addressbook_add_wizard_k_name">Názov</string>
   <string name="addressbook_add_wizard_k_destination">Cieľ</string>
@@ -174,6 +181,7 @@
   <string name="enable_dcc">Povoliť DCC</string>
   <string name="target_host">Cieľový host</string>
   <string name="target_port">Cieľový port</string>
+  <string name="use_ssl">Použiť SSL</string>
   <string name="tunnel_parameters">Parametre tunelov</string>
   <string name="profile">Profil</string>
   <string name="disabled">Zrušené</string>
