@@ -29,7 +29,7 @@
         android:layout_marginLeft="@dimen/listitem_horizontal_margin"
         android:layout_marginStart="@dimen/listitem_horizontal_margin"
         android:ellipsize="marquee"
-        android:maxLines="1"
+        android:singleLine="true"
         android:text="RouterInfo hash"
         android:textAppearance="@style/TextAppearance.AppCompat.Primary" />
 

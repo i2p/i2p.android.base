@@ -37,7 +37,7 @@
             android:layout_toRightOf="@id/tunnel_name"
             android:ellipsize="start"
             android:gravity="end"
-            android:maxLines="1"
+            android:singleLine="true"
             android:text="Interface:port"
             android:textAppearance="@style/TextAppearance.AppCompat.Secondary" />
 
