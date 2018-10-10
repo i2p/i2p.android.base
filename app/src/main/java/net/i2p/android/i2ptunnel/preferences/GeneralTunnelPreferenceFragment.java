@@ -111,7 +111,8 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
                 generalCategory.removePreference(generalCategory.findPreference(getString(R.string.TUNNEL_SHARED_CLIENT)));
                 addPreferencesFromResource(R.xml.tunnel_gen_server_port, portCategory);
                 portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_TARGET_PORT)));
-                portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_USE_SSL)));
+                // # TODO: See trac issue #2296
+                //portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_USE_SSL)));
             }
         }
 
@@ -168,8 +169,11 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
 
         @Override
         protected void generalClientStandardOrIrc(boolean isStandardOrIrc) {
+            /*
+            # TODO: See trac issue #2296
             if (!isStandardOrIrc)
                 portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_USE_SSL)));
+                 */
         }
 
         @Override
@@ -185,7 +189,8 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
         @Override
         protected void generalServerHttpBidirOrStreamr(boolean isStreamr) {
             addPreferencesFromResource(R.xml.tunnel_gen_client_port, portCategory);
-            portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_USE_SSL)));
+            // # TODO: See trac issue #2296
+            //portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_USE_SSL)));
             if (isStreamr)
                 portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_LISTEN_PORT)));
 
@@ -201,7 +206,8 @@ public class GeneralTunnelPreferenceFragment extends BaseTunnelPreferenceFragmen
         protected void generalServerPortStreamr(boolean isStreamr) {
             if (isStreamr) {
                 portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_TARGET_HOST)));
-                portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_USE_SSL)));
+                // # TODO: See trac issue #2296
+                //portCategory.removePreference(portCategory.findPreference(getString(R.string.TUNNEL_USE_SSL)));
             }
         }
 

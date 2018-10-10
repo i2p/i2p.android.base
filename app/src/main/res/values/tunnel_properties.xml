@@ -4,7 +4,7 @@
     <string name="TUNNEL_TYPE" translatable="false">type</string>
     <string name="TUNNEL_NAME" translatable="false">name</string>
     <string name="TUNNEL_DESCRIPTION" translatable="false">description</string>
-    <string name="TUNNEL_USE_SSL" translatable="false">useSSL</string>
+    <!--<string name="TUNNEL_USE_SSL" translatable="false">useSSL</string>-->
     <string name="TUNNEL_START_ON_LOAD" translatable="false">startOnLoad</string>
     <string name="TUNNEL_PRIV_KEY_FILE" translatable="false">privKeyFile</string>
 

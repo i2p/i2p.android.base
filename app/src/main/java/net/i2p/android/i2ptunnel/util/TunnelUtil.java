@@ -182,8 +182,10 @@ public class TunnelUtil extends GeneralHelper {
 
         @Override
         protected void generalClientStandardOrIrc(boolean isStandardOrIrc) {
+            /* # TODO: See trac issue #2296
             if (isStandardOrIrc)
                 ed.putBoolean(res.getString(R.string.TUNNEL_USE_SSL), isSSLEnabled(tunnel));
+                */
         }
 
         @Override
@@ -212,7 +214,8 @@ public class TunnelUtil extends GeneralHelper {
         protected void generalServerPortStreamr(boolean isStreamr) {
             if (!isStreamr) {
                 ed.putString(res.getString(R.string.TUNNEL_TARGET_HOST), getTargetHost(tunnel));
-                ed.putBoolean(res.getString(R.string.TUNNEL_USE_SSL), isSSLEnabled(tunnel));
+                // # TODO: See trac issue #2296
+                //ed.putBoolean(res.getString(R.string.TUNNEL_USE_SSL), isSSLEnabled(tunnel));
             }
         }
 
@@ -414,8 +417,10 @@ public class TunnelUtil extends GeneralHelper {
 
         @Override
         protected void generalClientStandardOrIrc(boolean isStandardOrIrc) {
+            /* # TODO: See trac issue #2296
             if (isStandardOrIrc)
                 cfg.setUseSSL(prefs.getBoolean(res.getString(R.string.TUNNEL_USE_SSL), false));
+                */
         }
 
         @Override
@@ -444,7 +449,8 @@ public class TunnelUtil extends GeneralHelper {
         protected void generalServerPortStreamr(boolean isStreamr) {
             if (!isStreamr) {
                 cfg.setTargetHost(prefs.getString(res.getString(R.string.TUNNEL_TARGET_HOST), "127.0.0.1"));
-                cfg.setUseSSL(prefs.getBoolean(res.getString(R.string.TUNNEL_USE_SSL), false));
+                // # TODO: See trac issue #2296
+                //cfg.setUseSSL(prefs.getBoolean(res.getString(R.string.TUNNEL_USE_SSL), false));
             }
         }
 
