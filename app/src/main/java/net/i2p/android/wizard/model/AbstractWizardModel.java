@@ -67,7 +67,10 @@ public abstract class AbstractWizardModel implements ModelCallbacks {
 
     public void load(Bundle savedValues) {
         for (String key : savedValues.keySet()) {
-            mRootPageList.findByKey(key).resetData(savedValues.getBundle(key));
+            // Expanded the code to hunt NPE - Ticket #2389
+            Page tmp = mRootPageList.findByKey(key);
+            Bundle tmpBundle = savedValues.getBundle(key);
+            tmp.resetData(tmpBundle);
         }
     }
 
