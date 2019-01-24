@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import net.i2p.android.router.util.Util;
 
 import net.i2p.android.router.I2PConstants;
 import net.i2p.android.router.service.RouterService;
@@ -19,7 +20,12 @@ public class OnBootReceiver extends BroadcastReceiver implements I2PConstants {
 
         if (startOnBoot) {
             Intent routerService = new Intent(context, RouterService.class);
-            context.startService(routerService);
+            // Ticket #2404
+            try {
+                context.startService(routerService);
+            } catch (IllegalStateException ex) {
+                Util.e("Error: ", ex);
+            }
         }
     }
 }
