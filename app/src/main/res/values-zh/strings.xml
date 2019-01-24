@@ -352,5 +352,6 @@
   <string name="error_logs_copied_to_clipboard">错误日志已复制到剪贴板</string>
   <string name="logs_copied_to_clipboard">日志已复制到剪贴板</string>
   <string name="label_browser_configuration">浏览器配置</string>
+  <string name="no_market_app">没有找到应用商店，请手动安装</string>
   <string name="unset">未设置</string>
 </resources>
