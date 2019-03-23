@@ -3,9 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION as String)
     defaultConfig {
-        versionCode 4745246
+        versionCode 4745247
         versionName "$I2P_VERSION"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION as String)
 
         // For Espresso
@@ -32,6 +32,7 @@ android {
     }
     lintOptions {
         abortOnError false
+        disable 'MissingDefaultResource'
     }
     packagingOptions {
         exclude 'LICENSE.txt'
@@ -51,6 +52,7 @@ android {
             applicationId 'net.i2p.android.router'
         }
     }
+    buildToolsVersion '28.0.3'
 }
 
 dependencies {
@@ -58,15 +60,13 @@ dependencies {
     implementation project(':lib:client')
     implementation project(':lib:helper')
     implementation project(path: ':routerjars', configuration: 'routerjars')
-
     // Android Support Repository dependencies
-    def supportVersion = '25.3.1'
+    def supportVersion = '28.0.0'
     implementation "com.android.support:support-v4:$supportVersion"
     implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation "com.android.support:preference-v7:$supportVersion"
     implementation "com.android.support:preference-v14:$supportVersion"
     implementation "com.android.support:recyclerview-v7:$supportVersion"
-
     // Remote dependencies
     implementation 'com.androidplot:androidplot-core:1.4.1'
     implementation 'com.eowise:recyclerview-stickyheaders:0.5.2@aar'
@@ -75,7 +75,6 @@ dependencies {
     implementation "net.i2p:router:$I2P_VERSION"
     implementation 'net.i2p.android.ext:floatingactionbutton:1.10.1'
     implementation 'org.sufficientlysecure:html-textview:3.1'
-
     // Testing-only dependencies
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2') {
         exclude group: 'com.android.support', module: 'support-annotations'

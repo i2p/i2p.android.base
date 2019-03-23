@@ -6,6 +6,7 @@
   <string name="welcome_new_version">Tip/version i ri është instaluar. Ju lutem lexoni notat e lëshimit .Versioni:</string>
   <string name="label_tunnels">Tunelet</string>
   <string name="label_status">Statusi</string>
+  <string name="label_console">Konsolë</string>
   <string name="label_addresses">Adresa</string>
   <string name="label_addressbook">Libri i adresave. </string>
   <string name="label_i2ptunnel_client">Tunelet e klientëve</string>
@@ -189,6 +190,7 @@
   <string name="http_client">Klient i HTTP\'së</string>
   <string name="username">Emër përdoruesi</string>
   <string name="password">Fjalëkalim</string>
+  <string name="other">Tjetër</string>
   <string name="all">Krejt</string>
   <string name="no_messages">Nuk ka mesazhe</string>
 </resources>

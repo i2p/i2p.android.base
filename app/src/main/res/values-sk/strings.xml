@@ -193,6 +193,7 @@
   <string name="http_client">HTTP klient</string>
   <string name="username">Užívateľské meno</string>
   <string name="password">Heslo</string>
+  <string name="other">Ďalší</string>
   <string name="custom_options">Vlastné nastavenia</string>
   <string name="all">Všetko</string>
 </resources>

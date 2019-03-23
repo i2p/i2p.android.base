@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         jcenter()
         google()
     }
@@ -13,7 +14,10 @@ allprojects {
     group = GROUP
 
     repositories {
+        mavenLocal()
         jcenter()
         google()
     }
 }
+
+
