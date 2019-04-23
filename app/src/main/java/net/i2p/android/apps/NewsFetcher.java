@@ -71,12 +71,12 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
      *
      * @since 0.7.14 not configurable
      */
-    private static final String BACKUP_NEWS_URL_SU3 = "http://avviiexdngd32ccoy4kuckvc3mkf53ycvzbz6vz75vzhv4tbpk5a.b32.i2p/news.su3";
+    private static final String BACKUP_NEWS_URL_SU3 = "http://dn3tvalnjz432qkqsvpfdqrwpqkw3ye4n4i2uyfr4jexvo3sp5ka.b32.i2p/news/news.su3";
     private static final String PROP_LAST_CHECKED = "router.newsLastChecked";
     private static final String PROP_REFRESH_FREQUENCY = "router.newsRefreshFrequency";
     private static final String DEFAULT_REFRESH_FREQUENCY = 24 * 60 * 60 * 1000 + "";
     private static final String PROP_NEWS_URL = "router.newsURL";
-    public static final String DEFAULT_NEWS_URL_SU3 = "http://echelon.i2p/news/news.su3";
+    public static final String DEFAULT_NEWS_URL_SU3 = "http://tc73n4kivdroccekirco7rhgxdg5f3cjvbaapabupeyzrqwv5guq.b32.i2p/news.su3";
 
     private NewsFetcher(Context context, RouterContext ctx, Notifications notif) {
         mCtx = context;
