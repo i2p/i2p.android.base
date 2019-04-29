@@ -14,6 +14,7 @@ import android.widget.TextView;
 import net.i2p.android.router.R;
 import net.i2p.android.util.FragmentUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -65,6 +66,8 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public void addTunnel(TunnelEntry tunnel) {
+        if (mTunnels == null)
+            mTunnels = new ArrayList<TunnelEntry>();
         boolean wasEmpty = mTunnels.isEmpty();
         mTunnels.add(tunnel);
         if (wasEmpty) {
