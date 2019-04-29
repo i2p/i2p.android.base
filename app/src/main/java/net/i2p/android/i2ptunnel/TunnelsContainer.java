@@ -211,6 +211,9 @@ public class TunnelsContainer extends Fragment implements
         if (requestCode == TUNNEL_WIZARD_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Bundle tunnelData = data.getExtras().getBundle(TUNNEL_WIZARD_DATA);
+                // ticket #2483
+                if (tunnelData == null)
+                    return;
                 // TODO fetch earlier
                 TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
                 TunnelConfig cfg = TunnelUtil.createConfigFromWizard(getActivity(), tcg, tunnelData);

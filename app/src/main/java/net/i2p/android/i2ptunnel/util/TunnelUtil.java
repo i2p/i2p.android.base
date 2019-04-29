@@ -568,11 +568,17 @@ public class TunnelUtil extends GeneralHelper {
         }
     }
 
+    /**
+     *  @param data non-null
+     */
     public static TunnelConfig createConfigFromWizard(
             Context ctx, TunnelControllerGroup tcg, Bundle data) {
         return new TunnelUtil(tcg).createConfigFromWizard(ctx, data);
     }
 
+    /**
+     *  @param data non-null
+     */
     public TunnelConfig createConfigFromWizard(Context ctx, Bundle data) {
         // Get the Bundle keys
         Resources res = ctx.getResources();
