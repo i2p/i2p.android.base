@@ -99,6 +99,7 @@ public class TunnelUtil extends GeneralHelper {
     public static void writeTunnelToPreferences(Context ctx, TunnelControllerGroup tcg, int tunnel) {
         new TunnelUtil(tcg).writeTunnelToPreferences(ctx, tunnel);
     }
+
     public void writeTunnelToPreferences(Context ctx, int tunnel) {
         Resources res = ctx.getResources();
 
@@ -122,9 +123,9 @@ public class TunnelUtil extends GeneralHelper {
     }
 
     class TunnelToPreferences extends TunnelLogic {
-        SharedPreferences.Editor ed;
-        Resources res;
-        int tunnel;
+        final SharedPreferences.Editor ed;
+        final Resources res;
+        final int tunnel;
 
         public TunnelToPreferences(SharedPreferences.Editor ed, Resources res, int tunnel, String type) {
             super(type);
@@ -328,6 +329,7 @@ public class TunnelUtil extends GeneralHelper {
     public static TunnelConfig createConfigFromPreferences(Context ctx, TunnelControllerGroup tcg, int tunnel) {
         return new TunnelUtil(tcg).createConfigFromPreferences(ctx, tunnel);
     }
+
     public TunnelConfig createConfigFromPreferences(Context ctx, int tunnel) {
         Resources res = ctx.getResources();
 
@@ -348,11 +350,11 @@ public class TunnelUtil extends GeneralHelper {
     }
 
     class TunnelConfigFromPreferences extends TunnelLogic {
-        TunnelConfig cfg;
-        SharedPreferences prefs;
-        Resources res;
-        TunnelControllerGroup tcg;
-        int tunnel;
+        final TunnelConfig cfg;
+        final SharedPreferences prefs;
+        final Resources res;
+        final TunnelControllerGroup tcg;
+        final int tunnel;
 
         public TunnelConfigFromPreferences(TunnelConfig cfg, SharedPreferences prefs, Resources res,
                                            TunnelControllerGroup tcg, int tunnel, String type) {
