@@ -3,12 +3,11 @@ package net.i2p.android.preferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;
 
-public class AdvancedPreferenceFragment extends PreferenceFragmentCompat {
+public class AdvancedPreferenceFragment extends I2PreferenceFragment {
     private static final String PREFERENCE_CATEGORY_TRANSPORTS = "preference_category_transports";
     private static final String PREFERENCE_CATEGORY_EXPL_TUNNELS = "preference_category_expl_tunnels";
 
