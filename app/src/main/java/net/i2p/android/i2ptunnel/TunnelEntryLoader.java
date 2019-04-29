@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TunnelEntryLoader extends AsyncTaskLoader<List<TunnelEntry>> {
-    private TunnelControllerGroup mGroup;
-    private boolean mClientTunnels;
+    private final TunnelControllerGroup mGroup;
+    private final boolean mClientTunnels;
     private List<TunnelEntry> mData;
-    private Handler mHandler;
+    private final Handler mHandler;
     private TunnelControllerMonitor mMonitor;
 
     public TunnelEntryLoader(Context context, TunnelControllerGroup tcg, boolean clientTunnels) {

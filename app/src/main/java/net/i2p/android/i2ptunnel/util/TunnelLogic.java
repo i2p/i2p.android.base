@@ -11,7 +11,7 @@ package net.i2p.android.i2ptunnel.util;
  * tunnel properties always exist.
  */
 public abstract class TunnelLogic {
-    protected String mType;
+    protected final String mType;
 
     public TunnelLogic(String type) {
         mType = type;

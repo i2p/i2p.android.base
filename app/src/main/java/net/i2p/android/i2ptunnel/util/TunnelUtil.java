@@ -570,6 +570,7 @@ public class TunnelUtil extends GeneralHelper {
             Context ctx, TunnelControllerGroup tcg, Bundle data) {
         return new TunnelUtil(tcg).createConfigFromWizard(ctx, data);
     }
+
     public TunnelConfig createConfigFromWizard(Context ctx, Bundle data) {
         // Get the Bundle keys
         Resources res = ctx.getResources();
@@ -591,10 +592,10 @@ public class TunnelUtil extends GeneralHelper {
     }
 
     class TunnelConfigFromWizard extends TunnelLogic {
-        TunnelConfig cfg;
-        Bundle data;
-        Resources res;
-        TunnelControllerGroup tcg;
+        final TunnelConfig cfg;
+        final Bundle data;
+        final Resources res;
+        final TunnelControllerGroup tcg;
 
         public TunnelConfigFromWizard(TunnelConfig cfg, Bundle data, Resources res,
                                            TunnelControllerGroup tcg, String type) {

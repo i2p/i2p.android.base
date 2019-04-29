@@ -17,10 +17,10 @@ import net.i2p.android.util.FragmentUtils;
 import java.util.List;
 
 public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Context mCtx;
-    private boolean mClientTunnels;
-    private TunnelListFragment.OnTunnelSelectedListener mListener;
-    private FragmentUtils.TwoPaneProvider mTwoPane;
+    private final Context mCtx;
+    private final boolean mClientTunnels;
+    private final TunnelListFragment.OnTunnelSelectedListener mListener;
+    private final FragmentUtils.TwoPaneProvider mTwoPane;
     private List<TunnelEntry> mTunnels;
     /**
      * The current activated item position. Only used on tablets.
@@ -34,10 +34,10 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public static class TunnelViewHolder extends RecyclerView.ViewHolder {
-        public ImageView status;
-        public TextView name;
-        public TextView description;
-        public TextView interfacePort;
+        public final ImageView status;
+        public final TextView name;
+        public final TextView description;
+        public final TextView interfacePort;
 
         public TunnelViewHolder(View itemView) {
             super(itemView);

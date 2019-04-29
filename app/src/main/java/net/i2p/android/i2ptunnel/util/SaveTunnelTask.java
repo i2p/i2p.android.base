@@ -15,9 +15,9 @@ import java.util.List;
  * InetAddress.getByName(), which will trigger a NetworkOnMainThreadException otherwise.
  */
 public class SaveTunnelTask  extends AsyncTask<Void, Void, List<String>> {
-    TunnelControllerGroup mGroup;
-    int mTunnelId;
-    TunnelConfig mCfg;
+    final TunnelControllerGroup mGroup;
+    final int mTunnelId;
+    final TunnelConfig mCfg;
 
     public SaveTunnelTask(TunnelControllerGroup group, int tunnelId, TunnelConfig cfg) {
         mGroup = group;

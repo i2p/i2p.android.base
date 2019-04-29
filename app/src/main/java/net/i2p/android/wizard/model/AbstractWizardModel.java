@@ -30,10 +30,10 @@ import java.util.List;
  * To create an actual wizard model, extend this class and implement {@link #onNewRootPageList()}.
  */
 public abstract class AbstractWizardModel implements ModelCallbacks {
-    protected Context mContext;
+    protected final Context mContext;
 
-    private List<ModelCallbacks> mListeners = new ArrayList<ModelCallbacks>();
-    private PageList mRootPageList;
+    private final List<ModelCallbacks> mListeners = new ArrayList<ModelCallbacks>();
+    private final PageList mRootPageList;
 
     public AbstractWizardModel(Context context) {
         mContext = context;
