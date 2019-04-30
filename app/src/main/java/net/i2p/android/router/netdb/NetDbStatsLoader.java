@@ -95,7 +95,7 @@ public class NetDbStatsLoader extends AsyncTaskLoader<List<ObjectCounter<String>
         int rv = 0;
         for (RouterAddress addr : info.getAddresses()) {
             String style = addr.getTransportStyle();
-            if (style.equals("NTCP")) {
+            if (style.equals("NTCP") || style.equals("NTCP2")) {
                 rv |= NTCP;
             } else if (style.equals("SSU")) {
                 if (addr.getOption("iport0") != null)
@@ -108,7 +108,12 @@ public class NetDbStatsLoader extends AsyncTaskLoader<List<ObjectCounter<String>
                 rv |= IPV6;
 
         }
-        return getContext().getString(TNAMES[rv]);
+        int tname = TNAMES[rv];
+        // remap cases with no string to "Hidden or starting up"
+        // so we don't crash NotFoundException
+        if (tname == 0)
+            tname = TNAMES[0];
+        return getContext().getString(tname);
     }
 
     @Override
