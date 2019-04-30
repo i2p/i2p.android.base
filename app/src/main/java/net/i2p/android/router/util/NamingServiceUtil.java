@@ -32,7 +32,17 @@ public class NamingServiceUtil {
         String kDest = res.getString(R.string.addressbook_add_wizard_k_destination);
 
         String hostName = data.getBundle(kHostName).getString(Page.SIMPLE_DATA_KEY);
-        String host = toASCII(res, hostName); // Already validated, won't throw IAE
+        String host;
+        try {
+            // Already validated, won't throw IAE
+            // ^^^ NOT TRUE ticket #2489 ^^^
+            host = toASCII(res, hostName);
+        } catch (IllegalArgumentException iae) {
+            Toast.makeText(ctx,
+                           iae.getMessage(),
+                           Toast.LENGTH_LONG).show();
+            return false;
+        }
         String displayHost = host.equals(hostName) ? hostName :
                                                      hostName + " (" + host + ')';
 
