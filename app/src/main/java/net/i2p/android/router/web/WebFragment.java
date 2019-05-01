@@ -49,19 +49,21 @@ public class WebFragment extends I2PFragmentBase {
         wv.getSettings().setBuiltInZoomControls(true);
         // http://stackoverflow.com/questions/2369310/webview-double-tap-zoom-not-working-on-a-motorola-droid-a855
         wv.getSettings().setUseWideViewPort(true);
-        _uriStr =  getArguments().getString(HTML_URI);
-        if (_uriStr != null) {
-            Uri uri = Uri.parse(_uriStr);
-            //wv.getSettings().setLoadsImagesAutomatically(true);
-            //wv.loadUrl(uri.toString());
-            // go thru the client so .i2p will work too
-            _wvClient.shouldOverrideUrlLoading(wv, uri.toString());
-        } else {
-            wv.getSettings().setLoadsImagesAutomatically(false);
-            int id = getArguments().getInt(HTML_RESOURCE_ID, 0);
-            // no default, so restart should keep previous view
-            if (id != 0)
-                loadResource(wv, id);
+        if (getArguments() != null) {
+            _uriStr = getArguments().getString(HTML_URI);
+            if (_uriStr != null) {
+                Uri uri = Uri.parse(_uriStr);
+                //wv.getSettings().setLoadsImagesAutomatically(true);
+                //wv.loadUrl(uri.toString());
+                // go thru the client so .i2p will work too
+                _wvClient.shouldOverrideUrlLoading(wv, uri.toString());
+            } else {
+                wv.getSettings().setLoadsImagesAutomatically(false);
+                int id = getArguments().getInt(HTML_RESOURCE_ID, 0);
+                // no default, so restart should keep previous view
+                if (id != 0)
+                    loadResource(wv, id);
+            }
         }
         return v;
     }
