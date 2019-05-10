@@ -31,6 +31,13 @@ public class CustomViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
+        // See Nov. 20, 2013 comment at:
+        // https://github.com/JakeWharton/ViewPagerIndicator/pull/257
+        // Our ticket #2488
+
+        // prevent NPE if fake dragging and touching ViewPager
+        if(isFakeDragging()) return false;
+
         return mEnabled && mFixedPage < 0 && super.onInterceptTouchEvent(event);
     }
 

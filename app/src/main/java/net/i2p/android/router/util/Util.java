@@ -445,10 +445,15 @@ public abstract class Util implements I2PConstants {
             case IPV4_UNKNOWN_IPV6_OK:
             case IPV4_DISABLED_IPV6_OK:
             case IPV4_SNAT_IPV6_OK:
-                RouterAddress ra = routerInfo.getTargetAddress("NTCP");
-                if (ra == null)
+                List<RouterAddress> ras = routerInfo.getTargetAddresses("NTCP", "NTCP2");
+                if (ras.isEmpty())
                     return new NetStatus(NetStatus.Level.INFO, toStatusString(ctx, status));
-                byte[] ip = ra.getIP();
+                byte[] ip = null;
+                for (RouterAddress ra : ras) {
+                    ip = ra.getIP();
+                    if (ip != null)
+                        break;
+                }
                 if (ip == null)
                     return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.net_status_error_unresolved_tcp));
                 // TODO set IPv6 arg based on configuration?
@@ -462,7 +467,7 @@ public abstract class Util implements I2PConstants {
 
             case REJECT_UNSOLICITED:
             case IPV4_DISABLED_IPV6_FIREWALLED:
-                if (routerInfo.getTargetAddress("NTCP") != null)
+                if (routerInfo.getTargetAddresses("NTCP", "NTCP2").isEmpty())
                     return new NetStatus(NetStatus.Level.WARN, ctx.getString(R.string.net_status_warn_firewalled_inbound_tcp));
                 // fall through...
             case IPV4_FIREWALLED_IPV6_OK:
@@ -483,7 +488,7 @@ public abstract class Util implements I2PConstants {
             case IPV4_UNKNOWN_IPV6_FIREWALLED:
             case IPV4_DISABLED_IPV6_UNKNOWN:
             default:
-                ra = routerInfo.getTargetAddress("SSU");
+                RouterAddress ra = routerInfo.getTargetAddress("SSU");
                 if (ra == null && rCtx.router().getUptime() > 5 * 60 * 1000) {
                     if (rCtx.commSystem().countActivePeers() <= 0)
                         return new NetStatus(NetStatus.Level.ERROR, ctx.getString(R.string.net_status_error_no_active_peers));
