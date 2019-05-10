@@ -145,7 +145,6 @@
   <string name="settings_label_transports">Transporten</string>
   <string name="settings_label_maxConns">Maximale connecties</string>
   <string name="settings_label_i2cp">I2CP-interface</string>
-  <string name="settings_desc_i2cp">Luister op poort 7654</string>
   <string name="settings_label_exploratory_pool">Verkennende-pool</string>
   <string name="settings_desc_exploratory_pool">Tunnelparameters</string>
   <string name="settings_label_expl_inbound">Inkomende tunnels</string>

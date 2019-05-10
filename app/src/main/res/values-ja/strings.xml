@@ -102,7 +102,6 @@
   <string name="settings_label_transports">トランスポート</string>
   <string name="settings_label_maxConns">最大接続数</string>
   <string name="settings_label_i2cp">I2CP インターフェース</string>
-  <string name="settings_desc_i2cp">7654番ポートでリッスン</string>
   <string name="settings_label_exploratory_pool">予備プール</string>
   <string name="settings_desc_exploratory_pool">トンネルパラーメーター</string>
   <string name="settings_label_expl_inbound">受信トンネル</string>

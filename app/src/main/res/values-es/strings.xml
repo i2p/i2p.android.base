@@ -145,7 +145,6 @@
   <string name="settings_label_transports">Transportes</string>
   <string name="settings_label_maxConns">Conexiones máximas</string>
   <string name="settings_label_i2cp">Interfaz de I2CP</string>
-  <string name="settings_desc_i2cp">Escuchar el puerto 7654</string>
   <string name="settings_label_exploratory_pool">Grupo exploratorio</string>
   <string name="settings_desc_exploratory_pool">Parámetros de túneles</string>
   <string name="settings_label_expl_inbound">Túneles de entrada</string>

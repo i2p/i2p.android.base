@@ -87,7 +87,6 @@
   <string name="settings_label_transports">Transporty</string>
   <string name="settings_label_maxConns">Maximum pripojení</string>
   <string name="settings_label_i2cp">Rozhranie I2CP</string>
-  <string name="settings_desc_i2cp">Počúvať na porte 7654</string>
   <string name="settings_label_exploratory_pool">Skúšobný pool</string>
   <string name="settings_desc_exploratory_pool">Parametre tunelov</string>
   <string name="settings_label_expl_inbound">Prichádzajúce tunely</string>

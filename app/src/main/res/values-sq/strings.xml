@@ -88,7 +88,6 @@
   <string name="settings_label_transports">Transportimet</string>
   <string name="settings_label_maxConns">Lidhjet maksimale</string>
   <string name="settings_label_i2cp">Ndërfaqja e I2CP\'së</string>
-  <string name="settings_desc_i2cp">Ndëgjo në portalen 7654</string>
   <string name="settings_label_exploratory_pool">Mjet zbulimi</string>
   <string name="settings_desc_exploratory_pool">Parametrat e tunelëve</string>
   <string name="settings_label_expl_inbound">Tunelët në hyrje</string>

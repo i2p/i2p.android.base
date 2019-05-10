@@ -116,7 +116,6 @@
   <string name="settings_label_transports">Transporturi</string>
   <string name="settings_label_maxConns">Maxim conexiuni</string>
   <string name="settings_label_i2cp">Interfata I2CP</string>
-  <string name="settings_desc_i2cp">Asculta pe portul 7654</string>
   <string name="settings_label_exploratory_pool">pool de explorare</string>
   <string name="settings_desc_exploratory_pool">Parametri tunelului</string>
   <string name="settings_label_expl_inbound">Tunele de intrare</string>

@@ -145,7 +145,6 @@
   <string name="settings_label_transports">Транспорти</string>
   <string name="settings_label_maxConns">Максимально з’єднань</string>
   <string name="settings_label_i2cp">Інтерфейс I2CP</string>
-  <string name="settings_desc_i2cp">Прослуховується на порту 7654</string>
   <string name="settings_label_exploratory_pool">Пошуковий пул</string>
   <string name="settings_desc_exploratory_pool">Параметри тунелів</string>
   <string name="settings_label_expl_inbound">Вхідні тунелі</string>
@@ -342,11 +341,13 @@
   <plurals name="log_error_messages">
     <item quantity="one">Одне повідомлення про помилку</item>
     <item quantity="few">%d повідомлень про помилку, спочатку нові</item>
+    <item quantity="many">%d повідомлень про помилки, спочатку нові</item>
     <item quantity="other">%d повідомлень про помилки, спочатку нові</item>
   </plurals>
   <plurals name="log_messages">
     <item quantity="one">Одне повідомлення</item>
     <item quantity="few">%d повідомлень, спочатку нові</item>
+    <item quantity="many">%d повідомлень, спочатку нові</item>
     <item quantity="other">%d повідомлень, спочатку нові</item>
   </plurals>
   <string name="log_entry">Запис у журналі</string>

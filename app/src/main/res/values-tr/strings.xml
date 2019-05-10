@@ -145,7 +145,7 @@
   <string name="settings_label_transports">Aktarımlar</string>
   <string name="settings_label_maxConns">En fazla bağlantı</string>
   <string name="settings_label_i2cp">I2CP Arayüzü</string>
-  <string name="settings_desc_i2cp">7654. kapı dinlensin</string>
+  <string name="settings_desc_i2cp">Üçüncü taraf uygulamalar tünel oluşturabilsin (yönelticinin yeniden başlatılması gerekir)</string>
   <string name="settings_label_exploratory_pool">Keşif havuzu</string>
   <string name="settings_desc_exploratory_pool">Tunel ayarları</string>
   <string name="settings_label_expl_inbound">Geliş tünelleri</string>

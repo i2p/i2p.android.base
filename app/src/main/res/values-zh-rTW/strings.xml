@@ -145,7 +145,6 @@
   <string name="settings_label_transports">傳輸</string>
   <string name="settings_label_maxConns">最大連接數</string>
   <string name="settings_label_i2cp">I2CP 介面</string>
-  <string name="settings_desc_i2cp">監聽Port 7654</string>
   <string name="settings_label_exploratory_pool">導坑池</string>
   <string name="settings_desc_exploratory_pool">隧道參數</string>
   <string name="settings_label_expl_inbound">Inbound 隧道</string>

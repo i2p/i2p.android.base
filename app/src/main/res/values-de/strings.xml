@@ -145,7 +145,7 @@
   <string name="settings_label_transports">Übertragungen</string>
   <string name="settings_label_maxConns">Max. Verbindungen</string>
   <string name="settings_label_i2cp">I2CP-Benutzeroberfläche</string>
-  <string name="settings_desc_i2cp">Auf Port 7654 lauschen</string>
+  <string name="settings_desc_i2cp">Erlaube anderen Applikationen das Erzeugen von Tunneln (benötigt ein Neustart des Routers)</string>
   <string name="settings_label_exploratory_pool">Satz an Erkundungstunneln</string>
   <string name="settings_desc_exploratory_pool">Tunnelparameter</string>
   <string name="settings_label_expl_inbound">Eingehende Tunnel</string>

@@ -145,7 +145,7 @@
   <string name="settings_label_transports">Транспортные протоколы</string>
   <string name="settings_label_maxConns">Максимум соединений</string>
   <string name="settings_label_i2cp">I2CP-интерфейс</string>
-  <string name="settings_desc_i2cp">Слушать на порту 7654</string>
+  <string name="settings_desc_i2cp">Разрешить создание туннелей сторонним программам (требуется перезапуск маршрутизатора)</string>
   <string name="settings_label_exploratory_pool">Зондирующий пул</string>
   <string name="settings_desc_exploratory_pool">Параметры тоннелей</string>
   <string name="settings_label_expl_inbound">Входящие туннели</string>

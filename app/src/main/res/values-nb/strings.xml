@@ -145,7 +145,6 @@
   <string name="settings_label_transports">Overføringer</string>
   <string name="settings_label_maxConns">Maks. tilknytninger</string>
   <string name="settings_label_i2cp">I2CP-grensesnitt</string>
-  <string name="settings_desc_i2cp">Lytt til port 7654</string>
   <string name="settings_label_exploratory_pool">Utforsknings-grunnlag</string>
   <string name="settings_desc_exploratory_pool">Tunnel-dimensjoner</string>
   <string name="settings_label_expl_inbound">Innkommende tunneler</string>

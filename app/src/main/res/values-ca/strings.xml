@@ -132,7 +132,6 @@
   <string name="settings_label_transports">Transports</string>
   <string name="settings_label_maxConns">Màx. connexions</string>
   <string name="settings_label_i2cp">Interfície I2CP</string>
-  <string name="settings_desc_i2cp">Escoltar el port 7654</string>
   <string name="settings_label_exploratory_pool">Piscina exploratòria</string>
   <string name="settings_desc_exploratory_pool">Paràmetres del túnel</string>
   <string name="settings_label_expl_inbound">Túnels d\'entrada</string>

@@ -145,7 +145,6 @@
   <string name="settings_label_transports">Trasporti</string>
   <string name="settings_label_maxConns">Limite connessioni</string>
   <string name="settings_label_i2cp">Interfaccia I2CP</string>
-  <string name="settings_desc_i2cp">Ascolta sulla porta 7654</string>
   <string name="settings_label_exploratory_pool">Esplorazione pool</string>
   <string name="settings_desc_exploratory_pool">Parametri tunnel</string>
   <string name="settings_label_expl_inbound">Tunnel in ingresso</string>

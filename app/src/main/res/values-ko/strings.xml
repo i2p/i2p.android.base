@@ -145,7 +145,6 @@
   <string name="settings_label_transports">트랜스포트</string>
   <string name="settings_label_maxConns">최대 접속 수</string>
   <string name="settings_label_i2cp">I2CP 인터페이스</string>
-  <string name="settings_desc_i2cp">7654 포트로 수신</string>
   <string name="settings_label_exploratory_pool">예비 풀</string>
   <string name="settings_desc_exploratory_pool">터널 파라미터</string>
   <string name="settings_label_expl_inbound">수신 터널</string>

@@ -145,7 +145,6 @@
   <string name="settings_label_transports">Nəqliyyatlar</string>
   <string name="settings_label_maxConns">Maksimum əlaqələr</string>
   <string name="settings_label_i2cp">I2CP interfeysi</string>
-  <string name="settings_desc_i2cp">7654 portunda dinlə</string>
   <string name="settings_label_exploratory_pool">Axtarış hovuzu</string>
   <string name="settings_desc_exploratory_pool">Tunel parametrləri</string>
   <string name="settings_label_expl_inbound">Daxil olan tunellər</string>

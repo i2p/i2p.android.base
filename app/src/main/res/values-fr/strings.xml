@@ -145,7 +145,7 @@
   <string name="settings_label_transports">Transports</string>
   <string name="settings_label_maxConns">Maximum de connexions</string>
   <string name="settings_label_i2cp">Interface d’I2CP</string>
-  <string name="settings_desc_i2cp">Écouter sur le port 7654</string>
+  <string name="settings_desc_i2cp">Permettre aux applis tierces de créer des tunnels (exige un redémarrage du routeur)</string>
   <string name="settings_label_exploratory_pool">Réserve exploratoire</string>
   <string name="settings_desc_exploratory_pool">Paramètres des tunnels</string>
   <string name="settings_label_expl_inbound">Tunnels entrants</string>
@@ -325,7 +325,7 @@
   <string name="tunnel_summ_user_agent">Passer l’en-tête « agent utilisateur »</string>
   <string name="tunnel_summ_referer">Passer l’en-tête Référent</string>
   <string name="tunnel_summ_accept">Passer l’en-tête « Accept-* »</string>
-  <string name="tunnel_summ_allow_ssl">Autoriser SSL vers des adresses I2P</string>
+  <string name="tunnel_summ_allow_ssl">Permettre SSL vers des adresses I2P</string>
   <string name="jump_url_list">Liste d’URL de saut</string>
   <string name="proxy_auth">Autorisation du mandataire</string>
   <string name="tunnel_summ_proxy_auth">Exiger une authentification pour utiliser ce mandataire</string>

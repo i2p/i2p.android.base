@@ -140,7 +140,6 @@
   <string name="settings_label_transports">Transportes</string>
   <string name="settings_label_maxConns">Número máximo de conexões</string>
   <string name="settings_label_i2cp">Interface do I2CP</string>
-  <string name="settings_desc_i2cp">Ouvindo na porta 7654</string>
   <string name="settings_desc_exploratory_pool">Parêmetros de tunel</string>
   <string name="settings_label_expl_inbound">Túneis entrantes</string>
   <string name="settings_label_expl_outbound">Tuneis de saída</string>

@@ -145,7 +145,6 @@
   <string name="settings_label_transports">传输</string>
   <string name="settings_label_maxConns">最大连接数</string>
   <string name="settings_label_i2cp">I2CP 接口</string>
-  <string name="settings_desc_i2cp">监听端口 7654</string>
   <string name="settings_label_exploratory_pool">探索隧道池</string>
   <string name="settings_desc_exploratory_pool">隧道参数</string>
   <string name="settings_label_expl_inbound">入站隧道</string>

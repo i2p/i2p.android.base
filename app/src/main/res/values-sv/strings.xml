@@ -146,7 +146,6 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="settings_label_transports">Transporter</string>
   <string name="settings_label_maxConns">Max anslutningar</string>
   <string name="settings_label_i2cp">I2CP interfrace</string>
-  <string name="settings_desc_i2cp">Lyssnar på port 7654</string>
   <string name="settings_label_exploratory_pool">Utforskande pool</string>
   <string name="settings_desc_exploratory_pool">Tunnelparametrar</string>
   <string name="settings_label_expl_inbound">Inåtgående tunnlar</string>

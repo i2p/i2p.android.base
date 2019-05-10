@@ -145,7 +145,6 @@
   <string name="settings_label_transports">Transport</string>
   <string name="settings_label_maxConns">Maks sambungan</string>
   <string name="settings_label_i2cp">I2CP antarmuka</string>
-  <string name="settings_desc_i2cp">Mendengarkan port 7654</string>
   <string name="settings_label_exploratory_pool">Pool eksplorasi</string>
   <string name="settings_desc_exploratory_pool">Parameter saluran</string>
   <string name="settings_label_expl_inbound">Saluran inbound</string>
