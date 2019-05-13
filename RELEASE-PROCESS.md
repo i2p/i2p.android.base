@@ -52,7 +52,7 @@
 3. Push free and donate builds to Google Play via https://play.google.com/apps/publish/
 4. Tag the new release. Example `mtn tag h: android-0.9.36`
 5. Push the monotone changes
-6. Update download page
+6. Update download page (version and hash)
 
 
 
