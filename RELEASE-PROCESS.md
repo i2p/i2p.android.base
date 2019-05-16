@@ -26,10 +26,10 @@
    `lib/helper/gradle.properties` to bump the version.
 7. `./gradlew clean assembleRelease`
 
-### Steps to take if the android helper is updated and should be released
+### Libraries
 
 1. `./gradlew :lib:client:uploadArchives`
-2. If the helper version was changed: `./gradlew :lib:helper:uploadArchives`
+2. If the helper version was changed and should be released: `./gradlew :lib:helper:uploadArchives`
 3. Check on Sonatype that everything worked, and close/release.
 
 ## F-Droid Guide
