@@ -1,4 +1,8 @@
 apply plugin: 'com.android.application'
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
 
 android {
     compileSdkVersion 28
@@ -73,6 +77,7 @@ dependencies {
     implementation 'com.inkapplications.viewpageindicator:library:2.4.4'
     implementation 'com.pnikosis:materialish-progress:1.7'
     implementation "net.i2p:router:$I2P_VERSION"
+    implementation "net.i2p:i2p:$I2P_VERSION"
     implementation 'net.i2p.android.ext:floatingactionbutton:1.10.1'
     implementation 'org.sufficientlysecure:html-textview:3.1'
     // Testing-only dependencies
