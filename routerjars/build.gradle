@@ -17,7 +17,7 @@ artifacts {
     routerjars file: file('libs/i2ptunnel.jar'), builtBy: buildRouter
     routerjars file: file('libs/i2ptunnel-ui.jar'), builtBy: buildRouter
     routerjars file: file('libs/addressbook.jar'), builtBy: buildRouter
-    routerjars file: file('libs/BOB.jar'), builtBy: buildRouter
+    //routerjars file: file('libs/BOB.jar'), builtBy: buildRouter
 }
 
 clean.dependsOn cleanBuildRouter

@@ -36,7 +36,7 @@
         <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildBOB" />
     </target>
 
-    <target name="buildrouter" depends="buildNewsXMLJar, buildI2PTunnelJar, buildAddressbook, buildBOB">
+    <target name="buildrouter" depends="buildNewsXMLJar, buildI2PTunnelJar, buildAddressbook">
         <mkdir dir="${jar.libs.dir}" />
 
         <!-- newsxml -->
@@ -50,7 +50,9 @@
         <copy file="${i2plib}/addressbook.jar" todir="${jar.libs.dir}" />
 
         <!-- bob -->
+       <!--
         <copy file="${i2plib}/BOB.jar" todir="${jar.libs.dir}" />
+        -->
 
     </target>
 

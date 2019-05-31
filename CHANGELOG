@@ -1,3 +1,25 @@
+0.9.41 / 2019-06-xx
+ * UPnP Fixes
+ * Remove BOB
+
+0.9.40 / 2019-05-10
+ * Open local I2CP socket for 3rd party apps
+ * Fix News URLs
+ * Numerous bug fixes (see trac)
+
+0.9.39 /
+ * Set App ID
+
+0.9.38 /
+
+0.9.37 /
+
+0.9.36 /
+
+0.9.35 /
+
+0.9.34 /
+
 0.9.33 / 2018-02-18
  * Translation updates
 

@@ -2,7 +2,7 @@ package net.i2p.android.router.service;
 
 import android.content.Context;
 
-import net.i2p.BOB.BOB;
+//import net.i2p.BOB.BOB;
 import net.i2p.I2PAppContext;
 import net.i2p.addressbook.DaemonThread;
 import net.i2p.android.apps.NewsFetcher;
@@ -40,10 +40,10 @@ class LoadClientsJob extends JobImpl {
     private Context mCtx;
     private Notifications _notif;
     private DaemonThread _addressbook;
-    private BOB _bob;
+    //private BOB _bob;
 
     /** this is the delay to load (and start) the clients. */
-    private static final long LOAD_DELAY = 90*1000;
+    private static final long LOAD_DELAY = 60*1000;
 
 
     public LoadClientsJob(Context ctx, RouterContext rCtx, Notifications notif) {
@@ -73,10 +73,10 @@ class LoadClientsJob extends JobImpl {
         _addressbook.start();
 
         // add other clients here
-        _bob = new BOB(I2PAppContext.getGlobalContext(), null, new String[0]);
-        try {
-            _bob.startup();
-        } catch (IOException ioe) {}
+        //_bob = new BOB(I2PAppContext.getGlobalContext(), null, new String[0]);
+        //try {
+        //    _bob.startup();
+        //} catch (IOException ioe) {}
 
         getContext().addShutdownTask(new ClientShutdownHook());
     }
@@ -90,6 +90,9 @@ class LoadClientsJob extends JobImpl {
         public String getName() { return "Start I2P Tunnel"; }
 
         public void runJob() {
+            while (!getContext().router().isRunning()) {
+                 try { Thread.sleep(1000); } catch (InterruptedException ie) { break; }
+            }
             Util.d("Starting i2ptunnel");
             TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
             try {
@@ -109,8 +112,8 @@ class LoadClientsJob extends JobImpl {
             // i2ptunnel registers its own hook
             // StatSummarizer registers its own hook
             // NewsFetcher registers its own hook
-            if (_bob != null)
-                _bob.shutdown(null);
+            //if (_bob != null)
+            //    _bob.shutdown(null);
             if (_addressbook != null)
                 _addressbook.halt();
         }
