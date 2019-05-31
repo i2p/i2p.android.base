@@ -214,6 +214,7 @@ public class RouterService extends Service {
             // Launch the router!
             // TODO Store this somewhere instead of relying on global context?
             Router r = new Router();
+            r.setUPnPScannerCallback(new SSDPLocker(RouterService.this));
             r.runRouter();
             synchronized(_stateLock) {
                 if(_state != State.STARTING) {
