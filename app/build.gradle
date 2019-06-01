@@ -78,6 +78,8 @@ dependencies {
     implementation 'com.pnikosis:materialish-progress:1.7'
     implementation "net.i2p:router:$I2P_VERSION"
     implementation "net.i2p:i2p:$I2P_VERSION"
+    implementation "net.i2p.client:mstreaming:$I2P_VERSION"
+    implementation "net.i2p.client:streaming:$I2P_VERSION"
     implementation 'net.i2p.android.ext:floatingactionbutton:1.10.1'
     implementation 'org.sufficientlysecure:html-textview:3.1'
     // Testing-only dependencies
