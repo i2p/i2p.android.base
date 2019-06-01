@@ -77,6 +77,7 @@ public class NetDbSummaryTableFragment extends Fragment {
         titleRow.setPadding(10, 0, 0, 0);
 
         tl1 = new TextView(getActivity());
+        tl1.setPadding(0, 0, 20, 0);
         tl1.setTextSize(20);
         tl2 = new TextView(getActivity());
         tl2.setTextSize(20);
@@ -108,6 +109,7 @@ public class NetDbSummaryTableFragment extends Fragment {
         row.setPadding(10, 0, 0, 0);
 
         tl1 = new TextView(getActivity());
+        tl1.setPadding(0, 0, 20, 0);
         tl2 = new TextView(getActivity());
 
         tl1.setText(name);
