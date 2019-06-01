@@ -125,7 +125,8 @@ public class MaterialSeekBarController implements SeekBar.OnSeekBarChangeListene
     }
 
     private void setPaddedValue(int value) {
-        mSeekBarValue.setText(String.format("%0" + mMaxDigits +"d", value));
+        //mSeekBarValue.setText(String.format("%0" + mMaxDigits +"d", value));
+        mSeekBarValue.setText(String.format("%" + mMaxDigits +"d", value));
     }
 
 
