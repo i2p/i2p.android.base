@@ -63,15 +63,6 @@ class LoadClientsJob extends JobImpl {
         t.setPriority(Thread.NORM_PRIORITY - 1);
         t.start();
 
-        NewsFetcher fetcher = NewsFetcher.getInstance(mCtx, getContext(), _notif);
-        t = new I2PAppThread(fetcher, "NewsFetcher", true);
-        t.start();
-
-        _addressbook = new DaemonThread(new String[] {"addressbook"});
-        _addressbook.setName("Addressbook");
-        _addressbook.setDaemon(true);
-        _addressbook.start();
-
         // add other clients here
         //_bob = new BOB(I2PAppContext.getGlobalContext(), null, new String[0]);
         //try {
@@ -103,6 +94,16 @@ class LoadClientsJob extends JobImpl {
                 tcg.startup();
                 int sz = tcg.getControllers().size();
                 Util.d("i2ptunnel started " + sz + " clients");
+
+                // no use starting these until i2ptunnel starts
+                NewsFetcher fetcher = NewsFetcher.getInstance(mCtx, getContext(), _notif);
+                Thread t = new I2PAppThread(fetcher, "NewsFetcher", true);
+                t.start();
+
+                _addressbook = new DaemonThread(new String[] {"addressbook"});
+                _addressbook.setName("Addressbook");
+                _addressbook.setDaemon(true);
+                _addressbook.start();
             } catch (IllegalArgumentException iae) {
                 Util.e("i2ptunnel failed to start", iae);
             }

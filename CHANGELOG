@@ -1,7 +1,9 @@
 0.9.41 / 2019-06-xx
- * UPnP Fixes
- * Fix visibility of floating menu items
+ * UPnP Fixes (ticket #2499)
+ * Update visibility of floating menu items
  * Put our router info at top of list
+ * Table layout cleanups
+ * Fixes for threads remaining after router stop
  * Remove BOB
 
 0.9.40 / 2019-05-10
@@ -9,18 +11,18 @@
  * Fix News URLs
  * Numerous bug fixes (see trac)
 
-0.9.39 /
+0.9.39 / 2019-03-23
  * Set App ID
 
-0.9.38 /
+0.9.38 / 2019-01-27
 
-0.9.37 /
+0.9.37 / 2018-10-10
 
-0.9.36 /
+0.9.36 / 2018-08-27
 
-0.9.35 /
+0.9.35 / 2018-07-03
 
-0.9.34 /
+0.9.34 / 2018-04-25
 
 0.9.33 / 2018-02-18
  * Translation updates
