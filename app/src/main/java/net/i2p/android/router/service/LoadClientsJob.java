@@ -37,8 +37,8 @@ import java.io.IOException;
  */
 class LoadClientsJob extends JobImpl {
 
-    private Context mCtx;
-    private Notifications _notif;
+    private final Context mCtx;
+    private final Notifications _notif;
     private DaemonThread _addressbook;
     //private BOB _bob;
 
@@ -91,7 +91,11 @@ class LoadClientsJob extends JobImpl {
 
         public void runJob() {
             while (!getContext().router().isRunning()) {
-                 try { Thread.sleep(1000); } catch (InterruptedException ie) { break; }
+                try { Thread.sleep(1000); } catch (InterruptedException ie) { return; }
+                if (!getContext().router().isAlive()) {
+                    Util.e("Router stopped before i2ptunnel could start");
+                    return;
+                }
             }
             Util.d("Starting i2ptunnel");
             TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
