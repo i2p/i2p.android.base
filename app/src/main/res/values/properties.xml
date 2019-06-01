@@ -33,6 +33,9 @@
     <!-- net.i2p.util.LogManager -->
     <string name="PROP_DEFAULTLEVEL" translatable="false">logger.defaultLevel</string>
 
+    <!-- net.i2p.router.client.ClientManager -->
+    <string name="PROP_DISABLE_EXTERNAL" translatable="false">i2cp.disableInterface</string>
+
     <!-- Others -->
     <string name="PREF_LANGUAGE" translatable="false">pref_language</string>
 </resources>
