@@ -22,9 +22,10 @@
 3. Ensure that `signing.properties` contains the details of the release key.
 4. Edit `gradle.properties` to bump the I2P version.
 5. Edit `app/build.gradle` to bump the Android version number.
-6. If the helper has changed since the last release, edit
+6. Edit `CHANGELOG` to add the release and date.
+7. If the helper has changed since the last release, edit
    `lib/helper/gradle.properties` to bump the version.
-7. `./gradlew clean assembleRelease`
+8. `./gradlew clean assembleRelease`
 
 ### Libraries
 
@@ -52,7 +53,7 @@
 3. Push free and donate builds to Google Play via https://play.google.com/apps/publish/
 4. Tag the new release. Example `mtn tag h: android-0.9.36`
 5. Push the monotone changes
-6. Update download page (version and hash)
+6. Update download page (version and hash, including F-Droid)
 
 
 

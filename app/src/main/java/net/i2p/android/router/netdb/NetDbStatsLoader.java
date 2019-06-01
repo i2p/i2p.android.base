@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class NetDbStatsLoader extends AsyncTaskLoader<List<ObjectCounter<String>>> {
-    private RouterContext mRContext;
+    private final RouterContext mRContext;
     private List<ObjectCounter<String>> mData;
 
     public NetDbStatsLoader(Context context, RouterContext rContext) {

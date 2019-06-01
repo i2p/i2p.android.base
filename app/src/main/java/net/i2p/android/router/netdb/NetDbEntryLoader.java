@@ -5,6 +5,7 @@ import android.support.v4.content.AsyncTaskLoader;
 
 import net.i2p.android.router.util.Util;
 import net.i2p.data.Destination;
+import net.i2p.data.Hash;
 import net.i2p.data.LeaseSet;
 import net.i2p.data.router.RouterInfo;
 import net.i2p.router.RouterContext;
@@ -24,14 +25,27 @@ public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
         mRouters = routers;
     }
 
+    /** put us on top */
     private static class RouterInfoComparator implements Comparator<RouterInfo> {
+        private final Hash _us;
+
+        public RouterInfoComparator(Hash us) {
+            _us = us;
+        }
+
         public int compare(RouterInfo l, RouterInfo r) {
-            return l.getIdentity().getHash().toBase64().compareTo(r.getIdentity().getHash().toBase64());
+            Hash lh = l.getIdentity().getHash();
+            Hash rh = r.getIdentity().getHash();
+            if (lh.equals(_us))
+                return -1;
+            if (rh.equals(_us))
+                return 1;
+            return lh.toBase64().compareTo(rh.toBase64());
         }
     }
 
     private class LeaseSetComparator implements Comparator<LeaseSet> {
-        private RouterContext mRContext;
+        private final RouterContext mRContext;
 
         public LeaseSetComparator(RouterContext rContext) {
             super();
@@ -53,9 +67,9 @@ public class NetDbEntryLoader extends AsyncTaskLoader<List<NetDbEntry>> {
     public List<NetDbEntry> loadInBackground() {
         List<NetDbEntry> ret = new ArrayList<>();
         RouterContext routerContext = Util.getRouterContext();
-        if (routerContext != null && routerContext.netDb().isInitialized()) {
+        if (routerContext != null && routerContext.netDb().isInitialized() && routerContext.routerHash() != null) {
             if (mRouters) {
-                Set<RouterInfo> routers = new TreeSet<>(new RouterInfoComparator());
+                Set<RouterInfo> routers = new TreeSet<>(new RouterInfoComparator(routerContext.routerHash()));
                 routers.addAll(routerContext.netDb().getRouters());
                 for (RouterInfo ri : routers) {
                     NetDbEntry entry = NetDbEntry.fromRouterInfo(routerContext, ri);

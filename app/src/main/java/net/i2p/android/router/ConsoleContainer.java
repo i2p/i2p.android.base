@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
+import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu.OnFloatingActionsMenuUpdateListener;
 import net.i2p.android.router.dialog.AboutDialog;
 import net.i2p.android.router.dialog.TextResourceDialog;
 import net.i2p.android.router.log.LogActivity;
@@ -42,6 +43,17 @@ public class ConsoleContainer extends Fragment {
         }
 
         mConsoleMenu = (FloatingActionsMenu) v.findViewById(R.id.console_action_menu);
+        // update visibility based on router state
+        mConsoleMenu.setOnFloatingActionsMenuUpdateListener(new OnFloatingActionsMenuUpdateListener() {
+            public void onMenuExpanded() {
+                // this is called after the animation starts, sadly
+                setMenuVisibility();
+            }
+            public void onMenuCollapsed() {
+                // call it here too so the expand animation isn't glitchy as often
+                setMenuVisibility();
+            }
+        });
         mConsoleMenu.findViewById(R.id.action_news).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

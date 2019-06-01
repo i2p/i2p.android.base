@@ -1,5 +1,7 @@
 0.9.41 / 2019-06-xx
  * UPnP Fixes
+ * Fix visibility of floating menu items
+ * Put our router info at top of list
  * Remove BOB
 
 0.9.40 / 2019-05-10
