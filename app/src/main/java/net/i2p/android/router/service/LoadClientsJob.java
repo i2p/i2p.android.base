@@ -89,7 +89,7 @@ class LoadClientsJob extends JobImpl {
                 }
             }
             Util.d("Starting i2ptunnel");
-            TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
+            TunnelControllerGroup tcg = TunnelControllerGroup.getInstance(getContext());
             try {
                 tcg.startup();
                 int sz = tcg.getControllers().size();
