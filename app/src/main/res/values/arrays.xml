@@ -31,13 +31,21 @@
     </string-array>
     <string-array name="languages">
         <item>zz</item>
+        <item>ar</item>
         <item>az</item>
-        <item>en</item>
         <item>ca</item>
         <item>zh</item>
+        <item>zh_TW</item>
+        <item>cs</item>
+        <item>da</item>
         <item>de</item>
+        <item>en</item>
         <item>es</item>
+        <item>fi</item>
         <item>fr</item>
+        <item>gl</item>
+        <item>el</item>
+        <item>hu</item>
         <item>in</item>
         <item>it</item>
         <item>ja</item>
@@ -59,13 +67,21 @@
     </string-array>
     <string-array name="language_names">
         <item>@string/settings_default</item>
+        <item>Arabic ﻉﺮﺒﻳﺓ</item>
         <item>Azerbaijani</item>
-        <item>English</item>
         <item>Català</item>
         <item>Chinese 中国的</item>
+        <item>Chinese 中国台湾</item>
+        <item>Czech</item>
+        <item>Dansk</item>
         <item>Deutsch</item>
+        <item>English</item>
         <item>Español</item>
+        <item>Suomi</item>
         <item>Français</item>
+        <item>Galego</item>
+        <item>Greek Ελληνικά</item>
+        <item>Hungarian</item>
         <item>Indonesia</item>
         <item>Italiano</item>
         <item>Japanese 日本語</item>

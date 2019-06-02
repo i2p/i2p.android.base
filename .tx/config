@@ -4,7 +4,7 @@ lang_map = he: iw, id: in, pt_BR: pt-rBR, ru_RU: ru, sv_SE: sv, tr_TR: tr, uk_UA
 
 [I2P.android]
 file_filter = app/src/main/res/values-<lang>/strings.xml
-minimum_perc = 30
+minimum_perc = 22
 source_file = app/src/main/res/values/strings.xml
 source_lang = en
 type = ANDROID
