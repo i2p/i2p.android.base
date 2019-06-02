@@ -154,6 +154,8 @@ public class NetDbDetailFragment extends I2PFragmentBase {
             String val = (String)e.getValue();
             addTableRow(table, DataHelper.stripHTML(key), DataHelper.stripHTML(val));
         }
+        // spacer
+        addTableRow(table, "", "");
 
         addresses.addView(table);
     }
