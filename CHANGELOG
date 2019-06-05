@@ -1,10 +1,16 @@
 0.9.41 / 2019-06-xx
+ * New 64 bit libjbigi (ticket #2503)
+ * Update 32 bit jbigi to GMP 6.1.2
+ * Fix for client tunnels not starting after reseed
  * UPnP Fixes (ticket #2499)
  * Update visibility of floating menu items
  * Put our router info at top of list
  * Table layout cleanups
  * Fixes for threads remaining after router stop
  * Remove BOB
+ * Remove welterde IRC tunnel
+ * New translations: Add cs, da, el
+ * Add missing translations to menu: ar, fi, gl, hu, zh_TW
 
 0.9.40 / 2019-05-10
  * Open local I2CP socket for 3rd party apps

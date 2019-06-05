@@ -2,6 +2,12 @@
 #
 # build GMP and libjbigi.so using the Android tools directly
 #
+# WARNING:
+# BROKEN - not updated for r19 NDK, aarch64, or GMP 6.1.2
+# Use the following in i2p.i2p source core/c/jbigi:
+# TARGET=android BITS=32 mbuild_all.sh
+# TARGET=android BITS=64 mbuild_all.sh
+#
 # TODO: Get more settings from environment variables set in ../custom-rules.xml
 #
 
@@ -71,7 +77,7 @@ JBIGI="$I2PBASE/core/c/jbigi"
 # libcrypto crashes on emulator, don't trust it
 # jbigi about 20-25% slower than java on emulator
 #
-GMPVER=6.0.0
+GMPVER=6.1.2
 GMP="$JBIGI/gmp-$GMPVER"
 
 if [ ! -d "$GMP" ]; then
