@@ -125,13 +125,16 @@
     </string-array>
     <string-array name="unsupported_browsers">
         <item>com.android.chrome</item>
+        <item>com.brave.browser</item>
         <item>com.android.browser</item>
         <item>com.sec.android.app.sbrowser</item>
+        <item>com.stoutner.privacybrowser.standard</item>
+        <item>info.guardianproject.browser</item>
         <item>mobi.mgeek.TunnyBrowser</item>
         <item>com.lastpass.lpandroid</item>
         <item>org.mozilla.focus</item>
-        <item>org.brave.browser</item>
-        <item>com.stoutner.privacybrowser.standard</item>
+        <item>org.mozilla.rocket</item>
+        <item>org.mozilla.klar</item>
         <item>org.torproject.torbrowser</item>
         <item>org.torproject.torbrowser_alpha</item>
     </string-array>
