@@ -114,12 +114,14 @@
         <item>Lightning</item>
     </string-array>
     <string-array name="supported_browsers">
-        <item>info.guardianproject.browser</item>
         <item>org.mozilla.firefox</item>
+        <item>org.mozilla.fennec_fdroid</item>
+        <item>org.gnu.icecat</item>
     </string-array>
     <string-array name="supported_browser_labels">
-        <item>Orweb</item>
         <item>Firefox</item>
+        <item>Fennec F-Droid</item>
+        <item>IceCatMobile</item>
     </string-array>
     <string-array name="unsupported_browsers">
         <item>com.android.chrome</item>
@@ -128,6 +130,10 @@
         <item>mobi.mgeek.TunnyBrowser</item>
         <item>com.lastpass.lpandroid</item>
         <item>org.mozilla.focus</item>
+        <item>org.brave.browser</item>
+        <item>com.stoutner.privacybrowser.standard</item>
+        <item>org.torproject.torbrowser</item>
+        <item>org.torproject.torbrowser_alpha</item>
     </string-array>
     <string-array name="tunnel_profiles">
         <item>bulk</item>
