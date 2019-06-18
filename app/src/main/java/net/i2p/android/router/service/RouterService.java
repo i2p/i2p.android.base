@@ -105,7 +105,7 @@ public class RouterService extends Service {
         if(lastState == State.RUNNING || lastState == State.ACTIVE) {
             Intent intent = new Intent(this, RouterService.class);
             intent.putExtra(EXTRA_RESTART, true);
-            onStartCommand(intent, 12345, 67890);
+            onStartCommand(intent, START_FLAG_REDELIVERY | START_FLAG_RETRY, 67890);
         } else if(lastState == State.MANUAL_QUITTING || lastState == State.GRACEFUL_SHUTDOWN) {
             synchronized(_stateLock) {
                 setState(State.MANUAL_QUITTED);
