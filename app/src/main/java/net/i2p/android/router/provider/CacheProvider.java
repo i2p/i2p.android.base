@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -153,7 +154,7 @@ public class CacheProvider extends ContentProvider {
         // first seg is empty since string starts with /
         String nonce = segs.length > 1 ? segs[1] : null;
         String scheme = segs.length > 2 ? segs[2] : null;
-        String host = segs.length > 3 ? segs[3].toLowerCase() : null;
+        String host = segs.length > 3 ? segs[3].toLowerCase(Locale.US) : null;
         String realPath = segs.length > 4 ? segs[4] : "";
         String query = uri.getEncodedQuery();
         if (query == null) {

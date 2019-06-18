@@ -28,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Locale;
 
 public class I2PWebViewClient extends WebViewClient {
 
@@ -76,7 +77,7 @@ public class I2PWebViewClient extends WebViewClient {
                 fail(view, "Bad URL " + url);
                 return true;
             }
-            s = s.toLowerCase();
+            s = s.toLowerCase(Locale.US);
             if (!(s.equals("http") || s.equals("https") ||
                   s.equals(CONTENT))) {
                 Util.d("Not loading URL " + url);
@@ -93,7 +94,7 @@ public class I2PWebViewClient extends WebViewClient {
                 return true;
             }
 
-            h = h.toLowerCase();
+            h = h.toLowerCase(Locale.US);
             if (h.endsWith(".i2p")) {
                 if (!s.equals("http")) {
                     fail(view, "Bad URL " + url);

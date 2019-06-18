@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
@@ -185,9 +186,9 @@ public abstract class Util implements I2PConstants {
                     toRemove.setProperty("routerconsole.lang", "");
                     toRemove.setProperty("routerconsole.country", "");
                 } else {
-                    routerProps.setProperty("routerconsole.lang", language[0].toLowerCase());
+                    routerProps.setProperty("routerconsole.lang", language[0].toLowerCase(Locale.US));
                     if (language.length == 2)
-                        routerProps.setProperty("routerconsole.country", language[1].toUpperCase());
+                        routerProps.setProperty("routerconsole.country", language[1].toUpperCase(Locale.US));
                     else
                         toRemove.setProperty("routerconsole.country", "");
                 }
