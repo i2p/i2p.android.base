@@ -320,7 +320,7 @@ public class CacheProvider extends ContentProvider {
             for (String key : toDelete) {
                 edit.remove(key);
             }
-            edit.commit();
+            edit.apply();
         }
     }
 
@@ -356,11 +356,10 @@ public class CacheProvider extends ContentProvider {
         return _sharedPrefs.getString(pref, null);
     }
 
-    /** @return success */
-    private boolean setPref(String pref, String val) {
+    private void setPref(String pref, String val) {
         SharedPreferences.Editor edit = _sharedPrefs.edit();
         edit.putString(pref, val);
-        return edit.commit();
+        edit.apply();
     }
 
     /** @return success */
