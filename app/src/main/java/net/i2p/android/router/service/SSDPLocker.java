@@ -17,7 +17,7 @@ public class SSDPLocker implements UPnPScannerCallback {
     private final MulticastLock lock;
 
     public SSDPLocker(Context context) {
-        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         lock = wifi.createMulticastLock("ssdp");
         lock.setReferenceCounted(false);
     }
