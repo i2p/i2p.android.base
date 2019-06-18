@@ -3,12 +3,13 @@
 <body>
 <h2>How to configure Firefox:</h2>
 <ol>
-    <li>Click <a href="about:config?filter=network.proxy">HERE</a>, and choose to open the URL in Firefox.</li>
+    <li>Click <a href="about:config?filter=proxy">HERE</a>, and choose to open the URL in Firefox.</li>
     <li>Change the value of "network.proxy.type" to <code>1</code>.</li>
     <li>Change the value of "network.proxy.http" to <code>127.0.0.1</code>.</li>
     <li>Change the value of "network.proxy.http_port" to <code>4444</code>.</li>
     <li>Change the value of "network.proxy.ssl" to <code>127.0.0.1</code>.</li>
     <li>Change the value of "network.proxy.ssl_port" to <code>4444</code>.</li>
+    <li>Change the value of "media.peerconnection.ice.proxy_only" to <code>true</code><li>
     <li>You may also wish to install plugins to help manage your browser's
     default javascript settings, such as NoScript and/or uMatrix, and use
     Private Browsing to manage your browser's cache.
@@ -21,6 +22,13 @@
     <li>Select Firefox from the list of browsers</li>
     <li>Paste the following URL where it says "type custom user.js url" <a href="https://github.com/eyedeekay/firefox.profile.i2p/raw/master/firefox.profile.i2p/user.js">https://github.com/eyedeekay/firefox.profile.i2p/raw/master/firefox.profile.i2p/user.js</a></li>
     <li>Tap "Update"</li>
+    <li>You can now browse I2P eepsites!</li>
+</ol>
+<h3>!Experimental Rootless Configuration via Webextension</h3>
+<strong><p>Use at your own risk</p></strong>
+<ol>
+    <li>Open this link in Firefox and get the WebExtension from <a href="https://github.com/eyedeekay/i2psetproxy.js/releases">Github</a></li>
+    <li>Click through the "Blocked Extension" warning</li>
     <li>You can now browse I2P eepsites!</li>
 </ol>
 </body>
