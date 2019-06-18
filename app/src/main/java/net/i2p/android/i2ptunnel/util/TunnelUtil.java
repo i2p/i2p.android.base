@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import net.i2p.I2PAppContext;
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Util;
 import net.i2p.android.wizard.model.Page;
 import net.i2p.i2ptunnel.TunnelController;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
@@ -589,12 +590,17 @@ public class TunnelUtil extends GeneralHelper {
         // Update the TunnelConfig from the tunnel wizard settings
         String kClientServer = res.getString(R.string.i2ptunnel_wizard_k_client_server);
         String kType = res.getString(R.string.i2ptunnel_wizard_k_type);
-        String clientServer = data.getBundle(kClientServer).getString(Page.SIMPLE_DATA_KEY);
-        String typeName = data.getBundle(clientServer + ":" + kType).getString(Page.SIMPLE_DATA_KEY);
-        String type = getTypeFromName(typeName, ctx);
-        cfg.setType(type);
+        try {
+            String clientServer = data.getBundle(kClientServer).getString(Page.SIMPLE_DATA_KEY);
+            String typeName = data.getBundle(clientServer + ":" + kType).getString(Page.SIMPLE_DATA_KEY);
+            String type = getTypeFromName(typeName, ctx);
+            cfg.setType(type);
 
-        new TunnelConfigFromWizard(cfg, data, res, _group, type).runLogic();
+            new TunnelConfigFromWizard(cfg, data, res, _group, type).runLogic();
+        } catch (NullPointerException ex) {
+            Util.e("Exception while trying to create config from wizard: "+ex.getMessage());
+        }
+
 
         return cfg;
     }
