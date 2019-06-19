@@ -83,7 +83,7 @@ dependencies {
     implementation 'net.i2p.android.ext:floatingactionbutton:1.10.1'
     implementation 'org.sufficientlysecure:html-textview:3.1'
     // Testing-only dependencies
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2') {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 }
