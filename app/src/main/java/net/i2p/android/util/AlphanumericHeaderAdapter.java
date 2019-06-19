@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import com.eowise.recyclerview.stickyheaders.StickyHeadersAdapter;
 
 import net.i2p.android.router.R;
@@ -49,7 +51,7 @@ public class AlphanumericHeaderAdapter implements StickyHeadersAdapter<Alphanume
 
     @Override
     public void onBindViewHolder(ViewHolder headerViewHolder, int position) {
-        String sortString = mAdapter.getSortString(position).toUpperCase();
+        String sortString = mAdapter.getSortString(position).toUpperCase(Locale.getDefault());
         if (sortString.isEmpty())
             headerViewHolder.itemView.setVisibility(View.GONE);
         else {
@@ -63,7 +65,7 @@ public class AlphanumericHeaderAdapter implements StickyHeadersAdapter<Alphanume
 
     @Override
     public long getHeaderId(int position) {
-        String sortString = mAdapter.getSortString(position).toUpperCase();
+        String sortString = mAdapter.getSortString(position).toUpperCase(Locale.getDefault());
         if (sortString.isEmpty())
             return Integer.MAX_VALUE;
 

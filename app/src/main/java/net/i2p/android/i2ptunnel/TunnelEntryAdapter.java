@@ -158,6 +158,16 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 tvh.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        // TODO
+                        // lint priority 8/10
+                        // lint: Do not treat position as fixed; only use immediately and call holder.getAdapterPosition() to look it up later
+                        // javadocs: Note that unlike ListView, RecyclerView will not call this method again
+                        // if the position of the item changes in the data set unless the item itself is invalidated
+                        // or the new position cannot be determined.
+                        // For this reason, you should only use the position parameter while acquiring
+                        // the related data item inside this method and should not keep a copy of it.
+                        // If you need the position of an item later on (e.g. in a click listener),
+                        // use RecyclerView.ViewHolder.getAdapterPosition() which will have the updated adapter position.
                         int oldPosition = mActivatedPosition;
                         mActivatedPosition = position;
                         notifyItemChanged(oldPosition);

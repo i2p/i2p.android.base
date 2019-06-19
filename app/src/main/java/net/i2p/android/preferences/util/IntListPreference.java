@@ -20,7 +20,7 @@ public class IntListPreference extends ListPreference {
                 getPersistedInt(0);
             } catch (ClassCastException e) {
                 // Fix for where this preference was previously stored in a ListPreference
-                getSharedPreferences().edit().remove(getKey()).commit();
+                getSharedPreferences().edit().remove(getKey()).apply();
             }
         }
 

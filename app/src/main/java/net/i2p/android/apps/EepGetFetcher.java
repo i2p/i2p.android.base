@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Locale;
+
 import net.i2p.I2PAppContext;
 import net.i2p.data.DataHelper;
 import net.i2p.util.EepGet;
@@ -83,7 +85,7 @@ public class EepGetFetcher implements EepGet.StatusListener {
         int semi = rv.indexOf(";");
         if (semi > 0)
             rv = rv.substring(0, semi);
-        return rv.toLowerCase();
+        return rv.toLowerCase(Locale.US);
     }
 
     /**

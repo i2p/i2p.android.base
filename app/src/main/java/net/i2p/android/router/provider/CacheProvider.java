@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -153,7 +154,7 @@ public class CacheProvider extends ContentProvider {
         // first seg is empty since string starts with /
         String nonce = segs.length > 1 ? segs[1] : null;
         String scheme = segs.length > 2 ? segs[2] : null;
-        String host = segs.length > 3 ? segs[3].toLowerCase() : null;
+        String host = segs.length > 3 ? segs[3].toLowerCase(Locale.US) : null;
         String realPath = segs.length > 4 ? segs[4] : "";
         String query = uri.getEncodedQuery();
         if (query == null) {
@@ -319,7 +320,7 @@ public class CacheProvider extends ContentProvider {
             for (String key : toDelete) {
                 edit.remove(key);
             }
-            edit.commit();
+            edit.apply();
         }
     }
 
@@ -355,11 +356,10 @@ public class CacheProvider extends ContentProvider {
         return _sharedPrefs.getString(pref, null);
     }
 
-    /** @return success */
-    private boolean setPref(String pref, String val) {
+    private void setPref(String pref, String val) {
         SharedPreferences.Editor edit = _sharedPrefs.edit();
         edit.putString(pref, val);
-        return edit.commit();
+        edit.apply();
     }
 
     /** @return success */

@@ -3,19 +3,17 @@ package net.i2p.android.util;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.SparseArray;
 import android.view.ViewGroup;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public abstract class MemoryFragmentPagerAdapter extends FragmentPagerAdapter {
-    private FragmentManager mFragmentManager;
-    private Map<Integer, String> mFragmentTags;
+    private final FragmentManager mFragmentManager;
+    private final SparseArray<String> mFragmentTags;
 
     public MemoryFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
         mFragmentManager = fm;
-        mFragmentTags = new HashMap<>();
+        mFragmentTags = new SparseArray<>();
     }
 
     @Override
