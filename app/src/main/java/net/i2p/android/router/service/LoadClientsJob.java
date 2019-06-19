@@ -12,6 +12,7 @@ import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.router.Job;
 import net.i2p.router.JobImpl;
 import net.i2p.router.RouterContext;
+import net.i2p.router.startup.RouterAppManager;
 import net.i2p.util.I2PAppThread;
 
 import java.io.IOException;
@@ -96,9 +97,9 @@ class LoadClientsJob extends JobImpl {
                 Util.d("i2ptunnel started " + sz + " clients");
 
                 // no use starting these until i2ptunnel starts
+                RouterContext ctx = getContext();
                 NewsFetcher fetcher = NewsFetcher.getInstance(mCtx, getContext(), _notif);
-                Thread t = new I2PAppThread(fetcher, "NewsFetcher", true);
-                t.start();
+                ctx.routerAppManager().addAndStart(fetcher, new String[0]);
 
                 _addressbook = new DaemonThread(new String[] {"addressbook"});
                 _addressbook.setName("Addressbook");
