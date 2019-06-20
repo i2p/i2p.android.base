@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import net.i2p.android.apps.NewsFetcher;
 import net.i2p.android.router.util.Util;
+import net.i2p.router.RouterContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -33,12 +34,16 @@ public class NewsFragment extends I2PFragmentBase {
     @Override
     public void onResume() {
         super.onResume();
-        NewsFetcher nf = NewsFetcher.getInstance();
-        if (nf != null) {
-            // Always update the status
-            TextView tv = (TextView) getActivity().findViewById(R.id.news_status);
-            tv.setText(nf.status().replace("&nbsp;", " "));
-            tv.setVisibility(View.VISIBLE);
+        RouterContext ctx = getRouterContext();
+        if (ctx != null) {
+            NewsFetcher nf = (NewsFetcher) ctx.clientAppManager().getRegisteredApp(NewsFetcher.APP_NAME);
+            if (nf != null) {
+                // Always update the status
+                // This is the news last updated/checked text at the bottom
+                TextView tv = (TextView) getActivity().findViewById(R.id.news_status);
+                tv.setText(nf.status().replace("&nbsp;", " "));
+                tv.setVisibility(View.VISIBLE);
+            }
         }
 
         // Only update the content if we need to

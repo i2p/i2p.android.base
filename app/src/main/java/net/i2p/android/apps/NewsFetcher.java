@@ -5,6 +5,10 @@ import android.content.Context;
 import net.i2p.android.router.NewsActivity;
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.Notifications;
+import net.i2p.app.ClientApp;
+import net.i2p.app.ClientAppManager;
+import net.i2p.app.ClientAppState;
+import static net.i2p.app.ClientAppState.*;
 import net.i2p.crypto.SU3File;
 import net.i2p.data.DataHelper;
 import net.i2p.router.RouterContext;
@@ -13,6 +17,7 @@ import net.i2p.router.news.NewsMetadata;
 import net.i2p.router.news.NewsXMLParser;
 import net.i2p.util.EepGet;
 import net.i2p.util.FileUtil;
+import net.i2p.util.I2PAppThread;
 import net.i2p.util.Log;
 import net.i2p.util.ReusableGZIPInputStream;
 import net.i2p.util.SecureFileOutputStream;
@@ -32,8 +37,11 @@ import java.util.List;
 /**
  * From router console, simplified since we don't deal with router versions
  * or updates.
+ *
+ * As of 0.9.41, implements ClientApp to hang us off the ClientAppManager,
+ * so we can remove the static reference.
  */
-public class NewsFetcher implements Runnable, EepGet.StatusListener {
+public class NewsFetcher implements Runnable, EepGet.StatusListener, ClientApp {
     private final Context mCtx;
     private final RouterContext _context;
     private final Notifications _notif;
@@ -44,20 +52,18 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private boolean _invalidated;
     private File _newsFile;
     private File _tempFile;
-    private static NewsFetcher _instance;
     private volatile boolean _isRunning = true;
     private Thread _thread;
+    private final ClientAppManager _mgr;
+    private volatile ClientAppState _state = UNINITIALIZED;
+    public static final String APP_NAME = "NewsFetcher";
 
-    public static /*final */ NewsFetcher getInstance() {
-        return _instance;
-    }
-
+    /**
+     *  As of 0.9.41, returns a new one every time. Only call once.
+     */
     public static /* final */ synchronized NewsFetcher getInstance(
             Context context, RouterContext ctx, Notifications notif) {
-        if (_instance != null)
-            return _instance;
-        _instance = new NewsFetcher(context, ctx, notif);
-        return _instance;
+        return new NewsFetcher(context, ctx, notif);
     }
 
     private static final String NEWS_DIR = "docs";
@@ -82,7 +88,6 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
         mCtx = context;
         _context = ctx;
         _notif = notif;
-        _context.addShutdownTask(new Shutdown());
         _log = ctx.logManager().getLog(NewsFetcher.class);
         try {
             String last = ctx.getProperty(PROP_LAST_CHECKED);
@@ -96,6 +101,9 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
         _newsFile = new File(newsDir, NEWS_FILE);
         _tempFile = new File(_context.getTempDir(), TEMP_NEWS_FILE);
         updateLastFetched();
+        _mgr = ctx.clientAppManager();
+        changeState(INITIALIZED);
+        _mgr.register(this);
     }
 
     private void updateLastFetched() {
@@ -134,7 +142,17 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     private static final long RUN_DELAY = 30 * 60 * 1000;
 
     public void run() {
-        _thread = Thread.currentThread();
+        changeState(RUNNING);
+        try {
+            run2();
+        } finally {
+            _mgr.unregister(this);
+            changeState(STOPPED);
+        }
+    }
+
+
+    private void run2() {
         try {
             Thread.sleep(INITIAL_DELAY);
         } catch (InterruptedException ie) {
@@ -276,14 +294,6 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
     public void attempting(String url) {
     }
 
-    private class Shutdown implements Runnable {
-        public void run() {
-            _isRunning = false;
-            if (_thread != null)
-                _thread.interrupt();
-        }
-    }
-
     //
     // SU3 handlers
     //
@@ -417,4 +427,69 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener {
             } catch (IOException ioe) {}
         }
     }
+
+    ////// begin ClientApp interface
+
+    /**
+     *  @since 0.9.41
+     */
+    public synchronized void startup() {
+        changeState(STARTING);
+        _thread = new I2PAppThread(this, "NewsFetcher", true);
+        _thread.start();
+    }
+
+    /**
+     *  @since 0.9.41
+     */
+    public synchronized void shutdown(String[] args) {
+        if (_state != RUNNING)
+            return;
+        changeState(STOPPING);
+        _isRunning = false;
+        if (_thread != null)
+            _thread.interrupt();
+        changeState(STOPPED);
+    }
+
+    /**
+     *  @since 0.9.41
+     */
+    public ClientAppState getState() {
+        return _state;
+    }
+
+    /**
+     *  @since 0.9.41
+     */
+    public String getName() {
+        return APP_NAME;
+    }
+
+    /**
+     *  @since 0.9.41
+     */
+    public String getDisplayName() {
+        return APP_NAME;
+    }
+
+    ////// end ClientApp interface
+    ////// begin ClientApp helpers
+
+    /**
+     *  @since 0.9.41
+     */
+    private void changeState(ClientAppState state) {
+        changeState(state, null);
+    }
+
+    /**
+     *  @since 0.9.41
+     */
+    private synchronized void changeState(ClientAppState state, Exception e) {
+        _state = state;
+        _mgr.notify(this, state, null, e);
+    }
+
+    ////// end ClientApp helpers
 }
