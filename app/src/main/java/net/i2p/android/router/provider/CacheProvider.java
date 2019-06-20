@@ -2,6 +2,7 @@ package net.i2p.android.router.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
@@ -231,10 +232,11 @@ public class CacheProvider extends ContentProvider {
     }
 
     private ParcelFileDescriptor eepFetch(Uri uri) throws FileNotFoundException {
-        AppCache cache = AppCache.getInstance(getContext());
+        Context ctx = getContext();
+        AppCache cache = AppCache.getInstance(ctx);
         OutputStream out;
         try {
-            out = cache.createCacheFile(uri);
+            out = cache.createCacheFile(ctx, uri);
         } catch (IOException ioe) {
             throw new FileNotFoundException(ioe.toString());
         }
@@ -245,7 +247,7 @@ public class CacheProvider extends ContentProvider {
             File file = cache.getCacheFile(uri);
             if (file.length() > 0) {
                 // this call will insert it back to us (don't set as current base)
-                Uri content = cache.addCacheFile(uri, false);
+                Uri content = cache.addCacheFile(ctx, uri, false);
                 return ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
             } else {
                  Util.d("CacheProvider Sucess but no data " + uri);
@@ -253,7 +255,7 @@ public class CacheProvider extends ContentProvider {
         } else {
             Util.d("CacheProvider Eepget fail " + uri);
         }
-        AppCache.getInstance().removeCacheFile(uri);
+        cache.removeCacheFile(ctx, uri);
         throw new FileNotFoundException("eepget fail");
     }
 
