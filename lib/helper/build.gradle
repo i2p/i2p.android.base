@@ -5,7 +5,7 @@ version = '0.9.5'
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION as String)
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION as String)
     }
     buildTypes {
@@ -25,7 +25,10 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:25.3.1'
+    // Android Support Repository dependencies
+    def supportVersion = '28.0.0'
+    implementation "com.android.support:support-v4:$supportVersion"
+    // Testing-only dependencies
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.11.0'
 }
