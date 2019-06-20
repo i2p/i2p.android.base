@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -121,8 +122,9 @@ public class BrowserListFragment extends Fragment implements
             intent.setData(Uri.parse("http://stats.i2p"));
 
             final PackageManager pm = getContext().getPackageManager();
-            List<ResolveInfo> installedBrowsers = pm.queryIntentActivities(intent, 0);
+            Set<ResolveInfo> installedBrowsers = new HashSet<>(pm.queryIntentActivities(intent, 0));
 
+            // Compare installed browsers to supported browsers
             for (ResolveInfo browser : installedBrowsers) {
                 if (recommended.contains(browser.activityInfo.packageName)) {
                     browsers.add(new Browser(pm, browser, true, true));

@@ -73,11 +73,15 @@ public class BrowserAdapter extends RecyclerView.Adapter<BrowserAdapter.ViewHold
         holder.mLabel.setText(browser.label);
 
         if (browser.isKnown) {
-            if (browser.isRecommended && browser.isInstalled) {
+            if (browser.isRecommended && browser.isInstalled(mCtx)) {
                 holder.mStatus.setImageDrawable(
                         mCtx.getResources().getDrawable(R.drawable.ic_stars_white_24dp));
                 holder.mStatus.setVisibility(View.VISIBLE);
-            } else if (browser.isSupported && !browser.isInstalled) {
+            } else if (browser.isSupported && browser.isInstalled(mCtx)) {
+                holder.mStatus.setImageDrawable(
+                        mCtx.getResources().getDrawable(R.drawable.ic_stars_white_24dp));
+                holder.mStatus.setVisibility(View.INVISIBLE);
+            } else if (browser.isSupported && !browser.isInstalled(mCtx)) {
                 holder.mStatus.setImageDrawable(
                         mCtx.getResources().getDrawable(R.drawable.ic_shop_white_24dp));
                 holder.mStatus.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +98,7 @@ public class BrowserAdapter extends RecyclerView.Adapter<BrowserAdapter.ViewHold
                     }
                 });
                 holder.mStatus.setVisibility(View.VISIBLE);
-            } else if (!browser.isSupported) {
+            } else if (browser.isInstalled(mCtx) && !browser.isSupported) {
                 // Make the icon gray-scale to show it is unsupported
                 ColorMatrix matrix = new ColorMatrix();
                 matrix.setSaturation(0);

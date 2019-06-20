@@ -1,19 +1,25 @@
 package net.i2p.android.help;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Browser implements Comparable<Browser> {
     public final String packageName;
     public final CharSequence label;
     public final Drawable icon;
-    public final boolean isInstalled;
     public final boolean isKnown;
     public final boolean isSupported;
     public final boolean isRecommended;
 
+    private boolean isInstalled;
     /**
      * A browser that we don't know about.
      *
@@ -79,5 +85,24 @@ public class Browser implements Comparable<Browser> {
                 return 3;
         } else
             return 2;
+    }
+
+    public boolean isInstalled(Context context){
+        if (isInstalled) {
+            return true;
+        }
+        // Find all installed browsers that listen for ".i2p"
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("http://stats.i2p"));
+
+        final PackageManager pm = context.getPackageManager();
+        List<ResolveInfo> installedBrowsers = pm.queryIntentActivities(intent, 0);
+        for (ResolveInfo browser : installedBrowsers) {
+            if (browser.activityInfo.packageName.equals(packageName)) {
+                isInstalled = true;
+                break;
+            }
+        }
+        return isInstalled;
     }
 }
