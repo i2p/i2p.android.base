@@ -442,8 +442,9 @@ public class I2PWebViewClient extends WebViewClient {
                 } else {
                     // nothing
                 }
-            } catch (IllegalArgumentException iae) {
+            } catch (RuntimeException iae) {
                 // throws IAE - not attached to window manager - perhaps due to screen rotation?
+                // Also includes android.view.WindowManager$BadTokenException extends RuntimeException
                 Util.e("Error while updating I2PWebViewClient dialog", iae);
             }
         }
