@@ -1,5 +1,6 @@
 package net.i2p.android.preferences;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class TransportsPreferenceFragment extends I2PreferenceFragment {
         ((SettingsActivity) getActivity()).getSupportActionBar().setTitle(R.string.settings_label_transports);
     }
 
+    @SuppressLint("ApplySharedPref")
     private void loadProperties() {
         Context context= getActivity();
         RouterContext ctx = Util.getRouterContext();
