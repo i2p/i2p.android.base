@@ -15,6 +15,11 @@ public class OnBootReceiver extends BroadcastReceiver implements I2PConstants {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (!Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+            Util.e("spoofed BOOT_COMPLETED");
+            return;
+        }
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean startOnBoot = prefs.getBoolean(PREF_START_ON_BOOT, false);
 

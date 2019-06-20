@@ -375,9 +375,9 @@ public class MainFragment extends I2PFragmentBase {
             String uptime = DataHelper.formatDuration(ctx.router().getUptime());
             int active = ctx.commSystem().countActivePeers();
             int known = Math.max(ctx.netDb().getKnownRouters() - 1, 0);
-            vUptime.setText("" + uptime);
-            vActive.setText("" + active);
-            vKnown.setText("" + known);
+            vUptime.setText(uptime);
+            vActive.setText(Integer.toString(active));
+            vKnown.setText(Integer.toString(known));
 
             // Load running tunnels
             loadDestinations(ctx);

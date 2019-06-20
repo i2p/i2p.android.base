@@ -212,7 +212,8 @@ public class I2PWebViewClient extends WebViewClient {
                 //reverse back to a i2p URI so we can delete it from the AppCache
                 uri = CacheProvider.getI2PUri(uri);
                 Util.d("clearing AppCache entry for current page " + uri);
-                AppCache.getInstance(view.getContext()).removeCacheFile(uri);
+                Context ctx = view.getContext();
+                AppCache.getInstance(ctx).removeCacheFile(ctx, uri);
             } catch (FileNotFoundException fnfe) {
                 // this actually only deletes the row in the provider,
                 // not the actual file, but it will be overwritten in the reload.
@@ -316,9 +317,10 @@ public class I2PWebViewClient extends WebViewClient {
         protected Integer doInBackground(String... urls) {
             final String url = urls[0];
             Uri uri = Uri.parse(url);
-            File cacheFile = AppCache.getInstance(_ctx).getCacheFile(uri);
+            final AppCache cache = AppCache.getInstance(_ctx);
+            File cacheFile = cache.getCacheFile(uri);
             if (cacheFile.exists()) {
-                final Uri resUri = AppCache.getInstance(_ctx).getCacheUri(uri);
+                final Uri resUri = cache.getCacheUri(_ctx, uri);
                 Util.d("Loading " + url + " from resource cache " + resUri);
                 _view.post(new Runnable() {
                     @Override
@@ -336,7 +338,7 @@ public class I2PWebViewClient extends WebViewClient {
             //EepGetFetcher fetcher = new EepGetFetcher(url);
             OutputStream out = null;
             try {
-                out = AppCache.getInstance(_ctx).createCacheFile(uri);
+                out = cache.createCacheFile(_ctx, uri);
                 // write error to stream
                 EepGetFetcher fetcher = new EepGetFetcher(url, out, true);
                 fetcher.addStatusListener(this);
@@ -349,11 +351,11 @@ public class I2PWebViewClient extends WebViewClient {
                 if (success) {
                     // store in cache, get content URL, and load that way
                     // Set as current base
-                    final Uri content = AppCache.getInstance(_ctx).addCacheFile(uri, true);
+                    final Uri content = cache.addCacheFile(_ctx, uri, true);
                     if (content != null) {
                         Util.d("Stored cache in " + content);
                     } else {
-                        AppCache.getInstance(_ctx).removeCacheFile(uri);
+                        cache.removeCacheFile(_ctx, uri);
                         Util.d("cache create error");
                         return 0;
                     }
@@ -392,7 +394,7 @@ public class I2PWebViewClient extends WebViewClient {
                               if (fis != null) try { fis.close(); } catch (IOException ioe) {}
                         }
                     }
-                    AppCache.getInstance(_ctx).removeCacheFile(uri);
+                    cache.removeCacheFile(_ctx, uri);
                      Util.d("loading error data URL: " + url);
                     final String finalMsg = msg;
                     _view.post(new Runnable() {
@@ -440,8 +442,9 @@ public class I2PWebViewClient extends WebViewClient {
                 } else {
                     // nothing
                 }
-            } catch (IllegalArgumentException iae) {
+            } catch (RuntimeException iae) {
                 // throws IAE - not attached to window manager - perhaps due to screen rotation?
+                // Also includes android.view.WindowManager$BadTokenException extends RuntimeException
                 Util.e("Error while updating I2PWebViewClient dialog", iae);
             }
         }

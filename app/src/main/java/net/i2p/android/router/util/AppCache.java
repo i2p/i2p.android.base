@@ -30,7 +30,6 @@ public class AppCache {
     private static AppCache _instance;
     private static File _cacheDir;
     private static long _totalSize;
-    private static ContentResolver _resolver;
     /** the LRU cache */
     private final Map<Integer, Object> _cache;
 
@@ -62,7 +61,6 @@ public class AppCache {
         _cacheDir = new File(ctx.getCacheDir(), DIR_NAME);
         _cacheDir.mkdir();
         Util.d("AppCache cache dir " + _cacheDir);
-        _resolver = ctx.getContentResolver();
         _cache = new LHM(MAX_FILES);
         initialize();
     }
@@ -72,9 +70,9 @@ public class AppCache {
      *  addCacheFile() or removeCacheFile() after the data is written.
      *  @param key no fragment allowed
      */
-    public OutputStream createCacheFile(Uri key) throws IOException {
+    public OutputStream createCacheFile(Context ctx, Uri key) throws IOException {
         // remove any old file so the total stays correct
-        removeCacheFile(key);
+        removeCacheFile(ctx, key);
         File f = toFile(key);
         f.getParentFile().mkdirs();
         return new FileOutputStream(f);
@@ -88,7 +86,7 @@ public class AppCache {
      *  @param key no fragment allowed
      *  @param setAsCurrentBase tell CacheProvider
      */
-    public Uri addCacheFile(Uri key, boolean setAsCurrentBase) {
+    public Uri addCacheFile(Context ctx, Uri key, boolean setAsCurrentBase) {
         int hash = toHash(key);
         synchronized(_cache) {
             _cache.put(hash, DUMMY);
@@ -96,19 +94,19 @@ public class AppCache {
         // file:/// uri
         //return Uri.fromFile(toFile(hash)).toString();
         // content:// uri
-        return insertContent(key, setAsCurrentBase);
+        return insertContent(ctx, key, setAsCurrentBase);
     }
 
     /**
      *  Remove a previously written file from the cache index and disk.
      *  @param key no fragment allowed
      */
-    public void removeCacheFile(Uri key) {
+    public void removeCacheFile(Context ctx, Uri key) {
         int hash = toHash(key);
         synchronized(_cache) {
             _cache.remove(hash);
         }
-        deleteContent(key);
+        deleteContent(ctx, key);
     }
 
     /**
@@ -118,7 +116,7 @@ public class AppCache {
      *
      *  @param key no fragment allowed
      */
-    public Uri getCacheUri(Uri key) {
+    public Uri getCacheUri(Context ctx, Uri key) {
         int hash = toHash(key);
         // poke the LRU
         Object present;
@@ -126,7 +124,7 @@ public class AppCache {
             present = _cache.get(hash);
         }
         if (present != null)
-            setAsCurrentBase(key);
+            setAsCurrentBase(ctx, key);
         return CacheProvider.getContentUri(key);
     }
 
@@ -242,7 +240,7 @@ public class AppCache {
     /**
      *  @return the uri inserted or null on failure
      */
-    private static Uri insertContent(Uri key, boolean setAsCurrentBase) {
+    private static Uri insertContent(Context ctx, Uri key, boolean setAsCurrentBase) {
         String path = toFile(key).getAbsolutePath();
         ContentValues cv = new ContentValues();
         cv.put(CacheProvider.DATA, path);
@@ -250,8 +248,9 @@ public class AppCache {
             cv.put(CacheProvider.CURRENT_BASE, Boolean.TRUE);
         Uri uri = CacheProvider.getContentUri(key);
         if (uri != null) {
-           _resolver.insert(uri, cv);
-           return uri;
+            ContentResolver resolver = ctx.getContentResolver();
+            resolver.insert(uri, cv);
+            return uri;
         }
         return null;
     }
@@ -259,19 +258,23 @@ public class AppCache {
     /**
      *  Set key as current base. May be content or i2p key.
      */
-    private static void setAsCurrentBase(Uri key) {
+    private static void setAsCurrentBase(Context ctx, Uri key) {
         ContentValues cv = new ContentValues();
         cv.put(CacheProvider.CURRENT_BASE, Boolean.TRUE);
         Uri uri = CacheProvider.getContentUri(key);
-        if (uri != null)
-           _resolver.insert(uri, cv);
+        if (uri != null) {
+            ContentResolver resolver = ctx.getContentResolver();
+            resolver.insert(uri, cv);
+        }
     }
 
     /** ok for now but we will need to store key in the map and delete by integer */
-    private static void deleteContent(Uri key) {
+    private static void deleteContent(Context ctx, Uri key) {
         Uri uri = CacheProvider.getContentUri(key);
-        if (uri != null)
-            _resolver.delete(uri, null, null);
+        if (uri != null) {
+            ContentResolver resolver = ctx.getContentResolver();
+            resolver.delete(uri, null, null);
+        }
     }
 
     /**
