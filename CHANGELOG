@@ -1,14 +1,20 @@
-0.9.41 / 2019-06-xx
+0.9.41 / 2019-07-03
  * New 64 bit libjbigi (ticket #2503)
  * Update 32 bit jbigi to GMP 6.1.2
  * Fix for client tunnels not starting after reseed
  * UPnP Fixes (ticket #2499)
+ * WebView crash fixes (ticket #2390)
+ * i2ptunnel crash fix (ticket #2552)
+ * i2ptunnel ANR fix (ticket #2491)
+ * Browser help pages improvements (tickets #2521, 2523)
+ * Code cleanups and fixes
  * Update visibility of floating menu items
  * Put our router info at top of list
  * Table layout cleanups
  * Fixes for threads remaining after router stop
  * Remove BOB
  * Remove welterde IRC tunnel
+ * Various lint fixes
  * New translations: Add cs, da, el
  * Add missing translations to menu: ar, fi, gl, hu, zh_TW
 

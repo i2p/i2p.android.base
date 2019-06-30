@@ -32,7 +32,7 @@ import java.util.Locale;
 
 public class I2PWebViewClient extends WebViewClient {
 
-    private Fragment _parentFrag;
+    private final Fragment _parentFrag;
     private BGLoad _lastTask;
     /** save it here so we can dismiss it in onPageFinished() */
     private ProgressDialog _lastDialog;
