@@ -16,6 +16,9 @@ import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTunnelPreferenceFragment extends CustomPreferenceFragment {
     protected static final String ARG_TUNNEL_ID = "tunnelId";
@@ -88,11 +91,15 @@ public abstract class BaseTunnelPreferenceFragment extends CustomPreferenceFragm
                 // TODO: There used to be a possible ANR here, because the underlying I2P code
                 // checks if the session is open as part of updating its config. We may need to save
                 // completely asynchronously (and ensure we do actually save before the app closes).
-                task.execute().get();
+                task.execute().get(2, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 Util.e("Interrupted while saving tunnel config", e);
             } catch (ExecutionException e) {
                 Util.e("Error while saving tunnel config", e);
+            } catch (CancellationException e) {
+                Util.e("Cancelled while saving tunnel config", e);
+            } catch (TimeoutException e) {
+                Util.e("Timed out while savomg tunnel config", e);
             }
         }
     }
