@@ -144,7 +144,7 @@
   <string name="settings_summ_showStats">Ana konsolda ayrıntılı istatistikler görüntülensin</string>
   <string name="settings_label_transports">Aktarımlar</string>
   <string name="settings_label_maxConns">En fazla bağlantı</string>
-  <string name="settings_label_i2cp">I2CP Arayüzü</string>
+  <string name="settings_label_i2cp">I2CP Arabirimi</string>
   <string name="settings_desc_i2cp">Üçüncü taraf uygulamalar tünel oluşturabilsin (yönelticinin yeniden başlatılması gerekir)</string>
   <string name="settings_label_exploratory_pool">Keşif havuzu</string>
   <string name="settings_desc_exploratory_pool">Tunel ayarları</string>
@@ -204,8 +204,8 @@
   <string name="no_configured_client_tunnels">Henüz ayarlanmış bir istemci tüneli yok.</string>
   <string name="no_configured_server_tunnels">Henüz ayarlanmış bir sunucu tüneli yok.</string>
   <string name="i2ptunnel_new_tunnel">Yeni Tünel</string>
-  <string name="i2ptunnel_msg_config_saved">Ayar değişiklikleri kaydedildi</string>
-  <string name="i2ptunnel_msg_config_save_failed">Ayarlar kaydedilemedi</string>
+  <string name="i2ptunnel_msg_config_saved">Yapılandırma değişiklikleri kaydedildi</string>
+  <string name="i2ptunnel_msg_config_save_failed">Yapılandırma kaydedilemedi</string>
   <string name="i2ptunnel_msg_tunnel_starting">Tünel açılıyor</string>
   <string name="i2ptunnel_msg_tunnel_stopping">Tünel kapatılıyor</string>
   <string name="i2ptunnel_delete_confirm_message">Tüneli sil</string>
@@ -353,7 +353,7 @@
   <string name="i2p_android_logs">I2P Android Günlükleri</string>
   <string name="error_logs_copied_to_clipboard">Hata günlükleri panoya kopyalandı</string>
   <string name="logs_copied_to_clipboard">Günlükler panoya kopyalandı</string>
-  <string name="label_browser_configuration">Tarayıcı ayarları</string>
+  <string name="label_browser_configuration">Tarayıcı yapılandırması</string>
   <string name="no_market_app">Herhangi bir mağaza uygulaması bulunamadı, lütfen el ile kurun</string>
   <string name="unset">Ayarı Kaldır</string>
 </resources>

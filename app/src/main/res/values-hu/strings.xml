@@ -23,12 +23,16 @@
   <string name="firewalled">Tűzfalazva</string>
   <string name="symmetric_nat">Szimmetrikus NAT</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
+  <string name="net_status_error_no_active_peers">Nincsenek aktív peerek - ellenőrizd a hálózati kapcsolatot és a tűzfalat</string>
   <string name="uptime">Indítás óta eltelt idő</string>
+  <string name="active_peers">Aktív peerek</string>
+  <string name="known_peers">Ismert peerek</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">M</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
   <string name="download">Letöltés</string>
+  <string name="first_start_welcome"><b>Üdvözöl az I2P!</b> Kérlek <b>légy türelemmel</b> amíg az I2P elindul és peer-eket talál.</string>
   <string name="action_search">Keresés</string>
   <string name="action_add">Hozzáadás</string>
   <string name="action_edit">Szerkesztés</string>
@@ -42,6 +46,7 @@
   <string name="version">Verzió</string>
   <string name="count">Mennyiség</string>
   <string name="tname_0">Rejtett vagy indul</string>
+  <string name="notification_status_peers">Peer-ek: %1$d aktív, %2$d ismert</string>
   <string name="menu_settings">Beállítások</string>
   <string name="settings_enable">Engedélyezés</string>
   <string name="settings_label_bandwidth">Sávszélesség</string>

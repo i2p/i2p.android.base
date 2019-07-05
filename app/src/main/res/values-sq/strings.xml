@@ -22,6 +22,7 @@
   <string name="button_router_off">Mbaje tastin për ta filluar I2P\'në</string>
   <string name="button_router_on">I2P është në funkcion (mbaje tastin gjatë për ta ndalur) </string>
   <string name="hidden">Fshehur</string>
+  <string name="testing">Po provohet</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
@@ -171,6 +172,7 @@
   <string name="i2ptunnel_wizard_desc_auto_start">Të startojë tuneli njëkohësisht me router\'in?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Krijo tunel?</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Krijo tunel</string>
+  <string name="i2ptunnel_view_target">Objektiv</string>
   <string name="i2ptunnel_view_autostart">Autostarto</string>
   <string name="name">Emër</string>
   <string name="description">Përshkrim</string>
