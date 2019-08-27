@@ -81,7 +81,7 @@ public class TunnelDetailFragment extends Fragment {
         try {
             mGroup = TunnelControllerGroup.getInstance();
             error = mGroup == null ? getResources().getString(R.string.i2ptunnel_not_initialized) : null;
-            controllers = mGroup.getControllers();
+            controllers = mGroup == null ? null : mGroup.getControllers();
         } catch (IllegalArgumentException iae) {
             mGroup = null;
             controllers = null;
