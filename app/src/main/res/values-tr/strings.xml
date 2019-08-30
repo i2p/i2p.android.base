@@ -36,7 +36,7 @@
   <string name="net_status_error_unresolved_tcp">Çözümlenmemiş TCP adresi</string>
   <string name="net_status_error_private_tcp">Kişisel TCP adresi</string>
   <string name="net_status_warn_firewalled_inbound_tcp">Gelen TCP güvenlik duvarı etkinleştirilmiş </string>
-  <string name="net_status_warn_firewalled_floodfill">Güvenlik duvarlı ve akış korumalı</string>
+  <string name="net_status_warn_firewalled_floodfill">Güvenlik duvarı arkasında otomatik doldurma</string>
   <string name="net_status_info_disconnected">Bağlantı kesildi - ağ bağlantısını denetleyin</string>
   <string name="net_status_error_udp_port">UPD kapısı kullanılıyor - ayarları değiştirip yeniden başlatın</string>
   <string name="net_status_error_no_active_peers">Etkin eş yok, ağ bağlantısını ve güvenlik duvarını denetleyin</string>

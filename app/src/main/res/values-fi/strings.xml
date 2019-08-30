@@ -67,13 +67,18 @@
   <string name="action_reload">Lataa uudelleen</string>
   <string name="action_refresh">Virkistä</string>
   <string name="hint_search_addressbook">Etsi osoitekirja</string>
+  <string name="action_reload_subscriptions">Lataa tilaukset uudelleen</string>
   <string name="news_last_updated">Uutisdt päivitetty viimeksi %s sitten</string>
   <string name="news_last_checked">Uutiset viimeksi tarkistettu %s sitten</string>
   <string name="news_updated">Uutiset päivitetty</string>
   <string name="view_news">Napauta viimeisimpien I2P-uutisten katselemiseksi</string>
   <string name="router_not_running">Reititin ei ole käynnissä.</string>
   <string name="router_shutting_down">Reititin sulkeutuu.</string>
+  <string name="stats_not_ready">Tilastointihallinta ei ole vielä valmis. Yritä myöhemmin uudelleen.</string>
   <string name="select_an_address">Valitse osoite.</string>
+  <string name="no_graphs_configured">Yhtään graafista esitystä ei ole asetettu. Voit valita graafisen esityksen tilastot asetukset-valikosta. Kaikki muutokset tulevat voimaan 60 sekunnin jälkeen.</string>
+  <string name="configure_graphs">Aseta graafisia esityksiä</string>
+  <string name="graphs_not_ready">Graafiset esitykset eivät ole vielä valmiina. Yritä myöhemmin uudelleen.</string>
   <string name="statistics">Tilastot</string>
   <string name="routers">Reitittimet</string>
   <string name="countries">Maat</string>
@@ -82,6 +87,7 @@
   <string name="versions">Versiot</string>
   <string name="version">Versio</string>
   <string name="count">Lukumäärä</string>
+  <string name="netdb_routers_empty">Sinun NetDB-verkossa ei ole reitittimiä.</string>
   <string name="notification_status_starting">I2P on käynnistymässä</string>
   <string name="notification_status_restarting">I2P on käynnistymässä uudelleen</string>
   <string name="notification_status_waiting">I2P odottaa verkkoyhteyttä</string>
@@ -109,8 +115,14 @@
   <string name="settings_label_bw_outbound">Lähtönopeus</string>
   <string name="settings_desc_bw_outbound">Enimmäislähtönopeus</string>
   <string name="settings_label_network">Verkko</string>
+  <string name="settings_label_hiddenMode">Osallistuminen</string>
   <string name="settings_desc_hiddenMode">Käännä piilotila pois päältä</string>
+  <string name="settings_label_maxPartTunnels">Niiden tunneleiden enimmäismäärä, joihin osallistutaan</string>
+  <string name="settings_desc_maxPartTunnels">Niiden tunneleiden enimmäismäärä, joihin osallistutaan (oletus=20)</string>
+  <string name="settings_dialog_maxPartTunnels">Niiden tunneleiden enimmäismäärä, joihin osallistutaan</string>
   <string name="settings_label_sharePercent">Jakoprosentti</string>
+  <string name="settings_desc_sharePercent">Jaettavan kaistanleveyden prosenttiosuus (oletus=80)</string>
+  <string name="settings_dialog_sharePercent">Jaettavan kaistanleveyden prosenttiosuus</string>
   <string name="settings_desc_upnp">Avaa palomuuriportit automaattisesti</string>
   <string name="settings_label_logging">Lokit</string>
   <string name="settings_label_default_log_level">Oletus loggaustaso</string>
@@ -119,9 +131,11 @@
   <string name="settings_default">Oletus</string>
   <string name="settings_label_advanced">Lisätietoja</string>
   <string name="settings_label_showStats">Reititintilastot</string>
+  <string name="settings_summ_showStats">Näytä lisätilastoja pääkonsoli-ikkunassa</string>
   <string name="settings_label_transports">Siirrot</string>
   <string name="settings_label_maxConns">Yhteyksien enimmäismäärä</string>
   <string name="settings_label_i2cp">I2CP-käyttöliittymä</string>
+  <string name="settings_desc_i2cp">Salli kolmanten osapuolien sovellusten luoda tunneleita (vaatii reitittimen uudelleenkäynnistyksen)</string>
   <string name="settings_desc_exploratory_pool">Tunneliparametrit</string>
   <string name="settings_label_expl_inbound">Tulotunnelit</string>
   <string name="settings_label_expl_outbound">Lähtötunnelit</string>
@@ -159,6 +173,7 @@
   <string name="i2ptunnel_type_streamrserver">Streamr-palvelin</string>
   <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
   <string name="install_recommended_app">Asennetaanko suositeltu sovellus?</string>
+  <string name="app_needed_for_this_tunnel_type">Sinun on asennettava sovellus tämän tunnelin käyttämiseksi. Haluaisitko asentaa suositellun sovelluksen?</string>
   <string name="i2ptunnel_not_initialized">Tunneleita ei ole vielä alustettu, lataa uudelleen kahdessa minuutissa.</string>
   <string name="i2ptunnel_new_tunnel">Uusi tunneli</string>
   <string name="i2ptunnel_msg_tunnel_starting">Käynnistetään tunneli</string>

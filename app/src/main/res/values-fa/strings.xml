@@ -88,7 +88,10 @@
   <string name="settings_label_bandwidth_net">پهنای باند و شبکه</string>
   <string name="settings_label_startOnBoot">شروع I2P در هنگام بوت</string>
   <string name="settings_label_bandwidth">پهنای باند</string>
+  <string name="settings_label_bw_inbound">سرعت ورودی</string>
+  <string name="settings_label_bw_outbound">سرعت خروجی</string>
   <string name="settings_label_network">شبکه</string>
+  <string name="settings_label_hiddenMode">مشارکت</string>
   <string name="settings_desc_hiddenMode">خاموش کردن حالت پنهان</string>
   <string name="settings_label_sharePercent">اشتراک گذاری درصد</string>
   <string name="settings_desc_upnp">باز کردن درگاه های دیوار آتشین به صورت خودکار</string>
@@ -191,6 +194,7 @@
   <string name="whitelist">لیست سفید</string>
   <string name="blacklist">لیست سیاه</string>
   <string name="access_list">لیست دسترسی</string>
+  <string name="unique_local">محل یکتا</string>
   <string name="client_connection_limits">محدودیت های اتصال کلاینت</string>
   <string name="connections_per_minute">اتصال ها در دقیقه</string>
   <string name="connections_per_hour">اتصال ها در ساعت</string>
