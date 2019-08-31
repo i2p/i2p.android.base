@@ -1,3 +1,6 @@
+0.9.42 / 2019-08-28
+ * Possible fix for tunnel edit dialog crash (ticket #2598)
+
 0.9.41 / 2019-07-03
  * New 64 bit libjbigi (ticket #2503)
  * Update 32 bit jbigi to GMP 6.1.2
