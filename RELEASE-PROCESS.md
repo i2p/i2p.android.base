@@ -6,6 +6,7 @@
 2. It should exist at `~/.ant/lib/maven-ant-tasks-2.1.3.jar`
 3. Ensure you got hamcrest-integration, hamcrest-library, hamcrest-core in the hamcrest.home directory.
 4. Ensure junit 4.12 at least in junit.home, ensure the jar file is named `junit4.jar`.
+5. Ensure to have updated the changelog with the changes done.
 
 ## Maven Central
 
@@ -55,6 +56,4 @@
 4. Tag the new release. Example `mtn tag h: android-0.9.36`
 5. Push the monotone changes
 6. Update download page (version and hash, including F-Droid)
-
-
 
