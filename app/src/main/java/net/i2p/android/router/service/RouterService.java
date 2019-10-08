@@ -795,12 +795,12 @@ public class RouterService extends Service {
     }
 
     /**
-     * @return success
+     * Saves state in background thread
      */
-    private boolean saveState() {
+    private void saveState() {
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, 0);
         SharedPreferences.Editor edit = prefs.edit();
         edit.putString(LAST_STATE, _state.toString());
-        return edit.commit();
+        edit.apply();
     }
 }
