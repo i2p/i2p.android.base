@@ -67,6 +67,11 @@ systemProp.socksProxyPort=9150
     ```
     sdk.dir=/path/to/android-studio/sdk
     ```
+1a. For building with a local router development build:
+    cd ../i2p.i2p
+    installer/resources/maven-dev-release.sh x // x is the build number, e.g. 6
+    cd back here
+    edit gradle.properties, add the build number x to I2P_PROPERTIES=0.9.xx-x
 
 2. `gradle assembleDebug`
 
