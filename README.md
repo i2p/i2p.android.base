@@ -75,7 +75,10 @@ systemProp.socksProxyPort=9150
 
 2. `gradle assembleDebug`
 
-3. The APK will be placed in `i2p.android.base/app/build/outputs/apk`.
+3. The APK files will be placed in `i2p.android.base/app/build/outputs/apk` subdirectories.
+
+4. Install debug build on phone in USB debugging mode
+    adb install app/build/outputs/apk/free/debug/app-free-debug.apk 
 
 ### Building with Android Studio
 
