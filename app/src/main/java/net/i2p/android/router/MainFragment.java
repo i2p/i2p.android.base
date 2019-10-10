@@ -578,12 +578,14 @@ public class MainFragment extends I2PFragmentBase {
         );
         if (language == null) {
             AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+            // avoid ISE caused by fragment detachment ticket #2631
+            final String languages[] = getResources().getStringArray(R.array.languages);
             b.setTitle(R.string.choose_language)
                     .setItems(R.array.language_names, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Save the language choice
-                            String language = getResources().getStringArray(R.array.languages)[which];
+                            String language = languages[which];
                             PreferenceManager.getDefaultSharedPreferences(getActivity())
                                     .edit()
                                     .putString(getString(R.string.PREF_LANGUAGE), language)
