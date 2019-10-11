@@ -1,15 +1,19 @@
 package net.i2p.android.router;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
@@ -69,6 +73,7 @@ public class MainFragment extends I2PFragmentBase {
     private TextView vAdvStatusText;
 
     private static final String PREF_CONFIGURE_BROWSER = "app.dialog.configureBrowser";
+    private static final String PREF_CONFIGURE_BATTERY = "app.dialog.configureBattery";
     private static final String PREF_FIRST_START = "app.router.firstStart";
     private static final String PREF_SHOW_STATS = "i2pandroid.main.showStats";
     protected static final String PROP_NEW_INSTALL = "i2p.newInstall";
@@ -620,16 +625,59 @@ public class MainFragment extends I2PFragmentBase {
                             ab.setPref(PREF_CONFIGURE_BROWSER, false);
                             Intent hi = new Intent(getActivity(), BrowserConfigActivity.class);
                             startActivity(hi);
+                            checkDialog();
                         }
                     })
                     .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int i) {
-                            dialog.cancel();
+                            dialog.dismiss();
                             ab.setPref(PREF_CONFIGURE_BROWSER, false);
+                            checkDialog();
                         }
                     })
                     .show();
+        } else if (ab.getPref(PREF_CONFIGURE_BATTERY, true)) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                // only for gingerbread and newer versions
+                final Intent intent = new Intent();
+                final Context mContext = ab.getApplicationContext();
+                String packageName = mContext.getPackageName();
+                PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+                if (pm.isIgnoringBatteryOptimizations(packageName)) {
+                    intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                } else {
+                    AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+                    b.setTitle(R.string.configure_no_doze_title)
+                            .setMessage(R.string.configure_no_doze)
+                            .setCancelable(false)
+                            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int i) {
+                                    String packageName = mContext.getPackageName();
+                                    dialog.dismiss();
+                                    ab.setPref(PREF_CONFIGURE_BATTERY, true);
+                                    intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                                    intent.setData(Uri.parse("package:" + packageName));
+                                    try {
+                                        mContext.startActivity(intent);
+                                    } catch (ActivityNotFoundException activityNotFound) {
+                                        ab.setPref(PREF_CONFIGURE_BATTERY, true);
+                                    }
+                                }
+                            })
+                            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int i) {
+                                    dialog.cancel();
+                                    ab.setPref(PREF_CONFIGURE_BATTERY, false);
+                                }
+                            })
+                            .show();
+                }
+            } else {
+                ab.setPref(PREF_CONFIGURE_BATTERY, false);
+            }
         }
         /*VersionDialog dialog = new VersionDialog();
         String oldVersion = ((I2PActivityBase) getActivity()).getPref(PREF_INSTALLED_VERSION, "??");

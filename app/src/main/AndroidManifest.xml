@@ -14,6 +14,11 @@
     <!-- following two are for UPnP -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <!-- required for reliable core functionality on Android, see:
+    https://geti2p.net/en/docs/applications/embedding
+    heading: "Design for and Encoruage Long Uptimes"
+    -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
         android:icon="@drawable/ic_launcher_itoopie"
