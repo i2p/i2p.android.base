@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ *  A single tunnel.
+ *  Stored by the TunnelEntryAdapter.
+ */
 public class TunnelEntry {
     public static final int RUNNING = 1;
     public static final int STARTING = 2;
@@ -31,23 +35,21 @@ public class TunnelEntry {
     private final int mId;
 
     /**
+     * @param tcg non-null
      * @return the new TunnelEntry, or null if there was an error.
      */
     public static TunnelEntry createNewTunnel(
             Context ctx,
             TunnelControllerGroup tcg,
             TunnelConfig cfg) {
+        int tunnelId = tcg.getControllers().size();
         TunnelEntry ret = null;
         List<String> msgs = new ArrayList<>();
         SaveTunnelTask task = new SaveTunnelTask(tcg, -1, cfg);
         try {
-            int tunnelId = tcg.getControllers().size();
             msgs.addAll(task.execute().get());
             TunnelController cur = TunnelUtil.getController(tcg, tunnelId);
             ret = new TunnelEntry(ctx, cur, tunnelId);
-        } catch (NullPointerException e) {
-            Util.e("TunnelControllerGroup don't exists yet", e);
-            msgs.add(ctx.getString(R.string.i2ptunnel_msg_config_save_failed));
         } catch (InterruptedException e) {
             Util.e("Interrupted while saving tunnel config", e);
             msgs.add(ctx.getString(R.string.i2ptunnel_msg_config_save_failed));

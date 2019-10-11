@@ -33,6 +33,11 @@ import net.i2p.router.RouterContext;
 
 import java.util.List;
 
+/**
+ *  The top level Fragment of the tunnels tabs.
+ *  Creates client and server TunnelListFragments,
+ *  the options menu, and the new tunnel wizard button.
+ */
 public class TunnelsContainer extends Fragment implements
         FragmentUtils.TwoPaneProvider,
         TunnelListFragment.OnTunnelSelectedListener,
@@ -216,6 +221,12 @@ public class TunnelsContainer extends Fragment implements
                     return;
                 // TODO fetch earlier
                 TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
+                if (tcg == null) {
+                    // router went away
+                    Toast.makeText(getActivity().getApplicationContext(),
+                                   R.string.router_not_running, Toast.LENGTH_LONG).show();
+                    return;
+                }
                 TunnelConfig cfg = TunnelUtil.createConfigFromWizard(getActivity(), tcg, tunnelData);
                 TunnelEntry tunnel = TunnelEntry.createNewTunnel(getActivity(), tcg, cfg);
 

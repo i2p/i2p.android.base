@@ -31,6 +31,12 @@ import net.i2p.i2ptunnel.TunnelControllerGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  The list of tunnels.
+ *  There's two of these, one for client tunnels and
+ *  one for server tunnels.
+ *  Creates the TunnelEntryAdapter.
+ */
 public class TunnelListFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<List<TunnelEntry>> {
     public static final String SHOW_CLIENT_TUNNELS = "show_client_tunnels";

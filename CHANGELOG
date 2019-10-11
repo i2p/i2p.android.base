@@ -1,6 +1,7 @@
 0.9.42 / 2019-10-xx
  * Save state in background thread (tickets #2595, #2632)
  * Fix ISE in language dialog (ticket #2631)
+ * Fix NPE in create tunnel (ticket #2629)
 
 0.9.42 / 2019-08-28
  * Possible fix for tunnel edit dialog crash (ticket #2598)
