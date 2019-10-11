@@ -320,7 +320,10 @@ public class MainFragment extends I2PFragmentBase {
         }
     }
 
-    public void updateState(State newState) {
+    /**
+     *  Changes the logo based on the state.
+     */
+    private void updateState(State newState) {
         if (newState == State.INIT ||
                 newState == State.STOPPED ||
                 newState == State.MANUAL_STOPPED ||
@@ -328,13 +331,13 @@ public class MainFragment extends I2PFragmentBase {
                 newState == State.NETWORK_STOPPED) {
             mConsoleLights.setImageResource(R.drawable.routerlogo_0);
         } else if (newState == State.STARTING ||
-                //newState == State.GRACEFUL_SHUTDOWN || // Don't change lights for graceful
                 newState == State.STOPPING ||
                 newState == State.MANUAL_STOPPING ||
                 newState == State.MANUAL_QUITTING ||
                 newState == State.NETWORK_STOPPING) {
             mConsoleLights.setImageResource(R.drawable.routerlogo_1);
-        } else if (newState == State.RUNNING) {
+        } else if (newState == State.RUNNING ||
+                   newState == State.GRACEFUL_SHUTDOWN) {
             mConsoleLights.setImageResource(R.drawable.routerlogo_2);
         } else if (newState == State.ACTIVE) {
             mConsoleLights.setImageResource(R.drawable.routerlogo_3);
@@ -437,6 +440,7 @@ public class MainFragment extends I2PFragmentBase {
             // network but no router context
             vStatusContainer.setVisibility(View.GONE);
             getActivity().findViewById(R.id.console_usage_stats).setVisibility(View.INVISIBLE);
+            updateState(State.STOPPED);
             /**
              * **
              * RouterService svc = _routerService; String status = "connected? "
@@ -526,8 +530,8 @@ public class MainFragment extends I2PFragmentBase {
      * compare translated nicknames - put "shared clients" first in the sort
      */
     private class AlphaComparator implements Comparator<Destination> {
-        private String xsc;
-        private RouterContext _ctx;
+        private final String xsc;
+        private final RouterContext _ctx;
 
         public AlphaComparator(RouterContext ctx) {
             _ctx = ctx;
