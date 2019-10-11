@@ -17,6 +17,12 @@ import net.i2p.android.util.FragmentUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  Contains the List of TunnelEntries.
+ *  There's two of these, one for client tunnels and
+ *  one for server tunnels.
+ *  Created by the TunnelListFragment.
+ */
 public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final Context mCtx;
     private final boolean mClientTunnels;
@@ -129,7 +135,7 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         switch (holder.getItemViewType()) {
             case R.string.router_not_running:
                 ((TextView) holder.itemView).setText(
-                        mCtx.getString(R.string.router_not_running));
+                        mCtx.getString(R.string.i2ptunnel_not_initialized));
                 break;
 
             case R.layout.listitem_empty:
