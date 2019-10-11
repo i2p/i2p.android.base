@@ -2,6 +2,9 @@
  * Save state in background thread (tickets #2595, #2632)
  * Fix ISE in language dialog (ticket #2631)
  * Fix NPE in create tunnel (ticket #2629)
+ * Update logo after router killed in background
+ * Fix message in tunnels tabs when tunnels not up yet
+ * Hide tunnel actions while TCG is starting
 
 0.9.42 / 2019-08-28
  * Possible fix for tunnel edit dialog crash (ticket #2598)

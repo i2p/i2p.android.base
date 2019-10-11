@@ -70,12 +70,11 @@ public class TunnelsContainer extends Fragment implements
         setHasOptionsMenu(true);
     }
 
-    private boolean showActions() {
+    private static boolean showActions() {
         RouterContext rCtx = Util.getRouterContext();
         TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
         return rCtx != null && tcg != null &&
-                (tcg.getState() == ClientAppState.STARTING ||
-                        tcg.getState() == ClientAppState.RUNNING);
+               tcg.getState() == ClientAppState.RUNNING;
     }
 
     @Override
