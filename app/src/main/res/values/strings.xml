@@ -68,7 +68,7 @@
     <string name="configure_browser_title">Configure browser?</string>
     <string name="configure_browser_for_i2p">Would you like to configure a browser to view I2P sites? (You can also do this later from the help menu.)</string>
     <string name="configure_no_doze_title">Manage Battery Optimizations?</string>
-    <string name="configure_no_doze">I2P works best if you run it for a long time. In order to prevent Android from closing I2P when trying to save power, you can add it to the battery exceptions list. This will improve the reliability of the application substantially.</string>
+    <string name="configure_no_doze">I2P works best if it keeps running. To prevent Android from closing I2P when trying to save power, you can add it to the battery exceptions list. This will substantially improve the reliability of the application.\n\nKeep I2P running in the background? (recommended)</string>
     <string name="first_start_title">Congratulations on getting I2P installed!</string>
     <string name="first_start_welcome"><b>Welcome to I2P!</b> Please <b>have patience</b> as I2P boots up and finds peers.</string>
     <string name="first_start_read">While you are waiting, please read the release notes and welcome page.</string>

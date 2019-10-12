@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <!-- required for reliable core functionality on Android, see:
     https://geti2p.net/en/docs/applications/embedding
-    heading: "Design for and Encoruage Long Uptimes"
+    heading: "Design for and Encourage Long Uptimes"
     -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 

@@ -639,14 +639,12 @@ public class MainFragment extends I2PFragmentBase {
                     .show();
         } else if (ab.getPref(PREF_CONFIGURE_BATTERY, true)) {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                // only for gingerbread and newer versions
+                // only for Marshmallow and newer versions
                 final Intent intent = new Intent();
                 final Context mContext = ab.getApplicationContext();
                 String packageName = mContext.getPackageName();
                 PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-                if (pm.isIgnoringBatteryOptimizations(packageName)) {
-                    intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-                } else {
+                if (!pm.isIgnoringBatteryOptimizations(packageName)) {
                     AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
                     b.setTitle(R.string.configure_no_doze_title)
                             .setMessage(R.string.configure_no_doze)
