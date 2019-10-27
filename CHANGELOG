@@ -1,4 +1,4 @@
-0.9.42 / 2019-10-xx
+0.9.43 / 2019-10-27
  * Save state in background thread (tickets #2595, #2632)
  * Fix ISE in language dialog (ticket #2631)
  * Fix NPE in create tunnel (ticket #2629)

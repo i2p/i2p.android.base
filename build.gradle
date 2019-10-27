@@ -1,3 +1,13 @@
+apply plugin: 'signing'
+
+version = "$I2P_VERSION"
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
+signing {
+     required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+     sign configurations.archives
+ }
+
 buildscript {
     repositories {
         mavenLocal()
@@ -9,6 +19,7 @@ buildscript {
         classpath 'com.android.tools.lint:lint-gradle:26.1.1'
     }
 }
+
 
 allprojects {
     group = GROUP
