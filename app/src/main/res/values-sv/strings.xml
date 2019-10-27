@@ -5,7 +5,7 @@
   <string name="choose_language">Välj språk</string>
   <string name="welcome_new_install">Välkommen till I2P! Den här appen är ALFA-mjukvara och erbjuder inte stark anonymitet.
 Läs utgåvenoteringar och licens-information.</string>
-  <string name="welcome_new_version">Ny version installerad. Var god läs release kommentarerna. Version: </string>
+  <string name="welcome_new_version">Ny version installerad. Vänligen läs versionsanteckningarna. Version: </string>
   <string name="label_tunnels">Tunnlar</string>
   <string name="label_status">Status</string>
   <string name="label_console">Konsoll</string>

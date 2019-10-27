@@ -238,6 +238,7 @@
   <string name="use_ssl">使用 SSL</string>
   <string name="tunnel_parameters">隧道參數</string>
   <string name="profile">個人資料</string>
+  <string name="access_control">存取控制</string>
   <string name="disabled">關閉</string>
   <string name="unlimited">無限制</string>
   <string name="http_client">HTTP 客戶端</string>
@@ -245,4 +246,5 @@
   <string name="password">密碼</string>
   <string name="other">其它</string>
   <string name="all">全部</string>
+  <string name="no_messages">沒有訊息</string>
 </resources>

@@ -4,6 +4,7 @@
   <string name="label_status">Status</string>
   <string name="label_addressbook">Adressebog</string>
   <string name="label_logs">Logs</string>
+  <string name="label_news">Nyheder</string>
   <string name="label_peers_status">Peers</string>
   <string name="label_release_notes">Udgivelsesnoter</string>
   <string name="label_browse">Brows</string>
@@ -26,6 +27,7 @@
   <string name="action_delete">Slet</string>
   <string name="action_reload">Genindlæs</string>
   <string name="action_refresh">Genopfrisk</string>
+  <string name="statistics">Statistik</string>
   <string name="routers">Routere</string>
   <string name="leasesets">LeaseSets</string>
   <string name="country">Land</string>

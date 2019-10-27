@@ -55,6 +55,8 @@
   <string name="upload">Передано</string>
   <string name="configure_browser_title">Настроить браузер?</string>
   <string name="configure_browser_for_i2p">Настроить браузер для просмотра I2P сайтов? (Вы сможете сделать это позже из меню \"Справка\")</string>
+  <string name="configure_no_doze_title">Управлять оптимизацией энергосбережения?</string>
+  <string name="configure_no_doze">I2P работает лучше всего когда постоянно запущен. Для предотвращения закрытия I2P системой вы можете добавить его в список исключения оптимизации. Это существенно увеличит надёжность приложения. Оставить I2P работать в фоне? (рекомендуется)</string>
   <string name="first_start_title">Поздравляем с установкой I2P!</string>
   <string name="first_start_welcome"><b>Добро пожаловать в I2P!</b> Пожалуйста, <b>дождитесь</b> пока I2P загрузится и найдет узлы.</string>
   <string name="first_start_read">Пока вы ждете, пожалуйста, прочтите информацию о релизе и страницу приветствия.</string>

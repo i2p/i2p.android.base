@@ -63,6 +63,7 @@
   <string name="settings_label_expl_length">Độ dài</string>
   <string name="settings_desc_expl_length">Số lượng hop được sử dụng</string>
   <string name="settings_label_expl_lengthVariance">Khoảng chênh lệch hop</string>
+  <string name="settings_summ_expl_lengthVariance">%s</string>
   <string name="settings_desc_expl_lengthVariance">Số lượng hop ngẫu nhiên được thêm vào</string>
   <string name="settings_label_expl_quantity">Số lượng</string>
   <string name="settings_desc_expl_quantity">Số lượng đường hầm</string>
@@ -70,6 +71,7 @@
   <string name="settings_desc_expl_backupQuantity">Số lượng đường hầm dự phòng</string>
   <string name="menu_about">Giới thiệu</string>
   <string name="about_version">Phiên bản:</string>
+  <string name="about_project">Trang chủ dự án:</string>
   <string name="menu_help">Giúp đỡ</string>
   <string name="general">Chung</string>
   <string name="addressbook_add_wizard_k_name">Tên</string>
@@ -99,6 +101,7 @@
   <string name="next">Kế</string>
   <string name="prev">Trước</string>
   <string name="finish">Nạp</string>
+  <string name="review">Duyệt xem</string>
   <string name="enabled">Được bật lên</string>
   <string name="i2ptunnel_view_target">Điểm đến</string>
   <string name="name">Tên</string>
@@ -110,6 +113,7 @@
   <string name="disabled">Tàn tật</string>
   <string name="whitelist">Sổ trắng</string>
   <string name="blacklist">Sổ đen</string>
+  <string name="unlimited">Không giới hạn</string>
   <string name="tunnel_summ_delay_open">Đợi mở đường hầm cho đến khi yêu cầu</string>
   <string name="tunnel_summ_reduce_quantity">Giảm số lượng hầm khi rổi</string>
   <string name="close_tunnels">Đóng đường hầm khi rảnh rổi</string>
@@ -117,4 +121,5 @@
   <string name="username">Tên đăng nhập</string>
   <string name="password">Mật khẩu</string>
   <string name="custom_options">Tùy chọn tùy ý</string>
+  <string name="all">Tất cả</string>
 </resources>

@@ -213,8 +213,10 @@
   <string name="http_client">Client HTTP</string>
   <string name="username">Nom d\'usuari</string>
   <string name="password">Contrasenya</string>
+  <string name="other">Altres</string>
   <string name="signature_type">Tipus de signatura</string>
   <string name="custom_options">Opcions personalitzades</string>
+  <string name="all">Tots</string>
   <string name="no_messages">Sense missatges</string>
   <string name="copy_logs">Copia registres</string>
   <string name="i2p_android_error_logs">Registres d\'error d\'I2P Android</string>

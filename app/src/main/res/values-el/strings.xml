@@ -50,6 +50,7 @@
   <string name="transport">Transport</string>
   <string name="versions">Εκδόσεις</string>
   <string name="version">Εκδοση</string>
+  <string name="count">Υπολογισμός</string>
   <string name="tname_0">Κρυμμένο κατά την εκκίνηση</string>
   <string name="menu_settings">Ρυθμίσεις</string>
   <string name="settings_enable">Ενεργοποίηση </string>
@@ -66,6 +67,7 @@
   <string name="settings_label_expl_quantity">Ποσότητα</string>
   <string name="menu_about">Σχετικά με</string>
   <string name="about_version">Έκδοση</string>
+  <string name="about_project">Project Home:</string>
   <string name="menu_help">Βοήθεια</string>
   <string name="general">Γενικά</string>
   <string name="addressbook_add_wizard_k_name">Όνομα</string>
@@ -79,17 +81,21 @@
   <string name="next">Επόμενο</string>
   <string name="prev">Προηγούμενο</string>
   <string name="finish">Υποβολή</string>
+  <string name="review">Ανασκόπηση</string>
   <string name="enabled">Ενεργοποιημένο</string>
   <string name="i2ptunnel_view_target">Στόχος</string>
   <string name="name">Όνομα</string>
   <string name="description">Περιγραφή</string>
   <string name="use_ssl">Χρήση SSL</string>
   <string name="profile">Προφίλ</string>
+  <string name="access_control">Έλεγχος πρόσβασης</string>
   <string name="disabled">Απενεργοποιημένο</string>
+  <string name="whitelist">Λίστα Επιτρεπόμενων</string>
   <string name="unlimited">Απεριόριστο</string>
   <string name="username">Όνομα χρήστη</string>
   <string name="password">Κωδικός</string>
   <string name="other">Άλλ</string>
   <string name="all">Όλοι</string>
   <string name="no_messages">Κανένα μήνυμα</string>
+  <string name="logs_copied_to_clipboard">Τα αρχεία καταγραφής αντιγράφηκαν στο πρόχειρο</string>
 </resources>

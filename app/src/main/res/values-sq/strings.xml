@@ -29,6 +29,7 @@
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
   <string name="download">Shkarkim</string>
+  <string name="upload">Ngarkoni</string>
   <string name="first_start_title">Urime që arritët ta instaloni I2P\'në!</string>
   <string name="first_start_welcome">&lt;b&gt;Mirë se vini në I2P!&lt;b&gt; Ju lutem &lt;b&gt;duroni&lt;b&gt; deri sa I2P të boot dhe tåe gjejë peers, </string>
   <string name="first_start_read">Deri sa jeni duke pritur, ju lutem lexoni notat që janë lëshuar dhe vizitoni faqen e mirëseardhjes. </string>

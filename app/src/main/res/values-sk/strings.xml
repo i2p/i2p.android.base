@@ -28,6 +28,8 @@
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">S</string>
+  <string name="download">Stiahnuť</string>
+  <string name="upload">Nahrať</string>
   <string name="first_start_title">Gratulácia k nainštalovaniu I2P!</string>
   <string name="first_start_welcome"><b>Vitajte v I2P!</b> Prosím <b>majte trpezlivosť</b>, kým sa I2P nabootuje a nájde peerov.</string>
   <string name="first_start_read">Zatiaľ čo budete čakať, prosím prečítajte si poznámky k vydaniu a úvodnú stránku.</string>

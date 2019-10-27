@@ -55,6 +55,8 @@
   <string name="upload">Téléversement</string>
   <string name="configure_browser_title">Configurer le navigateur ?</string>
   <string name="configure_browser_for_i2p">Souhaitez-vous configurer un navigateur pour visualiser les sites I2P ? (Vous pouvez aussi le faire plus tard grâce au menu d’aide.)</string>
+  <string name="configure_no_doze_title">Gérer les optimisations de la pile ?</string>
+  <string name="configure_no_doze">I2P fonctionne mieux s’il fonctionne en permanence. Pour empêcher qu’Android ferme I2P quand il essaie d’économiser l’énergie, vous pouvez ajouter I2P à la liste d’exception de la pile. La fiabilité de l’appli s’en trouvera grandement améliorée.\n\nGarder I2P en fonction en arrière-plan ? (recommandé)</string>
   <string name="first_start_title">Félicitations pour votre installation d’I2P !</string>
   <string name="first_start_welcome"><b>Bienvenue sur I2P !</b> Veuillez <b>patienter</b> pendant qu’I2P s’amorce et trouve des pairs.</string>
   <string name="first_start_read">Pendant que vous patientez, veuillez consulter les notes de mise à jour et la page d’accueil.</string>
@@ -277,7 +279,7 @@
   <string name="profile_interactive">Connexion interactive</string>
   <string name="delay_connect">Retarder la connexion</string>
   <string name="tunnel_summ_delay_connect">Activer les connexions pour requêtes et réponses</string>
-  <string name="access_control">Contrôle des accès</string>
+  <string name="access_control">Contrôle de l’accès</string>
   <string name="restricted_access">Accès restreint</string>
   <string name="disabled">Désactivé</string>
   <string name="whitelist">Liste blanche</string>
