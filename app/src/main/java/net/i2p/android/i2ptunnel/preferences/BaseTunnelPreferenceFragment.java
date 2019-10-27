@@ -14,6 +14,7 @@ import net.i2p.android.router.R;
 import net.i2p.android.router.util.Util;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
+import net.i2p.I2PAppContext;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.CancellationException;
@@ -30,7 +31,7 @@ public abstract class BaseTunnelPreferenceFragment extends CustomPreferenceFragm
     public void onCreatePreferences(Bundle paramBundle, String s) {
         String error;
         try {
-            mGroup = TunnelControllerGroup.getInstance();
+            mGroup = TunnelControllerGroup.getInstance(I2PAppContext.getGlobalContext());
             error = mGroup == null ? getResources().getString(R.string.i2ptunnel_not_initialized) : null;
         } catch (IllegalArgumentException iae) {
             mGroup = null;

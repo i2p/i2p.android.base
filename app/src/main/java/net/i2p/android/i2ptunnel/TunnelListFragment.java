@@ -27,6 +27,7 @@ import net.i2p.android.util.FragmentUtils;
 import net.i2p.android.widget.DividerItemDecoration;
 import net.i2p.android.widget.LoadingRecyclerView;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
+import net.i2p.I2PAppContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,7 +177,7 @@ public class TunnelListFragment extends Fragment implements
     private void initTunnels() {
         if (mGroup == null) {
             try {
-                mGroup = TunnelControllerGroup.getInstance();
+                mGroup = TunnelControllerGroup.getInstance(I2PAppContext.getGlobalContext());
             } catch (IllegalArgumentException iae) {
                 Util.e("Could not load tunnels", iae);
                 mGroup = null;

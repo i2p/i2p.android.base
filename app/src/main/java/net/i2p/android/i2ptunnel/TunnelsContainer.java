@@ -30,14 +30,10 @@ import net.i2p.app.ClientAppState;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.i2ptunnel.ui.TunnelConfig;
 import net.i2p.router.RouterContext;
+import net.i2p.I2PAppContext;
 
 import java.util.List;
 
-/**
- *  The top level Fragment of the tunnels tabs.
- *  Creates client and server TunnelListFragments,
- *  the options menu, and the new tunnel wizard button.
- */
 public class TunnelsContainer extends Fragment implements
         FragmentUtils.TwoPaneProvider,
         TunnelListFragment.OnTunnelSelectedListener,
@@ -70,11 +66,12 @@ public class TunnelsContainer extends Fragment implements
         setHasOptionsMenu(true);
     }
 
-    private static boolean showActions() {
+    private boolean showActions() {
         RouterContext rCtx = Util.getRouterContext();
-        TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
+        TunnelControllerGroup tcg = TunnelControllerGroup.getInstance(I2PAppContext.getGlobalContext());
         return rCtx != null && tcg != null &&
-               tcg.getState() == ClientAppState.RUNNING;
+                (tcg.getState() == ClientAppState.STARTING ||
+                        tcg.getState() == ClientAppState.RUNNING);
     }
 
     @Override
@@ -181,7 +178,7 @@ public class TunnelsContainer extends Fragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
+        TunnelControllerGroup tcg = TunnelControllerGroup.getInstance(I2PAppContext.getGlobalContext());
         if (tcg == null)
             return false;
 
@@ -219,13 +216,9 @@ public class TunnelsContainer extends Fragment implements
                 if (tunnelData == null)
                     return;
                 // TODO fetch earlier
-                TunnelControllerGroup tcg = TunnelControllerGroup.getInstance();
-                if (tcg == null) {
-                    // router went away
-                    Toast.makeText(getActivity().getApplicationContext(),
-                                   R.string.router_not_running, Toast.LENGTH_LONG).show();
+                TunnelControllerGroup tcg = TunnelControllerGroup.getInstance(I2PAppContext.getGlobalContext());
+                if (tcg == null)
                     return;
-                }
                 TunnelConfig cfg = TunnelUtil.createConfigFromWizard(getActivity(), tcg, tunnelData);
                 TunnelEntry tunnel = TunnelEntry.createNewTunnel(getActivity(), tcg, cfg);
 
