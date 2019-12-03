@@ -189,6 +189,7 @@
   <string name="tunnel_summ_use_ssl">استفاده از SSL برای اتصال به هدف</string>
   <string name="tunnel_parameters">پارامتر های تونل</string>
   <string name="profile">پروفایل</string>
+  <string name="access_control">کنترل دسترسی</string>
   <string name="restricted_access">دسترسی محدود</string>
   <string name="disabled">غیر فعال شد</string>
   <string name="whitelist">لیست سفید</string>

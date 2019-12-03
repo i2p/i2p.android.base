@@ -185,6 +185,7 @@
   <string name="use_ssl">Použiť SSL</string>
   <string name="tunnel_parameters">Parametre tunelov</string>
   <string name="profile">Profil</string>
+  <string name="access_control">Riadenie prístupu</string>
   <string name="disabled">Zrušené</string>
   <string name="whitelist">Whitelist</string>
   <string name="blacklist">Blacklist</string>

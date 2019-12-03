@@ -213,6 +213,7 @@
   <string name="use_ssl">Käytä SSL:ää</string>
   <string name="tunnel_parameters">Tunneliparametrit</string>
   <string name="profile">Profiili</string>
+  <string name="access_control">Käyttöoikeuksien hallinta</string>
   <string name="disabled">Otettu pois käytöstä</string>
   <string name="whitelist">Valkoinen lista</string>
   <string name="blacklist">Musta lista</string>

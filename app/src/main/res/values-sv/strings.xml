@@ -34,7 +34,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="net_status_error_i2cp">Klienthanterare I2CP-fel - kontrollera loggar</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_skew">Klockförskjutning på %s</string>
-  <string name="net_status_error_unresolved_tcp">Ej upplöst TCP-adress</string>
+  <string name="net_status_error_unresolved_tcp">Olöst TCP-adress</string>
   <string name="net_status_error_private_tcp">Privat TCP-adress</string>
   <string name="net_status_warn_firewalled_inbound_tcp">Bakom brandvägg med inåtgående TCP aktiverad</string>
   <string name="net_status_warn_firewalled_floodfill">Bakom brandvägg och \'floodfill\'</string>
@@ -231,7 +231,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="i2ptunnel_wizard_desc_name">Tunnelns namn, för identifikation i tunnellistan</string>
   <string name="i2ptunnel_wizard_desc_desc">Beskrivning av tunneln. Frivillig och endast för information.</string>
   <string name="i2ptunnel_wizard_desc_dest">Mata in I2Pdestinationen för den tjänst denna tunnel skall ansluta till. Detta kan vara den fulla 64 destinationsnyckeln, eller ett I2Pvärdnamn från din adressbok.</string>
-  <string name="i2ptunnel_wizard_desc_outproxies">Om du känner till några utproxies för den här typen av tunnel (antingen HTTP eller SOCKS), fyll i dem. Separera flera proxies med kommatecken.</string>
+  <string name="i2ptunnel_wizard_desc_outproxies">Om du känner till några utproxier för den här typen av tunnel (antingen HTTP eller SOCKS), fyll i dem. Separera flera proxier med kommatecken.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Detta är den IP din tjänst kör på, vanligtvis på samma maskin så 127.0.0.1 är automatiskt ifylld.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Detta är den port din tjänst tar emot anslutningar på.</string>
   <string name="i2ptunnel_wizard_desc_reachable_on">Det här begränsar vilka datorer eller smartphones som kan få tillgång till denna tunnel.</string>
@@ -260,7 +260,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="client_ssl">Klient SSL</string>
   <string name="tunnel_summ_client_ssl">Klienter måste använda SSL för att ansluta</string>
   <string name="outproxies">Utproxies</string>
-  <string name="ssl_outproxies">SSL utproxies</string>
+  <string name="ssl_outproxies">SSL utproxier</string>
   <string name="irc">IRC</string>
   <string name="enable_dcc">Aktivera DCC</string>
   <string name="tunnel_summ_enable_dcc">Tillåt IRCklienter att använda DCC</string>

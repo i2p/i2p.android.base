@@ -55,6 +55,8 @@
   <string name="upload">Yükleme</string>
   <string name="configure_browser_title">Tarayıcı ayarlansın mı?</string>
   <string name="configure_browser_for_i2p">I2P sitelerini görüntüleyecek bir tarayıcı ayarlamak ister misiniz? (bu işlemi daha sonra Yardım menüsünden yapabilirsiniz).</string>
+  <string name="configure_no_doze_title">Pil kullanımı yönetilsin mi?</string>
+  <string name="configure_no_doze">I2P için en iyi durum sürekli çalışmasıdır. I2P uygulamasının Android üzerinde pili korumak için kapatılmasını engellemek için uygulamayı pil kullanımı istisnası listesine ekleyebilirsiniz. Bu durumda uygulamanın güvenirliği önemli ölçüde artacaktır.\n\nI2P arka planda çalışır durumda tutulsun mu (önerilir)?</string>
   <string name="first_start_title">Tebrikler, I2P kuruldu!</string>
   <string name="first_start_welcome"><b>I2P Yazılımına Hoşgeldiniz</b> Lütfen I2P yüklenip eşleri bulana kadar <b>sabırlı olun</b>.</string>
   <string name="first_start_read">Beklerken, lütfen sürüm notları ve hoş geldiniz sayfalarını okuyun.</string>

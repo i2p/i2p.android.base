@@ -63,6 +63,7 @@
   <string name="settings_default">Výchozí</string>
   <string name="settings_label_advanced">Pokročilé</string>
   <string name="settings_label_expl_length">Délka</string>
+  <string name="settings_summ_expl_lengthVariance">%s</string>
   <string name="menu_about">O programu</string>
   <string name="about_version">Version:</string>
   <string name="menu_help">Pomoc</string>

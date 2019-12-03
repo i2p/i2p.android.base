@@ -183,11 +183,11 @@
   <string name="addressbook_add_wizard_k_destination">Destination</string>
   <string name="addressbook_add_wizard_desc_name">Le nom</string>
   <string name="addressbook_add_wizard_desc_destination">Coller ici le Base64 de la destination. Si avez un gestionnaire de fichiers  d’installé, vous pouvez chercher un fichier texte contenant le Base64.</string>
-  <string name="nsu_iae_illegal_char">Le nom d’hôte « %1$s » contient le caractère illégal %2$s</string>
-  <string name="nsu_iae_cannot_start_with">Le nom d’hôte ne peut pas commencer par « %s »</string>
-  <string name="nsu_iae_cannot_end_with">Le nom d’hôte ne peut pas se terminer par « %s »</string>
-  <string name="nsu_iae_cannot_contain">Le nom d’hôte ne peut pas contenir « %s »</string>
-  <string name="nsu_iae_requires_conversion">Le nom d’hôte « %s » exige une conversion en ASCII, mais la bibliothèque de conversion n’est pas proposée dans cette version d’Android</string>
+  <string name="nsu_iae_illegal_char">Le nom d’hôte « %1$s » contient le caractère illégal %2$s</string>
+  <string name="nsu_iae_cannot_start_with">Le nom d’hôte ne peut pas commencer par « %s »</string>
+  <string name="nsu_iae_cannot_end_with">Le nom d’hôte ne peut pas se terminer par « %s »</string>
+  <string name="nsu_iae_cannot_contain">Le nom d’hôte ne peut pas contenir « %s »</string>
+  <string name="nsu_iae_requires_conversion">Le nom d’hôte « %s » exige une conversion en ASCII, mais la bibliothèque de conversion n’est pas proposée dans cette version d’Android</string>
   <string name="i2ptunnel_type_client">Client normal</string>
   <string name="i2ptunnel_type_httpclient">Client HTTP</string>
   <string name="i2ptunnel_type_ircclient">Client IRC</string>
