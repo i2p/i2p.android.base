@@ -55,6 +55,8 @@
   <string name="upload">Hochladen</string>
   <string name="configure_browser_title">Browser konfigurieren?</string>
   <string name="configure_browser_for_i2p">Möchten Sie einen Browser zum Betrachten von I2P-Seiten einrichten? (Sie können dieses auch später noch im Hilfe-Menü erledigen).</string>
+  <string name="configure_no_doze_title">Batterie Optimierung managen?</string>
+  <string name="configure_no_doze">I2P funktioniert am besten, wenn es dauerhaft läuft. Um Android davon abzuhalten, I2P zu schließen, um Energie zu sparen, solltest du es zur Ausnahmeliste der Energiesparfunktionen hinzufügen. Dies sollte die Zuverlässigkeit des Programms \n\nKeep I2P massgeblich verbessern (empfohlen).</string>
   <string name="first_start_title">Herzlichen Glückwunsch, Sie haben I2P installiert!</string>
   <string name="first_start_welcome"><b>Willkommen im I2P</b> Bitte <b>haben Sie Geduld</b>, während I2P startet und Teilnehmer findet.</string>
   <string name="first_start_read">Lesen Sie bitte die Veröffentlichungshinweise und die Startseite während Sie warten.</string>

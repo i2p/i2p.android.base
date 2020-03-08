@@ -191,7 +191,7 @@
   <string name="blacklist">Tiltott-Lista</string>
   <string name="tunnel_summ_delay_open">Az alagút nyitás késleltetése szükségessé válásig</string>
   <string name="tunnel_summ_reduce_quantity">Alagutak mennyiségének csökkentése üres állapotban</string>
-  <string name="reduced_tunnel_quantity">Csökkentett alagút minőség</string>
+  <string name="reduced_tunnel_quantity">Csökkentett alagút mennyiség</string>
   <string name="close_tunnels">Alagutak bezárása üresjárat esetén</string>
   <string name="new_keys_on_reopen_conflict_msg">Nem engedélyezheti az új kulcsok készítését újranyitáskor amíg az alagút állandó kulcsok használatára van konfigurálva. Le akarja tiltani az állandó kulcsokat?</string>
   <string name="http_client">HTTP kliens</string>
