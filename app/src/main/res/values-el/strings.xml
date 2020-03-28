@@ -21,6 +21,7 @@
   <string name="symmetric_nat">Συμμετρικό NAT</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_info_disconnected">Αποσυνδέθηκε-ελένξετε την σύνδεση Δικτύου</string>
+  <string name="uptime">Χρόνος λειτουργίας δικτύου</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->

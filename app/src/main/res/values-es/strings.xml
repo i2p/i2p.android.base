@@ -55,6 +55,8 @@
   <string name="upload">Subida</string>
   <string name="configure_browser_title">¿Configurar navegador?</string>
   <string name="configure_browser_for_i2p">¿Desea configurar un navegador para ver sitios I2P? (también puede hacer esto más tarde desde el menú de ayuda).</string>
+  <string name="configure_no_doze_title">¿Gestionar las Optimizaciones de la Batería?</string>
+  <string name="configure_no_doze">I2P funciona mejor si sigue funcionando. Para evitar que Android cierre I2P cuando intente ahorrar energía, puede agregarlo a la lista de excepciones de batería. Esto mejorará sustancialmente la fiabilidad de la aplicación. (recomendado)</string>
   <string name="first_start_title">¡Felicidades por conseguir instalar I2P!</string>
   <string name="first_start_welcome"><b>¡Bienvenido a I2P!</b> Por favor, <b>tenga paciencia</b> mientras I2P se inicia y busca pares (peers).</string>
   <string name="first_start_read">Mientras espera, por favor, lea las notas de la versión y la página de bienvenida.</string>
@@ -145,6 +147,7 @@
   <string name="settings_label_transports">Transportes</string>
   <string name="settings_label_maxConns">Conexiones máximas</string>
   <string name="settings_label_i2cp">Interfaz de I2CP</string>
+  <string name="settings_desc_i2cp">Permitir que las aplicaciones de terceros creen túneles (requiere el reinicio del enrutador)</string>
   <string name="settings_label_exploratory_pool">Grupo exploratorio</string>
   <string name="settings_desc_exploratory_pool">Parámetros de túneles</string>
   <string name="settings_label_expl_inbound">Túneles de entrada</string>

@@ -56,7 +56,7 @@
   <string name="configure_browser_title">配置浏览器？</string>
   <string name="configure_browser_for_i2p">您想配置一个浏览器来查看 I2P 站点吗？（您也可以以后再从帮助菜单设置这个）</string>
   <string name="configure_no_doze_title">管理电池优化？</string>
-  <string name="configure_no_doze">I2P 工作得最好如果它持续运行。为阻止 Android 尝试省电时关闭 I2P，您可以将它添加到电池例外名单中。这将大幅提高应用稳定性。\n\n保持 I2P 在后台运行？（推荐）</string>
+  <string name="configure_no_doze">I2P 在持续工作时能达到最佳效果。为阻止 Android 在尝试省电时关闭 I2P，您可以将它添加到电池例外名单中。这将大幅提高应用稳定性。\n\n要保持 I2P 在后台运行吗？（推荐）</string>
   <string name="first_start_title">恭喜，I2P 已安装！</string>
   <string name="first_start_welcome"><b>欢迎使用 I2P！</b>在 I2P 启动和寻找同伴时，请<b>保持耐心</b>。</string>
   <string name="first_start_read">在您等候时，请阅读发布说明和欢迎页面。</string>

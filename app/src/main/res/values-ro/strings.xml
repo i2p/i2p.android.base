@@ -55,6 +55,8 @@
   <string name="upload">Încărcare</string>
   <string name="configure_browser_title">Configurați navigatorul web?</string>
   <string name="configure_browser_for_i2p">Doriți să configurați un navigator web să vizualizați site-uri I2P? (Puteți face acest lucru mai târziu din meniul ajutor.)</string>
+  <string name="configure_no_doze_title">Gestionarea optimizării bateriei?</string>
+  <string name="configure_no_doze">I2P funcționează cel mai bine dacă continuă să funcționeze. Pentru a împiedica Android să închidă I2P atunci când încercați să economisiți energie, îl puteți adăuga pe lista de excepții de la baterie. Acest lucru va îmbunătăți în mod substanțial fiabilitatea aplicației. \n\n  I2P care rulează în fundal? (recomandat)</string>
   <string name="first_start_title">Felicitari pentru instalarea I2P!</string>
   <string name="first_start_welcome"><b>Bine ați venit la I2P!</b> Vă rugăm <b>să aveți răbdare</b> în timp ce I2P se lansează și găsește colegii.</string>
   <string name="first_start_read">Cât timp așteptați, citiți notele de lansare și pagina de bun venit.</string>
