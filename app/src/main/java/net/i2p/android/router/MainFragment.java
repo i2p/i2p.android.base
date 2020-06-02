@@ -16,6 +16,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
+import android.util.AndroidRuntimeException;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import net.i2p.android.I2PActivityBase;
@@ -646,32 +648,34 @@ public class MainFragment extends I2PFragmentBase {
                 PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
                 if (!pm.isIgnoringBatteryOptimizations(packageName)) {
                     AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
-                    b.setTitle(R.string.configure_no_doze_title)
-                            .setMessage(R.string.configure_no_doze)
-                            .setCancelable(false)
-                            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int i) {
-                                    String packageName = mContext.getPackageName();
-                                    dialog.dismiss();
-                                    ab.setPref(PREF_CONFIGURE_BATTERY, true);
-                                    intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-                                    intent.setData(Uri.parse("package:" + packageName));
-                                    try {
-                                        mContext.startActivity(intent);
-                                    } catch (ActivityNotFoundException activityNotFound) {
-                                        ab.setPref(PREF_CONFIGURE_BATTERY, true);
-                                    }
-                                }
-                            })
-                            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int i) {
-                                    dialog.cancel();
-                                    ab.setPref(PREF_CONFIGURE_BATTERY, false);
-                                }
-                            })
-                            .show();
+                    b.setTitle(R.string.configure_no_doze_title);
+                    b.setMessage(R.string.configure_no_doze);
+                    b.setCancelable(false);
+                    b.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            String packageName = mContext.getPackageName();
+                            dialog.dismiss();
+                            ab.setPref(PREF_CONFIGURE_BATTERY, true);
+                            intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                            intent.setData(Uri.parse("package:" + packageName));
+                            try {
+                                mContext.startActivity(intent);
+                            } catch (ActivityNotFoundException activityNotFound) {
+                                ab.setPref(PREF_CONFIGURE_BATTERY, true);
+                            } catch (AndroidRuntimeException activityNotFound) {
+                                ab.setPref(PREF_CONFIGURE_BATTERY, true);
+                            }
+                        }
+                    });
+                    b.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.cancel();
+                            ab.setPref(PREF_CONFIGURE_BATTERY, false);
+                        }
+                    });
+                    b.show();
                 }
             } else {
                 ab.setPref(PREF_CONFIGURE_BATTERY, false);
