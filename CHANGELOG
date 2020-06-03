@@ -1,3 +1,9 @@
+0.9.46 2020-6-03
+ * catch ActivityNotFound exception in MainActivity
+
+0.9.45
+ * No significant changes
+
 0.9.44 / 2019-12-03
  * Updated translations
  * Bumped target sdk version to 28, enforced by google
