@@ -1,16 +1,23 @@
 package net.i2p.android.router.service;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 
 import net.i2p.android.router.R;
@@ -169,11 +176,39 @@ public class RouterService extends Service {
         _handler.removeCallbacks(_updater);
         _handler.postDelayed(_updater, 50);
         if(!restart) {
-            startForeground(1337, _statusBar.getNote());
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                startOwnForeground();
+            else
+                startForeground(1337, _statusBar.getNote());
         }
 
         //return START_STICKY;
         return START_NOT_STICKY;
+    }
+
+    /**
+     * Android 8.1, 9.0, 10 handle foreground applications differently and as such require us to
+     * start our foreground service differently.
+     * */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void startOwnForeground(){
+        String NOTIFICATION_CHANNEL_ID = "com.example.simpleapp";
+        String channelName = "My Background Service";
+        NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+        chan.setLightColor(Color.BLUE);
+        chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        assert manager != null;
+        manager.createNotificationChannel(chan);
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+        Notification notification = notificationBuilder.setOngoing(true)
+                .setSmallIcon(R.drawable.i2plogo)
+                .setContentTitle(getString(R.string.running_background))
+                .setPriority(NotificationManager.IMPORTANCE_MIN)
+                .setCategory(Notification.CATEGORY_SERVICE)
+                .build();
+        startForeground(1337, notification);
     }
 
     /**
