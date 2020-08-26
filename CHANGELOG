@@ -1,3 +1,6 @@
+0.9.47 2020-8-26
+ * Notification bug-fixes on platforms >8.0
+
 0.9.46 2020-6-03
  * catch ActivityNotFound exception in MainActivity
 
