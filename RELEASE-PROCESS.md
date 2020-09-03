@@ -13,7 +13,7 @@
 1. Check out a clean copy of i2p.i2p at the correct release version. (Make a clean checkout)
 2. Build the maven packages via `ant mavenCentral` where you end up with mavencentral-*.jar files in the current directory.
 3. Login to http://oss.sonatype.org for uploading the mavencentral-*.jar bundles.
-4. In nexus, choose "Staging Upload" and upload all of the bundles with upload mode set to "Artifact Bundle"
+4. In nexus, choose "Staging Upload" and upload all of the files with upload mode set to "Artifacts with POM". When uploading the files to nexus, you *must* upload the pom.xml files, and all of their artifacts. For each component, you will need to upload a *.jar, a *.jar.asc, a *sources.jar, a *sources.jar.asc, a javadoc.jar, and a javadoc.jar.asc, and a pom.xml and a pom.xml.asc from the pkg-mavencentral directory during the "Upload Artifacts with POM" operation. You will need to do this once for each component you upload to Nexus.
 5. Under "Staging Repositories" ensure all where uploaded correctly, select them all and press "Release" in the toolbar.
 
 ## Android Common Build
