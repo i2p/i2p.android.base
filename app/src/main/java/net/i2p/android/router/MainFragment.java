@@ -655,16 +655,18 @@ public class MainFragment extends I2PFragmentBase {
                         @Override
                         public void onClick(DialogInterface dialog, int i) {
                             String packageName = mContext.getPackageName();
+                            ab.setPref(PREF_CONFIGURE_BATTERY, false);
                             dialog.dismiss();
-                            ab.setPref(PREF_CONFIGURE_BATTERY, true);
+                            // Simply do not re-attempt a battery optimization after the first time,
+                            // even if an error occurs. http://trac.i2p2.i2p/ticket/2783
                             intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
                             intent.setData(Uri.parse("package:" + packageName));
                             try {
                                 mContext.startActivity(intent);
                             } catch (ActivityNotFoundException activityNotFound) {
-                                ab.setPref(PREF_CONFIGURE_BATTERY, true);
+                                ab.setPref(PREF_CONFIGURE_BATTERY, false);
                             } catch (AndroidRuntimeException activityNotFound) {
-                                ab.setPref(PREF_CONFIGURE_BATTERY, true);
+                                ab.setPref(PREF_CONFIGURE_BATTERY, false);
                             }
                         }
                     });
