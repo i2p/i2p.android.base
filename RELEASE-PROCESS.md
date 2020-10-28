@@ -31,7 +31,7 @@ in their main repository.
  2. Build the maven packages via `ant mavenCentral` where you end up with mavencentral-*.jar files in the 
   current directory.
  2. **A)** I2P for Android requires a Java 1.7 bootclasspath, but the servlet jar requires Java 8. So, to do the builds:
-  - First set `bootclasspath=/path/to/java/7/rt.jar` in override.properties
+  - First set `javac.compilerargs7=-bootclasspath /path/to/java/7/rt.jar:/path/to/java/7/jce.jar` in override.properties
   - Build with `ant mavenCentral`
   - upload everything *except* servlet.jar
   - Unset bootclasspath in override.properties
