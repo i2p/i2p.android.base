@@ -53,6 +53,10 @@ i2np.bandwidth.outboundKBytesPerSecond=50
 i2np.ntcp.enable=false
 i2np.ntcp.maxConnections=32
 #
+# NTCP2
+#
+i2np.ntcp2.enable=true
+#
 # UDP
 #
 i2np.udp.enable=true
