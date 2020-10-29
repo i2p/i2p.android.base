@@ -18,7 +18,7 @@ in their main repository.
  4. Ensure junit 4.12 at least in junit.home, ensure the jar file is named `junit4.jar`.
  5. Ensure to have updated the changelog with the changes done.
  6. Ensure that you are configured to build i2p.i2p with Java 8. On Debian it is easiest to set with
-   `update-alternatives --config java` and picking Java 8. **TODO:** add instructions for non-Debian-based
+   `update-java-alternatives --set java-8-openjdk-amd64` and picking Java 8. **TODO:** add instructions for non-Debian-based
    systems.
  7. Ensure that you have a Java 1.7 bootclasspath available. (See **Maven Central** step 2A.)
 
@@ -31,7 +31,7 @@ in their main repository.
  2. Build the maven packages via `ant mavenCentral` where you end up with mavencentral-*.jar files in the 
   current directory.
  2. **A)** I2P for Android requires a Java 1.7 bootclasspath, but the servlet jar requires Java 8. So, to do the builds:
-  - First set `javac.compilerargs7=-bootclasspath /path/to/java/7/rt.jar:/path/to/java/7/jce.jar` in override.properties
+  - First set `javac.compilerargs=-bootclasspath /path/to/java/7/rt.jar:/path/to/java/7/jce.jar` in override.properties
   - Build with `ant mavenCentral`
   - upload everything *except* servlet.jar
   - Unset bootclasspath in override.properties
@@ -45,6 +45,15 @@ in their main repository.
   Artifacts with POM" operation. You will need to do this once for each component you upload to Nexus.
  5. Under "Staging Repositories" ensure all where uploaded correctly, select them all and press "Release"
   in the toolbar.
+
+#### Example override.properties:
+
+        javac.version=1.7
+        javac.target=1.7
+        javac.source=1.8
+        javac.compilerargs=-bootclasspath /home/user/StudioProjects/java7bootclasspath/rt.jar:/home/idk/StudioProjects/java7bootclasspath/jce.jar
+        javac.compilerargs7=-bootclasspath /home/user/StudioProjects/java7bootclasspath/rt.jar:/home/idk/StudioProjects/java7bootclasspath/jce.jar
+        build.built-by=name
 
 ### Android Common Build
 
