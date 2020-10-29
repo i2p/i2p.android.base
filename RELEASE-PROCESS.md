@@ -51,8 +51,8 @@ in their main repository.
         javac.version=1.7
         javac.target=1.7
         javac.source=1.8
-        javac.compilerargs=-bootclasspath /home/user/StudioProjects/java7bootclasspath/rt.jar:/home/idk/StudioProjects/java7bootclasspath/jce.jar
-        javac.compilerargs7=-bootclasspath /home/user/StudioProjects/java7bootclasspath/rt.jar:/home/idk/StudioProjects/java7bootclasspath/jce.jar
+        javac.compilerargs=-bootclasspath /home/user/StudioProjects/java7bootclasspath/rt.jar:/home/user/StudioProjects/java7bootclasspath/jce.jar
+        javac.compilerargs7=-bootclasspath /home/user/StudioProjects/java7bootclasspath/rt.jar:/home/user/StudioProjects/java7bootclasspath/jce.jar
         build.built-by=name
 
 ### Android Common Build
