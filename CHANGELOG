@@ -1,3 +1,7 @@
+0.9.47-1 2020-10-29
+ * This release fixes a number of bugs arising from a misconfigured bootclasspath
+ * Fix a battery-management issue arising on some phones
+
 0.9.47 / 2020-08-26
  * Notification bug-fixes on platforms >8.0
 

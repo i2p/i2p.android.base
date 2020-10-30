@@ -104,12 +104,6 @@ config.py used to generate the repository are required to complete this process 
  2. Commit your release changes, `mtn ci gradle.properties lib/helper/gradle.properties app/build.gradle`
  3. Push free and donate builds to Google Play via https://play.google.com/apps/publish/
  4. Tag the new release. Example `mtn tag h: android-0.9.36`
- 5. Push the monotone changes
-  - Monotone fact: you have to push mtn tags themselves like you pushing changes you had checked in to
-  branch, at least as far as I can tell. Tags do not get synced automatically when you push to a branch
-  like in git. To actually have your tags show up, you'll need to push them individually, like this:
-  
-        mtn push mtn://localhost:8998?android-0.9.47
-
+ 5. Push the monotone changes. Make sure that they are there at the next git sync.
  6. Update download page (version and hash, including F-Droid)
 
