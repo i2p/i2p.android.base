@@ -55,6 +55,7 @@
   <string name="upload">Вивантажено</string>
   <string name="configure_browser_title">Налаштувати браузер?</string>
   <string name="configure_browser_for_i2p">Бажаєте налаштувати браузер для перегляду I2P-сайтів? (Ви також можете зробити це пізніше через меню).</string>
+  <string name="configure_no_doze_title">Керувати оптимізації батареї?</string>
   <string name="first_start_title">Вітаємо! I2P встановлено.</string>
   <string name="first_start_welcome"><b>Ласкаво просимо до I2P!</b> Будь ласка, <b>зачекайте,</b> так як I2P запускається і шукає піри.</string>
   <string name="first_start_read">Поки чекаєте, прочитайте, будь ласка, нотатки до релізу і вітальну сторінку.</string>

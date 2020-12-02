@@ -25,7 +25,7 @@
   <string name="button_router_graceful">I2P se fermera dans %s</string>
   <string name="button_shutdown_now">Appuyer longuement pour arrêter maintenant</string>
   <string name="button_cancel_graceful">Appuyer longuement pour annuler la fermeture</string>
-  <string name="no_internet">Aucune connexion Internet n’est disponible</string>
+  <string name="no_internet">Aucune connexion à Internet n’est disponible</string>
   <string name="hidden">caché</string>
   <string name="testing">en test</string>
   <string name="firewalled">derrière un pare-feu</string>
@@ -54,7 +54,7 @@
   <string name="download">Téléchargement</string>
   <string name="upload">Téléversement</string>
   <string name="configure_browser_title">Configurer le navigateur ?</string>
-  <string name="configure_browser_for_i2p">Souhaitez-vous configurer un navigateur pour visualiser les sites I2P ? (Vous pouvez aussi le faire plus tard grâce au menu d’aide.)</string>
+  <string name="configure_browser_for_i2p">Voulez-vous configurer un navigateur pour visualiser les sites I2P ? (Vous pouvez aussi le faire plus tard grâce au menu d’aide.)</string>
   <string name="configure_no_doze_title">Gérer les optimisations de la pile ?</string>
   <string name="configure_no_doze">I2P fonctionne mieux s’il fonctionne en permanence. Pour empêcher qu’Android ferme I2P quand il essaie d’économiser l’énergie, vous pouvez ajouter I2P à la liste d’exception de la pile. La fiabilité de l’appli s’en trouvera grandement améliorée.\n\nGarder I2P en fonction en arrière-plan ? (recommandé)</string>
   <string name="first_start_title">Félicitations pour votre installation d’I2P !</string>
@@ -82,11 +82,11 @@
   <string name="view_news">Toucher pour voir les dernières nouvelles d’I2P</string>
   <string name="router_not_running">Le routeur ne fonctionne pas.</string>
   <string name="router_shutting_down">Le routeur s’éteint.</string>
-  <string name="stats_not_ready">Le gestionnaire de statistiques n’est pas encore prêt. Ressayer ultérieurement.</string>
+  <string name="stats_not_ready">Le gestionnaire de statistiques n’est pas encore prêt. Réessayer plus tard.</string>
   <string name="select_an_address">Sélectionner une adresse.</string>
   <string name="no_graphs_configured">Aucun graphique n’a été configuré. Vous pouvez choisir les statistiques à graphiquer dans le menu des paramètres. Tout changement prendra effet après 60 secondes.</string>
   <string name="configure_graphs">Configurer les graphiques</string>
-  <string name="graphs_not_ready">Les graphiques ne sont pas encore prêts. Ressayer ultérieurement.</string>
+  <string name="graphs_not_ready">Les graphiques ne sont pas encore prêts. Réessayer plus tard.</string>
   <string name="statistics">Statistiques</string>
   <string name="routers">Routeurs</string>
   <string name="leasesets">Jeux de baux</string>
@@ -171,8 +171,8 @@
   <string name="about_project">Page d’accueil du projet :</string>
   <string name="about_bugs">Bogues et assistance :</string>
   <string name="about_helpwanted">Aide recherchée !</string>
-  <string name="about_volunteer">Souhaitez-vous aider à améliorer l’appli ? Portez-vous volontaire sur le forum Android :</string>
-  <string name="about_donate">Souhaitez-vous faire un don en argent ou en bitcoins pour acheter plus d’appareils Android pour le développement et les tests ? Rendez-vous sur :</string>
+  <string name="about_volunteer">Voulez-vous aider à améliorer l’appli ? Portez-vous volontaire sur le forum Android :</string>
+  <string name="about_donate">Voulez-vous faire un don en argent ou en bitcoins pour acheter plus d’appareils Android pour le développement et les tests ? Rendez-vous sur :</string>
   <string name="menu_help">Aide</string>
   <string name="general">Général</string>
   <string name="label_router">Adresses publiques</string>
@@ -201,7 +201,7 @@
   <string name="i2ptunnel_type_streamrserver">Serveur Streamr</string>
   <string name="i2ptunnel_type_httpbidirserver">Bidir HTTP</string>
   <string name="install_recommended_app">Installer l’appli recommandée ?</string>
-  <string name="app_needed_for_this_tunnel_type">Vous devez installer une appli pour utiliser ce tunnel. Souhaitez-vous installer l’appli recommandée ?</string>
+  <string name="app_needed_for_this_tunnel_type">Vous devez installer une appli pour utiliser ce tunnel. Voulez-vous installer l’appli recommandée ?</string>
   <string name="i2ptunnel_not_initialized">Les tunnels ne sont pas encore initialisés, veuillez recharger dans deux minutes.</string>
   <string name="no_configured_client_tunnels">Aucun tunnel client n’est configuré.</string>
   <string name="no_configured_server_tunnels">Aucun tunnel serveur n’est configuré.</string>

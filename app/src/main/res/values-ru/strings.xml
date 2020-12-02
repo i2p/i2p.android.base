@@ -47,22 +47,22 @@
   <string name="active_peers">Активные узлы</string>
   <string name="known_peers">Известные узлы</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
-  <string name="char_client_tunnel">K</string>
+  <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
-  <string name="char_server_tunnel">С</string>
+  <string name="char_server_tunnel">S</string>
   <string name="no_tunnels_running">Нет ни одного запущенного туннеля.</string>
   <string name="download">Получено</string>
   <string name="upload">Передано</string>
   <string name="configure_browser_title">Настроить браузер?</string>
   <string name="configure_browser_for_i2p">Настроить браузер для просмотра I2P сайтов? (Вы сможете сделать это позже из меню \"Справка\")</string>
   <string name="configure_no_doze_title">Управлять оптимизацией энергосбережения?</string>
-  <string name="configure_no_doze">I2P работает лучше всего когда постоянно запущен. Для предотвращения закрытия I2P системой вы можете добавить его в список исключения оптимизации. Это существенно увеличит надёжность приложения. Оставить I2P работать в фоне? (рекомендуется)</string>
+  <string name="configure_no_doze">I2P работает лучше всего, когда постоянно запущен. Для предотвращения закрытия I2P системой вы можете добавить его в список исключений оптимизации. Это существенно увеличит надёжность приложения. Оставить I2P работать в фоне? (рекомендуется)</string>
   <string name="first_start_title">Поздравляем с установкой I2P!</string>
   <string name="first_start_welcome"><b>Добро пожаловать в I2P!</b> Пожалуйста, <b>дождитесь</b> пока I2P загрузится и найдет узлы.</string>
   <string name="first_start_read">Пока вы ждете, пожалуйста, прочтите информацию о релизе и страницу приветствия.</string>
   <string name="first_start_faq">Как только у вас появятся клиентские туннели, пожалуйста, <b>посмотрите</b> раздел FAQ:</string>
-  <string name="first_start_faq_nonanon">Или используйте эту не анонимную ссылку, если вы не хотите ждать создания туннелей:</string>
-  <string name="first_start_irc">Настройте свой клиент IRC на <b>localhost:6668</b> и скажите нам привет:</string>
+  <string name="first_start_faq_nonanon">Или используйте эту неанонимную ссылку, если вы не хотите ждать создания туннелей:</string>
+  <string name="first_start_irc">Настройте свой клиент IRC на <b>localhost:6668</b> и поздоровайтесь с нами:</string>
   <string name="action_search">Поиск</string>
   <string name="action_add">Добавить</string>
   <string name="action_edit">Изменить</string>
@@ -137,10 +137,10 @@
   <string name="settings_dialog_sharePercent">Процент пропускной способности на раздачу</string>
   <string name="settings_desc_upnp">Автооткрытие портов брандмауэра</string>
   <string name="settings_label_logging">Журналирование</string>
-  <string name="settings_label_default_log_level">Уровень журналирования по-умолчанию</string>
+  <string name="settings_label_default_log_level">Уровень журналирования по умолчанию</string>
   <string name="settings_label_appearance">Внешний вид</string>
   <string name="settings_label_language">Язык</string>
-  <string name="settings_default">По-умолчанию</string>
+  <string name="settings_default">По умолчанию</string>
   <string name="settings_label_advanced">Расширенные</string>
   <string name="settings_label_showStats">Статистика маршрутизатора</string>
   <string name="settings_summ_showStats">Показать расширенную статистику в главной консоли</string>
@@ -171,8 +171,8 @@
   <string name="about_project">Сайт проекта:</string>
   <string name="about_bugs">Ошибки и поддержка:</string>
   <string name="about_helpwanted">Требуется помощь!</string>
-  <string name="about_volunteer">Хотите помочь улучшить приложение? Добровольцы на Android форуме:</string>
-  <string name="about_donate">Хотите пожертвовать деньги или bitcoins на покупку дополнительных Android устройств для разработчиков и тестировщиков? Зайдите:</string>
+  <string name="about_volunteer">Хотите помочь улучшить приложение? Добровольцы на Android-форуме:</string>
+  <string name="about_donate">Хотите пожертвовать деньги или bitcoins на покупку дополнительных Android-устройств для разработчиков и тестировщиков? Зайдите:</string>
   <string name="menu_help">Справка</string>
   <string name="general">Общие</string>
   <string name="label_router">Публичные адреса</string>
@@ -187,7 +187,7 @@
   <string name="nsu_iae_cannot_start_with">Имя узла не может начинаться с \"%s\"</string>
   <string name="nsu_iae_cannot_end_with">Имя узла не может заканчиваться \"%s\"</string>
   <string name="nsu_iae_cannot_contain">Имя узла не может содержать \"%s\"</string>
-  <string name="nsu_iae_requires_conversion">Имя узла \"%s\" необходимо преобразовать в ASCII, но соответствующая библиотека не доступна в этой версии Android</string>
+  <string name="nsu_iae_requires_conversion">Имя узла \"%s\" необходимо преобразовать в ASCII, но соответствующая библиотека недоступна в этой версии Android</string>
   <string name="i2ptunnel_type_client">Стандартный клиент</string>
   <string name="i2ptunnel_type_httpclient">HTTP клиент</string>
   <string name="i2ptunnel_type_ircclient">IRC клиент</string>
@@ -202,7 +202,7 @@
   <string name="i2ptunnel_type_httpbidirserver">HTTP bidir</string>
   <string name="install_recommended_app">Установить рекомендованное приложение?</string>
   <string name="app_needed_for_this_tunnel_type">Требуется установить приложение для использования этого туннеля. Хотите установить рекомендованное приложение?</string>
-  <string name="i2ptunnel_not_initialized">Туннели еще не инициализированы, пожалуйста, обновите через пару минут</string>
+  <string name="i2ptunnel_not_initialized">Туннели еще не инициализированы, пожалуйста, обновите через пару минут.</string>
   <string name="no_configured_client_tunnels">Нет настроенных клиентских туннелей.</string>
   <string name="no_configured_server_tunnels">Нет настроенных серверных туннелей.</string>
   <string name="i2ptunnel_new_tunnel">Создать туннель</string>
@@ -244,7 +244,7 @@
   <string name="i2ptunnel_wizard_submit_confirm_button">Создать туннель</string>
   <string name="i2ptunnel_view_target">Цель</string>
   <string name="i2ptunnel_view_access_point">Точка доступа</string>
-  <string name="i2ptunnel_view_autostart">Авто-запуск</string>
+  <string name="i2ptunnel_view_autostart">Автозапуск</string>
   <string name="address_copied_to_clipboard">Адрес скопирован в буфер обмена</string>
   <string name="edit_tunnel">Изменить туннель</string>
   <string name="name">Имя</string>
@@ -275,7 +275,7 @@
   <string name="tunnel_summ_use_ssl">Использовать SSL для подключения к цели</string>
   <string name="tunnel_parameters">Параметры туннеля</string>
   <string name="profile">Профиль</string>
-  <string name="profile_bulk">Массовое соединение (для загрузок/вебсайтов/P2P)</string>
+  <string name="profile_bulk">Массовое соединение (для загрузок/веб-сайтов/P2P)</string>
   <string name="profile_interactive">Интерактивное соединение</string>
   <string name="delay_connect">Задержка подключения</string>
   <string name="tunnel_summ_delay_connect">Включить для запроса/ответа соединений</string>

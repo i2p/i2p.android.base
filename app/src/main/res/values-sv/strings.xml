@@ -56,7 +56,9 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="upload">Ladda upp</string>
   <string name="configure_browser_title">Konfigurera webbläsaren?</string>
   <string name="configure_browser_for_i2p">Vill du konfigurera en browser för att se på I2P-sidor? (Du kan också göra detta senare från hjälpmenyn.)</string>
-  <string name="first_start_title">Gratulerar till din I2P installation!</string>
+  <string name="configure_no_doze_title">Hantera batterioptimeringar?</string>
+  <string name="configure_no_doze">I2P fungerar bäst om den fortsätter att fungera. För att förhindra att Android stänger I2P när du försöker spara ström kan du lägga till den i listan över undantag från batterier. Detta kommer att förbättra applikationens tillförlitlighet avsevärt.\n\nHålla I2P igång i bakgrunden? (rekommenderad)</string>
+  <string name="first_start_title">Gratulerar till din I2P-installation!</string>
   <string name="first_start_welcome"><b>Välkommen till I2P!</b> Vänligen <b>ha tålamod</b> medan I2P startar och letar upp noder.</string>
   <string name="first_start_read">Medan du väntar, vänligen läs utgåvans meddelanden och välkomstsidan.</string>
   <string name="first_start_faq">När du har fått klienttunnlar, vänligen <b>kolla</b> våra vanliga frågor:</string>
@@ -146,6 +148,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="settings_label_transports">Transporter</string>
   <string name="settings_label_maxConns">Max anslutningar</string>
   <string name="settings_label_i2cp">I2CP interfrace</string>
+  <string name="settings_desc_i2cp">Tillåt tredjepartsappar att skapa tunnlar (kräver omstart av routern)</string>
   <string name="settings_label_exploratory_pool">Utforskande pool</string>
   <string name="settings_desc_exploratory_pool">Tunnelparametrar</string>
   <string name="settings_label_expl_inbound">Inåtgående tunnlar</string>
@@ -173,7 +176,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="about_donate">Vill du donera pengar eller bitcoin för inköp av fler Androidenheter till utveckling och testning? Gå till:</string>
   <string name="menu_help">Hjälp</string>
   <string name="general">Generell</string>
-  <string name="label_router">Offentliga adresser</string>
+  <string name="label_router">Publika adresser</string>
   <string name="label_private">Privata adresser</string>
   <string name="addressbook_is_empty">Adressboken är tom</string>
   <string name="addressbook_search_header">%s hittade</string>
@@ -210,6 +213,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="i2ptunnel_msg_tunnel_stopping">Stannar tunnel</string>
   <string name="i2ptunnel_delete_confirm_message">Radera tunnel?</string>
   <string name="i2ptunnel_delete_confirm_button">Radera tunnel</string>
+  <string name="i2ptunnel_no_tunnel_details">Det gick inte att läsa in detaljer i tunneln</string>
   <string name="i2ptunnel_wizard_k_client_server">Klient eller Server</string>
   <string name="i2ptunnel_wizard_v_client">Klienttunnel</string>
   <string name="i2ptunnel_wizard_v_server">Servertunnel</string>
@@ -242,6 +246,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="i2ptunnel_view_target">Mål</string>
   <string name="i2ptunnel_view_access_point">Accesspunkt</string>
   <string name="i2ptunnel_view_autostart">Auto-start</string>
+  <string name="address_copied_to_clipboard">Adressen kopierades till urklipp</string>
   <string name="edit_tunnel">Redigera tunnel</string>
   <string name="name">Namn</string>
   <string name="description">Beskrivning</string>
@@ -352,5 +357,6 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="error_logs_copied_to_clipboard">Error loggar kopierade till urklipp</string>
   <string name="logs_copied_to_clipboard">Loggar kopierade till urklipp</string>
   <string name="label_browser_configuration">Browser konfiguration</string>
+  <string name="no_market_app">Ingen marknadsapp hittades. Installera manuellt</string>
   <string name="unset">Återställ</string>
 </resources>

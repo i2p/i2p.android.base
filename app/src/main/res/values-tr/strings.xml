@@ -3,11 +3,11 @@
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">I2P logosu</string>
   <string name="choose_language">Dil seçin</string>
-  <string name="welcome_new_install">I2P dünyasına hoş geldiniz. Bu uygulama henüz ALPHA geliştirme düzeyindedir ve güçlü bir isimsiz kalma özelliği sağlamamaktadır. Lütfen yayım notlarını ve lisans bilgilerini okuyun.</string>
+  <string name="welcome_new_install">I2P dünyasına hoş geldiniz. Bu uygulama henüz ALPHA geliştirme düzeyindedir ve güçlü bir anonim kalma özelliği sağlamamaktadır. Lütfen yayım notlarını ve lisans bilgilerini okuyun.</string>
   <string name="welcome_new_version">Yeni sürüm kuruldu. Lütfen yayım notlarını okuyun. Sürüm:</string>
   <string name="label_tunnels">Tüneller</string>
   <string name="label_status">Durum</string>
-  <string name="label_console">Konsol</string>
+  <string name="label_console">Pano</string>
   <string name="label_addresses">Adresler</string>
   <string name="label_addressbook">Adres Defteri</string>
   <string name="label_i2ptunnel_client">İstemci tünelleri</string>
@@ -61,7 +61,7 @@
   <string name="first_start_welcome"><b>I2P Yazılımına Hoşgeldiniz</b> Lütfen I2P yüklenip eşleri bulana kadar <b>sabırlı olun</b>.</string>
   <string name="first_start_read">Beklerken, lütfen sürüm notları ve hoş geldiniz sayfalarını okuyun.</string>
   <string name="first_start_faq">İstemci tünelleri bulunduğunda, lütfen Sık Sorulan Sorular bölümüne <b>bakın</b>:</string>
-  <string name="first_start_faq_nonanon">Ya da tünelleri beklemek istemiyorsanız isimsiz olmayan şu bağlantıyı kullanın:</string>
+  <string name="first_start_faq_nonanon">Ya da tünelleri beklemek istemiyorsanız anonim olmayan şu bağlantıyı kullanın:</string>
   <string name="first_start_irc">IRC istemcinizi <b>localhost:6668</b> adresine yönlendirip şuradan bize merhaba deyin:</string>
   <string name="action_search">Arama</string>
   <string name="action_add">Ekle</string>
@@ -143,7 +143,7 @@
   <string name="settings_default">Varsayılan</string>
   <string name="settings_label_advanced">Gelişmiş</string>
   <string name="settings_label_showStats">Yöneltici istatistikleri</string>
-  <string name="settings_summ_showStats">Ana konsolda ayrıntılı istatistikler görüntülensin</string>
+  <string name="settings_summ_showStats">Ana panoda ayrıntılı istatistikler görüntülensin</string>
   <string name="settings_label_transports">Aktarımlar</string>
   <string name="settings_label_maxConns">En fazla bağlantı</string>
   <string name="settings_label_i2cp">I2CP Arabirimi</string>
@@ -153,11 +153,11 @@
   <string name="settings_label_expl_inbound">Geliş tünelleri</string>
   <string name="settings_label_expl_outbound">Gidiş tünelleri</string>
   <string name="settings_label_expl_length">Uzunluk</string>
-  <string name="settings_summ_expl_length">%s sıçrama</string>
-  <string name="settings_desc_expl_length">Kullanılacak sıçrama sayısı</string>
-  <string name="settings_label_expl_lengthVariance">Sıçrama çeşitliliği</string>
+  <string name="settings_summ_expl_length">%s durak</string>
+  <string name="settings_desc_expl_length">Kullanılacak durak sayısı</string>
+  <string name="settings_label_expl_lengthVariance">Durak çeşitliliği</string>
   <string name="settings_summ_expl_lengthVariance">%s</string>
-  <string name="settings_desc_expl_lengthVariance">Rastgele eklenecek sıçrama sayısı</string>
+  <string name="settings_desc_expl_lengthVariance">Rastgele eklenecek durak sayısı</string>
   <string name="settings_label_expl_quantity">Sayı</string>
   <string name="settings_summ_expl_quantity">%s tünel</string>
   <string name="settings_desc_expl_quantity">Tünel sayısı</string>
@@ -328,7 +328,7 @@
   <string name="tunnel_summ_referer">\'Referer\' üstbilgisi geçirilsin</string>
   <string name="tunnel_summ_accept">\'Accept-*\' üstbilgisi geçirilsin</string>
   <string name="tunnel_summ_allow_ssl">I2P adreslerinde SSL kullanılabilsin</string>
-  <string name="jump_url_list">Adresi listesine sıçra</string>
+  <string name="jump_url_list">Sıçrama adresi listesi</string>
   <string name="proxy_auth">Vekil sunucu kimlik doğrulaması</string>
   <string name="tunnel_summ_proxy_auth">Bu vekil sunucuda oturum açmak için kimlik doğrulaması istensin</string>
   <string name="username">Kullanıcı Adı</string>
