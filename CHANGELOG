@@ -1,3 +1,7 @@
+0.9.48 2020-12-02
+ * This release updates the underlying I2P libraries to I2P version 0.9.48
+ * Updates to browser configuration documentation
+
 0.9.47-1 2020-10-29
  * This release fixes a number of bugs arising from a misconfigured bootclasspath
  * Fix a battery-management issue arising on some phones
