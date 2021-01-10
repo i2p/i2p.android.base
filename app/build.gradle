@@ -114,7 +114,7 @@ task copyI2PResources(type: Copy) {
     outputs.upToDateWhen { false }
     into 'src/main/res'
     into('drawable') {
-        from file(i2pbase + '/installer/resources/themes/console/images/i2plogo.png')
+        from file(i2pbase + '/apps/routerconsole/jsp/themes/console/images/i2plogo.png')
     }
     into('raw') {
         from(i2pbase + '/installer/resources/blocklist.txt') { rename { 'blocklist_txt' } }
@@ -177,15 +177,15 @@ task copyI2PAssets(type: Copy) {
     outputs.upToDateWhen { false }
     into 'src/main/assets/themes/console'
     into('images') {
-        from file(i2pbase + '/installer/resources/themes/console/images/i2plogo.png')
-        from file(i2pbase + '/installer/resources/themes/console/images/inbound.png')
-        from file(i2pbase + '/installer/resources/themes/console/images/outbound.png')
+        from file(i2pbase + '/apps/routerconsole/jsp/themes/console/images/i2plogo.png')
+        from file(i2pbase + '/apps/routerconsole/jsp/themes/console/images/inbound.png')
+        from file(i2pbase + '/apps/routerconsole/jsp/themes/console/images/outbound.png')
     }
     into('light') {
-        from file(i2pbase + '/installer/resources/themes/console/light/console.css')
+        from file(i2pbase + '/apps/routerconsole/jsp/themes/console/light/console.css')
     }
     into('light/images') {
-        from file(i2pbase + '/installer/resources/themes/console/light/images/header.png')
+        from file(i2pbase + '/apps/routerconsole/jsp/themes/console/light/images/header.png')
     }
 }
 

@@ -182,7 +182,9 @@
     <string name="settings_label_transports">Transports</string>
     <string name="settings_label_maxConns">Max connections</string>
     <string name="settings_label_i2cp">I2CP interface</string>
-    <string name="settings_desc_i2cp">Allow third-party apps to create tunnels (requires router restart)</string>
+    <string name="settings_desc_i2cp">Allow third-party apps to create tunnels using I2CP (requires router restart)</string>
+    <string name="settings_label_sam">SAM interface</string>
+    <string name="settings_desc_sam">Allow third-party apps to create tunnels using SAM (requires router restart)</string>
     <string name="settings_label_exploratory_pool">Exploratory pool</string>
     <string name="settings_desc_exploratory_pool">Tunnel parameters</string>
     <string name="settings_label_expl_inbound">Inbound tunnels</string>

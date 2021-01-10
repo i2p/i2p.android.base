@@ -20,6 +20,7 @@
     <available property="have.bob" file="${i2plib}/BOB.jar" />
     <available property="have.newsxml" file="${i2pbase}/apps/routerconsole/java/build/newsxml.jar" />
     <available property="have.i2ptunnel" file="${i2plib}/i2ptunnel-ui.jar" />
+    <available property="have.sam" file="${i2plib}/sam.jar" />
     <available property="have.addressbook" file="${i2plib}/addressbook.jar" />
 
     <target name="buildNewsXMLJar" unless="have.newsxml">
@@ -36,7 +37,11 @@
         <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildBOB" />
     </target>
 
-    <target name="buildrouter" depends="buildNewsXMLJar, buildI2PTunnelJar, buildAddressbook">
+    <target name="buildSAM" unless="have.sam">
+        <ant dir="${i2pbase}" inheritall="false" useNativeBasedir="true" target="buildSAM" />
+    </target>
+
+    <target name="buildrouter" depends="buildNewsXMLJar, buildI2PTunnelJar, buildAddressbook, buildSAM">
         <mkdir dir="${jar.libs.dir}" />
 
         <!-- newsxml -->
@@ -50,9 +55,14 @@
         <copy file="${i2plib}/addressbook.jar" todir="${jar.libs.dir}" />
 
         <!-- bob -->
-       <!--
+
+        <!--
         <copy file="${i2plib}/BOB.jar" todir="${jar.libs.dir}" />
         -->
+
+        <!-- sam -->
+        <copy file="${i2plib}/sam.jar" todir="${jar.libs.dir}" />
+
 
     </target>
 

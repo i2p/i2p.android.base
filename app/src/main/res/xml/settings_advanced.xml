@@ -23,6 +23,13 @@
         android:summary="@string/settings_desc_i2cp"
         />
 
+    <CheckBoxPreference
+        android:key="i2pandroid.client.sam"
+        android:defaultValue="true"
+        android:title="@string/settings_label_sam"
+        android:summary="@string/settings_desc_sam"
+        />
+
     <Preference
         android:key="preference_category_expl_tunnels"
         android:summary="@string/settings_desc_exploratory_pool"

@@ -14,8 +14,11 @@ import net.i2p.router.JobImpl;
 import net.i2p.router.RouterContext;
 import net.i2p.router.startup.RouterAppManager;
 import net.i2p.util.I2PAppThread;
+import net.i2p.sam.SAMBridge;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Load the clients we want.
@@ -41,6 +44,7 @@ class LoadClientsJob extends JobImpl {
     private final Context mCtx;
     private final Notifications _notif;
     private DaemonThread _addressbook;
+    public SAMBridge SAM_BRIDGE;
     //private BOB _bob;
 
     /** this is the delay to load (and start) the clients. */
@@ -57,8 +61,9 @@ class LoadClientsJob extends JobImpl {
     public String getName() { return "Start Clients"; }
 
     public void runJob() {
-        Job j = new RunI2PTunnel(getContext());
-        getContext().jobQueue().addJob(j);
+        Job jtunnel = new RunI2PTunnel(getContext());
+        getContext().jobQueue().addJob(jtunnel);
+
 
         Thread t = new I2PAppThread(new StatSummarizer(), "StatSummarizer", true);
         t.setPriority(Thread.NORM_PRIORITY - 1);
@@ -69,7 +74,16 @@ class LoadClientsJob extends JobImpl {
         //try {
         //    _bob.startup();
         //} catch (IOException ioe) {}
-
+        String useSAM = System.getProperty("i2pandroid.client.sam");
+        if (useSAM != null) {
+            Util.i("SAM API " + useSAM);
+            if (useSAM == "true") {
+                Job jsam = new RunI2PSAM(getContext());
+                getContext().jobQueue().addJob(jsam);
+            }else{
+                Util.i("SAM API disabled, not starting "+useSAM);
+            }
+        }
         getContext().addShutdownTask(new ClientShutdownHook());
     }
 
@@ -109,6 +123,46 @@ class LoadClientsJob extends JobImpl {
                 Util.e("i2ptunnel failed to start", iae);
             }
 
+        }
+    }
+
+    private class RunI2PSAM extends JobImpl {
+
+        public RunI2PSAM(RouterContext ctx) {
+            super(ctx);
+        }
+
+        public String getName() { return "Start SAM API"; }
+
+        public void runJob() {
+            while (!getContext().router().isRunning()) {
+                try { Thread.sleep(1000); } catch (InterruptedException ie) { return; }
+                if (!getContext().router().isAlive()) {
+                    Util.e("Router stopped before SAM API could start");
+                    return;
+                }
+            }
+            Util.d("Starting SAM");
+            try {
+                Util.i("Starting the SAM API");
+                SAM_BRIDGE = new SAMBridge("127.0.0.1",
+                        7656,
+                        false,
+                        SAM_PROPERTIES(),
+                        "sam.keys",
+                        new File("sam_config"));
+                SAM_BRIDGE.startup();
+            } catch (IOException e) {
+                Util.e( e.toString());
+                e.printStackTrace();
+            }
+
+        }
+
+        public Properties SAM_PROPERTIES() throws IOException {
+            Util.i("Getting the default properties");
+            Properties sam_properties = new Properties();
+            return sam_properties;
         }
     }
 

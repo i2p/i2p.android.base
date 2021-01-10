@@ -92,7 +92,7 @@ class InitActivities {
 
             File docsDir = new File(myDir, "docs");
             docsDir.mkdir();
-            copyResourceToFile(R.raw.ahelper_conflict_header_ht, "docs/ahelper-conflict-header.ht");
+            /*copyResourceToFile(R.raw.ahelper_conflict_header_ht, "docs/ahelper-conflict-header.ht");
             copyResourceToFile(R.raw.ahelper_new_header_ht, "docs/ahelper-new-header.ht");
             copyResourceToFile(R.raw.ahelper_notfound_header_ht, "docs/ahelper-notfound-header.ht");
             copyResourceToFile(R.raw.auth_header_ht, "docs/auth-header.ht");
@@ -110,7 +110,7 @@ class InitActivities {
             copyResourceToFile(R.raw.noproxy_header_ht, "docs/noproxy-header.ht");
             copyResourceToFile(R.raw.protocol_header_ht, "docs/protocol-header.ht");
             copyResourceToFile(R.raw.reset_header_ht, "docs/reset-header.ht");
-            copyResourceToFile(R.raw.resetp_header_ht, "docs/resetp-header.ht");
+            copyResourceToFile(R.raw.resetp_header_ht, "docs/resetp-header.ht");*/
 
             File cssDir = new File(docsDir, "themes/console/light");
             cssDir.mkdirs();
