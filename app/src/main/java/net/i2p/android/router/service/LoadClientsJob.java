@@ -5,6 +5,7 @@ import android.content.Context;
 //import net.i2p.BOB.BOB;
 import net.i2p.I2PAppContext;
 import net.i2p.addressbook.DaemonThread;
+import android.preference.PreferenceManager;
 import net.i2p.android.apps.NewsFetcher;
 import net.i2p.android.router.util.Notifications;
 import net.i2p.android.router.util.Util;
@@ -74,15 +75,13 @@ class LoadClientsJob extends JobImpl {
         //try {
         //    _bob.startup();
         //} catch (IOException ioe) {}
-        String useSAM = System.getProperty("i2pandroid.client.sam");
-        if (useSAM != null) {
-            Util.i("SAM API " + useSAM);
-            if (useSAM == "true") {
-                Job jsam = new RunI2PSAM(getContext());
-                getContext().jobQueue().addJob(jsam);
-            }else{
-                Util.i("SAM API disabled, not starting "+useSAM);
-            }
+        boolean useSAM = PreferenceManager.getDefaultSharedPreferences(mCtx).getBoolean("i2pandroid.client.SAM", true);; //getActivity())
+        Util.i("SAM API " + useSAM);
+        if (useSAM) {
+            Job jsam = new RunI2PSAM(getContext());
+            getContext().jobQueue().addJob(jsam);
+        }else{
+            Util.i("SAM API disabled, not starting "+useSAM);
         }
         getContext().addShutdownTask(new ClientShutdownHook());
     }
