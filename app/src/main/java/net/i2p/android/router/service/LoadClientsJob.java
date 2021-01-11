@@ -75,7 +75,7 @@ class LoadClientsJob extends JobImpl {
         //try {
         //    _bob.startup();
         //} catch (IOException ioe) {}
-        boolean useSAM = PreferenceManager.getDefaultSharedPreferences(mCtx).getBoolean("i2pandroid.client.SAM", true);; //getActivity())
+        boolean useSAM = PreferenceManager.getDefaultSharedPreferences(mCtx).getBoolean("i2pandroid.client.SAM", true);
         Util.i("SAM API " + useSAM);
         if (useSAM) {
             Job jsam = new RunI2PSAM(getContext());
