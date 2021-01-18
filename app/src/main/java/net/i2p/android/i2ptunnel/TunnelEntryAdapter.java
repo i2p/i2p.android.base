@@ -1,7 +1,11 @@
 package net.i2p.android.i2ptunnel;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.content.ClipboardManager;
 
 import net.i2p.android.router.R;
 import net.i2p.android.util.FragmentUtils;
@@ -129,6 +134,17 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    private void setClipboard(Context context, String text) {
+        if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setText(text);
+        } else {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
+            clipboard.setPrimaryClip(clip);
+        }
+    }
+
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
@@ -183,6 +199,23 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                 ViewCompat.getTransitionName(tvh.status));
                         Pair<View, String>[] pairs = new Pair[]{ statusPair};
                         mListener.onTunnelSelected(tunnel.getId(), pairs);
+                    }
+                });
+                tvh.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    //@Override
+                    public boolean onLongClick(View view) {
+                        setClipboard(mCtx, tunnel.getDestHashBase32());
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mCtx)
+                          .setSmallIcon(R.drawable.i2plogo) // notification icon
+                          .setContentTitle(mCtx.getString(R.string.copied_base32_system_notification_title)) // title
+                          .setContentText(mCtx.getString(R.string.copied_base32_system_notification_body)) // body message
+                          .setAutoCancel(true); // clear notification when clicked
+                        Intent intent = new Intent("copyb32notification");
+                        PendingIntent pi = PendingIntent.getActivity(mCtx, 0, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mBuilder.setContentIntent(pi);
+                        NotificationManager mNotificationManager = (NotificationManager)mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
+                        mNotificationManager.notify(0, mBuilder.build());
+                        return true;
                     }
                 });
                 break;
