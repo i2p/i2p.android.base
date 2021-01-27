@@ -95,12 +95,13 @@ class LoadClientsJob extends JobImpl {
         public String getName() { return "Start I2P Tunnel"; }
 
         public void runJob() {
-            while (!getContext().router().isRunning()) {
-                try { Thread.sleep(1000); } catch (InterruptedException ie) { return; }
-                if (!getContext().router().isAlive()) {
+            if (!getContext().router().isRunning()) {
+                if (getContext().router().isAlive()) {
+                    requeue(1000);
+                } else {
                     Util.e("Router stopped before i2ptunnel could start");
-                    return;
                 }
+                return;
             }
             Util.d("Starting i2ptunnel");
             TunnelControllerGroup tcg = TunnelControllerGroup.getInstance(getContext());
@@ -134,12 +135,13 @@ class LoadClientsJob extends JobImpl {
         public String getName() { return "Start SAM API"; }
 
         public void runJob() {
-            while (!getContext().router().isRunning()) {
-                try { Thread.sleep(1000); } catch (InterruptedException ie) { return; }
-                if (!getContext().router().isAlive()) {
+            if (!getContext().router().isRunning()) {
+                if (getContext().router().isAlive()) {
+                    requeue(1000);
+                } else {
                     Util.e("Router stopped before SAM API could start");
-                    return;
                 }
+                return;
             }
             Util.d("Starting SAM");
             try {
