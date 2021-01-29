@@ -80,6 +80,7 @@ class LoadClientsJob extends JobImpl {
         if (useSAM) {
             Job jsam = new RunI2PSAM(getContext());
             getContext().jobQueue().addJob(jsam);
+            Util.i("SAM API started successfully" + useSAM);
         }else{
             Util.i("SAM API disabled, not starting "+useSAM);
         }
@@ -152,12 +153,11 @@ class LoadClientsJob extends JobImpl {
                         SAM_PROPERTIES(),
                         "sam.keys",
                         new File("sam_config"));
-                SAM_BRIDGE.startup();
+                SAM_BRIDGE.run();
             } catch (IOException e) {
                 Util.e( e.toString());
                 e.printStackTrace();
             }
-
         }
 
         public Properties SAM_PROPERTIES() throws IOException {
@@ -175,6 +175,8 @@ class LoadClientsJob extends JobImpl {
             // NewsFetcher registers its own hook
             //if (_bob != null)
             //    _bob.shutdown(null);
+            if (SAM_BRIDGE != null)
+                SAM_BRIDGE.shutdown(null);
             if (_addressbook != null)
                 _addressbook.halt();
         }
