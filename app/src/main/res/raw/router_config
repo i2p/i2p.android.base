@@ -45,8 +45,8 @@ router.sharePercentage=80
 #
 ##### Transport
 #
-i2np.bandwidth.inboundKBytesPerSecond=300
-i2np.bandwidth.outboundKBytesPerSecond=150
+i2np.bandwidth.inboundKBytesPerSecond=100
+i2np.bandwidth.outboundKBytesPerSecond=50
 #
 # NTCP
 #
