@@ -6,7 +6,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import net.i2p.android.I2PActivity;
 import net.i2p.android.router.R;
@@ -18,7 +21,7 @@ class StatusBar {
     private final NotificationCompat.Builder mNotifyBuilder;
     private Notification mNotif;
     private final String NOTIFICATION_CHANNEL_ID = "net.i2p.android.STARTUP_STATE_CHANNEL";
-    private final String channelName = "I2P";
+    private final String channelName = "I2P Router Service";
 
     private static final int ID = 1337;
 
@@ -31,8 +34,10 @@ class StatusBar {
 
     StatusBar(Context ctx) {
         mCtx = ctx;
-        mNotificationManager = (NotificationManager) ctx.getSystemService(
+        mNotificationManager = (NotificationManager) mCtx.getSystemService(
                 Context.NOTIFICATION_SERVICE);
+        assert mNotificationManager != null;
+
         Thread.currentThread().setUncaughtExceptionHandler(
                 new CrashHandler(mNotificationManager));
 
@@ -40,22 +45,19 @@ class StatusBar {
         // won't be shown if replace() is called
         String text = ctx.getString(R.string.notification_status_starting);
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mNotifyBuilder = new NotificationCompat.Builder(mCtx);
         } else {
             mNotifyBuilder = new NotificationCompat.Builder(ctx, NOTIFICATION_CHANNEL_ID);
         }
+
         mNotifyBuilder.setContentText(text);
         mNotifyBuilder.setSmallIcon(icon);
         mNotifyBuilder.setColor(mCtx.getResources().getColor(R.color.primary_light));
         mNotifyBuilder.setOngoing(true);
         mNotifyBuilder.setOnlyAlertOnce(true);
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationChannel mNotificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
-            mNotificationManager.createNotificationChannel(mNotificationChannel);
-            mNotificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-        }
+        mNotifyBuilder.setPriority(NotificationManager.IMPORTANCE_MIN);
+        mNotifyBuilder.setCategory(Notification.CATEGORY_SERVICE);
 
         Intent intent = new Intent(ctx, I2PActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -87,6 +89,12 @@ class StatusBar {
     public void update(String title, String text) {
         mNotifyBuilder.setContentTitle(title)
             .setContentText(text);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel mNotificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+            mNotificationManager.createNotificationChannel(mNotificationChannel);
+            mNotificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            mNotifyBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
+        }
         mNotif = mNotifyBuilder.build();
         mNotificationManager.notify(ID, mNotif);
     }

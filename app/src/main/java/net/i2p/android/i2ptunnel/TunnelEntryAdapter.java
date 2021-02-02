@@ -202,9 +202,9 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     //@Override
                     public boolean onLongClick(View view) {
                         setClipboard(mCtx, tunnel.getDestHashBase32());
-                        Toast mailMessage = Toast.makeText(mCtx, R.string.copied_base32_system_notification_title, Toast. LENGTH_LONG);
-                        mailMessage.setGravity(Gravity.TOP, 0, 0); //optional
-                        mailMessage.show();
+                        Toast clipboardMessage = Toast.makeText(mCtx, R.string.copied_base32_system_notification_title, Toast. LENGTH_LONG);
+                        clipboardMessage.setGravity(Gravity.TOP, 0, 0); //optional
+                        clipboardMessage.show();
                         return true;
 
                     }
