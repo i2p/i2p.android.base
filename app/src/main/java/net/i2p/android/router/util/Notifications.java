@@ -2,15 +2,22 @@ package net.i2p.android.router.util;
 
 import net.i2p.android.router.R;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 
 public class Notifications {
     private final Context mCtx;
     private final NotificationManager mNotificationManager;
+
+
 
     public static final int ICON = R.drawable.ic_stat_router_active;
 
@@ -25,13 +32,26 @@ public class Notifications {
     }
 
     public void notify(String title, String text, Class<?> c) {
-        NotificationCompat.Builder b =
-                new NotificationCompat.Builder(mCtx)
-                        .setContentTitle(title)
-                        .setContentText(text)
-                        .setSmallIcon(ICON)
-                        .setColor(mCtx.getResources().getColor(R.color.primary_light))
-                        .setAutoCancel(true);
+        notify(title, text, "", c);
+    }
+
+    public void notify(String title, String text, String channel, Class<?> c) {
+        NotificationCompat.Builder b;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            b = new NotificationCompat.Builder(mCtx);
+        } else {
+            if (channel.equals("")){
+                b = new NotificationCompat.Builder(mCtx);
+            } else {
+                b = new NotificationCompat.Builder(mCtx, channel);
+            }
+        }
+
+        b.setContentTitle(title);
+        b.setContentText(text);
+        b.setSmallIcon(ICON);
+        b.setColor(mCtx.getResources().getColor(R.color.primary_light));
+        b.setAutoCancel(true);
 
         if (c != null) {
             Intent intent = new Intent(mCtx, c);

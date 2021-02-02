@@ -1,6 +1,7 @@
 package net.i2p.android.router.service;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -16,6 +17,8 @@ class StatusBar {
     private final NotificationManager mNotificationManager;
     private final NotificationCompat.Builder mNotifyBuilder;
     private Notification mNotif;
+    private final String NOTIFICATION_CHANNEL_ID = "net.i2p.android.STARTUP_STATE_CHANNEL";
+    private final String channelName = "I2P";
 
     private static final int ID = 1337;
 
@@ -37,12 +40,22 @@ class StatusBar {
         // won't be shown if replace() is called
         String text = ctx.getString(R.string.notification_status_starting);
 
-        mNotifyBuilder = new NotificationCompat.Builder(ctx)
-            .setContentText(text)
-            .setSmallIcon(icon)
-                .setColor(mCtx.getResources().getColor(R.color.primary_light))
-            .setOngoing(true)
-            .setOnlyAlertOnce(true);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            mNotifyBuilder = new NotificationCompat.Builder(mCtx);
+        } else {
+            mNotifyBuilder = new NotificationCompat.Builder(ctx, NOTIFICATION_CHANNEL_ID);
+        }
+        mNotifyBuilder.setContentText(text);
+        mNotifyBuilder.setSmallIcon(icon);
+        mNotifyBuilder.setColor(mCtx.getResources().getColor(R.color.primary_light));
+        mNotifyBuilder.setOngoing(true);
+        mNotifyBuilder.setOnlyAlertOnce(true);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel mNotificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+            mNotificationManager.createNotificationChannel(mNotificationChannel);
+            mNotificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+        }
 
         Intent intent = new Intent(ctx, I2PActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
