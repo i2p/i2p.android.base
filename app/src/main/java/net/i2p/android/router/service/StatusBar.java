@@ -22,6 +22,7 @@ class StatusBar {
     private Notification mNotif;
     private final String NOTIFICATION_CHANNEL_ID = "net.i2p.android.STARTUP_STATE_CHANNEL";
     private final String channelName = "I2P Router Service";
+    NotificationChannel mNotificationChannel;
 
     private static final int ID = 1337;
 
@@ -43,25 +44,24 @@ class StatusBar {
 
         int icon = ICON_STARTING;
         // won't be shown if replace() is called
-        String text = ctx.getString(R.string.notification_status_starting);
+        String text = mCtx.getString(R.string.notification_status_starting);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mNotifyBuilder = new NotificationCompat.Builder(mCtx);
         } else {
-            mNotifyBuilder = new NotificationCompat.Builder(ctx, NOTIFICATION_CHANNEL_ID);
+            mNotifyBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID);
         }
 
         mNotifyBuilder.setContentText(text);
         mNotifyBuilder.setSmallIcon(icon);
         mNotifyBuilder.setColor(mCtx.getResources().getColor(R.color.primary_light));
         mNotifyBuilder.setOngoing(true);
-        mNotifyBuilder.setOnlyAlertOnce(true);
-        mNotifyBuilder.setPriority(NotificationManager.IMPORTANCE_MIN);
+        mNotifyBuilder.setPriority(NotificationManager.IMPORTANCE_LOW);
         mNotifyBuilder.setCategory(Notification.CATEGORY_SERVICE);
 
-        Intent intent = new Intent(ctx, I2PActivity.class);
+        Intent intent = new Intent(mCtx, I2PActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pi = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getActivity(mCtx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mNotifyBuilder.setContentIntent(pi);
     }
 
@@ -90,7 +90,7 @@ class StatusBar {
         mNotifyBuilder.setContentTitle(title)
             .setContentText(text);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel mNotificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+            mNotificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_LOW);
             mNotificationManager.createNotificationChannel(mNotificationChannel);
             mNotificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
             mNotifyBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);

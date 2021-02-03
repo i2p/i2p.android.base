@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -168,9 +169,17 @@ public class RouterService extends Service {
         }
         _handler.removeCallbacks(_updater);
         _handler.postDelayed(_updater, 50);
+
+        // We need to *not* check if we're restarting on Android greater than Oreo due to
+        // changes in how notifications work and the use of NotificationChannels.
         if(!restart) {
             startForeground(1337, _statusBar.getNote());
+        } else {
+            if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                startForeground(1337, _statusBar.getNote());
+            }
         }
+
 
         //return START_STICKY;
         return START_NOT_STICKY;
