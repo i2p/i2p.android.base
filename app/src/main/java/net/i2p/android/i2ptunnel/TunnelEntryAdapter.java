@@ -196,6 +196,7 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                 ViewCompat.getTransitionName(tvh.status));
                         Pair<View, String>[] pairs = new Pair[]{ statusPair};
                         mListener.onTunnelSelected(tunnel.getId(), pairs);
+                        view.invalidate();
                     }
                 });
                 tvh.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -205,6 +206,7 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         Toast clipboardMessage = Toast.makeText(mCtx, R.string.copied_base32_system_notification_title, Toast. LENGTH_LONG);
                         clipboardMessage.setGravity(Gravity.TOP, 0, 0); //optional
                         clipboardMessage.show();
+                        view.invalidate();
                         return true;
 
                     }
@@ -214,6 +216,7 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             default:
                 break;
         }
+
     }
 
     // Return the size of the dataset (invoked by the layout manager)

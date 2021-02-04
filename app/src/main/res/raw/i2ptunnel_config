@@ -100,3 +100,56 @@ tunnel.3.option.outbound.length=2
 tunnel.3.option.outbound.lengthVariance=0
 tunnel.3.option.outbound.priority=15
 tunnel.3.startOnLoad=true
+
+# I2P Git Repositories SSH Access
+tunnel.6.description=I2P Git Repositories SSH Access
+tunnel.6.interface=127.0.0.1
+tunnel.6.listenPort=7670
+tunnel.6.name=gitssh.idk.i2p
+tunnel.6.option.i2cp.closeIdleTime=1800000
+tunnel.6.option.i2cp.closeOnIdle=false
+tunnel.6.option.i2cp.delayOpen=true
+tunnel.6.option.i2cp.destination.sigType=7
+tunnel.6.option.i2cp.newDestOnResume=false
+tunnel.6.option.i2cp.reduceIdleTime=1200000
+tunnel.6.option.i2cp.reduceOnIdle=true
+tunnel.6.option.i2cp.reduceQuantity=1
+tunnel.6.option.inbound.backupQuantity=1
+tunnel.6.option.inbound.length=3
+tunnel.6.option.inbound.nickname=gitssh.idk.i2p
+tunnel.6.option.inbound.quantity=3
+tunnel.6.option.outbound.backupQuantity=1
+tunnel.6.option.outbound.length=3
+tunnel.6.option.outbound.nickname=gitssh.idk.i2p
+tunnel.6.option.outbound.quantity=3
+tunnel.6.sharedClient=false
+tunnel.6.startOnLoad=false
+tunnel.6.targetDestination=gitssh.idk.i2p
+tunnel.6.type=client
+
+# I2P Git Repositories HTTP Access(Android only)
+# Disabled by default, useful for Android gitlab clients like labcoat
+tunnel.7.description=I2P Git Repositories HTTP Access(Android Only)
+tunnel.7.interface=127.0.0.1
+tunnel.7.listenPort=7671
+tunnel.7.name=git.idk.i2p
+tunnel.7.option.i2cp.closeIdleTime=1800000
+tunnel.7.option.i2cp.closeOnIdle=false
+tunnel.7.option.i2cp.delayOpen=true
+tunnel.7.option.i2cp.destination.sigType=7
+tunnel.7.option.i2cp.newDestOnResume=false
+tunnel.7.option.i2cp.reduceIdleTime=1200000
+tunnel.7.option.i2cp.reduceOnIdle=true
+tunnel.7.option.i2cp.reduceQuantity=1
+tunnel.7.option.inbound.backupQuantity=1
+tunnel.7.option.inbound.length=3
+tunnel.7.option.inbound.nickname=git.idk.i2p
+tunnel.7.option.inbound.quantity=3
+tunnel.7.option.outbound.backupQuantity=1
+tunnel.7.option.outbound.length=3
+tunnel.7.option.outbound.nickname=git.idk.i2p
+tunnel.7.option.outbound.quantity=3
+tunnel.7.sharedClient=false
+tunnel.7.startOnLoad=false
+tunnel.7.targetDestination=ssh.idk.i2p
+tunnel.7.type=client
