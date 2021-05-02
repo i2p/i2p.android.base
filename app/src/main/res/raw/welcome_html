@@ -36,9 +36,8 @@ services. You can also access the normal web anonymously via I2P's built-in web
 proxy (outproxy). <a href="https://geti2p.net/en/about/browser-config"
 target="_blank">Configure your browser</a> to use the HTTP proxy at 
 <code>127.0.0.1 port 4444</code>, then browse to an eepsite or a normal, 
-unencrypted <code>http://</code> address. For a pre-configured browser, you may 
-wish to try <a href="http://echelon.i2p/i2pfox/">I2PFox</a>, a custom build of 
-Firefox security hardened and tailored especially for I2P. If you wish to 
+unencrypted <code>http://</code> address.
+If you wish to
 disable or change outproxy access to the normal internet, remove or modify the 
 outproxy entry for <code>false.i2p</code> under the <i>Outproxies</i> option in 
 the <a href="/i2ptunnel/edit?tunnel=0" target="_blank">I2P HTTP Proxy  Tunnel 
@@ -80,13 +79,13 @@ target="_blank">geti2p.net</a>. If you want to know
 more about how I2P works or how you can participate, this is your first port of 
 call!</li>
       <li class="tidylist"><b>I2P Community Forums</b><br><a 
-href="http://forum.i2p/" target="_blank">forum.i2p</a>: A secure 
+href="http://i2pforum.i2p/" target="_blank">i2pforum.i2p</a>: A secure
         and anonymous online forum community where developers
 and users alike discuss problems and ideas relating to I2P and associated 
 topics, and <a href="http://zzz.i2p/" target="_blank">zzz's developer 
 forums</a> for both end users and developers.</li>
       <li class="tidylist"><b>I2P Anonymous Pastebin</b><br><a 
-href="http://pastethis.i2p/" target="_blank">pastethis.i2p</a>: Secure and
+href="http://paste.idk.i2p/" target="_blank">paste.idk.i2p</a>: Secure and
         anonymous paste service allowing anonymous text and text-based code 
 sharing over I2P.</li>
       <li class="tidylist"><b>Echelon's I2P Resources</b><br><a 
@@ -95,14 +94,6 @@ href="http://echelon.i2p/" target="_blank">echelon.i2p</a>: I2P software
 including a <a href="http://echelon.i2p/I2Pguide/index.html" 
 target="_blank">beginner's guide</a> and pre-release developer builds of I2P 
 for the adventurous to try.</li>
-        <li class="tidylist"><b>Ugha's Wiki</b><br><a href="http://ugha.i2p/" 
-target="_blank">ugha.i2p</a>: An open wiki that anyone can edit with plenty of 
-information  about I2P, help for beginners, additional links into the network, 
-and more.</li>
-      <li class="tidylist"><b>I2P-to-Freenet Proxy</b><br><a 
-href="http://fproxy.tino.i2p/" target="_blank">fproxy.tino.i2p</a>: 
-        Peer into the world of the <a href="http://freenetproject.org/" 
-target="_blank">Freenet</a> network with Tino's I2P-to-Freenet proxy.</li>
         <li class="tidylist"><b>The Planet (on I2P)</b><br><a 
 href="http://planet.i2p/" target="_blank">planet.i2p</a>: An RSS aggregator 
 site that takes news and events from around I2P and publishes them all in one 
@@ -149,23 +140,19 @@ discussion forum</a>,
   <a href="irc://127.0.0.1:6668/i2p-help">#i2p-help</a>, <a 
 href="irc://127.0.0.1:6668/i2p">#i2p</a> or <a 
 href="irc://127.0.0.1:6668/i2p-chat">#i2p-chat</a> on I2P's internal IRC 
-network (<code>irc.postman.i2p</code> or <code>irc.freshcoffee.i2p</code>). 
+network (<code>irc.postman.i2p</code> or <code>irc.echelon.i2p</code>).
 These channels are also available outside of I2P's encrypted, anonymous network 
 via <a href="irc://irc.freenode.net/i2p">Freenode IRC</a>.
   </li> 
   
 <li class="tidylist"><b>Reporting Bugs</b><br>If you'd like to report a bug, 
-please file a ticket on <a href="http://trac.i2p2.i2p/" 
-target="_blank">trac.i2p2.i2p</a>. For developer-related discussions, please 
+please file a ticket on <a href="http://git.idk.i2p/"
+target="_blank">git.idk.i2p</a>. For developer-related discussions, please
 visit <a href="http://zzz.i2p/" target="_blank">zzz's developer forums</a> or 
 come and visit the <a href="irc://127.0.0.1:6668/i2p-dev">developer channel</a> 
 on I2P's IRC network. Developers can browse source at <a 
-href="http://stats.i2p/cgi-bin/viewmtn/" target="_blank">zzz's mtn repository 
-viewer</a>, <a href="http://i2host.i2p/cgi-bin/view/branch/changes/i2p.i2p" 
-target="_blank">Sponge's instance</a>, or via <a 
-href="http://trac.i2p2.i2p/browser" target="_blank">trac.i2p2.i2p</a>. We 
-primarily use <a href="http://i2p-projekt.i2p/monotone.html" 
-target="_blank">monotone</a> to manage our source code.
+href="git.idk.i2p/i2p-hackers/i2p.i2p/-/commits/master" target="_blank">git.idk.i2p</a> or
+<a href="https://github.com/i2p/i2p.i2p" target="_blank">GitHub</a>.
   </li>
 
 <li class="tidylist"><b>Get Involved!</b><br>I2P is developed and maintained 
@@ -188,6 +175,6 @@ page</a> on the website.
 </ul>
 
 <div class="topness"><a href="#top">[Return to Top]</a></div>
-<div class="footnote"><hr>Document updated: June 2011</div>
+<div class="footnote"><hr>Document updated: May 2021</div>
 </div>
 </body></html>
