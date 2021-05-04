@@ -14,9 +14,10 @@ in their main repository.
 
 Docker users can use a shortcut to get an acceptable environment set up for building I2P for Android.
 
-`
-./app/build/outputs/apk/free/debug/app-free-debug.apk
-`
+``` bash
+docker build -t i2p.android.base .
+docker run -it --rm --name i2p.android.base -v $(pwd)/app/build:/opt/workspace/i2p.android.base/app/build i2p.android.base
+```
 
 ## Prerequirements
 
