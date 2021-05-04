@@ -10,15 +10,6 @@ At the time of this revision, 2020/09/13, the main Android maintainer is idk. id
 Play, and f-droid.i2p.io, and nextl00p handles working with the F-Droid project to provide an I2P release
 in their main repository.
 
-## Docker
-
-Docker users can use a shortcut to get an acceptable environment set up for building I2P for Android.
-
-``` bash
-docker build -t i2p.android.base .
-docker run -it --rm --name i2p.android.base -v $(pwd)/app/build:/opt/workspace/i2p.android.base/app/build i2p.android.base
-```
-
 ## Prerequirements
 
  1. Ensure you have the deprecated maven ant tasks. ( https://maven.apache.org/ant-tasks/download.cgi )
