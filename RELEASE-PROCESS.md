@@ -10,6 +10,12 @@ At the time of this revision, 2020/09/13, the main Android maintainer is idk. id
 Play, and f-droid.i2p.io, and nextl00p handles working with the F-Droid project to provide an I2P release
 in their main repository.
 
+NOTE: The docker container built by the Dockerfile in this repostory ensures that the Pre-requisites and
+Dependencies are properly met by obtaining them from the Debian package in `oldoldstable` and pre-configuring
+the override.properties that is used in the Docker container.
+
+**>> Beginning of Docker-enabled Steps <<**
+
 ## Prerequirements
 
  1. Ensure you have the deprecated maven ant tasks. ( https://maven.apache.org/ant-tasks/download.cgi )
@@ -33,6 +39,9 @@ in their main repository.
  2. **A)** I2P for Android requires a Java 1.7 bootclasspath, but the servlet jar requires Java 8. So, to do the builds:
   - First set `javac.compilerargs=-bootclasspath /path/to/java/7/rt.jar:/path/to/java/7/jce.jar` in override.properties
   - Build with `ant mavenCentral`
+
+**>> End of Docker-enabled Steps <<**
+
  3. Login to http://oss.sonatype.org for uploading the mavencentral-*.jar bundles.
  4. In nexus, choose "Staging Upload" and upload all of the files with upload mode set to "Artifacts with POM". 
   When uploading the files to nexus, you *must* upload the pom.xml files, and all of their artifacts. For each 

@@ -33,11 +33,16 @@ Run an Android build in the container
 Run:
 
         docker run -it --rm --name i2p.android.base \
-          -v $(pwd)/app/build:/opt/workspace/i2p.android.base/app/build \
-          -v $(pwd)/app/pkg-temp:/opt/workspace/i2p.i2p/pkg-temp \
+          -v $HOME/.gnupg/:/.gnupg/:ro \
+          -v /run/user/$(id -u)/:/run/user/$(id -u)/:ro \
+          -v $(pwd)/app/build:/opt/workspace/i2p.android.base/app/build:rw \
+          -v $(pwd)/app/pkg-temp:/opt/workspace/i2p.i2p/pkg-temp-copy/:rw \
           i2p.android.base
 
 And your android applications will appear in the `app/build` directory, in the same
 place where non-container builds would go.
 
-TODO: Containerized release builds
+If you encounter a permissions error when rebuilding, delete the `app/build` and
+`app/pkg-temp` path.
+
+        rm -rf app/pkg-temp app/build
