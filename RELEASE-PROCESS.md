@@ -40,7 +40,7 @@ the override.properties that is used in the Docker container.
   - First set `javac.compilerargs=-bootclasspath /path/to/java/7/rt.jar:/path/to/java/7/jce.jar` in override.properties
   - Build with `ant mavenCentral`
 
-**>> End of Docker-enabled Steps <<**
+**>> End of Docker-enabled Steps for Maven <<**
 
  3. Login to http://oss.sonatype.org for uploading the mavencentral-*.jar bundles.
  4. In nexus, choose "Staging Upload" and upload all of the files with upload mode set to "Artifacts with POM". 
@@ -62,12 +62,18 @@ the override.properties that is used in the Docker container.
 
 ### Android Common Build
 
+Using Docker: in order to use Docker to generate a new Android apk for release, you will
+need to run the build twice, once for the mavenCentral jars, and once for the actual Android
+app. After doing the Maven release, follow these steps in the i2p.android.base repository, and re-run
+the `docker run` step described in `DOCKER.md`
+
  1. Edit `routerjars/local.properties` to use the clean i2p.i2p copy.
  2. Pull the latest translations with `tx pull -a` and commit them. (If you don't have the `tx` command,
   do `pip install transifex-client` )
   - If there are any new translations, `mtn add` them, and add them to `app/src/main/res/values/arrays.xml`
   (two places, alphabetical order please)
- 3. Ensure that `signing.properties` contains the details of the release key.
+ 3. Ensure that `signing.properties` contains the details of the release key. If you are using Docker, see
+  `DOCKER.md` to perform this step for Docker builds by editing `etc/docker.signing.properties` instead.
  4. Edit `gradle.properties` to bump the I2P version.
  5. Edit `app/build.gradle` to bump the Android version number.
  6. Edit `CHANGELOG` to add the release and date.

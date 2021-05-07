@@ -30,19 +30,62 @@ a while to complete.
 Run an Android build in the container
 -------------------------------------
 
+Copy the `etc/docker.signing.example.proprties` file to `etc/docker.signing.proprties`,
+edit it to match your key information and rebuild the container.
+
 Run:
 
-        docker run -it --rm --name i2p.android.base \
+        docker run -it \
+          -u $(id -u):$(id -g) \
+          --name i2p.android.base \
           -v $HOME/.gnupg/:/.gnupg/:ro \
+          -v $HOME/.i2p-plugin-keys/:/.i2p-plugin-keys/:ro \
           -v /run/user/$(id -u)/:/run/user/$(id -u)/:ro \
-          -v $(pwd)/app/build:/opt/workspace/i2p.android.base/app/build:rw \
-          -v $(pwd)/app/pkg-temp:/opt/workspace/i2p.i2p/pkg-temp-copy/:rw \
           i2p.android.base
+
+To get the build artifacts for uploading to Maven out of the container, use:
+
+        docker cp i2p.android.base:/opt/workspace/i2p.i2p/pkg-mavencentral app/pkg-mavencentral
+        docker cp i2p.android.base:/opt/workspace/i2p.i2p/mavencentral-i2p.jar app/pkg-mavencentral
+        docker cp i2p.android.base:/opt/workspace/i2p.i2p/mavencentral-mstreaming.jar app/pkg-mavencentral
+        docker cp i2p.android.base:/opt/workspace/i2p.i2p/mavencentral-router.jar app/pkg-mavencentral
+        docker cp i2p.android.base:/opt/workspace/i2p.i2p/mavencentral-servlet-i2p.jar app/pkg-mavencentral
+        docker cp i2p.android.base:/opt/workspace/i2p.i2p/mavencentral-streaming.jar app/pkg-mavencentral
+
+To get the Android build artifacts out of the container, use:
+
+        docker cp i2p.android.base:/opt/workspace/i2p.android.base/app/build/ app/build
 
 And your android applications will appear in the `app/build` directory, in the same
 place where non-container builds would go.
 
-If you encounter a permissions error when rebuilding, delete the `app/build` and
-`app/pkg-temp` path.
+If you encounter a permissions error when rebuilding, delete the `app/build`,
+`app/pkg-mavencentral` and `app/pkg-temp` path.
 
-        rm -rf app/pkg-temp app/build
+        rm -rf app/pkg-temp app/build app/pkg-mavencentral
+
+Copypasta
+---------
+
+Once you have set up builds for the first time, from then on you can update the container and
+build a fresh set of Maven jars and a new I2P for Android app by copy-pasting the following
+commands:
+
+``` sh
+rm -rf app/pkg-temp app/build app/pkg-mavencentral
+docker build -t i2p.android.base .
+docker run -it \
+  -u $(id -u):$(id -g) \
+  --name i2p.android.base \
+  -v $HOME/.gnupg/:/.gnupg/:ro \
+  -v $HOME/.i2p-plugin-keys/:/.i2p-plugin-keys/:ro \
+  -v /run/user/$(id -u)/:/run/user/$(id -u)/:ro \
+  i2p.android.base
+docker cp i2p.android.base:/opt/workspace/i2p.i2p/pkg-mavencentral app/pkg-mavencentral
+docker cp i2p.android.base:/opt/workspace/i2p.i2p/mavencentral-i2p.jar app/pkg-mavencentral
+docker cp i2p.android.base:/opt/workspace/i2p.i2p/mavencentral-mstreaming.jar app/pkg-mavencentral
+docker cp i2p.android.base:/opt/workspace/i2p.i2p/mavencentral-router.jar app/pkg-mavencentral
+docker cp i2p.android.base:/opt/workspace/i2p.i2p/mavencentral-servlet-i2p.jar app/pkg-mavencentral
+docker cp i2p.android.base:/opt/workspace/i2p.i2p/mavencentral-streaming.jar app/pkg-mavencentral
+docker cp i2p.android.base:/opt/workspace/i2p.android.base/app/build/ app/build
+```
