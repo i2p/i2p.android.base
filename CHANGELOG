@@ -1,3 +1,6 @@
+0.9.50 2021-05-18
+ * This release updates the underlying I2P libraries to I2P version 0.9.50
+
 0.9.48 2020-12-02
  * This release updates the underlying I2P libraries to I2P version 0.9.48
  * Updates to browser configuration documentation
