@@ -27,7 +27,11 @@ public class OnBootReceiver extends BroadcastReceiver implements I2PConstants {
             Intent routerService = new Intent(context, RouterService.class);
             // Ticket #2404
             try {
-                context.startService(routerService);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+                    context.startForegroundService(routerService);
+                } else {
+                    context.startService(routerService);
+                }
             } catch (IllegalStateException ex) {
                 Util.e("Error: ", ex);
             }
