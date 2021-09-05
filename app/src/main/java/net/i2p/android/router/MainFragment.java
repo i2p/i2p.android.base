@@ -661,6 +661,7 @@ public class MainFragment extends I2PFragmentBase {
                             // even if an error occurs. http://trac.i2p2.i2p/ticket/2783
                             intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
                             intent.setData(Uri.parse("package:" + packageName));
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             try {
                                 mContext.startActivity(intent);
                             } catch (ActivityNotFoundException activityNotFound) {
