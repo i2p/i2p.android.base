@@ -1,8 +1,8 @@
 FROM menny/android_ndk
 ENV VERSION=0.9.50
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
-RUN echo 'deb https://deb.i2p2.de/ sid main' >> /etc/apt/sources.list
-RUN echo 'deb-src https://deb.i2p2.de/ sid main' >> /etc/apt/sources.list
+RUN echo 'deb http://deb.i2p2.de/ sid main' >> /etc/apt/sources.list
+RUN echo 'deb-src http://deb.i2p2.de/ sid main' >> /etc/apt/sources.list
 RUN echo 'deb http://archive.ubuntu.com/ubuntu trusty universe' >> /etc/apt/sources.list
 RUN wget -O /etc/apt/trusted.gpg.d/i2p-debian-repo.key.asc https://geti2p.net/_static/i2p-debian-repo.key.asc
 COPY etc/debian-jessie-repo.key.asc /etc/apt/trusted.gpg.d
@@ -11,7 +11,7 @@ RUN apt-get update
 RUN apt-get build-dep -y i2p i2p-router
 RUN apt-get install -y ant openjdk-8* libxml2-utils junit4 libhamcrest-java libmockito-java libmaven-ant-tasks-java dpkg-sig maven
 RUN cd /opt/packages && dpkg-sig -l openjdk-7-jre-headless.deb && dpkg -x openjdk-7-jre-headless.deb /opt/packages/openjdk-7-jre
-RUN git clone https://i2pgit.org/i2p-hackers/i2p.i2p --depth=1 -b i2p-$VERSION /opt/workspace/i2p.i2p
+RUN git clone https://github.com/i2p/i2p.i2p --depth=1 -b i2p-$VERSION /opt/workspace/i2p.i2p
 RUN update-java-alternatives --jre-headless --set java-1.8.0-openjdk-amd64
 RUN update-java-alternatives --set java-1.8.0-openjdk-amd64
 RUN update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
@@ -36,4 +36,4 @@ CMD cd /opt/workspace/i2p.i2p && \
 	cp -v *.jar pkg-mavencentral/; \
 	cd /opt/workspace/i2p.android.base && \
 	./gradlew --continue dependencies || true ; \
-	 ./gradlew --continue assembleRelease
+	 ./gradlew --continue assembleRelease; tail -f README.md

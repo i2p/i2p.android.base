@@ -21,6 +21,9 @@
   <string name="button_router_off">Dlouze stiskněte pro spuštění I2P</string>
   <string name="button_router_on">I2P běží (dlouze stiskněte pro zastavení)</string>
   <string name="hidden">Skryté</string>
+  <string name="testing">Testování</string>
+  <string name="firewalled">Firewalled</string>
+  <string name="symmetric_nat">Symetrický NAT</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
@@ -53,11 +56,15 @@
   <string name="configure_graphs">Konfigurovat grafy</string>
   <string name="country">Země</string>
   <string name="version">Verze</string>
+  <string name="count">Počet</string>
   <string name="netdb_routers_empty">Žádné routery ve vaší NetDB</string>
   <string name="netdb_leases_empty">Žádné LeaseSets ve vaší NetDB</string>
   <string name="menu_settings">Nastavení</string>
   <string name="settings_enable">Zapnout</string>
+  <string name="settings_label_bandwidth">Šířka pásma</string>
   <string name="settings_label_network">Síť</string>
+  <string name="settings_label_hiddenMode">Participace</string>
+  <string name="settings_dialog_sharePercent">Procento šířky pásma ke sdílení</string>
   <string name="settings_label_appearance">Podoba</string>
   <string name="settings_label_language">Jazyk</string>
   <string name="settings_default">Výchozí</string>
@@ -101,6 +108,7 @@
   <string name="description">Popis</string>
   <string name="outproxies">Výstupní proxy (Outproxies)</string>
   <string name="use_ssl">Použít SSL</string>
+  <string name="profile">Profil</string>
   <string name="access_control">Řízení přístupu</string>
   <string name="disabled">Vypnuto</string>
   <string name="whitelist">Seznam povolených (whitelist)</string>

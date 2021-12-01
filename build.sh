@@ -1,7 +1,7 @@
 #! /usr/bin/env sh
 rm -rf app/pkg-temp app/build app/pkg-mavencentral
 docker build -t i2p.android.base .
-docker run -it \
+docker run -itd \
   -u $(id -u):$(id -g) \
   --name i2p.android.base \
   -v $HOME/.gnupg/:/.gnupg/:ro \

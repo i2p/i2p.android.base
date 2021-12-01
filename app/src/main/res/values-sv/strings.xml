@@ -16,7 +16,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="label_logs">Loggar</string>
   <string name="label_error_logs">Felloggar</string>
   <string name="label_news">Nyheter</string>
-  <string name="label_peers_status">Noder</string>
+  <string name="label_peers_status">Jämlikar</string>
   <string name="label_release_notes">Utgåva noteringar</string>
   <string name="label_licenses">Licenser</string>
   <string name="label_browse">Bläddra</string>
@@ -40,13 +40,13 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="net_status_warn_firewalled_floodfill">Bakom brandvägg och \'floodfill\'</string>
   <string name="net_status_info_disconnected">Frånkopplad - kontrollera nätverksanslutning</string>
   <string name="net_status_error_udp_port">UDP-porten används - ändra i inställningar och start om</string>
-  <string name="net_status_error_no_active_peers">Inga aktiva noder - kontrollera nätverksanslutning och brandvägg</string>
+  <string name="net_status_error_no_active_peers">Inga aktiva jämlikar - kontrollera nätverksanslutning och brandvägg</string>
   <string name="net_status_error_udp_disabled_tcp_not_set">UDP deaktiverad och inåtgående TCP värd/port inte angiven</string>
-  <string name="net_status_warn_firewalled_udp_disabled">Bakom brandvägg med UDP avaktiverad</string>
+  <string name="net_status_warn_firewalled_udp_disabled">Bakom brandvägg med UDP inaktiverad</string>
   <string name="shared_clients">Delade klienter</string>
   <string name="uptime">Drifttid</string>
-  <string name="active_peers">Aktiva noder</string>
-  <string name="known_peers">Kända noder</string>
+  <string name="active_peers">Aktiva jämlikar</string>
+  <string name="known_peers">Kända jämlikar</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -59,7 +59,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="configure_no_doze_title">Hantera batterioptimeringar?</string>
   <string name="configure_no_doze">I2P fungerar bäst om den fortsätter att fungera. För att förhindra att Android stänger I2P när du försöker spara ström kan du lägga till den i listan över undantag från batterier. Detta kommer att förbättra applikationens tillförlitlighet avsevärt.\n\nHålla I2P igång i bakgrunden? (rekommenderad)</string>
   <string name="first_start_title">Gratulerar till din I2P-installation!</string>
-  <string name="first_start_welcome"><b>Välkommen till I2P!</b> Vänligen <b>ha tålamod</b> medan I2P startar och letar upp noder.</string>
+  <string name="first_start_welcome"><b>Välkommen till I2P!</b> Vänligen <b>ha tålamod</b> medan I2P startar och letar upp jämlikar.</string>
   <string name="first_start_read">Medan du väntar, vänligen läs utgåvans meddelanden och välkomstsidan.</string>
   <string name="first_start_faq">När du har fått klienttunnlar, vänligen <b>kolla</b> våra vanliga frågor:</string>
   <string name="first_start_faq_nonanon">Använd den här icke-anonyma länken om du inte vill vänta på tunnlar:</string>
@@ -113,7 +113,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="notification_status_shutdown_cancelled">Stängning avbruten</string>
   <string name="notification_status_shutting_down">I2P stängs av</string>
   <string name="notification_status_bw">Bandbredd:%1$sBps ner / %2$sBps upp</string>
-  <string name="notification_status_peers">Noder: %1$d aktiva, %2$d kända</string>
+  <string name="notification_status_peers">Jämlikar: %1$d aktiva, %2$d kända</string>
   <string name="notification_status_expl">Utforskande tunnlar: %1$d/%2$d</string>
   <string name="notification_status_client">Klienttunnlar:%1$d/%2$d</string>
   <string name="menu_settings">Inställningar</string>
@@ -162,7 +162,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="settings_label_expl_quantity">Kvantitet</string>
   <string name="settings_summ_expl_quantity">%s tunnlar</string>
   <string name="settings_desc_expl_quantity">Hur många tunnlar</string>
-  <string name="settings_label_expl_backupQuantity">Backup kvantitet</string>
+  <string name="settings_label_expl_backupQuantity">Reservmängd</string>
   <string name="settings_summ_expl_backupQuantity">%s tunnlar</string>
   <string name="settings_desc_expl_backupQuantity">Hur många reservtunnlar</string>
   <string name="settings_need_transport_enabled">Du måste ha minst en transport aktiverad</string>
@@ -190,8 +190,8 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="nsu_iae_cannot_contain">Värdnamnet kan inte innehålla \"%s\"</string>
   <string name="nsu_iae_requires_conversion">Värdnamnet \"%s\" kräver konvertering till ASCII men konverteringsbiblioteket är inte tillgängligt i denna version av Adroid</string>
   <string name="i2ptunnel_type_client">Standardklient</string>
-  <string name="i2ptunnel_type_httpclient">HTTPklient</string>
-  <string name="i2ptunnel_type_ircclient">IRCklient</string>
+  <string name="i2ptunnel_type_httpclient">HTTP-klient</string>
+  <string name="i2ptunnel_type_ircclient">IRC-klient</string>
   <string name="i2ptunnel_type_server">Standradserver</string>
   <string name="i2ptunnel_type_httpserver">HTTPserver</string>
   <string name="i2ptunnel_type_sockstunnel">SOCKS 4/4a/5 proxy</string>
@@ -213,7 +213,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="i2ptunnel_msg_tunnel_stopping">Stannar tunnel</string>
   <string name="i2ptunnel_delete_confirm_message">Radera tunnel?</string>
   <string name="i2ptunnel_delete_confirm_button">Radera tunnel</string>
-  <string name="i2ptunnel_no_tunnel_details">Det gick inte att läsa in detaljer i tunneln</string>
+  <string name="i2ptunnel_no_tunnel_details">Det gick inte att läsa in tunneldetaljer</string>
   <string name="i2ptunnel_wizard_k_client_server">Klient eller Server</string>
   <string name="i2ptunnel_wizard_v_client">Klienttunnel</string>
   <string name="i2ptunnel_wizard_v_server">Servertunnel</string>
@@ -234,7 +234,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="enabled">Aktiverad</string>
   <string name="i2ptunnel_wizard_desc_name">Tunnelns namn, för identifikation i tunnellistan</string>
   <string name="i2ptunnel_wizard_desc_desc">Beskrivning av tunneln. Frivillig och endast för information.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Mata in I2Pdestinationen för den tjänst denna tunnel skall ansluta till. Detta kan vara den fulla 64 destinationsnyckeln, eller ett I2Pvärdnamn från din adressbok.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Skriv in I2P-destinationen för den tjänst som denna klienttunnel ska ansluta till. Detta kan vara den fullständiga 64-grunddestinationsnyckeln eller ett I2P-värdnamn från din adressbok.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Om du känner till några utproxier för den här typen av tunnel (antingen HTTP eller SOCKS), fyll i dem. Separera flera proxier med kommatecken.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Detta är den IP din tjänst kör på, vanligtvis på samma maskin så 127.0.0.1 är automatiskt ifylld.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Detta är den port din tjänst tar emot anslutningar på.</string>
@@ -257,8 +257,8 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="tunnel_summ_shared_client">Använd samma Destination och tunnlar som andra klienter</string>
   <string name="target_destination">Måldestination</string>
   <string name="persistent_key">Beständig nyckel</string>
-  <string name="persistent_key_conflict_title">Avaktivera nya nycklar vid återöppning?</string>
-  <string name="persistent_key_conflict_msg">Du kan inte aktivera beständiga nycklar när tunneln är konfigurerad att generera nya nycklar vid återöppning. Vill du avaktivera ny nycklar vid återöppning?</string>
+  <string name="persistent_key_conflict_title">Inaktivera nya nycklar vid återöppning?</string>
+  <string name="persistent_key_conflict_msg">Du kan inte aktivera beständiga nycklar när tunneln är konfigurerad att generera nya nycklar vid återöppning. Vill du inaktivera ny nycklar vid återöppning?</string>
   <string name="tunnel_summ_persistent_key">Behåll den här tunnelns destination när den startar om</string>
   <string name="reachable_on">Nåbar på</string>
   <string name="listen_port">Lyssnande port</string>
@@ -268,7 +268,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="ssl_outproxies">SSL utproxier</string>
   <string name="irc">IRC</string>
   <string name="enable_dcc">Aktivera DCC</string>
-  <string name="tunnel_summ_enable_dcc">Tillåt IRCklienter att använda DCC</string>
+  <string name="tunnel_summ_enable_dcc">Tillåt IRC-klienter att använda DCC</string>
   <string name="website_domain_name">Webbplats domännamn</string>
   <string name="target_host">Målvärd</string>
   <string name="target_port">Målport</string>
@@ -282,7 +282,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="tunnel_summ_delay_connect">Aktivera för request/response-anslutningar</string>
   <string name="access_control">Tillgångskontroll</string>
   <string name="restricted_access">Bekgränsad åtkomst</string>
-  <string name="disabled">Avaktiverad</string>
+  <string name="disabled">Inaktiverad</string>
   <string name="whitelist">Whitelist</string>
   <string name="blacklist">Blacklist</string>
   <string name="access_list">Åtkomstlista</string>
@@ -322,10 +322,10 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="reduced_tunnel_quantity">Minska tunnelmängd</string>
   <string name="close_tunnels">Stäng tunnlar i viloläge</string>
   <string name="new_keys_on_reopen">Nya nycklar vid återöppning</string>
-  <string name="new_keys_on_reopen_conflict_title">Avaktivera beständiga nycklar?</string>
-  <string name="new_keys_on_reopen_conflict_msg">Du kan inte aktivera nya nycklar vid återöppning medan tunneln är konfigurerad att ha beständiga nycklar. Vill du avaktivera beständiga nycklar?</string>
-  <string name="http_client">HTTPklient</string>
-  <string name="tunnel_summ_user_agent">Släpp igenom \'Användar-Agent\' header</string>
+  <string name="new_keys_on_reopen_conflict_title">Inaktivera beständiga nycklar?</string>
+  <string name="new_keys_on_reopen_conflict_msg">Du kan inte aktivera nya nycklar vid återöppning medan tunneln är konfigurerad att ha beständiga nycklar. Vill du inaktivera beständiga nycklar?</string>
+  <string name="http_client">HTTP-klient</string>
+  <string name="tunnel_summ_user_agent">Släpp igenom \'Användar-Agent\'-rubriken</string>
   <string name="tunnel_summ_referer">Släpp igenom \'Referer\' header</string>
   <string name="tunnel_summ_accept">Släpp igenom \'Accept-*\' headers</string>
   <string name="tunnel_summ_allow_ssl">Tillåt SSL till I2Padresser</string>

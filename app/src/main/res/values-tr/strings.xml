@@ -58,7 +58,7 @@
   <string name="configure_no_doze_title">Pil kullanımı yönetilsin mi?</string>
   <string name="configure_no_doze">I2P için en iyi durum sürekli çalışmasıdır. I2P uygulamasının Android üzerinde pili korumak için kapatılmasını engellemek için uygulamayı pil kullanımı istisnası listesine ekleyebilirsiniz. Bu durumda uygulamanın güvenirliği önemli ölçüde artacaktır.\n\nI2P arka planda çalışır durumda tutulsun mu (önerilir)?</string>
   <string name="first_start_title">Tebrikler, I2P kuruldu!</string>
-  <string name="first_start_welcome"><b>I2P Yazılımına Hoşgeldiniz</b> Lütfen I2P yüklenip eşleri bulana kadar <b>sabırlı olun</b>.</string>
+  <string name="first_start_welcome"><b>I2P uygulamasına hoş geldiniz</b> Lütfen I2P yüklenip eşleri bulana kadar <b>sabırlı olun</b>.</string>
   <string name="first_start_read">Beklerken, lütfen sürüm notları ve hoş geldiniz sayfalarını okuyun.</string>
   <string name="first_start_faq">İstemci tünelleri bulunduğunda, lütfen Sık Sorulan Sorular bölümüne <b>bakın</b>:</string>
   <string name="first_start_faq_nonanon">Ya da tünelleri beklemek istemiyorsanız anonim olmayan şu bağlantıyı kullanın:</string>
@@ -108,7 +108,7 @@
   <string name="notification_status_client_down">İstemci tünelleri kapalı</string>
   <string name="notification_status_graceful">I2P %s içinde durdurulacak</string>
   <string name="notification_status_stopping">I2P durduruluyor</string>
-  <string name="notification_status_stopping_after_net">Ağ devre dışı bırakıldı, I2P durduruluyor</string>
+  <string name="notification_status_stopping_after_net">Ağ bağlantısı kesildi, I2P durduruluyor</string>
   <string name="notification_status_shutdown_cancelled">Kapatma iptal edildi</string>
   <string name="notification_status_shutting_down">I2P kapatılıyor</string>
   <string name="notification_status_bw">Bant genişliği: %1$sBps indirme / %2$sBps yükleme</string>
@@ -285,11 +285,11 @@
   <string name="whitelist">Beyaz liste</string>
   <string name="blacklist">Kara liste</string>
   <string name="access_list">Erişim listesi</string>
-  <string name="reject_inproxies">Geçen vekil sunucular reddedilsin</string>
+  <string name="reject_inproxies">Giriş vekil sunucular reddedilsin</string>
   <string name="tunnel_summ_reject_inproxies">Yalnız I2P kullanıcıları bağlanabilsin</string>
-  <string name="unique_local">Tekil yerel</string>
-  <string name="tunnel_summ_unique_local">Her istemci için tekil yerel sunucu IP adresi kullanılsın</string>
-  <string name="multihome">Ana sayfa kopyası</string>
+  <string name="unique_local">Benzersiz yerel</string>
+  <string name="tunnel_summ_unique_local">Her istemci için benzersiz yerel sunucu IP adresi kullanılsın</string>
+  <string name="multihome">Birden çok barındırma</string>
   <string name="tunnel_summ_multihome">Çoklu ev iyileştirmeleri kullanılsın</string>
   <string name="client_connection_limits">İstemci bağlantı sınırları</string>
   <string name="connections_per_minute">Dakikalık bağlantı sayısı</string>
@@ -333,8 +333,8 @@
   <string name="tunnel_summ_proxy_auth">Bu vekil sunucuda oturum açmak için kimlik doğrulaması istensin</string>
   <string name="username">Kullanıcı Adı</string>
   <string name="password">Parola</string>
-  <string name="outproxy_auth">Giden vekil sunucu kimlik doğrulaması</string>
-  <string name="tunnel_summ_outproxy_auth">Giden vekil sunucu için oturum açılması gerekiyor</string>
+  <string name="outproxy_auth">Çıkış vekil sunucusu kimlik doğrulaması</string>
+  <string name="tunnel_summ_outproxy_auth">Çıkış vekil sunucusu için oturum açılması gerekiyor</string>
   <string name="other">Diğer</string>
   <string name="signature_type">İmza türü</string>
   <string name="custom_options">Uyarlanmış seçenekler</string>

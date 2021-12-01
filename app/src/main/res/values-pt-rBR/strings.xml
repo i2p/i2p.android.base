@@ -6,10 +6,10 @@
   <string name="welcome_new_install">Bem vindo ao I2P! Este aplicativo está em estágio ALPHA e não provê anonimidade forte. Por favor leia as notas e informações de licença.</string>
   <string name="welcome_new_version">Nova versão instalada. Por favor, leia as notas de lançamento. Versão:</string>
   <string name="label_tunnels">Túneis</string>
-  <string name="label_status">Estado</string>
+  <string name="label_status">Status</string>
   <string name="label_console">Painel</string>
   <string name="label_addresses">Endereços</string>
-  <string name="label_addressbook">Livro de endereços</string>
+  <string name="label_addressbook">Catálogo de endereços</string>
   <string name="label_i2ptunnel_client">Túneis clientes</string>
   <string name="label_i2ptunnel_server">Túneis servidor</string>
   <string name="label_logs">Registros</string>
@@ -32,9 +32,11 @@
   <string name="symmetric_nat">NAT simétrico</string>
   <string name="net_status_error_i2cp">Erro no gerenciador de clientes I2CP - verificar logs</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
+  <string name="net_status_error_skew">Desincronização do relógio de %s</string>
   <string name="net_status_error_unresolved_tcp">Endereço TCP não resolvido</string>
   <string name="net_status_error_private_tcp">Endereço TCP privado</string>
   <string name="net_status_warn_firewalled_inbound_tcp">Sob firewall com entrada via TCP ativada</string>
+  <string name="net_status_warn_firewalled_floodfill">Sob firewall e enchimento por inundação</string>
   <string name="net_status_info_disconnected">Desconectado - verifique a conexão de rede</string>
   <string name="net_status_error_udp_port">Porta UDP em uso - altere as configurações e reinicie</string>
   <string name="net_status_error_no_active_peers">Sem pares ativos - verifique a conexão de rede e o firewall</string>
@@ -53,8 +55,10 @@
   <string name="upload">Carregar</string>
   <string name="configure_browser_title">Configurar o navegador?</string>
   <string name="configure_browser_for_i2p">Gostaria de configurar um navegador para visualizar sites da I2P? (Você pode também fazer isso depois a partir do menu ajuda.)</string>
-  <string name="first_start_title">Parabéns em instalar o I2P!</string>
-  <string name="first_start_welcome">&lt;b&gt;Seja bem-vindo!&lt;/b&gt; Por favor&lt;b&gt;, tenha paciência enquanto o roteador I2P inicia e procura por pares.</string>
+  <string name="configure_no_doze_title">Gerenciar otimizações de bateria?</string>
+  <string name="configure_no_doze">I2P funciona melhor se continuar funcionando. Para evitar que o Android feche o I2P ao tentar economizar/salvar energia, você pode adicioná-lo à lista de exceções da bateria. Isto melhorá substancialmente a confiabilidade do aplicativo.\n\nMantenha I2P funcionando em segundo plano? (recomendado)</string>
+  <string name="first_start_title">Parabéns por ter I2P instalado!</string>
+  <string name="first_start_welcome"><b>Boas-Vindas ao I2P!</b> Por favor <b>tenha paciência</b> enquanto I2P inicia e procura por pares.</string>
   <string name="first_start_read">Enquanto você está esperando, por favor leia as notas de lançamento e a página de boas vindas.</string>
   <string name="first_start_faq">Uma vez que você tenha túneis clientes, por favor <b>verifique</b> nosso FAQ:</string>
   <string name="first_start_faq_nonanon">Ou use esse link não-anonimo se você não deseja esperar por túneis:</string>
@@ -70,7 +74,7 @@
   <string name="action_i2ptunnel_restart_all">Reiniciar todos os túneis</string>
   <string name="action_reload">Recarregar</string>
   <string name="action_refresh">Atualizar</string>
-  <string name="hint_search_addressbook">Procurar por livro de endereços</string>
+  <string name="hint_search_addressbook">Pesquisar no catálogo de endereços</string>
   <string name="action_reload_subscriptions">Recarregar inscriçoes</string>
   <string name="news_last_updated">Última atualização das noticias a %s atrás</string>
   <string name="news_last_checked">Última verificação das noticias a %s atrás</string>
@@ -97,7 +101,7 @@
   <string name="notification_status_restarting">O roteador I2P está reiniciando</string>
   <string name="notification_status_waiting">O roteador I2P está esperando por uma conexão de rede</string>
   <string name="notification_status_starting_after_waiting">Conectado a rede, inicializando o roteador I2P</string>
-  <string name="notification_status_running">Software I2P em execução</string>
+  <string name="notification_status_running">I2P está em execução</string>
   <string name="notification_status_client_ready">Os túneis de cliente estão prontos</string>
   <string name="notification_status_client_down">Os túneis de cliente estão fora de serviço</string>
   <string name="notification_status_graceful">Interrompendo o roteador I2P em %s</string>
@@ -140,12 +144,15 @@
   <string name="settings_label_transports">Transportes</string>
   <string name="settings_label_maxConns">Número máximo de conexões</string>
   <string name="settings_label_i2cp">Interface do I2CP</string>
-  <string name="settings_desc_exploratory_pool">Parêmetros de tunel</string>
+  <string name="settings_desc_i2cp">Permitir que aplicações de terceiros criem túneis (requer reinicialização do roteador)</string>
+  <string name="settings_label_exploratory_pool">Reservatório exploratório</string>
+  <string name="settings_desc_exploratory_pool">Parâmetros do túnel</string>
   <string name="settings_label_expl_inbound">Túneis entrantes</string>
-  <string name="settings_label_expl_outbound">Tuneis de saída</string>
+  <string name="settings_label_expl_outbound">Túneis de saída</string>
   <string name="settings_label_expl_length">Comprimento</string>
   <string name="settings_summ_expl_length">%s saltos</string>
   <string name="settings_desc_expl_length">Quantos saltos usar</string>
+  <string name="settings_label_expl_lengthVariance">Variação do salto</string>
   <string name="settings_summ_expl_lengthVariance">%s</string>
   <string name="settings_desc_expl_lengthVariance">Quantos saltos aleatórios a adicionar</string>
   <string name="settings_label_expl_quantity">Quantidade</string>
@@ -155,11 +162,11 @@
   <string name="settings_summ_expl_backupQuantity">%s túneis</string>
   <string name="settings_desc_expl_backupQuantity">Quantos backups de túneis</string>
   <string name="settings_need_transport_enabled">Você deve ter pelo menos um transporte ativado</string>
-  <string name="settings_router_restart_required">Por favor, reinicialize o software I2P para aplicar as alterações</string>
+  <string name="settings_router_restart_required">Por favor reinicie I2P para aplicar as mudanças</string>
   <string name="menu_about">Sobre</string>
   <string name="about_version">Versão:</string>
   <string name="about_project">Lar do projeto:</string>
-  <string name="about_bugs">Bugs e suporte:</string>
+  <string name="about_bugs">Falhas e Suporte:</string>
   <string name="about_helpwanted">Procura-se ajuda!</string>
   <string name="about_volunteer">Quer ajudar a tornar o aplicativo melhor? Seja voluntário no fórum Android:</string>
   <string name="about_donate">Quer doar dinheiro ou bitcoins para comprar mais dispositivos Android para desenvolvimento e testes? Vá para:</string>
@@ -203,7 +210,7 @@
   <string name="i2ptunnel_delete_confirm_message">Apagar túnel?</string>
   <string name="i2ptunnel_delete_confirm_button">Apagar túnel</string>
   <string name="i2ptunnel_no_tunnel_details">Não foi possível carregar os detalhes do túnel</string>
-  <string name="i2ptunnel_wizard_k_client_server">Cliente ou servidor</string>
+  <string name="i2ptunnel_wizard_k_client_server">Cliente ou Servidor</string>
   <string name="i2ptunnel_wizard_v_client">Túnel cliente</string>
   <string name="i2ptunnel_wizard_v_server">Túnel servidor</string>
   <string name="i2ptunnel_wizard_k_type">Tipo de túnel</string>
@@ -223,6 +230,8 @@
   <string name="enabled">Ativado</string>
   <string name="i2ptunnel_wizard_desc_name">O nome do túnel, para identificação na lista de túneis.</string>
   <string name="i2ptunnel_wizard_desc_desc">Uma descrição do túnel. Isso é opcional e puramente informativo.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Digite o destino I2P do serviço ao qual este túnel cliente deve se conectar. Esta pode ser a chave base 64 do destino, ou um host I2P de seu catálogo de endereços.</string>
+  <string name="i2ptunnel_wizard_desc_outproxies">Se você souber de algum proxies de saída para este tipo de túnel (seja HTTP ou SOCKS), digite-os. Separe os múltiplos proxies com vírgulas.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Esse é o IP no qual o serviço está rodando, isto está geralmente na mesma maquina então 127.0.0.1 é autopreenchido.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Essa é a porta pela qual o serviço está aceitando conexões.</string>
   <string name="i2ptunnel_wizard_desc_reachable_on">Isso limita quais computadores ou smartphones podem acessar esse túnel</string>
@@ -233,6 +242,7 @@
   <string name="i2ptunnel_view_target">Alvo</string>
   <string name="i2ptunnel_view_access_point">Ponto de acesso</string>
   <string name="i2ptunnel_view_autostart">Auto-inicialização</string>
+  <string name="address_copied_to_clipboard">Endereço copiado para a área de transferência</string>
   <string name="edit_tunnel">Editar túnel</string>
   <string name="name">Nome</string>
   <string name="description">Descrição</string>
@@ -273,7 +283,7 @@
   <string name="blacklist">Lista de proibições</string>
   <string name="access_list">Lista de acessos</string>
   <string name="reject_inproxies">Rejeitar proxies de entrada</string>
-  <string name="tunnel_summ_reject_inproxies">Permitir que apenas usuários da I2P se conectem</string>
+  <string name="tunnel_summ_reject_inproxies">Permitir que apenas usuários I2P se conectem</string>
   <string name="unique_local">Local único</string>
   <string name="tunnel_summ_unique_local">Usar IPs de host locais únicos para cada cliente</string>
   <string name="multihome">Multihome</string>
@@ -294,6 +304,10 @@
   <string name="set_zero_for_unlimited">Especifique 0 para ilimitado</string>
   <string name="post_limits">Limites de POST</string>
   <string name="limit_period">Período limite</string>
+  <string name="client_posts_per_period">POSTs de clientes por período</string>
+  <string name="client_ban_length">Duração do banir/exclusão do cliente</string>
+  <string name="total_posts_per_period">Total de POSTs por período</string>
+  <string name="total_ban_length">Duração total do banir/exclusão</string>
   <string name="power_saving">Economia de energia</string>
   <string name="delay_open">Atrasar a abertura</string>
   <string name="tunnel_summ_delay_open">Atrasar a abertura do túnel até ser utilizado</string>
@@ -316,7 +330,7 @@
   <string name="tunnel_summ_proxy_auth">É necessário um login para usar esse proxy</string>
   <string name="username">Nome de usuário</string>
   <string name="password">Senha</string>
-  <string name="outproxy_auth">Autorização de proxy de saída</string>
+  <string name="outproxy_auth">Autorização do proxy de saída</string>
   <string name="tunnel_summ_outproxy_auth">Autenticação necessária para o proxy de saída</string>
   <string name="other">Outros</string>
   <string name="signature_type">Tipo de assinatura</string>
@@ -324,14 +338,21 @@
   <string name="all">Todos</string>
   <string name="no_messages">Sem mensagens</string>
   <string name="no_error_messages">Nenhuma mensagem de erro</string>
+  <plurals name="log_error_messages">
+    <item quantity="one">Uma mensagem de erro</item>
+    <item quantity="other">%d mensagens de erro, a primeira a mais recente</item>
+  </plurals>
   <plurals name="log_messages">
     <item quantity="one">Uma mensagem</item>
     <item quantity="other">%d mensagens, mais novas primeiro</item>
   </plurals>
   <string name="log_entry">Entrada no log</string>
   <string name="copy_logs">Copiar logs</string>
-  <string name="error_logs_copied_to_clipboard">Logs de erro copiados para a área de transferência</string>
-  <string name="logs_copied_to_clipboard">Logs copiados para a área de transferência</string>
+  <string name="i2p_android_error_logs">Registros de erros do I2P Android</string>
+  <string name="i2p_android_logs">Registros do I2P Android</string>
+  <string name="error_logs_copied_to_clipboard">Registros dos erros copiados para a área de transferência</string>
+  <string name="logs_copied_to_clipboard">Registros copiados para a área de transferência</string>
   <string name="label_browser_configuration">Configuração do navegador</string>
+  <string name="no_market_app">Nenhum aplicativo de mercado encontrado, por favor, instale manualmente</string>
   <string name="unset">Desligado</string>
 </resources>
