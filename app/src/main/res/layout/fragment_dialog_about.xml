@@ -64,13 +64,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/about_donate" />
+            android:text="@string/about_gitlab" />
 
         <TextView
-            android:id="@+id/url_donate"
+            android:id="@+id/url_gitlab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/url_donate" />
+            android:text="@string/url_gitlab" />
 
     </LinearLayout>
     

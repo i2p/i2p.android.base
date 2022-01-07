@@ -25,16 +25,16 @@ public class AboutDialog extends DialogFragment {
         View view = li.inflate(R.layout.fragment_dialog_about, null);
 
         final String currentVersion = Util.getOurVersion(getActivity());
-        TextView tv = (TextView)view.findViewById(R.id.about_version);
+        TextView tv = (TextView) view.findViewById(R.id.about_version);
         tv.setText(currentVersion);
 
-        tv = (TextView)view.findViewById(R.id.url_project);
+        tv = (TextView) view.findViewById(R.id.url_project);
         Linkify.addLinks(tv, I2Patterns.I2P_WEB_URL, "http://");
-        tv = (TextView)view.findViewById(R.id.url_android_bugs);
+        tv = (TextView) view.findViewById(R.id.url_android_bugs);
         Linkify.addLinks(tv, I2Patterns.I2P_WEB_URL, "http://");
-        tv = (TextView)view.findViewById(R.id.url_android_volunteer);
+        tv = (TextView) view.findViewById(R.id.url_android_volunteer);
         Linkify.addLinks(tv, I2Patterns.I2P_WEB_URL, "http://");
-        tv = (TextView)view.findViewById(R.id.url_donate);
+        tv = (TextView) view.findViewById(R.id.url_gitlab);
         Linkify.addLinks(tv, I2Patterns.I2P_WEB_URL, "http://");
 
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity());

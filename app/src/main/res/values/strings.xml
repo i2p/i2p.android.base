@@ -216,8 +216,8 @@
     <string name="url_android_forum" translatable="false">http://zzz.i2p/forums/17</string>
     <string name="about_helpwanted">Help Wanted!</string>
     <string name="about_volunteer">Want to help make the app better? Volunteer on the Android forum:</string>
-    <string name="about_donate">Want to donate money or bitcoins to buy more Android devices for development and testing? Go to:</string>
-    <string name="url_donate" translatable="false">https://geti2p.net/en/donate | http://i2p-projekt.i2p/en/donate</string>
+    <string name="about_gitlab">Want to suggest a feature or fix a bug? make a Merge Request on the Android Gitlab:</string>
+    <string name="url_gitlab" translatable="false">https://i2pgit.org/i2p-hackers/i2p.android.base | http://git.idk.i2p/i2p-hackers/i2p.android.base</string>
 
     <string name="menu_help">Help</string>
     <string name="general">General</string>
