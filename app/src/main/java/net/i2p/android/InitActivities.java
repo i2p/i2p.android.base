@@ -209,7 +209,11 @@ class InitActivities {
                     }
                     String name = ze.getName();
                     File f = new File(myDir + "/" + folder +"/" + name);
-                    if (ze.isDirectory()) {
+                    String canonicalPath = f.getCanonicalPath();
+                    if (!canonicalPath.startsWith(myDir)) {
+                        // If these don't match, there's a path-traversal possibility.
+                        // So ignore it.
+                    } else if (ze.isDirectory()) {
                         Util.d("Creating directory " + myDir + "/" + folder +"/" + name + " from resource");
                         f.mkdir();
                     } else {
