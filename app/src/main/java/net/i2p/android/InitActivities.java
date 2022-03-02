@@ -59,6 +59,7 @@ class InitActivities {
     }
 
     void initialize() {
+        Util.i("Initializing the I2P resources");
 
         if (checkNewVersion()) {
             List<Properties> lProps = Util.getPropertiesFromPreferences(ctx);
@@ -131,9 +132,9 @@ class InitActivities {
             File certDir = new File(myDir, "certificates");
             certDir.mkdir();
             File certificates = new File(myDir, "certificates");
-            File[] allcertificates = certificates.listFiles();
-            if ( allcertificates != null) {
-                for (File f : allcertificates) {
+            File[] allCertificates = certificates.listFiles();
+            if ( allCertificates != null) {
+                for (File f : allCertificates) {
                     Util.d("Deleting old certificate file/dir " + f);
                     FileUtil.rmdir(f, false);
                 }
@@ -178,10 +179,16 @@ class InitActivities {
                 out.write(buf, 0, read);
 
         } catch (IOException ioe) {
+            Util.e("copyResourceToFile" + "IOE: ", ioe);
         } catch (Resources.NotFoundException nfe) {
+            Util.e("copyResourceToFile" + "NFE: ", nfe);
         } finally {
-            if (in != null) try { in.close(); } catch (IOException ioe) {}
-            if (out != null) try { out.close(); } catch (IOException ioe) {}
+            if (in != null) try { in.close(); } catch (IOException ioe) {
+                Util.e("copyResourceToFile" + "IOE in.close(): ", ioe);
+            }
+            if (out != null) try { out.close(); } catch (IOException ioe) {
+                Util.e("copyResourceToFile" + "IOE out.close(): ", ioe);
+            }
         }
     }
     /**
@@ -192,7 +199,7 @@ class InitActivities {
         FileOutputStream out = null;
         ZipInputStream zis = null;
 
-        Util.d("Creating files in '" + myDir + "/" + folder + "/' from resource");
+        Util.i("Creating files in '" + myDir + "/" + folder + "/' from resource");
         try {
             // Context methods
             in = ctx.getResources().openRawResource(resID);
@@ -209,30 +216,48 @@ class InitActivities {
                     }
                     String name = ze.getName();
                     File f = new File(myDir + "/" + folder +"/" + name);
-                    String canonicalPath = f.getCanonicalPath();
-                    if (!canonicalPath.startsWith(myDir)) {
+                    String canonicalPath = f.getCanonicalPath().replace("/user/0/", "/data/");
+                    // account for canonical path differences when using .aab bundles
+                    if (!canonicalPath.startsWith(myDir.replace("/user/0/", "/data/"))) {
                         // If these don't match, there's a path-traversal possibility.
                         // So ignore it.
+                        Util.e("Path mismatch bug " + canonicalPath.toString() + " " + myDir.toString());
                     } else if (ze.isDirectory()) {
-                        Util.d("Creating directory " + myDir + "/" + folder +"/" + name + " from resource");
+                        Util.i("Creating directory " + myDir + "/" + folder +"/" + name + " from resource");
                         f.mkdir();
                     } else {
-                        Util.d("Creating file " + myDir + "/" + folder +"/" + name + " from resource");
+                        Util.i("Creating file " + myDir + "/" + folder +"/" + name + " from resource");
                         byte[] bytes = baos.toByteArray();
                         out = new FileOutputStream(f);
                         out.write(bytes);
                     }
                 } catch (IOException ioe) {
+                    Util.e("unzipResourceToDir" + "IOE: ", ioe);
                 } finally {
-                    if (out != null) { try { out.close(); } catch (IOException ioe) {} out = null; }
+                    if (out != null) {
+                        try {
+                            out.close();
+                        } catch (IOException ioe) {
+                            Util.e("unzipResourceToDir" + "IOE: interior out.close ", ioe);
+                        }
+                        out = null;
+                    }
                 }
             }
         } catch (IOException ioe) {
+            Util.e("unzipResourceToDir" + "IOE: ", ioe);
         } catch (Resources.NotFoundException nfe) {
+            Util.e("unzipResourceToDir" + "NFE: ", nfe);
         } finally {
-            if (in != null) try { in.close(); } catch (IOException ioe) {}
-            if (out != null) try { out.close(); } catch (IOException ioe) {}
-            if (zis != null) try { zis.close(); } catch (IOException ioe) {}
+            if (in != null) try { in.close(); } catch (IOException ioe) {
+                Util.e("unzipResourceToDir" + "IOE: in.close() ", ioe);
+            }
+            if (out != null) try { out.close(); } catch (IOException ioe) {
+                Util.e("unzipResourceToDir" + "IOE: out.close() ", ioe);
+            }
+            if (zis != null) try { zis.close(); } catch (IOException ioe) {
+                Util.e("unzipResourceToDir" + "IOE: zis.close() ", ioe);
+            }
         }
     }
 
