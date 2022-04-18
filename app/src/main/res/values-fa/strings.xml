@@ -26,6 +26,7 @@
   <string name="button_router_graceful">I2P در %s خاموش خواهد شد</string>
   <string name="no_internet">هیچ اتصال اینترنتی موجود نمی باشد</string>
   <string name="hidden">پنهان</string>
+  <string name="testing">در حال تست</string>
   <string name="symmetric_nat">NAT همگام</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_unresolved_tcp">آدرس های TCP حل نشده</string>
@@ -70,6 +71,7 @@
   <string name="transport">انتقال</string>
   <string name="versions">نسخه ها</string>
   <string name="version">نسخه</string>
+  <string name="count">شمارش</string>
   <string name="notification_status_starting">I2P در حال شروع می باشد</string>
   <string name="notification_status_restarting">I2P در حال راه اندازی مجدد است</string>
   <string name="notification_status_starting_after_waiting">شبکه اتصال یافت، I2P در حال آغاز است</string>
@@ -95,6 +97,7 @@
   <string name="settings_desc_hiddenMode">خاموش کردن حالت پنهان</string>
   <string name="settings_label_sharePercent">اشتراک گذاری درصد</string>
   <string name="settings_desc_upnp">باز کردن درگاه های دیوار آتشین به صورت خودکار</string>
+  <string name="settings_label_logging">ثبت وقایع</string>
   <string name="settings_label_appearance">ظاهر</string>
   <string name="settings_label_language">زبان</string>
   <string name="settings_default">پیش فرض</string>

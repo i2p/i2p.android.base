@@ -89,6 +89,7 @@
   <string name="graphs_not_ready">Gráficos não estão prontos ainda. Tente novamente.</string>
   <string name="statistics">Estatísticas</string>
   <string name="routers">Roteadores</string>
+  <string name="leasesets">LeaseSets</string>
   <string name="countries">Países</string>
   <string name="country">País</string>
   <string name="transport">Transporte</string>
@@ -97,6 +98,7 @@
   <string name="count">Contagem</string>
   <string name="tname_0">Oculto ou inicializando</string>
   <string name="netdb_routers_empty">Sem roteadores em seu NetDB.</string>
+  <string name="netdb_leases_empty">Não tem LeaseSets na sua NetDB.</string>
   <string name="notification_status_starting">O roteador I2P está inicializando</string>
   <string name="notification_status_restarting">O roteador I2P está reiniciando</string>
   <string name="notification_status_waiting">O roteador I2P está esperando por uma conexão de rede</string>
@@ -134,6 +136,7 @@
   <string name="settings_desc_sharePercent">Percentual da largura de banda compartilhada (por omissão=80)</string>
   <string name="settings_dialog_sharePercent">Porcentagem de banda para comprtilhar</string>
   <string name="settings_desc_upnp">Abrir portas do firewall automaticamente</string>
+  <string name="settings_label_logging">Registo de Eventos</string>
   <string name="settings_label_default_log_level">Nível padrão do log</string>
   <string name="settings_label_appearance">Aparência</string>
   <string name="settings_label_language">Idioma</string>

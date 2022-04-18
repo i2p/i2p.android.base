@@ -36,6 +36,7 @@
   <string name="net_status_error_unresolved_tcp">未解決の TCP アドレス</string>
   <string name="net_status_error_private_tcp">プライベートな TCP アドレス</string>
   <string name="net_status_warn_firewalled_inbound_tcp">着信 TCP が有効となり、ファイアーウォールされています</string>
+  <string name="net_status_warn_firewalled_floodfill">ファイアーウォールに防がれ、 Floodfill</string>
   <string name="net_status_info_disconnected">切断されました - ネットワーク接続を確認してください</string>
   <string name="net_status_error_udp_port">UDPポートが使用中 - 設定を変更して再起動してください</string>
   <string name="net_status_error_no_active_peers">アクティブなピアなし - ネットワークの接続およびファイアーウォールを確認してください</string>
@@ -82,13 +83,17 @@
   <string name="router_not_running">ルータが起動していません。</string>
   <string name="router_shutting_down">ルータはシャットダウン中です。</string>
   <string name="stats_not_ready">統計マネージャーはまだ準備出来ていません。後でやり直してください。</string>
+  <string name="select_an_address">アドレスを選択</string>
   <string name="no_graphs_configured">グラフは設定されていません。設定でどの統計をグラフにするか選択できます。すべての変更は60秒後に有効になります</string>
   <string name="configure_graphs">グラフ設定</string>
+  <string name="graphs_not_ready">グラフの準備ができていません。後でやり直してください。</string>
   <string name="statistics">統計</string>
   <string name="routers">ルータ</string>
   <string name="leasesets">リースセット</string>
+  <string name="countries">国</string>
   <string name="country">国</string>
   <string name="transport">トランスポート</string>
+  <string name="versions">バージョン</string>
   <string name="version">バージョン</string>
   <string name="count">カウント</string>
   <string name="tname_0">隠すか起動中</string>
@@ -249,7 +254,11 @@
   <string name="tunnel_cat_ports">ローカルポート</string>
   <string name="shared_client">共有クライアント</string>
   <string name="tunnel_summ_shared_client">他の共有クライアントと同じ宛先を使う</string>
+  <string name="target_destination">対象の宛先</string>
   <string name="persistent_key">永続的なキー</string>
+  <string name="persistent_key_conflict_title">新しいキーの再開放を無効にしますか？</string>
+  <string name="persistent_key_conflict_msg">再開放で新しいキーを生成するようトンネルを設定している間に永続キーを有効にできません。新しいキーの再開放を無効にしますか？</string>
+  <string name="tunnel_summ_persistent_key">再起動時にこのトンネルの宛先を維持する</string>
   <string name="reachable_on">到達可能</string>
   <string name="listen_port">着信ポート</string>
   <string name="client_ssl">クライアントSSL</string>
@@ -266,6 +275,8 @@
   <string name="tunnel_summ_use_ssl">ターゲットに接続するためにSSLを使用</string>
   <string name="tunnel_parameters">トンネル調節</string>
   <string name="profile">プロファイル</string>
+  <string name="profile_bulk">バルク接続（ダウンロード/ウェブサイト/BT）</string>
+  <string name="profile_interactive">双方向接続</string>
   <string name="delay_connect">接続延滞</string>
   <string name="tunnel_summ_delay_connect">要求/応答 接続用を有効</string>
   <string name="access_control">アクセス制御</string>
@@ -274,6 +285,7 @@
   <string name="whitelist">ホワイトリスト</string>
   <string name="blacklist">ブラックリスト</string>
   <string name="access_list">アクセスリスト</string>
+  <string name="reject_inproxies">インプロキシを拒否する</string>
   <string name="tunnel_summ_reject_inproxies">I2Pユーザーのみに接続を許可</string>
   <string name="unique_local">ユニークローカル</string>
   <string name="tunnel_summ_unique_local">クライアントごとに固有のローカルホストIPを使用</string>
@@ -294,16 +306,23 @@
   <string name="unlimited">無制限</string>
   <string name="set_zero_for_unlimited">0=無制限</string>
   <string name="post_limits">投稿制限</string>
+  <string name="limit_period">制限期間</string>
+  <string name="client_posts_per_period">期間当たりのクライアントのPOST数</string>
+  <string name="client_ban_length">クライアントの禁止の長さ</string>
+  <string name="total_posts_per_period">期間当たりの合計POST数</string>
+  <string name="total_ban_length">禁止の長さの合計</string>
   <string name="power_saving">パワーセーブ</string>
   <string name="delay_open">オープンを遅れさせる</string>
   <string name="tunnel_summ_delay_open">要求されるまでトンネルのオープンを遅らせる</string>
   <string name="reduce_quantity">数を減らす</string>
   <string name="tunnel_summ_reduce_quantity">アイドル時トンネルの数を減らす</string>
+  <string name="idle_time">アイドル時間</string>
   <string name="num_minutes">%s /分</string>
   <string name="reduced_tunnel_quantity">減らしたトンネルの数量</string>
   <string name="close_tunnels">アイドル時トンネルを閉じる</string>
   <string name="new_keys_on_reopen">再開放で新しいキーにする</string>
   <string name="new_keys_on_reopen_conflict_title">持続的なキーを無効化する？</string>
+  <string name="new_keys_on_reopen_conflict_msg">トンネルが永続キーを持つよう設定している間に新しいキーの再解放を有効にできません。永続キーを無効にしますか？</string>
   <string name="http_client">HTTPクライアント</string>
   <string name="tunnel_summ_user_agent">\'User-Agent\'ヘッダーを通す</string>
   <string name="tunnel_summ_referer">\'リファラー\'ヘッダーを通す</string>
@@ -315,16 +334,26 @@
   <string name="username">ユーザー名</string>
   <string name="password">パスワード</string>
   <string name="outproxy_auth">外部プロキシ認証</string>
+  <string name="tunnel_summ_outproxy_auth">ログインにはアウトプロキシが必要です</string>
   <string name="other">その他</string>
   <string name="signature_type">署名形式</string>
   <string name="custom_options">カスタムオプション</string>
   <string name="all">すべて</string>
   <string name="no_messages">本文がありません</string>
+  <string name="no_error_messages">エラーメッセージなし</string>
+  <plurals name="log_error_messages">
+    <item quantity="other">%d エラーメッセージ、新しい順</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="other">%dメッセージ、新しい順</item>
+  </plurals>
+  <string name="log_entry">ログ項目</string>
   <string name="copy_logs">ログをコピー</string>
   <string name="i2p_android_error_logs">I2PAndroidエラーログ</string>
   <string name="i2p_android_logs">I2PAndroidログ</string>
   <string name="error_logs_copied_to_clipboard">エラーログはクリップボードにコピーされました</string>
   <string name="logs_copied_to_clipboard">ログはクリップボードにコピーされました</string>
   <string name="label_browser_configuration">ブラウザ設定</string>
+  <string name="no_market_app">マーケットのアプリが見つかりませんでした。手動でインストールしてください。</string>
   <string name="unset">解除</string>
 </resources>

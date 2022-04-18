@@ -110,6 +110,7 @@
   <string name="use_ssl">Sử dụng SSL</string>
   <string name="tunnel_parameters">Thông số đường hầm</string>
   <string name="profile">Hồ sơ</string>
+  <string name="access_control">Kiểm soát truy cập</string>
   <string name="disabled">Tàn tật</string>
   <string name="whitelist">Sổ trắng</string>
   <string name="blacklist">Sổ đen</string>
@@ -120,6 +121,7 @@
   <string name="http_client">Khách HTTP</string>
   <string name="username">Tên đăng nhập</string>
   <string name="password">Mật khẩu</string>
+  <string name="other">Khác</string>
   <string name="custom_options">Tùy chọn tùy ý</string>
   <string name="all">Tất cả</string>
 </resources>

@@ -98,7 +98,7 @@
   <string name="count">Sayı</string>
   <string name="tname_0">Gizli ya da başlatılıyor</string>
   <string name="netdb_routers_empty">Ağ Veritabanınızda bir yöneltici bulunamadı.</string>
-  <string name="netdb_leases_empty">Ağ Veritabanınızda bir LeaseSets bulunamadı.</string>
+  <string name="netdb_leases_empty">Ağ Veritabanınızda bir Kiralama Kümesi bulunamadı.</string>
   <string name="notification_status_starting">I2P başlatılıyor</string>
   <string name="notification_status_restarting">I2P yeniden başlatılıyor</string>
   <string name="notification_status_waiting">I2P bir ağ bağlantısının kurulmasını bekliyor</string>
@@ -262,7 +262,7 @@
   <string name="reachable_on">Şuradan erişilebilir</string>
   <string name="listen_port">Dinlenecek kapı numarası</string>
   <string name="client_ssl">SSL İstemci</string>
-  <string name="tunnel_summ_client_ssl">İstemci yalnız SSL üzerinden bağlanabilir</string>
+  <string name="tunnel_summ_client_ssl">İstemci yalnızca SSL üzerinden bağlanabilir</string>
   <string name="outproxies">Çıkış vekil sunucuları</string>
   <string name="ssl_outproxies">SSL çıkış vekil sunucuları</string>
   <string name="irc">IRC</string>
@@ -286,7 +286,7 @@
   <string name="blacklist">Kara liste</string>
   <string name="access_list">Erişim listesi</string>
   <string name="reject_inproxies">Giriş vekil sunucular reddedilsin</string>
-  <string name="tunnel_summ_reject_inproxies">Yalnız I2P kullanıcıları bağlanabilsin</string>
+  <string name="tunnel_summ_reject_inproxies">Yalnızca I2P kullanıcıları bağlanabilsin</string>
   <string name="unique_local">Benzersiz yerel</string>
   <string name="tunnel_summ_unique_local">Her istemci için benzersiz yerel sunucu IP adresi kullanılsın</string>
   <string name="multihome">Birden çok barındırma</string>

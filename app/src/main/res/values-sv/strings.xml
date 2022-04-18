@@ -5,7 +5,7 @@
   <string name="choose_language">Välj språk</string>
   <string name="welcome_new_install">Välkommen till I2P! Den här appen är ALFA-mjukvara och erbjuder inte stark anonymitet.
 Läs utgåvenoteringar och licens-information.</string>
-  <string name="welcome_new_version">Ny version installerad. Vänligen läs versionsanteckningarna. Version: </string>
+  <string name="welcome_new_version">Ny version installerad. Läs versionsanteckningarna. Version: </string>
   <string name="label_tunnels">Tunnlar</string>
   <string name="label_status">Status</string>
   <string name="label_console">Konsoll</string>
@@ -59,15 +59,15 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="configure_no_doze_title">Hantera batterioptimeringar?</string>
   <string name="configure_no_doze">I2P fungerar bäst om den fortsätter att fungera. För att förhindra att Android stänger I2P när du försöker spara ström kan du lägga till den i listan över undantag från batterier. Detta kommer att förbättra applikationens tillförlitlighet avsevärt.\n\nHålla I2P igång i bakgrunden? (rekommenderad)</string>
   <string name="first_start_title">Gratulerar till din I2P-installation!</string>
-  <string name="first_start_welcome"><b>Välkommen till I2P!</b> Vänligen <b>ha tålamod</b> medan I2P startar och letar upp jämlikar.</string>
-  <string name="first_start_read">Medan du väntar, vänligen läs utgåvans meddelanden och välkomstsidan.</string>
-  <string name="first_start_faq">När du har fått klienttunnlar, vänligen <b>kolla</b> våra vanliga frågor:</string>
+  <string name="first_start_welcome"><b>Välkommen till I2P!</b> <b>Ha tålamod</b> medan I2P startar och letar upp jämlikar.</string>
+  <string name="first_start_read">Medan du väntar, läs utgåvans meddelanden och välkomstsidan.</string>
+  <string name="first_start_faq">När du har fått klienttunnlar, <b>kolla</b> våra vanliga frågor:</string>
   <string name="first_start_faq_nonanon">Använd den här icke-anonyma länken om du inte vill vänta på tunnlar:</string>
   <string name="first_start_irc">Peka din IRCclient till <b>localhost:6668</b> och säg hej till oss på:</string>
   <string name="action_search">Sök</string>
   <string name="action_add">Lägg till</string>
   <string name="action_edit">Redigera</string>
-  <string name="action_delete">Radera</string>
+  <string name="action_delete">Ta bort</string>
   <string name="action_i2ptunnel_start">Starta tunnel</string>
   <string name="action_i2ptunnel_stop">Stanna tunnel</string>
   <string name="action_i2ptunnel_start_all">Starta alla tunnlar</string>
@@ -138,7 +138,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="settings_dialog_sharePercent">Procent av bandbredd at dela</string>
   <string name="settings_desc_upnp">Öppna portar i brandvägg automatiskt</string>
   <string name="settings_label_logging">Loggning</string>
-  <string name="settings_label_default_log_level">Förvald log nivå</string>
+  <string name="settings_label_default_log_level">Standard loggnivå</string>
   <string name="settings_label_appearance">Stil</string>
   <string name="settings_label_language">Språk</string>
   <string name="settings_default">Förval</string>
@@ -211,8 +211,8 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="i2ptunnel_msg_config_save_failed">Misslyckades med att spara konfiguration</string>
   <string name="i2ptunnel_msg_tunnel_starting">Startar tunnel</string>
   <string name="i2ptunnel_msg_tunnel_stopping">Stannar tunnel</string>
-  <string name="i2ptunnel_delete_confirm_message">Radera tunnel?</string>
-  <string name="i2ptunnel_delete_confirm_button">Radera tunnel</string>
+  <string name="i2ptunnel_delete_confirm_message">Ta bort tunnel?</string>
+  <string name="i2ptunnel_delete_confirm_button">Ta bort tunnel</string>
   <string name="i2ptunnel_no_tunnel_details">Det gick inte att läsa in tunneldetaljer</string>
   <string name="i2ptunnel_wizard_k_client_server">Klient eller Server</string>
   <string name="i2ptunnel_wizard_v_client">Klienttunnel</string>
@@ -236,7 +236,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="i2ptunnel_wizard_desc_desc">Beskrivning av tunneln. Frivillig och endast för information.</string>
   <string name="i2ptunnel_wizard_desc_dest">Skriv in I2P-destinationen för den tjänst som denna klienttunnel ska ansluta till. Detta kan vara den fullständiga 64-grunddestinationsnyckeln eller ett I2P-värdnamn från din adressbok.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Om du känner till några utproxier för den här typen av tunnel (antingen HTTP eller SOCKS), fyll i dem. Separera flera proxier med kommatecken.</string>
-  <string name="i2ptunnel_wizard_desc_target_host">Detta är den IP din tjänst kör på, vanligtvis på samma maskin så 127.0.0.1 är automatiskt ifylld.</string>
+  <string name="i2ptunnel_wizard_desc_target_host">Detta är IP-adressen som din tjänst körs på, den är vanligtvis på samma maskin så 127.0.0.1 fylls i automatiskt.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Detta är den port din tjänst tar emot anslutningar på.</string>
   <string name="i2ptunnel_wizard_desc_reachable_on">Det här begränsar vilka datorer eller smartphones som kan få tillgång till denna tunnel.</string>
   <string name="i2ptunnel_wizard_desc_binding_port">Detta är den port som klienttunneln blir åtkomlig från lokalt. Detta är också klientporten för HTTP bidir servertunneln.</string>

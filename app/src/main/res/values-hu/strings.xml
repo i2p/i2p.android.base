@@ -237,6 +237,7 @@
   <string name="tunnel_parameters">Alagút paraméterei</string>
   <string name="profile">Profil</string>
   <string name="delay_connect">Csatlakozás késleltetése</string>
+  <string name="access_control">Hozzáférés kezelése</string>
   <string name="restricted_access">Korlátozott elérés</string>
   <string name="disabled">Tiltva</string>
   <string name="whitelist">Engedélyezett-Lista</string>

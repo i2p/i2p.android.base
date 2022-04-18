@@ -55,6 +55,8 @@
   <string name="upload">Enviar</string>
   <string name="configure_browser_title">Configurar o navegador?</string>
   <string name="configure_browser_for_i2p">Gostaria de configurar um navegador para ver sites I2P? (Pode fazê-lo mais tarde através do menu de ajuda.)</string>
+  <string name="configure_no_doze_title">Gerenciar otimizações de bateria?</string>
+  <string name="configure_no_doze">I2P funciona melhor se continuar funcionando. Para evitar que o Android feche o I2P ao tentar economizar/salvar energia, você pode adicioná-lo à lista de exceções da bateria. Isto melhorá substancialmente a confiabilidade do aplicativo.\n\nMantenha I2P funcionando em segundo plano? (recomendado)</string>
   <string name="first_start_title">Parabéns por ter instalado o I2P!</string>
   <string name="first_start_welcome"><b>Bem vindo ao I2P!</b> Por favor <b>tenha paciência</b> enquanto o I2P arranca e encontra outros nós na rede.</string>
   <string name="first_start_read">Enquanto espera, pode ler as notas de lançamento e a página de boas vindas.</string>
@@ -145,6 +147,7 @@
   <string name="settings_label_transports">Transportes</string>
   <string name="settings_label_maxConns">Nr. máx. de ligações</string>
   <string name="settings_label_i2cp">Interface I2CP</string>
+  <string name="settings_desc_i2cp">Permitir que aplicações de terceiros criem túneis (requer reinicialização do roteador)</string>
   <string name="settings_label_exploratory_pool">Poço exploratório</string>
   <string name="settings_desc_exploratory_pool">Parâmetros dos túneis</string>
   <string name="settings_label_expl_inbound">Túneis de entrada</string>
@@ -209,6 +212,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">Parar túnel</string>
   <string name="i2ptunnel_delete_confirm_message">Apagar túnel?</string>
   <string name="i2ptunnel_delete_confirm_button">Apagar túnel </string>
+  <string name="i2ptunnel_no_tunnel_details">Não foi possível carregar os detalhes do túnel</string>
   <string name="i2ptunnel_wizard_k_client_server">Cliente ou Servidor</string>
   <string name="i2ptunnel_wizard_v_client">Túnel cliente </string>
   <string name="i2ptunnel_wizard_v_server">Túnel servidor </string>
@@ -241,6 +245,7 @@
   <string name="i2ptunnel_view_target">Alvo</string>
   <string name="i2ptunnel_view_access_point">Ponto de acesso</string>
   <string name="i2ptunnel_view_autostart">Iniciar automaticamente</string>
+  <string name="address_copied_to_clipboard">Endereço copiado para a área de transferência</string>
   <string name="edit_tunnel">Alterar túnel </string>
   <string name="name">Nome</string>
   <string name="description">Descrição </string>
@@ -351,5 +356,6 @@
   <string name="error_logs_copied_to_clipboard">Registos de erro copiados para a área de transferência</string>
   <string name="logs_copied_to_clipboard">Registos copiados para a área de transferência</string>
   <string name="label_browser_configuration">Configuração do navegador</string>
+  <string name="no_market_app">Nenhum aplicativo de mercado encontrado, por favor, instale manualmente</string>
   <string name="unset">Desselecionar</string>
 </resources>
