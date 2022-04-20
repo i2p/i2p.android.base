@@ -16,6 +16,7 @@ import net.i2p.router.RouterContext;
 import net.i2p.router.startup.RouterAppManager;
 import net.i2p.util.I2PAppThread;
 import net.i2p.sam.SAMBridge;
+import net.i2p.sam.SAMSecureSessionInterface;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,8 @@ import java.util.Properties;
  * We can't use LoadClientAppsJob (reading in clients.config) directly
  * because Class.forName() needs a PathClassLoader argument -
  * http://doandroids.com/blogs/2010/6/10/android-classloader-dynamic-loading-of/
- * ClassLoader cl = new PathClassLoader(_apkPath, ClassLoader.getSystemClassLoader());
+ * ClassLoader cl = new PathClassLoader(_apkPath,
+ * ClassLoader.getSystemClassLoader());
  *
  * We can't extend LoadClientAppsJob to specify a class loader,
  * even if we use it only for Class.forName() and not for
@@ -46,11 +48,10 @@ class LoadClientsJob extends JobImpl {
     private final Notifications _notif;
     private DaemonThread _addressbook;
     public SAMBridge SAM_BRIDGE;
-    //private BOB _bob;
+    // private BOB _bob;
 
     /** this is the delay to load (and start) the clients. */
-    private static final long LOAD_DELAY = 60*1000;
-
+    private static final long LOAD_DELAY = 60 * 1000;
 
     public LoadClientsJob(Context ctx, RouterContext rCtx, Notifications notif) {
         super(rCtx);
@@ -59,30 +60,31 @@ class LoadClientsJob extends JobImpl {
         getTiming().setStartAfter(getContext().clock().now() + LOAD_DELAY);
     }
 
-    public String getName() { return "Start Clients"; }
+    public String getName() {
+        return "Start Clients";
+    }
 
     public void runJob() {
         Job jtunnel = new RunI2PTunnel(getContext());
         getContext().jobQueue().addJob(jtunnel);
-
 
         Thread t = new I2PAppThread(new StatSummarizer(), "StatSummarizer", true);
         t.setPriority(Thread.NORM_PRIORITY - 1);
         t.start();
 
         // add other clients here
-        //_bob = new BOB(I2PAppContext.getGlobalContext(), null, new String[0]);
-        //try {
-        //    _bob.startup();
-        //} catch (IOException ioe) {}
+        // _bob = new BOB(I2PAppContext.getGlobalContext(), null, new String[0]);
+        // try {
+        // _bob.startup();
+        // } catch (IOException ioe) {}
         boolean useSAM = PreferenceManager.getDefaultSharedPreferences(mCtx).getBoolean("i2pandroid.client.SAM", true);
         Util.i("SAM API " + useSAM);
         if (useSAM) {
             Job jsam = new RunI2PSAM(getContext());
             getContext().jobQueue().addJob(jsam);
             Util.i("SAM API started successfully" + useSAM);
-        }else{
-            Util.i("SAM API disabled, not starting "+useSAM);
+        } else {
+            Util.i("SAM API disabled, not starting " + useSAM);
         }
         getContext().addShutdownTask(new ClientShutdownHook());
     }
@@ -93,7 +95,9 @@ class LoadClientsJob extends JobImpl {
             super(ctx);
         }
 
-        public String getName() { return "Start I2P Tunnel"; }
+        public String getName() {
+            return "Start I2P Tunnel";
+        }
 
         public void runJob() {
             if (!getContext().router().isRunning()) {
@@ -116,7 +120,7 @@ class LoadClientsJob extends JobImpl {
                 NewsFetcher fetcher = NewsFetcher.getInstance(mCtx, getContext(), _notif);
                 ctx.routerAppManager().addAndStart(fetcher, new String[0]);
 
-                _addressbook = new DaemonThread(new String[] {"addressbook"});
+                _addressbook = new DaemonThread(new String[] { "addressbook" });
                 _addressbook.setName("Addressbook");
                 _addressbook.setDaemon(true);
                 _addressbook.start();
@@ -133,7 +137,9 @@ class LoadClientsJob extends JobImpl {
             super(ctx);
         }
 
-        public String getName() { return "Start SAM API"; }
+        public String getName() {
+            return "Start SAM API";
+        }
 
         public void runJob() {
             if (!getContext().router().isRunning()) {
@@ -147,15 +153,23 @@ class LoadClientsJob extends JobImpl {
             Util.d("Starting SAM");
             try {
                 Util.i("Starting the SAM API");
-                SAM_BRIDGE = new SAMBridge("127.0.0.1",
+                SAMSecureSessionInterface _secureSession = new AndroidSAMSecureSession(mCtx);
+                /*SAM_BRIDGE = new SAMBridge("127.0.0.1",
                         7656,
                         false,
                         SAM_PROPERTIES(),
                         "sam.keys",
-                        new File("sam_config"));
+                        new File("sam_config"));*/
+                SAM_BRIDGE = new SAMBridge("127.0.0.1",
+                 7656,
+                 false,
+                 SAM_PROPERTIES(),
+                 "sam.keys",
+                 new File("sam_config"),
+                 _secureSession);
                 SAM_BRIDGE.run();
             } catch (IOException e) {
-                Util.e( e.toString());
+                Util.e(e.toString());
                 e.printStackTrace();
             }
         }
@@ -173,8 +187,8 @@ class LoadClientsJob extends JobImpl {
             // i2ptunnel registers its own hook
             // StatSummarizer registers its own hook
             // NewsFetcher registers its own hook
-            //if (_bob != null)
-            //    _bob.shutdown(null);
+            // if (_bob != null)
+            // _bob.shutdown(null);
             if (SAM_BRIDGE != null)
                 SAM_BRIDGE.shutdown(null);
             if (_addressbook != null)

@@ -188,6 +188,9 @@
     <string name="settings_desc_i2cp">Allow third-party apps to create tunnels using I2CP (requires router restart)</string>
     <string name="settings_label_sam">SAM interface</string>
     <string name="settings_desc_sam">Allow third-party apps to create tunnels using SAM (requires router restart)</string>
+    <string name="settings_confirm_sam">An application is trying to make a SAM connection.</string>
+    <string name="settings_confirm_allow_sam">Allow</string>
+    <string name="settings_confirm_deny_sam">Deny</string>
     <string name="settings_label_exploratory_pool">Exploratory pool</string>
     <string name="settings_desc_exploratory_pool">Tunnel parameters</string>
     <string name="settings_label_expl_inbound">Inbound tunnels</string>
