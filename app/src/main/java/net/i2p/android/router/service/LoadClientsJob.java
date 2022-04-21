@@ -154,12 +154,6 @@ class LoadClientsJob extends JobImpl {
             try {
                 Util.i("Starting the SAM API");
                 SAMSecureSessionInterface _secureSession = new AndroidSAMSecureSession(mCtx);
-                /*SAM_BRIDGE = new SAMBridge("127.0.0.1",
-                        7656,
-                        false,
-                        SAM_PROPERTIES(),
-                        "sam.keys",
-                        new File("sam_config"));*/
                 SAM_BRIDGE = new SAMBridge("127.0.0.1",
                  7656,
                  false,

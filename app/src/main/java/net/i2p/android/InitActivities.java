@@ -35,6 +35,7 @@ class InitActivities {
     public InitActivities(Context c) {
         ctx = c;
         myDir = Util.getFileDir(c);
+        Util.i("My app directory is "+myDir);
         _ourVersion = Util.getOurVersion(c);
     }
 
@@ -61,6 +62,7 @@ class InitActivities {
     void initialize() {
         Util.i("Initializing the I2P resources");
 
+        unzipResourceToDir(R.raw.certificates_zip, "certificates");
         if (checkNewVersion()) {
             List<Properties> lProps = Util.getPropertiesFromPreferences(ctx);
             Properties props = lProps.get(0);
@@ -139,9 +141,8 @@ class InitActivities {
                     FileUtil.rmdir(f, false);
                 }
             }
-            unzipResourceToDir(R.raw.certificates_zip, "certificates");
-            //File netDBDir = new File(myDir, "netDB");
-            //netDBDir.mkdir();
+            File netDBDir = new File(myDir, "netDB");
+            netDBDir.mkdir();
             //unzipResourceToDir(R.raw.netdb_zip, "netDB");
         }
 
@@ -207,6 +208,7 @@ class InitActivities {
             ZipEntry ze;
             while ((ze = zis.getNextEntry()) != null) {
                 out = null;
+                Util.i("unzipping "+ze);
                 try {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     byte[] buffer = new byte[1024];
@@ -281,18 +283,31 @@ class InitActivities {
     private boolean checkNewVersion() {
         Properties props = new Properties();
 
+        Util.i("Checking for a new install/version");
         InputStream fin = null;
         try {
             fin = ctx.openFileInput(CONFIG_FILE);
             DataHelper.loadProps(props,  fin);
         } catch (IOException ioe) {
-            Util.d("Looks like a new install");
+            Util.i("Looks like a new install");
         } finally {
-            if (fin != null) try { fin.close(); } catch (IOException ioe) {}
+            if (fin != null) {
+                try {
+                    Util.i("fin was not null "+CONFIG_FILE);
+                    fin.close();
+                } catch (IOException ioe) {
+                    Util.i("Error loading config:", ioe);
+                }
+            }else {
+                Util.i("fin was null");
+            }
         }
 
         String oldVersion = props.getProperty(PROP_INSTALLED_VERSION);
+        Util.i("Old version is:"+oldVersion);
         boolean newInstall = oldVersion == null;
+        if (newInstall)
+            return true;
         boolean newVersion = !_ourVersion.equals(oldVersion);
 
         if (newVersion) {
