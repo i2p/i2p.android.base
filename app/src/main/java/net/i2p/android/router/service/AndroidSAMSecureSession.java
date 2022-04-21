@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
+import net.i2p.android.router.R;
 import net.i2p.sam.*;
 /**
  * Implements SAMSecureSessionInterface on Android platforms using a Toast
@@ -34,8 +35,8 @@ public class AndroidSAMSecureSession implements SAMSecureSessionInterface {
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
-        builder.setMessage().setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+        builder.setMessage(mCtx.getResources().getString(R.string.settings_confirm_sam)).setPositiveButton(mCtx.getResources().getString(R.string.settings_confirm_allow_sam), dialogClickListener)
+                .setNegativeButton(mCtx.getResources().getString(R.string.settings_confirm_deny_sam), dialogClickListener).show();
 
         return approve[0];
     }
