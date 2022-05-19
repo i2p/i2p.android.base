@@ -38,9 +38,9 @@
   <string name="net_status_warn_firewalled_inbound_tcp">Geliş TCP bağlantısı güvenlik duvarı etkinleştirilmiş </string>
   <string name="net_status_warn_firewalled_floodfill">Güvenlik duvarı arkasında otomatik doldurma</string>
   <string name="net_status_info_disconnected">Bağlantı kesildi - ağ bağlantısını denetleyin</string>
-  <string name="net_status_error_udp_port">UDP kapı numarası kullanılıyor - ayarları değiştirip yeniden başlatın</string>
+  <string name="net_status_error_udp_port">UDP bağlantı noktası kullanılıyor - ayarları değiştirip yeniden başlatın</string>
   <string name="net_status_error_no_active_peers">Etkin eş yok, ağ bağlantısını ve güvenlik duvarını denetleyin</string>
-  <string name="net_status_error_udp_disabled_tcp_not_set">UDP devre dışı ve Geliş TCP bağlantısı sunucu/kapı numarası ayarlanmamış</string>
+  <string name="net_status_error_udp_disabled_tcp_not_set">UDP devre dışı ve Geliş TCP bağlantısı sunucu/bağlantı noktası ayarlanmamış</string>
   <string name="net_status_warn_firewalled_udp_disabled">Güvenlik duvarı ve UDP devre dışı</string>
   <string name="shared_clients">Paylaşılmış istemciler</string>
   <string name="uptime">Çalışma süresi</string>
@@ -135,7 +135,7 @@
   <string name="settings_label_sharePercent">Paylaşım yüzdesi</string>
   <string name="settings_desc_sharePercent">Paylaşılacak bant genişliği yüzdesi (varsayılan=80)</string>
   <string name="settings_dialog_sharePercent">Paylaşılacak bant genişliği yüzdesi</string>
-  <string name="settings_desc_upnp">Güvenlik duvarı kapı numaraları kendiliğinden açılsın</string>
+  <string name="settings_desc_upnp">Güvenlik duvarı bağlantı noktaları otomatik olarak açılsın</string>
   <string name="settings_label_logging">Günlükleme</string>
   <string name="settings_label_default_log_level">Varsayılan günlük düzeyi</string>
   <string name="settings_label_appearance">Görünüm</string>
@@ -222,9 +222,9 @@
   <string name="i2ptunnel_wizard_k_dest">Hedef</string>
   <string name="i2ptunnel_wizard_k_outproxies">Çıkış vekil sunucuları</string>
   <string name="i2ptunnel_wizard_k_target_host">Hedef sunucu</string>
-  <string name="i2ptunnel_wizard_k_target_port">Hedef kapı numarası</string>
+  <string name="i2ptunnel_wizard_k_target_port">Hedef bağlantı noktası</string>
   <string name="i2ptunnel_wizard_k_reachable_on">Şuradan erişilebilir</string>
-  <string name="i2ptunnel_wizard_k_binding_port">Bağlanılacak kapı numarası</string>
+  <string name="i2ptunnel_wizard_k_binding_port">Bağlanılacak bağlantı noktası</string>
   <string name="i2ptunnel_wizard_k_auto_start">Otomatik başlat</string>
   <string name="next">Sonraki</string>
   <string name="prev">Önceki</string>
@@ -236,9 +236,9 @@
   <string name="i2ptunnel_wizard_desc_dest">Bu istemci tünelinin bağlanacağı hizmetin I2P hedefini yazın. Tam Base 64 hedef anahtarı ya da adres defterinizden bir sunucu adı olabilir.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Bu tünel türü için bildiğiniz çıkış sunucuları varsa (HTTP ya da SOCKS) buraya virgül ile ayırarak yazın. </string>
   <string name="i2ptunnel_wizard_desc_target_host">Çalıştırdığınız hizmetin IP adresi. Genellikle aynı bilgisayarda olduğundan otomatik olarak 127.0.0.1 yazılır.</string>
-  <string name="i2ptunnel_wizard_desc_target_port">Hizmetin bağlantıları kabul edeceği kapı numarası.</string>
+  <string name="i2ptunnel_wizard_desc_target_port">Hizmetin bağlantıları kabul edeceği bağlantı noktası.</string>
   <string name="i2ptunnel_wizard_desc_reachable_on">Bu seçenek bu tünele erişebilecek bilgisayar ve akıllı telefonları sınırlar.</string>
-  <string name="i2ptunnel_wizard_desc_binding_port">İstemci tüneline yerel olarak erişilebilecek kapı numarası. Aynı zamanda HTTP bidir sunucusu tünelinin istemci kapı numarasıdır.</string>
+  <string name="i2ptunnel_wizard_desc_binding_port">İstemci tüneline yerel olarak erişilebilecek bağlantı noktası. Aynı zamanda HTTP bidir sunucusu tünelinin istemci bağlantı noktasıdır.</string>
   <string name="i2ptunnel_wizard_desc_auto_start">Yöneltici başlatıldığında tünel de başlatılsın mı?</string>
   <string name="i2ptunnel_wizard_submit_confirm_message">Tünel oluşturulsun</string>
   <string name="i2ptunnel_wizard_submit_confirm_button">Tüneli oluştur</string>
@@ -251,7 +251,7 @@
   <string name="description">Açıklama</string>
   <string name="auto_start">Otomatik başlat</string>
   <string name="tunnel_summ_auto_start">Yöneltici başlatıldığında tünel de başlatılsın.</string>
-  <string name="tunnel_cat_ports">Yerel kapı numaraları</string>
+  <string name="tunnel_cat_ports">Yerel bağlantı noktaları</string>
   <string name="shared_client">Paylaşılmış istemci</string>
   <string name="tunnel_summ_shared_client">Diğer paylaşılmış istemciler ile aynı hedef ve tüneller kullanılsın</string>
   <string name="target_destination">Hedef konum</string>
@@ -260,7 +260,7 @@
   <string name="persistent_key_conflict_msg">Tünel yeniden açıldığında yeni anahtarlar oluşturuluyorsa sürekli anahtarlar kullanılamaz. Yeniden açıldığından yeni anahtarların oluşturulması devre dışı bırakılsın mı?</string>
   <string name="tunnel_summ_persistent_key">Yeniden başlatıldığında bu tünelin hedefi korunsun</string>
   <string name="reachable_on">Şuradan erişilebilir</string>
-  <string name="listen_port">Dinlenecek kapı numarası</string>
+  <string name="listen_port">Dinlenecek bağlantı noktası</string>
   <string name="client_ssl">SSL İstemci</string>
   <string name="tunnel_summ_client_ssl">İstemci yalnızca SSL üzerinden bağlanabilir</string>
   <string name="outproxies">Çıkış vekil sunucuları</string>
@@ -270,7 +270,7 @@
   <string name="tunnel_summ_enable_dcc">IRC istemcileri DCC kullanabilsin</string>
   <string name="website_domain_name">Web sitesinin etki alanı</string>
   <string name="target_host">Hedef sunucu</string>
-  <string name="target_port">Hedef kapı numarası</string>
+  <string name="target_port">Hedef bağlantı noktası</string>
   <string name="use_ssl">SSL Kullanılsın</string>
   <string name="tunnel_summ_use_ssl">Hedefe bağlanmak için SSL kullanılsın</string>
   <string name="tunnel_parameters">Tünel parametreleri</string>
