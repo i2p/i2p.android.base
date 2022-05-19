@@ -38,7 +38,7 @@ public class AndroidSAMSecureSession implements SAMSecureSessionInterface {
 
         @Override
         public void run() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(mCtx.getApplicationContext());
+            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
 
             builder.setTitle(mCtx.getResources().getString(R.string.settings_confirm_sam));
             builder.setMessage(mCtx.getResources().getString(R.string.settings_confirm_sam));
@@ -46,7 +46,6 @@ public class AndroidSAMSecureSession implements SAMSecureSessionInterface {
             builder.setPositiveButton(mCtx.getResources().getString(R.string.settings_confirm_allow_sam), new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int which) {
-                    // set result=true and close the dialog
                     result = 1;
                     dialog.dismiss();
                 }
@@ -56,7 +55,6 @@ public class AndroidSAMSecureSession implements SAMSecureSessionInterface {
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // set result=false
                     result = 0;
                     dialog.dismiss();
                 }
@@ -66,20 +64,30 @@ public class AndroidSAMSecureSession implements SAMSecureSessionInterface {
             alert.show();
         }
 
-        public boolean isResult() {
+        private synchronized void waitForResult() {
             for (int i=0;i<60;i++) {
+                if (result != - 1)
+                    break;
                 Util.i("Waiting on user to approve SAM connection");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    return false;
+                    Util.e("SAMSecureSession Error", e);
                 }
             }
+        }
+
+        private boolean isResult() {
             if (result == 0)
                 return false;
             if (result == 1)
                 return true;
             return false;
+        }
+
+        public boolean checkResult() {
+            waitForResult();
+            return isResult();
         }
     }
     public Context getApplicationContext() {
@@ -91,6 +99,6 @@ public class AndroidSAMSecureSession implements SAMSecureSessionInterface {
         Handler handler = new Handler(Looper.getMainLooper());
         SAMSecureRunnable ssr = new SAMSecureRunnable();
         handler.post(ssr);
-        return ssr.isResult();
+        return ssr.checkResult();
     }
 }

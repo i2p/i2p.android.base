@@ -63,88 +63,86 @@ class InitActivities {
         Util.i("Initializing the I2P resources");
 
         unzipResourceToDir(R.raw.certificates_zip, "certificates");
-        if (checkNewVersion()) {
-            List<Properties> lProps = Util.getPropertiesFromPreferences(ctx);
-            Properties props = lProps.get(0);
+        List<Properties> lProps = Util.getPropertiesFromPreferences(ctx);
+        Properties props = lProps.get(0);
 
-            props.setProperty("i2p.dir.temp", myDir + "/tmp");
-            props.setProperty("i2p.dir.pid", myDir + "/tmp");
-            // Time disabled in default router.config
-            // But lots of time problems on Android, not all carriers support NITZ
-            // and there was no NTP before 3.0. Tablets should be fine?
-            // Phones in airplane mode with wifi enabled still a problem.
-            // Deactivated phones in airplane mode definitely won't have correct time.
-            if (Build.VERSION.SDK_INT < 11)  // Honeycomb 3.0
-                props.setProperty("time.disabled", "false");
-            mergeResourceToFile(R.raw.router_config, "router.config", props);
-            mergeResourceToFile(R.raw.logger_config, "logger.config", lProps.get(1));
-            // This is not needed for now, i2ptunnel.config only contains tunnel
-            // settings, which can now be configured manually. We don't want to
-            // overwrite the user's tunnels.
-            //mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config", null);
-            copyResourceToFileIfAbsent(R.raw.i2ptunnel_config, "i2ptunnel.config");
-            // FIXME this is a memory hog to merge this way
-            mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
-            mergeResourceToFile(R.raw.more_hosts_txt, "hosts.txt", null);
-            copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
+        props.setProperty("i2p.dir.temp", myDir + "/tmp");
+        props.setProperty("i2p.dir.pid", myDir + "/tmp");
+        // Time disabled in default router.config
+        // But lots of time problems on Android, not all carriers support NITZ
+        // and there was no NTP before 3.0. Tablets should be fine?
+        // Phones in airplane mode with wifi enabled still a problem.
+        // Deactivated phones in airplane mode definitely won't have correct time.
+        if (Build.VERSION.SDK_INT < 11)  // Honeycomb 3.0
+            props.setProperty("time.disabled", "false");
+        mergeResourceToFile(R.raw.router_config, "router.config", props);
+        mergeResourceToFile(R.raw.logger_config, "logger.config", lProps.get(1));
+        // This is not needed for now, i2ptunnel.config only contains tunnel
+        // settings, which can now be configured manually. We don't want to
+        // overwrite the user's tunnels.
+        //mergeResourceToFile(R.raw.i2ptunnel_config, "i2ptunnel.config", null);
+        copyResourceToFileIfAbsent(R.raw.i2ptunnel_config, "i2ptunnel.config");
+        // FIXME this is a memory hog to merge this way
+        mergeResourceToFile(R.raw.hosts_txt, "hosts.txt", null);
+        mergeResourceToFile(R.raw.more_hosts_txt, "hosts.txt", null);
+        copyResourceToFile(R.raw.blocklist_txt, "blocklist.txt");
 
-            File abDir = new File(myDir, "addressbook");
-            abDir.mkdir();
-            copyResourceToFile(R.raw.subscriptions_txt, "addressbook/subscriptions.txt");
-            mergeResourceToFile(R.raw.addressbook_config_txt, "addressbook/config.txt", null);
+        File abDir = new File(myDir, "addressbook");
+        abDir.mkdir();
+        copyResourceToFile(R.raw.subscriptions_txt, "addressbook/subscriptions.txt");
+        mergeResourceToFile(R.raw.addressbook_config_txt, "addressbook/config.txt", null);
 
-            File docsDir = new File(myDir, "docs");
-            docsDir.mkdir();
-            /*copyResourceToFile(R.raw.ahelper_conflict_header_ht, "docs/ahelper-conflict-header.ht");
-            copyResourceToFile(R.raw.ahelper_new_header_ht, "docs/ahelper-new-header.ht");
-            copyResourceToFile(R.raw.ahelper_notfound_header_ht, "docs/ahelper-notfound-header.ht");
-            copyResourceToFile(R.raw.auth_header_ht, "docs/auth-header.ht");
-            copyResourceToFile(R.raw.baduri_header_ht, "docs/baduri-header.ht");
-            copyResourceToFile(R.raw.denied_header_ht, "docs/denied-header.ht");
-            copyResourceToFile(R.raw.dnf_header_ht, "docs/dnf-header.ht");
-            copyResourceToFile(R.raw.dnfb_header_ht, "docs/dnfb-header.ht");
-            copyResourceToFile(R.raw.dnfh_header_ht, "docs/dnfh-header.ht");
-            copyResourceToFile(R.raw.dnfp_header_ht, "docs/dnfp-header.ht");
-            copyResourceToFile(R.raw.enc_header_ht, "docs/enc-header.ht");
-            copyResourceToFile(R.raw.encp_header_ht, "docs/encp-header.ht");
-            copyResourceToFile(R.raw.localhost_header_ht, "docs/localhost-header.ht");
-            copyResourceToFile(R.raw.nols_header_ht, "docs/nols-header.ht");
-            copyResourceToFile(R.raw.nolsp_header_ht, "docs/nolsp-header.ht");
-            copyResourceToFile(R.raw.noproxy_header_ht, "docs/noproxy-header.ht");
-            copyResourceToFile(R.raw.protocol_header_ht, "docs/protocol-header.ht");
-            copyResourceToFile(R.raw.reset_header_ht, "docs/reset-header.ht");
-            copyResourceToFile(R.raw.resetp_header_ht, "docs/resetp-header.ht");*/
+        File docsDir = new File(myDir, "docs");
+        docsDir.mkdir();
+        /*copyResourceToFile(R.raw.ahelper_conflict_header_ht, "docs/ahelper-conflict-header.ht");
+        copyResourceToFile(R.raw.ahelper_new_header_ht, "docs/ahelper-new-header.ht");
+        copyResourceToFile(R.raw.ahelper_notfound_header_ht, "docs/ahelper-notfound-header.ht");
+        copyResourceToFile(R.raw.auth_header_ht, "docs/auth-header.ht");
+        copyResourceToFile(R.raw.baduri_header_ht, "docs/baduri-header.ht");
+        copyResourceToFile(R.raw.denied_header_ht, "docs/denied-header.ht");
+        copyResourceToFile(R.raw.dnf_header_ht, "docs/dnf-header.ht");
+        copyResourceToFile(R.raw.dnfb_header_ht, "docs/dnfb-header.ht");
+        copyResourceToFile(R.raw.dnfh_header_ht, "docs/dnfh-header.ht");
+        copyResourceToFile(R.raw.dnfp_header_ht, "docs/dnfp-header.ht");
+        copyResourceToFile(R.raw.enc_header_ht, "docs/enc-header.ht");
+        copyResourceToFile(R.raw.encp_header_ht, "docs/encp-header.ht");
+        copyResourceToFile(R.raw.localhost_header_ht, "docs/localhost-header.ht");
+        copyResourceToFile(R.raw.nols_header_ht, "docs/nols-header.ht");
+        copyResourceToFile(R.raw.nolsp_header_ht, "docs/nolsp-header.ht");
+        copyResourceToFile(R.raw.noproxy_header_ht, "docs/noproxy-header.ht");
+        copyResourceToFile(R.raw.protocol_header_ht, "docs/protocol-header.ht");
+        copyResourceToFile(R.raw.reset_header_ht, "docs/reset-header.ht");
+        copyResourceToFile(R.raw.resetp_header_ht, "docs/resetp-header.ht");*/
 
-            File cssDir = new File(docsDir, "themes/console/light");
-            cssDir.mkdirs();
-            //copyResourceToFile(R.raw.console_css, "docs/themes/console/light/console.css");
-            //copyResourceToFile(R.raw.android_css, "docs/themes/console/light/android.css");
+        File cssDir = new File(docsDir, "themes/console/light");
+        cssDir.mkdirs();
+        //copyResourceToFile(R.raw.console_css, "docs/themes/console/light/console.css");
+        //copyResourceToFile(R.raw.android_css, "docs/themes/console/light/android.css");
 
-            File imgDir = new File(docsDir, "themes/console/images");
-            imgDir.mkdir();
-            copyResourceToFile(R.drawable.i2plogo, "docs/themes/console/images/i2plogo.png");
-            copyResourceToFile(R.drawable.itoopie_sm, "docs/themes/console/images/itoopie_sm.png");
-            //copyResourceToFile(R.drawable.outbound, "docs/themes/console/images/outbound.png");
-            //copyResourceToFile(R.drawable.inbound, "docs/themes/console/images/inbound.png");
+        File imgDir = new File(docsDir, "themes/console/images");
+        imgDir.mkdir();
+        copyResourceToFile(R.drawable.i2plogo, "docs/themes/console/images/i2plogo.png");
+        copyResourceToFile(R.drawable.itoopie_sm, "docs/themes/console/images/itoopie_sm.png");
+        //copyResourceToFile(R.drawable.outbound, "docs/themes/console/images/outbound.png");
+        //copyResourceToFile(R.drawable.inbound, "docs/themes/console/images/inbound.png");
 
-            File img2Dir = new File(cssDir, "images");
-            img2Dir.mkdir();
-            //copyResourceToFile(R.drawable.header, "docs/themes/console/light/images/header.png");
+        File img2Dir = new File(cssDir, "images");
+        img2Dir.mkdir();
+        //copyResourceToFile(R.drawable.header, "docs/themes/console/light/images/header.png");
 
-            File certDir = new File(myDir, "certificates");
-            certDir.mkdir();
-            File certificates = new File(myDir, "certificates");
-            File[] allCertificates = certificates.listFiles();
-            if ( allCertificates != null) {
-                for (File f : allCertificates) {
-                    Util.d("Deleting old certificate file/dir " + f);
-                    FileUtil.rmdir(f, false);
-                }
+        File certDir = new File(myDir, "certificates");
+        certDir.mkdir();
+        File certificates = new File(myDir, "certificates");
+        File[] allCertificates = certificates.listFiles();
+        if ( allCertificates != null) {
+            for (File f : allCertificates) {
+                Util.d("Deleting old certificate file/dir " + f);
+                FileUtil.rmdir(f, false);
             }
-            File netDBDir = new File(myDir, "netDB");
-            netDBDir.mkdir();
-            //unzipResourceToDir(R.raw.netdb_zip, "netDB");
         }
+        File netDBDir = new File(myDir, "netDB");
+        netDBDir.mkdir();
+        //unzipResourceToDir(R.raw.netdb_zip, "netDB");
 
         // Set up the locations so settings can find them
         System.setProperty("i2p.dir.base", myDir);
