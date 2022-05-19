@@ -67,7 +67,7 @@ public class AndroidSAMSecureSession implements SAMSecureSessionInterface {
         }
 
         public boolean isResult() {
-            while (result == -1) {
+            for (int i=0;i<60;i++) {
                 Util.i("Waiting on user to approve SAM connection");
                 try {
                     Thread.sleep(1000);
@@ -91,6 +91,6 @@ public class AndroidSAMSecureSession implements SAMSecureSessionInterface {
         Handler handler = new Handler(Looper.getMainLooper());
         SAMSecureRunnable ssr = new SAMSecureRunnable();
         handler.post(ssr);
-        return false;
+        return ssr.isResult();
     }
 }
