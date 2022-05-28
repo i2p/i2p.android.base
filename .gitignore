@@ -1,2 +1,4 @@
 etc/docker.signing.properties
-signing.properties
+signing.properties.idea
+.idea/
+.gradle/

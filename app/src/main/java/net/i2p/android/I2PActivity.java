@@ -19,6 +19,7 @@ import net.i2p.android.router.MainFragment;
 import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;
 import net.i2p.android.router.addressbook.AddressbookContainer;
+import net.i2p.android.router.service.AndroidSAMSecureSession;
 import net.i2p.android.router.service.RouterService;
 import net.i2p.android.router.service.State;
 import net.i2p.android.router.util.Connectivity;
@@ -134,6 +135,7 @@ public class I2PActivity extends I2PActivityBase implements
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
         handleIntents();
     }
 
@@ -143,9 +145,16 @@ public class I2PActivity extends I2PActivityBase implements
 
         Intent intent = getIntent();
         String action = intent.getAction();
+        Util.d("handleIntent: intent=" + intent.toString());
 
         if (action == null)
             return;
+
+        Util.d("handleIntent: action=" + action);
+
+        Bundle extra = intent.getExtras();
+        if (extra != null)
+          Util.d("handleIntent extra=" + extra.toString());
 
         switch (action) {
             case "net.i2p.android.router.START_I2P":
@@ -153,7 +162,12 @@ public class I2PActivity extends I2PActivityBase implements
                     mViewPager.setCurrentItem(0, false);
                 autoStart();
                 break;
-
+            case "net.i2p.android.router.service.APPROVE_SAM":
+                Util.w("Affirmed SAM Connection");
+                String ID = extra.getString("ID");
+                Util.d("SAM ID was: " + ID);
+                AndroidSAMSecureSession.affirmResult(ID);
+                break;
             case Intent.ACTION_PICK:
                 mViewPager.setFixedPage(2, R.string.select_an_address);
                 break;

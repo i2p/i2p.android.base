@@ -236,7 +236,7 @@ public class RouterService extends Service {
                     throw new IllegalStateException("Router has no context?");
                 }
                 _context.router().setKillVMOnEnd(false);
-                Job loadJob = new LoadClientsJob(RouterService.this, _context, _notif);
+                Job loadJob = new LoadClientsJob(RouterService.this, _context, RouterService.this, _notif, _statusBar);
                 _context.jobQueue().addJob(loadJob);
                 _context.addShutdownTask(new ShutdownHook());
                 _context.addFinalShutdownTask(new FinalShutdownHook());
@@ -261,6 +261,16 @@ public class RouterService extends Service {
     }
     private String _currTitle;
     private boolean _hadTunnels;
+
+    public void updateStatus() {
+        RouterContext ctx = _context;
+        if(ctx != null && (_state == State.RUNNING || _state == State.ACTIVE || _state == State.GRACEFUL_SHUTDOWN)) {
+            Router router = ctx.router();
+            if(router.isAlive()) {
+                updateStatus(ctx);
+            }
+        }
+    }
 
     private void updateStatus(RouterContext ctx) {
         int active = ctx.commSystem().countActivePeers();

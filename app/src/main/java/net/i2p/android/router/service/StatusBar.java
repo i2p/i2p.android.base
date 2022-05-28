@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import net.i2p.android.I2PActivity;
 import net.i2p.android.router.R;
+import net.i2p.android.router.util.Notifications;
 
 class StatusBar {
 
@@ -45,35 +46,67 @@ class StatusBar {
         int icon = ICON_STARTING;
         // won't be shown if replace() is called
         String text = mCtx.getString(R.string.notification_status_starting);
+        mNotifyBuilder = notifyBuilder(icon, text);
+    }
 
+    private NotificationCompat.Builder notifyBuilder(int icon, String text) {
+        NotificationCompat.Builder tNotifyBuilder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mNotifyBuilder = new NotificationCompat.Builder(mCtx);
+            tNotifyBuilder = new NotificationCompat.Builder(mCtx);
         } else {
-            mNotifyBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID);
+            tNotifyBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID);
         }
+        tNotifyBuilder.setContentText(text);
+        tNotifyBuilder.setSmallIcon(icon);
+        tNotifyBuilder.setColor(mCtx.getResources().getColor(R.color.primary_light));
+        tNotifyBuilder.setOngoing(true);
+        tNotifyBuilder.setPriority(NotificationManager.IMPORTANCE_LOW);
+        tNotifyBuilder.setCategory(Notification.CATEGORY_SERVICE);
 
-        mNotifyBuilder.setContentText(text);
-        mNotifyBuilder.setSmallIcon(icon);
-        mNotifyBuilder.setColor(mCtx.getResources().getColor(R.color.primary_light));
-        mNotifyBuilder.setOngoing(true);
-        mNotifyBuilder.setPriority(NotificationManager.IMPORTANCE_LOW);
-        mNotifyBuilder.setCategory(Notification.CATEGORY_SERVICE);
+        PendingIntent pi = this.pendingIntent();
+        tNotifyBuilder.setContentIntent(pi);
+        return tNotifyBuilder;
+    }
 
+    private PendingIntent pendingIntent() {
         Intent intent = new Intent(mCtx, I2PActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getActivity(mCtx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        mNotifyBuilder.setContentIntent(pi);
+        return pi;
     }
 
     public void replace(int icon, int textResource) {
+        PendingIntent pi = pendingIntent();
+        mNotifyBuilder.setContentIntent(pi);
         replace(icon, mCtx.getString(textResource));
     }
 
     public void replace(int icon, String title) {
+        PendingIntent pi = pendingIntent();
+        mNotifyBuilder.setContentIntent(pi);
         mNotifyBuilder.setSmallIcon(icon)
             .setStyle(null)
             .setTicker(title);
         update(title);
+    }
+
+    public void replaceIntent(int icon, String text, PendingIntent pi) {
+        mNotifyBuilder.setContentIntent(pi);
+        mNotifyBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+        mNotifyBuilder.setAutoCancel(true);
+        mNotifyBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(text));
+        mNotifyBuilder.setSmallIcon(icon).setContentText(text);
+        update(null, text);
+    }
+
+    public void replaceIntent(int icon, int textResource, PendingIntent pi) {
+        String text = mCtx.getString(textResource);
+        mNotifyBuilder.setContentIntent(pi);
+        mNotifyBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+        mNotifyBuilder.setAutoCancel(true);
+        mNotifyBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(text));
+        mNotifyBuilder.setSmallIcon(icon).setContentText(text);
+        update(null, text);
     }
 
     public void update(String title) {
@@ -87,8 +120,10 @@ class StatusBar {
     }
 
     public void update(String title, String text) {
-        mNotifyBuilder.setContentTitle(title)
-            .setContentText(text);
+        if (title != null)
+            mNotifyBuilder.setContentTitle(title);
+        if (text != null)
+            mNotifyBuilder.setContentText(text);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mNotificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_LOW);
             mNotificationManager.createNotificationChannel(mNotificationChannel);

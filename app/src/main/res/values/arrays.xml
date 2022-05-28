@@ -172,4 +172,28 @@
         <item>ECDSA-P521</item>
         <item>Ed25519</item>
     </string-array>
+    <string-array name="speed_increments">
+        <item>100 KB/s</item>
+        <item>200 KB/s</item>
+        <item>300 KB/s</item>
+        <item>400 KB/s</item>
+        <item>500 KB/s</item>
+        <item>600 KB/s</item>
+        <item>700 KB/s</item>
+        <item>800 KB/s</item>
+        <item>900 KB/s</item>
+        <item>1000 KB/s</item>
+    </string-array>
+    <string-array name="speed_values">
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>500</item>
+        <item>600</item>
+        <item>700</item>
+        <item>800</item>
+        <item>900</item>
+        <item>1000</item>
+    </string-array>
 </resources>

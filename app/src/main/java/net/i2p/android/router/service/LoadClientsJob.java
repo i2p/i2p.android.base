@@ -1,19 +1,23 @@
 package net.i2p.android.router.service;
 
+import android.app.Notification;
 import android.content.Context;
 
 //import net.i2p.BOB.BOB;
-import net.i2p.I2PAppContext;
 import net.i2p.addressbook.DaemonThread;
+
+import android.content.Intent;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import net.i2p.android.apps.NewsFetcher;
+import net.i2p.android.router.service.AndroidSAMSecureSession;
 import net.i2p.android.router.util.Notifications;
 import net.i2p.android.router.util.Util;
 import net.i2p.i2ptunnel.TunnelControllerGroup;
 import net.i2p.router.Job;
 import net.i2p.router.JobImpl;
+import net.i2p.router.Router;
 import net.i2p.router.RouterContext;
-import net.i2p.router.startup.RouterAppManager;
 import net.i2p.util.I2PAppThread;
 import net.i2p.sam.SAMBridge;
 import net.i2p.sam.SAMSecureSessionInterface;
@@ -45,19 +49,41 @@ import java.util.Properties;
 class LoadClientsJob extends JobImpl {
 
     private final Context mCtx;
+    private final RouterService _routerService;
     private final Notifications _notif;
     private DaemonThread _addressbook;
     public SAMBridge SAM_BRIDGE;
+    private final StatusBar _statusBar;
     // private BOB _bob;
 
     /** this is the delay to load (and start) the clients. */
     private static final long LOAD_DELAY = 60 * 1000;
 
+    public LoadClientsJob(Context ctx, RouterContext rCtx, Notifications notif, StatusBar status) {
+        super(rCtx);
+        mCtx = ctx;
+        _routerService = null;
+        _notif = notif;
+        getTiming().setStartAfter(getContext().clock().now() + LOAD_DELAY);
+        _statusBar = status;
+    }
+
+    public LoadClientsJob(Context ctx, RouterContext rCtx, RouterService rSvc, Notifications notif, StatusBar status) {
+        super(rCtx);
+        mCtx = ctx;
+        _routerService = rSvc;
+        _notif = notif;
+        getTiming().setStartAfter(getContext().clock().now() + LOAD_DELAY);
+        _statusBar = status;
+    }
+
     public LoadClientsJob(Context ctx, RouterContext rCtx, Notifications notif) {
         super(rCtx);
         mCtx = ctx;
+        _routerService = null;
         _notif = notif;
         getTiming().setStartAfter(getContext().clock().now() + LOAD_DELAY);
+        _statusBar = null;
     }
 
     public String getName() {
@@ -153,7 +179,9 @@ class LoadClientsJob extends JobImpl {
             Util.d("Starting SAM");
             try {
                 Util.i("Starting the SAM API");
-                SAMSecureSessionInterface _secureSession = new AndroidSAMSecureSession(mCtx);
+                Looper.prepare();
+                AndroidSAMSecureSession _androidSecureSession = new AndroidSAMSecureSession(mCtx, _routerService, _statusBar);
+                SAMSecureSessionInterface _secureSession = _androidSecureSession;
                 SAM_BRIDGE = new SAMBridge("127.0.0.1",
                  7656,
                  false,
