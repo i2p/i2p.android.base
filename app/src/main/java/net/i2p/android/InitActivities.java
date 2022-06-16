@@ -62,7 +62,6 @@ class InitActivities {
     void initialize() {
         Util.i("Initializing the I2P resources");
 
-        unzipResourceToDir(R.raw.certificates_zip, "certificates");
         List<Properties> lProps = Util.getPropertiesFromPreferences(ctx);
         Properties props = lProps.get(0);
 
@@ -143,6 +142,9 @@ class InitActivities {
         File netDBDir = new File(myDir, "netDB");
         netDBDir.mkdir();
         //unzipResourceToDir(R.raw.netdb_zip, "netDB");
+        unzipResourceToDir(R.raw.certificates_zip, "certificates");
+        File familyKeysInvalid = new File(myDir,"certificates/family");
+        FileUtil.rmdir(familyKeysInvalid, false);
 
         // Set up the locations so settings can find them
         System.setProperty("i2p.dir.base", myDir);
@@ -227,6 +229,9 @@ class InitActivities {
                         f.mkdir();
                     } else {
                         Util.i("Creating file " + myDir + "/" + folder +"/" + name + " from resource");
+                        //create all the leading directories
+                        File newFile = new File(myDir+"/"+folder+"/"+name);
+                        newFile.getParentFile().mkdirs();
                         byte[] bytes = baos.toByteArray();
                         out = new FileOutputStream(f);
                         out.write(bytes);
