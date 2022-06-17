@@ -143,8 +143,6 @@ class InitActivities {
         netDBDir.mkdir();
         //unzipResourceToDir(R.raw.netdb_zip, "netDB");
         unzipResourceToDir(R.raw.certificates_zip, "certificates");
-        File familyKeysInvalid = new File(myDir,"certificates/family");
-        FileUtil.rmdir(familyKeysInvalid, false);
 
         // Set up the locations so settings can find them
         System.setProperty("i2p.dir.base", myDir);
