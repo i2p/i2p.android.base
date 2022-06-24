@@ -14,24 +14,26 @@
     <PreferenceCategory
         android:key="settings_bandwidth"
         android:title="@string/settings_label_bandwidth">
-    <!--
-    i2np.bandwidth.inboundKBytesPerSecond=100
-    -->
-    <DropDownPreference
-        android:key="@string/PROP_INBOUND_BANDWIDTH"
-        android:title="@string/settings_desc_bw_inbound"
-        android:entries="@array/speed_increments"
-        android:entryValues="@array/speed_values"
-        />
-    <!--
-    i2np.bandwidth.outboundKBytesPerSecond=30
-    -->
-    <DropDownPreference
-        android:key="@string/PROP_OUTBOUND_BANDWIDTH"
-        android:title="@string/settings_desc_bw_inbound"
-        android:entries="@array/speed_increments"
-        android:entryValues="@array/speed_values"
-        />
+        <!--
+        i2np.bandwidth.inboundKBytesPerSecond=100
+        -->
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="@string/PROP_INBOUND_BANDWIDTH"
+            android:title="@string/settings_desc_bw_inbound"
+            app:msbp_defaultValue="100"
+            app:msbp_maxValue="1000"
+            app:msbp_measurementUnit="KB/s"
+            />
+        <!--
+        i2np.bandwidth.outboundKBytesPerSecond=30
+        -->
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="@string/PROP_OUTBOUND_BANDWIDTH"
+            android:title="@string/settings_desc_bw_outbound"
+            app:msbp_defaultValue="100"
+            app:msbp_maxValue="1000"
+            app:msbp_measurementUnit="KB/s"
+            />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -49,9 +51,9 @@
         android:summary="@string/settings_desc_hiddenMode"
         />
         -->
-    <!--
-    router.maxParticipatingTunnels=0
-    -->
+        <!--
+        router.maxParticipatingTunnels=0
+        -->
         <!--
     <com.hlidskialf.android.preference.SeekBarPreference
         android:key="router.maxParticipatingTunnels"
@@ -64,9 +66,9 @@
         android:dependency="router.hiddenMode"
         />
         -->
-    <!--
-    router.sharePercentage=10
-    -->
+        <!--
+        router.sharePercentage=10
+        -->
         <!--
     <com.hlidskialf.android.preference.SeekBarPreference
         android:key="router.sharePercentage"
@@ -81,15 +83,15 @@
         />
         -->
 
-    <!--
-    i2np.upnp.enable=false
-    -->
-    <CheckBoxPreference
-        android:key="@string/PROP_ENABLE_UPNP"
-        android:defaultValue="true"
-        android:title="UPnP"
-        android:summary="@string/settings_desc_upnp"
-        />
+        <!--
+        i2np.upnp.enable=false
+        -->
+        <CheckBoxPreference
+            android:key="@string/PROP_ENABLE_UPNP"
+            android:defaultValue="true"
+            android:title="UPnP"
+            android:summary="@string/settings_desc_upnp"
+            />
     </PreferenceCategory>
 
 </PreferenceScreen>
