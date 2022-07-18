@@ -18,6 +18,7 @@ the override.properties that is used in the Docker container.
 
 ## Prerequirements
 
+ 0. Update the changelog!
  1. Ensure you have the deprecated maven ant tasks. ( https://maven.apache.org/ant-tasks/download.cgi )
  2. It should exist at `~/.ant/lib/maven-ant-tasks-2.1.3.jar`
  3. Ensure you have hamcrest-integration, hamcrest-library, hamcrest-core in the hamcrest.home directory.

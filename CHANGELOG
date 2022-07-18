@@ -1,3 +1,32 @@
+1.8.2
+ * This update fixes a bug where Family Keys are incorrectly handled by the Android router, leading
+ to a crash.
+ * This update fixes a bug wherein incorrect type-checking caused a crash when using the Network
+ Config page for some users.
+
+1.8.1
+ * This update fixes a bug where certificates were unpacked to the wrong location on new installs,
+ resulting in the router failing to start.
+
+1.8.0
+ * This release updates the underlying I2P libraries to I2P version 1.8.0
+ * The SAM API now operates in "Interactive Authentication" mode. Users will be prompted via
+ the notificationArea to approve or ignore new SAM connections initiated by external apps.
+ * The network config menu now features a drop-down configuration instead of a slider configuration
+ (since reversed)
+
+1.7.1
+ * This release updates the underlying I2P libraries to I2P version 1.7.1
+
+1.7.0
+ * This release updates the underlying I2P libraries to I2P version 1.7.0
+
+1.6.0
+ * This release updates the underlying I2P libraries to I2P version 1.6.0
+
+1.5.0
+ * This release updates the underlying I2P libraries to I2P version 1.5.0
+
 0.9.50 2021-05-18
  * This release updates the underlying I2P libraries to I2P version 0.9.50
 
