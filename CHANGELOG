@@ -7,6 +7,8 @@
 1.8.1
  * This update fixes a bug where certificates were unpacked to the wrong location on new installs,
  resulting in the router failing to start.
+ * Decouples the Android version from the I2P library version to allow for android point
+ releases with less pain.
 
 1.8.0
  * This release updates the underlying I2P libraries to I2P version 1.8.0
@@ -20,6 +22,7 @@
 
 1.7.0
  * This release updates the underlying I2P libraries to I2P version 1.7.0
+ * Refactor of the unzipResourceToDir function
 
 1.6.0
  * This release updates the underlying I2P libraries to I2P version 1.6.0
