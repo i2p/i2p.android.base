@@ -30,9 +30,11 @@ public class I2PDestinationPage extends SingleTextFieldPage {
         String data = mData.getString(SIMPLE_DATA_KEY);
         if (data.toLowerCase(Locale.US).endsWith(".b32.i2p")) { /* B32 */
             if (data.length() == BASE32_HASH_LENGTH + 8 || data.length() >= BASE32_HASH_LENGTH + 12) {
-                mFeedback = "Invalid B32";
-                return false;
+                mFeedback = "";
+                return true;
             }
+            mFeedback = "Invalid B32";
+            return false;
         } else if (data.endsWith(".i2p")) { /* Domain */
             // Valid
         } else if (data.length() >= 516) { /* B64 */
