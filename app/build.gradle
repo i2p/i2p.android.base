@@ -9,7 +9,7 @@ android {
     defaultConfig {
         versionCode 4745270
         versionName "$I2P_ANDROID_VERSION"
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION as String)
 
         // For Espresso
@@ -31,15 +31,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     lintOptions {
         abortOnError false
         disable 'MissingDefaultResource'
     }
     packagingOptions {
-        exclude 'LICENSE.txt'
+        resources {
+            excludes += ['LICENSE.txt']
+        }
     }
     flavorDimensions 'tier'
     productFlavors {
@@ -56,7 +59,6 @@ android {
             applicationId 'net.i2p.android.router'
         }
     }
-    buildToolsVersion '28.0.3'
 }
 
 dependencies {
@@ -86,6 +88,10 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+}
+
+dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }
 
 project.ext.i2pbase = "../i2p.i2p"
