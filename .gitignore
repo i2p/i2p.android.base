@@ -3,3 +3,6 @@ signing.properties
 .idea
 .idea/
 .gradle/
+local.properties
+override.properties
+build
