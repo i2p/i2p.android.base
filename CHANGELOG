@@ -1,3 +1,13 @@
+1.9.1
+ * Switches back to mavenCentral builds
+ * Fixes build process for F-Droid main
+ * Using tag i2p.i2p:i2p-android-1.9.0
+ * Allow b32 and blinded b32 to validate in I2PTunnel UI
+
+1.9.0
+ * Updates router to version 1.9.0
+ * Using tag i2p.i2p:i2p-android-1.9.0
+
 1.8.2
  * This update fixes a bug where Family Keys are incorrectly handled by the Android router, leading
  to a crash.
