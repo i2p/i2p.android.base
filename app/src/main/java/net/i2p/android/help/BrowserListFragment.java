@@ -102,8 +102,28 @@ public class BrowserListFragment extends Fragment implements
                     getContext().getResources().getStringArray(R.array.supported_browsers));
             supportedLabels = Arrays.asList(
                     getContext().getResources().getStringArray(R.array.supported_browser_labels));
-            unsupported = Arrays.asList(
-                    context.getResources().getStringArray(R.array.unsupported_browsers));
+            unsupported = allBrowsers(context);//Arrays.asList(
+                    //context.getResources().getStringArray(R.array.unsupported_browsers));
+        }
+
+        public List<String> allBrowsers(Context context){
+            //try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("http://www.google.com"));
+                List<ResolveInfo> browserList;
+                PackageManager pm = context.getPackageManager();
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.MARSHMALLOW) {
+                    // gets all
+                    browserList = pm.queryIntentActivities(intent, PackageManager.MATCH_ALL);
+                } else {
+                    browserList = pm.queryIntentActivities(intent, 0);
+                }
+            //}catch()
+            List<String> finalResult = new List<String>();
+            for (ResolveInfo ri : browserList){
+                finalResult.add(ri.resolvePackageName);
+            }
+            return finalResult;
         }
 
         @Override

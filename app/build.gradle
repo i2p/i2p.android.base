@@ -7,7 +7,7 @@ repositories {
 android {
     compileSdkVersion 28
     defaultConfig {
-        versionCode 4745270
+        versionCode 4745271
         versionName "$I2P_ANDROID_VERSION"
         minSdkVersion 14
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION as String)
