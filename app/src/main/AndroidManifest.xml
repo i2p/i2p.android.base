@@ -27,6 +27,8 @@
         <service
             android:name=".service.RouterService"
             android:icon="@drawable/ic_launcher_itoopie"
+            android:enabled="true"
+            android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="net.i2p.android.router.service.IRouterState" />
@@ -35,7 +37,9 @@
         <provider
             android:name=".provider.CacheProvider"
             android:authorities="${applicationId}.provider" />
-        <receiver android:name=".receiver.OnBootReceiver">
+        <receiver
+            android:name=".receiver.OnBootReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -45,7 +49,8 @@
             android:name="net.i2p.android.I2PActivity"
             android:icon="@drawable/ic_launcher_itoopie"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:exported="true">
             <!-- Console filters -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -109,6 +114,7 @@
         <activity
             android:name=".web.WebActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
             android:label="I2P Web Browser">
             <!-- Disabled, this browser is not very secure
             Temporarily enabled until an alternative browser is ready -->
