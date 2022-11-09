@@ -112,14 +112,14 @@ public class BrowserListFragment extends Fragment implements
                 intent.setData(Uri.parse("http://www.google.com"));
                 List<ResolveInfo> browserList;
                 PackageManager pm = context.getPackageManager();
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.MARSHMALLOW) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                     // gets all
                     browserList = pm.queryIntentActivities(intent, PackageManager.MATCH_ALL);
                 } else {
                     browserList = pm.queryIntentActivities(intent, 0);
                 }
             //}catch()
-            List<String> finalResult = new List<String>();
+            List<String> finalResult = new ArrayList<String>();
             for (ResolveInfo ri : browserList){
                 finalResult.add(ri.resolvePackageName);
             }
