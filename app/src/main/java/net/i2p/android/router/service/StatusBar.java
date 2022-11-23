@@ -71,7 +71,18 @@ class StatusBar {
     private PendingIntent pendingIntent() {
         Intent intent = new Intent(mCtx, I2PActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pi = PendingIntent.getActivity(mCtx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            pi = PendingIntent.getActivity(mCtx,
+                    0,
+                    intent,
+                    PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            pi = PendingIntent.getActivity(mCtx,
+                    0,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+        }
         return pi;
     }
 

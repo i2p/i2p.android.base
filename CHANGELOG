@@ -1,3 +1,6 @@
+2.0.1
+ * Fixes gitlab#49 by applying MUTABLE or IMMUTABLE flags across all PendingIntents
+
 2.0.0
  * Updates router to version 2.0.0
  * Updates gradle plugin

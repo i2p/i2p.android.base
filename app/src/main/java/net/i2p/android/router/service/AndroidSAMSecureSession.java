@@ -94,10 +94,20 @@ public class AndroidSAMSecureSession extends AppCompatActivity implements SAMSec
         bundle.putBoolean("approveSAMConnection", true);
         bundle.putString("ID", clientId);
         intent.putExtras(bundle);
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                mCtx, 7656,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT, bundle);
+        PendingIntent pendingIntent;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            pendingIntent = PendingIntent.getActivity(
+                    mCtx, 7656,
+                    intent,
+                    PendingIntent.FLAG_IMMUTABLE,
+                    bundle);
+        } else {
+            pendingIntent = PendingIntent.getActivity(
+                    mCtx, 7656,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT,
+                    bundle);
+        }
         String dlgText = mCtx.getString(R.string.settings_confirm_sam) + "\n";//""</br>";
         dlgText += mCtx.getString(R.string.settings_confirm_sam_id) + clientId + "\n";//""</br>";
         dlgText += mCtx.getString(R.string.settings_confirm_allow_sam) + "\n";//""</br>";
