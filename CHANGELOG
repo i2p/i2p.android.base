@@ -1,3 +1,9 @@
+2.0.0
+ * Updates router to version 2.0.0
+ * Updates gradle plugin
+ * Remove Firefox from supported browsers list due to lack of about:config support
+ * Add Privacy Browser to supported browsers list and write guide for it
+
 1.9.1
  * Switches back to mavenCentral builds
  * Fixes build process for F-Droid main
