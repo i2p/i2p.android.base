@@ -95,11 +95,11 @@ public class AndroidSAMSecureSession extends AppCompatActivity implements SAMSec
         bundle.putString("ID", clientId);
         intent.putExtras(bundle);
         PendingIntent pendingIntent;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
             pendingIntent = PendingIntent.getActivity(
                     mCtx, 7656,
                     intent,
-                    PendingIntent.FLAG_IMMUTABLE,
+                    PendingIntent.FLAG_MUTABLE,
                     bundle);
         } else {
             pendingIntent = PendingIntent.getActivity(

@@ -54,8 +54,8 @@ public class Notifications {
             Intent intent = new Intent(mCtx, c);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent pi;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                pi = PendingIntent.getActivity(mCtx, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                pi = PendingIntent.getActivity(mCtx, 0, intent, PendingIntent.FLAG_MUTABLE);
             } else {
                 pi = PendingIntent.getActivity(mCtx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             }
