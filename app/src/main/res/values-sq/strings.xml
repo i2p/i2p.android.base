@@ -91,4 +91,5 @@
   <string name="password">Fjalëkalim</string>
   <string name="other">Tjetër</string>
   <string name="all">Krejt</string>
+  <string name="no_messages">Pa mesazhe</string>
 </resources>

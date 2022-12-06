@@ -44,7 +44,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="net_status_error_udp_disabled_tcp_not_set">UDP deaktiverad och inåtgående TCP värd/port inte angiven</string>
   <string name="net_status_warn_firewalled_udp_disabled">Bakom brandvägg med UDP inaktiverad</string>
   <string name="shared_clients">Delade klienter</string>
-  <string name="uptime">Drifttid</string>
+  <string name="uptime">Driftstid</string>
   <string name="active_peers">Aktiva jämlikar</string>
   <string name="known_peers">Kända jämlikar</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->

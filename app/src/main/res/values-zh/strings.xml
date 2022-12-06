@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">I2P</string>
-  <string name="desc_i2p_logo">I2P标识</string>
+  <string name="desc_i2p_logo">I2P logo</string>
   <string name="choose_language">选择语言</string>
-  <string name="welcome_new_install">欢迎使用 I2P！本应用是 Alpha 版的测试软件，并不提供强有力的匿名性。请阅读发布说明和许可信息。</string>
+  <string name="welcome_new_install">欢迎使用 I2P Android！本应用是 Alpha 版的测试软件，并不保证提供强匿名性。请阅读发布说明和许可信息。</string>
   <string name="welcome_new_version">新版本已安装，请阅读发布说明。版本：</string>
   <string name="label_tunnels">隧道</string>
   <string name="label_status">状态</string>
   <string name="label_console">控制台</string>
   <string name="label_addresses">地址簿</string>
   <string name="label_addressbook">地址簿</string>
-  <string name="label_i2ptunnel_client">客户隧道</string>
-  <string name="label_i2ptunnel_server">服务隧道</string>
+  <string name="label_i2ptunnel_client">客户端隧道</string>
+  <string name="label_i2ptunnel_server">服务端隧道</string>
   <string name="label_logs">日志</string>
   <string name="label_error_logs">错误日志</string>
   <string name="label_news">新闻</string>
@@ -26,26 +26,26 @@
   <string name="button_shutdown_now">长按立即停止</string>
   <string name="button_cancel_graceful">长按取消关闭</string>
   <string name="no_internet">没有可用的互联网连接</string>
-  <string name="hidden">隐身</string>
+  <string name="hidden">隐身模式</string>
   <string name="testing">测试中</string>
-  <string name="firewalled">防火墙后</string>
+  <string name="firewalled">受到防火墙限制</string>
   <string name="symmetric_nat">对称 NAT</string>
   <string name="net_status_error_i2cp">客户端管理器 I2CP 错误 - 请检查日志</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_error_skew">时钟偏移 %s</string>
-  <string name="net_status_error_unresolved_tcp">未解析的 TCP 地址</string>
+  <string name="net_status_error_unresolved_tcp">无法解析的 TCP 地址</string>
   <string name="net_status_error_private_tcp">私有 TCP 地址</string>
   <string name="net_status_warn_firewalled_inbound_tcp">入站 TCP 已启用但受防火墙限制</string>
-  <string name="net_status_warn_firewalled_floodfill">种子节点因防火墙受限</string>
+  <string name="net_status_warn_firewalled_floodfill">因防火墙受限的洪泛节点</string>
   <string name="net_status_info_disconnected">已断开 - 请检查网络连接</string>
   <string name="net_status_error_udp_port">UDP 端口被占用 - 请在设置中更改并重启</string>
-  <string name="net_status_error_no_active_peers">没有活跃的对等端 - 请检查连接和防火墙情况</string>
+  <string name="net_status_error_no_active_peers">没有活跃的节点 - 请检查连接和防火墙情况</string>
   <string name="net_status_error_udp_disabled_tcp_not_set">UDP 已禁用并且入站 TCP 主机/端口未设置</string>
   <string name="net_status_warn_firewalled_udp_disabled">UDP 已禁用且受防火墙限制</string>
   <string name="shared_clients">共享客户端</string>
   <string name="uptime">上线时间</string>
-  <string name="active_peers">活跃对等端</string>
-  <string name="known_peers">已知对等端</string>
+  <string name="active_peers">活跃节点</string>
+  <string name="known_peers">已知节点</string>
   <!--Character to indicate a client tunnel. Usually first letter of the word "client".-->
   <string name="char_client_tunnel">C</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
@@ -58,11 +58,11 @@
   <string name="configure_no_doze_title">管理电池优化？</string>
   <string name="configure_no_doze">I2P 在持续工作时能达到最佳效果。为阻止 Android 在尝试节省电量时关闭 I2P，您可以将它添加到电池例外名单中。这将大幅提高应用稳定性。\n\n要保持 I2P 在后台运行吗？（推荐）</string>
   <string name="first_start_title">恭喜，I2P 已安装！</string>
-  <string name="first_start_welcome"><b>欢迎使用 I2P！</b>在 I2P 启动和寻找同伴时，请<b>保持耐心</b>。</string>
+  <string name="first_start_welcome"><b>欢迎使用 I2P！</b>在 I2P 启动和寻找节点时，请<b>保持耐心</b>。</string>
   <string name="first_start_read">在您等候时，请阅读发布说明和欢迎页面。</string>
   <string name="first_start_faq">一旦您有了客户端隧道，请<b>看看</b>我们的常见问题解答：</string>
-  <string name="first_start_faq_nonanon">或使用此非匿名链接，如果您不想等待隧道：</string>
-  <string name="first_start_irc">将您的 IRC 客户端引导到 <b>localhost:6668</b> 然后与我们打招呼，就在：</string>
+  <string name="first_start_faq_nonanon">如果您不想等待隧道，可以使用此非匿名链接，：</string>
+  <string name="first_start_irc">将您的 IRC 客户端指向到 <b>localhost:6668</b> 然后与我们打招呼，就在：</string>
   <string name="action_search">搜索</string>
   <string name="action_add">添加</string>
   <string name="action_edit">编辑</string>
@@ -89,26 +89,26 @@
   <string name="graphs_not_ready">图表尚未就绪。请稍候再试。</string>
   <string name="statistics">统计</string>
   <string name="routers">路由器</string>
-  <string name="leasesets">租契集</string>
+  <string name="leasesets">租约集</string>
   <string name="countries">国家</string>
   <string name="country">国家</string>
   <string name="transport">传输</string>
   <string name="versions">版本</string>
   <string name="version">版本</string>
   <string name="count">数量</string>
-  <string name="tname_0">隐身或正在启动</string>
+  <string name="tname_0">隐身模式或正在启动</string>
   <string name="netdb_routers_empty">您的网络库中没有路由器。</string>
-  <string name="netdb_leases_empty">您的网络库中没有赁集。</string>
+  <string name="netdb_leases_empty">您的网络库中没有租约集。</string>
   <string name="notification_status_starting">I2P 正在启动</string>
   <string name="notification_status_restarting">I2P 正在重启</string>
-  <string name="notification_status_waiting">I2P 正在等待一个网络连接</string>
+  <string name="notification_status_waiting">I2P 正在等待网络连接</string>
   <string name="notification_status_starting_after_waiting">网络已连接，I2P 正在启动</string>
   <string name="notification_status_running">I2P 正在运行</string>
   <string name="notification_status_client_ready">客户端隧道已就绪</string>
   <string name="notification_status_client_down">客户端隧道未就绪</string>
-  <string name="notification_status_graceful">正在停止 I2P，剩余 %s</string>
-  <string name="notification_status_stopping">正在停止 I2P</string>
-  <string name="notification_status_stopping_after_net">网络已中断，正在停止 I2P</string>
+  <string name="notification_status_graceful">正在关闭 I2P，剩余 %s</string>
+  <string name="notification_status_stopping">正在关闭 I2P</string>
+  <string name="notification_status_stopping_after_net">网络已中断，正在关闭 I2P</string>
   <string name="notification_status_shutdown_cancelled">关闭已取消</string>
   <string name="notification_status_shutting_down">I2P 正在关闭</string>
   <string name="notification_status_bw">带宽：下行 %1$sBps / 上行 %2$sBps</string>
@@ -130,8 +130,8 @@
   <string name="settings_label_hiddenMode">参与</string>
   <string name="settings_desc_hiddenMode">关闭隐身模式</string>
   <string name="settings_label_maxPartTunnels">最大参与隧道数</string>
-  <string name="settings_desc_maxPartTunnels">参与贡献的最大隧道数量(默认=20)</string>
-  <string name="settings_dialog_maxPartTunnels">参与的最大隧道数量</string>
+  <string name="settings_desc_maxPartTunnels">参与中转的最大隧道数量(默认=20)</string>
+  <string name="settings_dialog_maxPartTunnels">参与中转的最大隧道数量</string>
   <string name="settings_label_sharePercent">共享比例</string>
   <string name="settings_desc_sharePercent">共享带宽的最大比例(默认=80%)</string>
   <string name="settings_dialog_sharePercent">共享的带宽比例</string>
@@ -154,7 +154,7 @@
   <string name="settings_label_expl_outbound">出站隧道</string>
   <string name="settings_label_expl_length">长度</string>
   <string name="settings_summ_expl_length">%s 跳</string>
-  <string name="settings_desc_expl_length">使用跳点数量</string>
+  <string name="settings_desc_expl_length">跳点数量</string>
   <string name="settings_label_expl_lengthVariance">跳数变化量</string>
   <string name="settings_summ_expl_lengthVariance">%s</string>
   <string name="settings_desc_expl_lengthVariance">随机添加的跳点数量</string>
@@ -164,7 +164,7 @@
   <string name="settings_label_expl_backupQuantity">备用数量</string>
   <string name="settings_summ_expl_backupQuantity">%s 隧道</string>
   <string name="settings_desc_expl_backupQuantity">备用隧道数量</string>
-  <string name="settings_need_transport_enabled">您必须启用至少一个传输</string>
+  <string name="settings_need_transport_enabled">您必须启用至少一种传输</string>
   <string name="settings_router_restart_required">请重新启动 I2P 以应用此更改</string>
   <string name="menu_about">关于</string>
   <string name="about_version">版本:</string>
@@ -175,8 +175,8 @@
   <string name="about_donate">想捐钱或比特币来为开发和测试购买更多 Android 设备吗？前往:</string>
   <string name="menu_help">帮助</string>
   <string name="general">常规</string>
-  <string name="label_router">公网地址</string>
-  <string name="label_private">私网地址</string>
+  <string name="label_router">公共地址簿</string>
+  <string name="label_private">私人地址簿</string>
   <string name="addressbook_is_empty">地址簿是空的</string>
   <string name="addressbook_search_header">%s 找到</string>
   <string name="addressbook_add_wizard_k_name">名称</string>
@@ -252,7 +252,7 @@
   <string name="auto_start">自动启动</string>
   <string name="tunnel_summ_auto_start">路由器启动时自动启动此隧道。</string>
   <string name="tunnel_cat_ports">本地端口</string>
-  <string name="shared_client">共享客户端</string>
+  <string name="shared_client">共享隧道客户端</string>
   <string name="tunnel_summ_shared_client">使用相同的目的地和隧道为其他客户端共享</string>
   <string name="target_destination">目标目的地</string>
   <string name="persistent_key">持久密钥</string>
@@ -266,8 +266,8 @@
   <string name="outproxies">代理出口</string>
   <string name="ssl_outproxies">SSL 出口代理</string>
   <string name="irc">IRC</string>
-  <string name="enable_dcc">启用 DCC</string>
-  <string name="tunnel_summ_enable_dcc">允许 IRC 客户端使用 DCC</string>
+  <string name="enable_dcc">启用 DCC 聊天直连（危险）</string>
+  <string name="tunnel_summ_enable_dcc">允许 IRC 客户端点对点连接</string>
   <string name="website_domain_name">网站域名</string>
   <string name="target_host">目标主机</string>
   <string name="target_port">目标端口</string>

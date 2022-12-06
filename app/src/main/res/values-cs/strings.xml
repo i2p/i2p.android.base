@@ -113,10 +113,14 @@
   <string name="disabled">Vypnuto</string>
   <string name="whitelist">Seznam povolených (whitelist)</string>
   <string name="blacklist">Seznam zakázaných (blacklist)</string>
+  <string name="tunnel_summ_delay_open">Zpozdit otevření tunelu dokud není vyžadováno</string>
+  <string name="tunnel_summ_reduce_quantity">Snížit kvantitu při nečinnosti</string>
+  <string name="close_tunnels">Zavřít tunely při nečinnosti</string>
   <string name="http_client">Klient pro HTTP</string>
   <string name="username">Uživatelské jméno</string>
   <string name="password">Heslo</string>
   <string name="other">Další</string>
+  <string name="custom_options">Vlastní možnosti</string>
   <string name="all">Vše</string>
   <string name="no_messages">Žádné zprávy</string>
 </resources>

@@ -244,6 +244,7 @@
   <string name="blacklist">Tiltott-Lista</string>
   <string name="access_list">Elérési lista</string>
   <string name="reject_inproxies">Bejövő proxyk elutasítása</string>
+  <string name="post_limits">POST korlát</string>
   <string name="tunnel_summ_delay_open">Az alagút nyitás késleltetése szükségessé válásig</string>
   <string name="tunnel_summ_reduce_quantity">Alagutak mennyiségének csökkentése üres állapotban</string>
   <string name="reduced_tunnel_quantity">Csökkentett alagút mennyiség</string>
