@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-apply plugin: 'maven'
+
+// TODO: Migrate to something like this that works with Gradle 7.0
+// EITHER: Document how to generate build artifacts, pom files, etc and upload them to Nexus manually
+// OR: Automate the process like was possible when we could still use antique gradle versions
+// I just commented out the old code, surely something must present a similar API?
+//apply plugin: 'maven'
 apply plugin: 'signing'
 
 def isReleaseBuild() {
@@ -39,7 +44,9 @@ def getRepositoryPassword() {
     return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
 }
 
+
 afterEvaluate { project ->
+    /*
     uploadArchives {
         repositories {
             mavenDeployer {
@@ -87,7 +94,9 @@ afterEvaluate { project ->
             }
         }
     }
+    */
 
+    /*
     task installArchives(type: Upload) {
         description "Installs the artifacts to the local Maven repository."
         configuration = configurations['archives']
@@ -101,11 +110,14 @@ afterEvaluate { project ->
             }
         }
     }
+    */
 
+    /*
     signing {
         required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
         sign configurations.archives
     }
+    */
 
     task androidJavadocs(type: Javadoc) {
         // TODO: Fix links to external modules
