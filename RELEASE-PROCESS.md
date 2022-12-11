@@ -76,7 +76,7 @@ app. After doing the Maven release, follow these steps in the i2p.android.base r
 the `docker run` step described in `DOCKER.md`
 
  1. Edit `routerjars/local.properties` to use the clean i2p.i2p copy.
- 2. Pull the latest translations with `tx pull -a` and commit them. (If you don't have the `tx` command,
+ 2. Pull the latest translations with `tx pull -a -f` and commit them. (If you don't have the `tx` command,
   do `pip install transifex-client` )
   - If there are any new translations, `mtn add` them, and add them to `app/src/main/res/values/arrays.xml`
   (two places, alphabetical order please)
