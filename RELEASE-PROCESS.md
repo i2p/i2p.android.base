@@ -14,6 +14,13 @@ NOTE: The docker container built by the Dockerfile in this repostory ensures tha
 Dependencies are properly met by obtaining them from the Debian package in `oldoldstable` and pre-configuring
 the override.properties that is used in the Docker container.
 
+## Tag Freezes and Translations
+
+1-2 weeks before the software is released, I2P Desktop will have a "Tag Freeze" which is the deadline for
+translations to be checked in. **When** that time comes, someone who has Transifex privileges should use
+the command: `tx push -s -R I2P.android` to push any and all changed string resources to transifex for
+translation.
+
 **>> Beginning of Docker-enabled Steps <<**
 
 ## Prerequirements
