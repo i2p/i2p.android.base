@@ -169,7 +169,6 @@
   <string name="about_bugs">Bugs dan Dukungan:</string>
   <string name="about_helpwanted">Dibutuhkan Bantuan!</string>
   <string name="about_volunteer">Ingin membantu membuat aplikasi lebih baik? Jadilah relawan di forum Android:</string>
-  <string name="about_donate">Ingin memberikan donasi uang atau bitcoin agar kami dapat membeli lebih banyak perangkat Android untuk pengembangan dan pengujian? Pergi ke:</string>
   <string name="menu_help">Bantuan</string>
   <string name="general">Umum</string>
   <string name="label_router">Alamat publik</string>
@@ -230,7 +229,6 @@
   <string name="enabled">Diaktifkan</string>
   <string name="i2ptunnel_wizard_desc_name">Nama saluran, untuk identifikasi dalam daftar saluran.</string>
   <string name="i2ptunnel_wizard_desc_desc">Deskripsi saluran. Ini opsional dan murni informatif.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Ketik destinasi I2P service yang harus terhubung dengan client tunnel  ini. Destinasi ini bisa berbentuk 64 bit destination key atau nama I2P host yang berada di buku alamat anda.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Jika Anda tahu berbagai outproxy untuk jenis saluran ini (baik HTTP ataupun SOCKS), isikan mereka. Pisahkan proxy ganda dengan koma.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Ini adalah IP yang padanya berjalan layanan Anda, ini umumnya pada mesin yang sama, jadi 127.0.0.1 diisikan secara otomatis.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Ini adalah port yang padanya menerima koneksi layanan.</string>

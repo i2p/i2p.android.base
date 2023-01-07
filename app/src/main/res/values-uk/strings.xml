@@ -170,7 +170,6 @@
   <string name="about_bugs">Неполадки і підтримка:</string>
   <string name="about_helpwanted">Потрібна допомога!</string>
   <string name="about_volunteer">Бажаєте зробити цей додаток краще? Зголошуйтесь на форумі Android:</string>
-  <string name="about_donate">Бажаєте пожертвувати гроші на закупівлю більшої кількості різноманітних пристроїв Android для розробки та тестування? Вам сюди:</string>
   <string name="menu_help">Допомога</string>
   <string name="general">Головне</string>
   <string name="label_router">Публічні адреси</string>
@@ -231,7 +230,6 @@
   <string name="enabled">Увімкнено</string>
   <string name="i2ptunnel_wizard_desc_name">Назва тунелю для ідентифікації у списці тунелів.</string>
   <string name="i2ptunnel_wizard_desc_desc">Опис тунелю. Використовуйте це необов\'язкове поле задля більшої інформативності.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Тип призначення сервісу в мережі I2P, тобто куди клієнт має приєднатися. Це може бути повний BASE64 ключ призначення або імʼя вузла I2P з вашої адресної книги.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Якщо ви знаєте інші вихідні проксі для цього типу тунелю (або HTTP або SOCKS), то надрукуйте тут. Розділяйте проксі комами.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Це IP-адреса, на якій сервіс працює. Зазвичай така сама, як у машини, тому 127.0.0.1 введено автоматично.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Це порт, на який сервіс приймає з’єднання.</string>

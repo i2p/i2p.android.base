@@ -39,4 +39,4 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.11.0'
 }
 
-//apply from: "${project.rootDir}/gradle/maven-push.gradle"
+apply from: "${project.rootDir}/gradle/maven-push.gradle"

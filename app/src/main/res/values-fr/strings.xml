@@ -115,6 +115,10 @@
   <string name="notification_status_peers">Pairs : %1$d actifs, %2$d connus</string>
   <string name="notification_status_expl">Tunnels exploratoires : %1$d/%2$d</string>
   <string name="notification_status_client">Tunnels client : %1$d/%2$d</string>
+  <string name="stats_memory">Mémoire utilisée/max</string>
+  <string name="stats_delay">Délai de message</string>
+  <string name="copied_base32_system_notification_title">Base 32 copié au presse-papier</string>
+  <string name="copied_base32_system_notification_body">L\'adresse de votre tunnel I2P a été copiée au presse-papier.</string>
   <string name="menu_settings">Paramètres</string>
   <string name="settings_enable">Activer</string>
   <string name="settings_desc_subscriptions">URL d’abonnement</string>
@@ -147,7 +151,13 @@
   <string name="settings_label_transports">Transports</string>
   <string name="settings_label_maxConns">Maximum de connexions</string>
   <string name="settings_label_i2cp">Interface d’I2CP</string>
-  <string name="settings_desc_i2cp">Permettre aux applis tierces de créer des tunnels (exige un redémarrage du routeur)</string>
+  <string name="settings_desc_i2cp">Autorise les applications tiers à créer des tunnels en utilisant I2CP (requiert un redémarrage du routeur)</string>
+  <string name="settings_label_sam">Interface SAM</string>
+  <string name="settings_desc_sam">Autorise les applis tiers à créer des tunnels en utilisant SAM (requiert un redémarrage du routeur)</string>
+  <string name="settings_confirm_sam">Une application essaye d\'engager une connexion SAM.</string>
+  <string name="settings_confirm_sam_id">Connexion Nom/ID :</string>
+  <string name="settings_confirm_allow_sam">Appuyez pour autoriser</string>
+  <string name="settings_confirm_deny_sam">Ignorez pour refuser</string>
   <string name="settings_label_exploratory_pool">Réserve exploratoire</string>
   <string name="settings_desc_exploratory_pool">Paramètres des tunnels</string>
   <string name="settings_label_expl_inbound">Tunnels entrants</string>
@@ -172,7 +182,7 @@
   <string name="about_bugs">Bogues et assistance :</string>
   <string name="about_helpwanted">Aide recherchée !</string>
   <string name="about_volunteer">Voulez-vous aider à améliorer l’appli ? Portez-vous volontaire sur le forum Android :</string>
-  <string name="about_donate">Voulez-vous faire un don en argent ou en bitcoins pour acheter plus d’appareils Android pour le développement et les tests ? Rendez-vous sur :</string>
+  <string name="about_gitlab">Avez vous envie de suggérer une fonctionnalité ou corriger un bug ? faites une requête sur le Gitlab Android :</string>
   <string name="menu_help">Aide</string>
   <string name="general">Général</string>
   <string name="label_router">Adresses publiques</string>
@@ -233,7 +243,7 @@
   <string name="enabled">Activé</string>
   <string name="i2ptunnel_wizard_desc_name">Le nom du tunnel, pour identification dans la liste des tunnels.</string>
   <string name="i2ptunnel_wizard_desc_desc">Une description du tunnel. Ceci est facultatif et purement informatif.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Saisir la destination I2P du service auquel ce tunnel client devrait se connecter. Cela pourrait être la clé de destination entière en Base64 ou un nom d’hôte I2P de votre carnet d’adresses.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Spécifiez l\'adresse ou destination .i2p (hostname.i2p, b32 ou B64) du tunnel ici.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Si vous connaissez des mandataire sortants pour ce type de tunnel (soit HTTP ou SOCKS), ajoutez-les en les séparant par des virgules.</string>
   <string name="i2ptunnel_wizard_desc_target_host">L’IP sur laquelle votre service fonctionne, habituellement sur ​​la même machine, donc 127.0.0.1 est préremplie.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Le port sur lequel le service accepte des connexions.</string>
@@ -343,10 +353,12 @@
   <string name="no_error_messages">Aucun message d’erreur</string>
   <plurals name="log_error_messages">
     <item quantity="one">Un message d’erreur</item>
+    <item quantity="many">%d messages d’erreur, les plus récents en premier</item>
     <item quantity="other">%d messages d’erreur, les plus récents en premier</item>
   </plurals>
   <plurals name="log_messages">
     <item quantity="one">Un message</item>
+    <item quantity="many">%d messages, les plus récents en premier</item>
     <item quantity="other">%d messages, les plus récents en premier</item>
   </plurals>
   <string name="log_entry">Entrée de journal</string>
@@ -358,4 +370,5 @@
   <string name="label_browser_configuration">Configuration du navigateur</string>
   <string name="no_market_app">Aucune logithèque trouvée, veuillez installer manuellement.</string>
   <string name="unset">Non défini</string>
+  <string name="running_background">I2P s\'exécute en arrière-plan</string>
 </resources>

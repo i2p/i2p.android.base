@@ -169,7 +169,6 @@
   <string name="about_bugs">Xətalar və dəstək:</string>
   <string name="about_helpwanted">Yardıma ehtiyac var!</string>
   <string name="about_volunteer">Proqramı yaxşılaşdırmaq istəyirsiniz? Android forumunda könüllü:</string>
-  <string name="about_donate">İnkişaf və sınaq üçün daha çox Android qurğusunun alınmasına pul və ya bitkoyn bağışlamaq istəyirsiniz? Keç:</string>
   <string name="menu_help">Kömək</string>
   <string name="general">Əsas</string>
   <string name="label_router">İctimai ünvanlar</string>
@@ -230,7 +229,6 @@
   <string name="enabled">Aktivdir</string>
   <string name="i2ptunnel_wizard_desc_name"> Tunel siyahısında müəyyənləşdirilməsi üçün tunel adı.</string>
   <string name="i2ptunnel_wizard_desc_desc">Tunelin təsviri. Bu, istəkdən asılıdır və tamamilə informativdir.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Bu müştəri tunelinə bağlanacaq xidmətin İ2P hədəfinə yazın. Bu, tam əsaslı 64 hədəf açarı və ya ünvan kitabından bir İ2P hostun adı ola bilər. </string>
   <string name="i2ptunnel_wizard_desc_outproxies">Bu növ tunel (HTTP və ya SOCKS) üçün hər hansı bir outproxies bilirsinizsə, onları doldurun. Proksiləri vergül vasitəsilə ayırın. </string>
   <string name="i2ptunnel_wizard_desc_target_host">Bu, xidmətinizin işlədiyi IP-dir, adətən eyni alətdə olduğundan 127.0.0.1 avtomatik olaraq doldurulur.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Bu, xidmət əlaqələrini qəbul edən portdur.</string>

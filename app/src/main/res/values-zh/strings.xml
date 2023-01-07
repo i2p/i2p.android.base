@@ -115,6 +115,11 @@
   <string name="notification_status_peers">节点：%1$d 活动，%2$d 已知</string>
   <string name="notification_status_expl">探索隧道：%1$d/%2$d</string>
   <string name="notification_status_client">客户隧道：%1$d/%2$d</string>
+  <string name="stats_memory">已用内存/最大内存</string>
+  <string name="stats_lag">作业日志</string>
+  <string name="stats_delay">消息延迟</string>
+  <string name="copied_base32_system_notification_title">将B32地址复制到剪贴板</string>
+  <string name="copied_base32_system_notification_body">您的地址已复制到剪贴板上。</string>
   <string name="menu_settings">设置</string>
   <string name="settings_enable">启用</string>
   <string name="settings_desc_subscriptions">订阅 URL</string>
@@ -147,7 +152,13 @@
   <string name="settings_label_transports">传输</string>
   <string name="settings_label_maxConns">最大连接数</string>
   <string name="settings_label_i2cp">I2CP 接口</string>
-  <string name="settings_desc_i2cp">允许第三方应用创建隧道（需要路由重启）</string>
+  <string name="settings_desc_i2cp">允许第三方应用程序使用I2CP（需要重新启动路由器）</string>
+  <string name="settings_label_sam">SAM接口</string>
+  <string name="settings_desc_sam">允许第三方应用程序使用SAM（需要重新启动路由器）</string>
+  <string name="settings_confirm_sam">一个应用程序正在试图建立一个SAM连接。</string>
+  <string name="settings_confirm_sam_id">会话名称/ID：</string>
+  <string name="settings_confirm_allow_sam">点按允许</string>
+  <string name="settings_confirm_deny_sam">忽略否认</string>
   <string name="settings_label_exploratory_pool">探索隧道池</string>
   <string name="settings_desc_exploratory_pool">隧道参数</string>
   <string name="settings_label_expl_inbound">入站隧道</string>
@@ -172,7 +183,7 @@
   <string name="about_bugs">Bug 和支持:</string>
   <string name="about_helpwanted">需要帮助!</string>
   <string name="about_volunteer">想帮助让本应用变得更好吗？成为 Android 论坛志愿者:</string>
-  <string name="about_donate">想捐钱或比特币来为开发和测试购买更多 Android 设备吗？前往:</string>
+  <string name="about_gitlab">想建议一个功能或修复一个错误吗？ 在Android Gitlab上提出合并请求：</string>
   <string name="menu_help">帮助</string>
   <string name="general">常规</string>
   <string name="label_router">公共地址簿</string>
@@ -233,7 +244,7 @@
   <string name="enabled">已启用</string>
   <string name="i2ptunnel_wizard_desc_name">隧道的名称，隧道列表中的标识。</string>
   <string name="i2ptunnel_wizard_desc_desc">隧道的描述。这是可选的，纯粹提供信息性。</string>
-  <string name="i2ptunnel_wizard_desc_dest">输入这个客户端隧道应该连接到的该服务的 I2P 目的地。这可以是完整的 base 64 目的地密钥，或者您地址簿中的 I2P 主机名。</string>
+  <string name="i2ptunnel_wizard_desc_dest">在这里指定隧道的.i2p地址或目的地（hostname.i2p，b32或b64）。</string>
   <string name="i2ptunnel_wizard_desc_outproxies">如果您知道任何此类型的隧道 (HTTP 或者 SOCKS) 的出口代理，填入它们。用逗号分隔多个代理服务器。</string>
   <string name="i2ptunnel_wizard_desc_target_host">这是您正在运行服务的所在 IP，这通常是在同一台机器上，所以 127.0.0.1 会被自动填写。</string>
   <string name="i2ptunnel_wizard_desc_target_port">这是这项服务接受连接的端口。</string>
@@ -356,4 +367,5 @@
   <string name="label_browser_configuration">浏览器配置</string>
   <string name="no_market_app">没有找到应用商店，请手动安装</string>
   <string name="unset">未设置</string>
+  <string name="running_background">I2P正在后台运行</string>
 </resources>

@@ -115,6 +115,7 @@
   <string name="notification_status_peers">ピア: %1$d アクティブ、 %2$d 既知</string>
   <string name="notification_status_expl">調査トンネル: %1$d/%2$d</string>
   <string name="notification_status_client">クライアントトンネル: %1$d/%2$d</string>
+  <string name="stats_memory">メモリ 使用/最大</string>
   <string name="menu_settings">設定</string>
   <string name="settings_enable">有効</string>
   <string name="settings_desc_subscriptions">URL を登録</string>
@@ -147,7 +148,12 @@
   <string name="settings_label_transports">トランスポート</string>
   <string name="settings_label_maxConns">最大接続数</string>
   <string name="settings_label_i2cp">I2CP インターフェース</string>
-  <string name="settings_desc_i2cp">サードパーティのアプリがトンネルを作成することを許可（ルーターの再起動が必要）</string>
+  <string name="settings_label_sam">SAMインターフェース</string>
+  <string name="settings_desc_sam">サードパーティのアプリがSAMを使用するトンネルを作成することを許可（ルーターの再起動が必要）</string>
+  <string name="settings_confirm_sam">アプリケーションはSAM接続を作成することを試行中。</string>
+  <string name="settings_confirm_sam_id">接続 名/ID:</string>
+  <string name="settings_confirm_allow_sam">タップして許可</string>
+  <string name="settings_confirm_deny_sam">無視して拒否</string>
   <string name="settings_label_exploratory_pool">調査のプール</string>
   <string name="settings_desc_exploratory_pool">トンネルパラーメーター</string>
   <string name="settings_label_expl_inbound">受信トンネル</string>
@@ -172,7 +178,7 @@
   <string name="about_bugs">バグとサポート:</string>
   <string name="about_helpwanted">人手募集中！</string>
   <string name="about_volunteer">アプリの改善を手伝いたいですか？ Android フォーラム上でボランティア:</string>
-  <string name="about_donate">開発や試験用にさらに Android デバイスを購入するために、お金や Bitcoin を寄付していただけますか？ こちらです:</string>
+  <string name="about_gitlab">機能またはバグ修正の提案を行いますか？　Android Gitlab上でMerge要求を作成してください:</string>
   <string name="menu_help">ヘルプ</string>
   <string name="general">一般</string>
   <string name="label_router">公開アドレス</string>
@@ -233,7 +239,7 @@
   <string name="enabled">有効</string>
   <string name="i2ptunnel_wizard_desc_name">トンネルリストでの識別用に、トンネルの名前。</string>
   <string name="i2ptunnel_wizard_desc_desc">トンネルの説明。これは任意であり、単なる参考です。</string>
-  <string name="i2ptunnel_wizard_desc_dest">このクライアントトンネルが接続するサービスのI2P宛先を入力します。これには、ベース64の完全な宛先キーや、アドレス帳にあるI2Pホスト名を使用できます。</string>
+  <string name="i2ptunnel_wizard_desc_dest">ここでは、トンネルの .i2p アドレスまたは宛先（ホスト名.i2p、b32 または b64）を指定します。</string>
   <string name="i2ptunnel_wizard_desc_outproxies">この種類のトンネル用 （HTTP か SOCKS のいずれか) のアウトプロキシを知っているなら、それらを入力してください。カンマで複数のプロキシを分割できます。</string>
   <string name="i2ptunnel_wizard_desc_target_host">これは、サービスが起動している IPです。通常同一のマシン上なので、 127.0.0.1 が自動で入力されます。</string>
   <string name="i2ptunnel_wizard_desc_target_port">これはサービスが接続を受け入れているポートです。</string>
@@ -356,4 +362,5 @@
   <string name="label_browser_configuration">ブラウザ設定</string>
   <string name="no_market_app">マーケットのアプリが見つかりませんでした。手動でインストールしてください。</string>
   <string name="unset">解除</string>
+  <string name="running_background">I2Pはバックグラウンドで稼働中</string>
 </resources>

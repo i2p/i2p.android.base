@@ -169,7 +169,6 @@
   <string name="about_bugs">Feil og brukerstøtte:</string>
   <string name="about_helpwanted">Hjelp ønskes!</string>
   <string name="about_volunteer">Vil du gjøre dette programmet bedre? Meld deg som frivillig på Android-forumet:</string>
-  <string name="about_donate">Vil du donere penger eller bitcoin øremerket flere Android-enheter til utvikling og testformål? Gå til:</string>
   <string name="menu_help">Hjelp</string>
   <string name="general">Generelt</string>
   <string name="label_router">Offentlige adresser</string>
@@ -230,7 +229,6 @@
   <string name="enabled">Påskrudd</string>
   <string name="i2ptunnel_wizard_desc_name">Tunnel-navn, for identifikasjon i tunnel-listen.</string>
   <string name="i2ptunnel_wizard_desc_desc">Beskrivelse av tunnelen. Dette er valgfritt, og bare til informasjon.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Skriv inn I2P-målet og tjenesten som denne klienttunnelen skal koble til. Dette bør være hele base-64 -målnøkkelen, eller et I2P-vertsnavn fra adresseboka di.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Hvis du vet om noen utgående mellomtjenere for denne typen tunnel (enten HTTP eller SOCKS), fyll dem inn. Oppgis flere mellomtjenere må de deles med komma.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Dette er IP-en din tjeneste kjører på, dette er vanligvis den samme maskinen, så 127.0.0.1 er ferdigutfylt. </string>
   <string name="i2ptunnel_wizard_desc_target_port">Dette er porten tjenesten godtar tilkoblinger på.</string>

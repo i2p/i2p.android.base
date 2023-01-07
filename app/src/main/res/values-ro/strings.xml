@@ -147,7 +147,6 @@
   <string name="settings_label_transports">Transporturi</string>
   <string name="settings_label_maxConns">Maxim conexiuni</string>
   <string name="settings_label_i2cp">Interfata I2CP</string>
-  <string name="settings_desc_i2cp">Permiteți aplicațiilor terților să creeze tuneluri (necesită repornirea routerului)</string>
   <string name="settings_label_exploratory_pool">pool de explorare</string>
   <string name="settings_desc_exploratory_pool">Parametri tunelului</string>
   <string name="settings_label_expl_inbound">Tunele de intrare</string>
@@ -172,7 +171,6 @@
   <string name="about_bugs">Defecte și suport:</string>
   <string name="about_helpwanted">Doresc ajutor!</string>
   <string name="about_volunteer">Doriți să faceți aplicația mai bună? Voluntari pe forumul Android:</string>
-  <string name="about_donate">Doriți să donați bani sau bitcoins pentru cumpărarea de mai multe dispozitive Android pentru dezvoltare și testare? Mergeți la:</string>
   <string name="menu_help">Ajutor</string>
   <string name="general">General</string>
   <string name="label_router">Adrese publice</string>
@@ -233,7 +231,6 @@
   <string name="enabled">Activat</string>
   <string name="i2ptunnel_wizard_desc_name">Numele tunelului, pentru identificare în lista tunelurilor.</string>
   <string name="i2ptunnel_wizard_desc_desc">O descriere a tunelului. Este facultativ și pur informativ.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Tastați destinația I2P a serviciului la care ar trebui să se conecteze acest tunel client. Aceasta poate fi cheia de destinație completă a bazei 64 sau un nume de gazdă I2P din agenda dvs. de adrese.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Dacă cunoașteți vreo problemă pentru acest tip de tunel (HTTP sau SOCKS), completați-le. Separați mai multe proxy cu virgule.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Acesta este IP la care serviciul se execută, aceasta este, de obicei pe aceeași mașină, astfel 127.0.0.1 este autofilled.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Acesta este portul pe care serviciul  accepta conexiuni.</string>

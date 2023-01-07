@@ -169,7 +169,6 @@
   <string name="about_bugs">Bug e supporto:</string>
   <string name="about_helpwanted">Abbiamo bisogno di te!</string>
   <string name="about_volunteer">Vuoi aiutarci a creare un\'app migliore? Offriti volontario sul forum di Android:</string>
-  <string name="about_donate">Vuoi donare al progetto denaro o bitcoin per comprare dispositivi Android, su cui effettuare sviluppo e test dell\'app? Vai qui:</string>
   <string name="menu_help">Aiuto</string>
   <string name="general">Generale</string>
   <string name="label_router">Indirizzi pubblici</string>
@@ -229,7 +228,6 @@
   <string name="enabled">Abilita</string>
   <string name="i2ptunnel_wizard_desc_name">Il nome del tunnel, per identificarlo nell\'elenco dei tunnel.</string>
   <string name="i2ptunnel_wizard_desc_desc">Una descrizione del tunnel. È un attributo opzionale a puro titolo informativo.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Scrivi la destinazione I2P del servizio a cui questo client tunnel dovrebbe connettersi. Questa potrebbe essere la chiave base 64 di destinazione, o un hostname I2P della tua rubrica.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Se conosci qualche proxy di uscita per questo tipo di tunnel (HTTP oppure SOCKS), inseriscilo. Per inserire più proxy, separa i valori usando le virgole.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Questo è l\'indirizzo IP sul quale è in funzione il servizio, che generalmente risiede sulla stessa macchina: pertanto si assume il valore 127.0.0.1.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Questa è la porta per la quale il servizio accetta connessioni.</string>
@@ -339,10 +337,12 @@
   <string name="no_error_messages">Nessun messaggio di errore</string>
   <plurals name="log_error_messages">
     <item quantity="one">Un messaggio di errore</item>
+    <item quantity="many">%d messaggi di errore, più recenti per primi</item>
     <item quantity="other">%d messaggi di errore, più recenti per primi</item>
   </plurals>
   <plurals name="log_messages">
     <item quantity="one">Un messaggio</item>
+    <item quantity="many">%d messaggi, più recenti per primi</item>
     <item quantity="other">%d messaggi, più recenti per primi</item>
   </plurals>
   <string name="log_entry">Record di log</string>

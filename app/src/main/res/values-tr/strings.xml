@@ -115,6 +115,11 @@
   <string name="notification_status_peers">Eşler: %1$d etkin, %2$d bilinmeyen</string>
   <string name="notification_status_expl">Keşif tünelleri: %1$d/%2$d</string>
   <string name="notification_status_client">İstemci tünelleri: %1$d/%2$d</string>
+  <string name="stats_memory">Bellek kullanılan/toplam</string>
+  <string name="stats_lag">Görev gecikmesi</string>
+  <string name="stats_delay">İleti gecikmesi</string>
+  <string name="copied_base32_system_notification_title">Base32 panoya kopyalandı</string>
+  <string name="copied_base32_system_notification_body">I2P tünelinizin adresi panoya kopyalandı.</string>
   <string name="menu_settings">Ayarlar</string>
   <string name="settings_enable">Etkinleştir</string>
   <string name="settings_desc_subscriptions">Abonelik İnternet Adresleri</string>
@@ -147,7 +152,13 @@
   <string name="settings_label_transports">Taşıyıcılar</string>
   <string name="settings_label_maxConns">En fazla bağlantı</string>
   <string name="settings_label_i2cp">I2CP Arabirimi</string>
-  <string name="settings_desc_i2cp">Üçüncü taraf uygulamalar tünel oluşturabilsin (yönelticinin yeniden başlatılması gerekir)</string>
+  <string name="settings_desc_i2cp">Üçüncü taraf uygulamalar I2CP ile tüneller oluşturabilsin (yöneltici yeniden başlatılmalıdır)</string>
+  <string name="settings_label_sam">SAM arayüzü</string>
+  <string name="settings_desc_sam">Üçüncü taraf uygulamalar SAM ile tüneller oluşturabilsin (yöneltici yeniden başlatılmalıdır)</string>
+  <string name="settings_confirm_sam">Bir uygulama bir SAM bağlantısı kurmaya çalışıyor.</string>
+  <string name="settings_confirm_sam_id">Bağlantı adı/kodu:</string>
+  <string name="settings_confirm_allow_sam">İzin vermek için dokunun</string>
+  <string name="settings_confirm_deny_sam">Reddetmek için yok sayın</string>
   <string name="settings_label_exploratory_pool">Keşif havuzu</string>
   <string name="settings_desc_exploratory_pool">Tunel ayarları</string>
   <string name="settings_label_expl_inbound">Geliş tünelleri</string>
@@ -172,7 +183,7 @@
   <string name="about_bugs">Hatalar ve Destek</string>
   <string name="about_helpwanted">Yardımınız Gerekli!</string>
   <string name="about_volunteer">Uygulamayı daha iyi duruma getirmek için yardımcı olmak ister misiniz? Android forumunda gönüllü olun:</string>
-  <string name="about_donate">Geliştirme ve denemeler için çeşitli Android aygıtları alabilmemiz için para ya da bitcoin bağışlamak ister misiniz:</string>
+  <string name="about_gitlab">Bir öneride bulunmak ya da hata bildirmek mi istiyorsunuz? Android GitLab üzerinden bir birleştirme isteği yapın:</string>
   <string name="menu_help">Yardım</string>
   <string name="general">Genel</string>
   <string name="label_router">Herkese açık adresler</string>
@@ -233,7 +244,7 @@
   <string name="enabled">Etkin</string>
   <string name="i2ptunnel_wizard_desc_name">Tünel listesinde görüntülenecek tünel adı.</string>
   <string name="i2ptunnel_wizard_desc_desc">İsteğe bağlı olarak yazılabilecek tünel açıklaması.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Bu istemci tünelinin bağlanacağı hizmetin I2P hedefini yazın. Tam Base 64 hedef anahtarı ya da adres defterinizden bir sunucu adı olabilir.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Tünelin .i2p adresini ya da hedefini (sunucuadi.i2p, b32 ya da b64) buraya yazın.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Bu tünel türü için bildiğiniz çıkış sunucuları varsa (HTTP ya da SOCKS) buraya virgül ile ayırarak yazın. </string>
   <string name="i2ptunnel_wizard_desc_target_host">Çalıştırdığınız hizmetin IP adresi. Genellikle aynı bilgisayarda olduğundan otomatik olarak 127.0.0.1 yazılır.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Hizmetin bağlantıları kabul edeceği bağlantı noktası.</string>
@@ -358,4 +369,5 @@
   <string name="label_browser_configuration">Tarayıcı yapılandırması</string>
   <string name="no_market_app">Herhangi bir mağaza uygulaması bulunamadı, lütfen el ile kurun</string>
   <string name="unset">Ayarı Kaldır</string>
+  <string name="running_background">I2P arka planda çalışıyor</string>
 </resources>

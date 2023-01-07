@@ -135,7 +135,6 @@
   <string name="settings_label_transports">Siirrot</string>
   <string name="settings_label_maxConns">Yhteyksien enimmäismäärä</string>
   <string name="settings_label_i2cp">I2CP-käyttöliittymä</string>
-  <string name="settings_desc_i2cp">Salli kolmanten osapuolien sovellusten luoda tunneleita (vaatii reitittimen uudelleenkäynnistyksen)</string>
   <string name="settings_desc_exploratory_pool">Tunneliparametrit</string>
   <string name="settings_label_expl_inbound">Tulotunnelit</string>
   <string name="settings_label_expl_outbound">Lähtötunnelit</string>

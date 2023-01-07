@@ -147,7 +147,6 @@
   <string name="settings_label_transports">Transporty</string>
   <string name="settings_label_maxConns">Maksymalna liczba połączeń</string>
   <string name="settings_label_i2cp">Interfejs I2CP</string>
-  <string name="settings_desc_i2cp">Zezwól aplikacjom stron trzecich na tworzenie tuneli (wymaga restartu węzła)</string>
   <string name="settings_label_exploratory_pool">Pole rozpoznawcze</string>
   <string name="settings_desc_exploratory_pool">Parametry tuneli</string>
   <string name="settings_label_expl_inbound">Tunele przychodzące</string>
@@ -172,7 +171,6 @@
   <string name="about_bugs">Błędy i wsparcie:</string>
   <string name="about_helpwanted">Potrzebna pomoc!</string>
   <string name="about_volunteer">Chcesz pomóc w ulepszeniu tej aplikacji? Zgłoś się na ochotnika na forum Android:</string>
-  <string name="about_donate">Chcesz przesłać pieniądze lub bitcoiny, aby zakupić więcej Androidów dla rozwoju i testowania? Idź do:</string>
   <string name="menu_help">Pomoc</string>
   <string name="general">Ogólne</string>
   <string name="label_router">Adres publiczny</string>
@@ -233,7 +231,6 @@
   <string name="enabled">Włączony</string>
   <string name="i2ptunnel_wizard_desc_name">Nazwa tunelu dla identyfikacji w liście tuneli.</string>
   <string name="i2ptunnel_wizard_desc_desc">Opis tunelu. Ta opcja jest nieobowiązkowa i służąca wyłącznie do celów informacyjnych.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Wpisz adres Przeznaczenia I2P usługi z którą klient powinien się połączyć. To powinien być pełny adres Przeznaczenia w formacie Base64, lub adres z Twojej książki adresowej.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Jeśli znasz jakieś wychodzące proxy dla tego typu tunelów (HTTP lub SOCKS), to je wpisz. Serwery proxy oddziel przecinkami.</string>
   <string name="i2ptunnel_wizard_desc_target_host">To jest IP na którym Twój serwis jest uruchomiony, zazwyczaj jest to te same urządzenie więc 127.0.0.1 jest wpisane automatycznie.</string>
   <string name="i2ptunnel_wizard_desc_target_port">To jest port na którym Twój serwis akceptuje połączenia.</string>

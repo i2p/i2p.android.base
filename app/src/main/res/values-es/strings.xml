@@ -147,7 +147,6 @@
   <string name="settings_label_transports">Transportes</string>
   <string name="settings_label_maxConns">Conexiones máximas</string>
   <string name="settings_label_i2cp">Interfaz de I2CP</string>
-  <string name="settings_desc_i2cp">Permitir que las aplicaciones de terceros creen túneles (requiere el reinicio del enrutador)</string>
   <string name="settings_label_exploratory_pool">Grupo exploratorio</string>
   <string name="settings_desc_exploratory_pool">Parámetros de túneles</string>
   <string name="settings_label_expl_inbound">Túneles de entrada</string>
@@ -172,7 +171,6 @@
   <string name="about_bugs">Fallos y soporte:</string>
   <string name="about_helpwanted">¡Buscamos ayuda!</string>
   <string name="about_volunteer">¿Quiere ayudar a hacer mejor la aplicación? Ofrézcase voluntario en el foro de Android:</string>
-  <string name="about_donate">¿Quiere donar dinero o bitcoins para la compra de más dispositivos Android para el desarrollo y puesta a prueba? Vaya a:</string>
   <string name="menu_help">Ayuda</string>
   <string name="general">General</string>
   <string name="label_router">Direcciones públicas</string>
@@ -233,7 +231,6 @@
   <string name="enabled">Habilitado</string>
   <string name="i2ptunnel_wizard_desc_name">El nombre del túnel, para su identificación en la lista de túneles.</string>
   <string name="i2ptunnel_wizard_desc_desc">Una descripción del túnel. Esto es opcional y puramente informativo.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Escriba el destino I2P del servicio al que este túnel de cliente debe conectarse. Este podría ser la clave base 64 completa del destino I2P, o un nombre de nodo I2P de su libreta de direcciones.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Si sabe de cualquier proxy de salida para este tipo de túnel (bien HTTP o SOCKS), introdúzcalo. Separe los proxys con comas.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Esta es la IP sobre la que su servicio está ejecutándose, como este normalmente está en la misma máquina, se autorellena con 127.0.0.1</string>
   <string name="i2ptunnel_wizard_desc_target_port">Este es el puerto sobre el que el servicio está aceptando conexiones.</string>
@@ -343,10 +340,12 @@
   <string name="no_error_messages">No hay mensajes de error</string>
   <plurals name="log_error_messages">
     <item quantity="one">Un mensaje de error</item>
+    <item quantity="many">%d mensajes de error, los más recientes primero</item>
     <item quantity="other">%d mensajes de error, los más recientes primero</item>
   </plurals>
   <plurals name="log_messages">
     <item quantity="one">Un mensaje</item>
+    <item quantity="many">%d mensajes, los más recientes primero</item>
     <item quantity="other">%d mensajes, los más recientes primero</item>
   </plurals>
   <string name="log_entry">Entrada de registro (log)</string>

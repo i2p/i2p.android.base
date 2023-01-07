@@ -133,7 +133,6 @@
   <string name="settings_label_transports">Átvitel</string>
   <string name="settings_label_maxConns">Max kapcsolatok</string>
   <string name="settings_label_i2cp">I2CP felület</string>
-  <string name="settings_desc_i2cp">Alagutak létrehozásának engedélyezése harmadik féltől származó alkalmazásoknak (a router újraindítása szükséges hozzá)</string>
   <string name="settings_desc_exploratory_pool">Alagút paraméterei</string>
   <string name="settings_label_expl_inbound">Bejövő alagutak</string>
   <string name="settings_label_expl_outbound">Kimenő alagutak</string>
@@ -200,7 +199,6 @@
   <string name="enabled">Engedélyezve</string>
   <string name="i2ptunnel_wizard_desc_name">Az alagút neve, az alagutak listáján való azonosítás érdekében.</string>
   <string name="i2ptunnel_wizard_desc_desc">Az alagút leírása. Opcionális és csupán csak tájékoztató jellegű.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Adja meg az I2P célállomását a szolgáltatásnak amihez ennek a kliens alagútnak kapcsolódnia kellene. Ez lehet akár a teljes base-64 kódolt célállomás kulcs, vagy egy I2P állomás neve a címjegyzékéből.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Ha tud bármilyen kimenő proxy-t ezen típusú alagúthoz (legyen az akár HTTP vagy SOCKS), akkor írja be ide. A proxy-kat vesszővel választhatja el.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Ez az IP, melyen a szolgáltatásod fut, ez rendszerint ugyanazon a gépen van, így a 127.0.0.1 automatikusan beírásra kerül.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Ez a port, melyen a szolgáltatás csatlakozásokat fogad.</string>

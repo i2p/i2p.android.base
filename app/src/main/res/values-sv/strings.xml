@@ -148,7 +148,6 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="settings_label_transports">Transporter</string>
   <string name="settings_label_maxConns">Max anslutningar</string>
   <string name="settings_label_i2cp">I2CP interfrace</string>
-  <string name="settings_desc_i2cp">Tillåt tredjepartsappar att skapa tunnlar (kräver omstart av routern)</string>
   <string name="settings_label_exploratory_pool">Utforskande pool</string>
   <string name="settings_desc_exploratory_pool">Tunnelparametrar</string>
   <string name="settings_label_expl_inbound">Inåtgående tunnlar</string>
@@ -173,7 +172,6 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="about_bugs">Fel och Support:</string>
   <string name="about_helpwanted">Hjälp Önskas!</string>
   <string name="about_volunteer">Vill du hjälpa till att göra appen bättre? Anmäl dig på Android-forumet:</string>
-  <string name="about_donate">Vill du donera pengar eller bitcoin för inköp av fler Androidenheter till utveckling och testning? Gå till:</string>
   <string name="menu_help">Hjälp</string>
   <string name="general">Generell</string>
   <string name="label_router">Publika adresser</string>
@@ -234,7 +232,6 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="enabled">Aktiverad</string>
   <string name="i2ptunnel_wizard_desc_name">Tunnelns namn, för identifikation i tunnellistan</string>
   <string name="i2ptunnel_wizard_desc_desc">Beskrivning av tunneln. Frivillig och endast för information.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Skriv in I2P-destinationen för den tjänst som denna klienttunnel ska ansluta till. Detta kan vara den fullständiga 64-grunddestinationsnyckeln eller ett I2P-värdnamn från din adressbok.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Om du känner till några utproxier för den här typen av tunnel (antingen HTTP eller SOCKS), fyll i dem. Separera flera proxier med kommatecken.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Detta är IP-adressen som din tjänst körs på, den är vanligtvis på samma maskin så 127.0.0.1 fylls i automatiskt.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Detta är den port din tjänst tar emot anslutningar på.</string>

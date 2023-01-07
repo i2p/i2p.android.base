@@ -147,7 +147,6 @@
   <string name="settings_label_transports">Транспортные протоколы</string>
   <string name="settings_label_maxConns">Максимум соединений</string>
   <string name="settings_label_i2cp">I2CP-интерфейс</string>
-  <string name="settings_desc_i2cp">Разрешить создание туннелей сторонним программам (требуется перезапуск маршрутизатора)</string>
   <string name="settings_label_exploratory_pool">Зондирующий пул</string>
   <string name="settings_desc_exploratory_pool">Параметры тоннелей</string>
   <string name="settings_label_expl_inbound">Входящие туннели</string>
@@ -172,7 +171,6 @@
   <string name="about_bugs">Ошибки и поддержка:</string>
   <string name="about_helpwanted">Требуется помощь!</string>
   <string name="about_volunteer">Хотите помочь улучшить приложение? Добровольцы на Android-форуме:</string>
-  <string name="about_donate">Хотите пожертвовать деньги или bitcoins на покупку дополнительных Android-устройств для разработчиков и тестировщиков? Зайдите:</string>
   <string name="menu_help">Справка</string>
   <string name="general">Общие</string>
   <string name="label_router">Публичные адреса</string>
@@ -233,7 +231,6 @@
   <string name="enabled">Включить</string>
   <string name="i2ptunnel_wizard_desc_name">Имя туннеля для идентификации в списке туннелей.</string>
   <string name="i2ptunnel_wizard_desc_desc">Описание туннеля. Заполнять не обязательно.</string>
-  <string name="i2ptunnel_wizard_desc_dest">Впишите пункт назначения I2P сервиса, к которому должен подключаться этот туннель. Это может быть base 64 ключ назначения или I2P URL из вашей адресной книги.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Если вам известны любые внешние прокси для этого типа туннеля (как HTTP, так и SOCKS), впишите их. Несколько прокси перечисляются через запятую.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Это IP, на котором запущен ваш сервис, обычно он находится на том же устройстве, так что 127.0.0.1 заполняется автоматически.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Это порт, на котором сервис принимает подключения.</string>
