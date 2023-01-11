@@ -1,3 +1,8 @@
+2.1.0
+ * Upgrades router to version 2.1.0
+ * Adds jcenter repository back to app/ target, removes jcenter from other targets
+ * explicitly set android.useAndroidX
+
 2.0.1
  * Fixes gitlab#49 by applying MUTABLE or IMMUTABLE flags across all PendingIntents
 
