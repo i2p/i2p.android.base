@@ -44,6 +44,14 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".receiver.RemoteStartReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="net.i2p.android.router.receiver.START_I2P" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name="net.i2p.android.I2PActivity"
