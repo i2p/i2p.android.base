@@ -4,9 +4,12 @@ import java.util.Locale;
 
 import android.support.v4.app.Fragment;
 
+import net.i2p.I2PAppContext;
 import net.i2p.android.wizard.ui.I2PDestinationFragment;
+import net.i2p.client.naming.NamingService;
 import net.i2p.data.DataFormatException;
 import net.i2p.data.Destination;
+import net.i2p.client.naming.DummyNamingService;
 
 /**
  * A page asking for an I2P Destination.
@@ -27,11 +30,17 @@ public class I2PDestinationPage extends SingleTextFieldPage {
 
     @Override
     public boolean isValid() {
-        String data = mData.getString(SIMPLE_DATA_KEY);
+        String data = mData.getString(SIMPLE_DATA_KEY).split(":")[0];
         if (data.toLowerCase(Locale.US).endsWith(".b32.i2p")) { /* B32 */
-            if (data.length() == BASE32_HASH_LENGTH + 8 || data.length() >= BASE32_HASH_LENGTH + 12) {
+            if (data.length() == BASE32_HASH_LENGTH){
                 mFeedback = "";
                 return true;
+            }
+            if (data.length() >= BASE32_HASH_LENGTH + 8) {
+                if (data.length() <= BASE32_HASH_LENGTH + 12) {
+                    mFeedback = "";
+                    return true;
+                }
             }
             mFeedback = "Invalid B32";
             return false;

@@ -46,16 +46,36 @@ public class NamingServiceUtil {
         String displayHost = host.equals(hostName) ? hostName :
                                                      hostName + " (" + host + ')';
 
-        String destB64 = data.getBundle(kDest).getString(Page.SIMPLE_DATA_KEY);
-        Destination dest = new Destination();
-        try {
-            dest.fromBase64(destB64);
-        } catch (DataFormatException e) {} // Already validated
-
+        String dest = data.getBundle(kDest).getString(Page.SIMPLE_DATA_KEY).split(":")[0];
+        Destination destination = new Destination();
+        if (dest.endsWith(".b32.i2p")) {
+            NamingService dns = NamingServiceUtil.getNamingService(Util.getRouterContext(),"");
+            destination = dns.lookup(dest);
+            int i = 0;
+            while (destination == null) {
+                dns = NamingServiceUtil.getNamingService(Util.getRouterContext(),"");
+                destination = dns.lookup(dest);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                i++;
+                if (i > 500){
+                    break;
+                }
+            }
+        } else {
+            try {
+                destination.fromBase64(dest);
+            } catch (DataFormatException e) {
+                e.printStackTrace();
+            }
+        }
         // Check if already in addressbook
         Destination oldDest = ns.lookup(host);
         if (oldDest != null) {
-            if (destB64.equals(oldDest.toBase64()))
+            if (destination.toBase64().equals(oldDest.toBase64()))
                 Toast.makeText(ctx,
                         "Host name " + displayHost + " is already in address book, unchanged.",
                         Toast.LENGTH_LONG).show();
@@ -65,7 +85,7 @@ public class NamingServiceUtil {
                         Toast.LENGTH_LONG).show();
         } else {
             // Put the new host name
-            success = ns.put(host, dest);
+            success = ns.put(host, destination);
             if (!success)
                 Toast.makeText(ctx,
                         "Failed to add Destination " + displayHost + " to naming service " + ns.getName(),

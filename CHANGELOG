@@ -1,3 +1,7 @@
+2.1.0-1
+ * adds support for adding base32 addresses to the local addressbook
+ * adds support for destinations with ports in the string to i2ptunnel
+
 2.1.0
  * Upgrades router to version 2.1.0
  * Adds jcenter repository back to app/ target, removes jcenter from other targets
