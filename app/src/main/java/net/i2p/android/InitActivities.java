@@ -88,7 +88,7 @@ class InitActivities {
 
         File abDir = new File(myDir, "addressbook");
         abDir.mkdir();
-        copyResourceToFile(R.raw.subscriptions_txt, "addressbook/subscriptions.txt");
+        copyResourceToFileIfAbsent(R.raw.subscriptions_txt, "addressbook/subscriptions.txt");
         mergeResourceToFile(R.raw.addressbook_config_txt, "addressbook/config.txt", null);
 
         File docsDir = new File(myDir, "docs");
