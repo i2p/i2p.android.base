@@ -370,7 +370,7 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener, ClientApp {
     /**
      *  Process blocklist entries
      *
-     *  @since 0.9.28
+     *  @since 0.9.57
      */
     private void processBlocklistEntries(BlocklistEntries ble) {
         long oldTime = _context.getProperty(PROP_BLOCKLIST_TIME, 0L);
