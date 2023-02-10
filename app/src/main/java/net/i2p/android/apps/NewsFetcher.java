@@ -1,5 +1,13 @@
 package net.i2p.android.apps;
 
+import static net.i2p.app.ClientAppState.INITIALIZED;
+import static net.i2p.app.ClientAppState.RUNNING;
+import static net.i2p.app.ClientAppState.STARTING;
+import static net.i2p.app.ClientAppState.STOPPED;
+import static net.i2p.app.ClientAppState.STOPPING;
+import static net.i2p.app.ClientAppState.UNINITIALIZED;
+import static net.i2p.update.UpdateType.BLOCKLIST;
+
 import android.content.Context;
 
 import net.i2p.android.router.NewsActivity;
@@ -8,20 +16,26 @@ import net.i2p.android.router.util.Notifications;
 import net.i2p.app.ClientApp;
 import net.i2p.app.ClientAppManager;
 import net.i2p.app.ClientAppState;
-import static net.i2p.app.ClientAppState.*;
 import net.i2p.crypto.SU3File;
+import net.i2p.data.Base64;
 import net.i2p.data.DataHelper;
+import net.i2p.data.Hash;
+import net.i2p.router.Banlist;
+import net.i2p.router.Blocklist;
 import net.i2p.router.RouterContext;
+import net.i2p.router.news.BlocklistEntries;
 import net.i2p.router.news.NewsEntry;
 import net.i2p.router.news.NewsMetadata;
 import net.i2p.router.news.NewsXMLParser;
+import net.i2p.util.Addresses;
 import net.i2p.util.EepGet;
 import net.i2p.util.FileUtil;
 import net.i2p.util.I2PAppThread;
 import net.i2p.util.Log;
-import net.i2p.util.ReusableGZIPInputStream;
-import net.i2p.util.SecureFileOutputStream;
 import net.i2p.util.RFC822Date;
+import net.i2p.util.ReusableGZIPInputStream;
+import net.i2p.util.SecureFile;
+import net.i2p.util.SecureFileOutputStream;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -32,6 +46,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -57,6 +72,10 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener, ClientApp {
     private final ClientAppManager _mgr;
     private volatile ClientAppState _state = UNINITIALIZED;
     public static final String APP_NAME = "NewsFetcher";
+
+    static final String PROP_BLOCKLIST_TIME = "router.blocklistVersion";
+    private static final String BLOCKLIST_DIR = "docs/feed/blocklist";
+    private static final String BLOCKLIST_FILE = "blocklist.txt";
 
     /**
      *  As of 0.9.41, returns a new one every time. Only call once.
@@ -333,6 +352,11 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener, ClientApp {
             xml.delete();
             NewsMetadata data = parser.getMetadata();
             List<NewsEntry> entries = parser.getEntries();
+            BlocklistEntries ble = parser.getBlocklistEntries();
+            if (ble != null && ble.isVerified())
+                processBlocklistEntries(ble);
+            else
+                _log.info("No blocklist entries found in news feed");
             String sudVersion = su3.getVersionString();
             String signingKeyName = su3.getSignerString();
             File to3 = new File(_context.getTempDir(), "tmp3-" + _context.random().nextInt() + ".xml");
@@ -341,6 +365,104 @@ public class NewsFetcher implements Runnable, EepGet.StatusListener, ClientApp {
         } finally {
             to2.delete();
         }
+    }
+
+    /**
+     *  Process blocklist entries
+     *
+     *  @since 0.9.28
+     */
+    private void processBlocklistEntries(BlocklistEntries ble) {
+        long oldTime = _context.getProperty(PROP_BLOCKLIST_TIME, 0L);
+        if (ble.updated <= oldTime) {
+            if (_log.shouldWarn())
+                _log.warn("Not processing blocklist " + DataHelper.formatDate(ble.updated) +
+                        ", already have " + DataHelper.formatDate(oldTime));
+            return;
+        }
+        Blocklist bl = _context.blocklist();
+        Banlist ban = _context.banlist();
+        String reason = "Blocklist feed " + DataHelper.formatDate(ble.updated);
+        int banned = 0;
+        for (Iterator<String> iter = ble.entries.iterator(); iter.hasNext(); ) {
+            String s = iter.next();
+            if (s.length() == 44) {
+                byte[] b = Base64.decode(s);
+                if (b == null || b.length != Hash.HASH_LENGTH) {
+                    iter.remove();
+                    continue;
+                }
+                Hash h = Hash.create(b);
+                if (!ban.isBanlistedForever(h)) {
+                    ban.banlistRouterForever(h, reason);
+                    _context.commSystem().forceDisconnect(h);
+                }
+            } else {
+                byte[] ip = Addresses.getIP(s);
+                if (ip == null) {
+                    iter.remove();
+                    continue;
+                }
+                if (!bl.isBlocklisted(ip))
+                    bl.add(ip);
+            }
+            if (++banned >= BlocklistEntries.MAX_ENTRIES) {
+                // prevent somebody from destroying the whole network
+                break;
+            }
+        }
+        for (String s : ble.removes) {
+            if (s.length() == 44) {
+                byte[] b = Base64.decode(s);
+                if (b == null || b.length != Hash.HASH_LENGTH)
+                    continue;
+                Hash h = Hash.create(b);
+                if (ban.isBanlistedForever(h))
+                    ban.unbanlistRouter(h);
+            } else {
+                byte[] ip = Addresses.getIP(s);
+                if (ip == null)
+                    continue;
+                if (bl.isBlocklisted(ip))
+                    bl.remove(ip);
+            }
+        }
+        // Save the blocks. We do not save the unblocks.
+        File f = new SecureFile(_context.getConfigDir(), BLOCKLIST_DIR);
+        f.mkdirs();
+        f = new File(f, BLOCKLIST_FILE);
+        boolean fail = false;
+        BufferedWriter out = null;
+        try {
+            out = new BufferedWriter(new OutputStreamWriter(new SecureFileOutputStream(f), "UTF-8"));
+            out.write("# ");
+            out.write(ble.supdated);
+            out.newLine();
+            banned = 0;
+            for (String s : ble.entries) {
+                s = s.replace(':', ';');  // IPv6
+                out.write(reason);
+                out.write(':');
+                out.write(s);
+                out.newLine();
+                if (++banned >= BlocklistEntries.MAX_ENTRIES)
+                    break;
+            }
+        } catch (IOException ioe) {
+            _log.error("Error writing blocklist", ioe);
+            fail = true;
+        } finally {
+            if (out != null) try {
+                out.close();
+            } catch (IOException ioe) {}
+        }
+        if (!fail) {
+            f.setLastModified(ble.updated);
+            String upd = Long.toString(ble.updated);
+            _context.router().saveConfig(PROP_BLOCKLIST_TIME, upd);
+        }
+        if (_log.shouldWarn())
+            _log.warn("Processed " + ble.entries.size() + " blocks and " + ble.removes.size() + " unblocks from news feed");
     }
 
     /**
