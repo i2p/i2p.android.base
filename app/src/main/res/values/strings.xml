@@ -150,6 +150,10 @@
     <string name="notification_status_expl">Exploratory tunnels: %1$d/%2$d</string>
     <string name="notification_status_client">Client tunnels: %1$d/%2$d</string>
 
+    <string name="stats_memory">Memory used/max</string>
+    <string name="stats_lag">Job Lag</string>
+    <string name="stats_delay">Message Delay</string>
+
     <string name="copied_base32_system_notification_title">Base32 copied to clipboard</string>
     <string name="copied_base32_system_notification_body">The address of your I2P tunnel has been copied to the clipboard.</string>
 

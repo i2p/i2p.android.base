@@ -406,20 +406,21 @@ public class MainFragment extends I2PFragmentBase {
                 //ctx.commSystem().getReachabilityStatus();
 
                 String status =
-                        "Exploratory Tunnels in/out: " + inEx + " / " + outEx
-                                + "\nClient Tunnels in/out: " + inCl + " / " + outCl;
+                        getString(R.string.notification_status_expl, inEx, outEx) + '\n' +
+                        getString(R.string.notification_status_client, inCl, outCl);
 
 
                 // Need to see if we have the participation option set to on.
                 // I thought there was a router method for that? I guess not! WHY NOT?
                 // It would be easier if we had a number to test status.
-                String participate = "\nParticipation: " + tunnelStatus + " (" + part + ")";
+                String participate = '\n' + getString(R.string.settings_label_hiddenMode) + ": " + tunnelStatus + " (" + part + ")";
 
                 String details =
-                        "\nMemory: " + DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-                                + "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B'
-                                + "\nJob Lag: " + jobLag
-                                + "\nMsg Delay: " + msgDelay;
+                        '\n' + getString(R.string.stats_memory) + ": " +
+                        DataHelper.formatSize(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) +
+                        "B / " + DataHelper.formatSize(Runtime.getRuntime().maxMemory()) + 'B' +
+                        '\n' + getString(R.string.stats_lag) + ": " + jobLag +
+                        '\n' + getString(R.string.stats_delay) + ": " + msgDelay;
 
                 _savedStatus = status + participate + details;
                 vAdvStatusText.setText(_savedStatus);
