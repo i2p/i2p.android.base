@@ -1,3 +1,8 @@
+2.2.0
+ * Add blocklist feed support
+ * Fix translations on stats page
+ * Various bugfixes
+
 2.1.0-1
  * adds support for adding base32 addresses to the local addressbook
  * adds support for destinations with ports in the string to i2ptunnel
