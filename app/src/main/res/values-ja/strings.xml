@@ -121,7 +121,7 @@
   <string name="settings_desc_subscriptions">URL を登録</string>
   <string name="settings_label_bandwidth_net">帯域幅とネットワーク</string>
   <string name="settings_label_startOnBoot">デバイスの起動時にI2Pも起動</string>
-  <string name="settings_desc_startOnBoot">デバイスの起動時に自動でI2Pに接続</string>
+  <string name="settings_desc_startOnBoot">Android端末の起動時に、自動でI2Pに接続</string>
   <string name="settings_label_bandwidth">帯域幅</string>
   <string name="settings_label_bw_inbound">受信速度</string>
   <string name="settings_desc_bw_inbound">最大受信速度</string>
