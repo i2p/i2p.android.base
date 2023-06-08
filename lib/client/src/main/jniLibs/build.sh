@@ -3,10 +3,13 @@
 # build GMP and libjbigi.so using the Android tools directly
 #
 # WARNING:
-# BROKEN - not updated for r19 NDK, aarch64, or GMP 6.1.2
+# BROKEN - not updated for r25c NDK, aarch64, x86_64, or GMP 6.2.1
 # Use the following in i2p.i2p source core/c/jbigi:
 # TARGET=android BITS=32 mbuild_all.sh
 # TARGET=android BITS=64 mbuild_all.sh
+# Or if you want to compile for armv7a/aarch64 on different architecture :
+# ANDROID_FORCE_ARM=true TARGET=android BITS=32 mbuild_all.sh
+# ANDROID_FORCE_ARM=true TARGET=android BITS=64 mbuild_all.sh
 #
 # TODO: Get more settings from environment variables set in ../custom-rules.xml
 #
