@@ -1,18 +1,18 @@
 [main]
-host = https://www.transifex.com
-lang_map = he: iw, id: in, pt_BR: pt-rBR, ru_RU: ru, sv_SE: sv, tr_TR: tr, uk_UA: uk, yi: ji, zh_CN: zh, zh_TW: zh-rTW
+host     = https://www.transifex.com
+lang_map = pt_BR: pt-rBR, yi: ji, zh_CN: zh, zh_TW: zh-rTW, id: in, ru_RU: ru, sv_SE: sv, tr_TR: tr, uk_UA: uk, he: iw
 
-[I2P.android]
-file_filter = app/src/main/res/values-<lang>/strings.xml
+[o:otf:p:I2P:r:android]
+file_filter  = app/src/main/res/values-<lang>/strings.xml
+source_file  = app/src/main/res/values/strings.xml
+source_lang  = en
+type         = ANDROID
 minimum_perc = 22
-source_file = app/src/main/res/values/strings.xml
-source_lang = en
-type = ANDROID
 
-[I2P.android_lib_helper]
-file_filter = lib/helper/src/main/res/values-<lang>/strings.xml
+[o:otf:p:I2P:r:android_lib_helper]
+file_filter  = lib/helper/src/main/res/values-<lang>/strings.xml
+source_file  = lib/helper/src/main/res/values/strings.xml
+source_lang  = en
+type         = ANDROID
 minimum_perc = 50
-source_file = lib/helper/src/main/res/values/strings.xml
-source_lang = en
-type = ANDROID
 
