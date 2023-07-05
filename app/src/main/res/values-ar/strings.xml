@@ -105,6 +105,7 @@
   <string name="description">وصف</string>
   <string name="auto_start">تشغيل آلي</string>
   <string name="outproxies">بروكسي خارجي</string>
+  <string name="irc">IRC</string>
   <string name="use_ssl">استعمل SSL</string>
   <string name="profile">بروفايل</string>
   <string name="access_control">سيطرة الوصول</string>

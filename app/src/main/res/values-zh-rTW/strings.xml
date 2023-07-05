@@ -352,6 +352,12 @@
   <string name="all">全部</string>
   <string name="no_messages">沒有訊息</string>
   <string name="no_error_messages">无错误消息</string>
+  <plurals name="log_error_messages">
+    <item quantity="other">%d 条错误消息，新消息优先</item>
+  </plurals>
+  <plurals name="log_messages">
+    <item quantity="other">%d 条消息，新消息优先</item>
+  </plurals>
   <string name="log_entry">日志条目</string>
   <string name="copy_logs">复制日志</string>
   <string name="i2p_android_error_logs">I2P Android 错误日志</string>

@@ -65,6 +65,7 @@
   <string name="settings_label_network">Síť</string>
   <string name="settings_label_hiddenMode">Participace</string>
   <string name="settings_dialog_sharePercent">Procento šířky pásma ke sdílení</string>
+  <string name="settings_label_logging">Logování</string>
   <string name="settings_label_appearance">Podoba</string>
   <string name="settings_label_language">Jazyk</string>
   <string name="settings_default">Výchozí</string>
