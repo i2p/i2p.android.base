@@ -28,6 +28,7 @@
   <string name="action_reload">Tải lại</string>
   <string name="action_refresh">Nạp lại</string>
   <string name="statistics">Thống kê</string>
+  <string name="countries">Quốc Gia</string>
   <string name="country">Quốc gia</string>
   <string name="version">Phiên bản</string>
   <string name="count">Số lượng</string>

@@ -46,6 +46,7 @@
   <string name="action_refresh">تحديث</string>
   <string name="stats_not_ready">مدير الإحصاءات غير جاهز حاليا. يرجى المحاولة لاحقا</string>
   <string name="routers">الموجه</string>
+  <string name="countries">بلدان</string>
   <string name="country">البلد</string>
   <string name="transport">نقل</string>
   <string name="version">إصدار</string>

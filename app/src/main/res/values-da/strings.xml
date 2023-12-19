@@ -84,6 +84,7 @@
   <string name="name">Navn</string>
   <string name="description">Beskrivelse</string>
   <string name="use_ssl">Brug SSL</string>
+  <string name="profile">Profil</string>
   <string name="access_control">Adgangskontrol</string>
   <string name="disabled">Deaktiveret</string>
   <string name="http_client">HTTP klient</string>

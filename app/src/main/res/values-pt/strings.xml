@@ -115,6 +115,11 @@
   <string name="notification_status_peers">Nós: %1$d ativos, %2$d conhecidos</string>
   <string name="notification_status_expl">Túneis exploratórios: %1$d/%2$d</string>
   <string name="notification_status_client">Túneis de cliente: %1$d/%2$d</string>
+  <string name="stats_memory">Memória usada/max</string>
+  <string name="stats_lag">Atraso no trabalho</string>
+  <string name="stats_delay">Atraso de mensagem</string>
+  <string name="copied_base32_system_notification_title">Base32 copiado para a área de transferência</string>
+  <string name="copied_base32_system_notification_body">O endereço do túnel I2P foi copiado para a área de transferência.</string>
   <string name="menu_settings">Configurações</string>
   <string name="settings_enable">Ativar</string>
   <string name="settings_desc_subscriptions">URLs de Subscrição</string>
@@ -147,6 +152,13 @@
   <string name="settings_label_transports">Transportes</string>
   <string name="settings_label_maxConns">Nr. máx. de ligações</string>
   <string name="settings_label_i2cp">Interface I2CP</string>
+  <string name="settings_desc_i2cp">Permitir que aplicativos de terceiros criem túneis usando I2CP (requer a reinicialização do roteador)</string>
+  <string name="settings_label_sam">Interface SAM</string>
+  <string name="settings_desc_sam">Permitir que aplicativos de terceiros criem túneis usando SAM (requer a reinicialização do roteador)</string>
+  <string name="settings_confirm_sam">Um aplicativo está tentando fazer uma conexão SAM.</string>
+  <string name="settings_confirm_sam_id">Nome/ID da conexão:</string>
+  <string name="settings_confirm_allow_sam">Toque para permitir</string>
+  <string name="settings_confirm_deny_sam">Ignorar para negar</string>
   <string name="settings_label_exploratory_pool">Poço exploratório</string>
   <string name="settings_desc_exploratory_pool">Parâmetros dos túneis</string>
   <string name="settings_label_expl_inbound">Túneis de entrada</string>
@@ -171,6 +183,7 @@
   <string name="about_bugs">Erros e Suporte</string>
   <string name="about_helpwanted">Preciso de Ajuda!</string>
   <string name="about_volunteer">Queres tornar a aplicação melhor? Voluntariar-te no fórum do Android </string>
+  <string name="about_gitlab">Quer sugerir um recurso ou corrigir um bug? faça uma solicitação de mesclagem no Gitlab do Android:</string>
   <string name="menu_help">Ajuda</string>
   <string name="general">Geral</string>
   <string name="label_router">Endereços públicos</string>
@@ -231,6 +244,7 @@
   <string name="enabled">Ativado</string>
   <string name="i2ptunnel_wizard_desc_name">O nome do túnel, para identificação na lista de túneis.</string>
   <string name="i2ptunnel_wizard_desc_desc">A descrição do túnel. Este elemento é opcional e puramente informativo.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Especifique o endereço .i2p ou o destino (hostname.i2p, b32 ou b64) do túnel aqui.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Pode aqui introduzir proxies de saída para este tipo de túnel (HTTP ou SOCKS). Separe as proxies com vírgulas.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Este é o endereço IP no qual o seu serviço I2P está a correr. Normalmente corresponde à mesma máquina, portanto é automaticamente preenchido com 127.0.0.1.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Este é a porta na qual o seu serviço aceita ligações.</string>
@@ -357,4 +371,5 @@
   <string name="label_browser_configuration">Configuração do navegador</string>
   <string name="no_market_app">Nenhum aplicativo de mercado encontrado, por favor, instale manualmente</string>
   <string name="unset">Desselecionar</string>
+  <string name="running_background">I2P está sendo executado em segundo plano</string>
 </resources>

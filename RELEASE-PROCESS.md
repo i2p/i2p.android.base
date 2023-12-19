@@ -33,7 +33,7 @@ translation.
  5. Ensure you have the Mockito framework and accompanying documentation in your $JAVA_HOME
  6. Ensure to have updated the changelog with the changes done.
  7. Ensure that you are configured to build i2p.i2p with Java 8. On Debian it is easiest to set with
-   `update-java-alternatives --set java-8-openjdk-amd64` and picking Java 8. **TODO:** add instructions for non-Debian-based
+   `update-java-alternatives --set java-1.8.0-openjdk-amd64` and picking Java 8. **TODO:** add instructions for non-Debian-based
    systems.
  8. Ensure that you have a Java 1.7 bootclasspath available. (See **Maven Central** step 2A.)
 
