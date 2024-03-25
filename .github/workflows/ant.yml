@@ -30,7 +30,8 @@ jobs:
           echo "noExe=true" >> override.properties
       - name: build with Gradle
         run: |
-          git clone https://github.com/i2p/i2p.i2p
+          echo "i2psrc=$HOME/i2p.i2p" > local.properties
+          git clone https://github.com/i2p/i2p.i2p "$HOME/i2p.i2p"
           ./gradlew assembleDebug
           find . -name '*.apk'
 
