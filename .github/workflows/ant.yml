@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: GetText
-        run: sudo apt install gettext
+        run: sudo apt install gettext git
       - uses: actions/checkout@v4
       - name: Set up JDK 8
         uses: actions/setup-java@v4
@@ -30,6 +30,7 @@ jobs:
           echo "noExe=true" >> override.properties
       - name: build with Gradle
         run: |
+          git clone https://github.com/i2p/i2p.i2p
           ./gradlew assembleDebug
           find . -name '*.apk'
 
