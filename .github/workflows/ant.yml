@@ -65,7 +65,7 @@ jobs:
         run: |
           echo "i2psrc=$HOME/i2p.i2p" > routerjars/local.properties
           git clone -b master https://github.com/i2p/i2p.i2p "$HOME/i2p.i2p"
-          cd i2p.i2p && ./installer/resources/maven-dev-release.sh 1
+          bash -c "cd $HOME/i2p.i2p && ./installer/resources/maven-dev-release.sh 1"
           ./gradlew assembleDebug
           find . -name '*.apk'
       - name: Upload i2p-debug-${{ github.sha }}.apk
