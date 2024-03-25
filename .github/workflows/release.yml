@@ -20,36 +20,8 @@ jobs:
           sparse-checkout: |
             CHANGELOG.md
           sparse-checkout-cone-mode: false
-      - name: sleep 15 minutes
+      - name: sleep 6 minutes
         run: |
-          echo "sleeping 20 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 19 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 18 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 17 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 16 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 15 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 14 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 13 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 12 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 11 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 10 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 9 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 8 minutes to wait for artifacts"
-          sleep 1m
-          echo "sleeping 7 minutes to wait for artifacts"
-          sleep 1m
           echo "sleeping 6 minutes to wait for artifacts"
           sleep 1m
           echo "sleeping 5 minutes to wait for artifacts"
