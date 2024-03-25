@@ -42,7 +42,8 @@ jobs:
           workflow: ant.yml
           if_no_artifact_found: fail
       # remove .zip file extension
-      - run: for f in *.zip; do unzip "$f"; rm "$f"; done
+      #- run: for f in *.zip; do unzip "$f"; rm "$f"; done
+      - run: unzip i2p-debug.apk.zip
       - run: echo "" | tee -a RELEASE.md
       - run: echo "## Checksums" | tee -a RELEASE.md
       - run: echo "" | tee -a RELEASE.md
