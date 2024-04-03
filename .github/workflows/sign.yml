@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  build-signed:
     runs-on: ubuntu-latest
     steps:
       - name: GetText
@@ -41,7 +41,7 @@ jobs:
           name: i2p-debug.apk
           path: ./app/build/outputs/apk/free/debug/app-free-debug.apk
 
-  trunk:
+  trunk-signed:
     runs-on: ubuntu-latest
     steps:
       - name: GetText
