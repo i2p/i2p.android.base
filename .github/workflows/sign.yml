@@ -25,13 +25,15 @@ jobs:
       - name : Generate override.properties
         run: |
           rm -f override.properties
+          mv etc/github.gradle.properties gradle.properties
+          mv etc/github.signing.properties signing.properties
           echo "build.built-by=GitHub Actions" >> override.properties
           echo "noExe=true" >> override.properties
       - name: build with Gradle
         run: |
           echo "i2psrc=$HOME/i2p.i2p" > routerjars/local.properties
           git clone -b i2p-2.4.0 https://github.com/i2p/i2p.i2p "$HOME/i2p.i2p"
-          ./gradlew assembleDebug
+          ./gradlew assembleRelease
           find . -name '*.apk'
       - name: Upload i2p-debug-${{ github.sha }}.apk
         uses: actions/upload-artifact@v4
@@ -55,6 +57,8 @@ jobs:
           rm -f override.properties
           echo "build.built-by=GitHub Actions" >> override.properties
           echo "noExe=true" >> override.properties
+          mv etc/github.gradle.properties gradle.properties
+          mv etc/github.signing.properties signing.properties
           grep -v I2P_ gradle.properties > gradle.properties.update
           echo "I2P_VERSION=2.4.0-1" >> gradle.properties.update
           echo "I2P_ANDROID_VERSION=2.4.0-1" >> gradle.properties.update
@@ -64,7 +68,7 @@ jobs:
           echo "i2psrc=$HOME/i2p.i2p" > routerjars/local.properties
           git clone -b master https://github.com/i2p/i2p.i2p "$HOME/i2p.i2p"
           bash -c "cd $HOME/i2p.i2p && ./installer/resources/maven-dev-release.sh 1"
-          ./gradlew assembleDebug
+          ./gradlew assembleRelease
           find . -name '*.apk'
       - name: Upload i2p-debug-${{ github.sha }}.apk
         uses: actions/upload-artifact@v4
