@@ -4,13 +4,6 @@
 name: Java Signed CI
 
 on: [push]
-  secrets:
-    DEV_PASSWORD:
-      description: 'A password to unlock the private key'
-      required: true
-    DEV_SIGNING_KEY:
-      description: 'the private key'
-      required: true
 
 permissions:
   contents: read
@@ -19,6 +12,13 @@ permissions:
 
 jobs:
   build-signed:
+    secrets:
+      DEV_PASSWORD:
+        description: 'A password to unlock the private key'
+        required: true
+      DEV_SIGNING_KEY:
+        description: 'the private key'
+        required: true
     runs-on: ubuntu-latest
     steps:
       - name: GetText
@@ -55,6 +55,13 @@ jobs:
           path: ./app/build/outputs/apk/free/debug/app-free-debug.apk
 
   trunk-signed:
+    secrets:
+      DEV_PASSWORD:
+        description: 'A password to unlock the private key'
+        required: true
+      DEV_SIGNING_KEY:
+        description: 'the private key'
+        required: true
     runs-on: ubuntu-latest
     steps:
       - name: GetText
