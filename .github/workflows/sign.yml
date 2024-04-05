@@ -30,6 +30,7 @@ jobs:
           rm -f override.properties
           mv etc/github.gradle.properties gradle.properties
           mv etc/github.signing.properties signing.properties
+          mkdir -p /home/user/keystores/
           base64 -d $DEV_SIGNING_KEY > /home/user/keystores/android-release.keystore
           echo "KEY_ALIAS=mykey" >> signing.properties
           echo "KEY_PASSWORD=$DEV_PASSWORD" >> signing.properties
@@ -68,6 +69,7 @@ jobs:
           echo "noExe=true" >> override.properties
           mv etc/github.gradle.properties gradle.properties
           mv etc/github.signing.properties signing.properties
+          mkdir -p /home/user/keystores/
           base64 -d $DEV_SIGNING_KEY > /home/user/keystores/android-release.keystore
           echo "KEY_ALIAS=mykey" >> signing.properties
           echo "KEY_PASSWORD=$DEV_PASSWORD" >> signing.properties
