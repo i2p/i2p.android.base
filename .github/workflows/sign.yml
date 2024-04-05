@@ -30,9 +30,9 @@ jobs:
           rm -f override.properties
           mv etc/github.gradle.properties gradle.properties
           mv etc/github.signing.properties signing.properties
+          base64 -d $DEV_SIGNING_KEY > /home/user/keystores/android-release.keystore
           echo "KEY_ALIAS=mykey" >> signing.properties
           echo "KEY_PASSWORD=$DEV_PASSWORD" >> signing.properties
-          base64 -d $DEV_SIGNING_KEY > /home/user/keystores/android-release.keystore
           echo "build.built-by=GitHub Actions" >> override.properties
           echo "noExe=true" >> override.properties
       - name: build with Gradle
@@ -68,6 +68,7 @@ jobs:
           echo "noExe=true" >> override.properties
           mv etc/github.gradle.properties gradle.properties
           mv etc/github.signing.properties signing.properties
+          base64 -d $DEV_SIGNING_KEY > /home/user/keystores/android-release.keystore
           echo "KEY_ALIAS=mykey" >> signing.properties
           echo "KEY_PASSWORD=$DEV_PASSWORD" >> signing.properties
           grep -v I2P_ gradle.properties > gradle.properties.update
