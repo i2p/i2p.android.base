@@ -31,7 +31,7 @@ jobs:
           mv etc/github.gradle.properties gradle.properties
           mv etc/github.signing.properties signing.properties
           mkdir -p $HOME/keystores/
-          base64 -d $DEV_SIGNING_KEY > $HOME/keystores/android-release.keystore
+          echo $DEV_SIGNING_KEY | base64 -d > $HOME/keystores/android-release.keystorekeystore
           echo "KEY_ALIAS=mykey" >> signing.properties
           echo "KEY_PASSWORD=$DEV_PASSWORD" >> signing.properties
           echo "build.built-by=GitHub Actions" >> override.properties
@@ -70,7 +70,7 @@ jobs:
           mv etc/github.gradle.properties gradle.properties
           mv etc/github.signing.properties signing.properties
           mkdir -p $HOME/keystores/
-          base64 -d $DEV_SIGNING_KEY > $HOME/keystores/android-release.keystore
+          echo $DEV_SIGNING_KEY | base64 -d > $HOME/keystores/android-release.keystore
           echo "KEY_ALIAS=mykey" >> signing.properties
           echo "KEY_PASSWORD=$DEV_PASSWORD" >> signing.properties
           grep -v I2P_ gradle.properties > gradle.properties.update
