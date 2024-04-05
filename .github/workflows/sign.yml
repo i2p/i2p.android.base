@@ -24,8 +24,8 @@ jobs:
           distribution: 'temurin'
       - name: Generate override.properties
         env:
-          DEV_SIGNING_KEY=${{ secrets.DEV_SIGNING_KEY }}
-          DEV_PASSWORD=${{ secrets.DEV_PASSWORD }}
+          DEV_SIGNING_KEY: ${{ secrets.DEV_SIGNING_KEY }}
+          DEV_PASSWORD: ${{ secrets.DEV_PASSWORD }}
         run: |
           rm -f override.properties
           mv etc/github.gradle.properties gradle.properties
@@ -60,8 +60,8 @@ jobs:
           distribution: 'temurin'
       - name: Generate override.properties
         env:
-          DEV_SIGNING_KEY=${{ secrets.DEV_SIGNING_KEY }}
-          DEV_PASSWORD=${{ secrets.DEV_PASSWORD }}
+          DEV_SIGNING_KEY: ${{ secrets.DEV_SIGNING_KEY }}
+            DEV_PASSWORD: ${{ secrets.DEV_PASSWORD }}
         run: |
           rm -f override.properties
           echo "build.built-by=GitHub Actions" >> override.properties
