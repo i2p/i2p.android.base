@@ -22,7 +22,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      - name : Generate override.properties
+      - name: Generate override.properties
         env:
           DEV_SIGNING_KEY=${{ secrets.DEV_SIGNING_KEY }}
           DEV_PASSWORD=${{ secrets.DEV_PASSWORD }}
@@ -58,7 +58,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      - name : Generate override.properties
+      - name: Generate override.properties
         env:
           DEV_SIGNING_KEY=${{ secrets.DEV_SIGNING_KEY }}
           DEV_PASSWORD=${{ secrets.DEV_PASSWORD }}
