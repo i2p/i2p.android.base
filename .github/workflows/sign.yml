@@ -12,10 +12,10 @@ permissions:
 
 jobs:
   build-signed:
+    runs-on: ubuntu-latest
     secrets:
       DEV_PASSWORD: ${{ secrets.DEV_PASSWORD }}
       DEV_SIGNING_KEY: ${{ secrets.DEV_SIGNING_KEY }}
-    runs-on: ubuntu-latest
     steps:
       - name: GetText
         run: sudo apt install gettext git
@@ -51,10 +51,10 @@ jobs:
           path: ./app/build/outputs/apk/free/debug/app-free-debug.apk
 
   trunk-signed:
+    runs-on: ubuntu-latest
     secrets:
       DEV_PASSWORD: ${{ secrets.DEV_PASSWORD }}
       DEV_SIGNING_KEY: ${{ secrets.DEV_SIGNING_KEY }}
-    runs-on: ubuntu-latest
     steps:
       - name: GetText
         run: sudo apt install gettext git
