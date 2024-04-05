@@ -4,14 +4,13 @@
 name: Java Signed CI
 
 on: [push]
-  workflow_call:
-    secrets:
-      DEV_PASSWORD:
-        description: 'A password to unlock the private key'
-        required: true
-      DEV_SIGNING_KEY:
-        description: 'the private key'
-        required: true
+  secrets:
+    DEV_PASSWORD:
+      description: 'A password to unlock the private key'
+      required: true
+    DEV_SIGNING_KEY:
+      description: 'the private key'
+      required: true
 
 permissions:
   contents: read
