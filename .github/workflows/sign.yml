@@ -13,9 +13,6 @@ permissions:
 jobs:
   build-signed:
     runs-on: ubuntu-latest
-    secrets:
-      DEV_PASSWORD: ${{ secrets.DEV_PASSWORD }}
-      DEV_SIGNING_KEY: ${{ secrets.DEV_SIGNING_KEY }}
     steps:
       - name: GetText
         run: sudo apt install gettext git
@@ -26,6 +23,9 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: Generate override.properties
+        secrets:
+          DEV_PASSWORD: ${{ secrets.DEV_PASSWORD }}
+          DEV_SIGNING_KEY: ${{ secrets.DEV_SIGNING_KEY }}
         env:
           DEV_SIGNING_KEY=${{ secrets.DEV_SIGNING_KEY }}
           DEV_PASSWORD=${{ secrets.DEV_PASSWORD }}
@@ -52,9 +52,6 @@ jobs:
 
   trunk-signed:
     runs-on: ubuntu-latest
-    secrets:
-      DEV_PASSWORD: ${{ secrets.DEV_PASSWORD }}
-      DEV_SIGNING_KEY: ${{ secrets.DEV_SIGNING_KEY }}
     steps:
       - name: GetText
         run: sudo apt install gettext git
@@ -65,6 +62,9 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: Generate override.properties
+        secrets:
+          DEV_PASSWORD: ${{ secrets.DEV_PASSWORD }}
+          DEV_SIGNING_KEY: ${{ secrets.DEV_SIGNING_KEY }}
         env:
           DEV_SIGNING_KEY=${{ secrets.DEV_SIGNING_KEY }}
           DEV_PASSWORD=${{ secrets.DEV_PASSWORD }}
