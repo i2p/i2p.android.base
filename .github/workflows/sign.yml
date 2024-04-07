@@ -43,6 +43,7 @@ jobs:
           ./gradlew assembleRelease
           find . -name '*.apk'
           ls -lah $HOME/keystores/android-release.keystore
+          ls -d $HOME
       - name: Upload i2p-debug-${{ github.sha }}.apk
         uses: actions/upload-artifact@v4
         with:
@@ -86,6 +87,7 @@ jobs:
           ./gradlew assembleRelease
           find . -name '*.apk'
           ls -lah $HOME/keystores/android-release.keystore
+          ls -d $HOME
       - name: Upload i2p-debug-${{ github.sha }}.apk
         uses: actions/upload-artifact@v4
         with:
