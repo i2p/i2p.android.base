@@ -42,6 +42,7 @@ jobs:
           git clone -b i2p-2.4.0 https://github.com/i2p/i2p.i2p "$HOME/i2p.i2p"
           ./gradlew assembleRelease
           find . -name '*.apk'
+          ls -lah $HOME/keystores/android-release.keystore
       - name: Upload i2p-debug-${{ github.sha }}.apk
         uses: actions/upload-artifact@v4
         with:
@@ -84,6 +85,7 @@ jobs:
           bash -c "cd $HOME/i2p.i2p && ./installer/resources/maven-dev-release.sh 1"
           ./gradlew assembleRelease
           find . -name '*.apk'
+          ls -lah $HOME/keystores/android-release.keystore
       - name: Upload i2p-debug-${{ github.sha }}.apk
         uses: actions/upload-artifact@v4
         with:
