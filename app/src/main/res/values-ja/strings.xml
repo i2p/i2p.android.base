@@ -116,6 +116,7 @@
   <string name="notification_status_expl">調査トンネル: %1$d/%2$d</string>
   <string name="notification_status_client">クライアントトンネル: %1$d/%2$d</string>
   <string name="stats_memory">メモリ 使用/最大</string>
+  <string name="stats_delay">メッセージ遅延</string>
   <string name="copied_base32_system_notification_title">Base32をクリップボードにコピー</string>
   <string name="copied_base32_system_notification_body">あなたのI2Pトンネルのアドレスはクリップボードにコピーされました。</string>
   <string name="menu_settings">設定</string>

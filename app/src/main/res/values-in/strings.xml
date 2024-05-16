@@ -320,8 +320,8 @@
   <string name="new_keys_on_reopen_conflict_msg">Anda tidak dapat mengaktifkan key baru pada saat membuka kembali ketika tunnel sedang dikonfigurasi untuk mendapatkan persistent key. Apakah anda ingin menonaktifkan persistent key?</string>
   <string name="http_client">Klien HTTP</string>
   <string name="tunnel_summ_user_agent">Perbolehkan \'User-Agent\' header melalui</string>
-  <string name="tunnel_summ_referer">Pass \'Referer\' header through</string>
-  <string name="tunnel_summ_accept">Pass \'Accept-*\' header through</string>
+  <string name="tunnel_summ_referer">Perbolehkan \'Referer\' header melalui</string>
+  <string name="tunnel_summ_accept">Perbolehkan \'Accept-*\' header melalui</string>
   <string name="tunnel_summ_allow_ssl">Perbolehkan SSL ke alamat I2P</string>
   <string name="jump_url_list">Lewati daftar URL</string>
   <string name="proxy_auth">Otorisasi proxy</string>
