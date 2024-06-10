@@ -55,6 +55,8 @@
   <string name="upload">Unggah</string>
   <string name="configure_browser_title">Ubah pengaturan peramban?</string>
   <string name="configure_browser_for_i2p">Apakah anda ingin mengubah pengaturan peramban untuk mengunjungi situs-situs I2P? (Anda dapat melakukan ini nanti di menu bantuan.)</string>
+  <string name="configure_no_doze_title">Atur Optimisasi Baterai?</string>
+  <string name="configure_no_doze">I2P bekerja dengan baik jika terus dijalankan. Supaya  Android tidak menutup I2P ketika mencoba menghemat baterai, Anda dapat memasukkannya ke dalam daftar pengecualian baterai. Ini akan secara signifikan meningkatkan keandalan aplikasi. \n\nTetap jalankan I2P di latar belakang? (direkomendasikan)</string>
   <string name="first_start_title">Selamat atas terpasangnya I2P!</string>
   <string name="first_start_welcome"><b>Selamat datang di I2P</b> Mohon <b>bersabar</b> karena I2P boot up dan menemukan peers.</string>
   <string name="first_start_read">Sementara Anda menunggu, silahkan baca catatn rilis dan laman sambutan.</string>
@@ -113,6 +115,11 @@
   <string name="notification_status_peers">Peers: %1$d aktif, %2$d diketahui</string>
   <string name="notification_status_expl">Saluran eksplorasi: %1$d/%2$d</string>
   <string name="notification_status_client">Saluran klien: %1$d/%2$d</string>
+  <string name="stats_memory">Memori digunakan/maks</string>
+  <string name="stats_lag">Job Lag</string>
+  <string name="stats_delay">Message Delay</string>
+  <string name="copied_base32_system_notification_title">Alamat base32 disalin ke clipboard</string>
+  <string name="copied_base32_system_notification_body">Alamat tunnel I2P Anda telah disalin ke dalam clipboard.</string>
   <string name="menu_settings">Pengaturan</string>
   <string name="settings_enable">Aktifkan</string>
   <string name="settings_desc_subscriptions">URL Langganan</string>
@@ -145,6 +152,13 @@
   <string name="settings_label_transports">Transport</string>
   <string name="settings_label_maxConns">Maks sambungan</string>
   <string name="settings_label_i2cp">I2CP antarmuka</string>
+  <string name="settings_desc_i2cp">Ijinkan aplikasi third-party untuk membuat tunnels menggunakan I2CP (memerlukan router untuk di-restart)</string>
+  <string name="settings_label_sam">SAM interface</string>
+  <string name="settings_desc_sam">Ijinkan aplikasi third-party untuk membuat tunnels menggunakan SAM (memerlukan router untuk di-restart)</string>
+  <string name="settings_confirm_sam">Sebuah aplikasi sedang berusaha untuk membuat koneksi SAM.</string>
+  <string name="settings_confirm_sam_id">Nama Koneksi/ID:</string>
+  <string name="settings_confirm_allow_sam">Ketuk untuk memberikan ijin</string>
+  <string name="settings_confirm_deny_sam">Abaikan untuk tidak memberikan ijin</string>
   <string name="settings_label_exploratory_pool">Pool eksplorasi</string>
   <string name="settings_desc_exploratory_pool">Parameter saluran</string>
   <string name="settings_label_expl_inbound">Saluran inbound</string>
@@ -169,6 +183,7 @@
   <string name="about_bugs">Bugs dan Dukungan:</string>
   <string name="about_helpwanted">Dibutuhkan Bantuan!</string>
   <string name="about_volunteer">Ingin membantu membuat aplikasi lebih baik? Jadilah relawan di forum Android:</string>
+  <string name="about_gitlab">Anda ingin memberikan saran fitur atau memperbaiki bug? Berikan Merge Request di Android Gitlab:</string>
   <string name="menu_help">Bantuan</string>
   <string name="general">Umum</string>
   <string name="label_router">Alamat publik</string>
@@ -229,6 +244,7 @@
   <string name="enabled">Diaktifkan</string>
   <string name="i2ptunnel_wizard_desc_name">Nama saluran, untuk identifikasi dalam daftar saluran.</string>
   <string name="i2ptunnel_wizard_desc_desc">Deskripsi saluran. Ini opsional dan murni informatif.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Tetapkan alamat atau tujuan .i2p (hostname.i2p, b32 atau b64) dari tunnel di sini.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Jika Anda tahu berbagai outproxy untuk jenis saluran ini (baik HTTP ataupun SOCKS), isikan mereka. Pisahkan proxy ganda dengan koma.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Ini adalah IP yang padanya berjalan layanan Anda, ini umumnya pada mesin yang sama, jadi 127.0.0.1 diisikan secara otomatis.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Ini adalah port yang padanya menerima koneksi layanan.</string>
@@ -351,4 +367,5 @@
   <string name="label_browser_configuration">Konfigurasi peramban</string>
   <string name="no_market_app">Tidak ada aplikasi market ditemukan, silakan install secara manual</string>
   <string name="unset">Belum disetel</string>
+  <string name="running_background">I2P sedang berjalan di latar belakang</string>
 </resources>
