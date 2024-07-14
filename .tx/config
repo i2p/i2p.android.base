@@ -1,6 +1,6 @@
 [main]
 host     = https://www.transifex.com
-lang_map = pt_BR: pt-rBR, yi: ji, zh_CN: zh, zh_TW: zh-rTW, id: in, ru_RU: ru, sv_SE: sv, tr_TR: tr, uk_UA: uk, he: iw
+lang_map = pt_BR: pt-rBR, yi: ji, zh_CN: zh, zh_TW: zh-rTW, id: in, ru_RU: ru, sv_SE: sv, tr_TR: tr, uk_UA: uk, he: iw, es_AR: es-rAR
 
 [o:otf:p:I2P:r:android]
 file_filter  = app/src/main/res/values-<lang>/strings.xml
