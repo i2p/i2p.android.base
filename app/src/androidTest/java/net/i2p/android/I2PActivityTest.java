@@ -1,39 +1,43 @@
 package net.i2p.android;
 
-import android.test.ActivityInstrumentationTestCase2;
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import net.i2p.android.router.R;
 
-import static android.support.test.espresso.Espresso.closeSoftKeyboard;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
-import static android.support.test.espresso.Espresso.pressBack;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.swipeLeft;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.hasSibling;
-import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withParent;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.closeSoftKeyboard;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static androidx.test.espresso.Espresso.pressBack;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.swipeLeft;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.hasSibling;
+import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 
-public class I2PActivityTest extends ActivityInstrumentationTestCase2<I2PActivity> {
-    public I2PActivityTest() {
-        super(I2PActivity.class);
+@RunWith(AndroidJUnit4.class)
+public class I2PActivityTest {
+
+    private ActivityScenario<I2PActivity> scenario;
+
+    @Before
+    public void setUp() {
+        scenario = ActivityScenario.launch(I2PActivity.class);
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        // For each test method invocation, the Activity will not actually be created
-        // until the first time this method is called.
-        getActivity();
-    }
-
+    @Test
     public void testMainTabs() {
         onView(withId(R.id.router_onoff_button)).check(matches(isDisplayed()));
 
@@ -55,6 +59,7 @@ public class I2PActivityTest extends ActivityInstrumentationTestCase2<I2PActivit
         onView(withId(R.id.router_onoff_button)).check(matches(isDisplayed()));
     }
 
+    @Test
     public void testMainSwipe() {
         onView(withId(R.id.router_onoff_button)).check(matches(isDisplayed()));
 
@@ -70,9 +75,10 @@ public class I2PActivityTest extends ActivityInstrumentationTestCase2<I2PActivit
         // TODO: test addressbook ViewPager
     }
 
+    @Test
     public void testSettingsNavigation() {
         // Open settings menu
-        openActionBarOverflowOrOptionsMenu(getActivity());
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText(R.string.menu_settings)).perform(click());
 
         // Open bandwidth page
