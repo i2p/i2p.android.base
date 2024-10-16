@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.viewpagerindicator.TitlePageIndicator;
+//import com.viewpagerindicator.TitlePageIndicator;
 
 import net.i2p.android.i2ptunnel.preferences.EditTunnelContainerFragment;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
@@ -52,7 +52,7 @@ public class TunnelsContainer extends Fragment implements
     private boolean mTwoPane;
 
     ViewPager mViewPager;
-    TitlePageIndicator mPageIndicator;
+    //TitlePageIndicator mPageIndicator;
     FragmentPagerAdapter mFragPagerAdapter;
 
     private static final String FRAGMENT_CLIENT = "client_fragment";
@@ -82,7 +82,7 @@ public class TunnelsContainer extends Fragment implements
         View v = inflater.inflate(R.layout.container_tunnels, container, false);
 
         mViewPager = (ViewPager) v.findViewById(R.id.pager);
-        mPageIndicator = (TitlePageIndicator) v.findViewById(R.id.page_indicator);
+        //mPageIndicator = (TitlePageIndicator) v.findViewById(R.id.page_indicator);
         mNewTunnel = (ImageButton) v.findViewById(R.id.promoted_action);
         mNewTunnel.setVisibility(showActions() ? View.VISIBLE : View.GONE);
 
@@ -111,7 +111,7 @@ public class TunnelsContainer extends Fragment implements
         mViewPager.setAdapter(mFragPagerAdapter);
 
         // Bind the page indicator to the pager.
-        mPageIndicator.setViewPager(mViewPager);
+        //mPageIndicator.setViewPager(mViewPager);
 
         mNewTunnel.setOnClickListener(new View.OnClickListener() {
             @Override

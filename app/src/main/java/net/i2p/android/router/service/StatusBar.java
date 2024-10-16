@@ -140,6 +140,7 @@ class StatusBar {
             mNotificationManager.createNotificationChannel(mNotificationChannel);
             mNotificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
             mNotifyBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
+            //
         }
         mNotif = mNotifyBuilder.build();
         mNotificationManager.notify(ID, mNotif);

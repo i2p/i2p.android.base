@@ -1,5 +1,7 @@
 package net.i2p.android.router.service;
 
+import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE;
+
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -173,10 +175,17 @@ public class RouterService extends Service {
         // We need to *not* check if we're restarting on Android greater than Oreo due to
         // changes in how notifications work and the use of NotificationChannels.
         if(!restart) {
-            startForeground(1337, _statusBar.getNote());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                startForeground(1337, _statusBar.getNote(), FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
+            } else {
+                startForeground(1337, _statusBar.getNote());
+            }
         } else {
             if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 startForeground(1337, _statusBar.getNote());
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                startForeground(1337, _statusBar.getNote(), FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
             }
         }
 

@@ -29,10 +29,6 @@
             android:layout_weight="2"
             android:orientation="vertical">
 
-            <com.viewpagerindicator.TitlePageIndicator
-                android:id="@+id/page_indicator"
-                style="@style/PagerIndicator" />
-
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="match_parent"

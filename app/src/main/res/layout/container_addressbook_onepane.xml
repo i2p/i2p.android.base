@@ -5,10 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.viewpagerindicator.TitlePageIndicator
-        android:id="@+id/page_indicator"
-        style="@style/PagerIndicator" />
-
     <!-- The main content view -->
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
