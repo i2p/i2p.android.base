@@ -66,4 +66,12 @@
         android:layout_marginRight="@dimen/listitem_horizontal_margin"
         app:fab_colorNormal="@color/accent"
         app:fab_colorPressed="@color/accent_dark" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/page_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        app:tabGravity="fill" />
+
 </RelativeLayout>

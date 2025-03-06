@@ -1,12 +1,18 @@
 package net.i2p.android.router.netdb;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.ViewPager;
+//import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+//import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
+//import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+//import android.support.v4.app.LoaderManager;
+import androidx.loader.app.LoaderManager;
+//import android.support.v4.content.Loader;
+import androidx.loader.content.Loader;
+//import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;

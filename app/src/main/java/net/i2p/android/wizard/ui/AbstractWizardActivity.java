@@ -1,12 +1,18 @@
 package net.i2p.android.wizard.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
+//import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
+//import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+//import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
+//import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
+//import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+//import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;

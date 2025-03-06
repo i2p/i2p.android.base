@@ -1,7 +1,8 @@
 package net.i2p.android.preferences.util;
 
 import android.content.Context;
-import android.support.v7.preference.EditTextPreference;
+//import android.support.v7.preference.EditTextPreference;
+import androidx.preference.EditTextPreference;
 import android.util.AttributeSet;
 
 import net.i2p.android.router.R;

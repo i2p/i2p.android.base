@@ -25,7 +25,10 @@ import net.i2p.android.wizard.model.ReviewItem;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+//import android.support.v4.app.ListFragment;
+import androidx.fragment.app.ListFragment;
+//import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;

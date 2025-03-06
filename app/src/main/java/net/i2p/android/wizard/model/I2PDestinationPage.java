@@ -2,7 +2,8 @@ package net.i2p.android.wizard.model;
 
 import java.util.Locale;
 
-import android.support.v4.app.Fragment;
+//import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import net.i2p.I2PAppContext;
 import net.i2p.android.wizard.ui.I2PDestinationFragment;

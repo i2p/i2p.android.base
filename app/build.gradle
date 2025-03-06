@@ -65,6 +65,9 @@ android {
 }
 
 dependencies {
+    implementation "androidx.appcompat:appcompat:1.5.1"
+    implementation "androidx.preference:preference:1.2.0"
+    implementation "androidx.annotation:annotation:1.5.0"
     // Local dependencies
     implementation project(':lib:client')
     implementation project(':lib:helper')
@@ -76,6 +79,7 @@ dependencies {
     implementation "com.android.support:preference-v7:$supportVersion"
     implementation "com.android.support:preference-v14:$supportVersion"
     implementation "com.android.support:recyclerview-v7:$supportVersion"
+    implementation 'com.google.android.material:material:1.5.0'
     // Remote dependencies
     implementation 'com.androidplot:androidplot-core:1.5.11'
     implementation 'com.eowise:recyclerview-stickyheaders:0.5.2@aar'
@@ -94,6 +98,9 @@ dependencies {
 }
 
 dependencies {
+    implementation "androidx.appcompat:appcompat:1.5.1"
+    implementation "androidx.preference:preference:1.2.0"
+    implementation "androidx.annotation:annotation:1.5.0"
     implementation 'androidx.test.espresso:espresso-core:3.6.1'
     implementation 'androidx.test.ext:junit:1.2.1'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'

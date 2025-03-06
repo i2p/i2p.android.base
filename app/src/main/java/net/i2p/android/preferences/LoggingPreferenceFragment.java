@@ -1,7 +1,8 @@
 package net.i2p.android.preferences;
 
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceScreen;
+//import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;

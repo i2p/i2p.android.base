@@ -2,10 +2,14 @@ package net.i2p.android.preferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
+//import android.support.v7.preference.CheckBoxPreference;
+import android.preference.CheckBoxPreference;
+//import android.support.v7.preference.PreferenceCategory;
+import android.preference.PreferenceCategory;
+//import android.support.v7.preference.PreferenceManager;
+import android.preference.PreferenceManager;
+//import android.support.v7.preference.PreferenceScreen;
+import android.preference.PreferenceScreen;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;

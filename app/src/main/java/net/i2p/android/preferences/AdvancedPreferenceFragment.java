@@ -1,8 +1,10 @@
 package net.i2p.android.preferences;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.preference.Preference;
+//import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+//import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.SettingsActivity;

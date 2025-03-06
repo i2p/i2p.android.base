@@ -3,9 +3,11 @@ package net.i2p.android.router.dialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+//import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
+//import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 import net.i2p.android.I2PActivityBase;
 import net.i2p.android.router.MainFragment;

@@ -2,9 +2,12 @@ package net.i2p.android.router.netdb;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+//import android.support.v4.app.ListFragment;
+import androidx.fragment.app.ListFragment;
+//import android.support.v4.app.LoaderManager;
+import androidx.loader.app.LoaderManager;
+//import android.support.v4.content.Loader;
+import androidx.loader.content.Loader;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;

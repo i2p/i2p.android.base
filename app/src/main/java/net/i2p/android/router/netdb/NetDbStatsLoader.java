@@ -1,7 +1,8 @@
 package net.i2p.android.router.netdb;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+//import android.support.v4.content.AsyncTaskLoader;
+import androidx.loader.content.AsyncTaskLoader;
 
 import net.i2p.android.router.R;
 import net.i2p.data.Hash;

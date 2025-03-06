@@ -3,8 +3,12 @@ package android.support.v4.view;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.os.ParcelableCompat;
-import android.support.v4.os.ParcelableCompatCreatorCallbacks;
+//import android.support.v4.os.ParcelableCompat;
+import androidx.core.os.ParcelableCompat;
+//import android.support.v4.os.ParcelableCompatCreatorCallbacks;
+import androidx.core.os.ParcelableCompatCreatorCallbacks;
+
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.Toast;

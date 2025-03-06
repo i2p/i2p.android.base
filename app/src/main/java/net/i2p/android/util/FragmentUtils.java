@@ -1,7 +1,9 @@
 package net.i2p.android.util;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+//import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+//import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 
 public class FragmentUtils {
     public interface TwoPaneProvider {

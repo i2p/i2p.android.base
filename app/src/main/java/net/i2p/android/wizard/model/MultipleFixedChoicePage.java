@@ -18,7 +18,8 @@ package net.i2p.android.wizard.model;
 
 import net.i2p.android.wizard.ui.MultipleChoiceFragment;
 
-import android.support.v4.app.Fragment;
+//import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
