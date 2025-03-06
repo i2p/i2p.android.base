@@ -2,9 +2,12 @@ package net.i2p.android.i2ptunnel.preferences;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
+//import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
+//import android.support.v7.preference.PreferenceGroup;
+import androidx.preference.PreferenceGroup;
+//import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 import android.widget.Toast;
 
 import net.i2p.android.i2ptunnel.util.SaveTunnelTask;
