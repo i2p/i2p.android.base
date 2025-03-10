@@ -40,4 +40,6 @@
 
     <dimen name="graph_domain_tick_label_font_size">15dp</dimen>
     <dimen name="graph_range_tick_label_font_size">15dp</dimen>
+    <dimen name="pager_indicator_height">48dp</dimen>
+
 </resources>

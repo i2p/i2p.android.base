@@ -1,6 +1,7 @@
 package net.i2p.android.i2ptunnel;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 //import android.support.v4.app.ActivityCompat;
@@ -27,7 +28,16 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
-import com.viewpagerindicator.TitlePageIndicator;
+import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
+import androidx.core.content.ContextCompat;
 
 import net.i2p.android.i2ptunnel.preferences.EditTunnelContainerFragment;
 import net.i2p.android.i2ptunnel.util.TunnelUtil;
@@ -60,7 +70,7 @@ public class TunnelsContainer extends Fragment implements
     private boolean mTwoPane;
 
     ViewPager mViewPager;
-    TitlePageIndicator mPageIndicator;
+    MagicIndicator mPageIndicator;
     FragmentPagerAdapter mFragPagerAdapter;
 
     private static final String FRAGMENT_CLIENT = "client_fragment";
@@ -89,16 +99,17 @@ public class TunnelsContainer extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.container_tunnels, container, false);
 
-        mViewPager = (ViewPager) v.findViewById(R.id.pager);
-        TabLayout tabLayout = v.findViewById(R.id.page_indicator);
-        tabLayout.setupWithViewPager(mViewPager);
-        mNewTunnel = (ImageButton) v.findViewById(R.id.promoted_action);
+        mViewPager = v.findViewById(R.id.pager);
+        mPageIndicator = v.findViewById(R.id.magic_indicator);
+        
+        mNewTunnel = v.findViewById(R.id.promoted_action);
         mNewTunnel.setVisibility(showActions() ? View.VISIBLE : View.GONE);
 
+        // Initialize ViewPager adapter
+        mFragPagerAdapter = new TunnelsPagerAdapter(getChildFragmentManager());
+        mViewPager.setAdapter(mFragPagerAdapter);
+
         if (v.findViewById(R.id.detail_fragment) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w720dp). If this view
-            // is present, then the activity should be in two-pane mode.
             mTwoPane = true;
         }
 
@@ -109,18 +120,58 @@ public class TunnelsContainer extends Fragment implements
                     savedInstanceState, FRAGMENT_SERVER);
         }
 
+        setupMagicIndicator();
+
         return v;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // Add null check for safety
+        if (mPageIndicator == null) {
+            return;
+        }
 
         mFragPagerAdapter = new TunnelsPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mFragPagerAdapter);
 
-        // Bind the page indicator to the pager.
-        mPageIndicator.setViewPager(mViewPager);
+        // Replace old indicator setup with MagicIndicator initialization
+        CommonNavigator commonNavigator = new CommonNavigator(getContext());
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+            @Override
+            public int getCount() {
+                return mFragPagerAdapter.getCount();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
+                simplePagerTitleView.setText(mFragPagerAdapter.getPageTitle(index));
+                simplePagerTitleView.setNormalColor(ContextCompat.getColor(context, 
+                    R.color.primary_text_disabled_material_dark));
+                simplePagerTitleView.setSelectedColor(ContextCompat.getColor(context,
+                    R.color.primary_text_default_material_dark));
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mViewPager.setCurrentItem(index);
+                    }
+                });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setColors(ContextCompat.getColor(context, R.color.primary));
+                return indicator;
+            }
+        });
+
+        mPageIndicator.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(mPageIndicator, mViewPager);
+        //mPageIndicator.setViewPager(mViewPager);
 
         mNewTunnel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -319,5 +370,46 @@ public class TunnelsContainer extends Fragment implements
                         .remove(detailFrag).commit();
             }
         }
+    }
+
+    private void setupMagicIndicator() {
+        if (mPageIndicator == null || getContext() == null) {
+            return;
+        }
+    
+        CommonNavigator commonNavigator = new CommonNavigator(getContext());
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+            @Override
+            public int getCount() {
+                return mFragPagerAdapter.getCount();
+            }
+    
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
+                simplePagerTitleView.setText(mFragPagerAdapter.getPageTitle(index));
+                simplePagerTitleView.setNormalColor(ContextCompat.getColor(context, 
+                    R.color.primary_text_disabled_material_dark));
+                simplePagerTitleView.setSelectedColor(ContextCompat.getColor(context,
+                    R.color.primary_text_default_material_dark));
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mViewPager.setCurrentItem(index);
+                    }
+                });
+                return simplePagerTitleView;
+            }
+    
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setColors(ContextCompat.getColor(context, R.color.primary));
+                return indicator;
+            }
+        });
+    
+        mPageIndicator.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(mPageIndicator, mViewPager);
     }
 }

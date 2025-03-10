@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!--
-    This layout is a two-pane layout for the master/detail
-    flow within a DrawerLayout. See res/values-large/refs.xml
-    and res/values-sw600dp/refs.xml for layout aliases
-    that replace the single-pane version of the layout with
-    this two-pane version.
-    -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,17 +13,23 @@
         android:paddingRight="104dp"
         android:paddingStart="@dimen/listitem_horizontal_margin">
 
-        <!-- The main fragment view -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:orientation="vertical">
 
-            <android.support.v4.view.ViewPager
+            <net.lucode.hackware.magicindicator.MagicIndicator
+                android:id="@+id/magic_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/pager_indicator_height"
+                android:theme="@style/MagicIndicator" />
+
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -66,12 +63,5 @@
         android:layout_marginRight="@dimen/listitem_horizontal_margin"
         app:fab_colorNormal="@color/accent"
         app:fab_colorPressed="@color/accent_dark" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/page_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="fixed"
-        app:tabGravity="fill" />
 
 </RelativeLayout>

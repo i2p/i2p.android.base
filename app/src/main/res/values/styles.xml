@@ -24,6 +24,9 @@
 
     <style name="Theme.I2P" parent="Base.Theme.I2P">
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <item name="footerColor">@color/footer_color</item>
+        <item name="selectedBold">true</item>
+        <item name="selectedColor">@color/selected_color</item>
     </style>
 
     <style name="TextAppearance.AppCompat.Primary" parent="TextAppearance.AppCompat.Body1">
@@ -193,5 +196,9 @@
         <item name="android:textStyle">bold</item>
         <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingRight">12dp</item>
+    </style>
+    <style name="MagicIndicator">
+        <item name="android:layout_height">@dimen/pager_indicator_height</item>
+        <item name="android:background">?attr/colorPrimary</item>
     </style>
 </resources>

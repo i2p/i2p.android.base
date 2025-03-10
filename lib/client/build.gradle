@@ -26,6 +26,7 @@ android {
     lintOptions {
         abortOnError false
     }
+    namespace 'net.i2p.android.lib.client'
 }
 
 dependencies {

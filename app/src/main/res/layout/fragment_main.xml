@@ -93,7 +93,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="?attr/colorPrimary"
@@ -151,5 +151,5 @@
                     tools:text="0.0 KBps / 0.0 KB" />
             </LinearLayout>
         </LinearLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 </LinearLayout>

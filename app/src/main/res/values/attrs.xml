@@ -14,4 +14,7 @@
         <attr name="msbp_defaultValue" format="reference|integer"/>
         <attr name="msbp_measurementUnit" format="reference|string"/>
     </declare-styleable>
+    <attr name="footerColor" format="color" />
+    <attr name="selectedBold" format="boolean" />
+    <attr name="selectedColor" format="color" />
 </resources>
