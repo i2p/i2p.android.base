@@ -6,5 +6,5 @@
           android:title="@string/action_search"
           android:icon="@drawable/ic_search_white_24dp"
           i2pandroid:showAsAction="ifRoom|collapseActionView"
-          i2pandroid:actionViewClass="android.support.v7.widget.SearchView" />
+          i2pandroid:actionViewClass="androidx.appcompat.widget.SearchView" />
 </menu>

@@ -4,7 +4,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-//import android.support.v7.app.AppCompatActivity;
+import android.os.Handler;
+import android.os.Looper;
+import java.util.concurrent.CountDownLatch;
 import androidx.appcompat.app.AppCompatActivity;
 
 import net.i2p.android.I2PActivity;
@@ -22,6 +24,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
 
 /**
  * Implements SAMSecureSessionInterface on Android platforms using a Toast
@@ -46,10 +49,33 @@ public class AndroidSAMSecureSession extends AppCompatActivity implements SAMSec
         results.put(clientId, 1);
     }
 
-    public AndroidSAMSecureSession(Context ctx, RouterService rCtx, StatusBar statusBar) {
+    private AndroidSAMSecureSession(Context ctx, RouterService rCtx, StatusBar statusBar) {
         mCtx = ctx;
         _routerService = rCtx;
         _statusBar = statusBar;
+    }
+
+    public static AndroidSAMSecureSession create(Context ctx, RouterService rCtx, StatusBar statusBar) {
+        if (Looper.getMainLooper().getThread() == Thread.currentThread()) {
+            // We're on the main thread, create directly
+            return new AndroidSAMSecureSession(ctx, rCtx, statusBar);
+        } else {
+            // We're not on the main thread, post to main thread
+            final AndroidSAMSecureSession[] result = new AndroidSAMSecureSession[1];
+            final CountDownLatch latch = new CountDownLatch(1);
+            
+            new Handler(Looper.getMainLooper()).post(() -> {
+                result[0] = new AndroidSAMSecureSession(ctx, rCtx, statusBar);
+                latch.countDown();
+            });
+
+            try {
+                latch.await();
+                return result[0];
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Failed to create AndroidSAMSecureSession", e);
+            }
+        }
     }
 
     private void waitForResult(String clientId) {

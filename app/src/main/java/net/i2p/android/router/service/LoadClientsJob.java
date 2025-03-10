@@ -180,7 +180,8 @@ class LoadClientsJob extends JobImpl {
             try {
                 Util.i("Starting the SAM API");
                 Looper.prepare();
-                AndroidSAMSecureSession _androidSecureSession = new AndroidSAMSecureSession(mCtx, _routerService, _statusBar);
+                //AndroidSAMSecureSession _androidSecureSession = new AndroidSAMSecureSession(mCtx, _routerService, _statusBar);
+                AndroidSAMSecureSession _androidSecureSession = AndroidSAMSecureSession.create(mCtx, _routerService, _statusBar);
                 SAMSecureSessionInterface _secureSession = _androidSecureSession;
                 SAM_BRIDGE = new SAMBridge("127.0.0.1",
                  7656,

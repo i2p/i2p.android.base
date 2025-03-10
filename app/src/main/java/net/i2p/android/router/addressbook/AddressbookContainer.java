@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 //import android.support.v4.app.Fragment;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 //import android.support.v4.app.FragmentManager;
 import androidx.fragment.app.FragmentManager;
@@ -27,18 +28,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-//import com.viewpagerindicator.TitlePageIndicator;
+import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
 import net.i2p.android.router.R;
 import net.i2p.android.router.util.NamingServiceUtil;
 import net.i2p.android.router.util.Util;
 import net.i2p.client.naming.NamingService;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 public class AddressbookContainer extends Fragment
         implements AddressbookFragment.OnAddressSelectedListener,
         SearchView.OnQueryTextListener {
     public static final int ADD_WIZARD_REQUEST = 1;
     public static final String ADD_WIZARD_DATA = "add_wizard_data";
+    private MagicIndicator mPageIndicator;
 
     /**
      * Whether or not the container is in two-pane mode, i.e. running on a tablet
@@ -48,7 +58,6 @@ public class AddressbookContainer extends Fragment
 
     ViewPager mViewPager;
     FragmentPagerAdapter mFragPagerAdapter;
-
     private static final String FRAGMENT_ROUTER = "router_fragment";
     private static final String FRAGMENT_PRIVATE = "private_fragment";
     private static final int FRAGMENT_ID_ROUTER = 0;
@@ -73,6 +82,17 @@ public class AddressbookContainer extends Fragment
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
+    
+        if (!mTwoPane) {
+            // Initialize ViewPager and adapter first
+            mViewPager = (ViewPager) v.findViewById(R.id.pager);
+            mFragPagerAdapter = new AddressbookPagerAdapter(getActivity(), getChildFragmentManager());
+            mViewPager.setAdapter(mFragPagerAdapter);
+            
+            // Then set up MagicIndicator
+            mPageIndicator = v.findViewById(R.id.magic_indicator);
+            setupMagicIndicator();
+        }
 
         if (savedInstanceState != null) {
             mRouterFrag = (AddressbookFragment) getChildFragmentManager().getFragment(
@@ -95,14 +115,6 @@ public class AddressbookContainer extends Fragment
                 ft.add(R.id.right_fragment, mPrivateFrag);
             }
             ft.commit();
-        }
-
-        if (!mTwoPane) {
-            mViewPager = (ViewPager) v.findViewById(R.id.pager);
-            //TitlePageIndicator pageIndicator = (TitlePageIndicator) v.findViewById(R.id.page_indicator);
-            mFragPagerAdapter = new AddressbookPagerAdapter(getActivity(), getChildFragmentManager());
-            mViewPager.setAdapter(mFragPagerAdapter);
-            //pageIndicator.setViewPager(mViewPager);
         }
 
         return v;
@@ -256,5 +268,39 @@ public class AddressbookContainer extends Fragment
             mRouterFrag.filterAddresses(query);
         if (mPrivateFrag != null)
             mPrivateFrag.filterAddresses(query);
+    }
+
+    private void setupMagicIndicator() {
+        if (mPageIndicator == null || mFragPagerAdapter == null || mViewPager == null) {
+            return;
+        }
+    
+        CommonNavigator commonNavigator = new CommonNavigator(getContext());
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+            @Override
+            public int getCount() {
+                return mFragPagerAdapter.getCount();
+            }
+    
+            @Override
+            public IPagerTitleView getTitleView(Context context, int index) {
+                SimplePagerTitleView titleView = new ColorTransitionPagerTitleView(context);
+                titleView.setText(mFragPagerAdapter.getPageTitle(index));
+                titleView.setNormalColor(ContextCompat.getColor(context, R.color.primary_text_disabled_material_dark));
+                titleView.setSelectedColor(ContextCompat.getColor(context, R.color.primary_text_default_material_dark));
+                titleView.setOnClickListener(v -> mViewPager.setCurrentItem(index));
+                return titleView;
+            }
+    
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setColors(ContextCompat.getColor(context, R.color.primary));
+                return indicator;
+            }
+        });
+    
+        mPageIndicator.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(mPageIndicator, mViewPager);
     }
 }
