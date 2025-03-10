@@ -128,51 +128,14 @@ public class TunnelsContainer extends Fragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // Add null check for safety
-        if (mPageIndicator == null) {
-            return;
-        }
-
+        
+        // Initialize ViewPager and adapter
         mFragPagerAdapter = new TunnelsPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mFragPagerAdapter);
 
-        // Replace old indicator setup with MagicIndicator initialization
-        CommonNavigator commonNavigator = new CommonNavigator(getContext());
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-            @Override
-            public int getCount() {
-                return mFragPagerAdapter.getCount();
-            }
+        setupMagicIndicator();
 
-            @Override
-            public IPagerTitleView getTitleView(Context context, final int index) {
-                SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
-                simplePagerTitleView.setText(mFragPagerAdapter.getPageTitle(index));
-                simplePagerTitleView.setNormalColor(ContextCompat.getColor(context, 
-                    R.color.primary_text_disabled_material_dark));
-                simplePagerTitleView.setSelectedColor(ContextCompat.getColor(context,
-                    R.color.primary_text_default_material_dark));
-                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mViewPager.setCurrentItem(index);
-                    }
-                });
-                return simplePagerTitleView;
-            }
-
-            @Override
-            public IPagerIndicator getIndicator(Context context) {
-                LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setColors(ContextCompat.getColor(context, R.color.primary));
-                return indicator;
-            }
-        });
-
-        mPageIndicator.setNavigator(commonNavigator);
-        ViewPagerHelper.bind(mPageIndicator, mViewPager);
-        //mPageIndicator.setViewPager(mViewPager);
-
+        // Setup New Tunnel button
         mNewTunnel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -378,6 +341,7 @@ public class TunnelsContainer extends Fragment implements
         }
     
         CommonNavigator commonNavigator = new CommonNavigator(getContext());
+        commonNavigator.setAdjustMode(true);  // Add this line for better spacing
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
@@ -388,6 +352,7 @@ public class TunnelsContainer extends Fragment implements
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
                 simplePagerTitleView.setText(mFragPagerAdapter.getPageTitle(index));
+                simplePagerTitleView.setTextSize(16); // Add this line to increase text size
                 simplePagerTitleView.setNormalColor(ContextCompat.getColor(context, 
                     R.color.primary_text_disabled_material_dark));
                 simplePagerTitleView.setSelectedColor(ContextCompat.getColor(context,
@@ -404,12 +369,19 @@ public class TunnelsContainer extends Fragment implements
             @Override
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
                 indicator.setColors(ContextCompat.getColor(context, R.color.primary));
+                indicator.setLineHeight(dpToPx(context, 3));
                 return indicator;
             }
         });
     
         mPageIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(mPageIndicator, mViewPager);
+    }
+    
+    private int dpToPx(Context context, int dp) {
+        float density = context.getResources().getDisplayMetrics().density;
+        return Math.round(dp * density);
     }
 }
