@@ -115,6 +115,11 @@
   <string name="notification_status_peers">Узлы: %1$d активны, %2$d известны</string>
   <string name="notification_status_expl">Поисковые туннели: %1$d/%2$d</string>
   <string name="notification_status_client">Туннели клиента: %1$d/%2$d</string>
+  <string name="stats_memory">Память исп./макс.</string>
+  <string name="stats_lag">Задержка задач</string>
+  <string name="stats_delay">Задержка сообщений</string>
+  <string name="copied_base32_system_notification_title">Base32 скопирован в буфер обмена</string>
+  <string name="copied_base32_system_notification_body">Адрес вашего I2P-туннеля скопирован в буфер обмена.</string>
   <string name="menu_settings">Настройки</string>
   <string name="settings_enable">Включить</string>
   <string name="settings_desc_subscriptions">Подписки на URL</string>
@@ -147,6 +152,13 @@
   <string name="settings_label_transports">Транспортные протоколы</string>
   <string name="settings_label_maxConns">Максимум соединений</string>
   <string name="settings_label_i2cp">I2CP-интерфейс</string>
+  <string name="settings_desc_i2cp">Разрешить создание туннелей с помощью I2CP сторонним программам (требуется перезапуск маршрутизатора)</string>
+  <string name="settings_label_sam">Интерфейс SAM</string>
+  <string name="settings_desc_sam">Разрешить создание туннелей с помощью SAM сторонним программам (требуется перезапуск маршрутизатора)</string>
+  <string name="settings_confirm_sam">Приложение пытается создать SAM-подключение.</string>
+  <string name="settings_confirm_sam_id">Имя/ID соединения:</string>
+  <string name="settings_confirm_allow_sam">Нажмите для разрешения</string>
+  <string name="settings_confirm_deny_sam">Проигнорируйте для запрещения</string>
   <string name="settings_label_exploratory_pool">Зондирующий пул</string>
   <string name="settings_desc_exploratory_pool">Параметры тоннелей</string>
   <string name="settings_label_expl_inbound">Входящие туннели</string>
@@ -171,6 +183,7 @@
   <string name="about_bugs">Ошибки и поддержка:</string>
   <string name="about_helpwanted">Требуется помощь!</string>
   <string name="about_volunteer">Хотите помочь улучшить приложение? Добровольцы на Android-форуме:</string>
+  <string name="about_gitlab">Хотите предложить функцию или исправить ошибку? Отправьте merge request в Android Gitlab:</string>
   <string name="menu_help">Справка</string>
   <string name="general">Общие</string>
   <string name="label_router">Публичные адреса</string>
@@ -231,6 +244,7 @@
   <string name="enabled">Включить</string>
   <string name="i2ptunnel_wizard_desc_name">Имя туннеля для идентификации в списке туннелей.</string>
   <string name="i2ptunnel_wizard_desc_desc">Описание туннеля. Заполнять не обязательно.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Укажите .i2p-адрес или адрес назначения (hostname.i2p, b32 или b64) для туннеля.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Если вам известны любые внешние прокси для этого типа туннеля (как HTTP, так и SOCKS), впишите их. Несколько прокси перечисляются через запятую.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Это IP, на котором запущен ваш сервис, обычно он находится на том же устройстве, так что 127.0.0.1 заполняется автоматически.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Это порт, на котором сервис принимает подключения.</string>
@@ -359,4 +373,5 @@
   <string name="label_browser_configuration">Настройки браузера</string>
   <string name="no_market_app">Не найдено приложение маркета. Пожалуйста, установите вручную.</string>
   <string name="unset">Отменить</string>
+  <string name="running_background">I2P работает в фоновом режиме</string>
 </resources>
