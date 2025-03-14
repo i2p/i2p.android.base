@@ -18,6 +18,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.core.util.Pair;
 //import android.support.v4.view.ViewPager;
 import androidx.viewpager.widget.ViewPager;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -293,9 +295,14 @@ public class TunnelsContainer extends Fragment implements
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
             // fragment transaction.
-            TunnelDetailFragment detailFrag = TunnelDetailFragment.newInstance(tunnelId);
-            getChildFragmentManager().beginTransaction()
-                    .replace(R.id.detail_fragment, detailFrag).commit();
+            try {
+                TunnelDetailFragment detailFrag = TunnelDetailFragment.newInstance(tunnelId);
+                getChildFragmentManager().beginTransaction()
+                    .replace(R.id.detail_fragment, detailFrag)
+                    .commitNow(); // Use commitNow() to execute synchronously
+            } catch (Exception e) {
+                Log.e("TunnelsContainer", "Failed to update detail fragment", e);
+            }
         } else {
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.

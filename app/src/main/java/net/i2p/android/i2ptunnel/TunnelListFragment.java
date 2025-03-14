@@ -64,6 +64,8 @@ public class TunnelListFragment extends Fragment implements
     private TunnelEntryAdapter mAdapter;
     private boolean mClientTunnels;
 
+    private static final String KEY_SELECTED_TUNNEL = "selected_tunnel";
+
     // Container Activity must implement this interface
     public interface OnTunnelSelectedListener {
         void onTunnelSelected(int tunnelId, Pair<View, String>[] pairs);
@@ -107,6 +109,12 @@ public class TunnelListFragment extends Fragment implements
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState != null) {
+            int tunnelId = savedInstanceState.getInt(KEY_SELECTED_TUNNEL, -1);
+            if (tunnelId != -1) {
+                mCallback.onTunnelSelected(tunnelId, null);
+            }
+        }
     }
 
     @Override
