@@ -8,6 +8,8 @@ import androidx.core.util.Pair;
 import androidx.core.view.ViewCompat;
 //import android.support.v7.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,6 +75,7 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void setTunnels(List<TunnelEntry> tunnels) {
         mTunnels = tunnels;
+        Log.d("TunnelEntryAdapter", "setTunnels: size=" + (tunnels != null ? tunnels.size() : "null"));
         notifyDataSetChanged();
     }
 
@@ -148,6 +151,8 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        Log.d("TunnelEntryAdapter", "onBindViewHolder: position=" + position +
+              " viewType=" + holder.getItemViewType());
         switch (holder.getItemViewType()) {
             case R.string.router_not_running:
                 ((TextView) holder.itemView).setText(
@@ -225,9 +230,11 @@ public class TunnelEntryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     // Return the size of the dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        if (mTunnels == null || mTunnels.isEmpty())
+        if (mTunnels == null || mTunnels.isEmpty()) {
+            Log.d("TunnelEntryAdapter", "getItemCount: returning 1 for empty/null state");
             return 1;
-
+        }
+        Log.d("TunnelEntryAdapter", "getItemCount: returning " + mTunnels.size());
         return mTunnels.size();
     }
 }
