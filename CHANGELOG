@@ -1,3 +1,21 @@
+2.8.0
+ * Update I2P Library
+ * Migrate to AndroidX
+ * Migrate to MagicIndicator
+
+2.7.1
+ * Update I2P Library
+ * Roll back ViewPageIndicator version, fixes crash, causes other issues
+
+2.7.0
+ * Update I2P Library
+
+2.6.0
+ * Update I2P Library
+
+2.5.0
+ * Update I2P Library
+
 2.4.0
  * Update I2P Library
 
