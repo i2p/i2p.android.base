@@ -2,7 +2,7 @@ package net.i2p.android.preferences.util;
 
 import android.content.Context;
 //import android.support.v7.preference.ListPreference;
-import android.preference.ListPreference;
+import androidx.preference.ListPreference;
 import android.util.AttributeSet;
 
 public class IntListPreference extends ListPreference {
