@@ -1,11 +1,9 @@
 package net.i2p.android;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 //import android.support.v4.app.Fragment;
 import androidx.fragment.app.Fragment;
@@ -59,7 +57,6 @@ public class I2PActivity extends I2PActivityBase implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_viewpager);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);

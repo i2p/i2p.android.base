@@ -120,10 +120,9 @@ public class TunnelListFragment extends Fragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //mClientTunnels = getArguments().getBoolean(SHOW_CLIENT_TUNNELS);
-        mClientTunnels = true;
+        mClientTunnels = getArguments().getBoolean(SHOW_CLIENT_TUNNELS);
 
-        //mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
         // use a linear layout manager

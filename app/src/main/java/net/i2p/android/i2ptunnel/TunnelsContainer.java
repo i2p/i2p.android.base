@@ -134,10 +134,6 @@ public class TunnelsContainer extends Fragment implements
         // Initialize ViewPager and adapter
         mFragPagerAdapter = new TunnelsPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mFragPagerAdapter);
-        // Make sure the ViewPager has proper height
-        /*mViewPager.setLayoutParams(new ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT));*/
 
         setupMagicIndicator();
 
@@ -305,19 +301,19 @@ public class TunnelsContainer extends Fragment implements
                     .replace(R.id.detail_fragment, detailFrag)
                     .commitNow(); // Use commitNow() to execute synchronously
             } catch (Exception e) {
-                // This exception might occur if the fragment transaction fails due to an invalid state.
-                // It is handled by logging the error to help with debugging.
                 Log.e("TunnelsContainer", "Failed to update detail fragment", e);
             }
         } else {
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(getActivity(), TunnelDetailActivity.class);
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), pairs);
-            detailIntent.putExtra("tunnel_id", tunnelId);
-            ActivityCompat.startActivity(getActivity().getApplicationContext(), detailIntent, options.toBundle());
+            detailIntent.putExtra(TunnelDetailFragment.TUNNEL_ID, tunnelId);
+
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    getActivity(), pairs);
+            ActivityCompat.startActivity(getActivity(), detailIntent, options.toBundle());
         }
-    }  
+    }
 
     // TunnelDetailFragment.TunnelDetailListener
 
