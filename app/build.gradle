@@ -143,7 +143,7 @@ if (propFile.canRead()) {
 }
 
 task certificatesZip(type: Zip) {
-    archiveName = 'certificates_zip'
+    archiveBaseName = 'certificates_zip'
     from files('' + i2pbase + '/installer/resources/certificates')
 }
 task copyI2PResources(type: Copy) {

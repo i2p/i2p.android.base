@@ -23,6 +23,9 @@ android {
         abortOnError false
     }
     namespace 'net.i2p.android.lib.helper'
+    buildFeatures {
+        aidl true
+    }
 }
 
 dependencies {
