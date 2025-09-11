@@ -190,6 +190,7 @@
   <string name="blacklist">Blacklist</string>
   <string name="tunnel_summ_delay_open">Pozdržať otvorenie tunelov až pokiaľ to nebude vyžadované</string>
   <string name="tunnel_summ_reduce_quantity">Znížiť množstvo tunelov pri nečinnosti</string>
+  <string name="num_minutes">%s minúty</string>
   <string name="close_tunnels">Zavrieť tunely pri nečinnosti</string>
   <string name="http_client">HTTP klient</string>
   <string name="username">Užívateľské meno</string>

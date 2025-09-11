@@ -88,6 +88,7 @@
   <string name="disabled">E çaktivizuar</string>
   <string name="whitelist">Listë lejimesh</string>
   <string name="unlimited">E pakufizuar</string>
+  <string name="num_minutes">%s minuta</string>
   <string name="username">Emër përdoruesi</string>
   <string name="password">Fjalëkalim</string>
   <string name="other">Tjetër</string>

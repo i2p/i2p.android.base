@@ -47,8 +47,11 @@
   <string name="settings_label_advanced">Avanceret</string>
   <string name="settings_label_transports">Transporter</string>
   <string name="settings_label_expl_length">Længde</string>
+  <string name="settings_summ_expl_length">%s hop</string>
   <string name="settings_label_expl_quantity">Mængde</string>
+  <string name="settings_summ_expl_quantity">%s tunneler</string>
   <string name="settings_label_expl_backupQuantity">Reserve mængde</string>
+  <string name="settings_summ_expl_backupQuantity">%s tunneler</string>
   <string name="menu_about">Om</string>
   <string name="about_version">Version:</string>
   <string name="menu_help">Hjælp</string>

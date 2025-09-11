@@ -115,6 +115,7 @@
   <string name="notification_status_peers">Teilnehmer: %1$d aktiv, %2$d bekannt</string>
   <string name="notification_status_expl">Erkundungstunnel: %1$d/%2$d</string>
   <string name="notification_status_client">Clienttunnel: %1$d/%2$d</string>
+  <string name="stats_memory">Speicher belegt/max.</string>
   <string name="stats_delay">Nachrichtenverzögerung</string>
   <string name="copied_base32_system_notification_title">Base32 in die Zwischenablage kopiert</string>
   <string name="copied_base32_system_notification_body">Die Adresse Ihres I2P-Tunnels wurde in die Zwischenablage kopiert.</string>
@@ -181,6 +182,7 @@
   <string name="about_bugs">Fehlermeldungen und Unterstützung:</string>
   <string name="about_helpwanted">Unterstützer gesucht!!</string>
   <string name="about_volunteer">Sie wollen mithelfen, die App besser zu machen? Dann schauen Sie in das Android-Forum:</string>
+  <string name="about_gitlab">Möchten Sie eine Funktion vorschlagen oder einen Fehler beheben? Stellen Sie einen Merge-Request auf Android Gitlab:</string>
   <string name="menu_help">Hilfe</string>
   <string name="general">Allgemein</string>
   <string name="label_router">Öffentliche Adressen</string>
@@ -241,6 +243,7 @@
   <string name="enabled">Aktiviert</string>
   <string name="i2ptunnel_wizard_desc_name">Der Name des Tunnels zur Erkennung in der Tunnelliste.</string>
   <string name="i2ptunnel_wizard_desc_desc">Eine optionale, aber für Sie aussagekräftige Beschreibung des Tunnels.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Geben Sie hier die .i2p-Adresse oder das Ziel (Hostname.i2p, b32 oder b64) des Tunnels an.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Falls Sie Ausgangsproxies für diese Tunnelart kennen (entweder HTTP oder SOCKS), geben Sie sie hier ein. Trennen Sie mehrere Proxies mit Kommas.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Das ist die IP, unter der der Dienst erreichbar ist. Normalerweise ist er auf der gleichen Maschine, also wird 127.0.0.1 automatisch ausgefüllt.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Dies ist der Port, unter dem der Dienst erreichbar ist.</string>

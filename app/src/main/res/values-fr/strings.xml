@@ -292,8 +292,8 @@
   <string name="access_control">Contrôle de l’accès</string>
   <string name="restricted_access">Accès restreint</string>
   <string name="disabled">Désactivé</string>
-  <string name="whitelist">Liste blanche</string>
-  <string name="blacklist">Liste noire</string>
+  <string name="whitelist">Liste d’acceptation</string>
+  <string name="blacklist">Liste de rejet</string>
   <string name="access_list">Liste d’accès</string>
   <string name="reject_inproxies">Refuser les mandataires entrants</string>
   <string name="tunnel_summ_reject_inproxies">Ne permettre qu’aux utilisateurs d’I2P de se connecter</string>

@@ -18,6 +18,7 @@
   <string name="label_graphs">Γραφήματα</string>
   <string name="hidden">κρυμμένο</string>
   <string name="testing">Δοκιμάζει</string>
+  <string name="firewalled">Με τείχος προστασίας</string>
   <string name="symmetric_nat">Συμμετρικό NAT</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
   <string name="net_status_info_disconnected">Αποσυνδέθηκε-ελένξετε την σύνδεση Δικτύου</string>
@@ -64,8 +65,11 @@
   <string name="settings_default">Εξ\'ορισμού</string>
   <string name="settings_label_advanced">Προχωρημένα</string>
   <string name="settings_label_expl_length">Μήκος</string>
+  <string name="settings_summ_expl_length">%s βήματα</string>
   <string name="settings_summ_expl_lengthVariance">%s</string>
   <string name="settings_label_expl_quantity">Ποσότητα</string>
+  <string name="settings_summ_expl_quantity">%s τούνελ</string>
+  <string name="settings_summ_expl_backupQuantity">%s τούνελ</string>
   <string name="menu_about">Σχετικά με</string>
   <string name="about_version">Έκδοση</string>
   <string name="about_project">Project Home:</string>
@@ -93,6 +97,7 @@
   <string name="disabled">Απενεργοποιημένο</string>
   <string name="whitelist">Λίστα Επιτρεπόμενων</string>
   <string name="unlimited">Απεριόριστο</string>
+  <string name="num_minutes">%s λεπτά</string>
   <string name="username">Όνομα χρήστη</string>
   <string name="password">Κωδικός</string>
   <string name="other">Άλλ</string>

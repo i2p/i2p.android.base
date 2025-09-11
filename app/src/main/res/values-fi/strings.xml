@@ -139,6 +139,7 @@
   <string name="settings_label_expl_inbound">Tulotunnelit</string>
   <string name="settings_label_expl_outbound">Lähtötunnelit</string>
   <string name="settings_label_expl_length">Pituus</string>
+  <string name="settings_summ_expl_length">%s hyppyä</string>
   <string name="settings_summ_expl_lengthVariance">%s</string>
   <string name="settings_label_expl_quantity">Määrä</string>
   <string name="settings_summ_expl_quantity">%s tunnelia</string>

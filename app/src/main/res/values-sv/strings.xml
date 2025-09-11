@@ -116,6 +116,11 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="notification_status_peers">Jämlikar: %1$d aktiva, %2$d kända</string>
   <string name="notification_status_expl">Utforskande tunnlar: %1$d/%2$d</string>
   <string name="notification_status_client">Klienttunnlar:%1$d/%2$d</string>
+  <string name="stats_memory">Minne använt/max</string>
+  <string name="stats_lag">Jobbfördröjning</string>
+  <string name="stats_delay">Meddelandefördröjning</string>
+  <string name="copied_base32_system_notification_title">Base32 kopierad till urklipp</string>
+  <string name="copied_base32_system_notification_body">Adressen till din I2P-tunnel har kopierats till urklipp.</string>
   <string name="menu_settings">Inställningar</string>
   <string name="settings_enable">Aktivera</string>
   <string name="settings_desc_subscriptions">Prenumerations URL</string>
@@ -148,6 +153,13 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="settings_label_transports">Transporter</string>
   <string name="settings_label_maxConns">Max anslutningar</string>
   <string name="settings_label_i2cp">I2CP interfrace</string>
+  <string name="settings_desc_i2cp">Tillåt tredjepartsappar att skapa tunnlar med I2CP (kräver omstart av routern)</string>
+  <string name="settings_label_sam">SAM-gränssnitt</string>
+  <string name="settings_desc_sam">Tillåt tredjepartsappar att skapa tunnlar med SAM (kräver omstart av routern)</string>
+  <string name="settings_confirm_sam">Ett program försöker upprätta en SAM-anslutning.</string>
+  <string name="settings_confirm_sam_id">Anslutningsnamn/ID:</string>
+  <string name="settings_confirm_allow_sam">Tryck för att tillåta</string>
+  <string name="settings_confirm_deny_sam">Ignorera för att förneka</string>
   <string name="settings_label_exploratory_pool">Utforskande pool</string>
   <string name="settings_desc_exploratory_pool">Tunnelparametrar</string>
   <string name="settings_label_expl_inbound">Inåtgående tunnlar</string>
@@ -172,6 +184,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="about_bugs">Fel och Support:</string>
   <string name="about_helpwanted">Hjälp Önskas!</string>
   <string name="about_volunteer">Vill du hjälpa till att göra appen bättre? Anmäl dig på Android-forumet:</string>
+  <string name="about_gitlab">Vill du föreslå en funktion eller åtgärda ett fel? Gör en sammanslagningsförfrågan på Android Gitlab:</string>
   <string name="menu_help">Hjälp</string>
   <string name="general">Generell</string>
   <string name="label_router">Publika adresser</string>
@@ -232,6 +245,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="enabled">Aktiverad</string>
   <string name="i2ptunnel_wizard_desc_name">Tunnelns namn, för identifikation i tunnellistan</string>
   <string name="i2ptunnel_wizard_desc_desc">Beskrivning av tunneln. Frivillig och endast för information.</string>
+  <string name="i2ptunnel_wizard_desc_dest">Ange .i2p-adressen eller destinationen (hostname.i2p, b32 eller b64) för tunneln här.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">Om du känner till några utproxier för den här typen av tunnel (antingen HTTP eller SOCKS), fyll i dem. Separera flera proxier med kommatecken.</string>
   <string name="i2ptunnel_wizard_desc_target_host">Detta är IP-adressen som din tjänst körs på, den är vanligtvis på samma maskin så 127.0.0.1 fylls i automatiskt.</string>
   <string name="i2ptunnel_wizard_desc_target_port">Detta är den port din tjänst tar emot anslutningar på.</string>
@@ -356,4 +370,5 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="label_browser_configuration">Browser konfiguration</string>
   <string name="no_market_app">Ingen marknadsapp hittades. Installera manuellt</string>
   <string name="unset">Återställ</string>
+  <string name="running_background">I2P körs i bakgrunden</string>
 </resources>

@@ -76,6 +76,10 @@
   <string name="general">عام</string>
   <string name="addressbook_add_wizard_k_name">الاسم</string>
   <string name="addressbook_add_wizard_k_destination">اتجاه</string>
+  <string name="nsu_iae_illegal_char">اسم العنوان \"%1$s\" يحتوي على حرف غيرصالح %2$s</string>
+  <string name="nsu_iae_cannot_start_with">لا يمكن ان يبدأ اسم العنوان ب \"%s\"</string>
+  <string name="nsu_iae_cannot_end_with">لا يمكن ان ينتهي اسم العنوان ب \"%s\"</string>
+  <string name="nsu_iae_cannot_contain">لا يمكن ان يحتوي اسم العنوان على \"%s\"</string>
   <string name="i2ptunnel_type_client">مستخدم عادي</string>
   <string name="i2ptunnel_type_httpclient">HTTP client</string>
   <string name="i2ptunnel_type_ircclient">IRC برنامج</string>

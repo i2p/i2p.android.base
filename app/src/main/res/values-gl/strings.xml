@@ -111,6 +111,7 @@
   <string name="name">Nome</string>
   <string name="description">Descrición</string>
   <string name="disabled">Desactivado</string>
+  <string name="num_minutes">%sminutos</string>
   <string name="username">Nome de usuario</string>
   <string name="password">Contrasinal</string>
   <string name="other">Outra</string>

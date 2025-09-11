@@ -25,7 +25,7 @@
   <string name="button_router_graceful">I2P %s içinde kapatılacak</string>
   <string name="button_shutdown_now">Şimdi durdurmak için uzun basın</string>
   <string name="button_cancel_graceful">Kapatmayı engellemek için uzun basın</string>
-  <string name="no_internet">Kullanılabilecek bir İnternet bağlantısı yok</string>
+  <string name="no_internet">Kullanılabilecek bir internet bağlantısı yok</string>
   <string name="hidden">Gizli</string>
   <string name="testing">Sınanıyor</string>
   <string name="firewalled">Güvenlik duvarlı</string>
@@ -40,8 +40,8 @@
   <string name="net_status_info_disconnected">Bağlantı kesildi. Ağ bağlantısını denetleyin</string>
   <string name="net_status_error_udp_port">UDP bağlantı noktası kullanılıyor. Ayarları değiştirip yeniden başlatın</string>
   <string name="net_status_error_no_active_peers">Etkin eş yok, ağ bağlantısını ve güvenlik duvarını denetleyin</string>
-  <string name="net_status_error_udp_disabled_tcp_not_set">UDP devre dışı ve Geliş TCP bağlantısı sunucu/bağlantı noktası ayarlanmamış</string>
-  <string name="net_status_warn_firewalled_udp_disabled">Güvenlik duvarı ve UDP devre dışı</string>
+  <string name="net_status_error_udp_disabled_tcp_not_set">UDP etkisizleştirilmiş ve Geliş TCP bağlantısı sunucu/bağlantı noktası ayarlanmamış</string>
+  <string name="net_status_warn_firewalled_udp_disabled">UDP ile güvenlik duvarı etkisizleştirilmiş</string>
   <string name="shared_clients">Paylaşılmış istemciler</string>
   <string name="uptime">Çalışma süresi</string>
   <string name="active_peers">Etkin eşler</string>
@@ -111,7 +111,7 @@
   <string name="notification_status_stopping_after_net">Ağ bağlantısı kesildi, I2P durduruluyor</string>
   <string name="notification_status_shutdown_cancelled">Kapatma iptal edildi</string>
   <string name="notification_status_shutting_down">I2P kapatılıyor</string>
-  <string name="notification_status_bw">Bant genişliği: %1$sBps indirme / %2$sBps yükleme</string>
+  <string name="notification_status_bw">Bant genişliği: %1$sB/sn indirme / %2$sB/sn yükleme</string>
   <string name="notification_status_peers">Eşler: %1$d etkin, %2$d bilinmeyen</string>
   <string name="notification_status_expl">Keşif tünelleri: %1$d/%2$d</string>
   <string name="notification_status_client">İstemci tünelleri: %1$d/%2$d</string>
@@ -132,11 +132,11 @@
   <string name="settings_label_bw_outbound">Gidiş bağlantısı hızı</string>
   <string name="settings_desc_bw_outbound">En yüksek gidiş bağlantısı hızı</string>
   <string name="settings_label_network">Ağ</string>
-  <string name="settings_label_hiddenMode">Katılım</string>
+  <string name="settings_label_hiddenMode">Katkıda Bulunmak</string>
   <string name="settings_desc_hiddenMode">Gizli kipi kapat</string>
-  <string name="settings_label_maxPartTunnels">Katılınacak en fazla tünel sayısı </string>
-  <string name="settings_desc_maxPartTunnels">Katılınacak en fazla tünel sayısı (varsayılan=20)</string>
-  <string name="settings_dialog_maxPartTunnels">Katılınacak en fazla tünel sayısı </string>
+  <string name="settings_label_maxPartTunnels">Katkıda bulunulacak en fazla tünel sayısı </string>
+  <string name="settings_desc_maxPartTunnels">Katkıda bulunulacak en fazla tünel sayısı (varsayılan=20)</string>
+  <string name="settings_dialog_maxPartTunnels">Katkıda bulunulacak en fazla tünel sayısı </string>
   <string name="settings_label_sharePercent">Paylaşım yüzdesi</string>
   <string name="settings_desc_sharePercent">Paylaşılacak bant genişliği yüzdesi (varsayılan=80)</string>
   <string name="settings_dialog_sharePercent">Paylaşılacak bant genişliği yüzdesi</string>
@@ -268,7 +268,7 @@
   <string name="target_destination">Hedef konum</string>
   <string name="persistent_key">Sürekli anahtar</string>
   <string name="persistent_key_conflict_title">Yeniden açıldığında yeni anahtarlar oluşturulmasın</string>
-  <string name="persistent_key_conflict_msg">Tünel yeniden açıldığında yeni anahtarlar oluşturuluyorsa sürekli anahtarlar kullanılamaz. Yeniden açıldığından yeni anahtarların oluşturulması devre dışı bırakılsın mı?</string>
+  <string name="persistent_key_conflict_msg">Tünel yeniden açıldığında yeni anahtarlar oluşturuluyorsa sürekli anahtarlar kullanılamaz. Yeniden açıldığından yeni anahtarların oluşturulması etkisizleştirilsin mi?</string>
   <string name="tunnel_summ_persistent_key">Yeniden başlatıldığında bu tünelin hedefi korunsun</string>
   <string name="reachable_on">Şuradan erişilebilir</string>
   <string name="listen_port">Dinlenecek bağlantı noktası</string>
@@ -292,7 +292,7 @@
   <string name="tunnel_summ_delay_connect">Bağlantı yanıtları için etkinleştirin</string>
   <string name="access_control">Erişim denetimi</string>
   <string name="restricted_access">Kısıtlı erişim</string>
-  <string name="disabled">Devre dışı</string>
+  <string name="disabled">Etkisizleştirilmiş</string>
   <string name="whitelist">Beyaz liste</string>
   <string name="blacklist">Kara liste</string>
   <string name="access_list">Erişim listesi</string>
@@ -333,7 +333,7 @@
   <string name="close_tunnels">Boştayken tüneller kapatılsın</string>
   <string name="new_keys_on_reopen">Yeniden açıldığından yeni anahtarlar oluşturulsun</string>
   <string name="new_keys_on_reopen_conflict_title">Sürekli anahtarlar kullanılamasın</string>
-  <string name="new_keys_on_reopen_conflict_msg">Tünel yeniden açıldığında yeni anahtarlar oluşturuluyorsa sürekli anahtarlar kullanılamaz. Sürekli anahtarlar devre dışı bırakılsın mı?</string>
+  <string name="new_keys_on_reopen_conflict_msg">Tünel yeniden açıldığında yeni anahtarlar oluşturuluyorsa sürekli anahtarlar kullanılamaz. Sürekli anahtarlar etkisizleştirilsin mi?</string>
   <string name="http_client">HTTP istemcisi</string>
   <string name="tunnel_summ_user_agent">\'User-Agent\' üst bilgisi geçirilsin</string>
   <string name="tunnel_summ_referer">\'Referer\' üst bilgisi geçirilsin</string>
