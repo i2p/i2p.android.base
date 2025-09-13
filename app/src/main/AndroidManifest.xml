@@ -20,6 +20,13 @@
     heading: "Design for and Encourage Long Uptimes"
     -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    
+    <!-- SECURITY: Custom permission for remote I2P router control -->
+    <permission
+        android:name="net.i2p.android.router.REMOTE_START"
+        android:label="@string/permission_remote_start_label"
+        android:description="@string/permission_remote_start_description"
+        android:protectionLevel="signature" />
 
     <application
         android:icon="@drawable/ic_launcher_itoopie"
@@ -48,10 +55,12 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <!-- SECURITY: RemoteStartReceiver now requires signature-level permission -->
         <receiver
             android:name=".receiver.RemoteStartReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:permission="net.i2p.android.router.REMOTE_START">
             <intent-filter>
                 <action android:name="net.i2p.android.router.receiver.START_I2P" />
             </intent-filter>
