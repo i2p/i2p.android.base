@@ -27,3 +27,5 @@
 -keep class !android.support.v7.view.menu.**,** {*;}
 -dontwarn **
 -dontnote **
+
+-keep class net.i2p.android.client.util.SummaryEditTextPreference { *; }
