@@ -9,6 +9,9 @@ repositories {
 android {
     namespace 'net.i2p.android.router'
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION as String)
+    buildFeatures {
+        viewBinding true
+    }
     defaultConfig {
         versionCode Integer.parseInt(project.I2P_ANDROID_VERSION_CODE as String)
         versionName "$I2P_ANDROID_VERSION"
@@ -66,10 +69,10 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:1.5.1"
-    implementation "androidx.preference:preference:1.2.0"
-    implementation "androidx.annotation:annotation:1.5.0"
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation "androidx.appcompat:appcompat:1.7.1"
+    implementation "androidx.preference:preference:1.2.1"
+    implementation "androidx.annotation:annotation:1.9.1"
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
     // Local dependencies
     implementation project(':lib:client')
     implementation project(':lib:helper')
