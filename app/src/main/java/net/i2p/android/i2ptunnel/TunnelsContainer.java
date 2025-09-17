@@ -107,10 +107,6 @@ public class TunnelsContainer extends Fragment implements
         mNewTunnel = v.findViewById(R.id.promoted_action);
         mNewTunnel.setVisibility(showActions() ? View.VISIBLE : View.GONE);
 
-        // Initialize ViewPager adapter
-        mFragPagerAdapter = new TunnelsPagerAdapter(getChildFragmentManager());
-        mViewPager.setAdapter(mFragPagerAdapter);
-
         if (v.findViewById(R.id.detail_fragment) != null) {
             mTwoPane = true;
         }
@@ -121,8 +117,6 @@ public class TunnelsContainer extends Fragment implements
             mServerFrag = (TunnelListFragment) getChildFragmentManager().getFragment(
                     savedInstanceState, FRAGMENT_SERVER);
         }
-
-        setupMagicIndicator();
 
         return v;
     }
