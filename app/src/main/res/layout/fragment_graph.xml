@@ -6,14 +6,10 @@
 
     <com.androidplot.xy.XYPlot
         android:id="@+id/rate_stat_plot"
-        androidPlot.graphWidget.domainLabelPaint.textSize="@dimen/graph_domain_tick_label_font_size"
-        androidPlot.graphWidget.domainOriginLabelPaint.textSize="@dimen/graph_domain_tick_label_font_size"
         androidPlot.graphWidget.marginBottom="20dp"
         androidPlot.graphWidget.marginLeft="20dp"
         androidPlot.graphWidget.marginRight="10dp"
         androidPlot.graphWidget.marginTop="11dp"
-        androidPlot.graphWidget.rangeLabelPaint.textSize="@dimen/graph_range_tick_label_font_size"
-        androidPlot.graphWidget.rangeOriginLabelPaint.textSize="@dimen/graph_range_tick_label_font_size"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

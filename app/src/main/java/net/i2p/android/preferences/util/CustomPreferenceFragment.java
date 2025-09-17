@@ -10,7 +10,7 @@ import androidx.preference.PreferenceFragmentCompat;
  */
 public abstract class CustomPreferenceFragment extends PreferenceFragmentCompat {
     private static final String DIALOG_FRAGMENT_TAG =
-            "android.support.v7.preference.PreferenceFragment.DIALOG";
+        "androidx.preference.PreferenceFragment.DIALOG";
 
     @Override
     public void onDisplayPreferenceDialog(Preference preference) {
