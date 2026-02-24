@@ -1,14 +1,13 @@
 #!/bin/bash
 #
-# build GMP and libjbigi.so using the Android tools directly
+# build GMP and libjbigi.so using the Android NDK toolchain
 #
-# WARNING:
-# BROKEN - not updated for r19 NDK, aarch64, or GMP 6.1.2
-# Use the following in i2p.i2p source core/c/jbigi:
+# Updated for NDK r28+ with 16KB page alignment support
+# (required for Google Play Store compliance)
+#
+# Alternatively, use the following in i2p.i2p source core/c/jbigi:
 # TARGET=android BITS=32 mbuild_all.sh
 # TARGET=android BITS=64 mbuild_all.sh
-#
-# TODO: Get more settings from environment variables set in ../custom-rules.xml
 #
 
 # uncomment to skip
@@ -34,7 +33,7 @@ if [ ! -d "$I2PBASE" ]; then
     exit 1
 fi
 
-ROUTERJARS=$THISDIR/../../../../routerjars
+ROUTERJARS=$THISDIR/../../../../../routerjars
 
 ## Check the local.properties file first
 export NDK=$(awk -F= '/ndk\.dir/{print $2}' "$ROUTERJARS/local.properties")
@@ -77,7 +76,7 @@ JBIGI="$I2PBASE/core/c/jbigi"
 # libcrypto crashes on emulator, don't trust it
 # jbigi about 20-25% slower than java on emulator
 #
-GMPVER=6.1.2
+GMPVER=6.2.1
 GMP="$JBIGI/gmp-$GMPVER"
 
 if [ ! -d "$GMP" ]; then
@@ -106,45 +105,41 @@ fi
 LEVEL=$(awk -F' ' '/minSdkVersion/{print $2}' ../../../build.gradle)
 
 #
-# 4.6 is the GCC version. GCC 4.4.3 support was removed in NDK r9b.
-# Available in r10:
-#	arm-linux-androideabi-4.6
-#	arm-linux-androideabi-4.8
-#	arm-linux-androideabi-clang3.3
-#	arm-linux-androideabi-clang3.4
-#	llvm-3.3
-#	llvm-3.4
-#	mipsel-linux-android-4.6
-#	mipsel-linux-android-4.8
-#	mipsel-linux-android-clang3.3
-#	mipsel-linux-android-clang3.4
-#	x86-4.6
-#	x86-4.8
-#	x86-clang3.3
-#	x86-clang3.4
-GCCVER=4.8
+#
+# NDK r28+ uses the LLVM/Clang toolchain exclusively.
+# GCC was removed in NDK r18. Standalone toolchains were removed in NDK r19.
+# We now use the NDK's built-in clang directly.
+#
+# 16KB page alignment: All LOAD segments in .so files must be aligned to
+# at least 16KB (0x4000) for Google Play Store compliance.
+# This is achieved via: -Wl,-z,max-page-size=16384
+#
 
-for ABI in "armeabi" "armeabi-v7a" "x86" "mips"; do
+TOOLCHAIN_DIR="$NDK/toolchains/llvm/prebuilt/linux-x86_64"
+if [ ! -d "$TOOLCHAIN_DIR" ]; then
+    # Try macOS path
+    TOOLCHAIN_DIR="$NDK/toolchains/llvm/prebuilt/darwin-x86_64"
+fi
+if [ ! -d "$TOOLCHAIN_DIR" ]; then
+    echo "Cannot find NDK toolchain in $NDK/toolchains/llvm/prebuilt/"
+    exit 1
+fi
+
+for ABI in "armeabi-v7a" "arm64-v8a"; do
 
 # ABI-specific settings
 case "$ABI" in
-    "armeabi" | "armeabi-v7a")
+    "armeabi-v7a")
         ARCH="arm"
-        TOOLCHAIN="arm-linux-androideabi-$GCCVER"
+        TARGET="armv7a-linux-androideabi"
         export BINPREFIX="arm-linux-androideabi-"
         CONFIGUREHOST="arm-linux-androideabi"
         ;;
-    "x86")
-        ARCH="x86"
-        TOOLCHAIN="x86-$GCCVER"
-        export BINPREFIX="i686-linux-android-"
-        CONFIGUREHOST="i686-linux-android"
-        ;;
-    "mips")
-        ARCH="mips"
-        TOOLCHAIN="mipsel-linux-android-$GCCVER"
-        export BINPREFIX="mipsel-linux-android-"
-        CONFIGUREHOST="mipsel-linux-android"
+    "arm64-v8a")
+        ARCH="aarch64"
+        TARGET="aarch64-linux-android"
+        export BINPREFIX="aarch64-linux-android-"
+        CONFIGUREHOST="aarch64-linux-android"
         ;;
 esac
 
@@ -161,71 +156,43 @@ then
     continue
 fi
 
-if [ `uname -s` = "Darwin" ]; then
-    export SYSTEM="darwin-x86"
-    BUILDHOST="x86-darwin"
-elif [ `uname -m` = "x86_64" ]; then
-    export SYSTEM="linux-x86_64"
+if [ `uname -m` = "x86_64" ]; then
     BUILDHOST="x86_64-pc-linux-gnu"
 else
-    export SYSTEM="linux-x86"
     BUILDHOST="x86-pc-linux-gnu"
 fi
-
-TOOLCHAINDIR="/tmp/android-$LEVEL-$ARCH-$GCCVER"
-if [ ! -d ${TOOLCHAINDIR} ]
-then
-    ${NDK}/build/tools/make-standalone-toolchain.sh --toolchain=${TOOLCHAIN} --platform=android-${LEVEL} --install-dir=${TOOLCHAINDIR} --system=${SYSTEM}
+if [ `uname -s` = "Darwin" ]; then
+    BUILDHOST="x86-darwin"
 fi
 
-export SYSROOT="$TOOLCHAINDIR/sysroot/"
-if [ ! -d "$SYSROOT" ]; then
-    echo "Cannot find $SYSROOT in NDK, check for support of level: $LEVEL arch: $ARCH or adjust LEVEL and ARCH in script"
-    exit 1
-fi
-
-COMPILER="$TOOLCHAINDIR/bin/${BINPREFIX}gcc"
+# NDK r19+ uses a unified toolchain - no standalone toolchain needed
+COMPILER="$TOOLCHAIN_DIR/bin/${TARGET}${LEVEL}-clang"
 if [ ! -f "$COMPILER" ]; then
-    echo "Cannot find compiler $COMPILER in NDK, check for support of system: $SYSTEM ABI: $AABI or adjust AABI and SYSTEM in script"
+    echo "Cannot find compiler $COMPILER"
+    echo "Check that NDK version supports API level $LEVEL for target $TARGET"
     exit 1
 fi
-export CC="$COMPILER --sysroot=$SYSROOT"
-# worked without this on 4.3.2, but 5.0.2 couldn't find it
-export NM="$TOOLCHAINDIR/bin/${BINPREFIX}nm"
-STRIP="$TOOLCHAINDIR/bin/${BINPREFIX}strip"
+export CC="$COMPILER"
+export NM="$TOOLCHAIN_DIR/bin/llvm-nm"
+STRIP="$TOOLCHAIN_DIR/bin/llvm-strip"
 
 export LIBGMP_LDFLAGS='-avoid-version'
 
+# Common 16KB page alignment flag - required for Google Play Store
+PAGE_SIZE_FLAGS='-Wl,-z,max-page-size=16384'
+
 case "$ARCH" in
     "arm")
-        BASE_CFLAGS='-O2 -g -pedantic -fomit-frame-pointer -Wa,--noexecstack -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing -finline-limit=64'
-        case "$ABI" in
-            "armeabi")
-                MPN_PATH="arm/v5 arm generic"
-                export CFLAGS="${BASE_CFLAGS} -march=armv5te -mtune=xscale -msoft-float -mthumb"
-                ;;
-            "armeabi-v7a")
-                MPN_PATH="arm/v6t2 arm/v6 arm/v5 arm generic"
-                export CFLAGS="${BASE_CFLAGS} -march=armv7-a -mfloat-abi=softfp -mfpu=vfp"
-                ;;
-        esac
-        export LDFLAGS='-Wl,--fix-cortex-a8 -Wl,--no-undefined -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now'
+        MPN_PATH="arm/v6t2 arm/v6 arm/v5 arm generic"
+        BASE_CFLAGS='-O2 -g -pedantic -fomit-frame-pointer -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing'
+        export CFLAGS="${BASE_CFLAGS} -march=armv7-a -mfloat-abi=softfp -mfpu=vfp"
+        export LDFLAGS="-Wl,--fix-cortex-a8 -Wl,--no-undefined -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now ${PAGE_SIZE_FLAGS}"
         ;;
-    "x86")
-        MPN_PATH="x86/atom/sse2 x86/atom/mmx x86/atom x86 generic"
-        # Base CFLAGS set from ndk-build output
-        BASE_CFLAGS='-O2 -g -pedantic -Wa,--noexecstack -fomit-frame-pointer -ffunction-sections -funwind-tables -fstrict-aliasing -funswitch-loops -finline-limit=300'
-        # x86, CFLAGS set according to 'CPU Arch ABIs' in the r8c documentation
-        export CFLAGS="${BASE_CFLAGS} -march=i686 -mtune=atom -msse3 -mstackrealign -mfpmath=sse -m32"
-        export LDFLAGS='-Wl,-z,noexecstack,-z,relro'
-        ;;
-    "mips")
-        MPN_PATH=""
-        # Base CFLAGS set from ndk-build output
-        BASE_CFLAGS='-O2 -g -pedantic -fomit-frame-pointer -Wa,--noexecstack -fno-strict-aliasing -finline-functions -ffunction-sections -funwind-tables -fmessage-length=0 -fno-inline-functions-called-once -fgcse-after-reload -frerun-cse-after-loop -frename-registers -funswitch-loops -finline-limit=300'
-        # mips CFLAGS not specified in 'CPU Arch ABIs' in the r8b documentation
+    "aarch64")
+        MPN_PATH="arm64 generic"
+        BASE_CFLAGS='-O2 -g -pedantic -fomit-frame-pointer -ffunction-sections -funwind-tables -fstack-protector -fno-strict-aliasing'
         export CFLAGS="${BASE_CFLAGS}"
-        export LDFLAGS='-Wl,--no-undefined -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now'
+        export LDFLAGS="-Wl,--no-undefined -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now ${PAGE_SIZE_FLAGS}"
         ;;
 esac
 

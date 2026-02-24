@@ -7,6 +7,7 @@ repositories {
 }
 
 android {
+    ndkVersion '28.2.13676358'
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION as String)
     defaultConfig {
         minSdkVersion 21

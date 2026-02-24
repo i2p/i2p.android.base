@@ -5,4 +5,33 @@ signing.properties
 .gradle/
 local.properties
 override.properties
+
+# VS Code
+.vscode/
+
+# Build outputs
+app/build/
+app/free/
+lib/client/build/
+lib/helper/build/
+routerjars/build/
+routerjars/libs/
+
+# Generated resources (created by copyI2PResources / copyI2PAssets tasks)
+app/src/main/res/drawable/i2plogo.png
+app/src/main/res/raw/
+app/src/main/assets/
+
+# Release artifacts
+*.apk
+*.aab
+*.asc
+*.sig
+
+# Patch files
+*.patch
+helpdiff
+
+# Redundant per-module gradle.properties (covered by root)
+app/gradle.properties
 build
