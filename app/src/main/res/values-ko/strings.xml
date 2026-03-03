@@ -50,11 +50,13 @@
   <string name="char_client_tunnel">클</string>
   <!--Character to indicate a server tunnel. Usually first letter of the word "server".-->
   <string name="char_server_tunnel">서</string>
-  <string name="no_tunnels_running">아직 아무 터널도 실행중이 아님.</string>
+  <string name="no_tunnels_running">아직 실행 중인 터널 없음.</string>
   <string name="download">다운로드</string>
   <string name="upload">업로드</string>
   <string name="configure_browser_title">브라우저를 설정할까요?</string>
   <string name="configure_browser_for_i2p">브라우저가 I2P 사이트들을 볼 수 있게 설정할까요? (추후 도움말 메뉴에서 할 수도 있습니다.)</string>
+  <string name="configure_no_doze_title">배터리 최적화 관리?</string>
+  <string name="configure_no_doze">I2P는 계속 실행 중일 때 가장 잘 작동합니다. Android가 전력 절약을 위햐 I2P를 종료하지 않도록 배터리 예외 목록해 추가해 주십시오. 이렇게 하면 애플리케이션의 안정성이 크게 향상됩니다.\n\nI2P를 백그라운드에서 계속 실행하시겠습니까? (권장)</string>
   <string name="first_start_title">I2P가 설치 된것을 환영합니다!</string>
   <string name="first_start_welcome"><b>I2P에 환영합니다!</b> I2P가 시작되고 피어들을 찾을때까지 <b>기다려주세요</b>.</string>
   <string name="first_start_read">기다리는 동안, 릴리즈 노트와 환영 페이지를 읽어보세요.</string>
@@ -113,6 +115,11 @@
   <string name="notification_status_peers">피어들: %1$d 활성, %2$d 알려짐</string>
   <string name="notification_status_expl">예비 터널들: %1$d/%2$d</string>
   <string name="notification_status_client">클라이언트 터널들: %1$d/%2$d</string>
+  <string name="stats_memory">메모리 사용/최대</string>
+  <string name="stats_lag">작업 지연</string>
+  <string name="stats_delay">메시지 지연</string>
+  <string name="copied_base32_system_notification_title">클립보드에 base32 복사됨</string>
+  <string name="copied_base32_system_notification_body">I2P 터널 주소가 클립보드에 복사되었습니다.</string>
   <string name="menu_settings">설정</string>
   <string name="settings_enable">활성화</string>
   <string name="settings_desc_subscriptions">구독 URL들</string>
@@ -145,6 +152,13 @@
   <string name="settings_label_transports">트랜스포트</string>
   <string name="settings_label_maxConns">최대 접속 수</string>
   <string name="settings_label_i2cp">I2CP 인터페이스</string>
+  <string name="settings_desc_i2cp">제3자 앱의 I2CP를 사용한 터널 생성 허용 (라우터 재시작 필요)</string>
+  <string name="settings_label_sam">SAM 인터페이스</string>
+  <string name="settings_desc_sam">제3자 앱의 SAM을 사용한 터널 생성 허용 (라우터 재시작 필요)</string>
+  <string name="settings_confirm_sam">애플리케이션이 SAM 연결을 시도하는 중입니다.</string>
+  <string name="settings_confirm_sam_id">연결 이름/ID:</string>
+  <string name="settings_confirm_allow_sam">탭하여 허용</string>
+  <string name="settings_confirm_deny_sam">무시하여 거절</string>
   <string name="settings_label_exploratory_pool">예비 풀</string>
   <string name="settings_desc_exploratory_pool">터널 파라미터</string>
   <string name="settings_label_expl_inbound">수신 터널</string>
@@ -169,6 +183,7 @@
   <string name="about_bugs">버그와 지원:</string>
   <string name="about_helpwanted">도움이 필요합니다!</string>
   <string name="about_volunteer">이 앱을 개선시키고 싶나요? 안드로이드 포럼에서 기여하세요:</string>
+  <string name="about_gitlab">기능 또는 버그 수정을 요청하고 싶으신가요? Android Gitlab에서 요청을 머지해 주십시오:</string>
   <string name="menu_help">도움말</string>
   <string name="general">일반</string>
   <string name="label_router">공공 주소들</string>
@@ -208,6 +223,7 @@
   <string name="i2ptunnel_msg_tunnel_stopping">터널 중지중</string>
   <string name="i2ptunnel_delete_confirm_message">터널을 삭제합니까?</string>
   <string name="i2ptunnel_delete_confirm_button">터널 삭제</string>
+  <string name="i2ptunnel_no_tunnel_details">터널 세부 정보를 불러올 수 없음</string>
   <string name="i2ptunnel_wizard_k_client_server">클라이언트 또는 서버</string>
   <string name="i2ptunnel_wizard_v_client">클라이언트 터널</string>
   <string name="i2ptunnel_wizard_v_server">서버 터널</string>
@@ -228,6 +244,7 @@
   <string name="enabled">활성화됨</string>
   <string name="i2ptunnel_wizard_desc_name">터널 리스트에서 구별하기 위한 터널의 이름</string>
   <string name="i2ptunnel_wizard_desc_desc">터널의 설명. 선택적이고 단순 정보용.</string>
+  <string name="i2ptunnel_wizard_desc_dest">여기서 터널의 .i2p 주소 또는 도착지(호스트네임.i2p, b32 또는 b64)를 지정하십시오.</string>
   <string name="i2ptunnel_wizard_desc_outproxies">만약 이 터널 종류의 나가는 프록시를 안다면 (HTTP 또는 SOCKS), 입력. 여러 프록시들을 콤마로 구별.</string>
   <string name="i2ptunnel_wizard_desc_target_host">서비스가 작동중인 IP, 대부분의 경우 같은 기기이기 때문에 127.0.0.1이 자동 입력됨.</string>
   <string name="i2ptunnel_wizard_desc_target_port">서비스가 접속을 받아들일 포트.</string>
@@ -239,6 +256,7 @@
   <string name="i2ptunnel_view_target">목표</string>
   <string name="i2ptunnel_view_access_point">엑세스 포인트</string>
   <string name="i2ptunnel_view_autostart">자동 시작</string>
+  <string name="address_copied_to_clipboard">클립보드에 주소 복사됨</string>
   <string name="edit_tunnel">터널 편집</string>
   <string name="name">이름</string>
   <string name="description">설명</string>
@@ -347,5 +365,7 @@
   <string name="error_logs_copied_to_clipboard">클립보드에 오류 로그 복사됨</string>
   <string name="logs_copied_to_clipboard">클립보드에 로그 복사됨</string>
   <string name="label_browser_configuration">브라우저 설정</string>
+  <string name="no_market_app">마켓 앱을 찾을 수 없습니다. 수동으로 설치해 주십시오</string>
   <string name="unset">미설정</string>
+  <string name="running_background">I2P가 백그라운드에서 실행 중입니다</string>
 </resources>

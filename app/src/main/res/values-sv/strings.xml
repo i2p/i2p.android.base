@@ -17,7 +17,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="label_error_logs">Felloggar</string>
   <string name="label_news">Nyheter</string>
   <string name="label_peers_status">Jämlikar</string>
-  <string name="label_release_notes">Utgåva noteringar</string>
+  <string name="label_release_notes">Versionsinformation</string>
   <string name="label_licenses">Licenser</string>
   <string name="label_browse">Bläddra</string>
   <string name="label_graphs">Diagram</string>
@@ -33,7 +33,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="symmetric_nat">Symmetrisk NAT</string>
   <string name="net_status_error_i2cp">Klienthanterare I2CP-fel - kontrollera loggar</string>
   <!--Parameter is a time, e.g. 32s or 2m-->
-  <string name="net_status_error_skew">Klockförskjutning på %s</string>
+  <string name="net_status_error_skew">Klocksnedvridning på %s</string>
   <string name="net_status_error_unresolved_tcp">Olöst TCP-adress</string>
   <string name="net_status_error_private_tcp">Privat TCP-adress</string>
   <string name="net_status_warn_firewalled_inbound_tcp">Bakom brandvägg med inåtgående TCP aktiverad</string>
@@ -114,7 +114,7 @@ Läs utgåvenoteringar och licens-information.</string>
   <string name="notification_status_shutting_down">I2P stängs av</string>
   <string name="notification_status_bw">Bandbredd:%1$sBps ner / %2$sBps upp</string>
   <string name="notification_status_peers">Jämlikar: %1$d aktiva, %2$d kända</string>
-  <string name="notification_status_expl">Utforskande tunnlar: %1$d/%2$d</string>
+  <string name="notification_status_expl">Utforskningstunnlar: %1$d/%2$d</string>
   <string name="notification_status_client">Klienttunnlar:%1$d/%2$d</string>
   <string name="stats_memory">Minne använt/max</string>
   <string name="stats_lag">Jobbfördröjning</string>

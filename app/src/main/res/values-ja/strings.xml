@@ -3,8 +3,8 @@
   <string name="app_name">I2P</string>
   <string name="desc_i2p_logo">I2P ロゴ</string>
   <string name="choose_language">言語を選択</string>
-  <string name="welcome_new_install">I2P へようこそ！このアプリはアルファ版のソフトウェアであり、強い匿名性を提供いたしません。リリース・ノート及びライセンス情報をご覧ください。</string>
-  <string name="welcome_new_version">新しいバージョンがインストールされました。リリース・ノートをご覧ください。バージョン:</string>
+  <string name="welcome_new_install">I2P へようこそ！このアプリはアルファ版のソフトウェアであり、強い匿名性を提供いたしません。リリースノート及びライセンス情報をご覧ください。</string>
+  <string name="welcome_new_version">新しいバージョンがインストールされました。リリースノートをご覧ください。バージョン:</string>
   <string name="label_tunnels">トンネル</string>
   <string name="label_status">状態</string>
   <string name="label_console">コンソール</string>
@@ -16,7 +16,7 @@
   <string name="label_error_logs">エラーログ</string>
   <string name="label_news">ニュース</string>
   <string name="label_peers_status">ピア</string>
-  <string name="label_release_notes">リリース・ノート</string>
+  <string name="label_release_notes">リリースノート</string>
   <string name="label_licenses">ライセンス</string>
   <string name="label_browse">ブラウズ</string>
   <string name="label_graphs">グラフ</string>
@@ -59,7 +59,7 @@
   <string name="configure_no_doze">I2Pは稼働し続けていれば最もよく動作します。Androidが電気の節約を試みたときにI2Pを終了しないようにするため、電池例外の一覧にI2Pを追加できます。これにより、アプリケーションの信頼性が大幅に上昇します。\n\nI2Pをバックグラウンドで稼働し続けますか？（推奨）</string>
   <string name="first_start_title">I2P のインストールおめでとうございます！</string>
   <string name="first_start_welcome"><b>I2P へようこそ！</b> I2P が立ち上がり、ピアを見つけるまで<b>我慢してください</b>。</string>
-  <string name="first_start_read">待っている間、リリースノートとウェルカムページをお読みください。</string>
+  <string name="first_start_read">お待ちの間、リリースノートとウェルカムページをお読みください。</string>
   <string name="first_start_faq">クライアントトンネルを得たら、以下のよくある質問を<b>ご確認ください</b>:</string>
   <string name="first_start_faq_nonanon">あるいは、トンネルを待ちたくないなら、この非匿名リンクを使用してください:</string>
   <string name="first_start_irc">IRC クライアントを <b>localhost:6668</b> に合わせて、私たちに一言挨拶してください:</string>
