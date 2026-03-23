@@ -135,6 +135,16 @@ do
 		exit 1
 	fi
 
+	# percents
+	# skip english
+	PERCS=`grep '^translated_percent: ' "$TMP" | cut -c 21- | tail -n +2`
+	PERCS=`echo "$PERCS" | tr '\n' ' '`
+	if [ -z "$PERCS" ]
+	then
+		echo "ERROR: No percentages found for $W"
+		exit 1
+	fi
+
 	rm -f "$TMP"
 	# debug
 	#echo
@@ -146,6 +156,10 @@ do
 	echo
 	#echo "Timestamps:"
 	#echo "$TIMES"
+	#echo
+	#echo "Percentages:"
+	#echo "$PERCS"
+	#echo
 
 	i=0
 	for LANG in $LANGS
@@ -160,10 +174,11 @@ do
 			fi
 		fi
 
+		PERC=`echo "$PERCS" | cut -d ' ' -f $i`
 		FILE=`echo "$FILES" | cut -d ' ' -f $i`
 		if [ ! -f "$FILE" -a -z "$L" ]
 		then
-			echo "SKIPPING $LANG - no local file $FILE"
+			echo "SKIPPING $LANG ${PERC}% complete - no local file $FILE"
 			echo "Force download with $0 $CX $LANG"
 			continue
 		fi
@@ -220,7 +235,7 @@ do
 			RC=1
 			continue
 		fi
-		echo "DOWNLOADED language $LANG to $FILE"
+		echo "DOWNLOADED language $LANG ${PERC}% complete to $FILE"
 	done
 done
 
