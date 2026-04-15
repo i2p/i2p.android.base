@@ -24,10 +24,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    lintOptions {
+    namespace 'net.i2p.android.lib.client'
+    lint {
         abortOnError false
     }
-    namespace 'net.i2p.android.lib.client'
 }
 
 dependencies {

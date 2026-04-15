@@ -20,12 +20,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    lintOptions {
-        abortOnError false
-    }
     namespace 'net.i2p.android.lib.helper'
     buildFeatures {
         aidl true
+    }
+    lint {
+        abortOnError false
     }
 }
 

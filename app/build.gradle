@@ -45,12 +45,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    lintOptions {
-        abortOnError false
-        checkReleaseBuilds false
-        disable 'MissingDefaultResource'
-    }
     packagingOptions {
+        // Store native libs uncompressed and page-aligned for 16KB page size compliance
+        jniLibs {
+            useLegacyPackaging = false
+        }
         resources {
             excludes += ['LICENSE.txt']
         }
@@ -69,6 +68,11 @@ android {
             dimension 'tier'
             applicationId 'net.i2p.android.router'
         }
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+        disable 'MissingDefaultResource'
     }
 }
 
