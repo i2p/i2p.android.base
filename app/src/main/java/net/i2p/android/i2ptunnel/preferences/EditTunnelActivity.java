@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 //import android.support.v4.app.FragmentManager;
 import androidx.fragment.app.FragmentManager;
 //import android.support.v7.app.AppCompatActivity;
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 //import android.support.v7.widget.Toolbar;
 import androidx.appcompat.widget.Toolbar;
@@ -24,6 +25,7 @@ public class EditTunnelActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         localeManager.onCreate(this);
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_fragment);
 

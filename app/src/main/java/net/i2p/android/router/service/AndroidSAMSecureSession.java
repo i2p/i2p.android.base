@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import java.util.concurrent.CountDownLatch;
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import net.i2p.android.I2PActivity;
@@ -41,6 +42,7 @@ public class AndroidSAMSecureSession extends AppCompatActivity implements SAMSec
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
     }
 

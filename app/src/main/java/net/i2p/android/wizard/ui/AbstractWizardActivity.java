@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment;
 //import android.support.v4.app.Fragment;
 import androidx.fragment.app.Fragment;
 //import android.support.v4.app.FragmentActivity;
+import androidx.activity.EdgeToEdge;
 import androidx.fragment.app.FragmentActivity;
 //import android.support.v4.app.FragmentManager;
 import androidx.fragment.app.FragmentManager;
@@ -59,6 +60,7 @@ public abstract class AbstractWizardActivity extends FragmentActivity implements
             }
         }
 
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wizard);
 

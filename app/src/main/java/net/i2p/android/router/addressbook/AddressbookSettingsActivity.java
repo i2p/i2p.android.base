@@ -3,6 +3,7 @@ package net.i2p.android.router.addressbook;
 import android.content.Context;
 import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 //import android.support.v7.widget.Toolbar;
 import androidx.appcompat.widget.Toolbar;
@@ -31,6 +32,7 @@ public class AddressbookSettingsActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         localeManager.onCreate(this);
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addressbook_settings);
 

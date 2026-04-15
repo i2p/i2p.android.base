@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 //import android.support.v4.content.LocalBroadcastManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 //import android.support.v7.app.AppCompatActivity;
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 //import android.support.v7.preference.Preference;
 import androidx.preference.Preference;
@@ -43,6 +44,7 @@ public class SettingsActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         localeManager.onCreate(this);
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_fragment);
 

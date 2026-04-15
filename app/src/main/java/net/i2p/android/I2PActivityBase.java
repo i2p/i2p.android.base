@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 //import android.support.v7.app.AppCompatActivity;
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import net.i2p.android.router.service.RouterBinder;
@@ -40,6 +41,7 @@ public abstract class I2PActivityBase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Util.d(this + " onCreate called");
         localeManager.onCreate(this);
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         _sharedPrefs = getSharedPreferences(SHARED_PREFS, 0);
     }

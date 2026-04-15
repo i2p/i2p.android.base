@@ -92,7 +92,8 @@ dependencies {
     implementation "com.android.support:preference-v7:$supportVersion"
     implementation "com.android.support:preference-v14:$supportVersion"
     implementation "com.android.support:recyclerview-v7:$supportVersion"*/
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.activity:activity:1.9.0'
     // Remote dependencies
     implementation 'com.androidplot:androidplot-core:1.5.11'
     implementation 'com.eowise:recyclerview-stickyheaders:0.5.2@aar'
