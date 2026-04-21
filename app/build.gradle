@@ -52,7 +52,7 @@ android {
         }
         resources {
             excludes += ['LICENSE.txt']
-            pickFirsts += ['net/i2p/i2ptunnel/resources/proxy/encp-header.ht']
+            //pickFirsts += ['net/i2p/i2ptunnel/resources/proxy/encp-header.ht']
         }
     }
     flavorDimensions 'tier'
