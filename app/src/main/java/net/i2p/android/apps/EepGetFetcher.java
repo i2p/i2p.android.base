@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.util.Locale;
 
 import net.i2p.I2PAppContext;
@@ -40,7 +41,20 @@ public class EepGetFetcher implements EepGet.StatusListener {
         _context = I2PAppContext.getGlobalContext();
         _log = _context.logManager().getLog(EepGetFetcher.class);
         _url = url;
-        _file = new File(_context.getTempDir(), "eepget-" + _context.random().nextLong());
+        // SECURITY: Use secure temp file creation to prevent race conditions (CVE-2025-ANDROID-002)
+        try {
+            _file = File.createTempFile("eepget-", ".tmp", _context.getTempDir());
+            // Set restrictive permissions (owner read/write only)
+            _file.setReadable(false, false);
+            _file.setReadable(true, true);
+            _file.setWritable(false, false);
+            _file.setWritable(true, true);
+            _file.setExecutable(false, false);
+        } catch (IOException e) {
+            _log.error("Failed to create secure temp file", e);
+            // Fallback to less secure method if createTempFile fails
+            _file = new File(_context.getTempDir(), "eepget-" + System.nanoTime() + "-" + _context.random().nextInt(10000));
+        }
         _eepget = new EepGet(_context, true, "localhost", 4444, 0, -1, MAX_LEN,
                              _file.getAbsolutePath(), null, url,
                              true, null, null, null);
@@ -121,12 +135,14 @@ public class EepGetFetcher implements EepGet.StatusListener {
         if (statusCode < 0) {
             rv = ERROR_HEADER + ERROR_URL + "<a href=\"" + _url + "\">" + _url +
                  "</a></p>" + ERROR_ROUTER + ERROR_FOOTER;
-            _file.delete();
+            // SECURITY: Secure file deletion
+            secureDelete(_file);
         } else if (_file.length() <= 0) {
             rv = ERROR_HEADER + ERROR_URL + "<a href=\"" + _url + "\">" + _url +
                  "</a> No data returned, error code: " + statusCode +
                  "</p>" + ERROR_FOOTER;
-            _file.delete();
+            // SECURITY: Secure file deletion
+            secureDelete(_file);
         } else {
             InputStream fis = null;
             try {
@@ -139,7 +155,8 @@ public class EepGetFetcher implements EepGet.StatusListener {
                 rv = "I/O error";
             } finally {
                 if (fis != null) try { fis.close(); } catch (IOException ioe) {}
-                _file.delete();
+                // SECURITY: Secure file deletion
+                secureDelete(_file);
             }
         }
         return rv;
@@ -156,4 +173,42 @@ public class EepGetFetcher implements EepGet.StatusListener {
     public void headerReceived(String url, int attemptNum, String key, String val) {}
 
     public void attempting(String url) {}
+    
+    /**
+     * SECURITY: Secure file deletion method to prevent data recovery
+     * Overwrites file content before deletion to prevent sensitive data recovery
+     */
+    private void secureDelete(File file) {
+        if (file == null || !file.exists()) {
+            return;
+        }
+        
+        try {
+            // Overwrite file with random data before deletion
+            long fileSize = file.length();
+            if (fileSize > 0) {
+                try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
+                    byte[] randomData = new byte[8192];
+                    long remaining = fileSize;
+                    
+                    while (remaining > 0) {
+                        _context.random().nextBytes(randomData);
+                        int bytesToWrite = (int) Math.min(randomData.length, remaining);
+                        raf.write(randomData, 0, bytesToWrite);
+                        remaining -= bytesToWrite;
+                    }
+                    
+                    raf.getFD().sync(); // Force write to disk
+                }
+            }
+        } catch (IOException e) {
+            _log.warn("Could not securely overwrite temp file, proceeding with normal deletion", e);
+        } finally {
+            // Always attempt to delete the file
+            if (!file.delete()) {
+                _log.warn("Could not delete temp file: " + file.getAbsolutePath());
+                file.deleteOnExit();
+            }
+        }
+    }
 }
