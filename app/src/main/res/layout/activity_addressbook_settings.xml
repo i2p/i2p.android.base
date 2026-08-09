@@ -4,46 +4,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/colorBackground">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:fillViewport="true"
-        android:scrollbarStyle="outsideInset">
+        android:scrollbarStyle="outsideInset"
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="Subscriptions"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorPrimary" />
 
             <EditText
                 android:id="@+id/subscriptions_content"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@android:drawable/edit_text"
                 android:ems="10"
-                android:inputType="textMultiLine">
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:minHeight="120dp"
+                android:padding="12dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textColorHint="?android:attr/textColorHint">
 
                 <requestFocus />
             </EditText>
@@ -52,9 +61,14 @@
                 android:id="@+id/button_save_subscriptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save subscriptions.txt" />
+                android:backgroundTint="?attr/colorPrimary"
+                android:elevation="2dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:stateListAnimator="@null"
+                android:text="Save subscriptions.txt"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
-
     </ScrollView>
 </LinearLayout>
