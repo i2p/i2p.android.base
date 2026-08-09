@@ -3,29 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground">
 
     <ScrollView
         android:id="@+id/main_scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginEnd="-5dp"
-        android:layout_marginLeft="-6dp"
-        android:layout_marginRight="-5dp"
-        android:layout_marginStart="-6dp"
         android:layout_weight="1"
-        android:background="@drawable/side_shadow"
         android:fillViewport="true"
-        android:paddingLeft="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_vertical_margin"
-        android:scrollbarStyle="outsideInset">
+        android:padding="16dp"
+        android:scrollbarStyle="outsideInset"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_vertical_margin">
+            android:paddingBottom="16dp">
 
+            <!-- Logo区域 -->
             <ImageView
                 android:id="@+id/console_lights"
                 android:layout_width="match_parent"
@@ -33,121 +30,155 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/desc_i2p_logo"
                 android:scaleType="fitCenter"
+                android:padding="8dp"
                 android:src="@drawable/routerlogo_0" />
 
+            <!-- 路由器控制按钮区域 -->
             <LinearLayout
                 android:id="@+id/router_button_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/white"
+                android:padding="16dp"
+                android:elevation="2dp">
 
                 <net.i2p.android.router.util.LongToggleButton
                     android:id="@+id/router_onoff_button"
                     android:layout_width="match_parent"
-                    android:layout_height="68dp"
+                    android:layout_height="56dp"
                     android:textOff="@string/button_router_off"
-                    android:textOn="@string/button_router_on" />
+                    android:textOn="@string/button_router_on"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textColor="?android:attr/textColorPrimary"/>
 
                 <LinearLayout
                     android:id="@+id/router_graceful_buttons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    android:layout_marginTop="8dp">
 
                     <TextView
                         android:id="@+id/router_graceful_status"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_marginBottom="8dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/button_shutdown_now"
                             android:layout_width="0dp"
-                            android:layout_height="68dp"
+                            android:layout_height="48dp"
                             android:layout_weight="1"
-                            android:text="@string/button_shutdown_now" />
+                            android:text="@string/button_shutdown_now"
+                            android:layout_marginEnd="4dp"
+                            style="?android:attr/buttonBarButtonStyle"/>
 
                         <Button
                             android:id="@+id/button_cancel_graceful"
                             android:layout_width="0dp"
-                            android:layout_height="68dp"
+                            android:layout_height="48dp"
                             android:layout_weight="1"
-                            android:text="@string/button_cancel_graceful" />
+                            android:text="@string/button_cancel_graceful"
+                            android:layout_marginStart="4dp"
+                            style="?android:attr/buttonBarButtonStyle"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- 状态信息区域 -->
             <LinearLayout
                 android:id="@+id/status_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/white"
+                android:padding="16dp"
+                android:elevation="2dp">
 
                 <include layout="@layout/console_status" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
+    <!-- 底部统计信息工具栏 -->
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="72dp"
         android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
         <LinearLayout
             android:id="@+id/console_usage_stats"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="88dp"
-            android:layout_marginRight="88dp">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/download"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@android:color/white"
+                    android:alpha="0.7"/>
 
                 <TextView
                     android:id="@+id/console_download_stats"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@android:color/white"
                     tools:text="0.0 KBps / 0.0 KB" />
             </LinearLayout>
 
             <View
-                style="@style/Divider.Vertical"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp" />
+                android:layout_width="1dp"
+                android:layout_height="32dp"
+                android:background="@android:color/white"
+                android:alpha="0.3"
+                android:layout_marginEnd="16dp"/>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/upload"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@android:color/white"
+                    android:alpha="0.7"/>
 
                 <TextView
                     android:id="@+id/console_upload_stats"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@android:color/white"
                     tools:text="0.0 KBps / 0.0 KB" />
             </LinearLayout>
         </LinearLayout>
