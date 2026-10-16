@@ -4,7 +4,14 @@ configurations {
 }
 task buildRouter(type: Exec) {
     outputs.dir('libs')
-    commandLine 'ant', 'buildrouter'
+    // build.reproducible=true makes the i2p.i2p Ant build write "reproducible"
+    // into the jars' Build-Date manifest attribute instead of the wall clock.
+    // Override with -PantReproducible=false for a timestamped dev build.
+    if (project.findProperty('antReproducible') == 'false') {
+        commandLine 'ant', 'buildrouter'
+    } else {
+        commandLine 'ant', '-Dbuild.reproducible=true', 'buildrouter'
+    }
 }
 // An empty routerjars.jar is added to the classpath for the "default" configuration.
 // But we are using the "routerjars" configuration, which only contains what we want.

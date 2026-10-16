@@ -30,6 +30,10 @@ android {
     }
     buildTypes {
         release {
+            // Reproducible builds: don't bake the git HEAD of the checkout into the APK
+            vcsInfo {
+                include = false
+            }
             signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
