@@ -157,6 +157,11 @@ if (propFile.canRead()) {
 
 task certificatesZip(type: Zip) {
     archiveBaseName = 'certificates_zip'
+    // Reproducible builds: without these the archive embeds the filesystem mtimes
+    // and the readdir order of the i2p.i2p checkout, so every fresh clone (e.g. on
+    // the F-Droid build servers) produces a different APK.
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
     from files('' + i2pbase + '/installer/resources/certificates')
 }
 task copyI2PResources(type: Copy) {
